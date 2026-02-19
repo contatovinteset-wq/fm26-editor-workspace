@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-FM26 Extraction Tool
-Extrai e organiza arquivos do jogo FM26
+FM26 Extractor Tool - Ferramenta de extração automatizada
+Extrai e analisa arquivos do Football Manager 26
 """
 
 import os
@@ -9,152 +9,143 @@ import sys
 import json
 import struct
 import zipfile
-import shutil
+import subprocess
 from pathlib import Path
 from datetime import datetime
 
 class FM26Extractor:
-    def __init__(self, game_path, output_path):
+    def __init__(self, game_path: str, output_path: str):
         self.game_path = Path(game_path)
         self.output_path = Path(output_path)
-        self.manifest = {
-            "extracted_at": datetime.now().isoformat(),
-            "game_path": str(game_path),
-            "files": {}
-        }
-    
-    def find_all_xmls(self):
-        """Encontra todos os XMLs no diretório do jogo"""
-        xmls = list(self.game_path.rglob("*.xml"))
-        print(f"[XML] Encontrados {len(xmls)} arquivos XML")
-        return xmls
-    
-    def find_all_jsons(self):
-        """Encontra todos os JSONs"""
-        jsons = list(self.game_path.rglob("*.json"))
-        print(f"[JSON] Encontrados {len(jsons)} arquivos JSON")
-        return jsons
-    
-    def find_all_configs(self):
-        """Encontra arquivos de configuração"""
-        configs = []
-        for ext in ["*.cfg", "*.config", "*.ini", "*.properties"]:
-            configs.extend(self.game_path.rglob(ext))
-        print(f"[CONFIG] Encontrados {len(configs)} arquivos de config")
-        return configs
+        self.output_path.mkdir(parents=True, exist_ok=True)
+        
+    def find_fmf_files(self):
+        """Localiza todos os arquivos FMF do jogo"""
+        fmf_files = list(self.game_path.glob("**/*.fmf"))
+        print(f"Encontrados {len(fmf_files)} arquivos FMF")
+        return fmf_files
     
     def find_asset_bundles(self):
-        """Encontra todos os Asset Bundles"""
-        bundles = list(self.game_path.rglob("*.bundle"))
-        print(f"[BUNDLE] Encontrados {len(bundles)} Asset Bundles")
+        """Localiza todos os Asset Bundles"""
+        bundles = list(self.game_path.glob("**/*.bundle"))
+        print(f"Encontrados {len(bundles)} Asset Bundles")
+        return bundles
+    
+    def find_dlls(self):
+        """Localiza DLLs importantes"""
+        dlls = list(self.game_path.glob("**/*.dll"))
+        important = [d for d in dlls if any(x in d.name.lower() for x in ['fm', 'si.', 'game_plugin'])]
+        print(f"Encontradas {len(important)} DLLs importantes")
+        return important
+    
+    def analyze_metadata(self):
+        """Analisa global-metadata.dat"""
+        metadata_path = self.game_path / "fm_Data/il2cpp_data/Metadata/global-metadata.dat"
+        if not metadata_path.exists():
+            print("Metadata não encontrado")
+            return None
+            
+        with open(metadata_path, 'rb') as f:
+            data = f.read()
         
-        # Organizar por tipo
-        by_type = {}
-        for bundle in bundles:
-            name = bundle.stem
-            # Extrair tipo do nome
-            parts = name.split('-')
-            if len(parts) >= 2:
-                bundle_type = parts[0]
-                if bundle_type not in by_type:
-                    by_type[bundle_type] = []
-                by_type[bundle_type].append(str(bundle))
+        # Extrair strings legíveis
+        strings = []
+        current = b''
+        for byte in data:
+            if 32 <= byte < 127:
+                current += bytes([byte])
+            else:
+                if len(current) > 10:
+                    try:
+                        s = current.decode('utf-8', errors='replace')
+                        strings.append(s)
+                    except:
+                        pass
+                current = b''
         
-        return bundles, by_type
-    
-    def find_fmf_files(self):
-        """Encontra arquivos FMF"""
-        fmfs = list(self.game_path.rglob("*.fmf"))
-        print(f"[FMF] Encontrados {len(fmfs)} arquivos FMF")
-        return fmfs
-    
-    def find_dll_assemblies(self):
-        """Encontra DLLs principais do jogo"""
-        dlls = []
-        for dll in self.game_path.rglob("*.dll"):
-            name = dll.name.lower()
-            # Filtrar DLLs importantes
-            if any(x in name for x in ['fm', 'si.', 'game_plugin', 'match', 'ui']):
-                dlls.append(str(dll))
-        print(f"[DLL] Encontrados {len(dlls)} DLLs relevantes")
-        return dlls
-    
-    def extract_fmf_header(self, fmf_path):
-        """Extrai header de arquivo FMF"""
-        with open(fmf_path, 'rb') as f:
-            magic = f.read(4)
-            if magic == b'FMF\x00':
-                version = struct.unpack('<I', f.read(4))[0]
-                return {
-                    "path": str(fmf_path),
-                    "magic": "FMF",
-                    "version": version,
-                    "valid": True
-                }
-        return {"path": str(fmf_path), "valid": False}
-    
-    def scan_all(self):
-        """Escaneia todo o diretório do jogo"""
-        print("=" * 60)
-        print("FM26 EXTRACTION TOOL - Scan Completo")
-        print("=" * 60)
-        
-        results = {
-            "xmls": [str(x) for x in self.find_all_xmls()],
-            "jsons": [str(x) for x in self.find_all_jsons()],
-            "configs": [str(x) for x in self.find_all_configs()],
-            "fmfs": [str(x) for x in self.find_fmf_files()],
-            "dlls": self.find_dll_assemblies()
+        # Filtrar por categorias importantes
+        categories = {
+            'injury': [],
+            'transfer': [],
+            'newgen': [],
+            'match': [],
+            'ui': [],
+            'database': [],
+            'config': []
         }
         
-        bundles, bundles_by_type = self.find_asset_bundles()
-        results["bundles"] = [str(x) for x in bundles]
-        results["bundles_by_type"] = bundles_by_type
+        keywords = {
+            'injury': ['injury', 'lesion', 'fitness'],
+            'transfer': ['transfer', 'value', 'wage', 'salary'],
+            'newgen': ['newgen', 'regen', 'wonderkid'],
+            'match': ['match', 'engine', 'tactic'],
+            'ui': ['uipanel', 'uitheme', 'skin', 'uiview'],
+            'database': ['database', 'playerid', 'clubid', 'teamid'],
+            'config': ['config', 'setting', 'path']
+        }
         
-        # Salvar manifest
-        manifest_path = self.output_path / "extraction_manifest.json"
-        with open(manifest_path, 'w', encoding='utf-8') as f:
-            json.dump(results, f, indent=2, ensure_ascii=False)
+        for s in strings:
+            s_lower = s.lower()
+            for cat, kws in keywords.items():
+                if any(kw in s_lower for kw in kws):
+                    categories[cat].append(s)
         
-        print(f"\n[OK] Manifest salvo em: {manifest_path}")
-        return results
+        return categories
     
-    def extract_important_files(self):
-        """Extrai arquivos importantes para análise"""
-        extract_dir = self.output_path / "extracted"
-        extract_dir.mkdir(parents=True, exist_ok=True)
+    def extract_bundle_strings(self, bundle_path: Path):
+        """Extrai strings de um Asset Bundle"""
+        with open(bundle_path, 'rb') as f:
+            data = f.read()
         
-        # Copiar XMLs importantes
-        xml_dir = extract_dir / "xmls"
-        xml_dir.mkdir(exist_ok=True)
-        for xml in self.find_all_xmls():
-            if xml.stat().st_size > 1000:  # Só arquivos > 1KB
-                shutil.copy2(xml, xml_dir / xml.name)
+        strings = []
+        current = b''
+        for i, byte in enumerate(data):
+            if 32 <= byte < 127:
+                current += bytes([byte])
+            else:
+                if len(current) > 8:
+                    try:
+                        s = current.decode('utf-8', errors='replace')
+                        if s.isprintable():
+                            strings.append(s)
+                    except:
+                        pass
+                current = b''
         
-        # Copiar JSONs importantes
-        json_dir = extract_dir / "jsons"
-        json_dir.mkdir(exist_ok=True)
-        for json_file in self.find_all_jsons():
-            shutil.copy2(json_file, json_dir / json_file.name)
+        return strings
+    
+    def generate_report(self):
+        """Gera relatório completo do jogo"""
+        report = {
+            'timestamp': datetime.now().isoformat(),
+            'game_path': str(self.game_path),
+            'files': {
+                'fmf': len(self.find_fmf_files()),
+                'bundles': len(self.find_asset_bundles()),
+                'dlls': len(self.find_dlls())
+            },
+            'metadata_analysis': self.analyze_metadata()
+        }
         
-        print(f"[OK] Arquivos extraídos para: {extract_dir}")
+        # Salvar relatório
+        report_path = self.output_path / 'extraction_report.json'
+        with open(report_path, 'w', encoding='utf-8') as f:
+            json.dump(report, f, indent=2, ensure_ascii=False)
+        
+        print(f"Relatório salvo em: {report_path}")
+        return report
 
-if __name__ == '__main__':
+def main():
     game_path = "/data/.openclaw/workspace/fm26-game-files"
-    output_path = "/data/.openclaw/workspace/fm26-editor-workspace"
+    output_path = "/data/.openclaw/workspace/fm26-editor-workspace/extraction-output"
     
     extractor = FM26Extractor(game_path, output_path)
-    results = extractor.scan_all()
+    report = extractor.generate_report()
     
-    print("\n" + "=" * 60)
-    print("RESUMO")
-    print("=" * 60)
-    print(f"XMLs: {len(results['xmls'])}")
-    print(f"JSONs: {len(results['jsons'])}")
-    print(f"Configs: {len(results['configs'])}")
-    print(f"FMFs: {len(results['fmfs'])}")
-    print(f"DLLs: {len(results['dlls'])}")
-    print(f"Bundles: {len(results['bundles'])}")
-    print(f"\nTipos de Bundle:")
-    for bt, bundles in results['bundles_by_type'].items():
-        print(f"  {bt}: {len(bundles)} bundles")
+    print("\n=== RESUMO ===")
+    for cat, items in report.get('metadata_analysis', {}).items():
+        if isinstance(items, list):
+            print(f"{cat}: {len(items)} referências")
+
+if __name__ == '__main__':
+    main()
