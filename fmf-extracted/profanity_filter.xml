@@ -1,0 +1,10 @@
+<record>
+	<!-- no need to preload or cache -->
+	<boolean id="preload" value="false"/>
+	<boolean id="cache" value="false"/>
+	
+	<!-- make sure these don't get loaded by the TEXT_RESOURCE_TYPE_IMP class, we only stream this -->
+	<list id="supported_types">
+		<record type="Text Stream" value="true" />
+	</list>
+</record>

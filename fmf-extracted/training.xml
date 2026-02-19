@@ -1,0 +1,4 @@
+<record>
+	<!-- don't preload the stuff in this folder -->
+	<boolean id="preload" value="false"/>
+</record>

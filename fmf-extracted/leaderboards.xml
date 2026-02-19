@@ -1,0 +1,289 @@
+<record>
+	<list id="items">
+		<record>
+			<string id="name" value="leaderboard_all_time_sim"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_all_time_sim"/>
+				<string id="epicstore" value="leaderboard_all_time_sim"/>
+				<string id="ms_store" value="leaderboardalltimesim"/>
+				<string id="xbox_edition" value="leaderboardalltimesim"/>
+				<string id="playstation" value="1"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_all_time_sim_cc"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_all_time_sim_cc"/>
+				<string id="epicstore" value="leaderboard_all_time_sim_cc"/>
+				<string id="ms_store" value="leaderboardalltimesimcc"/>
+				<string id="xbox_edition" value="leaderboardalltimesimcc"/>
+				<string id="playstation" value="2"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_all_time_total"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_all_time_total"/>
+				<string id="epicstore" value="leaderboard_all_time_total"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQeQ"/>
+				<string id="game_center" value="24_leaderboard_all_time_total"/>
+				<string id="ms_store" value="leaderboardalltimetotal"/>
+				<string id="xbox_edition" value="leaderboardalltimetotal"/>
+				<string id="playstation" value="3"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_fantasy_draft_cup_wins"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_fantasy_draft_cup_wins"/>
+				<string id="epicstore" value="leaderboard_fantasy_draft_cup_wins"/>
+				<string id="ms_store" value="leaderboardfantasydraftcupwins"/>
+				<string id="xbox_edition" value="leaderboardfantasydraftcupwins"/>
+				<string id="playstation" value="4"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_fantasy_draft_league_wins"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_fantasy_draft_league_wins"/>
+				<string id="epicstore" value="leaderboard_fantasy_draft_league_wins"/>
+				<string id="ms_store" value="leaderboardfantasydraftleaguewins"/>
+				<string id="xbox_edition" value="leaderboardfantasydraftleaguewins"/>
+				<string id="playstation" value="5"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_fantasy_draft_matches"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_fantasy_draft_matches"/>
+				<string id="epicstore" value="leaderboard_fantasy_draft_matches"/>
+				<string id="ms_store" value="leaderboardfantasydraftmatches"/>
+				<string id="xbox_edition" value="leaderboardfantasydraftmatches"/>
+				<string id="playstation" value="6"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_fantasy_draft_points"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_fantasy_draft_points"/>
+				<string id="epicstore" value="leaderboard_fantasy_draft_points"/>
+				<string id="ms_store" value="leaderboardfantasydraftpoints"/>
+				<string id="xbox_edition" value="leaderboardfantasydraftpoints"/>
+				<string id="playstation" value="7"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_fantasy_draft_wins"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_fantasy_draft_wins"/>
+				<string id="epicstore" value="leaderboard_fantasy_draft_wins"/>
+				<string id="ms_store" value="leaderboardfantasydraftwins"/>
+				<string id="xbox_edition" value="leaderboardfantasydraftwins"/>
+				<string id="playstation" value="8"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_sim_season"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_sim_season"/>
+				<string id="epicstore" value="leaderboard_sim_season"/>
+				<string id="ms_store" value="leaderboardsimseason"/>
+				<string id="xbox_edition" value="leaderboardsimseason"/>
+				<string id="playstation" value="9"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_single_sim_cc_game"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_single_sim_cc_game"/>
+				<string id="epicstore" value="leaderboard_single_sim_cc_game"/>
+				<string id="ms_store" value="leaderboardsinglesimccgame"/>
+				<string id="xbox_edition" value="leaderboardsinglesimccgame"/>
+				<string id="playstation" value="10"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_single_sim_game"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_single_sim_game"/>
+				<string id="epicstore" value="leaderboard_single_sim_game"/>
+				<string id="ms_store" value="leaderboardsinglesimgame"/>
+				<string id="xbox_edition" value="leaderboardsinglesimgame"/>
+				<string id="playstation" value="11"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_all_time_classic"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_all_time_classic"/>
+				<string id="epicstore" value="leaderboard_all_time_classic"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQeg"/>
+				<string id="game_center" value="24_leaderboard_all_time_classic"/>
+				<string id="ms_store" value="leaderboardalltimeclassic"/>
+				<string id="xbox_edition" value="leaderboardalltimeclassic"/>
+				<string id="playstation" value="12"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_single_classic_game"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_single_classic_game"/>
+				<string id="epicstore" value="leaderboard_single_classic_game"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQew"/>
+				<string id="game_center" value="24_leaderboard_single_classic_game"/>
+				<string id="ms_store" value="leaderboardsingleclassicgame"/>
+				<string id="xbox_edition" value="leaderboardsingleclassicgame"/>
+				<string id="playstation" value="13"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_classic_season"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_classic_season"/>
+				<string id="epicstore" value="leaderboard_classic_season"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQfA"/>
+				<string id="game_center" value="24_leaderboard_classic_season"/>
+				<string id="ms_store" value="leaderboardclassicseason"/>
+				<string id="xbox_edition" value="leaderboardclassicseason"/>
+				<string id="playstation" value="14"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_challenge_1"/>
+			<record id="mappings">
+				<string id="epicstore" value="22_leaderboard_challenge_saviour_cometh"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQfQ"/>
+				<string id="game_center" value="24_challenge_1"/>
+				<string id="xbox_edition" value="leaderboardchallenge1"/>
+				<string id="playstation" value="15"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_challenge_2"/>
+			<record id="mappings">
+				<string id="epicstore" value="22_leaderboard_challenge_underdog"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQfg"/>
+				<string id="game_center" value="24_challenge_2"/>
+				<string id="xbox_edition" value="leaderboardchallenge2"/>
+				<string id="playstation" value="16"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_challenge_3"/>
+			<record id="mappings">
+				<string id="epicstore" value="22_leaderboard_challenge_injury_crisis"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQfw"/>
+				<string id="game_center" value="24_challenge_3"/>
+				<string id="xbox_edition" value="leaderboardchallenge3"/>
+				<string id="playstation" value="17"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_challenge_4"/>
+			<record id="mappings">
+				<string id="epicstore" value="22_leaderboard_challenge_unrest_at_home"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQgAE"/>
+				<string id="game_center" value="24_challenge_4"/>
+				<string id="xbox_edition" value="leaderboardchallenge4"/>
+				<string id="playstation" value="18"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_challenge_5"/>
+			<record id="mappings">
+				<string id="epicstore" value="22_leaderboard_challenge_invincibles"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQgQE"/>
+				<string id="game_center" value="24_challenge_5"/>
+				<string id="xbox_edition" value="leaderboardchallenge5"/>
+				<string id="playstation" value="19"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_challenge_6"/>
+			<record id="mappings">
+				<string id="epicstore" value="22_leaderboard_challenge_financial_storm"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQggE"/>
+				<string id="game_center" value="24_challenge_6"/>
+				<string id="xbox_edition" value="leaderboardchallenge6"/>
+				<string id="playstation" value="20"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_challenge_7"/>
+			<record id="mappings">
+				<string id="epicstore" value="22_leaderboard_challenge_cant_win_anything"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQgwE"/>
+				<string id="xbox_edition" value="leaderboardchallenge7"/>
+				<string id="playstation" value="21"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_challenge_8"/>
+			<record id="mappings">
+				<string id="epicstore" value="22_leaderboard_challenge_from_the_bottom"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQiQE"/>
+				<string id="xbox_edition" value="leaderboardchallenge8"/>
+				<string id="playstation" value="22"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_challenge_9"/>
+			<record id="mappings">
+				<string id="epicstore" value="22_leaderboard_challenge_from_the_ashes"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQiAE"/>
+				<string id="xbox_edition" value="leaderboardchallenge9"/>
+				<string id="playstation" value="23"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_challenge_10"/>
+			<record id="mappings">
+				<string id="epicstore" value="22_leaderboard_challenge_fixture_pile_up"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQhwE"/>
+				<string id="xbox_edition" value="leaderboardchallenge10"/>
+				<string id="playstation" value="24"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_all_time_touch_cc"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_all_time_touch_cc"/>
+				<string id="epicstore" value="leaderboard_all_time_touch_cc"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQhAE"/>
+				<string id="game_center" value="24_leaderboard_all_time_touch_cc"/>
+				<string id="xbox_edition" value="leaderboardalltimetouchcc"/>
+				<string id="playstation" value="25"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_single_touch_cc_game"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_single_touch_cc_game"/>
+				<string id="epicstore" value="leaderboard_single_touch_cc_game"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQhQE"/>
+				<string id="game_center" value="24_leaderboard_single_touch_cc_game"/>
+				<string id="xbox_edition" value="leaderboardsingletouchccgame"/>
+				<string id="playstation" value="26"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_touch_cc_season"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_touch_cc_season"/>
+				<string id="epicstore" value="leaderboard_touch_cc_season"/>
+				<string id="google_play" value="CgkIwrKwy7YPEAIQhgE"/>
+				<string id="game_center" value="24_leaderboard_touch_cc_season"/>
+				<string id="xbox_edition" value="leaderboardtouchccseason"/>
+				<string id="playstation" value="27"/>
+			</record>
+		</record>
+		<record>
+			<string id="name" value="leaderboard_versus_comp_score"/>
+			<record id="mappings">
+				<string id="steamworks" value="leaderboard_versus_comp_score"/>
+				<string id="epicstore" value="leaderboard_versus_comp_points"/>
+				<string id="ms_store" value="leaderboardversuscomppoints"/>
+			</record>
+		</record>
+	</list>
+</record>

@@ -1,0 +1,825 @@
+<record>
+	<string id="attributes" value="1.0" />
+	<list id="items">
+
+		<!-- Group storage for achievements: these aren't achievements themselves but define a stat that feed multiple achievements -->
+
+		<!--achievements that need career earnings -->
+		<record>
+			<string id="name" value="career_earnings" />
+			<string id="statvalue" value="career_earnings" />
+			<string id="enabled" value="Yes" />
+		</record>
+
+		<!--achievements that need manager of the month awards -->
+		<record>
+			<string id="name" value="manager_of_the_month_awards" />
+			<string id="statvalue" value="manager_of_the_month_awards" />
+			<string id="enabled" value="Yes" />
+		</record>
+
+		<!--achievements that need human seasons at one club -->
+		<record>
+			<string id="name" value="seasons_at_one_club" />
+			<string id="statvalue" value="seasons_at_one_club" />
+			<string id="enabled" value="Yes" />
+		</record>
+
+		<!--achievements that need consecutive unbeaten matches -->
+		<record>
+			<string id="name" value="consecutive_matches_unbeaten" />
+			<string id="statvalue" value="consecutive_matches_unbeaten" />
+			<string id="enabled" value="Yes" />
+		</record>
+
+		<!--achievements that need consecutive matches wins -->
+		<record>
+			<string id="name" value="consecutive_matches_won" />
+			<string id="statvalue" value="consecutive_matches_won" />
+			<string id="enabled" value="Yes" />
+		</record>
+
+		<!--achievements that need players in team of week -->
+		<record>
+			<string id="name" value="players_in_team_of_week" />
+			<string id="statvalue" value="players_in_team_of_week" />
+			<string id="enabled" value="Yes" />
+		</record>
+
+		<!-- Achievements -->
+		<!-- PLEASE KEEP ACHIEVEMENTS LIST IN ALPHABETICAL ORDER BY display_name FIELD -->
+
+		<record>
+			<string id="name" value="achievement_beat_a_rival" />
+			<translation id="display_name" translation_id="553361" type="use" value="'I Would Love It If We Beat Them'[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is 'I Would Love It If We Beat Them']" />
+			<translation id="description" translation_id="553362" type="use" value="You beat a rival team[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is 'I Would Love It If We Beat Them']" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_beat_a_rival" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_beat_a_rival" />
+				<string id="epicstore" value="achievement_beat_a_rival" />
+				<string id="ms_store" value="39" />
+				<string id="xbox_edition" value="39" />
+				<string id="playstation" value="38" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_signed_a_player" />
+			<translation id="display_name" translation_id="553363" type="use" value="#DoneDeal[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is #DoneDeal]" />
+			<translation id="description" translation_id="553364" type="use" value="You signed your first player[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is #DoneDeal]" />
+			<integer id="max_value" value="1" />
+			<string id="enabled" value="Yes" />
+			<string id="type" value="player" />
+			<string id="file" value="achievement_signed_a_player" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_signed_a_player" />
+				<string id="epicstore" value="achievement_signed_a_player" />
+				<string id="game_center" value="26_achievement_signed_a_player" />
+				<string id="ms_store" value="43" />
+				<string id="xbox_edition" value="43" />
+				<string id="playstation" value="42" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_eleven_of_our_own" />
+			<translation id="display_name" translation_id="586060" type="use" value="Eleven Of Our Own[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Eleven of Our Own]" />
+			<translation id="description" translation_id="586076" type="use" value="You started a full eleven of home-grown players[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Eleven of Our Own]" />
+			<integer id="max_value" value="1" />
+			<string id="enabled" value="Yes" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_eleven_of_our_own" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_eleven_of_our_own" />
+				<string id="epicstore" value="achievement_eleven_of_our_own" />
+				<string id="ms_store" value="23" />
+				<string id="xbox_edition" value="23" />
+				<string id="playstation" value="22" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_win_a_match_after_being_2_goals_behind_at_half_time" />
+			<translation id="display_name" translation_id="553365" type="use" value="A Game of Two Halves[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is A Game of Two Halves]" />
+			<translation id="description" translation_id="553366" type="use" value="You won a competitive match after being two or more goals down at half time[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is A Game of Two Halves]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_win_a_match_after_being_2_goals_behind_at_half_time" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_win_a_match_after_being_2_goals_behind_at_half_time" />
+				<string id="epicstore" value="achievement_win_a_match_after_being_2_goals_behind_at_half_time" />
+				<string id="ms_store" value="37" />
+				<string id="xbox_edition" value="37" />
+				<string id="playstation" value="36" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_continental_champions" />
+			<translation id="display_name" translation_id="586061" type="use" value="Continental Champions[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Continental Champions]" />
+			<translation id="description" translation_id="586077" type="use" value="You won a top continental club competition[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Continental Champions]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_continental_champions" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_continental_champions" />
+				<string id="epicstore" value="achievement_continental_champions" />
+				<string id="ms_store" value="11" />
+				<string id="xbox_edition" value="11" />
+				<string id="playstation" value="10" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_bring_it_on" />
+			<translation id="display_name" translation_id="553371" type="use" value="Bring It On[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Bring It On]" />
+			<translation id="description" translation_id="553372" type="use" value="You completed the induction[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Bring It On]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="other" />
+			<string id="file" value="achievement_bring_it_on" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_bring_it_on" />
+				<string id="epicstore" value="achievement_bring_it_on" />
+				<string id="ms_store" value="44" />
+				<string id="game_center" value="26_achievement_bring_it_on" />
+				<string id="xbox_edition" value="44" />
+				<string id="playstation" value="43" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_sell_50_million_plus_player" />
+			<translation id="display_name" translation_id="497357" type="use" value="Cash to Burn[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Cash to Burn]" />
+			<translation id="description" translation_id="497358" type="use" value="You sold a player for &#163;50m or more[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Cash to Burn]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="player" />
+			<string id="file" value="achievement_sell_50_million_plus_player" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_sell_50_million_plus_player" />
+				<string id="epicstore" value="achievement_sell_50_million_plus_player" />
+				<string id="ms_store" value="25" />
+				<string id="game_center" value="26_achievement_sell_50_million_plus_player" />
+				<string id="xbox_edition" value="25" />
+				<string id="playstation" value="24" />
+			</record>
+		</record>
+		
+		<record>
+			<string id="name" value="achievement_centurion" />
+			<translation id="display_name" translation_id="586062" type="use" value="Centurion[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Centurion]" />
+			<translation id="description" translation_id="586078" type="use" value="You won 100 competitive matches[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Centurion]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="100" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_centurion" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_centurion" />
+				<string id="epicstore" value="achievement_centurion" />
+				<string id="ms_store" value="14" />
+				<string id="xbox_edition" value="14" />
+				<string id="playstation" value="13" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_championes" />
+			<translation id="display_name" translation_id="553373" type="use" value="Championes[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Championes]" />
+			<translation id="description" translation_id="553374" type="use" value="You won a domestic league title[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Championes]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_championes" />
+			<record id="mappings">
+				<string id="game_center" value="26_achievement_championes" />
+				<string id="xbox_edition" value="12" />
+				<string id="playstation" value="11" />
+				<string id="steamworks" value="achievement_championes" />
+				<string id="epicstore" value="achievement_championes" />
+				<string id="ms_store" value="12" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_won_top_domestic_cup" />
+			<translation id="display_name" translation_id="497189" type="use" value="Cup Glory![COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Cup Glory]" />
+			<translation id="description" translation_id="497190" type="use" value="You won a top domestic cup[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Cup Glory]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_won_top_domestic_cup" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_won_domestic_cup" />
+				<string id="epicstore" value="achievement_won_domestic_cup" />
+				<string id="ms_store" value="18" />
+				<string id="game_center" value="26_achievement_won_domestic_cup" />
+				<string id="xbox_edition" value="18" />
+				<string id="playstation" value="17" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_do_the_double" />
+			<translation id="display_name" translation_id="497229" type="use" value="Do The Double[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Do The Double]" />
+			<translation id="description" translation_id="497230" type="use" value="You won a nation's top league and cup competitions in the same season[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Do The Double]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_do_the_double" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_do_the_double" />
+				<string id="epicstore" value="achievement_do_the_double" />
+				<string id="ms_store" value="10" />
+				<string id="xbox_edition" value="10" />
+				<string id="playstation" value="9" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_win_3_consecutive_league_titles" />
+			<translation id="display_name" translation_id="497231" type="use" value="Domination[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Domination]" />
+			<translation id="description" translation_id="553384" type="use" value="You won three consecutive top division league titles[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Domination]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="3" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_win_3_consecutive_league_titles" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_win_3_consecutive_league_titles" />
+				<string id="epicstore" value="achievement_win_3_consecutive_league_titles" />
+				<string id="ms_store" value="4" />
+				<string id="xbox_edition" value="4" />
+				<string id="playstation" value="3" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_won_a_match" />
+			<translation id="display_name" translation_id="497247" type="use" value="First Victory[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is First Victory]" />
+			<translation id="description" translation_id="497248" type="use" value="You guided your team to victory in a competitive fixture[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is First Victory]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_won_a_match" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_won_a_match" />
+				<string id="epicstore" value="achievement_won_a_match" />
+				<string id="game_center" value="26_achievement_won_a_match" />
+				<string id="ms_store" value="41" />
+				<string id="xbox_edition" value="41" />
+				<string id="playstation" value="40" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_full_board_confidence" />
+			<translation id="display_name" translation_id="497297" type="use" value="Full Faith[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Full Faith]" />
+			<translation id="description" translation_id="586080" type="use" value="The board have evaluated your performance as superb and worthy of an A Grade[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Full Faith]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_full_board_confidence" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_full_board_confidence" />
+				<string id="epicstore" value="achievement_full_board_confidence" />
+				<string id="ms_store" value="36" />
+				<string id="xbox_edition" value="36" />
+				<string id="playstation" value="35" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_globetrotter" />
+			<translation id="display_name" translation_id="586063" type="use" value="Globetrotter[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Globetrotter]" />
+			<translation id="description" translation_id="586081" type="use" value="You won a competition with domestic clubs from different nations[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Globetrotter]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="2" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_globetrotter" />
+			<record id="mappings">
+				<string id="ms_store" value="9" />
+				<string id="steamworks" value="achievement_globetrotter" />
+				<string id="epicstore" value="achievement_globetrotter" />
+				<string id="xbox_edition" value="9" />
+				<string id="playstation" value="8" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_unlock_all_achievements" />
+			<translation id="display_name" translation_id="553405" type="use" value="GOAT[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is GOAT]" />
+			<translation id="description" translation_id="553406" type="use" value="You unlocked all achievements[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is GOAT]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="other" />
+			<string id="file" value="achievement_unlock_all_achievements" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_unlock_all_achievements" />
+				<string id="epicstore" value="achievement_unlock_all_achievements" />
+				<string id="ms_store" value="1" />
+				<string id="xbox_edition" value="1" />
+				<string id="playstation" value="0" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_least_goals_conceded_in_league" />
+			<translation id="display_name" translation_id="497309" type="use" value="Immovable Object[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Immovable Object]" />
+			<translation id="description" translation_id="553409" type="use" value="Your team conceded the fewest league goals over an entire season[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Iron Curtain]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_least_goals_conceded_in_league" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_least_goals_conceded_in_league" />
+				<string id="epicstore" value="achievement_least_goals_conceded_in_league" />
+				<string id="game_center" value="26_achievement_least_goals_conceded_in_league" />
+				<string id="ms_store" value="15" />
+				<string id="xbox_edition" value="15" />
+				<string id="playstation" value="14" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_undefeated_season" />
+			<translation id="display_name" translation_id="497245" type="use" value="Invincible![COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Invincible!]" />
+			<translation id="description" translation_id="497246" type="use" value="Your team played the entire season without losing a league match[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Invincible!]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_undefeated_season" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_undefeated_season" />
+				<string id="epicstore" value="achievement_undefeated_season" />
+				<string id="ms_store" value="8" />
+				<string id="game_center" value="26_achievement_undefeated_season" />
+				<string id="xbox_edition" value="8" />
+				<string id="playstation" value="7" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="career_earnings_over_20_million" />
+			<string id="statvalue" value="career_earnings" />
+			<translation id="display_name" translation_id="487210" type="use" value="Money, Money, Money[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE; these appear through the Steam client and other platform pop-up notifications when achievements have been hit, Achievement is Money, Money, Money]" />
+			<translation id="description" translation_id="680199" type="use" value="You earned more than &#163;20m in your career as a manager[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE; these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Money, Money, Money]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="20000000" />
+			<string id="type" value="manager" />
+			<string id="file" value="career_earnings_over_20_million" />
+			<record id="mappings">
+				<string id="steamworks" value="career_earnings_over_20_million" />
+				<string id="epicstore" value="career_earnings_over_20_million" />
+				<string id="ms_store" value="17" />
+				<string id="game_center" value="26_career_earnings_over_20_million" />
+				<string id="xbox_edition" value="17" />
+				<string id="playstation" value="16" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_motivational_speaker" />
+			<translation id="display_name" translation_id="553416" type="use" value="Motivational Speaker[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE; these appear through the Steam client and other platform pop-up notifications when achievements have been hit, Achievement is Motivational Speaker]" />
+			<translation id="description" translation_id="553417" type="use" value="Your team talk had a positive effect on the team[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE; these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Motivational Speaker]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_motivational_speaker" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_motivational_speaker" />
+				<string id="epicstore" value="achievement_motivational_speaker" />
+				<string id="ms_store" value="40" />
+				<string id="xbox_edition" value="40" />
+				<string id="playstation" value="39" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_gain_bottom_to_top_promotion" />
+			<translation id="display_name" translation_id="586067" type="use" value="Started From the Bottom[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement for winning promotion from the bottom to the top division in a nation]" />
+			<translation id="description" translation_id="553418" type="use" value="You won promotion from the bottom to the top division in a nation[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is National Hero]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_gain_bottom_to_top_promotion" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_gain_bottom_to_top_promotion" />
+				<string id="epicstore" value="achievement_gain_bottom_to_top_promotion" />
+				<string id="ms_store" value="6" />
+				<string id="xbox_edition" value="6" />
+				<string id="playstation" value="5" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_sell_player" />
+			<translation id="display_name" translation_id="553423" type="use" value="Off the Books[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Off The Books]" />
+			<translation id="description" translation_id="553424" type="use" value="You sold a player[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Off The Books]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="player" />
+			<string id="file" value="achievement_sell_player" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_sell_player" />
+				<string id="epicstore" value="achievement_sell_player" />
+				<string id="game_center" value="26_achievement_sell_player" />
+				<string id="ms_store" value="42" />
+				<string id="xbox_edition" value="42" />
+				<string id="playstation" value="41" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_one_of_our_own" />
+			<translation id="display_name" translation_id="553428" type="use" value="One Of Our Own[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is One Of Our Own]" />
+			<translation id="description" translation_id="553429" type="use" value="You gave a player under the age of 23 their league debut[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is One Of Our Own]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="player" />
+			<string id="file" value="achievement_one_of_our_own" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_one_of_our_own" />
+				<string id="epicstore" value="achievement_one_of_our_own" />
+				<string id="ms_store" value="35" />
+				<string id="xbox_edition" value="35" />
+				<string id="playstation" value="34" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_one_of_us" />
+			<translation id="display_name" translation_id="553430" type="use" value="One of Us, One of Us![COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is One of Us, One of Us!]" />
+			<translation id="description" translation_id="553431" type="use" value="You hired a new member of staff[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is One of Us, One of Us!]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_one_of_us" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_one_of_us" />
+				<string id="epicstore" value="achievement_one_of_us" />
+				<string id="ms_store" value="38" />
+				<string id="xbox_edition" value="38" />
+				<string id="playstation" value="37" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_one_for_the_record_books" />
+			<translation id="display_name" translation_id="586069" type="use" value="One For The Record Books[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is One For The Record Books]" />
+			<translation id="description" translation_id="586088" type="use" value="Your team set a new division record for most points in a season[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is One For The Record Books]" />
+			<integer id="max_value" value="1" />
+			<string id="enabled" value="Yes" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_one_for_the_record_books" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_one_for_the_record_books" />
+				<string id="epicstore" value="achievement_one_for_the_record_books" />
+				<string id="ms_store" value="7" />
+				<string id="game_center" value="26_achievement_one_for_the_record_books" />
+				<string id="xbox_edition" value="7" />
+				<string id="playstation" value="6" />
+			</record>
+		</record>	
+
+		<record>
+			<string id="name" value="achievement_10_seasons_at_one_club" />
+			<string id="statvalue" value="seasons_at_one_club" />
+			<translation id="display_name" translation_id="497233" type="use" value="Part of the Furniture[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Part of the Furniture]" />
+			<translation id="description" translation_id="553437" type="use" value="You stayed at one club for 10 seasons[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Part of the Furniture]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="10" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_10_seasons_at_one_club" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_10_seasons_at_one_club" />
+				<string id="epicstore" value="achievement_10_seasons_at_one_club" />
+				<string id="ms_store" value="5" />
+				<string id="xbox_edition" value="5" />
+				<string id="playstation" value="4" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_people_pleaser" />
+			<translation id="display_name" translation_id="553438" type="use" value="People Pleaser[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is People Pleaser]" />
+			<translation id="description" translation_id="553439" type="use" value="You have a happy squad[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is People Pleaser]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_people_pleaser" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_people_pleaser" />
+				<string id="epicstore" value="achievement_people_pleaser" />
+				<string id="ms_store" value="32" />
+				<string id="xbox_edition" value="32" />
+				<string id="playstation" value="31" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_record_sale" />
+			<translation id="display_name" translation_id="497295" type="use" value="Record Sale[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Record Sale]" />
+			<translation id="description" translation_id="497296" type="use" value="You broke the club's record for a transfer fee received for a player[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Record Sale]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="player" />
+			<string id="file" value="achievement_record_sale" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_record_sale" />
+				<string id="epicstore" value="achievement_record_sale" />
+				<string id="game_center" value="26_achievement_record_sale" />
+				<string id="ms_store" value="21" />
+				<string id="xbox_edition" value="21" />
+				<string id="playstation" value="20" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_record_signing" />
+			<translation id="display_name" translation_id="497293" type="use" value="Record Signing[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Record Signing]" />
+			<translation id="description" translation_id="497294" type="use" value="You broke the club's record for a transfer fee spent on a player[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Record Signing]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="player" />
+			<string id="file" value="achievement_record_signing" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_record_signing" />
+				<string id="epicstore" value="achievement_record_signing" />
+				<string id="game_center" value="26_achievement_record_signing" />
+				<string id="ms_store" value="22" />
+				<string id="xbox_edition" value="22" />
+				<string id="playstation" value="21" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_shots_for_days" />
+			<translation id="display_name" translation_id="553449" type="use" value="Shots For Days[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, Achievement is Shots For Days]" />
+			<translation id="description" translation_id="553450" type="use" value="You accumulated more than 5 xG in a match[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, Achievement is Shots For Days]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_shots_for_days" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_shots_for_days" />
+				<string id="epicstore" value="achievement_shots_for_days" />
+				<string id="ms_store" value="29" />
+				<string id="xbox_edition" value="29" />
+				<string id="playstation" value="28" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_buy_50_million_plus_player" />
+			<translation id="display_name" translation_id="497359" type="use" value="Splashing the Cash[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Splashing the Cash]" />
+			<translation id="description" translation_id="497360" type="use" value="You bought a player for &#163;50m or more[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Splashing the Cash]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="player" />
+			<string id="file" value="achievement_buy_50_million_plus_player" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_buy_50_million_plus_player" />
+				<string id="epicstore" value="achievement_buy_50_million_plus_player" />
+				<string id="ms_store" value="24" />
+				<string id="game_center" value="26_achievement_buy_50_million_plus_player" />
+				<string id="xbox_edition" value="24" />
+				<string id="playstation" value="23" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_super_sub" />
+			<translation id="display_name" translation_id="553456" type="use" value="Super-Sub[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Super-Sub]" />
+			<translation id="description" translation_id="553457" type="use" value="Your player scored after being brought on[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Super-Sub]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="player" />
+			<string id="file" value="achievement_super_sub" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_super_sub" />
+				<string id="epicstore" value="achievement_super_sub" />
+				<string id="game_center" value="26_achievement_super_sub" />
+				<string id="ms_store" value="34" />
+				<string id="xbox_edition" value="34" />
+				<string id="playstation" value="33" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_hes_a_natural" />
+			<translation id="display_name" translation_id="553474" type="use" value="They're a Natural[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE; these appear through the Steam client and other platform pop-up notifications when achievements have been hit, Achievement is They're a Natural]" />
+			<translation id="description" translation_id="487183" type="use" value="You retrained a player to be a natural in a new position[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE; these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is He's a Natural]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="player" />
+			<string id="file" value="achievement_hes_a_natural" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_hes_a_natural" />
+				<string id="epicstore" value="achievement_hes_a_natural" />
+				<string id="ms_store" value="30" />
+				<string id="xbox_edition" value="30" />
+				<string id="playstation" value="29" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_big_win" />
+			<translation id="display_name" translation_id="497287" type="use" value="Thumping[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Thumping]" />
+			<translation id="description" translation_id="553475" type="use" value="Your team won a competitive match by at least five goals[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Thumping]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_big_win" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_big_win" />
+				<string id="epicstore" value="achievement_big_win" />
+				<string id="ms_store" value="27" />
+				<string id="xbox_edition" value="27" />
+				<string id="playstation" value="26" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_30_competitive_matches_without_losing" />
+			<string id="statvalue" value="consecutive_matches_unbeaten" />
+			<translation id="display_name" translation_id="497321" type="use" value="Top Form[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Top Form]" />
+			<translation id="description" translation_id="586096" type="use" value="Your team went undefeated for 30 competitive matches[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Top Form]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="30" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_30_matches_without_losing" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_30_matches_without_losing" />
+				<string id="epicstore" value="achievement_30_matches_without_losing" />
+				<string id="ms_store" value="20" />
+				<string id="xbox_edition" value="20" />
+				<string id="playstation" value="19" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_won_20_competitions" />
+			<translation id="display_name" translation_id="497235" type="use" value="Trophy Hoarder[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Trophy Hoarder]" />
+			<translation id="description" translation_id="586097" type="use" value="You won 20 competitions[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Trophy Hoarder]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="20" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_won_20_cup_competitions" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_won_20_cup_competitions" />
+				<string id="epicstore" value="achievement_won_20_cup_competitions" />
+				<string id="game_center" value="26_achievement_won_20_cup_competitions" />
+				<string id="ms_store" value="3" />
+				<string id="xbox_edition" value="3" />
+				<string id="playstation" value="2" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_most_goals_scored_in_league" />
+			<translation id="display_name" translation_id="497205" type="use" value="Unstoppable Force[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Unstoppable Force]" />
+			<translation id="description" translation_id="497206" type="use" value="Your team scored the most league goals over the entire season[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Unstoppable Force]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_most_goals_scored_in_league" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_most_goals_scored_in_league" />
+				<string id="epicstore" value="achievement_most_goals_scored_in_league" />
+				<string id="game_center" value="26_achievement_most_goals_scored_in_league" />
+				<string id="ms_store" value="16" />
+				<string id="xbox_edition" value="16" />
+				<string id="playstation" value="15" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_we_meet_again" />
+			<translation id="display_name" translation_id="553490" type="use" value="We Meet Again[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is ]" />
+			<translation id="description" translation_id="553491" type="use" value="You won a match against a player you previously sold[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is We Meet Again]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_we_meet_again" />
+			<record id="mappings">
+				<string id="xbox_edition" value="28" />
+				<string id="playstation" value="27" />
+				<string id="steamworks" value="achievement_we_meet_again" />
+				<string id="epicstore" value="achievement_we_meet_again" />
+				<string id="ms_store" value="28" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_wheeler_dealer" />
+			<translation id="display_name" translation_id="553493" type="use" value="Wheeler Dealer[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Wheeler Dealer]" />
+			<translation id="description" translation_id="553494" type="use" value="You successfully negotiated a higher fee for a player[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is Wheeler Dealer]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_wheeler_dealer" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_wheeler_dealer" />
+				<string id="epicstore" value="achievement_wheeler_dealer" />
+				<string id="ms_store" value="33" />
+				<string id="xbox_edition" value="33" />
+				<string id="playstation" value="32" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_club_world_cup" />
+			<translation id="display_name" translation_id="541018" type="use" value="World Beaters[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is win the Club World Cup]" />
+			<translation id="description" translation_id="553496" type="use" value="You won the Club World Cup[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is win the Club World Cup]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_club_world_cup" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_club_world_cup" />
+				<string id="epicstore" value="achievement_club_world_cup" />
+				<string id="ms_store" value="13" />
+				<string id="xbox_edition" value="13" />
+				<string id="playstation" value="12" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_get_into_hall_of_fame" />
+			<translation id="display_name" translation_id="497255" type="use" value="World Renowned[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is World Renowned]" />
+			<translation id="description" translation_id="553497" type="use" value="You made it into the worldwide Hall of Fame[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is World Renowned]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_get_into_hall_of_fame" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_get_into_hall_of_fame" />
+				<string id="epicstore" value="achievement_get_into_hall_of_fame" />
+				<string id="game_center" value="26_achievement_get_into_hall_of_fame" />
+				<string id="ms_store" value="2" />
+				<string id="xbox_edition" value="2" />
+				<string id="playstation" value="1" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_you_can_buy_happiness" />
+			<translation id="display_name" translation_id="553498" type="use" value="You Can Buy Happiness[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE; these appear through the Steam client and other platform pop-up notifications when achievements have been hit, Achievement is You Can Buy Happiness]" />
+			<translation id="description" translation_id="553499" type="use" value="You made a transfer the supporters were extremely happy with[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE; these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is You Can Buy Happiness]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="manager" />
+			<string id="file" value="achievement_you_can_buy_happiness" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_you_can_buy_happiness" />
+				<string id="epicstore" value="achievement_you_can_buy_happiness" />
+				<string id="ms_store" value="31" />
+				<string id="xbox_edition" value="31" />
+				<string id="playstation" value="30" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_10_match_winning_streak" />
+			<string id="statvalue" value="consecutive_matches_won" />
+			<translation id="display_name" translation_id="497227" type="use" value="You're on Fire[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is You're On Fire]" />
+			<translation id="description" translation_id="497228" type="use" value="You won 10 consecutive competitive matches[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is You're on Fire]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="10" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_10_match_winning_streak" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_10_match_winning_streak" />
+				<string id="epicstore" value="achievement_10_match_winning_streak" />
+				<string id="ms_store" value="26" />
+				<string id="xbox_edition" value="26" />
+				<string id="playstation" value="25" />
+			</record>
+		</record>
+
+		<record>
+			<string id="name" value="achievement_won_promotion" />
+			<translation id="display_name" translation_id="497187" type="use" value="You're Up![COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 40; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is You're Up]" />
+			<translation id="description" translation_id="553502" type="use" value="You guided your team to promotion in a domestic league[COMMENT: AREA: Achievements; SUB-AREA: In-game achievement names and descriptions; FR-BN: n/a; TONE: Formal; CHARLIMIT: 100; REF-ID: n/a; NOTE: these appear through the Steam client and other platform pop-up notifications when achievements have been hit, cannot be feminised, Achievement is You're Up]" />
+			<string id="enabled" value="Yes" />
+			<integer id="max_value" value="1" />
+			<string id="type" value="competition" />
+			<string id="file" value="achievement_won_promotion" />
+			<record id="mappings">
+				<string id="steamworks" value="achievement_won_promotion" />
+				<string id="epicstore" value="achievement_won_promotion" />
+				<string id="ms_store" value="19" />
+				<string id="xbox_edition" value="19" />
+				<string id="playstation" value="18" />
+			</record>
+		</record>
+
+		<!-- PLEASE KEEP ACHIEVEMENTS LIST IN ALPHABETICAL ORDER BY display_name FIELD -->
+
+	</list>
+</record>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM26 Wiki - Manual Completo de Modding</title>
+    <style>
+        :root {
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --accent: #e94560;
+            --accent-light: #ff6b6b;
+            --text: #eee;
+            --text-muted: #aaa;
+            --success: #4ecca3;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header {
+            background: linear-gradient(135deg, var(--bg-card), #0f0f23);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid #333;
+        }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; color: var(--accent); }
+        header p { color: var(--text-muted); font-size: 1.1em; }
+        .nav-tabs {
+            display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;
+        }
+        .nav-tab {
+            background: var(--bg-card);
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+        .nav-tab:hover, .nav-tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        .section { display: none; }
+        .section.active { display: block; }
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+        .card h2 { color: var(--accent-light); margin-bottom: 15px; font-size: 1.5em; }
+        .card h3 { color: var(--success); margin: 15px 0 10px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        th { background: #0f0f23; color: var(--accent); }
+        tr:hover { background: rgba(233, 69, 96, 0.1); }
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin: 2px;
+        }
+        .tag-green { background: var(--success); color: #000; }
+        .tag-yellow { background: var(--warning); color: #000; }
+        .tag-red { background: var(--danger); color: #fff; }
+        .tag-blue { background: #007bff; color: #fff; }
+        code {
+            background: #0f0f23;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: var(--accent-light);
+        }
+        pre {
+            background: #0f0f23;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .difficulty-1 { color: var(--success); }
+        .difficulty-2 { color: var(--warning); }
+        .difficulty-3 { color: var(--danger); }
+        .info-box {
+            background: rgba(78, 204, 163, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .danger-box {
+            background: rgba(220, 53, 69, 0.1);
+            border-left: 4px solid var(--danger);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .tool-card {
+            background: #0f0f23;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #333;
+        }
+        .tool-card h4 { color: var(--accent); margin-bottom: 8px; }
+        .tool-card a { color: var(--success); text-decoration: none; }
+        .tool-card a:hover { text-decoration: underline; }
+        .progress-bar {
+            background: #333;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            transition: width 0.3s;
+        }
+        .toc {
+            background: #0f0f23;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .toc h3 { color: var(--accent); margin-bottom: 10px; }
+        .toc ul { list-style: none; }
+        .toc li { padding: 5px 0; }
+        .toc a { color: var(--text-muted); text-decoration: none; }
+        .toc a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎮 FM26 Wiki - Manual de Modding</h1>
+            <p>Guia completo para edição de arquivos, skins, database e engenharia reversa do Football Manager 26</p>
+        </header>
+
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="showSection('overview')">📊 Visão Geral</div>
+            <div class="nav-tab" onclick="showSection('files')">📁 Arquivos</div>
+            <div class="nav-tab" onclick="showSection('skins')">🎨 Skins/UI</div>
+            <div class="nav-tab" onclick="showSection('database')">💾 Database</div>
+            <div class="nav-tab" onclick="showSection('dlls')">⚙️ DLLs/IL2CPP</div>
+            <div class="nav-tab" onclick="showSection('tools')">🛠️ Ferramentas</div>
+            <div class="nav-tab" onclick="showSection('mods')">🧩 Mods</div>
+        </div>
+
+        <!-- OVERVIEW SECTION -->
+        <div id="overview" class="section active">
+            <div class="card">
+                <h2>📋 Resumo Executivo</h2>
+                <table>
+                    <tr><th>Item</th><th>Status</th><th>Dificuldade</th></tr>
+                    <tr><td>Arquivos FMF (XML comprimido)</td><td><span class="tag tag-green">✅ Editável</span></td><td class="difficulty-1">Fácil</td></tr>
+                    <tr><td>Asset Bundles (Uniformes, cabelos)</td><td><span class="tag tag-green">✅ Editável</span></td><td class="difficulty-2">Médio</td></tr>
+                    <tr><td>Skins/UI</td><td><span class="tag tag-yellow">⚠️ Parcial</span></td><td class="difficulty-2">Médio</td></tr>
+                    <tr><td>Database/Editor Data</td><td><span class="tag tag-green">✅ Editável</span></td><td class="difficulty-1">Fácil</td></tr>
+                    <tr><td>DLLs (IL2CPP)</td><td><span class="tag tag-red">❌ Complexo</span></td><td class="difficulty-3">Difícil</td></tr>
+                    <tr><td>Match Engine</td><td><span class="tag tag-red">❌ Compilado</span></td><td class="difficulty-3">Muito Difícil</td></tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>🏗️ Arquitetura do Jogo</h2>
+                <p>O FM26 foi construído com <strong>Unity 6000.x</strong> usando <strong>IL2CPP</strong> (C# compilado para C++ nativo).</p>
+                
+                <h3>📂 Estrutura Principal</h3>
+                <pre>
+FM26/
+├── data/                    # Dados do jogo (FMF - zstd+XML)
+│   ├── languages.fmf        # 197MB - Strings de localização
+│   ├── achievements.fmf     # Conquistas Steam/Epic/Xbox
+│   ├── media.fmf            # Respostas de coletivas
+│   └── ...
+├── fm_Data/                 # Dados Unity
+│   ├── VietNorSteam/        # 1.9GB - Asset Bundles
+│   │   ├── art-characters-male-outfits_assets_all.bundle   # 361MB
+│   │   ├── art-characters-female-outfits_assets_all.bundle # 356MB
+│   │   └── ...
+│   ├── il2cpp_data/         # Metadados IL2CPP
+│   └── Resources/           # DLLs nativas
+├── dotnet/                  # .NET Runtime
+└── FM.exe                   # Executável principal
+                </pre>
+            </div>
+
+            <div class="card">
+                <h2>⚠️ O que NÃO encontramos</h2>
+                <div class="danger-box">
+                    <strong>Ctrl+P (Exportação de dados):</strong> Funcionalidade removida do código compilado. Para reativar, seria necessário fazer hook nas DLLs.
+                </div>
+                <div class="warning-box">
+                    <strong>Arquivos de skin/UI:</strong> A interface do FM26 usa Unity UI Toolkit, que está dentro dos Asset Bundles ou injetada nas DLLs. Não são mais arquivos XML simples como nas versões anteriores.
+                </div>
+            </div>
+        </div>
+
+        <!-- FILES SECTION -->
+        <div id="files" class="section">
+            <div class="card">
+                <h2>📁 Formato FMF (Football Manager File)</h2>
+                <p>Formato proprietário da Sports Interactive. Conteúdo comprimido com <strong>zstd</strong>.</p>
+                
+                <h3>Estrutura do Header</h3>
+                <pre>
+Offset 0x00-0x01: Versão (02 01)
+Offset 0x02-0x05: Magic "fmf." (66 6d 66 2e)
+Offset 0x06-0x19: Metadados
+Offset 0x1A+:     Dados ZSTD (28 b5 2f fd = magic zstd)
+                </pre>
+
+                <h3>Arquivos FMF Analisados</h3>
+                <table>
+                    <tr><th>Arquivo</th><th>Tamanho</th><th>Conteúdo</th><th>Editável?</th></tr>
+                    <tr><td>achievements.fmf</td><td>5KB</td><td>66KB XML - Conquistas</td><td><span class="tag tag-green">✅ Sim</span></td></tr>
+                    <tr><td>languages.fmf</td><td>197MB</td><td>Strings de localização (binário)</td><td><span class="tag tag-yellow">⚠️ Difícil</span></td></tr>
+                    <tr><td>media.fmf</td><td>3.9MB</td><td>Respostas de coletivas</td><td><span class="tag tag-green">✅ Sim</span></td></tr>
+                    <tr><td>leaderboards.fmf</td><td>1.1KB</td><td>Placares online</td><td><span class="tag tag-green">✅ Sim</span></td></tr>
+                    <tr><td>store.fmf</td><td>1.4KB</td><td>Itens da loja (In-Game Editor)</td><td><span class="tag tag-green">✅ Sim</span></td></tr>
+                </table>
+
+                <h3>Como Extrair FMF</h3>
+                <pre>
+import zstandard as zstd
+
+with open("arquivo.fmf", "rb") as f:
+    data = f.read()
+
+# Pular 26 bytes do header
+zstd_data = data[26:]
+
+# Descomprimir
+dctx = zstd.ZstdDecompressor()
+result = dctx.decompress(zstd_data, max_output_size=10*1024*1024)
+                </pre>
+            </div>
+
+            <div class="card">
+                <h2>📦 Asset Bundles (UnityFS)</h2>
+                <p>Contêm modelos 3D, texturas, materiais e animações do jogo.</p>
+                
+                <h3>Principais Bundles</h3>
+                <table>
+                    <tr><th>Bundle</th><th>Tamanho</th><th>Conteúdo</th><th>Potencial</th></tr>
+                    <tr><td>art-characters-male-outfits</td><td>361MB</td><td>Uniformes masculinos</td><td><span class="tag tag-green">⭐⭐⭐⭐⭐</span></td></tr>
+                    <tr><td>art-characters-female-outfits</td><td>356MB</td><td>Uniformes femininos</td><td><span class="tag tag-green">⭐⭐⭐⭐⭐</span></td></tr>
+                    <tr><td>art-characters-male-skin</td><td>206MB</td><td>Peles masculinas</td><td><span class="tag tag-yellow">⭐⭐⭐</span></td></tr>
+                    <tr><td>art-characters-male-hair</td><td>163MB</td><td>Cabelos masculinos</td><td><span class="tag tag-green">⭐⭐⭐⭐</span></td></tr>
+                    <tr><td>art-environments-cityassets</td><td>185MB</td><td>Cidade/estádios</td><td><span class="tag tag-yellow">⭐⭐⭐</span></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- SKINS SECTION -->
+        <div id="skins" class="section">
+            <div class="card">
+                <h2>🎨 Skins e UI no FM26</h2>
+                
+                <div class="warning-box">
+                    <strong>⚠️ Mudança importante:</strong> Diferente das versões anteriores (FM24 e anteriores), o FM26 usa <strong>Unity UI Toolkit</strong> em vez de arquivos XML/panels simples.
+                </div>
+
+                <h3>Skins Disponíveis</h3>
+                <table>
+                    <tr><th>Skin</th><th>Autor</th><th>Link</th></tr>
+                    <tr><td>MrTini23 FM26 Skin</td><td>MrTini23</td><td><a href="https://www.fmscout.com/a-mrtini23-fm26-skin.html" target="_blank">FMScout</a></td></tr>
+                    <tr><td>Material Skin 26</td><td>budwaiser4</td><td><a href="https://www.fmscout.com/a-material-skin-fm26.html" target="_blank">FMScout</a></td></tr>
+                </table>
+
+                <h3>Tutorial: Como Fazer Skins FM26</h3>
+                <div class="info-box">
+                    <strong>Vídeo tutorial:</strong> <a href="https://www.youtube.com/watch?v=YBIGCXjkZvc" target="_blank">"HOW TO USE AND MAKE SKINS ON FM26!"</a> por Tiny Hips
+                </div>
+
+                <h3>Estrutura de uma Skin FM26</h3>
+                <pre>
+skin_name/
+├── skin_config.xml          # Configurações da skin
+├── graphics/                # Imagens e ícones
+│   ├── icons/
+│   ├── backgrounds/
+│   └── ...
+├── panels/                  # Painéis da UI (limitado no FM26)
+└── settings/                # Configurações
+                </pre>
+            </div>
+
+            <div class="card">
+                <h2>🔧 Editando a UI</h2>
+                <p>Para edições avançadas de UI, você precisa:</p>
+                <ol>
+                    <li>Extrair Asset Bundles com <strong>AssetStudio</strong></li>
+                    <li>Editar arquivos .uxml (Visual Trees) e .uss (Style Sheets)</li>
+                    <li>Reempacotar com <strong>UABE</strong></li>
+                </ol>
+                
+                <div class="info-box">
+                    <strong>Dica:</strong> Muitas modificações de UI podem ser feitas via skins sem precisar editar Asset Bundles diretamente.
+                </div>
+            </div>
+        </div>
+
+        <!-- DATABASE SECTION -->
+        <div id="database" class="section">
+            <div class="card">
+                <h2>💾 Database e Editor Data</h2>
+                
+                <h3>O que é Editor Data?</h3>
+                <p>São arquivos <code>.fmf</code> criados com o <strong>Pre-Game Editor</strong> oficial que modificam a database do jogo.</p>
+
+                <h3>Tipos de Editor Data</h3>
+                <table>
+                    <tr><th>Tipo</th><th>Descrição</th><th>Quantidade FMScout</th></tr>
+                    <tr><td>Data Updates</td><td>Atualizações de jogadores, transferências</td><td>18 arquivos</td></tr>
+                    <tr><td>League Updates</td><td>Novas ligas jogáveis</td><td>33 arquivos</td></tr>
+                    <tr><td>Scenarios</td><td>Cenários personalizados</td><td>21 arquivos</td></tr>
+                </table>
+
+                <h3>Database Brasileira</h3>
+                <div class="warning-box">
+                    <strong>Status:</strong> Não encontramos uma database brasileira completa no FMScout. Você pode criar sua própria usando o Pre-Game Editor.
+                </div>
+
+                <h3>IDs de Clubes e Jogadores</h3>
+                <p>Cada clube e jogador tem um <strong>Unique ID</strong> no jogo. Para encontrar IDs:</p>
+                <ol>
+                    <li>Use o <strong>FM Live Editor 26</strong> para ver IDs em tempo real</li>
+                    <li>Abra a database no <strong>Pre-Game Editor</strong></li>
+                    <li>Use ferramentas como <strong>FMSE</strong> ou <strong>Genie Scout</strong></li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h2>🇧🇷 Criando Database Brasileira</h2>
+                
+                <h3>Passo a Passo</h3>
+                <ol>
+                    <li><strong>Instalar Pre-Game Editor</strong> (vem com o jogo na Steam)</li>
+                    <li><strong>Criar novo Editor Data</strong></li>
+                    <li><strong>Adicionar competições:</strong>
+                        <ul>
+                            <li>Brasileirão Série A, B, C, D</li>
+                            <li>Copa do Brasil</li>
+                            <li>Estaduais (SP, RJ, RS, etc.)</li>
+                            <li>Copa Libertadores (já existe)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Configurar regras:</strong>
+                        <ul>
+                            <li>Numero de estrangeiros</li>
+                            <li>Formato de pontos corridos</li>
+                            <li>Rebaixamento/accesso</li>
+                        </ul>
+                    </li>
+                    <li><strong>Salvar como .fmf</strong> em <code>Documents/Sports Interactive/Football Manager 2026/editor data/</code></li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- DLLs SECTION -->
+        <div id="dlls" class="section">
+            <div class="card">
+                <h2>⚙️ Engenharia Reversa - IL2CPP</h2>
+                
+                <div class="danger-box">
+                    <strong>⚠️ Aviso:</strong> Editar DLLs é extremamente complexo e pode causar crashes. O FM26 usa IL2CPP que compila C# para código nativo C++.
+                </div>
+
+                <h3>Assemblies Principais</h3>
+                <table>
+                    <tr><th>Assembly</th><th>Função</th></tr>
+                    <tr><td>FMGame.dll</td><td>Núcleo do jogo</td></tr>
+                    <tr><td>FM.UI.dll</td><td>Interface do usuário</td></tr>
+                    <tr><td>FM.Match.dll</td><td>Motor de partida</td></tr>
+                    <tr><td>SI.Core.dll</td><td>Núcleo da Sports Interactive</td></tr>
+                    <tr><td>SI.UI.dll</td><td>Componentes UI</td></tr>
+                </table>
+
+                <h3>Ferramentas Necessárias</h3>
+                <div class="tool-card">
+                    <h4>Il2CppDumper</h4>
+                    <p>Extrai metadados e gera "Dummy DLLs" para análise.</p>
+                    <a href="https://github.com/Perfare/Il2CppDumper" target="_blank">GitHub - Perfare/Il2CppDumper</a>
+                </div>
+
+                <h3>Processo de Análise</h3>
+                <pre>
+1. Extrair arquivos:
+   - GameAssembly.dll (ou similar)
+   - global-metadata.dat (em fm_Data/il2cpp_data/Metadata/)
+
+2. Rodar Il2CppDumper:
+   ./Il2CppDumper GameAssembly.dll global-metadata.dat output/
+
+3. Analisar Dummy DLLs com dnSpy ou ILSpy
+
+4. Identificar métodos/funções alvo
+
+5. Criar hook ou patch (avançado)
+                </pre>
+
+                <h3>Reativando Ctrl+P (Exportação)</h3>
+                <div class="warning-box">
+                    <strong>Teoria:</strong> A funcionalidade de exportação foi removida, mas pode ser possível reativá-la via hook na FM.UI.dll ou SI.UI.dll interceptando o input do teclado.
+                    <br><br>
+                    <strong>Status:</strong> Não testado ainda. Requer conhecimento avançado de reverse engineering.
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎮 Match Engine</h2>
+                <p>O motor de partida está compilado em código nativo. Edições diretas são extremamente difíceis.</p>
+                
+                <h3>O que PODE ser modificado (via database)</h3>
+                <ul>
+                    <li>Táticas e formações padrão</li>
+                    <li>Estilos de jogo</li>
+                    <li>Set pieces</li>
+                </ul>
+
+                <h3>O que NÃO pode ser facilmente modificado</h3>
+                <ul>
+                    <li>Física da bola</li>
+                    <li>IA dos jogadores</li>
+                    <li>Animações</li>
+                    <li>Tomada de decisão</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TOOLS SECTION -->
+        <div id="tools" class="section">
+            <div class="card">
+                <h2>🛠️ Ferramentas Essenciais</h2>
+                
+                <div class="tool-card">
+                    <h4>FM Live Editor 26 (FMScout)</h4>
+                    <p>Editor em tempo real. Edita jogadores, clubes, contratos durante o jogo.</p>
+                    <p><strong>Preço:</strong> Grátis para scouting, £5.49 para edição</p>
+                    <a href="https://www.fmscout.com/a-fm-live-editor-26.html" target="_blank">Download no FMScout</a>
+                </div>
+
+                <div class="tool-card">
+                    <h4>FM Genie Scout 26</h4>
+                    <p>Utility de scouting avançado. Mostra atributos ocultos, potencial, etc.</p>
+                    <a href="https://www.fmscout.com/a-fm-genie-scout-26.html" target="_blank">Download no FMScout</a>
+                </div>
+
+                <div class="tool-card">
+                    <h4>Pre-Game Editor (Oficial)</h4>
+                    <p>Editor de database oficial. Vem instalado com o jogo via Steam.</p>
+                    <p><strong>Local:</strong> Steam Library → Football Manager 2026 → tools</p>
+                </div>
+
+                <div class="tool-card">
+                    <h4>AssetStudio</h4>
+                    <p>Extrai assets de Asset Bundles Unity (modelos, texturas, etc.)</p>
+                    <a href="https://github.com/Perfare/AssetStudio" target="_blank">GitHub - Perfare/AssetStudio</a>
+                </div>
+
+                <div class="tool-card">
+                    <h4>UABE (Unity Assets Bundle Extractor)</h4>
+                    <p>Edita e substitui assets em Asset Bundles.</p>
+                    <a href="https://github.com/SeriousCache/UABE" target="_blank">GitHub - SeriousCache/UABE</a>
+                </div>
+
+                <div class="tool-card">
+                    <h4>Il2CppDumper</h4>
+                    <p>Engenharia reversa de jogos Unity IL2CPP.</p>
+                    <a href="https://github.com/Perfare/Il2CppDumper" target="_blank">GitHub - Perfare/Il2CppDumper</a>
+                </div>
+
+                <div class="tool-card">
+                    <h4>dnSpy</h4>
+                    <p>Decompilador .NET para analisar Dummy DLLs geradas pelo Il2CppDumper.</p>
+                    <a href="https://github.com/dnSpy/dnSpy" target="_blank">GitHub - dnSpy</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📊 Comparativo de Editores</h2>
+                <table>
+                    <tr><th>Ferramenta</th><th>Tipo</th><th>Tempo Real</th><th>Preço</th></tr>
+                    <tr><td>FM Live Editor 26</td><td>Editor</td><td>✅ Sim</td><td>£5.49</td></tr>
+                    <tr><td>In-Game Editor (DLC)</td><td>Editor</td><td>✅ Sim</td><td>$4.99</td></tr>
+                    <tr><td>Pre-Game Editor</td><td>Editor</td><td>❌ Não</td><td>Grátis</td></tr>
+                    <tr><td>Genie Scout 26</td><td>Scout</td><td>✅ Sim</td><td>Grátis/Pago</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- MODS SECTION -->
+        <div id="mods" class="section">
+            <div class="card">
+                <h2>🧩 Tipos de Mods</h2>
+                
+                <h3>1. Mods de Atributos/Configuração</h3>
+                <table>
+                    <tr><th>Mod</th><th>Arquivo</th><th>Dificuldade</th></tr>
+                    <tr><td>Alterar % de lesões</td><td>Editor Data (.fmf)</td><td class="difficulty-1">Fácil</td></tr>
+                    <tr><td>Progresso de newgens</td><td>Editor Data (.fmf)</td><td class="difficulty-1">Fácil</td></tr>
+                    <tr><td>Valores de jogadores</td><td>Editor Data (.fmf) ou Live Editor</td><td class="difficulty-1">Fácil</td></tr>
+                    <tr><td>Financeiro de clubes</td><td>Editor Data (.fmf) ou Live Editor</td><td class="difficulty-1">Fácil</td></tr>
+                </table>
+
+                <h3>2. Mods Visuais</h3>
+                <table>
+                    <tr><th>Mod</th><th>Ferramenta</th><th>Dificuldade</th></tr>
+                    <tr><td>Skins</td><td>Editor de texto/XML</td><td class="difficulty-2">Médio</td></tr>
+                    <tr><td>Logos</td><td>Photoshop/GIMP</td><td class="difficulty-1">Fácil</td></tr>
+                    <tr><td>Facepacks</td><td>Download pronto</td><td class="difficulty-1">Fácil</td></tr>
+                    <tr><td>Kits/Uniformes</td><td>AssetStudio + Photoshop</td><td class="difficulty-2">Médio</td></tr>
+                </table>
+
+                <h3>3. Mods de Database</h3>
+                <table>
+                    <tr><th>Mod</th><th>Ferramenta</th><th>Dificuldade</th></tr>
+                    <tr><td>Atualização de transferências</td><td>Pre-Game Editor</td><td class="difficulty-1">Fácil</td></tr>
+                    <tr><td>Novas ligas</td><td>Pre-Game Editor</td><td class="difficulty-2">Médio</td></tr>
+                    <tr><td>Database brasileira completa</td><td>Pre-Game Editor</td><td class="difficulty-3">Difícil</td></tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>📋 Checklist para Mods</h2>
+                
+                <h3>Antes de começar:</h3>
+                <ul>
+                    <li>✅ Fazer backup da pasta do jogo</li>
+                    <li>✅ Fazer backup da pasta de saves</li>
+                    <li>✅ Desativar Steam Cloud para testes</li>
+                    <li>✅ Criar ponto de restauração do sistema</li>
+                </ul>
+
+                <h3>Para editar database:</h3>
+                <ul>
+                    <li>✅ Instalar Pre-Game Editor</li>
+                    <li>✅ Criar pasta <code>editor data</code> em Documents</li>
+                    <li>✅ Testar em save novo antes de usar em save principal</li>
+                </ul>
+
+                <h3>Para editar assets:</h3>
+                <ul>
+                    <li>✅ Instalar AssetStudio</li>
+                    <li>✅ Instalar UABE</li>
+                    <li>✅ Ter Photoshop/GIMP para texturas</li>
+                    <li>✅ Backup dos Asset Bundles originais</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 20px; color: var(--text-muted); margin-top: 30px;">
+            <p>FM26 Wiki v1.0 - Gerado por Koda (OpenClaw)</p>
+            <p>Última atualização: 2026-02-19</p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            // Remove active from all tabs
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            // Activate selected tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

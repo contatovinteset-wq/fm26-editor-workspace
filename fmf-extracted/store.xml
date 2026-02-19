@@ -1,0 +1,16 @@
+<record>
+	<list id="items">
+		<!-- ########################################################## -->
+		<!-- Offer id and item ids need to match the Epic backend       -->
+		<!-- unlockable id & category are how it is represented in code	-->
+		<!-- ########################################################## -->
+		<record>
+			<!-- UNLOCKABLE_ID_INGAME_EDITOR -->
+			<string id="unlockable" value="17"/>
+			<string id="offer_id" value="7cba406da746429f8a868c5b10105c3f"/>
+			<!-- the item_id corresponds to the audience item id found in the Epic backend, under base game product > Epic Games Store > Offers -->
+			<string id="item_id" value="b8ae39698d9a4d2c8e0b4eb8f271b643"/>
+			<string id="item_category" value="editor"/>
+		</record>
+	</list>
+</record>

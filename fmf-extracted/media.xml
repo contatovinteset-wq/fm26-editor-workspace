@@ -1,0 +1,23 @@
+<!-- alternative answers --><record>
+  <list id="pcaa">
+	
+	<record>
+      <!-- PRESS_CONFERENCE_ALTERNATIVE_ANSWER_ID::CHANGE_REFERENCE_FROM_JOB_VARIABLE_TO_BOARD_OWNERSHIP -->
+
+      <!--  Question Properties -->
+      <integer id="alt_answer_id" value="3" />
+
+      <!-- Answer Text -->
+      <translation id="alt_answer_headline" translation_id="489368" type="use" value="[%person#1-surname] to begin planning for next season with board[COMMENT: AREA: Press Conference Questions; SUB-AREA: Board and Consortium Ownership; FR-BN: 25624; TONE: Formal; CHARLIMIT: None; REF-ID: n/a; NOTE: alternative answer string, ANID_CHANGE_REFERENCE_FROM_JOB_VARIABLE_TO_BOARD_OWNERSHIP]" />
+      <translation id="alt_answer_string" translation_id="489369" type="use" value="[%person#1-I] will sit down with the board and some of [%person#1-my] staff in the coming days and we'll plan a strategy ahead of next season. [%person#1-I]'m keen to get started[COMMENT: AREA: Press Conference Questions; SUB-AREA: Board and Consortium Ownership; FR-BN: 25624; TONE: Formal; CHARLIMIT: None; REF-ID: n/a; NOTE: alternative answer string, ANID_CHANGE_REFERENCE_FROM_JOB_VARIABLE_TO_BOARD_OWNERSHIP]" />
+
+      <list id="rule">
+        <record>
+          <integer id="ccon" value="2" /> <!-- PROP_CLUB_RULE_CLUB_IS_CONSORTIUM_OWNED-->
+        </record>
+      </list>
+    </record>
+	
+  </list>
+
+</record>
