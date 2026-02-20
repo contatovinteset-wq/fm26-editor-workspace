@@ -1,0 +1,46 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 2655822549527135985
+  },
+  "m_Name": "AppearanceDataSourcesAssets_NewgenRealPlayerFemale",
+  "AppearanceControlData": {
+    "m_FileID": 2,
+    "m_PathID": 6797823111557958129
+  },
+  "SkinTexturesRegistry": {
+    "m_FileID": 0,
+    "m_PathID": -368957648608839055
+  },
+  "OutfitsRegistry": {
+    "m_FileID": 0,
+    "m_PathID": -4983792851146103426
+  },
+  "PresetsRegistry": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "HairRegistry": {
+    "m_FileID": 2,
+    "m_PathID": 7599095271699230080
+  },
+  "OutfitPresetsRegistry": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "BaseSkinMaterial": {
+    "m_AssetGUID": "aee5efe62a6b6334fa3f84bf35e0aa96",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  },
+  "Prefab": {
+    "m_AssetGUID": "c61b8c48fe41d044a96a437e7d53af8e",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  }
+}

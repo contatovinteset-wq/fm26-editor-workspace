@@ -1,0 +1,237 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 2313241655238342168
+  },
+  "m_Name": "KitBuilderRegistry",
+  "m_settingsHolder": {
+    "m_FileID": 2,
+    "m_PathID": 8907939669992217840
+  },
+  "m_armbandDefinitions": [
+    {
+      "ReferenceTex2D": {
+        "m_AssetGUID": "934f81b87cf28f44db1f35b01468cfc6",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "BoundingColours": [
+        {
+          "r": 0.0,
+          "g": 0.0,
+          "b": 0.0,
+          "a": 1.0
+        },
+        {
+          "r": 0.3962264060974121,
+          "g": 0.3962264060974121,
+          "b": 0.3962264060974121,
+          "a": 1.0
+        }
+      ]
+    },
+    {
+      "ReferenceTex2D": {
+        "m_AssetGUID": "5992f3242aec83845a60a978ed5e415a",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "BoundingColours": [
+        {
+          "r": 0.0,
+          "g": 0.3541884422302246,
+          "b": 1.0,
+          "a": 1.0
+        }
+      ]
+    },
+    {
+      "ReferenceTex2D": {
+        "m_AssetGUID": "d3b33623d9d34884faeab18d83331431",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "BoundingColours": [
+        {
+          "r": 0.0,
+          "g": 0.5471698045730591,
+          "b": 0.07253845036029816,
+          "a": 1.0
+        }
+      ]
+    },
+    {
+      "ReferenceTex2D": {
+        "m_AssetGUID": "3beae74a2fdae754f909860ef8396fe5",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "BoundingColours": [
+        {
+          "r": 0.8962264060974121,
+          "g": 0.0,
+          "b": 0.3522705137729645,
+          "a": 1.0
+        }
+      ]
+    },
+    {
+      "ReferenceTex2D": {
+        "m_AssetGUID": "487ba8451cef04341b8cc849eb51aa4c",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "BoundingColours": [
+        {
+          "r": 1.0,
+          "g": 0.11237693578004837,
+          "b": 0.0,
+          "a": 1.0
+        }
+      ]
+    },
+    {
+      "ReferenceTex2D": {
+        "m_AssetGUID": "59ec6eca02d096b42905b4b8ae0ca033",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "BoundingColours": [
+        {
+          "r": 0.0,
+          "g": 0.0,
+          "b": 0.0,
+          "a": 1.0
+        }
+      ]
+    },
+    {
+      "ReferenceTex2D": {
+        "m_AssetGUID": "784fd7f9d6bbe6f4e87acc5b30ec7f8e",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "BoundingColours": [
+        {
+          "r": 1.0,
+          "g": 1.0,
+          "b": 1.0,
+          "a": 1.0
+        }
+      ]
+    },
+    {
+      "ReferenceTex2D": {
+        "m_AssetGUID": "c54d2a4d1b27e7a489c81b95bcfed50f",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "BoundingColours": [
+        {
+          "r": 1.0,
+          "g": 1.0,
+          "b": 1.0,
+          "a": 1.0
+        },
+        {
+          "r": 0.801886796951294,
+          "g": 0.801886796951294,
+          "b": 0.801886796951294,
+          "a": 1.0
+        }
+      ]
+    },
+    {
+      "ReferenceTex2D": {
+        "m_AssetGUID": "380292219e4c1f04aa7c833f76c7669b",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "BoundingColours": [
+        {
+          "r": 1.0,
+          "g": 0.7659672498703003,
+          "b": 0.0,
+          "a": 1.0
+        }
+      ]
+    },
+    {
+      "ReferenceTex2D": {
+        "m_AssetGUID": "751546944bc703d4ea1d1d4e26c5b7b3",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "BoundingColours": [
+        {
+          "r": 1.0,
+          "g": 0.0,
+          "b": 0.0,
+          "a": 1.0
+        },
+        {
+          "r": 0.0,
+          "g": 1.0,
+          "b": 0.0,
+          "a": 1.0
+        },
+        {
+          "r": 0.0,
+          "g": 0.0,
+          "b": 1.0,
+          "a": 1.0
+        }
+      ]
+    }
+  ],
+  "PlayerShirtMask": {
+    "m_AssetGUID": "857696f637f8d484e8d2dfd7e4cd452b",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  },
+  "PlayerShortsMask": {
+    "m_AssetGUID": "e68dd5548c093eb4c9c2412a4f54b276",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  },
+  "PlayerSocksMask": {
+    "m_AssetGUID": "c8c627af81a8b3a44b4dad4f7db9b114",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  },
+  "TrackTopRecolour": {
+    "m_AssetGUID": "e702d785ef2cd4b4b931a6e41a90b6b6",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  },
+  "TrackBottomRecolour": {
+    "m_AssetGUID": "9606803ae32311644a25f672d9d769e4",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  },
+  "TrackTopRecolourFemale": {
+    "m_AssetGUID": "ec89e3ee586b13b4a806c17c928888b7",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  },
+  "TrackBottomRecolourFemale": {
+    "m_AssetGUID": "8c0e8aebc8dd8754989903acbc01cf90",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  },
+  "UnderArmourRecolour": {
+    "m_AssetGUID": "84105ecffbc2ef5498945cf0e8cfa4f9",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  },
+  "UnderArmourRecolourFemale": {
+    "m_AssetGUID": "0601444fd18beb54997c0f5184720622",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  }
+}

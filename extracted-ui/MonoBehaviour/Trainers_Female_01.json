@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "Trainers_Female_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "Trainers_Female_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "7e745130ca9ba6e4c85e097c21a3f496",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Female_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "cf675290098908047bfde571a6dba330",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Female_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "d3e915485aecdf042849a51bb6ceecb0",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Female_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "72d7b55f3d3782349b58827dcbd49fd3",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Female_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "2b10d186d1c6f534683bdeb70dbb3d89",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Female_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "aed8ba54cf9c8dc49bd968830e35a687",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Female_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "9ead1bedaa8019a49a242ee3597c1254",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Female_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "0b8971859ce4eb54ba822fb3dd2c23b7",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Female_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "94fdaa3f43cdd784ba3833e0e967eb37",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Female_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "0530e829b994b3e4fa9d81913ac19335",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Female_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "3fa932f04c9071a4f98863cbff88738f",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Female_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "02f53cc6f0ae0cc4a952d32db1220c49",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

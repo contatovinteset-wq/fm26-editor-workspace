@@ -1,0 +1,46 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 2655822549527135985
+  },
+  "m_Name": "AppearanceDataSourcesAssets_NewgenRealPlayerMale",
+  "AppearanceControlData": {
+    "m_FileID": 2,
+    "m_PathID": -6080948600696309589
+  },
+  "SkinTexturesRegistry": {
+    "m_FileID": 0,
+    "m_PathID": -4339496324854784907
+  },
+  "OutfitsRegistry": {
+    "m_FileID": 0,
+    "m_PathID": 8006022883268918941
+  },
+  "PresetsRegistry": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "HairRegistry": {
+    "m_FileID": 2,
+    "m_PathID": 1353059958227651453
+  },
+  "OutfitPresetsRegistry": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "BaseSkinMaterial": {
+    "m_AssetGUID": "9c866952c4fdf8a478bb892f6f391fa8",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  },
+  "Prefab": {
+    "m_AssetGUID": "cad505a4bb56d0340aa7c38bcc37c6d4",
+    "m_SubObjectName": "",
+    "m_SubObjectType": ""
+  }
+}

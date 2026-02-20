@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "AttireOvercoat_Male_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "AttireOvercoat_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "79a7702fcda33e540b4e1a2fb7df517e",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireOvercoat_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "4065f91b1be0bb44ebdc260022f60e4d",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireOvercoat_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "b0479e64cab1f2743b5f8ca104ba04b8",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireOvercoat_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "4c8dc3f85e962604a8b04085e33c27fa",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireOvercoat_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "f80821f946ca92b47bb13dde76a7d600",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireOvercoat_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "3584d00eec15a5643bb268f5538db363",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireOvercoat_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "950672ddee5f8064093544eee178605e",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireOvercoat_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "2794c7282a845d943af1a45ca75bf243",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireOvercoat_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "4ffef0259c5a8b64da4fe0b0fd5d62c5",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireOvercoat_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "1c11464a4648c59499d2fac48b02eefe",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireOvercoat_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "e99265e428b008046a5e44a7b2539617",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireOvercoat_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "708c19d858ee4714ba16200536655992",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

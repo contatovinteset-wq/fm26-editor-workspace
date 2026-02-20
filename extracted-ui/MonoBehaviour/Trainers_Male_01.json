@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "Trainers_Male_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "Trainers_Male_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "ddb1d6726b14ea34ca796dcdd25994fb",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Male_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "881ce05b4b533fc49b7cca5ff883351d",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Male_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "05fa65c9e6eb80c4ba3e6d3e6f7234ad",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Male_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "1572b9a35d50e834eb1495ed9c782a0e",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Male_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "2751c696c8c7d364b93ba2765512f765",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Male_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "3a51d804148f1c54b92ff4a6ea034ae2",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Male_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "8eace7e6ea2246c4b8dd463777f8b4b3",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Male_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "821ec4c5ff973054cba08e4237bcc5d4",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Male_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "98387443bff595c43ae9daba828c63e0",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Male_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "0c80b99406d31514e833cf942a8381a4",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Male_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "238083203e5e89c4d89bc0d600ea4760",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "Trainers_Male_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "317db02af0adab341ad63dfa249b695b",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

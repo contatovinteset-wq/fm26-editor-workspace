@@ -1,0 +1,2963 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 1904934087117750999
+  },
+  "m_Name": "NewgenMale_OutfitsRegistry",
+  "m_outfitsTorso": {
+    "m_assets": [
+      {
+        "m_name": "Overcoat 01",
+        "m_assetReference": {
+          "m_AssetGUID": "7afba18ea1262ce44bedd5295a468edc",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 1294002217035456340
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Overcoat and Tie 01",
+        "m_assetReference": {
+          "m_AssetGUID": "0d49619611f687744a123d66a04c144c",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 1294002217035456340
+            }
+          },
+          {
+            "m_subPartSlot": 1,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 3089619015231582074
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Polo Shirt 01",
+        "m_assetReference": {
+          "m_AssetGUID": "d31a72b55e9e93f4581ede1b9f4ae522",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 4490586498922430023
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Shirt 01",
+        "m_assetReference": {
+          "m_AssetGUID": "3d9f2e4f741580340926bf2a5a374173",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": -3888512013207264068
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Shirt Tucked 01",
+        "m_assetReference": {
+          "m_AssetGUID": "3ad6b2aa07102d14fb7c27e46125c200",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": -3888512013207264068
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "T-Shirt 01",
+        "m_assetReference": {
+          "m_AssetGUID": "73ff30df85a966c42a99502251ef39f7",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 5111584078770220250
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Wenger Coat 01",
+        "m_assetReference": {
+          "m_AssetGUID": "5dcab235eb220944c8db8ca26ffe2566",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 1927606470101264936
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Suit Blazer 01",
+        "m_assetReference": {
+          "m_AssetGUID": "cbc882ae93aabf148a16f9e5ac535e7b",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 2798989538967252625
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Suit Blazer 02",
+        "m_assetReference": {
+          "m_AssetGUID": "47a61c96a02a7324c84e8b944943d9cd",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": -8434518538706998695
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Suit Blazer and Tie 01",
+        "m_assetReference": {
+          "m_AssetGUID": "bdbb8546d2e201d49a6c2154e33ce599",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 2798989538967252625
+            }
+          },
+          {
+            "m_subPartSlot": 1,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 3089619015231582074
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Suit Blazer and Tie 02",
+        "m_assetReference": {
+          "m_AssetGUID": "cdec54bb0be7b0540ae684caeac0035e",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": -8434518538706998695
+            }
+          },
+          {
+            "m_subPartSlot": 1,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 3089619015231582074
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Suit Blazer Tucked 02",
+        "m_assetReference": {
+          "m_AssetGUID": "3daa62612f4e0a3468e7ae97864152ab",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": -8434518538706998695
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Suit Blazer Tucked and Tie 02",
+        "m_assetReference": {
+          "m_AssetGUID": "7a424a418f1ea4341bf022d2125ff385",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": -8434518538706998695
+            }
+          },
+          {
+            "m_subPartSlot": 1,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 3089619015231582074
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Track Jumper 02",
+        "m_assetReference": {
+          "m_AssetGUID": "2d219e6d77031be40aaaf3a6334d9a9c",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 4856447215577062173
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Track Top 01",
+        "m_assetReference": {
+          "m_AssetGUID": "0e9be0c1bd209b449b720d0f27632e46",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": -2784595309569144371
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Track Top 03",
+        "m_assetReference": {
+          "m_AssetGUID": "a0b88f218f151b140b8241fb1c6f2dbd",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 6.25,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 2454172166544970514
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsLegs": {
+    "m_assets": [
+      {
+        "m_name": "Jeans 01",
+        "m_assetReference": {
+          "m_AssetGUID": "1ff312e3a63f1c84a87710717b42b8a2",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 20.0,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 2655701321445954929
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Suit Trousers 01",
+        "m_assetReference": {
+          "m_AssetGUID": "914f2feda31e36c4e9ddf6448c8c42dd",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 20.0,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": -9207284042928882021
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Track Bottoms 01",
+        "m_assetReference": {
+          "m_AssetGUID": "707c656e959ca93488f4a0b3b4316f99",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 20.0,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 1460616981251740842
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Track Bottoms 02",
+        "m_assetReference": {
+          "m_AssetGUID": "859f238375318a24c97460a7b0c709fe",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 20.0,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 4377982212949720360
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Track Bottoms 03",
+        "m_assetReference": {
+          "m_AssetGUID": "12d2e3a6f9ee6d74f98c9891647ed61d",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 20.0,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": -7471644635770403326
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsFeet": {
+    "m_assets": [
+      {
+        "m_name": "Boots 01",
+        "m_assetReference": {
+          "m_AssetGUID": "28251736ac00e384db89ce82884dcd85",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 33.33333206176758,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": -7696603638631709364
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Shoes 01",
+        "m_assetReference": {
+          "m_AssetGUID": "07a4c7e0b34c34545a163b284d351551",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 33.33333206176758,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": 2887770622053649959
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Trainers 01",
+        "m_assetReference": {
+          "m_AssetGUID": "cf3828d24978bef49889984856ac3aa6",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 33.33333206176758,
+        "m_subPartColourSets": [
+          {
+            "m_subPartSlot": 0,
+            "m_outfitColourSet": {
+              "m_FileID": 0,
+              "m_PathID": -2503702521600456939
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesLeftEarring": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 33.33333206176758,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Diamond Stud",
+        "m_assetReference": {
+          "m_AssetGUID": "6f243c82c7c5ac54e845e8b269064047",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 33.33333206176758,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7254902124404907,
+                  "g": 0.9490196108818054,
+                  "b": 1.0,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.10196078568696976,
+                  "g": 0.10196078568696976,
+                  "b": 0.10196078568696976,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.8941176533699036,
+                  "g": 0.8941176533699036,
+                  "b": 0.8941176533699036,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.95686274766922,
+                  "g": 0.7019608020782471,
+                  "b": 0.12941177189350128,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.5607843399047852,
+                  "g": 0.0,
+                  "b": 0.007843137718737125,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.6352941393852234,
+                  "g": 0.019607843831181526,
+                  "b": 0.4313725531101227,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.5333333611488342,
+                  "b": 0.0,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.7176470756530762,
+                  "b": 0.843137264251709,
+                  "a": 1.0
+                }
+              ]
+            }
+          },
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 1.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Stud",
+        "m_assetReference": {
+          "m_AssetGUID": "688c51955811b3c46931d7e3ba105f46",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 33.33333206176758,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7254902124404907,
+                  "g": 0.9490196108818054,
+                  "b": 1.0,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.10196078568696976,
+                  "g": 0.10196078568696976,
+                  "b": 0.10196078568696976,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.8941176533699036,
+                  "g": 0.8941176533699036,
+                  "b": 0.8941176533699036,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.95686274766922,
+                  "g": 0.7019608020782471,
+                  "b": 0.12941177189350128,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.5607843399047852,
+                  "g": 0.0,
+                  "b": 0.007843137718737125,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.6352941393852234,
+                  "g": 0.019607843831181526,
+                  "b": 0.4313725531101227,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.5333333611488342,
+                  "b": 0.0,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.7176470756530762,
+                  "b": 0.843137264251709,
+                  "a": 1.0
+                }
+              ]
+            }
+          },
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 1.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesLeftHearingDevice": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0,
+        "m_recolouringData": []
+      }
+    ]
+  },
+  "m_outfitAccessoriesLeftWristwear": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 25.0,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Luxury Watch",
+        "m_assetReference": {
+          "m_AssetGUID": "5bb44e21e8ade34489b77e96a7e82030",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 25.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Smart Watch",
+        "m_assetReference": {
+          "m_AssetGUID": "9a4d0e4db6f218645a1d6619ef24aff4",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 25.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.20392157137393951,
+                  "b": 0.4431372582912445,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6745098233222961,
+                  "g": 0.8274509906768799,
+                  "b": 0.45098039507865906,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9490196108818054,
+                  "g": 0.1764705926179886,
+                  "b": 0.1764705926179886,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9215686321258545,
+                  "g": 0.9215686321258545,
+                  "b": 0.9215686321258545,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9647058844566345,
+                  "g": 0.5568627715110779,
+                  "b": 0.33725491166114807,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.9607843160629272,
+                  "b": 0.40784314274787903,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.3764705955982208,
+                  "g": 0.3607843220233917,
+                  "b": 0.658823549747467,
+                  "a": 0.0
+                }
+              ]
+            }
+          },
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 1.0,
+                  "g": 0.6666666865348816,
+                  "b": 0.0,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9176470637321472,
+                  "g": 0.0,
+                  "b": 1.0,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 1.0,
+                  "b": 0.9647058844566345,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6352941393852234,
+                  "g": 1.0,
+                  "b": 0.0,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.6352941393852234,
+                  "b": 0.0,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9411764740943909,
+                  "g": 0.9411764740943909,
+                  "b": 0.9411764740943909,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.0,
+                  "b": 0.0,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8941176533699036,
+                  "g": 1.0,
+                  "b": 0.0,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Bracelet",
+        "m_assetReference": {
+          "m_AssetGUID": "fbeb2a90e915eeb4b984914a26e8eae5",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 25.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 1.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesRightEarring": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 33.33333206176758,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Diamond Stud",
+        "m_assetReference": {
+          "m_AssetGUID": "74d2dddcb28893e478dc10fb52bf9bba",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 33.33333206176758,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7254902124404907,
+                  "g": 0.9490196108818054,
+                  "b": 1.0,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.10196078568696976,
+                  "g": 0.10196078568696976,
+                  "b": 0.10196078568696976,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.8941176533699036,
+                  "g": 0.8941176533699036,
+                  "b": 0.8941176533699036,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.95686274766922,
+                  "g": 0.7019608020782471,
+                  "b": 0.12941177189350128,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.5607843399047852,
+                  "g": 0.0,
+                  "b": 0.007843137718737125,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.6352941393852234,
+                  "g": 0.019607843831181526,
+                  "b": 0.4313725531101227,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.5333333611488342,
+                  "b": 0.0,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.7176470756530762,
+                  "b": 0.843137264251709,
+                  "a": 1.0
+                }
+              ]
+            }
+          },
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 1.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Stud",
+        "m_assetReference": {
+          "m_AssetGUID": "b56fd316b66e17d409ea168fcd2185d4",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 33.33333206176758,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7254902124404907,
+                  "g": 0.9490196108818054,
+                  "b": 1.0,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.10196078568696976,
+                  "g": 0.10196078568696976,
+                  "b": 0.10196078568696976,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.8941176533699036,
+                  "g": 0.8941176533699036,
+                  "b": 0.8941176533699036,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.95686274766922,
+                  "g": 0.7019608020782471,
+                  "b": 0.12941177189350128,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.5607843399047852,
+                  "g": 0.0,
+                  "b": 0.007843137718737125,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.6352941393852234,
+                  "g": 0.019607843831181526,
+                  "b": 0.4313725531101227,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.5333333611488342,
+                  "b": 0.0,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.7176470756530762,
+                  "b": 0.843137264251709,
+                  "a": 1.0
+                }
+              ]
+            }
+          },
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 1.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesRightHearingDevice": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0,
+        "m_recolouringData": []
+      }
+    ]
+  },
+  "m_outfitAccessoriesRightWristwear": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 25.0,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Luxury Watch",
+        "m_assetReference": {
+          "m_AssetGUID": "5c4344eec4a6ac84794c4a7f6d70eb47",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 25.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Smart Watch",
+        "m_assetReference": {
+          "m_AssetGUID": "d81ba5a78c55e7c4bb370a409d251fd7",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 25.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.20392157137393951,
+                  "b": 0.4431372582912445,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6745098233222961,
+                  "g": 0.8274509906768799,
+                  "b": 0.45098039507865906,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9490196108818054,
+                  "g": 0.1764705926179886,
+                  "b": 0.1764705926179886,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9215686321258545,
+                  "g": 0.9215686321258545,
+                  "b": 0.9215686321258545,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9647058844566345,
+                  "g": 0.5568627715110779,
+                  "b": 0.33725491166114807,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.9607843160629272,
+                  "b": 0.40784314274787903,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.3764705955982208,
+                  "g": 0.3607843220233917,
+                  "b": 0.658823549747467,
+                  "a": 0.0
+                }
+              ]
+            }
+          },
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 1.0,
+                  "g": 0.6666666865348816,
+                  "b": 0.0,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9176470637321472,
+                  "g": 0.0,
+                  "b": 1.0,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 1.0,
+                  "b": 0.9647058844566345,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6352941393852234,
+                  "g": 1.0,
+                  "b": 0.0,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.6352941393852234,
+                  "b": 0.0,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9411764740943909,
+                  "g": 0.9411764740943909,
+                  "b": 0.9411764740943909,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.0,
+                  "b": 0.0,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8941176533699036,
+                  "g": 1.0,
+                  "b": 0.0,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Bracelet",
+        "m_assetReference": {
+          "m_AssetGUID": "f26c28d9b41caf64ca94bb187ace4103",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 25.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 1.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 1.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesGlasses": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Glasses 1",
+        "m_assetReference": {
+          "m_AssetGUID": "abaccd815fb762a43b5e1b27bea877de",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.20392157137393951,
+                  "b": 0.4431372582912445,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6745098233222961,
+                  "g": 0.8274509906768799,
+                  "b": 0.45098039507865906,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9490196108818054,
+                  "g": 0.1764705926179886,
+                  "b": 0.1764705926179886,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9215686321258545,
+                  "g": 0.9215686321258545,
+                  "b": 0.9215686321258545,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9647058844566345,
+                  "g": 0.5568627715110779,
+                  "b": 0.33725491166114807,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.9607843160629272,
+                  "b": 0.40784314274787903,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.3764705955982208,
+                  "g": 0.3607843220233917,
+                  "b": 0.658823549747467,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Glasses 2",
+        "m_assetReference": {
+          "m_AssetGUID": "1b63d3c1e03a26d4fb2de743279a6ea7",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.20392157137393951,
+                  "b": 0.4431372582912445,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6745098233222961,
+                  "g": 0.8274509906768799,
+                  "b": 0.45098039507865906,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9490196108818054,
+                  "g": 0.1764705926179886,
+                  "b": 0.1764705926179886,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9215686321258545,
+                  "g": 0.9215686321258545,
+                  "b": 0.9215686321258545,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9647058844566345,
+                  "g": 0.5568627715110779,
+                  "b": 0.33725491166114807,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.9607843160629272,
+                  "b": 0.40784314274787903,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.3764705955982208,
+                  "g": 0.3607843220233917,
+                  "b": 0.658823549747467,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Glasses 3",
+        "m_assetReference": {
+          "m_AssetGUID": "c1ac02e585430ba49b58226e71d85f42",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.20392157137393951,
+                  "b": 0.4431372582912445,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6745098233222961,
+                  "g": 0.8274509906768799,
+                  "b": 0.45098039507865906,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9490196108818054,
+                  "g": 0.1764705926179886,
+                  "b": 0.1764705926179886,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9215686321258545,
+                  "g": 0.9215686321258545,
+                  "b": 0.9215686321258545,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9647058844566345,
+                  "g": 0.5568627715110779,
+                  "b": 0.33725491166114807,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.9607843160629272,
+                  "b": 0.40784314274787903,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.3764705955982208,
+                  "g": 0.3607843220233917,
+                  "b": 0.658823549747467,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Glasses 4",
+        "m_assetReference": {
+          "m_AssetGUID": "76a9fcc10c9a52049b758f563c6ff790",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.20392157137393951,
+                  "b": 0.4431372582912445,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6745098233222961,
+                  "g": 0.8274509906768799,
+                  "b": 0.45098039507865906,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9490196108818054,
+                  "g": 0.1764705926179886,
+                  "b": 0.1764705926179886,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9215686321258545,
+                  "g": 0.9215686321258545,
+                  "b": 0.9215686321258545,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9647058844566345,
+                  "g": 0.5568627715110779,
+                  "b": 0.33725491166114807,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.9607843160629272,
+                  "b": 0.40784314274787903,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.3764705955982208,
+                  "g": 0.3607843220233917,
+                  "b": 0.658823549747467,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Glasses 5",
+        "m_assetReference": {
+          "m_AssetGUID": "c236f8c08e673d147a88c68c9a4e2653",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.20392157137393951,
+                  "b": 0.4431372582912445,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6745098233222961,
+                  "g": 0.8274509906768799,
+                  "b": 0.45098039507865906,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9490196108818054,
+                  "g": 0.1764705926179886,
+                  "b": 0.1764705926179886,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9215686321258545,
+                  "g": 0.9215686321258545,
+                  "b": 0.9215686321258545,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9647058844566345,
+                  "g": 0.5568627715110779,
+                  "b": 0.33725491166114807,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.9607843160629272,
+                  "b": 0.40784314274787903,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.3764705955982208,
+                  "g": 0.3607843220233917,
+                  "b": 0.658823549747467,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Glasses 6",
+        "m_assetReference": {
+          "m_AssetGUID": "0789b8e5d0935ab4682dcf1c1cbd6979",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.20392157137393951,
+                  "b": 0.4431372582912445,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6745098233222961,
+                  "g": 0.8274509906768799,
+                  "b": 0.45098039507865906,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9490196108818054,
+                  "g": 0.1764705926179886,
+                  "b": 0.1764705926179886,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9215686321258545,
+                  "g": 0.9215686321258545,
+                  "b": 0.9215686321258545,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9647058844566345,
+                  "g": 0.5568627715110779,
+                  "b": 0.33725491166114807,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.9607843160629272,
+                  "b": 0.40784314274787903,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.3764705955982208,
+                  "g": 0.3607843220233917,
+                  "b": 0.658823549747467,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Glasses 7",
+        "m_assetReference": {
+          "m_AssetGUID": "ca22b2c054cb55e42ba1187986c2bf84",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.20392157137393951,
+                  "b": 0.4431372582912445,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6745098233222961,
+                  "g": 0.8274509906768799,
+                  "b": 0.45098039507865906,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9490196108818054,
+                  "g": 0.1764705926179886,
+                  "b": 0.1764705926179886,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9215686321258545,
+                  "g": 0.9215686321258545,
+                  "b": 0.9215686321258545,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9647058844566345,
+                  "g": 0.5568627715110779,
+                  "b": 0.33725491166114807,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.9607843160629272,
+                  "b": 0.40784314274787903,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.3764705955982208,
+                  "g": 0.3607843220233917,
+                  "b": 0.658823549747467,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "m_name": "Glasses 8",
+        "m_assetReference": {
+          "m_AssetGUID": "33a17d20bcdafa64ea4cef6b2960242e",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 0,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.0,
+                  "g": 0.20392157137393951,
+                  "b": 0.4431372582912445,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6745098233222961,
+                  "g": 0.8274509906768799,
+                  "b": 0.45098039507865906,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9490196108818054,
+                  "g": 0.1764705926179886,
+                  "b": 0.1764705926179886,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9215686321258545,
+                  "g": 0.9215686321258545,
+                  "b": 0.9215686321258545,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.9647058844566345,
+                  "g": 0.5568627715110779,
+                  "b": 0.33725491166114807,
+                  "a": 0.0
+                },
+                {
+                  "r": 1.0,
+                  "g": 0.9607843160629272,
+                  "b": 0.40784314274787903,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.3764705955982208,
+                  "g": 0.3607843220233917,
+                  "b": 0.658823549747467,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesLeftEyepatches": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0,
+        "m_recolouringData": []
+      }
+    ]
+  },
+  "m_outfitsAccessoriesRightEyepatches": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0,
+        "m_recolouringData": []
+      }
+    ]
+  },
+  "m_outfitsAccessoriesLapel": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 14.285714149475098,
+        "m_subPartColourSets": []
+      },
+      {
+        "m_name": "Blazer Lapel 1",
+        "m_assetReference": {
+          "m_AssetGUID": "be5ed0d57a0fe87429494b039543d011",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 14.285714149475098,
+        "m_subPartColourSets": []
+      },
+      {
+        "m_name": "Blazer Lapel 2",
+        "m_assetReference": {
+          "m_AssetGUID": "4d232775126eeb84ba2f4222e0d604ea",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 14.285714149475098,
+        "m_subPartColourSets": []
+      },
+      {
+        "m_name": "Kick It Out Blazer Lapel 1",
+        "m_assetReference": {
+          "m_AssetGUID": "80cbe782f6fe14441b216bd83aaf7d55",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 14.285714149475098,
+        "m_subPartColourSets": []
+      },
+      {
+        "m_name": "Kick It Out Blazer Lapel 2",
+        "m_assetReference": {
+          "m_AssetGUID": "7ea1b25f6691daa4199da5ab5c59f95d",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 14.285714149475098,
+        "m_subPartColourSets": []
+      },
+      {
+        "m_name": "War Child Blazer Lapel 1",
+        "m_assetReference": {
+          "m_AssetGUID": "8d07bd828a9662e47977214ff61eeed3",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 14.285714149475098,
+        "m_subPartColourSets": []
+      },
+      {
+        "m_name": "War Child Blazer Lapel 2",
+        "m_assetReference": {
+          "m_AssetGUID": "6872f4858f9ca0d44989836585336db3",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 14.285714149475098,
+        "m_subPartColourSets": []
+      }
+    ]
+  },
+  "m_outfitsAccessoriesNeck": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0,
+        "m_recolouringData": []
+      }
+    ]
+  },
+  "m_outfitsAccessoriesLeftIndexFinger": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Ring",
+        "m_assetReference": {
+          "m_AssetGUID": "bb66149e607f2fc47b2ad6a2908cc295",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesLeftMiddleFinger": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Ring",
+        "m_assetReference": {
+          "m_AssetGUID": "43626b94a59bf044f86f5f24c42dbbb0",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesLeftRingFinger": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Ring",
+        "m_assetReference": {
+          "m_AssetGUID": "ead0551573bee2141881ba36f0f79c68",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesLeftLittleFinger": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Ring",
+        "m_assetReference": {
+          "m_AssetGUID": "9031a315a31046c48ac476422ad5b103",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesRightIndexFinger": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Ring",
+        "m_assetReference": {
+          "m_AssetGUID": "e86050d95f7c7de449f983d565c2e542",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesRightMiddleFinger": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Ring",
+        "m_assetReference": {
+          "m_AssetGUID": "a08987a53c30ea243be0d161cc76d189",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesRightRingFinger": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Ring",
+        "m_assetReference": {
+          "m_AssetGUID": "886dfb16a67e0774eb8f622fc64b22a4",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "m_outfitsAccessoriesRightLittleFinger": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_AssetGUID": "",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": []
+      },
+      {
+        "m_name": "Ring",
+        "m_assetReference": {
+          "m_AssetGUID": "7d2b726a69724bf46a0c349587f6c7bc",
+          "m_SubObjectName": "",
+          "m_SubObjectType": ""
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 50.0,
+        "m_recolouringData": [
+          {
+            "m_displayName": "",
+            "m_recolourChannel": 1,
+            "m_colourSet": {
+              "m_colours": [
+                {
+                  "r": 0.7686274647712708,
+                  "g": 0.7215686440467834,
+                  "b": 0.21568627655506134,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.6784313917160034,
+                  "g": 0.6784313917160034,
+                  "b": 0.6784313917160034,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7372549176216125,
+                  "g": 0.6431372761726379,
+                  "b": 0.41960784792900085,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.16470588743686676,
+                  "g": 0.16470588743686676,
+                  "b": 0.16470588743686676,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7176470756530762,
+                  "g": 0.4313725531101227,
+                  "b": 0.4745098054409027,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.8980392217636108,
+                  "g": 0.8941176533699036,
+                  "b": 0.886274516582489,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.7921568751335144,
+                  "g": 0.800000011920929,
+                  "b": 0.8078431487083435,
+                  "a": 0.0
+                },
+                {
+                  "r": 0.529411792755127,
+                  "g": 0.5254902243614197,
+                  "b": 0.5058823823928833,
+                  "a": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "SuitTrousers_Female_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "SuitTrousers_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "54ec1ca88dfe9944bbe280589ecfe9d2",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTrousers_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "eac7594b2b640554a91168df495a0931",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTrousers_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "a49c0ce427b73a14e984bc764d9efb79",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTrousers_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "b49c6fb8992e9104daa4cb963a808be9",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTrousers_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "545572087b09602498a8a54ad0b4fe73",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTrousers_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "2fa62bd4e0bdc3748a303751c4fc1848",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTrousers_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "ed92f63a489d83b4aab11e254f0b7774",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTrousers_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "31c60b01b7035c64e83e3f995d52691f",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTrousers_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "71a5c94e0d2752344abd741bd1a19668",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTrousers_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "887c8cd1bbea06640bad06953e8bb882",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTrousers_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "b9bdca71df9f2b74a836a6b5a1553f56",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTrousers_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "64aff3f5daea9b04dad5c6e2e1b08b0e",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

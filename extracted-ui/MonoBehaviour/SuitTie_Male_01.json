@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "SuitTie_Male_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "SuitTie_Male_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "36676114c15e5a542be284a105ec9697",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Male_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "6312fa97785ed0440839973eae2a3260",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Male_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "de3d1b3698278254bbc9f32b65bb5b93",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Male_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "a753e7b6f51c80645a04d787cdece20a",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Male_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "da2e3a9b2787d984e92925433eacc3ea",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Male_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "7ba8a019a9624234e99c03e8e04c1c24",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Male_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "ee95f7aadc5b8054d9fe2e96d2bf1fd9",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Male_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "8f532194678d42742b15e5697516979e",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Male_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "be18423425fb7914cb1214b9aa153dd8",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Male_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "c73343defaca6c1459853001db399bfb",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Male_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "195fc2aa474940446af1dd57f8cec898",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Male_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "b82001f731676a04f9cf904a9ea4ea7d",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

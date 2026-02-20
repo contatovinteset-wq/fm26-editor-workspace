@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "AttirePolo_Male_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "AttirePolo_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "8bb2c84005b306a45b636a3cf0feaedc",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttirePolo_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "402a004a37ba54a499d1188a50712076",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttirePolo_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "37618f17947355d4f92e3fc117c4fcb9",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttirePolo_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "9cac94e766a8a464cbda6b235f2533b0",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttirPolo_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "6c2c588a8eca4dd4bbabc2f634945154",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttirePolo_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "63d32f2d5c2972646a8763c9d0c23695",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttirePolo_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "110b8d57c6eefbb45a606df4886f7a07",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttirePolo_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "97e9fdf3dcb9e46478e3286c77cdad68",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttirePolo_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "464819a5602dc854381cff7ea917048d",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttirePolo_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "9c8e160758ecac14abf4343f11ab2242",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttirePolo_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "331c702539166a64bb2646b8761b1b19",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttirePolo_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "143f31b358ad2b84893400147c6a845b",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

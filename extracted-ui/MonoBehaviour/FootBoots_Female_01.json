@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "FootBoots_Female_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "FootShoes_Male_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "c78ebedd6ae04e64da080daf8aef985e",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "FootShoes_Male_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "f8811bcd753742a4890af4f9f81baea3",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "FootShoes_Male_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "7bd4cbd515323bb408ab08304776991c",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "FootShoes_Male_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "0731d59193a9e6745ae5f14ed79db308",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "FootShoes_Male_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "7d40cbe3955ffa44da5b29c6db18034f",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "FootShoes_Male_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "6bc2c88c75d13db47b2e19f590cae9b1",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "FootShoes_Male_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "bb8b829a41aef484e9d70b6c3de8adfc",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "FootShoes_Male_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "7e783313d9cf4d4438d37ecbe8956d90",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "FootShoes_Male_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "3ceb7f587c3d3be4289a44d5fe583de4",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "FootShoes_Male_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "0cd16ace21995eb4aa13f5dcb89ec773",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "FootShoes_Male_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "a7564552985493b40aad223437d7e1aa",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "FootShoes_Male_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "4fdd41c816148fe4b80acd777d2bed27",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

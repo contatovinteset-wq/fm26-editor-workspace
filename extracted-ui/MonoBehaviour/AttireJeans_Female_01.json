@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "AttireJeans_Female_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "AttireJeans_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "aa82f057b5226e44394915f73773b4e9",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireJeans_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "b08d6ab890a7afb4cbf99ad70db0b131",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireJeans_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "967551083efb28242849f7b5d33e4bea",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireJeans_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "d3fe22ea3d4845d4daacd25776410fe7",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireJeans_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "6c13a16b722c84d43bf6ad68be0706a9",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireJeans_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "b3439edcd33f93d478ec373d3db6bdfa",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireJeans_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "4cf5c35cca7022e42aba07f4184c7b8c",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireJeans_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "eddcb5bac8ac62b45bee0f9896515ad0",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireJeans_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "028c7b89839d3974f8ef1ae8df2401f1",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireJeans_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "b8a77979506671b49903739717787527",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireJeans_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "58e3b937ae1cff54eaa48d7987aed3d7",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireJeans_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "818bed3ae2eeacf49a6e82200d001cea",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

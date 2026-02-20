@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "TrackJumper_Female_02",
+  "m_outfitColours": [
+    {
+      "DisplayName": "TrackJumper_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "bfadee2475e0adc4fa063394842ed069",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackJumper_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "839dfa959c9a7cb45b6a92f106328c9b",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackJumper_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "70d5f1f419e8bce4d8503197b30470b7",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackJumper_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "9b22af022a8e0e44aa44eb84abd0c8bc",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackJumper_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "d8a8557f4545d2941a21899b6cc75937",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackJumper_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "839dfa959c9a7cb45b6a92f106328c9b",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackJumper_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "be59500f65913c8429772419356d3299",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackJumper_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "e254d877d2e75c1428f5b6e169e8f72c",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackJumper_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "e0dccf77ecb6e54409c1078cbc00749a",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackJumper_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "373a862275fc1fe42822f5d9e3d382c1",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackJumper_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "78f7f582de785f746a22c96dccd2ccc6",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackJumper_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "a1cb20b759aea3b49bc0c1ef89204207",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

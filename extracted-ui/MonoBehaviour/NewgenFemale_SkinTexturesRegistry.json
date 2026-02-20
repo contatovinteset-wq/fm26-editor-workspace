@@ -1,0 +1,867 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 9024249881117572686
+  },
+  "m_Name": "NewgenFemale_SkinTexturesRegistry",
+  "m_skinTones": {
+    "m_assets": [
+      {
+        "m_name": "Skin Tone 1",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "f95da17b5cc91f14b9888d93120a1052",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "77bf89f40d605274b99f572face89da6",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 2",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "b4a4402388c6f5449a65e6f16af19797",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "202a9d8b5b5492142860f0f30d265692",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 3",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "ddb642e07e6e2b741b7344cec40d8088",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "8bdd6e16aad06304095ed17b1b371e40",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 4",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "f96219bc2a4f9c24b970c7d5670ec5c9",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "1d01c177c885d864ba6514aad153bff7",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 5",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "8478f6bc0d77d504bbf97de5ae612744",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "ecf8094adf143b849a2717dc710c7000",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 6",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "7eee43a1d72d7d640879886304475482",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "97d2b0939a034074b881956826f9aabe",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 7",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "5c8e8bf8edbe47d449cc8a978052d9b7",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "94861f50937f0c74681b73aefeee8e22",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 8",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "73156d3685f8a8143b3946ff4fa330f9",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "0278130348d89a54fbc29c58616f41f5",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 9",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "7aa2f64923df40b439c374cc624430ba",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "497deb37a0d118643ab3ba7a09ad34ed",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 10",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "e75bc13321fb7504593112a407324400",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "0b7ade783acd4854cbe382e888a00896",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 11",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "cdfc6a9946d15954f9d44dd5ffdd7805",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "c219026331f0edd42bafa5273600da12",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 12",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "177dcbd394788044ab2f76f411428bad",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "4ba0613c1e52652479810d9473017931",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 13",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "cd38512fc1c3f454097829308c66bc33",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "0e2397d0e252eea44804c81d17363a1a",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 14",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "3665ff71c032a6a4bb4327c6c6673e86",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "7fb92d40f050f0340aad348af028dbf5",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 15",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "e28a03fe704f7e94181dd4625bf577df",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "e81ce7daf54bbc04e9bc6e2c38917b84",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 16",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "c5fdca75582a1b14e8b60b83d98e90ce",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "e3b19dc3d485dae49a8ad0ec04c1db6f",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 17",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "0242e6b6cbfb53046967567437cb1665",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "b010f89881ef54f4c904b97ec657ae98",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 18",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "6c643ace44e157446aa184dc9f291b47",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "70a74ce59be6ff94193d16fb2cf3f7fe",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 19",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "1ba137c87d2f6b747b07194e012109f3",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "81f7d669c48014e429e17a6db7c14ccc",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      },
+      {
+        "m_name": "Skin Tone 20",
+        "m_assetReference": {
+          "m_oldTextures": {
+            "m_AssetGUID": "d08d5ae281177be479ea06791ebe3b78",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_youngTextures": {
+            "m_AssetGUID": "9431b70adaadf044e94804a4dd14748c",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        }
+      }
+    ]
+  },
+  "m_blushes": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0
+      }
+    ]
+  },
+  "m_contours": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0
+      }
+    ]
+  },
+  "m_eyeliners": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0
+      }
+    ]
+  },
+  "m_eyeshadows": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0
+      }
+    ]
+  },
+  "m_facepaints": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_recolouringData": []
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0
+      }
+    ]
+  },
+  "m_faceDetails": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 1,
+        "m_chanceWeight": 0.0,
+        "m_type": 0
+      },
+      {
+        "m_name": "Freckles",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "3e14f99e41b8ae84590834b571bf41b0",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 1,
+        "m_chanceWeight": 0.0,
+        "m_type": 1
+      },
+      {
+        "m_name": "Large Freckles",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "86d6fa1e5cee4244bb8782ee282e2532",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 1,
+        "m_chanceWeight": 0.0,
+        "m_type": 2
+      },
+      {
+        "m_name": "Moles",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "e331b44b83b30b04ab2c2ba5c3d615c6",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 1,
+        "m_chanceWeight": 0.0,
+        "m_type": 3
+      },
+      {
+        "m_name": "Sun Spots",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "6d9f6b27b4eed9048b8b948b17451508",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 1,
+        "m_chanceWeight": 0.0,
+        "m_type": 4
+      },
+      {
+        "m_name": "Port Wine Stain",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "63221232d74ddff45b9b0673b7cd6258",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 1,
+        "m_chanceWeight": 0.0,
+        "m_type": 5
+      },
+      {
+        "m_name": "Port Wine Stain 2",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "6ea2afdd5e3e9654398e5d8f665a3edd",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 1,
+        "m_chanceWeight": 0.0,
+        "m_type": 6
+      },
+      {
+        "m_name": "Vitiligo",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "0a7df417ca4f9c54eb70b1ea58fcb56b",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 1,
+        "m_chanceWeight": 0.0,
+        "m_type": 7
+      },
+      {
+        "m_name": "Acne1",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "7f7aacae5fcda6048839b4a14de0f8c8",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 1,
+        "m_chanceWeight": 0.0,
+        "m_type": 8
+      },
+      {
+        "m_name": "Acne2",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "8ca39366daea9d642a0eb01de25259e3",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 1,
+        "m_chanceWeight": 0.0,
+        "m_type": 9
+      },
+      {
+        "m_name": "Acne3",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "682363a7a6e472d408c8186ea0bd57a9",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 1,
+        "m_chanceWeight": 0.0,
+        "m_type": 10
+      }
+    ]
+  },
+  "m_facialMarks": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0
+      }
+    ]
+  },
+  "m_lipsticks": {
+    "m_assets": [
+      {
+        "m_name": "None",
+        "m_assetReference": {
+          "m_albedo": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_normals": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          },
+          "m_roughness": {
+            "m_AssetGUID": "",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 100.0
+      }
+    ]
+  },
+  "m_eyeColours": {
+    "m_assets": [
+      {
+        "m_name": "Amber",
+        "m_assetReference": {
+          "m_eyeMaterial": {
+            "m_AssetGUID": "8fa4a86e259daab4894b80f3055f2705",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_type": 0
+      },
+      {
+        "m_name": "Black",
+        "m_assetReference": {
+          "m_eyeMaterial": {
+            "m_AssetGUID": "9e0e1808bd791ec4abb4e332c9cd10b7",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_type": 1
+      },
+      {
+        "m_name": "Blue",
+        "m_assetReference": {
+          "m_eyeMaterial": {
+            "m_AssetGUID": "ece80144607f5b64bb718d02dbe96bc3",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_type": 2
+      },
+      {
+        "m_name": "Brown",
+        "m_assetReference": {
+          "m_eyeMaterial": {
+            "m_AssetGUID": "5cba70db168cffa48b905e5494bef0b5",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_type": 3
+      },
+      {
+        "m_name": "Green",
+        "m_assetReference": {
+          "m_eyeMaterial": {
+            "m_AssetGUID": "51c19f8cbd2d1ae45a25b948ec43752a",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_type": 4
+      },
+      {
+        "m_name": "Grey",
+        "m_assetReference": {
+          "m_eyeMaterial": {
+            "m_AssetGUID": "24cc566b56685be43817046595e65d63",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_type": 5
+      },
+      {
+        "m_name": "Hazel",
+        "m_assetReference": {
+          "m_eyeMaterial": {
+            "m_AssetGUID": "b8a9be102f0c01c4489c8cad7095ca51",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_type": 6
+      },
+      {
+        "m_name": "Light Blue",
+        "m_assetReference": {
+          "m_eyeMaterial": {
+            "m_AssetGUID": "87ffa66443cfce24fa01698876cc6d88",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_type": 7
+      },
+      {
+        "m_name": "Light Green",
+        "m_assetReference": {
+          "m_eyeMaterial": {
+            "m_AssetGUID": "ec25c86fa5dda594fa6e9f52310596a1",
+            "m_SubObjectName": "",
+            "m_SubObjectType": ""
+          }
+        },
+        "m_overrideChanceWeight": 0,
+        "m_chanceWeight": 11.11111068725586,
+        "m_type": 8
+      }
+    ]
+  }
+}

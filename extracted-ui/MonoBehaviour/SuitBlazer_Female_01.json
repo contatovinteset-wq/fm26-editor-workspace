@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "SuitBlazer_Female_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "SuitBlazer_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "adb954c6b06b9b64fa33fc417cca3cbf",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitBlazer_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "ce63a22ef7649474a9611d5460a08a90",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitBlazer_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "11f329067ec09dc4ebfc6c0ba5461546",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitBlazer_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "28e6430c0a027704da05471de3358bf6",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitBlazer_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "55107247a1e58d745918dfbd0cc05f57",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitBlazer_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "52aad616641cc7143bd32cb246bcef59",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitBlazer_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "890f2c5242fa7464fab24c38f43a9af5",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitBlazer_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "1b14dff5ee7cbbd4dad1e0bc7b3089a3",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitBlazer_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "6f068f2d2db10b9478a83f57a8b8ddb1",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitBlazer_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "7aac17e3b97e0e140a821a425450966f",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitBlazer_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "fcdacd75b09da714e98cbf9d787ebb2d",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitBlazer_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "6b80a96f4a5982e44998c6a3c71ce5de",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

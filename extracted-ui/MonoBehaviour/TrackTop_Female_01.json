@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "TrackTop_Female_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "TrackTop_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "ca286d4060b6d9e43ae6e8cd3a3ce976",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackTop_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "c6a882b1fc29abf479cd5dc68f94ac49",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackTop_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "7cfdaa8483acc844eada2156bf1fe66e",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackTop_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "0a2866a5c338d7f4ba5bc9d71ec4f5a9",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackTop_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "cb0549d8d4c91a64eb25c8c5968dee12",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackTop_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "cdbd22a214b63d242834b456ea6af858",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackTop_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "7d70fa4634843b14f8eea177c300ff8e",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackTop_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "e9d65157301ad7f4a847a009f370aa07",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackTop_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "b393045a64ecc924685acf98a7da84fc",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackTop_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "145a4a4f3bc8119418e2bf3904a086bf",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackTop_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "320d920fa57fa7d43ae0a9860dd86916",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "TrackTop_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "c906d43ab764f9941bd0e840941b87bd",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

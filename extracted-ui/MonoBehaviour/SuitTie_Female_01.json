@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "SuitTie_Female_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "SuitTie_Female_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "091edbd8d2f18b345bee400e23d82b10",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Female_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "3d330f65300934b4eb768957c845e7f2",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Female_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "82dc50abdcf620044971a1429ac8ee22",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Female_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "73e102260af23c944aa4042d21a46d35",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Female_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "8bf2e60004659f7489e271fcfdf4fed4",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Female_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "0d41e828efbff4e42b1f8b0c582b98c5",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Female_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "dfe6702bfc679dd459938bef34f29d56",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Female_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "b3fcb503fc259b44ba988edff2002a37",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Female_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "4a4cde1f09d81b64b926403ee9f9777c",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Female_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "67615f09860d9e14fb51cbd7bb8639e2",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Female_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "d8a98cfbe9d164146a217af6624c06be",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "SuitTie_Female_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "df40c966473c81b469cc8a6eb612efc6",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

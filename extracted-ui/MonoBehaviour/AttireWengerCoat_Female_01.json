@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "AttireWengerCoat_Female_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "AttireWengerCoat_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "f49fdebb581f0b2478116d3e56784ab4",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireWengerCoat_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "fbec7641d159ba44ab83debab80be17e",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireWengerCoat_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "25b8dd11034102942ad6274bc25d85f6",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireWengerCoat_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "a4b6e9e0aa2dbda478b0ec8c01b600f9",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireWengerCoat_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "8a1cc3b06a0c7a84580b04740c83b583",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireWengerCoat_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "602be73dc38d9014393bc0929dc4dfa8",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireWengerCoat_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "f8cdf915c509e104d94bd9d04e23ebdf",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireWengerCoat_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "0cf377c3914168c4cb5c1604896d2de5",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireWengerCoat_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "17e6dc1049cbc1846a704871800ec9bd",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireWengerCoat_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "82f47bb0932f6144f84fc4dd1845c74a",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireWengerCoat_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "8728bad56084b18439feb68c781ea61c",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireWengerCoat_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "af43e10f46fd9e84d8ff8ac93ac084a7",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}

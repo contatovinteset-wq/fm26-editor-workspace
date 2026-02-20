@@ -1,0 +1,110 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 8340094174056843657
+  },
+  "m_Name": "AttireTshirt_Male_01",
+  "m_outfitColours": [
+    {
+      "DisplayName": "AttireTshirt_Male_Black",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "50c50ddd0aec6334fbf0aa8fa11aac2d",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireTshirt_Male_Grey",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "b6d7343c4b767e34d931473adb65c9d6",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireTshirt_Male_White",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "f96fc3b6dc77f904b8033770d80a7c99",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireTshirt_Male_Beige",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "695d2bc183097ed4bbff1d3d9e69b53f",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireTshirt_Male_Green",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "069e603e70cd0e246a7425a504f7c436",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireTshirt_Male_Navy",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "041053da96591de4a9e5df49ce7d5d9c",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireTshirt_Male_Orange",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "34237e4053d5b964d87c8dd691119a88",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireTshirt_Male_Yellow",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "78f5c4fcfb9b24447ac348c81027471c",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireTshirt_Male_Blue",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "3a895d01f56d42a4ab2ed7d3d9175941",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireTshirt_Male_Purple",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "fb9333868bc819840bc58c8a6a464ff9",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireTshirt_Male_Pink",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "5fa1c48ed7d36f242a6d0eab103f4bed",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "DisplayName": "AttireTshirt_Male_Red",
+      "OutfitMaterialAssetReference": {
+        "m_AssetGUID": "0a2183af7affb70429e8e862db8c8b5c",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ]
+}
