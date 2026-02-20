@@ -1,6 +1,6 @@
 # Relatório de Progresso - FM26-Editor
 
-**Data:** 19/02/2026 - 18:00 GMT-3
+**Data:** 20/02/2026 - 01:00 GMT-3
 
 ---
 
@@ -117,8 +117,53 @@ Encontrei referências a:
 - [x] Mapear XMLs extraídos
 - [x] Documentar estrutura
 - [x] Criar ferramentas básicas
-- [ ] Investigar exportação (Ctrl+P)
+- [x] Análise profunda do metadata (21K+ refs)
+- [ ] Investigar exportação (Ctrl+P) - **30%**
 - [ ] Analisar UI detalhadamente
-- [ ] Extrair Asset Bundles
-- [ ] Mapear IDs
+- [x] Extrair Asset Bundles (parcial - OOM)
+- [x] Mapear IDs (iniciado: Série A, Corinthians)
 - [ ] Criar database brasileira
+
+---
+
+## 🆕 Novas Descobertas (20/02)
+
+### Config Hunter Analysis
+- **21.637 linhas** de análise gerada
+- **Injury**: 69 referências (EventPlayerInjured*, MajorInjury, MinorInjury)
+- **Transfer**: 695+ referências (TransferValue, Wage, ClubBudgetAdjustment)
+- **Newgen**: 64 referências (NewGenPortraitData, AllowNewgenFaceGeneration)
+- **Match**: 2100+ referências (MatchPerformance, m_matchMaterialPreset)
+- **Training**: 900+ referências ($intensityVariation, TrainingSchedule)
+- **Finance**: 46 referências (ClubBudgetAdjustment, ClubFinances)
+
+### IDs Mapeados (via usuário em jogo)
+- **102423** = Série A (Brasileirão)
+- **319** = COR (Corinthians)
+
+### Ctrl+P Investigation
+- Funções de exportação ainda existem no código
+- `ExportCurrentItemToBinding` - principal função
+- `Initialize_ctrlKeyboardprintScreen` - Print Screen pode funcionar
+- Possibilidade de restaurar via mod de UI ou hook
+
+---
+
+## 📁 Arquivos Principais
+
+```
+fm26-editor-workspace/
+├── WIKI.html                    # Manual completo
+├── PROGRESS.md                  # Este arquivo
+├── ID-MAPPING-BRASIL.md        # Mapeamento IDs BR
+├── id-registry.json             # Registro de IDs
+├── config-analysis.txt          # 21K+ refs de config
+├── ctrlp-deep-investigation.md  # Análise Ctrl+P
+├── tools/
+│   ├── config_hunter.py         # Busca configs
+│   ├── extract_ui.py            # Extrai UI
+│   ├── register_id.py           # Registra IDs
+│   └── ...
+└── extracted-ui/
+    └── MonoBehaviour/           # 66 JSONs extraídos
+```
