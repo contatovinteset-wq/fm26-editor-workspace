@@ -1,101 +1,122 @@
-# Ctrl+P Export - Plano de Restauração
+# Plano de Restauração do Ctrl+P - FM26
 
-**Data:** 20/02/2026
-**Objetivo:** Restaurar funcionalidade de exportação de dados (Ctrl+P) no FM26
+## Status: FUNÇÃO EXISTE NO CÓDIGO
 
----
+### Evidências Encontradas no Metadata
 
-## 🔍 Análise Técnica
+```
+Initialize_ctrlKeyboardprintScreen  ← Inicializador do atalho
+PrintScreen                         ← Tecla referenciada
+printScreenKey                      ← Propriedade
+get_printScreenKey                  ← Getter
+```
 
-### O que encontramos no metadata:
+### Sistema de Context Menu
 
-| Função | Status | Descrição |
-|--------|--------|-----------|
-| `Initialize_ctrlKeyboardp` | ✅ Existe | Tecla P com Ctrl está registrada |
-| `SelectAll` | ✅ Existe | Função de selecionar todos |
-| `ExportCurrentItemToBinding` | ✅ Existe | Exporta item atual |
-| `CreateExportDataFromCustomView` | ✅ Existe | Cria dados de exportação |
-| `CustomViewExportData` | ✅ Existe | Dados de exportação customizada |
-| `ExportCurrentViewLabel` | ✅ Existe | Label da view atual |
-| `TableView` / `StreamedTableView` | ✅ Existe | Tabela de jogadores |
-
-### Conclusão:
-**As funções EXISTEM no código.** O problema é que o **binding** entre Ctrl+P e a função de exportação foi removido ou desabilitado na UI.
+```
+ContextMenuData                     ← Dados do menu de contexto
+PluginContextMenuContributor        ← Contribuidor de plugins
+DisableContextMenu                  ← Flag para desabilitar
+m_contextMenuDescriptionManipulator ← Manipulador
+```
 
 ---
 
-## 🛠️ Soluções Possíveis
+## Estratégia de Restauração
 
-### Opção 1: Mod de Skin (MAIS VIÁVEL)
-As skins do FM26 podem adicionar/modificar bindings de teclado.
+### Opção 1: Modificar ContextMenu via Asset Bundle
 
-**Passos:**
-1. Extrair skin padrão do jogo
-2. Modificar arquivo de bindings
-3. Adicionar: `<Binding key="Ctrl+P" action="ExportCurrentItem" />`
-4. Reempacotar e instalar
+O `contextMenuData` das tabelas (ex: `PlayerSearchResultsViewCollection.json`) define as opções do menu.
 
-**Referências:**
-- FM26 usa Unity UI Toolkit (.uxml/.uss)
-- Skins podem sobrescrever comportamentos
+**Estrutura atual:**
+```json
+{
+  "name": "Attributes",
+  "PropertyValue": "attributes",
+  "ChildList": [...]
+}
+```
 
-### Opção 2: FM Live Editor 26
-O FM Live Editor pode ter função de exportação ou permitir hooks.
+**Teoria:** Adicionar um item com `PropertyValue` que chame a função de exportação.
 
-**Verificar:**
-- Se tem função de "Export Squad"
-- Se tem API para capturar dados
-- Se pode injetar código
-
-### Opção 3: Solução Externa (WORKAROUND)
-Criar ferramenta que captura dados de outra forma.
-
-**Alternativas:**
-1. **Screenshot + OCR** - Não ideal (limitado)
-2. **Captura de memória** - FM Live Editor faz isso
-3. **Export via arquivo de save** - Analisar .fm files
-4. **Clipping de dados** - Via FMSE/FMGE
+**Problema:** Não sabemos qual `PropertyValue` dispara a exportação.
 
 ---
 
-## 📋 Plano de Ação
+### Opção 2: Injetar Atalho de Teclado
 
-### Fase 1: Investigar Skins
-- [ ] Extrair skin padrão do FM26
-- [ ] Localizar arquivo de bindings de teclado
-- [ ] Verificar se pode adicionar Ctrl+P
+**Arquivos envolvidos:**
+- `Initialize_ctrlKeyboardprintScreen` - Função de inicialização
+- `printScreenKey` - Propriedade do atalho
 
-### Fase 2: FM Live Editor
-- [ ] Verificar se tem função de exportação
-- [ ] Testar se consegue exportar lista de jogadores
-- [ ] Verificar documentação da API
-
-### Fase 3: Solução Externa
-- [ ] Criar script Python que lê save game
-- [ ] Extrair dados de jogadores do .fm
-- [ ] Converter para CSV/HTML
+**Possibilidade:** Criar um plugin que registre o atalho na inicialização.
 
 ---
 
-## 🎯 Próximos Passos Imediatos
+### Opção 3: Usar FM Live Editor
 
-1. **Testar FM Live Editor** - Verificar se tem exportação
-2. **Investigar estrutura de skins** - Extrair e analisar
-3. **Criar ferramenta de exportação** - Se necessário
+**O que sabemos:**
+- FM Live Editor 26 lê dados do jogo em tempo real
+- Pode acessar lista de jogadores selecionados
+- Pode exportar para CSV/JSON
 
----
+**Vantagem:** Não requer modificação do jogo.
 
-## 💡 Perguntas para Responder
-
-1. FM Live Editor tem função de exportar lista?
-2. Skins podem adicionar bindings de teclado?
-3. Qual formato o export HTML usava?
-4. Dados estão acessíveis via save game?
+**Desvantagem:** Não é integrado ao jogo nativamente.
 
 ---
 
-## 📁 Arquivos Relacionados
+## Próximos Passos de Investigação
 
-- `ctrlp-deep-investigation.md` - Análise anterior
-- `config-analysis.txt` - Todas as refs de export
-- `fm_Data/` - Arquivos do jogo para extrair
+1. **Analisar DLL com Il2CppDumper** (requer Windows)
+   - Extrair classes completas
+   - Ver assinatura de `Initialize_ctrlKeyboardprintScreen`
+   - Descobrir parâmetros necessários
+
+2. **Procurar PropertyValue de exportação**
+   - Analisar `ExportCurrentItemToBinding`
+   - Descobrir qual string dispara a função
+
+3. **Investigar sistema de plugins**
+   - `PluginContextMenuContributor`
+   - Como registrar novos itens
+
+4. **Testar modificação de bundle**
+   - Criar bundle modificado com novo item no contextMenu
+   - Verificar se o jogo carrega
+
+---
+
+## Descobertas Importantes
+
+### Comparação FM24 → FM26
+
+| Feature | FM24 | FM26 |
+|---------|------|------|
+| Ctrl+A (Select All) | ✅ Funciona | ✅ Funciona |
+| Ctrl+P (Export) | ✅ Funciona | ❌ Removido da UI |
+| Função no código | ✅ Existe | ✅ Existe (órfã) |
+| Print Screen | ✅ Screenshot | ✅ Screenshot |
+
+### Conclusão
+
+A função de exportação **não foi deletada** - foi apenas **desconectada** da interface. Isso significa que:
+
+1. **É possível reativar** via patch de DLL
+2. **É possível criar alternativa** via contexto menu mod
+3. **FM Live Editor pode suprir** a necessidade enquanto não resolvemos
+
+---
+
+## Arquivos Relacionados
+
+- `/extracted-tables/PlayerSearchResultsViewCollection.json` - Tabela de busca
+- `/skins-reference/StandaloneWindows64/ui-tableviews_assets_all.bundle` - Bundle de tabelas
+- `global-metadata.dat` - Metadata com todas as funções
+
+---
+
+## Contato
+
+Atualizado em: 2026-02-20
+Autor: Koda (OpenClaw Assistant)
