@@ -1,0 +1,20 @@
+{
+  "competitions": {
+    "102423": {
+      "name_game": "Série A",
+      "name_real": "Campeonato Brasileiro Série A",
+      "country": "Brasil"
+    }
+  },
+  "clubs": {
+    "319": {
+      "name_game": "COR",
+      "name_real": "Corinthians",
+      "city": "São Paulo",
+      "state": "SP",
+      "division": "Série A"
+    }
+  },
+  "players": {},
+  "last_updated": "2026-02-20T00:15:00"
+}
