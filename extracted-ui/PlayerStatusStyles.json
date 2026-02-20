@@ -1,0 +1,1344 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 11998
+  },
+  "m_Name": "PlayerStatusStyles",
+  "m_ImportedWithErrors": 0,
+  "m_ImportedWithWarnings": 0,
+  "m_Rules": [
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 2,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 0
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 1
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 6,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 5
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 10,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 2
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 9
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 14,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 3
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 13
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 18,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 4
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 17
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 22,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 5
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 21
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 26,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 25
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 30,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 3
+            }
+          ]
+        }
+      ],
+      "line": 29
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 34,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 8
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 4
+            }
+          ]
+        }
+      ],
+      "line": 33
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 38,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 9
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 5
+            }
+          ]
+        }
+      ],
+      "line": 37
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 42,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 10
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            }
+          ]
+        }
+      ],
+      "line": 41
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 46,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 11
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 7
+            }
+          ]
+        }
+      ],
+      "line": 45
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 50,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 12
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 8
+            }
+          ]
+        }
+      ],
+      "line": 49
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 54,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 13
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 9
+            }
+          ]
+        }
+      ],
+      "line": 53
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 58,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 14
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 10
+            }
+          ]
+        }
+      ],
+      "line": 57
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 62,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 15
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 10
+            }
+          ]
+        }
+      ],
+      "line": 61
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 66,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 16
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 10
+            }
+          ]
+        }
+      ],
+      "line": 65
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 70,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 17
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 10
+            }
+          ]
+        }
+      ],
+      "line": 69
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 74,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 18
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 11
+            }
+          ]
+        }
+      ],
+      "line": 73
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 78,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 19
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 12
+            }
+          ]
+        }
+      ],
+      "line": 77
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 82,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 20
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 12
+            }
+          ]
+        }
+      ],
+      "line": 81
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 86,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 21
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 12
+            }
+          ]
+        }
+      ],
+      "line": 85
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 90,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 91,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 92,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 93,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 94,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 95,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 96,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 97,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 22
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 98,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 23
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 99,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 24
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 100,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 101,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 25
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 102,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 26
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 103,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 27
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 104,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 28
+            }
+          ]
+        }
+      ],
+      "line": 89
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 108,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 109,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 110,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 9
+            }
+          ]
+        }
+      ],
+      "line": 107
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 114,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 10
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 115,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 11
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 116,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 29
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 13
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 117,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 12
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 13
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 14
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 30
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 118,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 119,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 15
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 120,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 16
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 121,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 31
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 122,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 32
+            }
+          ]
+        }
+      ],
+      "line": 113
+    }
+  ],
+  "m_ComplexSelectors": [
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "cannot-play-high",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "cannot-play",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sub-off",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sub-on-off",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "two-yellows",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 4
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "red-card",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 5
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "cannot-play-low",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 6
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "restricted",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 7
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "restricted-low",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 8
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "shouldnt-play-high",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 9
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "shouldnt-play",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 10
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "shouldnt-play-low",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 11
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "warning",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 12
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "advisory-low",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 13
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "advisory",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 14
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sub-on",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 15
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "man-of-the-match",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 16
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "can-play",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 17
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "advisory-high",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 18
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "homegrown-club",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 19
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "homegrown-nation",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 20
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "homegrown-club-or-nation",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 21
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "player-status",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 22
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "player-status-tactics",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 23
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "player-status-preview",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 24
+    }
+  ],
+  "floats": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "dimensions": [
+    {
+      "unit": 1,
+      "value": 32.0
+    },
+    {
+      "unit": 1,
+      "value": 24.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 24.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    }
+  ],
+  "colors": [
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.3529411852359772
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.7529411911964417
+    }
+  ],
+  "strings": [
+    "--colours-linear-scale-1",
+    "--colours-brand-highlight-red",
+    "--colours-base-red-20",
+    "--colours-base-grey-20",
+    "--colours-base-neutral-white",
+    "--colours-linear-scale-5",
+    "--colours-base-orange-50",
+    "--colours-base-orange-20",
+    "--colours-base-yellow-50",
+    "--colours-base-teal-20",
+    "--colours-base-teal-50",
+    "--colours-linear-scale-20",
+    "--colours-base-blue-20",
+    "--border-radius-trailing-extra-small"
+  ],
+  "assets": [],
+  "imports": [],
+  "m_FlattenedImportedStyleSheets": [],
+  "m_ContentHash": 222081205,
+  "scalableImages": []
+}

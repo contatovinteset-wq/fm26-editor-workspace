@@ -1,0 +1,109 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 11998
+  },
+  "m_Name": "ManagerPersonaSummaryScreenStyle",
+  "m_ImportedWithErrors": 0,
+  "m_ImportedWithWarnings": 0,
+  "m_Rules": [
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 2,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 3,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 4,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 0
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 5,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 1
+    }
+  ],
+  "m_ComplexSelectors": [
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "layout-divider-solid-vertical",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 0
+    }
+  ],
+  "floats": [
+    1.0
+  ],
+  "dimensions": [
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 24.0
+    }
+  ],
+  "colors": [],
+  "strings": [
+    "stretch",
+    "--colours-alpha-light-alpha-8"
+  ],
+  "assets": [],
+  "imports": [],
+  "m_FlattenedImportedStyleSheets": [],
+  "m_ContentHash": 1746741522,
+  "scalableImages": []
+}

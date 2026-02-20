@@ -1,0 +1,7732 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 11998
+  },
+  "m_Name": "ManagerPersonaDetailsScreenStyle",
+  "m_ImportedWithErrors": 0,
+  "m_ImportedWithWarnings": 0,
+  "m_Rules": [
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 3,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 4,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 5,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 6,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 7,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 3
+            }
+          ]
+        }
+      ],
+      "line": 2
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-self",
+          "m_Line": 11,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 4
+            }
+          ]
+        }
+      ],
+      "line": 10
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 15,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 16,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 17,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 2
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-shrink",
+          "m_Line": 18,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 19,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 4
+            }
+          ]
+        }
+      ],
+      "line": 14
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 23,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 24,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 25,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 26,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 9
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 27,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 10
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-shrink",
+          "m_Line": 28,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 5
+            }
+          ]
+        }
+      ],
+      "line": 22
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 32,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 11
+            }
+          ]
+        }
+      ],
+      "line": 31
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "color",
+          "m_Line": 36,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 11
+            }
+          ]
+        }
+      ],
+      "line": 35
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 40,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-shrink",
+          "m_Line": 41,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 42,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 3
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 9
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 12
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 10
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 12
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 43,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "align-content",
+          "m_Line": 44,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 45,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 13
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 46,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 14
+            }
+          ]
+        }
+      ],
+      "line": 39
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 51,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 11
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-shrink",
+          "m_Line": 52,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 12
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 53,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 54,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "align-content",
+          "m_Line": 55,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 56,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 15
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 57,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 16
+            }
+          ]
+        }
+      ],
+      "line": 49
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 61,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 13
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "position",
+          "m_Line": 62,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 17
+            }
+          ]
+        },
+        {
+          "m_Name": "right",
+          "m_Line": 63,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "left",
+          "m_Line": 64,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "bottom",
+          "m_Line": 65,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "top",
+          "m_Line": 66,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 67,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 18
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 68,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 19
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 69,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 9
+            }
+          ]
+        }
+      ],
+      "line": 60
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 73,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 14
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "position",
+          "m_Line": 74,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 20
+            }
+          ]
+        },
+        {
+          "m_Name": "right",
+          "m_Line": 75,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 10
+            }
+          ]
+        },
+        {
+          "m_Name": "left",
+          "m_Line": 76,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 11
+            }
+          ]
+        },
+        {
+          "m_Name": "bottom",
+          "m_Line": 77,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 12
+            }
+          ]
+        },
+        {
+          "m_Name": "top",
+          "m_Line": 78,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 79,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 13
+            }
+          ]
+        }
+      ],
+      "line": 72
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 83,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 14
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 84,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 15
+            }
+          ]
+        },
+        {
+          "m_Name": "border-left-width",
+          "m_Line": 85,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 16
+            }
+          ]
+        },
+        {
+          "m_Name": "border-right-width",
+          "m_Line": 86,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 17
+            }
+          ]
+        }
+      ],
+      "line": 82
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "font-size",
+          "m_Line": 90,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 18
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 91,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 21
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 92,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 93,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 22
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 94,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 23
+            }
+          ]
+        }
+      ],
+      "line": 89
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 98,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 19
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 99,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 20
+            }
+          ]
+        }
+      ],
+      "line": 97
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "display",
+          "m_Line": 103,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 24
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 104,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 21
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 105,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 22
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 106,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 25
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 107,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 23
+            }
+          ]
+        }
+      ],
+      "line": 102
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding",
+          "m_Line": 111,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 24
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 25
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 26
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 27
+            }
+          ]
+        },
+        {
+          "m_Name": "margin",
+          "m_Line": 112,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 15
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 16
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 28
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 17
+            }
+          ]
+        }
+      ],
+      "line": 110
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-self",
+          "m_Line": 116,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 26
+            }
+          ]
+        },
+        {
+          "m_Name": "min-width",
+          "m_Line": 117,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 29
+            }
+          ]
+        },
+        {
+          "m_Name": "max-width",
+          "m_Line": 118,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 30
+            }
+          ]
+        }
+      ],
+      "line": 115
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding",
+          "m_Line": 122,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 31
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 32
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 33
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 34
+            }
+          ]
+        },
+        {
+          "m_Name": "margin",
+          "m_Line": 123,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 18
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 19
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 20
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 21
+            }
+          ]
+        }
+      ],
+      "line": 121
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 127,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 22
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 128,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 27
+            }
+          ]
+        }
+      ],
+      "line": 126
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 132,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 23
+            }
+          ]
+        }
+      ],
+      "line": 131
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 136,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 137,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 138,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 28
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 139,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 24
+            }
+          ]
+        },
+        {
+          "m_Name": "margin",
+          "m_Line": 140,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 35
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 141,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 25
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 29
+            }
+          ]
+        }
+      ],
+      "line": 135
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 145,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 36
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 146,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 37
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 147,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 26
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 148,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 27
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 30
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 149,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 28
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 29
+            }
+          ]
+        }
+      ],
+      "line": 144
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 153,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 29
+            }
+          ]
+        }
+      ],
+      "line": 152
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "color",
+          "m_Line": 157,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 30
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 31
+            }
+          ]
+        }
+      ],
+      "line": 156
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "min-width",
+          "m_Line": 161,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 38
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 162,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 32
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 163,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 33
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 164,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 34
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 165,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 31
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 166,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 32
+            }
+          ]
+        }
+      ],
+      "line": 160
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "height",
+          "m_Line": 170,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 39
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 171,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 35
+            }
+          ]
+        }
+      ],
+      "line": 169
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding",
+          "m_Line": 175,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 33
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 36
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 176,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 37
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 177,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 40
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 178,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 41
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 179,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 34
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 38
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 180,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 35
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 174
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding",
+          "m_Line": 184,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 36
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 36
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 185,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 39
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 186,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 42
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 187,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 43
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 188,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 37
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 40
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 189,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 38
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 183
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding",
+          "m_Line": 193,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 39
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 36
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 194,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 41
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 195,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 44
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 196,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 45
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 197,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 40
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 42
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 198,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 41
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 192
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 202,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 46
+            }
+          ]
+        },
+        {
+          "m_Name": "margin",
+          "m_Line": 203,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 42
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 204,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 43
+            }
+          ]
+        }
+      ],
+      "line": 201
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 208,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 47
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 209,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 48
+            }
+          ]
+        }
+      ],
+      "line": 207
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 213,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 44
+            }
+          ]
+        }
+      ],
+      "line": 212
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 217,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 45
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 43
+            }
+          ]
+        }
+      ],
+      "line": 216
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 221,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 46
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 222,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 44
+            }
+          ]
+        },
+        {
+          "m_Name": "max-width",
+          "m_Line": 223,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 49
+            }
+          ]
+        }
+      ],
+      "line": 220
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding",
+          "m_Line": 227,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 50
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 51
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 52
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 53
+            }
+          ]
+        },
+        {
+          "m_Name": "margin",
+          "m_Line": 228,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 47
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 54
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 55
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 48
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 229,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 56
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 230,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 49
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 45
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 231,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 46
+            }
+          ]
+        }
+      ],
+      "line": 226
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 235,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 50
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 47
+            }
+          ]
+        }
+      ],
+      "line": 234
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "display",
+          "m_Line": 239,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 48
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 240,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 57
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 241,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 58
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 242,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 238
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 246,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 59
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 247,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 60
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 248,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 61
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 249,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 49
+            }
+          ]
+        }
+      ],
+      "line": 245
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 253,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 62
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 254,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 63
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 255,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 64
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 256,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 65
+            }
+          ]
+        }
+      ],
+      "line": 252
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 260,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 66
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 261,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 67
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 262,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 50
+            }
+          ]
+        }
+      ],
+      "line": 259
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 266,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 3
+            }
+          ]
+        }
+      ],
+      "line": 265
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 270,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 51
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 269
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "justify-content",
+          "m_Line": 274,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 51
+            }
+          ]
+        }
+      ],
+      "line": 273
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 278,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 52
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 279,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 68
+            }
+          ]
+        }
+      ],
+      "line": 277
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-self",
+          "m_Line": 283,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 53
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 284,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 69
+            }
+          ]
+        }
+      ],
+      "line": 282
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 288,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 70
+            }
+          ]
+        }
+      ],
+      "line": 287
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 292,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 52
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 291
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-left",
+          "m_Line": 296,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 71
+            }
+          ]
+        }
+      ],
+      "line": 295
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "border-color",
+          "m_Line": 300,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 53
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 54
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 301,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 54
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 55
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 302,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 55
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 56
+            }
+          ]
+        }
+      ],
+      "line": 299
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 306,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 56
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-wrap",
+          "m_Line": 307,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 57
+            }
+          ]
+        },
+        {
+          "m_Name": "overflow",
+          "m_Line": 308,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 58
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 309,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 57
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 45
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 310,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 72
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 311,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 58
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 59
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 312,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 59
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 60
+            }
+          ]
+        }
+      ],
+      "line": 305
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 316,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 60
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-wrap",
+          "m_Line": 317,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 61
+            }
+          ]
+        },
+        {
+          "m_Name": "overflow",
+          "m_Line": 318,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 62
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 319,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 73
+            }
+          ]
+        },
+        {
+          "m_Name": "margin",
+          "m_Line": 320,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 74
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 321,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 61
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 43
+            }
+          ]
+        }
+      ],
+      "line": 315
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 325,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 62
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 43
+            }
+          ]
+        }
+      ],
+      "line": 324
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 329,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 75
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 330,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 63
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 36
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 331,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 63
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 332,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 76
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 333,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 77
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 334,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 64
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 38
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 335,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 65
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 64
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 336,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 78
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 337,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 66
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 328
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "max-width",
+          "m_Line": 341,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 79
+            }
+          ]
+        },
+        {
+          "m_Name": "max-height",
+          "m_Line": 342,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 80
+            }
+          ]
+        }
+      ],
+      "line": 340
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "border-radius",
+          "m_Line": 346,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 81
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 347,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 82
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 348,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 4
+            }
+          ]
+        }
+      ],
+      "line": 345
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "border-radius",
+          "m_Line": 352,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 83
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 353,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 84
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 354,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 5
+            }
+          ]
+        }
+      ],
+      "line": 351
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "border-radius",
+          "m_Line": 358,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 85
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 359,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 86
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 360,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "display",
+          "m_Line": 361,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 6
+            }
+          ]
+        }
+      ],
+      "line": 357
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "border-radius",
+          "m_Line": 365,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 87
+            }
+          ]
+        }
+      ],
+      "line": 364
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 369,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 370,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 88
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 371,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 372,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 373,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 89
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 374,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 90
+            }
+          ]
+        },
+        {
+          "m_Name": "overflow",
+          "m_Line": 375,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 65
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 376,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 91
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 377,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 92
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 378,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 93
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 379,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 94
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 380,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 95
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 381,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 96
+            }
+          ]
+        }
+      ],
+      "line": 368
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "display",
+          "m_Line": 385,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 6
+            }
+          ]
+        }
+      ],
+      "line": 384
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "border-radius",
+          "m_Line": 389,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 97
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 390,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 98
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 391,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 9
+            }
+          ]
+        }
+      ],
+      "line": 388
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 395,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 10
+            }
+          ]
+        }
+      ],
+      "line": 394
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 399,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 11
+            }
+          ]
+        }
+      ],
+      "line": 398
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "border-width",
+          "m_Line": 403,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 99
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 404,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 12
+            }
+          ]
+        }
+      ],
+      "line": 402
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-left",
+          "m_Line": 408,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 100
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 409,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 101
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 410,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 102
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 411,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 103
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 412,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 413,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 104
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 414,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 13
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 415,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 67
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 66
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-wrap",
+          "m_Line": 416,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 67
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 417,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 105
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 418,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 68
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 419,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 69
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 420,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 14
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 421,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 106
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 422,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 107
+            }
+          ]
+        },
+        {
+          "m_Name": "overflow",
+          "m_Line": 423,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 70
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 424,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 108
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 425,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 109
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 426,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 110
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 427,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 111
+            }
+          ]
+        }
+      ],
+      "line": 407
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-self",
+          "m_Line": 431,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 71
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 432,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 112
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 433,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 68
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 72
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 434,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 113
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 435,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 114
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 436,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 69
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 72
+            }
+          ]
+        }
+      ],
+      "line": 430
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-items",
+          "m_Line": 440,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 73
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 441,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 74
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 442,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 75
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 443,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 70
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 43
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 444,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 115
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 445,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 15
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 446,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 71
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 447,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 116
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 448,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 117
+            }
+          ]
+        }
+      ],
+      "line": 439
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "position",
+          "m_Line": 452,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 76
+            }
+          ]
+        }
+      ],
+      "line": 451
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 456,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 118
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 457,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 119
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 458,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 120
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 459,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 121
+            }
+          ]
+        },
+        {
+          "m_Name": "top",
+          "m_Line": 460,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 461,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 72
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 77
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 462,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 73
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 11
+            }
+          ]
+        }
+      ],
+      "line": 455
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "height",
+          "m_Line": 466,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 122
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 467,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 16
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 468,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 123
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 469,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 124
+            }
+          ]
+        },
+        {
+          "m_Name": "top",
+          "m_Line": 470,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 471,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 17
+            }
+          ]
+        }
+      ],
+      "line": 465
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 475,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 74
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 476,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 75
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 477,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 125
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 478,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 126
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 479,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 127
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 480,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 128
+            }
+          ]
+        }
+      ],
+      "line": 474
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "min-width",
+          "m_Line": 485,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 129
+            }
+          ]
+        }
+      ],
+      "line": 483
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 490,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 130
+            }
+          ]
+        }
+      ],
+      "line": 488
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 495,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 76
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 496,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 131
+            }
+          ]
+        },
+        {
+          "m_Name": "min-width",
+          "m_Line": 497,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 132
+            }
+          ]
+        }
+      ],
+      "line": 493
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 501,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 77
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 502,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 133
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 134
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 135
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 136
+            }
+          ]
+        }
+      ],
+      "line": 500
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 506,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 78
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 507,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 137
+            }
+          ]
+        }
+      ],
+      "line": 505
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "font-size",
+          "m_Line": 511,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 138
+            }
+          ]
+        }
+      ],
+      "line": 510
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 515,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 79
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 516,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 139
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 140
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 141
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 142
+            }
+          ]
+        }
+      ],
+      "line": 514
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 520,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 143
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 521,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 144
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 522,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 78
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 523,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 79
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 524,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 80
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 525,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 145
+            }
+          ]
+        }
+      ],
+      "line": 519
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 529,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 146
+            }
+          ]
+        }
+      ],
+      "line": 528
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 533,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 147
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 534,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 81
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 535,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 82
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 536,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 148
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 537,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 80
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 532
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 541,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 149
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 542,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 83
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 543,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 84
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 544,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 150
+            }
+          ]
+        }
+      ],
+      "line": 540
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 548,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 151
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 549,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 152
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 550,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 85
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 551,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 86
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 552,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 87
+            }
+          ]
+        }
+      ],
+      "line": 547
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 556,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 81
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 557,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 88
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 558,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 89
+            }
+          ]
+        },
+        {
+          "m_Name": "align-content",
+          "m_Line": 559,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 90
+            }
+          ]
+        }
+      ],
+      "line": 555
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 563,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 82
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 564,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 91
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 565,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 92
+            }
+          ]
+        },
+        {
+          "m_Name": "align-content",
+          "m_Line": 566,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 93
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 567,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 94
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 568,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 153
+            }
+          ]
+        },
+        {
+          "m_Name": "position",
+          "m_Line": 569,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 95
+            }
+          ]
+        },
+        {
+          "m_Name": "right",
+          "m_Line": 570,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 83
+            }
+          ]
+        },
+        {
+          "m_Name": "left",
+          "m_Line": 571,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 84
+            }
+          ]
+        },
+        {
+          "m_Name": "bottom",
+          "m_Line": 572,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 85
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 573,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 154
+            }
+          ]
+        }
+      ],
+      "line": 562
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-grow",
+          "m_Line": 577,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 86
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 578,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 96
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 579,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 97
+            }
+          ]
+        },
+        {
+          "m_Name": "align-content",
+          "m_Line": 580,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 98
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 581,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 99
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 582,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 155
+            }
+          ]
+        },
+        {
+          "m_Name": "position",
+          "m_Line": 583,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 100
+            }
+          ]
+        },
+        {
+          "m_Name": "right",
+          "m_Line": 584,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 87
+            }
+          ]
+        },
+        {
+          "m_Name": "left",
+          "m_Line": 585,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 88
+            }
+          ]
+        },
+        {
+          "m_Name": "bottom",
+          "m_Line": 586,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 89
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 587,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 156
+            }
+          ]
+        }
+      ],
+      "line": 576
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-items",
+          "m_Line": 591,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 101
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 592,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 157
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 593,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 90
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 590
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "border-width",
+          "m_Line": 597,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 158
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 598,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 159
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 599,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 160
+            }
+          ]
+        }
+      ],
+      "line": 596
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin",
+          "m_Line": 603,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 161
+            }
+          ]
+        }
+      ],
+      "line": 602
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "max-height",
+          "m_Line": 607,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 162
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 608,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 91
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 102
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 163
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 609,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 103
+            }
+          ]
+        },
+        {
+          "m_Name": "border-radius",
+          "m_Line": 610,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 92
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 102
+            }
+          ]
+        },
+        {
+          "m_Name": "border-width",
+          "m_Line": 611,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 164
+            }
+          ]
+        },
+        {
+          "m_Name": "border-color",
+          "m_Line": 612,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 93
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 104
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 613,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 94
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 56
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 614,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 95
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "min-height",
+          "m_Line": 615,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 165
+            }
+          ]
+        }
+      ],
+      "line": 606
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "display",
+          "m_Line": 619,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 105
+            }
+          ]
+        }
+      ],
+      "line": 618
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "display",
+          "m_Line": 624,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 6
+            }
+          ]
+        }
+      ],
+      "line": 623
+    }
+  ],
+  "m_ComplexSelectors": [
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "biography-navigation-buttons",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "biography-navigation-buttons-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "biography-property-1-step1",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "biography-property-1-step1-property-2-additional",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "biography-property1-stepper",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "stepper-step--selected",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 4
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "biography-property1-stepper",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "stepper-text",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 5
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "biography-summary-rectangle",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 6
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "biography-summary-panel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 7
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "biography-summary-panel-carousel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "carousel-page-indicator",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 8
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "biography-summary-panel-carousel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "carousel-next-button",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 9
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "biography-summary-panel-carousel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "carousel-viewport",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 10
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "body-small-12px-bold",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 11
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "components-biography",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 12
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "data_display-graphs-stepper-step_bar-width-size-narrow-counter-total-3-height-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 13
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "football-career-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicontainer_horizontal_align",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 14
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "non-playing-role-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicontainer_horizontal_align",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 14
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "football-career-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 15
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "football-career-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button-group__child-last",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 16
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "non-playing-role-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button-group__child-last",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 16
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "non-playing-role-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 17
+    },
+    {
+      "m_Specificity": 31,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "non-playing-role-radio-group",
+              "m_Type": 3
+            },
+            {
+              "m_Value": "no-flex-grow-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 18
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "football-career-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 19
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "non-playing-role-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 19
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-highest-level-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 19
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-coaching-badge-radiobutton",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 19
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "football-career-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 20
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "non-playing-role-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 20
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-highest-level-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 20
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-coaching-badge-radiobutton",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 20
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "game-creation-dynamic-step-flex-grow",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 21
+    },
+    {
+      "m_Specificity": 12,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "game-creation-dynamic-step-flex-grow",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "TemplateContainer",
+              "m_Type": 2
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 21
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "expanding-input-field",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-text-field",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 21
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "input-text-field--secondary-text-color",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-text-element--inner-input-field-component",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 22
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "inputs-text-field-default-default-validation-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 23
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "layout-divider-solid-horizontal",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 24
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "management-style-option",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 25
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "management-style-option",
+              "m_Type": 3
+            },
+            {
+              "m_Value": "disabled",
+              "m_Type": 4
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 26
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "management-style-option",
+              "m_Type": 3
+            },
+            {
+              "m_Value": "hover",
+              "m_Type": 4
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 27
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "management-style-options-grid",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 28
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "management-style-options-grid",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list__item",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 29
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "management-style-options-grid",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list__item--last",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 30
+    },
+    {
+      "m_Specificity": 41,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "management-style-toggle-icon",
+              "m_Type": 3
+            },
+            {
+              "m_Value": "disabled",
+              "m_Type": 4
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-toggle__input",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-toggle__checkmark",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 31
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-attributes-table",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 32
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-highest-level-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicontainer_horizontal_align",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 33
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-highest-level-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button-group__child-active",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 34
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "football-career-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button-group__child-active",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 34
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "non-playing-role-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button-group__child-active",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 34
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "selected-management-style",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 34
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-highest-level-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 35
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-nonplaying-career-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 35
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-color-button--selected",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-color-button-checkbox",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 35
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-grid-button-selected",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-grid-button-checkmark",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 35
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-nonplaying-career-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "inputs-hybrid-task_switch_button-large-active-false--type-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 36
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-nonplaying-career-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "inputs-hybrid-task_switch_button-large-active-true--type-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 36
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-persona-image-phone-landscape",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 37
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-persona-background-image-phone-landscape",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 38
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-persona-summary-step-panel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 39
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-nonplaying-career-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 40
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-nonplaying-career-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button-group__container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 41
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-phone-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicontainer_horizontal_align",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 42
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-background-phone-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 43
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-coaching-badge-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-coaching-badge-radiobutton",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 44
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-coaching-badge-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button-group__container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 45
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-coaching-badge-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__input",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 46
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-coaching-badge-radio-group",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button-group__child-active",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 47
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-coaching-badge-radiobutton",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 48
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-style-grid-item-checkbox",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 49
+    },
+    {
+      "m_Specificity": 31,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-style-grid-item-checkbox",
+              "m_Type": 3
+            },
+            {
+              "m_Value": "checked",
+              "m_Type": 4
+            },
+            {
+              "m_Value": "hover",
+              "m_Type": 4
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 50
+    },
+    {
+      "m_Specificity": 31,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-style-grid-item-checkbox",
+              "m_Type": 3
+            },
+            {
+              "m_Value": "checked",
+              "m_Type": 4
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "inputs-hybrid-task_switch_button-large-active-false--type-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 51
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-style-grid-item-checkbox",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-base-field__input",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 52
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-color-button",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 53
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-color-button--selected",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-color-button",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 54
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-color-button-checkbox",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 55
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-color-button-tint",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 56
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-grid-button",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 57
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-grid-button-checkmark",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 58
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "no-toggle-icon",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-toggle__checkmark",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 58
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-grid-button-checkmark-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 59
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-grid-button-selected",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 60
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-grid-button-selected",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-grid-button",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 61
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-grid-button-selected",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-grid-button-checkmark-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 62
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 63
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 64
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-mobile-radiogroup",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-radio-button__checkmark-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 65
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-slider",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 66
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-slider",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sislider--dragger",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 67
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-slider",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sislider--tracker",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 68
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-main-interaction-panel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 69
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-lhs-panel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 70
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-lhs-panel-min-res",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 71
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-manager-frame",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 72
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-persona-details-screen-main-panel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 73
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-persona-min-res-screen",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 74
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-persona-phone-top-stepper",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "body-small-12px-bold",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 75
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-persona-screen-main-panel-min-res",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 76
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "middle-name-property-1-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 77
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "middle-name-property-1-default-bottom-margin",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 78
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "nickname-property-1-default-bottom-margin",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 78
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "names-property-1-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 79
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "names-property-1-add-more",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 79
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "nationalities-property-1-add-two",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 80
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "nickname-property-1-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 81
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "step-summary-content",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 82
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "step-summary-content-absolute",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 83
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "step-biography-content-absolute",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 84
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "stepper-property-1-biography",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 85
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "input-field-noborder",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-base-field__input",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 86
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "input-field-noborder",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-base-text-field",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 87
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-dropdown-secondary",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "si-dropdown__selection-field",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 88
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-visible-element",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 89
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "manager-creation-hidden-element",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 90
+    }
+  ],
+  "floats": [
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "dimensions": [
+    {
+      "unit": 1,
+      "value": 933.0
+    },
+    {
+      "unit": 1,
+      "value": 827.0
+    },
+    {
+      "unit": 1,
+      "value": 336.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 1,
+      "value": 36.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 1366.0
+    },
+    {
+      "unit": 1,
+      "value": 900.0
+    },
+    {
+      "unit": 1,
+      "value": 68.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 20.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 3.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 120.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 880.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 312.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 28.0
+    },
+    {
+      "unit": 1,
+      "value": 3.0
+    },
+    {
+      "unit": 1,
+      "value": 3.0
+    },
+    {
+      "unit": 2,
+      "value": 31.5
+    },
+    {
+      "unit": 1,
+      "value": 130.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 350.0
+    },
+    {
+      "unit": 1,
+      "value": 600.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 350.0
+    },
+    {
+      "unit": 1,
+      "value": 600.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 491.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 0.10000000149011612
+    },
+    {
+      "unit": 1,
+      "value": 5.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 14.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 14.0
+    },
+    {
+      "unit": 2,
+      "value": 48.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 32.0
+    },
+    {
+      "unit": 1,
+      "value": 64.0
+    },
+    {
+      "unit": 1,
+      "value": 32.0
+    },
+    {
+      "unit": 1,
+      "value": 64.0
+    },
+    {
+      "unit": 2,
+      "value": 71.0
+    },
+    {
+      "unit": 2,
+      "value": 66.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 2,
+      "value": 29.0
+    },
+    {
+      "unit": 1,
+      "value": 48.0
+    },
+    {
+      "unit": 1,
+      "value": 48.0
+    },
+    {
+      "unit": 1,
+      "value": 24.0
+    },
+    {
+      "unit": 1,
+      "value": 48.0
+    },
+    {
+      "unit": 1,
+      "value": 24.0
+    },
+    {
+      "unit": 1,
+      "value": 11.0
+    },
+    {
+      "unit": 1,
+      "value": 24.0
+    },
+    {
+      "unit": 1,
+      "value": 24.0
+    },
+    {
+      "unit": 1,
+      "value": 24.0
+    },
+    {
+      "unit": 1,
+      "value": 24.0
+    },
+    {
+      "unit": 1,
+      "value": 390.0
+    },
+    {
+      "unit": 1,
+      "value": 66.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 796.0
+    },
+    {
+      "unit": 1,
+      "value": 18.0
+    },
+    {
+      "unit": 1,
+      "value": 796.0
+    },
+    {
+      "unit": 1,
+      "value": 18.0
+    },
+    {
+      "unit": 1,
+      "value": 390.0
+    },
+    {
+      "unit": 1,
+      "value": 66.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 2,
+      "value": 60.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 2,
+      "value": 50.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 32.0
+    },
+    {
+      "unit": 1,
+      "value": 15.0
+    },
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 32.0
+    }
+  ],
+  "colors": [
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 0.04313725605607033
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 0.04313725605607033
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 0.04313725605607033
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 0.250980406999588
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 0.250980406999588
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 0.250980406999588
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 0.0
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.1411764770746231
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 0.250980406999588
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 0.250980406999588
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.08235294371843338
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.3529411852359772
+    }
+  ],
+  "strings": [
+    "--row-direction-normal",
+    "space-between",
+    "stretch",
+    "flex-start",
+    "stretch",
+    "column",
+    "space-between",
+    "--flex-start-normal",
+    "column",
+    "space-between",
+    "flex-start",
+    "--communication-feedback-information",
+    "--numbers-border-radius-null",
+    "space-between",
+    "center",
+    "space-between",
+    "center",
+    "absolute",
+    "center",
+    "center",
+    "absolute",
+    "normal",
+    "bold",
+    "middle-left",
+    "flex",
+    "flex-start",
+    "flex-start",
+    "normal",
+    "stretch",
+    "--colours-brand-foundation-white",
+    "--none",
+    "--global-text-secondary",
+    "space-between",
+    "center",
+    "stretch",
+    "stretch",
+    "--spacing-medium---16",
+    "center",
+    "--core-controls-border-pc-default",
+    "center",
+    "--colours-alpha-light-alpha-8",
+    "center",
+    "--core-controls-border-pc-hover",
+    "--colours-alpha-transparent-0",
+    "flex-start",
+    "--numbers-border-radius-small",
+    "stretch",
+    "--buttons-toggle-active-base-surface",
+    "flex",
+    "stretch",
+    "flex-start",
+    "space-between",
+    "normal",
+    "center",
+    "--buttons-toggle-active-primary-border",
+    "--buttons-toggle-active-primary-surface",
+    "--buttons-text-default",
+    "nowrap",
+    "hidden",
+    "--buttons-toggle-notactive-border",
+    "--buttons-toggle-notactive-surface",
+    "nowrap",
+    "hidden",
+    "center",
+    "--core-controls-surface-pc-default",
+    "hidden",
+    "--row-direction-reverse",
+    "wrap",
+    "space-between",
+    "center",
+    "hidden",
+    "center",
+    "--colours-base-neutral-white",
+    "flex-start",
+    "center",
+    "center",
+    "absolute",
+    "--colours-alpha-light-alpha-35",
+    "column",
+    "center",
+    "flex-start",
+    "center",
+    "flex-start",
+    "column",
+    "flex-start",
+    "column",
+    "center",
+    "flex-start",
+    "flex-start",
+    "stretch",
+    "center",
+    "flex-start",
+    "stretch",
+    "flex-end",
+    "center",
+    "absolute",
+    "flex-start",
+    "stretch",
+    "flex-end",
+    "center",
+    "absolute",
+    "flex-start",
+    "--spacing-small---8",
+    "center",
+    "--buttons-secondary-border-default",
+    "flex"
+  ],
+  "assets": [
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    }
+  ],
+  "imports": [
+    {
+      "styleSheet": {
+        "m_FileID": 3,
+        "m_PathID": -820025129605260392
+      },
+      "mediaQueries": []
+    }
+  ],
+  "m_FlattenedImportedStyleSheets": [
+    {
+      "m_FileID": 3,
+      "m_PathID": -820025129605260392
+    }
+  ],
+  "m_ContentHash": 1383068612,
+  "scalableImages": []
+}

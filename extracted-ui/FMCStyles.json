@@ -1,0 +1,766 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 11998
+  },
+  "m_Name": "FMCStyles",
+  "m_ImportedWithErrors": 0,
+  "m_ImportedWithWarnings": 0,
+  "m_Rules": [
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 4,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 5,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 6,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 7,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 3
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-top",
+          "m_Line": 11,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 10
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding",
+          "m_Line": 15,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "margin",
+          "m_Line": 16,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 14
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding",
+          "m_Line": 20,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 19
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--start-colour",
+          "m_Line": 24,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "--end-colour",
+          "m_Line": 25,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 3
+            }
+          ]
+        }
+      ],
+      "line": 23
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--start-colour",
+          "m_Line": 29,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "--end-colour",
+          "m_Line": 30,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 5
+            }
+          ]
+        }
+      ],
+      "line": 28
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 34,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 3
+            }
+          ]
+        }
+      ],
+      "line": 33
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "font-size",
+          "m_Line": 38,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 39,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 37
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 43,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 3
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 42
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-left",
+          "m_Line": 47,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 4
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 48,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 5
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 46
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--start-colour",
+          "m_Line": 52,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "--end-colour",
+          "m_Line": 53,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "position",
+          "m_Line": 54,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "min-height",
+          "m_Line": 55,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 56,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 57,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 7
+            }
+          ]
+        }
+      ],
+      "line": 51
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-left",
+          "m_Line": 61,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 62,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 4
+            }
+          ]
+        }
+      ],
+      "line": 60
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-items",
+          "m_Line": 66,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "min-height",
+          "m_Line": 67,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 8
+            }
+          ]
+        }
+      ],
+      "line": 65
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-image",
+          "m_Line": 71,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 70
+    }
+  ],
+  "m_ComplexSelectors": [
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "fmc-hidden",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "base-layer-content",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "fmc-training-day-padding-margin-reset",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "fmc-first-team-padding-reset",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "fmc-calendar-training-gradient-rest",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 4
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "fmc-calendar-training-gradient-blank",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 5
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "fmc-main-menu",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 6
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "tactics-subs-block-fmc-large-width",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "fmc-subs-font-increase",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 7
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "fmc-margin-right-8",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 8
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "shortcut-bar",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 9
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "shortcut-bar-gradient",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 10
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "shortcut-string",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 11
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "controller-shortcut-list",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 12
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "fmc-store-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 13
+    }
+  ],
+  "floats": [
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "dimensions": [
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 30.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 14.0
+    },
+    {
+      "unit": 1,
+      "value": 32.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 1,
+      "value": 40.0
+    }
+  ],
+  "colors": [
+    {
+      "r": 0.0,
+      "g": 0.0,
+      "b": 0.0,
+      "a": 0.0
+    },
+    {
+      "r": 0.0,
+      "g": 0.0,
+      "b": 0.0,
+      "a": 0.0
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.08235294371843338
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.08235294371843338
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.0
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.0
+    },
+    {
+      "r": 0.0,
+      "g": 0.0,
+      "b": 0.0,
+      "a": 0.0
+    },
+    {
+      "r": 0.007843137718737125,
+      "g": 0.007843137718737125,
+      "b": 0.007843137718737125,
+      "a": 0.501960813999176
+    }
+  ],
+  "strings": [
+    "normal",
+    "--global-gap-regular",
+    "--spacing-padding-medium---16",
+    "absolute",
+    "--spacing-padding-small---8",
+    "flex-end"
+  ],
+  "assets": [
+    {
+      "m_FileID": 5,
+      "m_PathID": -3554830784871524220
+    }
+  ],
+  "imports": [
+    {
+      "styleSheet": {
+        "m_FileID": 3,
+        "m_PathID": -820025129605260392
+      },
+      "mediaQueries": []
+    }
+  ],
+  "m_FlattenedImportedStyleSheets": [
+    {
+      "m_FileID": 3,
+      "m_PathID": -820025129605260392
+    }
+  ],
+  "m_ContentHash": 1264554220,
+  "scalableImages": []
+}

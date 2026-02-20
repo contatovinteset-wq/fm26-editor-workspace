@@ -1,0 +1,672 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 11998
+  },
+  "m_Name": "LanguageDirectionCommon",
+  "m_ImportedWithErrors": 0,
+  "m_ImportedWithWarnings": 0,
+  "m_Rules": [
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--row-direction-always-normal",
+          "m_Line": 3,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "--row-direction-always-reverse",
+          "m_Line": 4,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 1
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-items",
+          "m_Line": 8,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 0
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 7
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-items",
+          "m_Line": 12,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 3
+            }
+          ]
+        }
+      ],
+      "line": 11
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-self",
+          "m_Line": 16,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 2
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 15
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-self",
+          "m_Line": 20,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 3
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 3
+            }
+          ]
+        }
+      ],
+      "line": 19
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-self",
+          "m_Line": 24,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 4
+            }
+          ]
+        }
+      ],
+      "line": 23
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "align-self",
+          "m_Line": 28,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 5
+            }
+          ]
+        }
+      ],
+      "line": 27
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "justify-content",
+          "m_Line": 32,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 4
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            }
+          ]
+        }
+      ],
+      "line": 31
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "scale",
+          "m_Line": 36,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 5
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 6
+            }
+          ]
+        }
+      ],
+      "line": 35
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-text-generator",
+          "m_Line": 40,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 41,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 8
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 9
+            }
+          ]
+        }
+      ],
+      "line": 39
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 45,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 9
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 10
+            }
+          ]
+        }
+      ],
+      "line": 44
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 49,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 10
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 10
+            }
+          ]
+        }
+      ],
+      "line": 48
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "scale",
+          "m_Line": 53,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 11
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 12
+            }
+          ]
+        }
+      ],
+      "line": 52
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 56,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 13
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 11
+            }
+          ]
+        }
+      ],
+      "line": 55
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 59,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 14
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 12
+            }
+          ]
+        }
+      ],
+      "line": 58
+    }
+  ],
+  "m_ComplexSelectors": [
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "root",
+              "m_Type": 4
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "align-items-start",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "align-items-end",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "align-self-start",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "align-self-end",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 4
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "align-self-always-start",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 5
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "align-self-always-end",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 6
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "justify-content-difference",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 7
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "rtl-horizontal-flip",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 8
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "rtl-label",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 9
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list--horizontal-list",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 10
+    },
+    {
+      "m_Specificity": 211,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list__scroll-view",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-content-and-vertical-scroll-container",
+              "m_Type": 6
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-content-viewport",
+              "m_Type": 6
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 11
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "fm-star-rating-star-no-margin",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 12
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "fm-star-rating-star",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 12
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "text-right-inverted",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 13
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "text-left-inverted",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 14
+    }
+  ],
+  "floats": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "dimensions": [],
+  "colors": [],
+  "strings": [
+    "row",
+    "row-reverse",
+    "--flex-start-normal",
+    "--flex-end-normal",
+    "flex-start",
+    "flex-end",
+    "--different-justify-content",
+    "--rlt-x-flip",
+    "--text-generator-type",
+    "--text-left-align",
+    "--row-direction-normal",
+    "--text-right-inverted",
+    "--text-left-inverted"
+  ],
+  "assets": [],
+  "imports": [],
+  "m_FlattenedImportedStyleSheets": [],
+  "m_ContentHash": 1799526747,
+  "scalableImages": []
+}

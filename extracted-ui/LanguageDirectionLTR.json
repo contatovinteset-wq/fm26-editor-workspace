@@ -1,0 +1,2350 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 11998
+  },
+  "m_Name": "LanguageDirectionLTR",
+  "m_ImportedWithErrors": 0,
+  "m_ImportedWithWarnings": 0,
+  "m_Rules": [
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--row-direction-normal",
+          "m_Line": 3,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "--row-direction-reverse",
+          "m_Line": 4,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "--flex-start-normal",
+          "m_Line": 5,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "--flex-end-normal",
+          "m_Line": 6,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "--different-justify-content",
+          "m_Line": 7,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "--manager-large-res-postiton-left",
+          "m_Line": 8,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "--manager-standard-res-postiton-left",
+          "m_Line": 9,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "--manager-min-res-postiton-left",
+          "m_Line": 10,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "--rlt-x-flip",
+          "m_Line": 11,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "--border-radius-leading-small",
+          "m_Line": 12,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 5
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 2
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 3
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 4
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "--border-radius-trailing-small",
+          "m_Line": 13,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 5
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 5
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 5
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 8
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "--border-radius-leading-extra-small",
+          "m_Line": 14,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 9
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 10
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 11
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 12
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "--border-radius-trailing-extra-small",
+          "m_Line": 15,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 13
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 14
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 15
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 16
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "--border-radius-leading-medium-small",
+          "m_Line": 16,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 17
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 8
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 18
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 19
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 20
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "--border-radius-trailing-medium-small",
+          "m_Line": 17,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 21
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 22
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 8
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 23
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 8
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 24
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "--text-generator-type",
+          "m_Line": 18,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 9
+            }
+          ]
+        },
+        {
+          "m_Name": "--text-left-align",
+          "m_Line": 19,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 10
+            }
+          ]
+        },
+        {
+          "m_Name": "--text-left-inverted",
+          "m_Line": 20,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 11
+            }
+          ]
+        },
+        {
+          "m_Name": "--text-right-inverted",
+          "m_Line": 21,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 12
+            }
+          ]
+        },
+        {
+          "m_Name": "--margin-leading-extra-small",
+          "m_Line": 22,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 3
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 4
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 5
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "--margin-trailing-extra-small",
+          "m_Line": 23,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 8
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 9
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 10
+            }
+          ]
+        }
+      ],
+      "line": 1
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "right",
+          "m_Line": 28,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 11
+            }
+          ]
+        },
+        {
+          "m_Name": "left",
+          "m_Line": 29,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 26
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "left",
+          "m_Line": 33,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 12
+            }
+          ]
+        },
+        {
+          "m_Name": "right",
+          "m_Line": 34,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 32
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "right",
+          "m_Line": 39,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 13
+            }
+          ]
+        }
+      ],
+      "line": 38
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "right",
+          "m_Line": 43,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 14
+            }
+          ]
+        }
+      ],
+      "line": 42
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "right",
+          "m_Line": 47,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 15
+            }
+          ]
+        },
+        {
+          "m_Name": "left",
+          "m_Line": 48,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 46
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "right",
+          "m_Line": 52,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 16
+            }
+          ]
+        }
+      ],
+      "line": 51
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "left",
+          "m_Line": 56,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 17
+            }
+          ]
+        }
+      ],
+      "line": 55
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "left",
+          "m_Line": 60,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 18
+            }
+          ]
+        }
+      ],
+      "line": 59
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-left",
+          "m_Line": 67,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 25
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 13
+            }
+          ]
+        }
+      ],
+      "line": 66
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 71,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 26
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 13
+            }
+          ]
+        }
+      ],
+      "line": 70
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-left",
+          "m_Line": 75,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 27
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 14
+            }
+          ]
+        }
+      ],
+      "line": 74
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 79,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 28
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 14
+            }
+          ]
+        }
+      ],
+      "line": 78
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-left",
+          "m_Line": 83,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 29
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 15
+            }
+          ]
+        }
+      ],
+      "line": 82
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 87,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 30
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 15
+            }
+          ]
+        }
+      ],
+      "line": 86
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-left",
+          "m_Line": 91,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 31
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 16
+            }
+          ]
+        }
+      ],
+      "line": 90
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 95,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 32
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 16
+            }
+          ]
+        }
+      ],
+      "line": 94
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-left",
+          "m_Line": 99,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 33
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 17
+            }
+          ]
+        }
+      ],
+      "line": 98
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 103,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 34
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 17
+            }
+          ]
+        }
+      ],
+      "line": 102
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-left",
+          "m_Line": 107,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 35
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 18
+            }
+          ]
+        }
+      ],
+      "line": 106
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 111,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 36
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 18
+            }
+          ]
+        }
+      ],
+      "line": 110
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-left",
+          "m_Line": 115,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 37
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 19
+            }
+          ]
+        }
+      ],
+      "line": 114
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 119,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 38
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 19
+            }
+          ]
+        }
+      ],
+      "line": 118
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-left",
+          "m_Line": 123,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 39
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 20
+            }
+          ]
+        }
+      ],
+      "line": 122
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 127,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 40
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 20
+            }
+          ]
+        }
+      ],
+      "line": 126
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-left",
+          "m_Line": 131,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 41
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 14
+            }
+          ]
+        }
+      ],
+      "line": 130
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-right",
+          "m_Line": 135,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 42
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 14
+            }
+          ]
+        }
+      ],
+      "line": 134
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-left",
+          "m_Line": 141,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 43
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 21
+            }
+          ]
+        }
+      ],
+      "line": 140
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-right",
+          "m_Line": 145,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 44
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 21
+            }
+          ]
+        }
+      ],
+      "line": 144
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-left",
+          "m_Line": 150,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 45
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 22
+            }
+          ]
+        }
+      ],
+      "line": 149
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-right",
+          "m_Line": 154,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 46
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 22
+            }
+          ]
+        }
+      ],
+      "line": 153
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-left",
+          "m_Line": 158,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 47
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 23
+            }
+          ]
+        }
+      ],
+      "line": 157
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-right",
+          "m_Line": 162,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 48
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 23
+            }
+          ]
+        }
+      ],
+      "line": 161
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-left",
+          "m_Line": 167,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 49
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 24
+            }
+          ]
+        }
+      ],
+      "line": 166
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-right",
+          "m_Line": 171,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 50
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 24
+            }
+          ]
+        }
+      ],
+      "line": 170
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-left",
+          "m_Line": 175,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 51
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 25
+            }
+          ]
+        }
+      ],
+      "line": 174
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-right",
+          "m_Line": 179,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 52
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 25
+            }
+          ]
+        }
+      ],
+      "line": 178
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-left",
+          "m_Line": 183,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 53
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 26
+            }
+          ]
+        }
+      ],
+      "line": 182
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-right",
+          "m_Line": 187,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 54
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 26
+            }
+          ]
+        }
+      ],
+      "line": 186
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-left",
+          "m_Line": 191,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 55
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 27
+            }
+          ]
+        }
+      ],
+      "line": 190
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-right",
+          "m_Line": 195,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 56
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 27
+            }
+          ]
+        }
+      ],
+      "line": 194
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-left",
+          "m_Line": 199,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 57
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 28
+            }
+          ]
+        }
+      ],
+      "line": 198
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-right",
+          "m_Line": 203,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 58
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 28
+            }
+          ]
+        }
+      ],
+      "line": 202
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 207,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 19
+            }
+          ]
+        }
+      ],
+      "line": 206
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "position",
+          "m_Line": 211,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 29
+            }
+          ]
+        },
+        {
+          "m_Name": "right",
+          "m_Line": 212,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 59
+            }
+          ]
+        }
+      ],
+      "line": 210
+    }
+  ],
+  "m_ComplexSelectors": [
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "root",
+              "m_Type": 4
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "right-0",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "left-0",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "right-8",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "right-16",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 4
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "right-40",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 5
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "right-42",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 6
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "left-4",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 7
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "left-12",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 8
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-left-global-gap-none",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 9
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-right-global-gap-none",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 10
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-left-global-gap-extra-small",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 11
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-right-global-gap-extra-small",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 12
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-left-global-gap-small",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 13
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-right-global-gap-small",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 14
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-left-global-gap-regular",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 15
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-right-global-gap-regular",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 16
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-left-global-gap-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 17
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-right-global-gap-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 18
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-left-global-gap-extra-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 19
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-right-global-gap-extra-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 20
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-left-global-gap-extra-extra-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 21
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-right-global-gap-extra-extra-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 22
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-left-global-gap-huge",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 23
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-right-global-gap-huge",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 24
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-left-global-gap-segmented-tab-spacing",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 25
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "margin-right-global-gap-segmented-tab-spacing",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 26
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-left-global-padding-none",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 27
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-right-global-padding-none",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 28
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-left-global-padding-extra-small",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 29
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-right-global-padding-extra-small",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 30
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-left-global-padding-small",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 31
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-right-global-padding-small",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 32
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-left-global-padding-regular",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 33
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-right-global-padding-regular",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 34
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-left-global-padding-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 35
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-right-global-padding-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 36
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-left-global-padding-extra-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 37
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-right-global-padding-extra-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 38
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-left-global-padding-extra-extra-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 39
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-right-global-padding-extra-extra-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 40
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-left-global-padding-huge",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 41
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "padding-right-global-padding-huge",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 42
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "rtl-padding-bottom-global-padding-regular",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 43
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "random-button-absolute",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 44
+    }
+  ],
+  "floats": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0
+  ],
+  "dimensions": [
+    {
+      "unit": 1,
+      "value": 1100.0
+    },
+    {
+      "unit": 1,
+      "value": 865.0
+    },
+    {
+      "unit": 1,
+      "value": 745.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 40.0
+    },
+    {
+      "unit": 1,
+      "value": 42.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 0.0
+    }
+  ],
+  "colors": [],
+  "strings": [
+    "row",
+    "row-reverse",
+    "flex-start",
+    "flex-end",
+    "space-between",
+    "--numbers-border-radius-small",
+    "--numbers-border-radius-null",
+    "--numbers-border-radius-extra-small",
+    "--numbers-border-radius-medium-small",
+    "standard",
+    "middle-left",
+    "middle-left",
+    "middle-right",
+    "--global-gap-none",
+    "--global-gap-segmented-tab-spacing",
+    "--global-gap-small",
+    "--global-gap-regular",
+    "--global-gap-large",
+    "--global-gap-extra-large",
+    "--global-gap-extra-extra-large",
+    "--global-gap-huge",
+    "--global-padding-none",
+    "--global-padding-extra-small",
+    "--global-padding-small",
+    "--global-padding-regular",
+    "--global-padding-large",
+    "--global-padding-extra-large",
+    "--global-padding-extra-extra-large",
+    "--global-padding-huge",
+    "absolute"
+  ],
+  "assets": [],
+  "imports": [],
+  "m_FlattenedImportedStyleSheets": [],
+  "m_ContentHash": -552441613,
+  "scalableImages": []
+}

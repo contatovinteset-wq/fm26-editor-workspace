@@ -1,0 +1,5155 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 11998
+  },
+  "m_Name": "FMChartStyles",
+  "m_ImportedWithErrors": 0,
+  "m_ImportedWithWarnings": 0,
+  "m_Rules": [
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 2,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 3,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 4,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 5,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 6,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 7,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 8,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 9,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 10,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 11,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 12,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 13,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 14,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 15,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 16,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 17,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 18,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 9
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 19,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 10
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 20,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 1
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 24,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 25,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 26,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 27,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 28,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 29,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 30,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 31,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 11
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 32,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 12
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 33,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 13
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 34,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 35,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 14
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 36,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 15
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 37,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 16
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 38,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 17
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 39,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 18
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 40,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 19
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 41,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 20
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 42,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 3
+            }
+          ]
+        }
+      ],
+      "line": 23
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 46,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 47,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 48,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 49,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 50,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 51,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 52,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 53,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 21
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 54,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 22
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 55,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 23
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 56,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 24
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 57,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 25
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 58,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 26
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 59,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 27
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 60,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 28
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 61,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 29
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 62,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 30
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 63,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 31
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 64,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 5
+            }
+          ]
+        }
+      ],
+      "line": 45
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "position",
+          "m_Line": 68,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 9
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 69,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 32
+            }
+          ]
+        },
+        {
+          "m_Name": "left",
+          "m_Line": 70,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "max-width",
+          "m_Line": 71,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "min-width",
+          "m_Line": 72,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "transition-property",
+          "m_Line": 73,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 10
+            }
+          ]
+        },
+        {
+          "m_Name": "transition-duration",
+          "m_Line": 74,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "transition-timing-function",
+          "m_Line": 75,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 11
+            }
+          ]
+        },
+        {
+          "m_Name": "transition-delay",
+          "m_Line": 76,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 5
+            }
+          ]
+        }
+      ],
+      "line": 67
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "position",
+          "m_Line": 80,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 12
+            }
+          ]
+        },
+        {
+          "m_Name": "right",
+          "m_Line": 81,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "top",
+          "m_Line": 82,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "left",
+          "m_Line": 83,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 79
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 87,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 88,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 89,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 90,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 13
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 91,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 14
+            }
+          ]
+        }
+      ],
+      "line": 86
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 95,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 96,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 97,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 9
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 98,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 15
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 99,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 16
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 100,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 17
+            }
+          ]
+        }
+      ],
+      "line": 94
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 104,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 105,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 106,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 10
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 107,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 18
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 108,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 19
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 109,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 20
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-color",
+          "m_Line": 110,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 9
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 111,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 33
+            }
+          ]
+        }
+      ],
+      "line": 103
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 115,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 116,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 10
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 117,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 21
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 118,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 22
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 119,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 11
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 120,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 23
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 121,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 122,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 34
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 123,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 35
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 124,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 12
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 125,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 36
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 126,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 37
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 127,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 38
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 128,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 39
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 129,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 40
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 130,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 41
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 131,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 42
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 132,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 43
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 133,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 11
+            }
+          ]
+        }
+      ],
+      "line": 114
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 137,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 138,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 12
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 139,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 24
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 140,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 25
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 141,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 13
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 142,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 26
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 143,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 144,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 44
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 145,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 45
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 146,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 46
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 147,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 47
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 148,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 48
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 149,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 49
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 150,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 50
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 151,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 51
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 152,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 52
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 153,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 53
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 154,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 54
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 155,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 13
+            }
+          ]
+        }
+      ],
+      "line": 136
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 159,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 160,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 14
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 161,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 27
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 162,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 28
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 163,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 14
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 164,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 29
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 165,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 166,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 55
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 167,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 56
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 168,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 57
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 169,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 15
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 170,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 58
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 171,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 59
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 172,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 60
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 173,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 61
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 174,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 62
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 175,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 63
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 176,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 64
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 177,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 15
+            }
+          ]
+        }
+      ],
+      "line": 158
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 181,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 9
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 182,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 16
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 183,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 30
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 184,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 31
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 185,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 16
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 186,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 32
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 187,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 188,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 65
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 189,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 66
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 190,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 67
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 191,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 68
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 192,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 69
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 193,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 70
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 194,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 71
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 195,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 72
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 196,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 73
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 197,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 74
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 198,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 75
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 199,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 17
+            }
+          ]
+        }
+      ],
+      "line": 180
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 203,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 10
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 204,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 18
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 205,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 17
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 206,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 33
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 207,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 34
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 208,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 35
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 209,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 76
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 210,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 77
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 211,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 78
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 212,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 79
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 213,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 80
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 214,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 81
+            }
+          ]
+        }
+      ],
+      "line": 202
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 218,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 11
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 219,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 19
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 220,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 18
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 221,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 36
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 222,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 37
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 223,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 38
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 224,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 225,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 217
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 229,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 12
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 230,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 20
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 231,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 19
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 232,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 39
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 233,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 40
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 234,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 41
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 235,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 236,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 42
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 237,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 43
+            }
+          ]
+        },
+        {
+          "m_Name": "overflow",
+          "m_Line": 238,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 44
+            }
+          ]
+        },
+        {
+          "m_Name": "text-overflow",
+          "m_Line": 239,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 45
+            }
+          ]
+        }
+      ],
+      "line": 228
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 243,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 13
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 244,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 21
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 245,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 20
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 246,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 46
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 247,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 47
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 248,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 48
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 249,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 250,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 49
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 251,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 50
+            }
+          ]
+        },
+        {
+          "m_Name": "overflow",
+          "m_Line": 252,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 51
+            }
+          ]
+        },
+        {
+          "m_Name": "text-overflow",
+          "m_Line": 253,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 52
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 254,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 53
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 255,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 82
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 256,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 83
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 257,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 84
+            }
+          ]
+        },
+        {
+          "m_Name": "position",
+          "m_Line": 258,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 54
+            }
+          ]
+        }
+      ],
+      "line": 242
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 262,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 14
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 263,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 22
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 264,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 21
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 265,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 55
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 266,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 56
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 267,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 57
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 268,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 269,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 58
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 270,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 59
+            }
+          ]
+        },
+        {
+          "m_Name": "overflow",
+          "m_Line": 271,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 60
+            }
+          ]
+        },
+        {
+          "m_Name": "text-overflow",
+          "m_Line": 272,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 61
+            }
+          ]
+        },
+        {
+          "m_Name": "translate",
+          "m_Line": 273,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 85
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 86
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 274,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 87
+            }
+          ]
+        },
+        {
+          "m_Name": "rotate",
+          "m_Line": 275,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 88
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 276,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 89
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 277,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 22
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 278,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 90
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 279,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 91
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 280,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 92
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 281,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 93
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 282,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 94
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-width",
+          "m_Line": 283,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 95
+            }
+          ]
+        },
+        {
+          "m_Name": "top",
+          "m_Line": 284,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "position",
+          "m_Line": 285,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 62
+            }
+          ]
+        }
+      ],
+      "line": 261
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "color",
+          "m_Line": 289,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 23
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 290,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 15
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 291,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 63
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 292,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 64
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 293,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 23
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 96
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 97
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 98
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 294,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 24
+            }
+          ]
+        }
+      ],
+      "line": 288
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "color",
+          "m_Line": 298,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 24
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 299,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 16
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 300,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 65
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 301,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 66
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 302,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 99
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 25
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 100
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 101
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 303,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 26
+            }
+          ]
+        }
+      ],
+      "line": 297
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 307,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 17
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 308,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 25
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 309,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 67
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 310,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 68
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 311,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 27
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 312,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 69
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 313,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 314,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 102
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 315,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 103
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 316,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 104
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 317,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 105
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 318,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 106
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 319,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 107
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 320,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 108
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 321,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 109
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 322,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 110
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 323,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 111
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 324,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 112
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 325,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 26
+            }
+          ]
+        }
+      ],
+      "line": 306
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 329,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 18
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 330,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 27
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 331,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 70
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 332,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 71
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 333,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 28
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 334,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 72
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 335,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 336,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 113
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 337,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 114
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 338,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 115
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 339,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 116
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 340,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 117
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 341,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 118
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 342,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 119
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 343,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 120
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 344,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 121
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 345,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 122
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 346,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 123
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 347,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 28
+            }
+          ]
+        }
+      ],
+      "line": 328
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 351,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 19
+            }
+          ]
+        },
+        {
+          "m_Name": "color",
+          "m_Line": 352,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 29
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 353,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 73
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 354,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 74
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 355,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 29
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 356,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 75
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 357,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 358,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 124
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 359,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 125
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 360,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 126
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 361,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 30
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 362,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 127
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 363,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 128
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 364,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 129
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 365,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 130
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 366,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 131
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 367,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 132
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 368,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 133
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 369,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 30
+            }
+          ]
+        }
+      ],
+      "line": 350
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "color",
+          "m_Line": 373,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 31
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 374,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 76
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 375,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 77
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 376,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 31
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 377,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 78
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 378,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 32
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 379,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 134
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 380,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 135
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 381,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 136
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 382,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 137
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 383,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 138
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 384,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 139
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 385,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 140
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 386,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 141
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 387,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 142
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 388,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 143
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 389,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 144
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 390,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 32
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-left-radius",
+          "m_Line": 391,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 33
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-left-radius",
+          "m_Line": 392,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 34
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-right-radius",
+          "m_Line": 393,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 35
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-right-radius",
+          "m_Line": 394,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 36
+            }
+          ]
+        },
+        {
+          "m_Name": "border-left-width",
+          "m_Line": 395,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 37
+            }
+          ]
+        },
+        {
+          "m_Name": "border-right-width",
+          "m_Line": 396,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 38
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-width",
+          "m_Line": 397,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 39
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-width",
+          "m_Line": 398,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 40
+            }
+          ]
+        },
+        {
+          "m_Name": "border-left-color",
+          "m_Line": 399,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 33
+            }
+          ]
+        },
+        {
+          "m_Name": "border-right-color",
+          "m_Line": 400,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 34
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-color",
+          "m_Line": 401,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 35
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-color",
+          "m_Line": 402,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 36
+            }
+          ]
+        },
+        {
+          "m_Name": "display",
+          "m_Line": 403,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 79
+            }
+          ]
+        },
+        {
+          "m_Name": "visibility",
+          "m_Line": 404,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 80
+            }
+          ]
+        },
+        {
+          "m_Name": "overflow",
+          "m_Line": 405,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 81
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 406,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 41
+            }
+          ]
+        }
+      ],
+      "line": 372
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "color",
+          "m_Line": 410,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 145
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 82
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 411,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 20
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 412,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 83
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 413,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 84
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 414,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 42
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 415,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 85
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 416,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 417,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 146
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 418,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 147
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 419,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 148
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 420,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 149
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 421,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 150
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 422,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 151
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 423,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 152
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 424,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 153
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 425,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 154
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 426,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 155
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 427,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 156
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-generator",
+          "m_Line": 428,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 86
+            }
+          ]
+        }
+      ],
+      "line": 409
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "color",
+          "m_Line": 432,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 157
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 82
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 433,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 21
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-style",
+          "m_Line": 434,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 87
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 435,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 88
+            }
+          ]
+        },
+        {
+          "m_Name": "font-size",
+          "m_Line": 436,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 43
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 437,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 89
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 438,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 439,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 158
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 440,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 44
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 441,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 159
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 442,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 160
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 443,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 161
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-left",
+          "m_Line": 444,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 162
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 445,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 163
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 446,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 164
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 447,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 165
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-outline-width",
+          "m_Line": 448,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 166
+            }
+          ]
+        },
+        {
+          "m_Name": "letter-spacing",
+          "m_Line": 449,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 167
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-generator",
+          "m_Line": 450,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 90
+            }
+          ]
+        }
+      ],
+      "line": 431
+    }
+  ],
+  "m_ComplexSelectors": [
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "financial-history-chart-x-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "financial-history-chart-y-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "financial-history-chart-x-axis-name",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "financial-history-chart-y-axis-name",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "tooltip-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "tooltip-financial-history",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 4
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "financial-pie-chart-data-label",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 5
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "compare-pie-chart-data-label",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 6
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "polar-chart-radius-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 6
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "gauge-chart-data-label",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 7
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "zone-map-data-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 8
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "match-ratings-chart-x-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 9
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "match-ratings-chart-y-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 10
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "match-ratings-chart-x-axis-name",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 11
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "match-ratings-chart-y-axis-name",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 11
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "polar-chart-angle-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 12
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "polar-chart-data-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 13
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "thermal-chart-data-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 14
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "league-history-x-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 15
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "league-history-y-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 16
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "league-history-block-x-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 17
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "league-history-block-y-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 18
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "xg-match-story-x-axis-name",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 19
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "xg-match-story-y-axis-name",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 19
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "xg-match-story-x-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 20
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "xg-match-story-y-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 21
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "data-point-hover",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 22
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "recruitment-budget-charts-x-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 23
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "recruitment-budget-charts-y-axis-labels",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 24
+    }
+  ],
+  "floats": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "dimensions": [
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 3,
+      "value": 0.25
+    },
+    {
+      "unit": 3,
+      "value": 0.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 20.0
+    },
+    {
+      "unit": 1,
+      "value": 36.0
+    },
+    {
+      "unit": 1,
+      "value": 24.0
+    },
+    {
+      "unit": 1,
+      "value": 100.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 14.0
+    },
+    {
+      "unit": 1,
+      "value": 14.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 14.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 1,
+      "value": 7.5
+    },
+    {
+      "unit": 1,
+      "value": 7.5
+    },
+    {
+      "unit": 1,
+      "value": 7.5
+    },
+    {
+      "unit": 1,
+      "value": 7.5
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    }
+  ],
+  "colors": [
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 0.5568627715110779,
+      "g": 0.10588235408067703,
+      "b": 0.10588235408067703,
+      "a": 1.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 0.5568627715110779,
+      "g": 0.10588235408067703,
+      "b": 0.10588235408067703,
+      "a": 1.0
+    },
+    {
+      "r": 0.1568627506494522,
+      "g": 1.0,
+      "b": 0.42352941632270813,
+      "a": 1.0
+    },
+    {
+      "r": 0.5568627715110779,
+      "g": 0.10588235408067703,
+      "b": 0.10588235408067703,
+      "a": 1.0
+    },
+    {
+      "r": 0.8980392217636108,
+      "g": 0.8980392217636108,
+      "b": 0.8980392217636108,
+      "a": 1.0
+    },
+    {
+      "r": 0.8980392217636108,
+      "g": 0.8980392217636108,
+      "b": 0.8980392217636108,
+      "a": 1.0
+    },
+    {
+      "r": 0.9725490212440491,
+      "g": 0.7764706015586853,
+      "b": 0.26274511218070984,
+      "a": 1.0
+    },
+    {
+      "r": 0.0,
+      "g": 0.0,
+      "b": 0.0,
+      "a": 0.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 0.5568627715110779,
+      "g": 0.10588235408067703,
+      "b": 0.10588235408067703,
+      "a": 1.0
+    },
+    {
+      "r": 0.929411768913269,
+      "g": 1.0,
+      "b": 0.9529411792755127,
+      "a": 1.0
+    },
+    {
+      "r": 0.5568627715110779,
+      "g": 0.10588235408067703,
+      "b": 0.10588235408067703,
+      "a": 1.0
+    },
+    {
+      "r": 0.929411768913269,
+      "g": 1.0,
+      "b": 0.9529411792755127,
+      "a": 1.0
+    },
+    {
+      "r": 0.5568627715110779,
+      "g": 0.10588235408067703,
+      "b": 0.10588235408067703,
+      "a": 1.0
+    },
+    {
+      "r": 0.929411768913269,
+      "g": 1.0,
+      "b": 0.9529411792755127,
+      "a": 1.0
+    },
+    {
+      "r": 0.5568627715110779,
+      "g": 0.10588235408067703,
+      "b": 0.10588235408067703,
+      "a": 1.0
+    },
+    {
+      "r": 0.8980392217636108,
+      "g": 0.8980392217636108,
+      "b": 0.8980392217636108,
+      "a": 1.0
+    },
+    {
+      "r": 0.18039216101169586,
+      "g": 0.18039216101169586,
+      "b": 0.18039216101169586,
+      "a": 1.0
+    },
+    {
+      "r": 0.18039216101169586,
+      "g": 0.18039216101169586,
+      "b": 0.18039216101169586,
+      "a": 1.0
+    },
+    {
+      "r": 0.7843137383460999,
+      "g": 0.7843137383460999,
+      "b": 0.7843137383460999,
+      "a": 1.0
+    },
+    {
+      "r": 0.7843137383460999,
+      "g": 0.7843137383460999,
+      "b": 0.7843137383460999,
+      "a": 1.0
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.6509804129600525
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.6509804129600525
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 0.5568627715110779,
+      "g": 0.10588235408067703,
+      "b": 0.10588235408067703,
+      "a": 1.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 0.5568627715110779,
+      "g": 0.10588235408067703,
+      "b": 0.10588235408067703,
+      "a": 1.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 0.5568627715110779,
+      "g": 0.10588235408067703,
+      "b": 0.10588235408067703,
+      "a": 1.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 0.0
+    },
+    {
+      "r": 0.7058823704719543,
+      "g": 0.11764705926179886,
+      "b": 0.6000000238418579,
+      "a": 1.0
+    },
+    {
+      "r": 0.7058823704719543,
+      "g": 0.11764705926179886,
+      "b": 0.6000000238418579,
+      "a": 1.0
+    },
+    {
+      "r": 0.7058823704719543,
+      "g": 0.11764705926179886,
+      "b": 0.6000000238418579,
+      "a": 1.0
+    },
+    {
+      "r": 0.7058823704719543,
+      "g": 0.11764705926179886,
+      "b": 0.6000000238418579,
+      "a": 1.0
+    }
+  ],
+  "strings": [
+    "normal",
+    "middle-center",
+    "nowrap",
+    "normal",
+    "middle-right",
+    "nowrap",
+    "normal",
+    "middle-center",
+    "nowrap",
+    "absolute",
+    "translate",
+    "ease-out-bounce",
+    "absolute",
+    "upper-left",
+    "normal",
+    "middle-center",
+    "normal",
+    "flex-start",
+    "upper-left",
+    "normal",
+    "flex-start",
+    "normal",
+    "middle-left",
+    "nowrap",
+    "normal",
+    "middle-center",
+    "nowrap",
+    "bold",
+    "middle-right",
+    "nowrap",
+    "normal",
+    "middle-center",
+    "nowrap",
+    "middle-center",
+    "normal",
+    "flex-start",
+    "middle-center",
+    "normal",
+    "flex-start",
+    "middle-center",
+    "normal",
+    "flex-start",
+    "center",
+    "nowrap",
+    "visible",
+    "clip",
+    "middle-center",
+    "normal",
+    "flex-start",
+    "center",
+    "nowrap",
+    "visible",
+    "clip",
+    "column",
+    "relative",
+    "middle-right",
+    "normal",
+    "flex-start",
+    "center",
+    "nowrap",
+    "visible",
+    "clip",
+    "relative",
+    "bold",
+    "lower-center",
+    "bold",
+    "middle-right",
+    "normal",
+    "middle-center",
+    "nowrap",
+    "normal",
+    "middle-center",
+    "nowrap",
+    "normal",
+    "middle-right",
+    "nowrap",
+    "normal",
+    "middle-center",
+    "nowrap",
+    "flex",
+    "visible",
+    "visible",
+    "--global-text-secondary",
+    "bold",
+    "middle-center",
+    "nowrap",
+    "Advanced",
+    "bold",
+    "middle-right",
+    "nowrap",
+    "Advanced"
+  ],
+  "assets": [
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    },
+    {
+      "m_FileID": 4,
+      "m_PathID": 5636211117028388537
+    }
+  ],
+  "imports": [],
+  "m_FlattenedImportedStyleSheets": [],
+  "m_ContentHash": -1664095757,
+  "scalableImages": []
+}

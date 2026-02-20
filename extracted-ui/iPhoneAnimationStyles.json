@@ -1,0 +1,755 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 11998
+  },
+  "m_Name": "iPhoneAnimationStyles",
+  "m_ImportedWithErrors": 0,
+  "m_ImportedWithWarnings": 0,
+  "m_Rules": [
+    {
+      "m_Properties": [
+        {
+          "m_Name": "opacity",
+          "m_Line": 5,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 0
+            }
+          ]
+        }
+      ],
+      "line": 3
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "opacity",
+          "m_Line": 10,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 8
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "transition-property",
+          "m_Line": 18,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "transition-duration",
+          "m_Line": 19,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "transition-timing-function",
+          "m_Line": 20,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 21,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 13
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "transition-property",
+          "m_Line": 28,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "transition-duration",
+          "m_Line": 29,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "transition-timing-function",
+          "m_Line": 30,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "opacity",
+          "m_Line": 31,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 3
+            }
+          ]
+        }
+      ],
+      "line": 24
+    }
+  ],
+  "m_ComplexSelectors": [
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "report-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "tool-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "layout-card-default-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "speakto-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--visible",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "report-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--visible",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "tool-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--visible",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "layout-card-default-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--visible",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "speakto-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--open",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "report-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--show",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "report-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--open",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "tool-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--show",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "tool-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--open",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "layout-card-default-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--show",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "layout-card-default-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--open",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "speakto-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--show",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "speakto-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--close",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "report-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--hide",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "report-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--close",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "tool-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--hide",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "tool-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--close",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "layout-card-default-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--hide",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "layout-card-default-default",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--close",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "speakto-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "panel--hide",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "speakto-container",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 3
+    }
+  ],
+  "floats": [
+    0.0,
+    1.0,
+    1.0,
+    0.0
+  ],
+  "dimensions": [
+    {
+      "unit": 3,
+      "value": 0.33000001311302185
+    },
+    {
+      "unit": 3,
+      "value": 0.33000001311302185
+    }
+  ],
+  "colors": [],
+  "strings": [
+    "opacity",
+    "ease-in-out-sine",
+    "opacity",
+    "ease-in-out-sine"
+  ],
+  "assets": [],
+  "imports": [
+    {
+      "styleSheet": {
+        "m_FileID": 3,
+        "m_PathID": -820025129605260392
+      },
+      "mediaQueries": []
+    }
+  ],
+  "m_FlattenedImportedStyleSheets": [
+    {
+      "m_FileID": 3,
+      "m_PathID": -820025129605260392
+    }
+  ],
+  "m_ContentHash": 915702761,
+  "scalableImages": []
+}

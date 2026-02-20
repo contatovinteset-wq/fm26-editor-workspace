@@ -1,0 +1,1965 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 11998
+  },
+  "m_Name": "StreamedObjectListStyles",
+  "m_ImportedWithErrors": 0,
+  "m_ImportedWithWarnings": 0,
+  "m_Rules": [
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--list-item-margin-bottom",
+          "m_Line": 2,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 0
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "--list-item-padding-bottom",
+          "m_Line": 3,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "--list-item-separator-width",
+          "m_Line": 4,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "--list-item-separator-color",
+          "m_Line": 5,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 2
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 1
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--list-item-padding-bottom",
+          "m_Line": 9,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 3
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 8
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--list-item-padding-bottom",
+          "m_Line": 13,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 4
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 3
+            }
+          ]
+        }
+      ],
+      "line": 12
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--list-item-padding-bottom",
+          "m_Line": 17,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 5
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 4
+            }
+          ]
+        }
+      ],
+      "line": 16
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--list-item-padding-bottom",
+          "m_Line": 21,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 5
+            }
+          ]
+        }
+      ],
+      "line": 20
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "border-bottom-color",
+          "m_Line": 25,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 7
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-width",
+          "m_Line": 26,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 8
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 7
+            }
+          ]
+        }
+      ],
+      "line": 24
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "border-bottom-width",
+          "m_Line": 30,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 9
+            }
+          ]
+        }
+      ],
+      "line": 29
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 34,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 10
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 8
+            }
+          ]
+        }
+      ],
+      "line": 33
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 38,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 11
+            }
+          ]
+        }
+      ],
+      "line": 37
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 42,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 12
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 9
+            }
+          ]
+        }
+      ],
+      "line": 41
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 46,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 13
+            }
+          ]
+        }
+      ],
+      "line": 45
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "height",
+          "m_Line": 50,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 51,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "width",
+          "m_Line": 52,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-top",
+          "m_Line": 53,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 54,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 55,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 10
+            }
+          ]
+        },
+        {
+          "m_Name": "flex-direction",
+          "m_Line": 56,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 14
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 11
+            }
+          ]
+        }
+      ],
+      "line": 49
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "height",
+          "m_Line": 60,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 61,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 62,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 12
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 63,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 13
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 64,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 14
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-left-radius",
+          "m_Line": 65,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 6
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-right-radius",
+          "m_Line": 66,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 7
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-right-radius",
+          "m_Line": 67,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 8
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-left-radius",
+          "m_Line": 68,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 9
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 69,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 10
+            }
+          ]
+        }
+      ],
+      "line": 59
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "height",
+          "m_Line": 73,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 11
+            }
+          ]
+        },
+        {
+          "m_Name": "transition",
+          "m_Line": 74,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 15
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 12
+            },
+            {
+              "m_ValueType": 7,
+              "valueIndex": 16
+            }
+          ]
+        },
+        {
+          "m_Name": "transition-timing-function",
+          "m_Line": 75,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 17
+            }
+          ]
+        },
+        {
+          "m_Name": "transition-duration",
+          "m_Line": 76,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 13
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-left-radius",
+          "m_Line": 77,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 14
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-right-radius",
+          "m_Line": 78,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 15
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-right-radius",
+          "m_Line": 79,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 16
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-left-radius",
+          "m_Line": 80,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 17
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 81,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "cursor",
+          "m_Line": 82,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 15
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 18
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 16
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 19
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 17
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 20
+            }
+          ]
+        }
+      ],
+      "line": 72
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 86,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 9
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 87,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 18
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-left-radius",
+          "m_Line": 88,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 19
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-right-radius",
+          "m_Line": 89,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 20
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-right-radius",
+          "m_Line": 90,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 21
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-left-radius",
+          "m_Line": 91,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 22
+            }
+          ]
+        }
+      ],
+      "line": 85
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "height",
+          "m_Line": 95,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 23
+            }
+          ]
+        },
+        {
+          "m_Name": "justify-content",
+          "m_Line": 96,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 21
+            }
+          ]
+        },
+        {
+          "m_Name": "align-self",
+          "m_Line": 97,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 22
+            }
+          ]
+        },
+        {
+          "m_Name": "align-items",
+          "m_Line": 98,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 23
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-left-radius",
+          "m_Line": 99,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 24
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-right-radius",
+          "m_Line": 100,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 25
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-right-radius",
+          "m_Line": 101,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 26
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-left-radius",
+          "m_Line": 102,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 27
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 103,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 28
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 104,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 4
+            }
+          ]
+        }
+      ],
+      "line": 94
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "border-top-left-radius",
+          "m_Line": 108,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 29
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-right-radius",
+          "m_Line": 109,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 30
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-right-radius",
+          "m_Line": 110,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 31
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-left-radius",
+          "m_Line": 111,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 32
+            }
+          ]
+        }
+      ],
+      "line": 107
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "height",
+          "m_Line": 115,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 33
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-left-radius",
+          "m_Line": 116,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 34
+            }
+          ]
+        },
+        {
+          "m_Name": "border-top-right-radius",
+          "m_Line": 117,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 35
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-right-radius",
+          "m_Line": 118,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 36
+            }
+          ]
+        },
+        {
+          "m_Name": "border-bottom-left-radius",
+          "m_Line": 119,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 37
+            }
+          ]
+        },
+        {
+          "m_Name": "background-color",
+          "m_Line": 120,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 5
+            }
+          ]
+        }
+      ],
+      "line": 114
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 124,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 6
+            }
+          ]
+        }
+      ],
+      "line": 123
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 128,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 7
+            }
+          ]
+        }
+      ],
+      "line": 127
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--marker",
+          "m_Line": 132,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 18
+            }
+          ]
+        }
+      ],
+      "line": 131
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "overflow",
+          "m_Line": 136,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 24
+            }
+          ]
+        }
+      ],
+      "line": 135
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--marker",
+          "m_Line": 140,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 19
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 141,
+          "m_Values": [
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 139
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "--marker",
+          "m_Line": 145,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 20
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-right",
+          "m_Line": 146,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 38
+            }
+          ]
+        },
+        {
+          "m_Name": "margin-bottom",
+          "m_Line": 147,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 39
+            }
+          ]
+        }
+      ],
+      "line": 144
+    }
+  ],
+  "m_ComplexSelectors": [
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "root",
+              "m_Type": 4
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "item_padding-bottom-small",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "item_padding-bottom-medium",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "item_padding-bottom-large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 3
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "item_padding-bottom-extra_large",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 4
+    },
+    {
+      "m_Specificity": 132,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "vertical_list_item_separator",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "VirtualisedList",
+              "m_Type": 2
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-scroll-view--vertical",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "View",
+              "m_Type": 6
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list__item",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 5
+    },
+    {
+      "m_Specificity": 132,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "vertical_list_item_separator",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "VirtualisedList",
+              "m_Type": 2
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-scroll-view--vertical",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "View",
+              "m_Type": 6
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list__item--last",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 6
+    },
+    {
+      "m_Specificity": 132,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "vertical_list_item_margin-bottom",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "VirtualisedList",
+              "m_Type": 2
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-scroll-view--vertical",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "View",
+              "m_Type": 6
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list__item",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 7
+    },
+    {
+      "m_Specificity": 132,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "vertical_list_item_margin-bottom",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "VirtualisedList",
+              "m_Type": 2
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-scroll-view--vertical",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "View",
+              "m_Type": 6
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list__item--last",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 8
+    },
+    {
+      "m_Specificity": 132,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "vertical_list_item_padding-bottom",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "VirtualisedList",
+              "m_Type": 2
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-scroll-view--vertical",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "View",
+              "m_Type": 6
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list__item",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 9
+    },
+    {
+      "m_Specificity": 132,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "vertical_list_item_padding-bottom",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "VirtualisedList",
+              "m_Type": 2
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-scroll-view--vertical",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "View",
+              "m_Type": 6
+            }
+          ],
+          "m_PreviousRelationship": 1
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list__item--last",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 1
+        }
+      ],
+      "ruleIndex": 10
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicarousel-progresscontainer",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 11
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicarousel-progressbar",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 12
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicarousel-progressbar",
+              "m_Type": 3
+            },
+            {
+              "m_Value": "hover",
+              "m_Type": 4
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 13
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicarousel-progressbar-slider",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 14
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicarousel-progressbar-active",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 15
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicarousel-progressbar-active",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicarousel-progressbar-slider",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 16
+    },
+    {
+      "m_Specificity": 31,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicarousel-progressbar",
+              "m_Type": 3
+            },
+            {
+              "m_Value": "hover",
+              "m_Type": 4
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sicarousel-progressbar-slider",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 17
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "item-remove-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list__item",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 18
+    },
+    {
+      "m_Specificity": 31,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "item-remove-background",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "virtualised-list__item",
+              "m_Type": 3
+            },
+            {
+              "m_Value": "hover",
+              "m_Type": 4
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 19
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "list-show-viewport-overflow",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 20
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "list-show-viewport-overflow",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "unity-scroll-view__content-viewport",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 21
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "wrapped_list",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        },
+        {
+          "m_Parts": [
+            {
+              "m_Value": "streamed-list-view-item",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 2
+        }
+      ],
+      "ruleIndex": 22
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "streamed-list-view-item-padding-right-bottom-16",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 23
+    }
+  ],
+  "floats": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "dimensions": [
+    {
+      "unit": 1,
+      "value": 1.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 10.0
+    },
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 3,
+      "value": 0.25
+    },
+    {
+      "unit": 3,
+      "value": 0.30000001192092896
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 2,
+      "value": 100.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 6.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    },
+    {
+      "unit": 1,
+      "value": 16.0
+    }
+  ],
+  "colors": [
+    {
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0,
+      "a": 0.0
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.16078431904315948
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.3529411852359772
+    },
+    {
+      "r": 0.686274528503418,
+      "g": 0.47058823704719543,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 0.9019607901573181,
+      "g": 0.9019607901573181,
+      "b": 0.9803921580314636,
+      "a": 0.3529411852359772
+    },
+    {
+      "r": 0.686274528503418,
+      "g": 0.47058823704719543,
+      "b": 1.0,
+      "a": 1.0
+    },
+    {
+      "r": 0.0,
+      "g": 0.0,
+      "b": 0.0,
+      "a": 0.0
+    },
+    {
+      "r": 0.0,
+      "g": 0.0,
+      "b": 0.0,
+      "a": 0.0
+    },
+    {
+      "r": 0.7803921699523926,
+      "g": 0.7098039388656616,
+      "b": 0.23137255012989044,
+      "a": 1.0
+    },
+    {
+      "r": 0.7803921699523926,
+      "g": 0.7098039388656616,
+      "b": 0.23137255012989044,
+      "a": 1.0
+    }
+  ],
+  "strings": [
+    "--numbers-border-radius-medium",
+    "--colours-alpha-light-alpha-8",
+    "--spacing-padding-new-ex",
+    "--spacing-padding-medium---16",
+    "--spacing-padding-large---32",
+    "--spacing-padding-extra-large---64",
+    "--list-item-separator-color",
+    "--list-item-separator-width",
+    "--list-item-margin-bottom",
+    "--list-item-padding-bottom",
+    "flex-start",
+    "--row-direction-normal",
+    "center",
+    "center",
+    "flex-start",
+    "all",
+    "ease-in-out",
+    "ease-out",
+    "--cursor-clickable-1x-url",
+    "--cursor-clickable-1x-hotspot-x",
+    "--cursor-clickable-1x-hotspot-y",
+    "center",
+    "center",
+    "flex-start",
+    "visible"
+  ],
+  "assets": [],
+  "imports": [],
+  "m_FlattenedImportedStyleSheets": [],
+  "m_ContentHash": 705910564,
+  "scalableImages": []
+}

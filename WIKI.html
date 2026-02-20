@@ -170,6 +170,7 @@
             <div class="nav-tab" onclick="showSection('dlls')">⚙️ DLLs/IL2CPP</div>
             <div class="nav-tab" onclick="showSection('tools')">🛠️ Ferramentas</div>
             <div class="nav-tab" onclick="showSection('mods')">🧩 Mods</div>
+            <div class="nav-tab" onclick="showSection('research')">🔬 Pesquisa</div>
         </div>
 
         <!-- OVERVIEW SECTION -->
@@ -185,6 +186,27 @@
                     <tr><td>DLLs (IL2CPP)</td><td><span class="tag tag-red">❌ Complexo</span></td><td class="difficulty-3">Difícil</td></tr>
                     <tr><td>Match Engine</td><td><span class="tag tag-red">❌ Compilado</span></td><td class="difficulty-3">Muito Difícil</td></tr>
                 </table>
+            </div>
+
+            <div class="card">
+                <h2>🇧🇷 Database Brasileira</h2>
+                
+                <div class="info-box">
+                    <strong>Contexto:</strong> O FM26 não possui as competições e clubes brasileiros licenciados nativamente.
+                </div>
+
+                <h3>Solução de Modding</h3>
+                <ul>
+                    <li>Utilizar o <strong>Pre-Game Editor</strong> para criar clubes, jogadores e competições reais.</li>
+                    <li>IDs de clubes e jogadores podem ser fixados manualmente para garantir compatibilidade com ferramentas externas de gráficos (faces/logos) e editores em tempo real.</li>
+                </ul>
+
+                <h3>Estrutura Sugerida</h3>
+                <ol>
+                    <li><strong>Ligas:</strong> Série A, Série B, Série C e Série D.</li>
+                    <li><strong>Copas:</strong> Copa do Brasil e Estaduais.</li>
+                    <li><strong>IDs:</strong> Manter IDs clássicos para facepacks de versões anteriores.</li>
+                </ol>
             </div>
 
             <div class="card">
@@ -463,7 +485,8 @@ skin_name/
                 <div class="tool-card">
                     <h4>FM Live Editor 26 (FMScout)</h4>
                     <p>Editor em tempo real. Edita jogadores, clubes, contratos durante o jogo.</p>
-                    <p><strong>Preço:</strong> Grátis para scouting, £5.49 para edição</p>
+                    <p><strong>Status:</strong> Não oficial. Edição completa requer pagamento.</p>
+                    <p><strong>Preço:</strong> Grátis para scouting, £5.49 para edição completa</p>
                     <a href="https://www.fmscout.com/a-fm-live-editor-26.html" target="_blank">Download no FMScout</a>
                 </div>
 
@@ -475,7 +498,8 @@ skin_name/
 
                 <div class="tool-card">
                     <h4>Pre-Game Editor (Oficial)</h4>
-                    <p>Editor de database oficial. Vem instalado com o jogo via Steam.</p>
+                    <p>Editor de database oficial. Gratuito e instalado via Steam.</p>
+                    <p><strong>Uso Ideal:</strong> Criar/editar databases antes de iniciar um save (ex: database brasileira completa).</p>
                     <p><strong>Local:</strong> Steam Library → Football Manager 2026 → tools</p>
                 </div>
 
@@ -576,9 +600,42 @@ skin_name/
             </div>
         </div>
 
+        <div id="research" class="section">
+            <div class="card">
+                <h2>🔍 Ctrl+P Investigation</h2>
+                <div class="warning-box">
+                    <strong>Status:</strong> Funcionalidade presente no código mas desconectada da UI.
+                </div>
+                <ul>
+                    <li>A função <code>ExportCurrentItemToBinding</code> foi localizada no código, mas não possui gatilhos ativos.</li>
+                    <li><strong>Keybindings:</strong> Ctrl+P não consta na lista de atalhos oficiais do jogo (confirmado via configurações de teclado).</li>
+                    <li><strong>Context Menu:</strong> O menu de contexto das tabelas de jogadores não possui ação de exportação; serve apenas para gerenciar colunas.</li>
+                    <li><strong>Arquivos Analisados:</strong> <code>PlayerSearchResultsViewCollection.json</code>, <code>FirstTeamSquadAndYouthTeamSquadCollection.json</code>.</li>
+                    <li><strong>Hipótese:</strong> Adicionar uma entrada ao <code>contextMenu</code> injetando a chamada da função de exportação. O desafio atual é descobrir como invocar callbacks específicos através de <code>PropertyValue</code>.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>🛠️ Context Menu Structure (Documentação Técnica)</h2>
+                <p>A estrutura básica dos menus de contexto nas coleções de tabelas segue o padrão:</p>
+                <pre>
+{
+  "name": "nome_do_item",
+  "PropertyValue": "valor_de_propriedade",
+  "ChildList": [...],
+  "DisplayValue": { "GameID": "id_tradução" }
+}
+                </pre>
+                <ul>
+                    <li><code>PropertyValue</code>: Atualmente mapeia apenas para colunas de dados (ex: <code>attribute-pace</code>, <code>based</code>, <code>club</code>).</li>
+                    <li>Não foram encontrados exemplos de <code>PropertyValue</code> que executem ações especiais ou callbacks de sistema.</li>
+                </ul>
+            </div>
+        </div>
+
         <footer style="text-align: center; padding: 20px; color: var(--text-muted); margin-top: 30px;">
             <p>FM26 Wiki v1.0 - Gerado por Koda (OpenClaw)</p>
-            <p>Última atualização: 2026-02-19</p>
+            <p>Última atualização: 2026-02-20</p>
         </footer>
     </div>
 
