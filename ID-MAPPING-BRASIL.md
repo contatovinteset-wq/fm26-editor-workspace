@@ -89,6 +89,64 @@ Competition: 102423 (Série A)
 
 ---
 
+## 🏃 Jogadores Brasileiros
+
+### Estrelas Atuais
+| ID | Nome | Clube | Posição | Valor |
+|----|------|-------|---------|-------|
+| - | *Coletar via FM Live Editor* | - | - | - |
+
+### Prospects/Newgens
+| ID | Nome | Clube | Posição | Potencial |
+|----|------|-------|---------|-----------|
+| - | *Coletar jogadores gerados* | - | - | - |
+
+### Ídolos Históricos (se no jogo)
+| ID | Nome | Clube Base | Posição |
+|----|------|------------|---------|
+| - | *Coletar lendas* | - | - |
+
+---
+
+## 📊 Estrutura de Dados por Jogador
+
+```
+PlayerID: {
+  name: "Nome Completo",
+  short_name: "Apelido",
+  club_id: 319,
+  position: "ST",
+  nationality: "Brasil",
+  age: 25,
+  value: 50000000,
+  wage: 150000,
+  ca: 150,  // Current Ability
+  pa: 170   // Potential Ability
+}
+```
+
+---
+
+## 🎯 Prioridades de Coleta
+
+### Top 50 Brasileiros Ativos
+1. **Atacantes**: Endrick, Vini Jr, Raphinha, Rodrygo, Gabriel Barbosa
+2. **Meias**: Bruno Guimarães, Lucas Paquetá, Raphinha
+3. **Zagueiros**: Marquinhos, Militão, Gabriel Magalhães
+4. **Laterais**: Danilo, Alex Sandro, Renan Lodi
+5. **Goleiros**: Alisson, Ederson
+
+### Prospects (Newgens)
+- Buscar jogadores com PA alto em clubes brasileiros
+- Registrar para acompanhar desenvolvimento
+
+### IDs Especiais
+- Newgens gerados pelo jogo (FA automatizar)
+- Jogadores sem clube
+- Base de jovens
+
+---
+
 ## 💡 Dica: Padrão de Nomes
 
 Clubes sem licença usam siglas de 3 letras:
@@ -99,3 +157,43 @@ Clubes sem licença usam siglas de 3 letras:
 - INT = Internacional
 
 Essas siglas podem ajudar a identificar clubes ao buscar no FM Live Editor.
+
+---
+
+## 🔧 Como Coletar IDs de Jogadores
+
+### Método 1: FM Live Editor 26
+1. Abrir painel do editor (tecla configurada)
+2. Buscar jogador pelo nome
+3. Anotar: `ID | Nome | Clube | Posição`
+
+### Método 2: Tela do Jogador
+1. Entrar na página do jogador
+2. FM Live Editor mostra o ID no topo
+3. Screenshot para processar depois
+
+### Método 3: Exportar Lista
+1. Criar shortlist no jogo
+2. FM Live Editor pode exportar para CSV
+3. Processar CSV para extrair IDs
+
+---
+
+## 📝 Template para Enviar IDs
+
+```
+JOGADORES:
+ID | Nome | Clube | Posição
+123456 | Vini Jr | RMA | LW
+789012 | Endrick | PAL | ST
+...
+
+CLUBES:
+ID | Sigla | Nome Real
+319 | COR | Corinthians
+...
+
+COMPETIÇÕES:
+ID | Nome Jogo | Nome Real
+102423 | Série A | Brasileirão
+```
