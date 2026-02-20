@@ -1,0 +1,434 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 6927148995291191234
+  },
+  "m_Name": "NationalPoolPlayerSearchShortlistPhoneViewCollection",
+  "m_customViewDisplayName": {
+    "GameID": 0
+  },
+  "m_customViewNamePrefix": {
+    "GameID": 0
+  },
+  "m_tableViewSettings": [
+    {
+      "name": "",
+      "ChildList": [
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 30426
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 3291838694261815108
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24672
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 6756590113794275976
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 30427
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 8654653213848186377
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 8543650398790752661
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 5596458224493026731
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 30417
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 6031621818377634407
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 0
+              },
+              "PropertyValue": {
+                "m_FileID": 0,
+                "m_PathID": -502655548551340550
+              },
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 0
+              },
+              "PropertyValue": {
+                "m_FileID": 0,
+                "m_PathID": 5451609021616730285
+              },
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 0
+              },
+              "PropertyValue": {
+                "m_FileID": 0,
+                "m_PathID": -770467362078038259
+              },
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 30405
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 59479047542182186
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 2941613130252868154
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -3660188888557755457
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 8299639036840362923
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 18008
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 5803099178821187588
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 4007018599128087531
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -1914370477684910479
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 30432
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -4078197612264470451
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 7722419926509852812
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 30436
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -2646097593420796607
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    }
+  ],
+  "m_contextMenuData": []
+}

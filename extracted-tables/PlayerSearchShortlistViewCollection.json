@@ -1,0 +1,5627 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 6927148995291191234
+  },
+  "m_Name": "PlayerSearchShortlistViewCollection",
+  "m_customViewDisplayName": {
+    "GameID": 24666
+  },
+  "m_customViewNamePrefix": {
+    "GameID": 24667
+  },
+  "m_tableViewSettings": [
+    {
+      "name": "Overview",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 15278
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -8230882390133235121
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "General Info",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24672
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -1737474657290849802
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Contract",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24671
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -9014032015627008044
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 5036362563731257751
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -7188619722192362418
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -2517369149631184186
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 8928520449517060817
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -1217912031637719302
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 8566522439136360131
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 18003
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 2832689008343546402
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 689803297709994090
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -995690040700818790
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 7448311891311932899
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -1068929434213330426
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -416488253031839881
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -5931073379382216475
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 18008
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 15275
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -164148411968361219
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    }
+  ],
+  "m_contextMenuData": [
+    {
+      "name": "Ability and Roles",
+      "ChildList": [
+        {
+          "name": "Assistant manager's opinion of this player's current ability",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35063
+          },
+          "PropertyValue": "assistant-opinion-current-ability",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Assistant manager's opinion of this player's current ability in the selected role - IP",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35062
+          },
+          "PropertyValue": "assistant-opinion-current-ability-in-selected-ip-role",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Assistant manager's opinion of this player's current ability in the selected role - OOP",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35061
+          },
+          "PropertyValue": "assistant-opinion-current-ability-in-selected-oop-role",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Assistant manager's opinion of this player's potential ability",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35060
+          },
+          "PropertyValue": "assistant-opinion-potential-ability",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Assistant manager's opinion of this player's best position",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35059
+          },
+          "PropertyValue": "assistant-opinion-best-position",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Assistant manager's opinion of this player's best tactical role",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35058
+          },
+          "PropertyValue": "assistant-opinion-best-role",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Player Style",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35066
+          },
+          "PropertyValue": "assistant-opinion-player-style",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Strongest Area of Game",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35065
+          },
+          "PropertyValue": "scouted-strongest-area-of-game",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Weakest Area of Game",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35064
+          },
+          "PropertyValue": "scouted-weakest-area-of-game",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 35057
+      },
+      "PropertyValue": "abilityandroles",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Attributes",
+      "ChildList": [
+        {
+          "name": "Goalkeeping",
+          "ChildList": [
+            {
+              "name": "Aeriel Reach",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24867
+              },
+              "PropertyValue": "attribute-aerial-reach",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Command Of Area",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24868
+              },
+              "PropertyValue": "attribute-command-of-area",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Communication",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24869
+              },
+              "PropertyValue": "attribute-communication",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Eccentricity",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24870
+              },
+              "PropertyValue": "attribute-eccentricity",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Handling",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24871
+              },
+              "PropertyValue": "attribute-handling",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Kicking",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24872
+              },
+              "PropertyValue": "attribute-kicking",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "One on Ones",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24873
+              },
+              "PropertyValue": "attribute-one-on-ones",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Punching (Tendency)",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35055
+              },
+              "PropertyValue": "attribute-punching",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Reflexes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24874
+              },
+              "PropertyValue": "attribute-reflexes",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Rushing out (Tendency)",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24875
+              },
+              "PropertyValue": "attribute-rushing-out",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Throwing",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24877
+              },
+              "PropertyValue": "attribute-throwing",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24866
+          },
+          "PropertyValue": "goalkeeping",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Mental",
+          "ChildList": [
+            {
+              "name": "Aggression",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24839
+              },
+              "PropertyValue": "attribute-aggression",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Anticipation",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24840
+              },
+              "PropertyValue": "attribute-anticipation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Bravery",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24841
+              },
+              "PropertyValue": "attribute-bravery",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Composure",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24842
+              },
+              "PropertyValue": "attribute-composure",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Concentration",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24843
+              },
+              "PropertyValue": "attribute-concentration",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Decisions",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24844
+              },
+              "PropertyValue": "attribute-decisions",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Determination",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24845
+              },
+              "PropertyValue": "attribute-determination",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Flair",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24846
+              },
+              "PropertyValue": "attribute-flair",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Leadership",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24847
+              },
+              "PropertyValue": "attribute-leadership",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Off The Ball",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24848
+              },
+              "PropertyValue": "attribute-movement",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Positioning",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24849
+              },
+              "PropertyValue": "attribute-positioning",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Teamwork",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24850
+              },
+              "PropertyValue": "attribute-teamwork",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Vision",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24851
+              },
+              "PropertyValue": "attribute-vision",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Work Rate",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24852
+              },
+              "PropertyValue": "attribute-work-rate",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24838
+          },
+          "PropertyValue": "mental",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Physical",
+          "ChildList": [
+            {
+              "name": "Acceleration",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24830
+              },
+              "PropertyValue": "attribute-acceleration",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Agility",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24831
+              },
+              "PropertyValue": "attribute-agility",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Balance",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24832
+              },
+              "PropertyValue": "attribute-balance",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Jumping Reach",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24833
+              },
+              "PropertyValue": "attribute-jumping-reach",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Natural Fitness",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24834
+              },
+              "PropertyValue": "attribute-natural-fitness",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Pace",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24835
+              },
+              "PropertyValue": "attribute-pace",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Stamina",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24836
+              },
+              "PropertyValue": "attribute-stamina",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Strength",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24837
+              },
+              "PropertyValue": "attribute-strength",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24826
+          },
+          "PropertyValue": "physical",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Technical",
+          "ChildList": [
+            {
+              "name": "Corners",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24854
+              },
+              "PropertyValue": "attribute-corners",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Crossing",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24855
+              },
+              "PropertyValue": "attribute-crossing",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Dribbling",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24891
+              },
+              "PropertyValue": "attribute-dribbling",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Finishing",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24856
+              },
+              "PropertyValue": "attribute-finishing",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "First Touch",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24857
+              },
+              "PropertyValue": "attribute-first-touch",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Free Kicks",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35056
+              },
+              "PropertyValue": "attribute-free-kicks",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Heading",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24859
+              },
+              "PropertyValue": "attribute-heading",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Long Shots",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24860
+              },
+              "PropertyValue": "attribute-long-shots",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Long Throws",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24861
+              },
+              "PropertyValue": "attribute-long-throws",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Marking",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24883
+              },
+              "PropertyValue": "attribute-marking",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Passing",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24862
+              },
+              "PropertyValue": "attribute-passing",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Penalty Taking",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24863
+              },
+              "PropertyValue": "attribute-penalty-taking",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Tackling",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24864
+              },
+              "PropertyValue": "attribute-tackling",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Technique",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24865
+              },
+              "PropertyValue": "attribute-technique",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24853
+          },
+          "PropertyValue": "technical",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24825
+      },
+      "PropertyValue": "attributes",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Club",
+      "ChildList": [
+        {
+          "name": "Based",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12748
+          },
+          "PropertyValue": "based",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Club",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24810
+          },
+          "PropertyValue": "club",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Division",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 3208
+          },
+          "PropertyValue": "club-division",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24810
+      },
+      "PropertyValue": "club",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Contract",
+      "ChildList": [
+        {
+          "name": "Bonuses",
+          "ChildList": [
+            {
+              "name": "Appearance Fee",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 5341
+              },
+              "PropertyValue": "appearance-bonus",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Assist Bonus",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12749
+              },
+              "PropertyValue": "assist-bonus",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Clean Sheet Bonus",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12750
+              },
+              "PropertyValue": "clean-sheet-bonus",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Goal Bonus",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12751
+              },
+              "PropertyValue": "goal-bonus",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "International Cap Bonus",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12752
+              },
+              "PropertyValue": "international-cap-bonus",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Seasonal Landmark Assist Bonus",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12753
+              },
+              "PropertyValue": "seasonal-landmark-assist-bonus",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Season Landmark Assist Bonus - Number Of Assists",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12754
+              },
+              "PropertyValue": "seasonal-landmark-assist-bonus-number-of-assists",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Seasonal Landmark Combined Goal and Assist Bonus",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12757
+              },
+              "PropertyValue": "seasonal-landmark-combined-goal-assist-bonus",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Seasonal Landmark Combined Goal and Assist Bonus - Number of combined Goals and Assists",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12758
+              },
+              "PropertyValue": "seasonal-landmark-combined-goal-assist-bonus-number",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Seasonal Landmark Goal Bonus",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12755
+              },
+              "PropertyValue": "seasonal-landmark-goal-bonus",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Seasonal Landmark Goal Bonus - Number of Goals",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12756
+              },
+              "PropertyValue": "seasonal-landmark-goal-bonus-number-of-goals",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Unused Substitute Fee",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 15397
+              },
+              "PropertyValue": "unused-sub-bonus",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35045
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Clauses",
+          "ChildList": [
+            {
+              "name": "Contract Extension After Promotion",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12761
+              },
+              "PropertyValue": "contract-extension-after-promotion-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Match Highest Earner Clause",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12762
+              },
+              "PropertyValue": "match-highest-earner-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "1-Year Extension After League Games (Avoid Relegation Final Season)",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12763
+              },
+              "PropertyValue": "one-year-extension-after-leagues-games-avoid-relegation-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "1-Year Extension After League Games (Final Season)",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12765
+              },
+              "PropertyValue": "one-year-extension-after-leagues-games-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "1-Year Extension After League Games (Promoted Final Season)",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12764
+              },
+              "PropertyValue": "one-year-extension-after-leagues-games-promotion-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Optional Contract Extension By Club",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12766
+              },
+              "PropertyValue": "optional-extension-by-club-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Percentage of Wages paid by Sponsor",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12767
+              },
+              "PropertyValue": "percentage-wages-paid-by-sponsor-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Promotion Wage Rise",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12768
+              },
+              "PropertyValue": "promotion-wage-rise-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Promotion Wage Drop",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12769
+              },
+              "PropertyValue": "relegation-wage-drop-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Sell On Fee Percentage",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12770
+              },
+              "PropertyValue": "sell-on-fee-percentage-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Top Division Promotion Wage Rise",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12771
+              },
+              "PropertyValue": "top-division-promotion-wage-rise-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Top Division Relegation Wage Drop",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12772
+              },
+              "PropertyValue": "top-division-relegation-wage-drop-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Wage After Reaching Club League Games",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12773
+              },
+              "PropertyValue": "wage-after-reaching-club-league-games-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Waive Club Compensation For Managerial Role",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12774
+              },
+              "PropertyValue": "waive-club-compensation-for-managerial-role-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Yearly Wage Rise",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12775
+              },
+              "PropertyValue": "yearly-wage-rise-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35047
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Clauses (Release)",
+          "ChildList": [
+            {
+              "name": "Active Non Promotion Release Clause",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12776
+              },
+              "PropertyValue": "active-non-promotion-release-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Active Relegation Release Clause",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12777
+              },
+              "PropertyValue": "active-relegation-release-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Injury Release Clause",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12779
+              },
+              "PropertyValue": "injury-release-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12780
+              },
+              "PropertyValue": "min-fee-release-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause (Clubs in a Continental Competition)",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12781
+              },
+              "PropertyValue": "min-fee-release-clause-clubs-in-continental-comp",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause (Clubs in a Continental Competition) - Expiry Date",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12782
+              },
+              "PropertyValue": "min-fee-release-clause-clubs-in-continental-comp-expiry-date",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause (Clubs in a Major Continental Competition)",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12783
+              },
+              "PropertyValue": "min-fee-release-clause-clubs-in-major-continental-comp",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause (Clubs in a Major Continental Competition) - Expiry Date",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12784
+              },
+              "PropertyValue": "min-fee-release-clause-clubs-in-major-continental-comp-expiry-date",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause (Domestic Clubs in Higher Division)",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12785
+              },
+              "PropertyValue": "min-fee-release-clause-domestic-clubs-higher-division",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause (Domestic Clubs in Higher Division) - Expiry Date",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12786
+              },
+              "PropertyValue": "min-fee-release-clause-domestic-clubs-higher-division-expiry-date",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause (Domestic Clubs)",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12787
+              },
+              "PropertyValue": "min-fee-release-clause-domestic-clubs",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause (Domestic Clubs) - Expiry Date",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12788
+              },
+              "PropertyValue": "min-fee-release-clause-domestic-clubs-expiry-date",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause - Expiry Date",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12780
+              },
+              "PropertyValue": "min-fee-release-clause-expiry-date",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause (Foreign Clubs)",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12789
+              },
+              "PropertyValue": "min-fee-release-clause-foreign-clubs",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minimum Fee Release Clause (Foreign Clubs) - Expiry Date",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12790
+              },
+              "PropertyValue": "min-fee-release-clause-foreign-clubs-expiry-date",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Non Promotion Release Clause",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12791
+              },
+              "PropertyValue": "non-promotion-release-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Non-Playing Job Offer Release Clause",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12793
+              },
+              "PropertyValue": "non-playing-job-offer-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Relegation Release Clause",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12792
+              },
+              "PropertyValue": "relegation-release-clause",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35048
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "General",
+          "ChildList": [
+            {
+              "name": "Contract Expiry Date",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35050
+              },
+              "PropertyValue": "contract-expiry-date",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Contract Start Date",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12794
+              },
+              "PropertyValue": "contract-start-date",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Contract Type",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12795
+              },
+              "PropertyValue": "contract-type",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Full/Part Time",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12796
+              },
+              "PropertyValue": "contract-status",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Loan Contract Expiry Date",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35051
+              },
+              "PropertyValue": "loan-contract-expirydate",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Set For Release",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12797
+              },
+              "PropertyValue": "contract-set-for-release",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Wage",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 5340
+              },
+              "PropertyValue": "wage",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Wage After Tax",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12798
+              },
+              "PropertyValue": "wage-after-tax",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Wage Contribution",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 12799
+              },
+              "PropertyValue": "loan-wage-contribution",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35049
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 35046
+      },
+      "PropertyValue": "contract",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Dynamics and Happiness",
+      "ChildList": [
+        {
+          "name": "General Happiness",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 3245
+          },
+          "PropertyValue": "happiness",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "International Happiness",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13693
+          },
+          "PropertyValue": "international-happiness",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Long-Term Plans",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13694
+          },
+          "PropertyValue": "long-term-plans",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Morale",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13695
+          },
+          "PropertyValue": "morale",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Short-term Plans",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13699
+          },
+          "PropertyValue": "short-term-plans",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 35067
+      },
+      "PropertyValue": "dynamicsandhappiness",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Fitness and Injuries",
+      "ChildList": [
+        {
+          "name": "Fatigue",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 3251
+          },
+          "PropertyValue": "fatigue-icon",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Injured On",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12803
+          },
+          "PropertyValue": "injury-date",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Injury",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 3220
+          },
+          "PropertyValue": "injury",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Injury preventing training",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12804
+          },
+          "PropertyValue": "injury-preventing-training",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Injury Risk",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 3221
+          },
+          "PropertyValue": "injury-risklevel",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Injury Susceptibility",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 3198
+          },
+          "PropertyValue": "injury-susceptibility-large",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Match Load",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 3196
+          },
+          "PropertyValue": "match-load-large",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Match Sharpness",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35157
+          },
+          "PropertyValue": "match-sharpness",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Overall Physical Condition",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35158
+          },
+          "PropertyValue": "condition-icon",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Overall Risk",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12805
+          },
+          "PropertyValue": "overall-injury-risk",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Recurring Injury",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12806
+          },
+          "PropertyValue": "recurring-injury",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Time Out",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 3238
+          },
+          "PropertyValue": "injury-time-missed",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Training Load",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 3197
+          },
+          "PropertyValue": "training-load-large",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 35156
+      },
+      "PropertyValue": "",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "General",
+      "ChildList": [
+        {
+          "name": "Age",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24814
+          },
+          "PropertyValue": "age",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Best Postition",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35042
+          },
+          "PropertyValue": "scouted-best-position",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Birth Region",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12936
+          },
+          "PropertyValue": "region-of-birth",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Date Of Birth",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35044
+          },
+          "PropertyValue": "date-of-birth",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Due Date",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12917
+          },
+          "PropertyValue": "home-grown-due-date",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Eligible to Sign for Club",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12919
+          },
+          "PropertyValue": "eligible-to-sign-for-club",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "EU National",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12920
+          },
+          "PropertyValue": "is-eu-national",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Favoured Clubs",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12921
+          },
+          "PropertyValue": "favoured-clubs",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Favoured Personnel",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12922
+          },
+          "PropertyValue": "favoured-people",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Height",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24812
+          },
+          "PropertyValue": "height",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Home-Grown Status",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12923
+          },
+          "PropertyValue": "home-grown-status",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Left Foot",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12925
+          },
+          "PropertyValue": "left-foot",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Media Description",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12927
+          },
+          "PropertyValue": "media-description",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Media Handling Style",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12928
+          },
+          "PropertyValue": "media-handling",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Nation Of Birth",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12930
+          },
+          "PropertyValue": "nation-of-birth",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "National Team",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24811
+          },
+          "PropertyValue": "national-team",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Player",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24808
+          },
+          "PropertyValue": "portrait-name",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Player Status",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 3214
+          },
+          "PropertyValue": "inf",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Position",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 3202
+          },
+          "PropertyValue": "position",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Preferred Foot",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12931
+          },
+          "PropertyValue": "preferred-foot",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Preferred Squad Number",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35037
+          },
+          "PropertyValue": "preferred-shirt-number",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Promised Squad Number",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35038
+          },
+          "PropertyValue": "promised-squad-number",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Recent Changes (Last 2 Weeks)",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12935
+          },
+          "PropertyValue": "recent-training-changes",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Right Foot",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12926
+          },
+          "PropertyValue": "right-foot",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Second Nationality",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35043
+          },
+          "PropertyValue": "second-nationality",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Secondary Position",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 12938
+          },
+          "PropertyValue": "secondary-position",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Squad Number",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35039
+          },
+          "PropertyValue": "shirtnumber",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Transfer Value",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24815
+          },
+          "PropertyValue": "transfer-value",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Unique ID",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 15399
+          },
+          "PropertyValue": "unique-id",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "World Reputation",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24813
+          },
+          "PropertyValue": "world-reputation",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24673
+      },
+      "PropertyValue": "general",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Hidden",
+      "ChildList": [
+        {
+          "name": "Adaptability",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32426
+          },
+          "PropertyValue": "hidden-adaptability",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Ambition",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32427
+          },
+          "PropertyValue": "hidden-ambition",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Asking Price",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32431
+          },
+          "PropertyValue": "hidden-asking-price",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Consistency",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32429
+          },
+          "PropertyValue": "hidden-consistency",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Controversy",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32430
+          },
+          "PropertyValue": "hidden-controversy",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Current Ability",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35068
+          },
+          "PropertyValue": "hidden-current-ability",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Current Reputation",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35069
+          },
+          "PropertyValue": "hidden-current-reputation",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Dirtiness",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32434
+          },
+          "PropertyValue": "hidden-dirtiness",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Home Reputation",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32435
+          },
+          "PropertyValue": "hidden-home-reputation",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Important Matches",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32436
+          },
+          "PropertyValue": "hidden-important-matches",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Injury Proneness",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32437
+          },
+          "PropertyValue": "hidden-injury-proneness",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Is Newgen",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32438
+          },
+          "PropertyValue": "hidden-is-newgen",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Loyalty",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32439
+          },
+          "PropertyValue": "hidden-loyalty",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Potential Ability",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35070
+          },
+          "PropertyValue": "hidden-potential-ability",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Pressure",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32442
+          },
+          "PropertyValue": "hidden-pressure",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Professionalism",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32443
+          },
+          "PropertyValue": "hidden-professionalism",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Sportsmanship",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32444
+          },
+          "PropertyValue": "hidden-sportsmanship",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Temperament",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32445
+          },
+          "PropertyValue": "hidden-temperament",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Versatility",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32446
+          },
+          "PropertyValue": "hidden-versatility",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "World Reputation",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35071
+          },
+          "PropertyValue": "hidden-world-reputation",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "WP Pts",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 32448
+          },
+          "PropertyValue": "hidden-wp-points",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 1,
+      "DisplayValue": {
+        "GameID": 32477
+      },
+      "PropertyValue": "hidden",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": -4410761806398367430
+      }
+    },
+    {
+      "name": "International",
+      "ChildList": [
+        {
+          "name": "International Appearances (Season)",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13780
+          },
+          "PropertyValue": "international-caps-season",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "International Assists",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13782
+          },
+          "PropertyValue": "international-assists",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "International Average Rating",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13783
+          },
+          "PropertyValue": "international-average-rating",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "International Caps",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35072
+          },
+          "PropertyValue": "international-caps",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "International Goals",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35073
+          },
+          "PropertyValue": "international-goals",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "International Goals Conceded",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13784
+          },
+          "PropertyValue": "international-goals-conceded",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "National Team",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24819
+          },
+          "PropertyValue": "national-team",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Youth Apps",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35075
+          },
+          "PropertyValue": "international-youth-caps",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Youth Goals",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35074
+          },
+          "PropertyValue": "international-youth-goals",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24816
+      },
+      "PropertyValue": "international",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Scouting",
+      "ChildList": [
+        {
+          "name": "Days since scout reports created",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35160
+          },
+          "PropertyValue": "days-since-last-scouted",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Knowledge",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 20157
+          },
+          "PropertyValue": "knowledge",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Number of days left on this shortlist",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35161
+          },
+          "PropertyValue": "days-left-on-shortlist",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Recommendation",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24787
+          },
+          "PropertyValue": "recommendation",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Scout's opinion of this player's best position",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35169
+          },
+          "PropertyValue": "scouted-best-position",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Scout's opinion of this player's best tactical role",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35162
+          },
+          "PropertyValue": "scouted-best-role",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Scout's opinion of this player's maximum asking price",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35165
+          },
+          "PropertyValue": "scouted-max-value",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Scout's opinion of this player's maximum wage demands",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35163
+          },
+          "PropertyValue": "scouted-max-wage",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Scout's opinion of this player's minimum asking price",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35166
+          },
+          "PropertyValue": "scouted-min-value",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Scout's opinion of this player's minimum wage demands",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35164
+          },
+          "PropertyValue": "scouted-min-wage",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Scout's opinion of this player's current ability",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35167
+          },
+          "PropertyValue": "current-ability-stars",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Scout's opinion of this player's potential ability",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35168
+          },
+          "PropertyValue": "potential-ability-stars",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Scouting Costs",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35170
+          },
+          "PropertyValue": "scouting-costs",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 35159
+      },
+      "PropertyValue": "",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Stats",
+      "ChildList": [
+        {
+          "name": "Aerial Challenges",
+          "ChildList": [
+            {
+              "name": "Aerial Challenges Attempted",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35086
+              },
+              "PropertyValue": "chalkboard-stats-headers-attempted",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Aerial Challenges Attempted per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35087
+              },
+              "PropertyValue": "chalkboard-stats-headers-attempted-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Headers Lost per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35089
+              },
+              "PropertyValue": "chalkboard-stats-headers-lost-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Headers Won",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35088
+              },
+              "PropertyValue": "chalkboard-stats-headers-won",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Headers Won per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35091
+              },
+              "PropertyValue": "chalkboard-stats-headers-won-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Headers Won Ratio",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35090
+              },
+              "PropertyValue": "chalkboard-stats-headers-won-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Key Headers Per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35092
+              },
+              "PropertyValue": "chalkboard-stats-key-headers-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35077
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Career",
+          "ChildList": [
+            {
+              "name": "All Time Career Appearances",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13776
+              },
+              "PropertyValue": "stats-career-appearances",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "All Time Career Goals",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13777
+              },
+              "PropertyValue": "stats-career-goals",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "All Time League Appearances",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13778
+              },
+              "PropertyValue": "stats-career-league-appearances",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "All Time League Goals",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13779
+              },
+              "PropertyValue": "stats-career-league-goals",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13774
+          },
+          "PropertyValue": "career",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Crosses",
+          "ChildList": [
+            {
+              "name": "Cross Completion Ratio",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35093
+              },
+              "PropertyValue": "chalkboard-stats-crosses-completion-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Crosses Attempted",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35094
+              },
+              "PropertyValue": "chalkboard-stats-crosses-attempted",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Crosses Attempter per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35095
+              },
+              "PropertyValue": "chalkboard-stats-crosses-attempted-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Crosses Completed",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35098
+              },
+              "PropertyValue": "chalkboard-stats-crosses-completed",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Crosses Completed per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35099
+              },
+              "PropertyValue": "chalkboard-stats-crosses-completed-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Open Play Cross Completion Ratio",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35102
+              },
+              "PropertyValue": "chalkboard-stats-open-play-crosses-completion-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Open Play Cross Attempted",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35096
+              },
+              "PropertyValue": "chalkboard-stats-open-play-crosses-attempted",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Open Play Crosses Attempted per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35097
+              },
+              "PropertyValue": "chalkboard-stats-open-play-crosses-attempted-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Open Play Crosses Completed",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35100
+              },
+              "PropertyValue": "chalkboard-stats-open-play-crosses-completed",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Open Play Crosses Completed per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35101
+              },
+              "PropertyValue": "chalkboard-stats-open-play-crosses-completed-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35078
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "General",
+          "ChildList": [
+            {
+              "name": "Appearances",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13826
+              },
+              "PropertyValue": "stats-overall-appearances",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Assists",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13827
+              },
+              "PropertyValue": "stats-overall-assists",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Average Minutes Per Goal",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13828
+              },
+              "PropertyValue": "stats-minutes-per-goal",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Average Rating",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13829
+              },
+              "PropertyValue": "average-rating",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Clean Sheets",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13830
+              },
+              "PropertyValue": "stats-clean-sheets",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Clean Sheets per 90 minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13831
+              },
+              "PropertyValue": "stats-clean-sheets-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Conceded per 90 minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13832
+              },
+              "PropertyValue": "stats-conceded-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Expected Assists",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13833
+              },
+              "PropertyValue": "expected-assists",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Expected Assists per 90 minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13834
+              },
+              "PropertyValue": "expected-assists-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Expected Goals Overperformance",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13835
+              },
+              "PropertyValue": "expected-goals-overperformance",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Expected Goals per 90 minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13836
+              },
+              "PropertyValue": "expected-goals-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Fouls Against",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13837
+              },
+              "PropertyValue": "stats-fouls-against",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Fouls Made",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13838
+              },
+              "PropertyValue": "stats-fouls-made",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Game Win Ratio",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13839
+              },
+              "PropertyValue": "stats-game-win-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Games Drawn",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13840
+              },
+              "PropertyValue": "stats-games-drawn",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Games Lost",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13841
+              },
+              "PropertyValue": "stats-games-lost",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Games Missed In A Row",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13842
+              },
+              "PropertyValue": "stats-games-misssed-in-a-row",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Games Won",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13843
+              },
+              "PropertyValue": "stats-games-won",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Goals",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13844
+              },
+              "PropertyValue": "goals",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Goals Conceded",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13845
+              },
+              "PropertyValue": "stats-conceded",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Goals per 90 minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13846
+              },
+              "PropertyValue": "stats-goals-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Last 5 Games",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13848
+              },
+              "PropertyValue": "form",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Last Match Rating",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13849
+              },
+              "PropertyValue": "stats-last-match-rating",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13850
+              },
+              "PropertyValue": "stats-minutes",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minutes Per Game",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13851
+              },
+              "PropertyValue": "stats-minutes-per-game",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minutes Since Last Conceded",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13060
+              },
+              "PropertyValue": "stats-minutes-since-last-conceded",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Minutes Since Last Goal",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13853
+              },
+              "PropertyValue": "stats-minutes-since-last-goal",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Non Penalty Expected Goals",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13854
+              },
+              "PropertyValue": "non-penalty-expected-goals",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Non Penalty Expected Goals per 90",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13855
+              },
+              "PropertyValue": "non-penalty-expected-goals-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Penalties Taken",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13856
+              },
+              "PropertyValue": "stats-penalties",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Penalties Faced",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13857
+              },
+              "PropertyValue": "stats-penalties-faced",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Penalties Saved",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13858
+              },
+              "PropertyValue": "stats-penalties-saved",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Penalties Saved Ratio",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13859
+              },
+              "PropertyValue": "stats-penalties-saved-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Penalties Scored",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13860
+              },
+              "PropertyValue": "stats-penalties-scored",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Penalties Scored Ratio",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13861
+              },
+              "PropertyValue": "stats-penalties-scored-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player Of The Match",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13862
+              },
+              "PropertyValue": "stats-player-of-the-match",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Points Won Per Game",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13863
+              },
+              "PropertyValue": "stats-points-won-per-game",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Red Cards",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13864
+              },
+              "PropertyValue": "stats-red-cards",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Starting Appearances",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13865
+              },
+              "PropertyValue": "stats-starting-appearances",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Team Goals",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13866
+              },
+              "PropertyValue": "stats-team-goals",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Team Goals Conceded",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13867
+              },
+              "PropertyValue": "stats-team-goals-conceded",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Team Goals Conceded per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35085
+              },
+              "PropertyValue": "stats-team-goals-conceded-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Team Goals per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13869
+              },
+              "PropertyValue": "stats-team-goals-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Total Saves per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13870
+              },
+              "PropertyValue": "stats-total-saves-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "xG",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13872
+              },
+              "PropertyValue": "expected-goals",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Yellow Cards",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13873
+              },
+              "PropertyValue": "yellow-cards",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13775
+          },
+          "PropertyValue": "general",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Mistakes",
+          "ChildList": [
+            {
+              "name": "Mistakes Leading To Goal",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35103
+              },
+              "PropertyValue": "chalkboard-stats-mistakes-leading-to-goal",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35079
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Movement",
+          "ChildList": [
+            {
+              "name": "Distance Covered",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35104
+              },
+              "PropertyValue": "chalkboard-stats-distance-covered",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Distance Covered per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35105
+              },
+              "PropertyValue": "chalkboard-stats-distance-covered-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Dribbles Made",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35106
+              },
+              "PropertyValue": "chalkboard-stats-dribbles-made",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Dribbles Made per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35107
+              },
+              "PropertyValue": "chalkboard-stats-dribbles-made-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "High Intensity Sprints Per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35108
+              },
+              "PropertyValue": "chalkboard-stats-sprints-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Offsides",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35109
+              },
+              "PropertyValue": "chalkboard-stats-offsides",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35080
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Passes",
+          "ChildList": [
+            {
+              "name": "Assists per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35110
+              },
+              "PropertyValue": "chalkboard-stats-assists-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Chances Created per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35111
+              },
+              "PropertyValue": "chalkboard-stats-chances-created-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Clear Cut Chances Created",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35112
+              },
+              "PropertyValue": "chalkboard-stats-clear-cut-chances-created",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Key Passes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35113
+              },
+              "PropertyValue": "chalkboard-stats-key-passes",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Key Passes per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35115
+              },
+              "PropertyValue": "chalkboard-stats-key-passes-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Open Play Key Passes per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35114
+              },
+              "PropertyValue": "chalkboard-stats-open-play-key-passes-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Pass Completion Ratio",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35116
+              },
+              "PropertyValue": "chalkboard-stats-pass-completion-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Passes Attempted",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35118
+              },
+              "PropertyValue": "chalkboard-stats-passes-attempted",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Passes Attempted per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35117
+              },
+              "PropertyValue": "chalkboard-stats-passes-attempted-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Passes Completed",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35119
+              },
+              "PropertyValue": "chalkboard-stats-passes-completed",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Passes Completed per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35120
+              },
+              "PropertyValue": "chalkboard-stats-passes-completed-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Possession Lost per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35121
+              },
+              "PropertyValue": "chalkboard-stats-possession-lost-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Progressive Passes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35122
+              },
+              "PropertyValue": "chalkboard-stats-progressive-passes",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Progressive Passes per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35123
+              },
+              "PropertyValue": "chalkboard-stats-progressive-passes-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35081
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Saves",
+          "ChildList": [
+            {
+              "name": "Expected Goals Prevented",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35124
+              },
+              "PropertyValue": "chalkboard-stats-expected-goals-prevented",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Expected Goals Prevented per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35125
+              },
+              "PropertyValue": "chalkboard-stats-expected-goals-prevented-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Expected Save Percentage",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35126
+              },
+              "PropertyValue": "chalkboard-stats-expected-save-percentage",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Save Ratio",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35127
+              },
+              "PropertyValue": "chalkboard-stats-save-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Saves Held",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35128
+              },
+              "PropertyValue": "chalkboard-stats-saves-held",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Saves Parried",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35129
+              },
+              "PropertyValue": "chalkboard-stats-saves-parried",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Saves Tipped",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35130
+              },
+              "PropertyValue": "chalkboard-stats-saves-tipped",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35082
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Shots",
+          "ChildList": [
+            {
+              "name": "Conversion Rate (%)",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35131
+              },
+              "PropertyValue": "chalkboard-stats-converstion-rate",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Expected Goals per Shot",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35132
+              },
+              "PropertyValue": "chalkboard-stats-expected-goals-per-shot",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Free Kick Shots",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 14018
+              },
+              "PropertyValue": "chalkboard-stats-free-kick-shots",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Goals From Outside The Box",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 14019
+              },
+              "PropertyValue": "chalkboard-stats-goals-outside-box",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Shots",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13237
+              },
+              "PropertyValue": "chalkboard-stats-shots",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Shots From Outside The Box per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35133
+              },
+              "PropertyValue": "chalkboard-stats-shots-outside-box-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Shots On Target",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35134
+              },
+              "PropertyValue": "chalkboard-stats-shots-on-target",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Shots on Target per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35135
+              },
+              "PropertyValue": "chalkboard-stats-shots-on-target-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Shots On Target Ratio",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35136
+              },
+              "PropertyValue": "chalkboard-stats-shots-on-target-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Shots per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35137
+              },
+              "PropertyValue": "chalkboard-stats-shots-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35083
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Tackles and Interceptions",
+          "ChildList": [
+            {
+              "name": "Blocks",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35138
+              },
+              "PropertyValue": "chalkboard-stats-blocks",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Blocks per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35139
+              },
+              "PropertyValue": "chalkboard-stats-blocks-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Clearances",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 13244
+              },
+              "PropertyValue": "chalkboard-stats-clearances",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Clearances per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35140
+              },
+              "PropertyValue": "chalkboard-stats-clearances-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Interceptions",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35141
+              },
+              "PropertyValue": "chalkboard-stats-interceptions",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Interceptions per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35142
+              },
+              "PropertyValue": "chalkboard-stats-interceptions-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Key Tackles",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35143
+              },
+              "PropertyValue": "chalkboard-stats-key-tackles",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Key Tackles per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35144
+              },
+              "PropertyValue": "chalkboard-stats-key-tackles-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Possession Won per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35145
+              },
+              "PropertyValue": "chalkboard-stats-possession-won-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Pressures Attempted",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35146
+              },
+              "PropertyValue": "chalkboard-stats-pressures-attempted",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Pressures Attempted per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35147
+              },
+              "PropertyValue": "chalkboard-stats-pressures-attempted-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Pressures Completed",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35148
+              },
+              "PropertyValue": "chalkboard-stats-pressures-completed",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Pressures Completed per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35149
+              },
+              "PropertyValue": "chalkboard-stats-pressures-completed-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Shots Blocked Defending",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35150
+              },
+              "PropertyValue": "chalkboard-stats-shots-blocked-defending",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Shots Blocked Defending per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35151
+              },
+              "PropertyValue": "chalkboard-stats-shots-blocked-defending-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Tackle Completion Ratio",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35152
+              },
+              "PropertyValue": "chalkboard-stats-tackle-completion-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Tackles Attempted",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35153
+              },
+              "PropertyValue": "chalkboard-stats-tackles-attempted",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Tackles Completed",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35154
+              },
+              "PropertyValue": "chalkboard-stats-tackles-completed",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Tackles per 90 Minutes",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 35155
+              },
+              "PropertyValue": "chalkboard-stats-tackles-completed-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35084
+          },
+          "PropertyValue": "",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 35076
+      },
+      "PropertyValue": "statsgeneral",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Transfer",
+      "ChildList": [
+        {
+          "name": "Actual Playing Time",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13171
+          },
+          "PropertyValue": "actual-playing-time",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Agent",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24796
+          },
+          "PropertyValue": "agent",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Agreed Playing Time",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35054
+          },
+          "PropertyValue": "playing-time",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Asking Price",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24797
+          },
+          "PropertyValue": "asking-price",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Fee",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13177
+          },
+          "PropertyValue": "recent-offer-basic-fee",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Future Playing Time",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 15408
+          },
+          "PropertyValue": "future-playing-time",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Last Club",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13178
+          },
+          "PropertyValue": "last-club",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Last Transfer Fee",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13179
+          },
+          "PropertyValue": "last-transfer-fee",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Loan Status",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13180
+          },
+          "PropertyValue": "loan-status",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Offer Type",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35053
+          },
+          "PropertyValue": "recent-offer-type",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "On Loan From",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13181
+          },
+          "PropertyValue": "on-loan-from",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Overall Fee",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13182
+          },
+          "PropertyValue": "recent-offer-full-fee",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Players Interest",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35035
+          },
+          "PropertyValue": "player-interest",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Transfer Fees Received",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13184
+          },
+          "PropertyValue": "total-transfer-fees",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Transfer Status",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 13186
+          },
+          "PropertyValue": "transfer-status",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Transfer Value",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24798
+          },
+          "PropertyValue": "transfer-value",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Work Permit Required",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 35052
+          },
+          "PropertyValue": "work-permit-required",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24668
+      },
+      "PropertyValue": "transfer",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,2731 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 6927148995291191234
+  },
+  "m_Name": "NationalPoolPlayerSearchResultsViewCollection",
+  "m_customViewDisplayName": {
+    "GameID": 24666
+  },
+  "m_customViewNamePrefix": {
+    "GameID": 0
+  },
+  "m_tableViewSettings": [
+    {
+      "name": "Overview",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 15278
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 644962764647753440
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "General Info",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24672
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -1737474657290849802
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Contract",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 28265
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -9014032015627008044
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 5036362563731257751
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -7188619722192362418
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -2517369149631184186
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 8928520449517060817
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -1217912031637719302
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 8566522439136360131
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 18003
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 2832689008343546402
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 689803297709994090
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -995690040700818790
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": 7448311891311932899
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -1068929434213330426
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -416488253031839881
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 0
+          },
+          "PropertyValue": {
+            "m_FileID": 0,
+            "m_PathID": -5931073379382216475
+          },
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 18008
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 15275
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -164148411968361219
+      },
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    }
+  ],
+  "m_contextMenuData": [
+    {
+      "name": "Not translated currently",
+      "ChildList": [
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24807
+          },
+          "PropertyValue": "recommendation",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Player",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24808
+          },
+          "PropertyValue": "portrait-name",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24809
+          },
+          "PropertyValue": "scouted-best-position",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Club",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24810
+          },
+          "PropertyValue": "club",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24811
+          },
+          "PropertyValue": "national-team",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Height",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24812
+          },
+          "PropertyValue": "height",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24813
+          },
+          "PropertyValue": "world-reputation",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Age",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24814
+          },
+          "PropertyValue": "age",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24815
+          },
+          "PropertyValue": "transfer-value",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24673
+      },
+      "PropertyValue": "general",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Contract",
+      "ChildList": [
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24799
+          },
+          "PropertyValue": "recommendation",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Player",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24800
+          },
+          "PropertyValue": "portrait-name",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Club",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24801
+          },
+          "PropertyValue": "club",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24802
+          },
+          "PropertyValue": "playing-time",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24803
+          },
+          "PropertyValue": "contract-status",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24804
+          },
+          "PropertyValue": "wage",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24805
+          },
+          "PropertyValue": "contract-expiry-date",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24806
+          },
+          "PropertyValue": "transfer-value",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24676
+      },
+      "PropertyValue": "contract",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Transfer",
+      "ChildList": [
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24794
+          },
+          "PropertyValue": "recommendation",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Player",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24795
+          },
+          "PropertyValue": "portrait-name",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24796
+          },
+          "PropertyValue": "agent",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24797
+          },
+          "PropertyValue": "asking-price",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24798
+          },
+          "PropertyValue": "transfer-value",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24668
+      },
+      "PropertyValue": "transfer",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Selection Info",
+      "ChildList": [
+        {
+          "name": "Recommendation",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24768
+          },
+          "PropertyValue": "recommendation",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Player",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24769
+          },
+          "PropertyValue": "portrait-name",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Position",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24770
+          },
+          "PropertyValue": "position",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Morale",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24771
+          },
+          "PropertyValue": "morale",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Last 5 Games",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24772
+          },
+          "PropertyValue": "last-five-matches-rating",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "CON",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24773
+          },
+          "PropertyValue": "condition-icon",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "SHP",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24774
+          },
+          "PropertyValue": "match-sharpness",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Appearances",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24775
+          },
+          "PropertyValue": "stats-overall-appearances",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Goals",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24776
+          },
+          "PropertyValue": "goals",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Rating",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24777
+          },
+          "PropertyValue": "average-rating",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24745
+      },
+      "PropertyValue": "selection-info",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Scout",
+      "ChildList": [
+        {
+          "name": "Transfer",
+          "ChildList": [
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24787
+              },
+              "PropertyValue": "recommendation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24788
+              },
+              "PropertyValue": "portrait-name",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Age",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24789
+              },
+              "PropertyValue": "age",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24790
+              },
+              "PropertyValue": "scouting-costs",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24791
+              },
+              "PropertyValue": "transfer-value",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24792
+              },
+              "PropertyValue": "scouted-min-wage",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24793
+              },
+              "PropertyValue": "scouted-max-wage",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24778
+          },
+          "PropertyValue": "transfer",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Position",
+          "ChildList": [
+            {
+              "name": "Recommendation",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24780
+              },
+              "PropertyValue": "recommendation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24781
+              },
+              "PropertyValue": "portrait-name",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Position",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24782
+              },
+              "PropertyValue": "position",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Best Pos",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24783
+              },
+              "PropertyValue": "scouted-best-position",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24784
+              },
+              "PropertyValue": "scouted-best-role",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24785
+              },
+              "PropertyValue": "current-ability-stars",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24786
+              },
+              "PropertyValue": "potential-ability-stars",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24779
+          },
+          "PropertyValue": "position",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24746
+      },
+      "PropertyValue": "scout",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Stats",
+      "ChildList": [
+        {
+          "name": "Not translated currently",
+          "ChildList": [
+            {
+              "name": "Recommendation",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24755
+              },
+              "PropertyValue": "recommendation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24756
+              },
+              "PropertyValue": "portrait-name",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Appearances",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24757
+              },
+              "PropertyValue": "stats-overall-appearances",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Goals",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24758
+              },
+              "PropertyValue": "goals",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "PoM",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24759
+              },
+              "PropertyValue": "stats-player-of-the-match",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Pas %",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24760
+              },
+              "PropertyValue": "chalkboard-stats-pass-completion-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Tck/90",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24761
+              },
+              "PropertyValue": "chalkboard-stats-tackles-completed-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Drb/90",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24762
+              },
+              "PropertyValue": "chalkboard-stats-dribbles-made-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Shot %",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24763
+              },
+              "PropertyValue": "chalkboard-stats-shots-on-target-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Rating",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24764
+              },
+              "PropertyValue": "average-rating",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24754
+          },
+          "PropertyValue": "club",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "International",
+          "ChildList": [
+            {
+              "name": "Recommendation",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24755
+              },
+              "PropertyValue": "recommendation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24756
+              },
+              "PropertyValue": "portrait-name",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Appearances",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24757
+              },
+              "PropertyValue": "stats-overall-appearances",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Goals",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24758
+              },
+              "PropertyValue": "goals",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "PoM",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24759
+              },
+              "PropertyValue": "stats-player-of-the-match",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Pas %",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24760
+              },
+              "PropertyValue": "chalkboard-stats-pass-completion-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Tck/90",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24761
+              },
+              "PropertyValue": "chalkboard-stats-tackles-completed-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Drb/90",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24762
+              },
+              "PropertyValue": "chalkboard-stats-dribbles-made-per90",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Shot %",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24763
+              },
+              "PropertyValue": "chalkboard-stats-shots-on-target-ratio",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Rating",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24764
+              },
+              "PropertyValue": "average-rating",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24765
+          },
+          "PropertyValue": "international",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24748
+      },
+      "PropertyValue": "stats",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "International",
+      "ChildList": [
+        {
+          "name": "Not translated currently",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24817
+          },
+          "PropertyValue": "recommendation",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Player",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24818
+          },
+          "PropertyValue": "portrait-name",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Not translated currently",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24819
+          },
+          "PropertyValue": "national-team",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Not translated currently",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24820
+          },
+          "PropertyValue": "international-caps",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Not translated currently",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24821
+          },
+          "PropertyValue": "international-goals",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Not translated currently",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24822
+          },
+          "PropertyValue": "international-youth-caps",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Not translated currently",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24823
+          },
+          "PropertyValue": "international-youth-goals",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Not translated currently",
+          "ChildList": [],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24824
+          },
+          "PropertyValue": "transfer-value",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24816
+      },
+      "PropertyValue": "international",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Attributes",
+      "ChildList": [
+        {
+          "name": "Physical",
+          "ChildList": [
+            {
+              "name": "Recommendation",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24829
+              },
+              "PropertyValue": "recommendation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24828
+              },
+              "PropertyValue": "portrait-name",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24830
+              },
+              "PropertyValue": "attribute-acceleration",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24831
+              },
+              "PropertyValue": "attribute-agility",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24832
+              },
+              "PropertyValue": "attribute-balance",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24833
+              },
+              "PropertyValue": "attribute-jumping-reach",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24834
+              },
+              "PropertyValue": "attribute-natural-fitness",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24835
+              },
+              "PropertyValue": "attribute-pace",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24836
+              },
+              "PropertyValue": "attribute-stamina",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24837
+              },
+              "PropertyValue": "attribute-strength",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24826
+          },
+          "PropertyValue": "physical",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Mental",
+          "ChildList": [
+            {
+              "name": "Recommendation",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24829
+              },
+              "PropertyValue": "recommendation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24828
+              },
+              "PropertyValue": "portrait-name",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24839
+              },
+              "PropertyValue": "attribute-aggression",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24840
+              },
+              "PropertyValue": "attribute-anticipation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24841
+              },
+              "PropertyValue": "attribute-bravery",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24842
+              },
+              "PropertyValue": "attribute-composure",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24843
+              },
+              "PropertyValue": "attribute-concentration",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24844
+              },
+              "PropertyValue": "attribute-decisions",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24845
+              },
+              "PropertyValue": "attribute-determination",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24846
+              },
+              "PropertyValue": "attribute-flair",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24847
+              },
+              "PropertyValue": "attribute-leadership",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24848
+              },
+              "PropertyValue": "attribute-movement",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24849
+              },
+              "PropertyValue": "attribute-positioning",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24850
+              },
+              "PropertyValue": "attribute-teamwork",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24851
+              },
+              "PropertyValue": "attribute-vision",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24852
+              },
+              "PropertyValue": "attribute-work-rate",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24838
+          },
+          "PropertyValue": "mental",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Technical",
+          "ChildList": [
+            {
+              "name": "Recommendation",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24829
+              },
+              "PropertyValue": "recommendation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24828
+              },
+              "PropertyValue": "portrait-name",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24854
+              },
+              "PropertyValue": "attribute-corners",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24855
+              },
+              "PropertyValue": "attribute-crossing",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24856
+              },
+              "PropertyValue": "attribute-finishing",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24857
+              },
+              "PropertyValue": "attribute-first-touch",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24858
+              },
+              "PropertyValue": "attribute-free-kicks",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24859
+              },
+              "PropertyValue": "attribute-heading",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24860
+              },
+              "PropertyValue": "attribute-long-shots",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Long Throws",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24861
+              },
+              "PropertyValue": "attribute-long-throws",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24862
+              },
+              "PropertyValue": "attribute-passing",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24863
+              },
+              "PropertyValue": "attribute-penalty-taking",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24864
+              },
+              "PropertyValue": "attribute-tackling",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24865
+              },
+              "PropertyValue": "attribute-technique",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24853
+          },
+          "PropertyValue": "technical",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Goalkeeping",
+          "ChildList": [
+            {
+              "name": "Recommendation",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24829
+              },
+              "PropertyValue": "recommendation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24828
+              },
+              "PropertyValue": "portrait-name",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24867
+              },
+              "PropertyValue": "attribute-aerial-reach",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24868
+              },
+              "PropertyValue": "attribute-command-of-area",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Communication",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24869
+              },
+              "PropertyValue": "attribute-communication",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24870
+              },
+              "PropertyValue": "attribute-eccentricity",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24871
+              },
+              "PropertyValue": "attribute-handling",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24872
+              },
+              "PropertyValue": "attribute-kicking",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24873
+              },
+              "PropertyValue": "attribute-one-on-ones",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24874
+              },
+              "PropertyValue": "attribute-reflexes",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24875
+              },
+              "PropertyValue": "attribute-rushing-out",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24876
+              },
+              "PropertyValue": "attribute-punching",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24877
+              },
+              "PropertyValue": "attribute-throwing",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24866
+          },
+          "PropertyValue": "goalkeeping",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Defensive",
+          "ChildList": [
+            {
+              "name": "Recommendation",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24829
+              },
+              "PropertyValue": "recommendation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24828
+              },
+              "PropertyValue": "portrait-name",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24879
+              },
+              "PropertyValue": "attribute-acceleration",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24880
+              },
+              "PropertyValue": "attribute-anticipation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24881
+              },
+              "PropertyValue": "attribute-heading",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24882
+              },
+              "PropertyValue": "attribute-jumping-reach",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24883
+              },
+              "PropertyValue": "attribute-marking",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24884
+              },
+              "PropertyValue": "attribute-pace",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24885
+              },
+              "PropertyValue": "attribute-positioning",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24886
+              },
+              "PropertyValue": "attribute-stamina",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24887
+              },
+              "PropertyValue": "attribute-strength",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24888
+              },
+              "PropertyValue": "attribute-tackling",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24878
+          },
+          "PropertyValue": "defensive",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        },
+        {
+          "name": "Attacking",
+          "ChildList": [
+            {
+              "name": "Recommendation",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24829
+              },
+              "PropertyValue": "recommendation",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24828
+              },
+              "PropertyValue": "portrait-name",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24890
+              },
+              "PropertyValue": "attribute-crossing",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24891
+              },
+              "PropertyValue": "attribute-dribbling",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24892
+              },
+              "PropertyValue": "attribute-free-kicks",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24893
+              },
+              "PropertyValue": "attribute-finishing",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24894
+              },
+              "PropertyValue": "attribute-first-touch",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24895
+              },
+              "PropertyValue": "attribute-flair",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24896
+              },
+              "PropertyValue": "attribute-long-shots",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24897
+              },
+              "PropertyValue": "attribute-movement",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24898
+              },
+              "PropertyValue": "attribute-passing",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            },
+            {
+              "name": "Player",
+              "ChildList": [],
+              "Disable": 0,
+              "AddSpacerBefore": 0,
+              "DisplayValue": {
+                "GameID": 24899
+              },
+              "PropertyValue": "attribute-vision",
+              "requirement": {
+                "m_FileID": 0,
+                "m_PathID": 0
+              }
+            }
+          ],
+          "Disable": 0,
+          "AddSpacerBefore": 0,
+          "DisplayValue": {
+            "GameID": 24889
+          },
+          "PropertyValue": "attacking",
+          "requirement": {
+            "m_FileID": 0,
+            "m_PathID": 0
+          }
+        }
+      ],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 24825
+      },
+      "PropertyValue": "attributes",
+      "requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    }
+  ]
+}

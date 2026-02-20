@@ -1,0 +1,3157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<record>
+  <!-- this property list maps ad cells to specific ads that are in the graphics folder, these
+	mappings should be used for the leagues where we have been given supplied with ads that
+	should be displayed at matches in the league -->
+  <record id="options">
+    <!-- SI Default - War Child -->
+    <record id="101" path="static/default/warchild" />
+    <!-- SI Default - Kick it Out -->
+    <record id="102" path="static/default/kickitout" />
+    <!-- National League -->
+    <record id="409" path="static/eng conf/national league" />
+    <!-- AFC Wimbledon -->
+    <record id="299" path="static/eng/wimbledon/lotto" />
+    <!-- AFC Wimbledon -->
+    <record id="300" path="static/eng/wimbledon/cherryred" />
+    <!-- AFC Wimbledon - private office -->
+    <record id="301" path="video/eng/wimbledon/privateoffice" animated="true" />
+    <!-- AFC Wimbledon -->
+    <record id="303" path="static/eng/wimbledon/silvermere" />
+    <!-- SI Default - Special Effect -->
+    <record id="103" path="static/default/special effect" />
+    <!-- EFL - skybet EFL -->
+    <record id="113" path="static/eng/efl/skybet efl" />
+    <!-- EFL - Carabao -->
+    <record id="114" path="static/eng/efl/carabao" />
+    <!-- EFL - Carabao Cup -->
+    <record id="116" path="static/eng/efl/carabao cup" />
+    <!-- EFL - EFL Trophy -->
+    <record id="124" path="static/eng/efl/efl trophy" />
+    <!-- EFL - Smart Meter -->
+    <record id="326" path="static/eng/efl/smart meter" />
+    <!-- LFP - Chaine -->
+    <record id="125" path="static/fra/chaine" />
+    <!-- LFP - Bkt -->
+    <record id="129" path="static/fra/bkt" />
+    <!-- LFP - La Poste -->
+    <record id="130" path="static/fra/la poste" />
+    <!-- LFP - Decathlon L1 -->
+    <record id="131" path="static/fra/decathlon l1" />
+    <!-- LFP - Decathlon L2 -->
+    <record id="134" path="static/fra/decathlon l2" />
+    <!-- Bundesliga -->
+    <record id="140" path="static/ger/bundesliga" />
+    <!-- 3. Liga -->
+    <record id="145" path="static/ger/3 liga" />
+    <!-- ITA - Torino - Bet365 -->
+    <record id="153" path="static/ita/torino/bet365" />
+    <!-- ITA - Torino - Joma 2 -->
+    <record id="155" path="static/ita/torino/joma" />
+    <!-- ITA - Torino - Suzuki -->
+    <record id="157" path="static/ita/torino/suzuki" />
+    <!-- NIFL - Sports Direct -->
+    <record id="164" path="static/nir/sportsdirect" />
+    <!-- EFL - Carabao -->
+    <record id="172" path="video/eng/efl/carabao" animated="true" />
+    <!-- Bundesliga -->
+    <record id="177" path="video/ger/bundesliga" animated="true" />
+    <!-- Keuken Kampioen Divisie -->
+    <record id="192" path="video/ned/keukenkampioen" animated="true" />
+    <!-- Ekstraklasa - PKO -->
+    <record id="193" path="video/pol/pko" animated="true" />
+    <!-- Keuken Kampioen Divisie -->
+    <record id="199" path="static/ned/keukenkampioen" />
+    <!-- Keuken Kampioen Divisie -->
+    <record id="202" path="static/ned/keukenkampioen" />
+    <!-- ITA - Cagliari - Doppio Malto -->
+    <record id="156" path="static/ita/cagliari/doppio malto" />
+    <!-- ITA - Bologna - Macron -->
+    <record id="238" path="static/ita/bologna/bologna macron" />
+    <!-- ITA - Bologna - Store -->
+    <record id="239" path="static/ita/bologna/bologna store" />
+    <!-- ITA - Cagliari - Eye Sportswear -->
+    <record id="243" path="static/ita/cagliari/eye" />
+    <!-- ITA - Bologna - Macron -->
+    <record id="257" path="video/ita/bologna/bologna macron" animated="true" />
+    <!-- ITA - Bologna - Store -->
+    <record id="258" path="video/ita/bologna/bologna store" animated="true" />
+    <!-- Eredivisie Lottery -->
+    <record id="259" path="static/ned/eredivisie lottery" />
+    <!-- Eredivisie - Home of Dutch Football -->
+    <record id="260" path="static/ned/home of dutch football" />
+    <!-- ITA - Empoli - Computer Gross -->
+    <record id="269" path="video/ita/empoli/computer gross" animated="true" />
+    <!-- ITA - Empoli - Kappa -->
+    <record id="271" path="video/ita/empoli/kappa" animated="true" />
+    <!-- ITA - Empoli - Pediatrica -->
+    <record id="272" path="video/ita/empoli/pediatrica" animated="true" />
+    <!-- ITA - Empoli - Sammontana -->
+    <record id="274" path="video/ita/empoli/sammontana" animated="true" />
+    <!-- ITA - Genoa -->
+    <record id="275" path="static/ita/genoa/genoa" />
+    <!-- EFL - EFL -->
+    <record id="276" path="video/eng/efl/efl" animated="true" />
+    <!-- EFL - League One -->
+    <record id="278" path="static/eng/efl/efl league one" />
+    <!-- EFL - League Two -->
+    <record id="279" path="static/eng/efl/efl league two" />
+    <!-- EFL - Championship -->
+    <record id="280" path="static/eng/efl/efl championship" />
+    <!-- EFL - League One -->
+    <record id="281" path="static/eng/efl/efl league one" />
+    <!-- Wales - Cymru Leagues -->
+    <record id="292" path="static/wal/cymru leagues" />
+    <!-- Wales - Cymru Leagues -->
+    <record id="294" path="static/wal/cymru leagues" />
+    <!-- Wales - JD Sports -->
+    <record id="297" path="static/wal/jd sports" />
+    <!-- Wales - JD Sports -->
+    <record id="298" path="static/wal/jd sports" />
+    <!-- LFP - Chaine -->
+    <record id="305" path="video/fra/chaine" animated="true" />
+    <!-- 3. Liga -->
+    <record id="315" path="video/ger/3 liga" animated="true" />
+    <!-- ITA - Cagliari - Eye -->
+    <record id="316" path="video/ita/cagliari/eye" animated="true" />
+    <!-- ITA - Genoa -->
+    <record id="331" path="video/ita/genoa/genoa" animated="true" />
+    <!-- ITA - Torino - Bet365 -->
+    <record id="339" path="video/ita/torino/bet365" animated="true" />
+    <!-- ITA - Torino - Joma -->
+    <record id="342" path="video/ita/torino/joma" animated="true" />
+    <!-- ITA - Torino - Suzuki -->
+    <record id="343" path="video/ita/torino/suzuki" animated="true" />
+    <!-- 3F Superliga -->
+    <record id="350" path="static/den/superliga" />
+    <!-- 3F Superliga -->
+    <record id="351" path="static/den/superliga" />
+    <!-- SI Default - Kick It Out -->
+    <record id="349" path="video/default/kickitout" animated="true" />
+    <!-- 3F Superliga -->
+    <record id="354" path="video/den/superliga" animated="true" />
+    <!-- Watford - Asus -->
+    <record id="352" path="video/eng/watford/asus" animated="true" />
+    <!-- SI Default - Special Effect -->
+    <record id="361" path="video/default/special effect" animated="true" />
+    <!-- SI Default - War Child -->
+    <record id="362" path="video/default/warchild" animated="true" />
+    <!-- CAN - Derbystar -->
+    <record id="267" path="static/can/derbystar" />
+    <!-- CAN - Telus -->
+    <record id="372" path="static/can/telus" />
+    <!-- CAN - VW -->
+    <record id="380" path="static/can/vw" />
+    <!-- CAN - Burnbrae Farm -->
+    <record id="381" path="static/can/burnbraefarm" />
+    <!-- CAN - Macron -->
+    <record id="386" path="static/can/macron" />
+    <!-- CAN - one soccer -->
+    <record id="389" path="static/can/one soccer" />
+    <!-- CAN - VW -->
+    <record id="406" path="video/can/vw" animated="true" />
+    <!-- ITA - Hellas Verona - Joma -->
+    <record id="162" path="static/ita/hellas verona/joma" />
+    <!-- ITA - Hellas Verona - Vetrocar -->
+    <record id="163" path="static/ita/hellas verona/vetrocar" />
+    <!-- ITA - Cagliari - Sardegna -->
+    <record id="161" path="static/ita/cagliari/sardegna" />
+    <!-- ITA - Cagliari - Energit -->
+    <record id="165" path="static/ita/cagliari/energit" />
+    <!-- ITA - Empoli - Computer Gross -->
+    <record id="166" path="static/ita/empoli/computer gross" />
+    <!-- ITA - Empoli - Pediatrica -->
+    <record id="167" path="static/ita/empoli/pediatrica" />
+    <!-- ITA - Empoli - Kappa -->
+    <record id="168" path="static/ita/empoli/kappa" />
+    <!-- ITA - Empoli - Sammontana -->
+    <record id="170" path="static/ita/empoli/sammontana" />
+    <!-- ITA - Cagliari - Energit -->
+    <record id="231" path="video/ita/cagliari/energit" animated="true" />
+    <!-- ITA - Cagliari - Sardegna -->
+    <record id="232" path="video/ita/cagliari/sardegna" animated="true" />
+    <!-- ITA - Cagliari - doppio malto -->
+    <record id="233" path="video/ita/cagliari/doppio malto" animated="true" />
+    <!-- ITA - Hellas Verona - Joma -->
+    <record id="234" path="video/ita/hellas verona/joma" animated="true" />
+    <!-- ITA - Hellas Verona - Vetrocar -->
+    <record id="235" path="video/ita/hellas verona/vetrocar" animated="true" />
+    <!-- KOR - K League -->
+    <record id="237" path="static/kor/hanabank" />
+    <!-- KOR - K League -->
+    <record id="248" path="static/kor/711" />
+    <!-- KOR - K League -->
+    <record id="249" path="static/kor/coupang play" />
+    <!-- KOR - K League -->
+    <record id="250" path="static/kor/dongwon" />
+    <!-- EFL - Utilita -->
+    <record id="251" path="static/eng/efl/utilita" />
+    <!-- EFL - Utilita -->
+    <record id="253" path="video/eng/efl/utilita" animated="true" />
+    <!-- CAN - Westjet -->
+    <record id="256" path="video/can/westjet" animated="true" />
+    <!-- MLS - Adidas -->
+    <record id="138" path="static/usa/adidas" />
+    <!-- MLS - Our Soccer -->
+    <record id="240" path="video/usa/oursoccer" animated="true" />
+    <!-- NIFL - NIFL -->
+    <record id="327" path="static/nir/nifl" />
+    <!-- NIFL - Uhlsport -->
+    <record id="328" path="static/nir/uhlsport" />
+    <!-- Ekstraklasa - PKO -->
+    <record id="329" path="static/pol/pko" />
+    <!-- MLS - CAT -->
+    <record id="330" path="static/usa/cat" />
+    <!-- MLS - Allstate -->
+    <record id="332" path="static/usa/allstate" />
+    <!-- Wales - Macron -->
+    <record id="333" path="static/wal/macron" />
+    <!-- Wales - Become a Ref -->
+    <record id="334" path="static/wal/become a ref" />
+    <!-- William Hill - SPFL -->
+    <record id="369" path="video/sco/spfl" animated="true" />
+    <!-- MLS - CAT -->
+    <record id="371" path="video/usa/cat" animated="true" />
+    <!-- MLS - Allstate -->
+    <record id="373" path="video/usa/allstate" animated="true" />
+    <!-- LFP - BKT -->
+    <record id="353" path="video/fra/bkt" animated="true" />
+    <!-- LFP - La Poste -->
+    <record id="410" path="video/fra/la poste" animated="true" />
+    <!-- LFP - Decathlon L1 -->
+    <record id="411" path="video/fra/decathlon l1" animated="true" />
+    <!-- EFL - EFL Trophy -->
+    <record id="228" path="video/eng/efl/efl trophy" animated="true" />
+    <!-- EFL - Kelloggs -->
+    <record id="336" path="video/eng/efl/kelloggs" animated="true" />
+    <!-- Watford - Koka -->
+    <record id="414" path="video/eng/watford/koka" animated="true" />
+    <!-- Watford - Uni Herts -->
+    <record id="415" path="video/eng/watford/uni herts" animated="true" />
+    <!-- SI Default - FMFC -->
+    <record id="416" path="video/default/fmfc" animated="true" />
+    <!-- EFL - Jameson -->
+    <record id="117" path="static/eng/efl/jameson" />
+    <!-- EFL - Jameson -->
+    <record id="126" path="video/eng/efl/jameson" animated="true" />
+    <!-- ITA - Cagliari - banco di sardegna -->
+    <record id="159" path="static/ita/cagliari/banco di sardegna" />
+    <!-- ITA - Cagliari - banco di sardegna -->
+    <record id="188" path="video/ita/cagliari/banco di sardegna" animated="true" />
+    <!-- LAT - Virsliga -->
+    <record id="359" path="video/lat/virsliga" animated="true" />
+    <!-- SPFL - William Hill SPFL -->
+    <record id="385" path="static/sco/spfl" />
+    <!-- MLS - Our Soccer -->
+    <record id="391" path="static/usa/oursoccer" />
+    <!-- MLS - Adidas -->
+    <record id="393" path="video/usa/adidas" animated="true" />
+    <!-- NIFL - Lough 41 -->
+    <record id="427" path="static/nir/lough 41" />
+    <!-- UEFA - UCL - Tier Dressing 01 -->
+    <record id="338" path="static/uefa/ucl tier 01" />
+    <!-- UEFA - UCL - Tier Dressing 02 -->
+    <record id="347" path="static/uefa/ucl tier 02" />
+    <!-- UEFA - UECL - Tier Dressing 01 -->
+    <record id="363" path="static/uefa/uecl tier 01" />
+    <!-- UEFA - UECL - Tier Dressing 02 -->
+    <record id="375" path="static/uefa/uecl tier 02" />
+    <!-- UEFA - UECL - Tier Dressing 03 -->
+    <record id="390" path="static/uefa/uecl tier 03" />
+    <!-- UEFA - UEL - Tier Dressing 01 -->
+    <record id="428" path="static/uefa/uel tier 01" />
+    <!-- UEFA - UEL - Tier Dressing 02 -->
+    <record id="429" path="static/uefa/uel tier 02" />
+    <!-- UEFA - UEL - Tier Dressing 03 -->
+    <record id="430" path="static/uefa/uel tier 03" />
+    <!-- UEFA - USC - Tier Dressing 01 -->
+    <record id="431" path="static/uefa/usc tier 01" />
+    <!-- UEFA - USC - Tier Dressing 02 -->
+    <record id="432" path="static/uefa/usc tier 02" />
+    <!-- UEFA - UEL/UECL - Strauss -->
+    <record id="435" path="video/uefa/strauss" animated="true" />
+    <!-- UEFA - UEL/UECL - Enterprise -->
+    <record id="437" path="video/uefa/enterprise" animated="true" />
+    <!-- UEFA - UCL/USC - Fedex -->
+    <record id="439" path="video/uefa/fedex" animated="true" />
+    <!-- UEFA Foundation -->
+    <record id="440" path="video/uefa/foundation" animated="true" />
+    <!-- UEFA - UEL - Hankook -->
+    <record id="441" path="video/uefa/hankook" animated="true" />
+    <!-- UEFA - UECL - Laufenn -->
+    <record id="442" path="video/uefa/laufenn" animated="true" />
+    <!-- UEFA - UCL/USC - Pepsi Max -->
+    <record id="444" path="video/uefa/pepsi" animated="true" />
+    <!-- UEFA - UCL/USC - Playstation -->
+    <record id="445" path="video/uefa/playstation" animated="true" />
+    <!-- CAN - Carlsberg -->
+    <record id="446" path="static/can/carlsberg" />
+    <!-- CAN - Degree -->
+    <record id="448" path="static/can/degree" />
+    <!-- CAN - CPL -->
+    <record id="449" path="static/can/cpl" />
+    <!-- CAN - Allstate -->
+    <record id="450" path="video/can/cpl" animated="true" />
+    <!-- CAN - Carlsberg -->
+    <record id="451" path="video/can/carlsberg" animated="true" />
+    <!-- CAN - Gatorade -->
+    <record id="452" path="video/can/gatorade" animated="true" />
+    <!-- CAN - Degree -->
+    <record id="453" path="video/can/degree" animated="true" />
+    <!-- CAN - Telus -->
+    <record id="454" path="video/can/telus" animated="true" />
+    <!-- KOR - Hana Bank -->
+    <record id="464" path="video/kor/hanabank" animated="true" />
+    <!-- KOR - Dongwon -->
+    <record id="465" path="video/kor/dongwon" animated="true" />
+    <!-- KOR - Lingtea -->
+    <record id="466" path="video/kor/lingtea" animated="true" />
+    <!-- KOR - 711 -->
+    <record id="467" path="video/kor/711" animated="true" />
+    <!-- ITA - Hellas Verona - HV Store -->
+    <record id="476" path="static/ita/hellas verona/hvstore" />
+    <!-- ITA - Hellas Verona - HV Store -->
+    <record id="479" path="video/ita/hellas verona/hvstore" animated="true" />
+    <!-- UEFA - USC - Tier Dressing 03 -->
+    <record id="480" path="static/uefa/usc tier 03" />
+    <!-- Wales - MG -->
+    <record id="107" path="static/wal/mg" />
+    <!-- Wales - PAWB -->
+    <record id="109" path="static/wal/pawb" />
+    <!-- Wales - Welsh Blood Service -->
+    <record id="110" path="static/wal/wbs" />
+    <!-- Wales - MG -->
+    <record id="322" path="static/wal/mg" />
+    <!-- ITA - Fiorentina - Store -->
+    <record id="324" path="static/ita/fiorentina/fiorentina store" />
+    <!-- ITA - Fiorentina - Follow 1 -->
+    <record id="325" path="static/ita/fiorentina/follow 1" />
+    <!-- ITA - Fiorentina - Kappa -->
+    <record id="367" path="static/ita/fiorentina/kappa" />
+    <!-- ITA - Fiorentina - Follow 2 -->
+    <record id="481" path="static/ita/fiorentina/follow 2" />
+    <!-- ITA - Fiorentina - Mediacom -->
+    <record id="482" path="static/ita/fiorentina/mediacom" />
+    <!-- ITA - Fiorentina - Kappa -->
+    <record id="483" path="video/ita/fiorentina/kappa" animated="true" />
+    <!-- ITA - Fiorentina - Mediacom -->
+    <record id="484" path="video/ita/fiorentina/mediacom" animated="true" />
+    <!-- LFP - Ligue 1 -->
+    <record id="146" path="static/fra/ligue1" />
+    <!-- LFP - Ligue 2 -->
+    <record id="147" path="static/fra/ligue2" />
+    <!-- LFP - Ligue 1 -->
+    <record id="181" path="video/fra/ligue1" animated="true" />
+    <!-- LFP - Ligue 2 -->
+    <record id="185" path="video/fra/ligue2" animated="true" />
+    <!-- LFP - McDonalds -->
+    <record id="186" path="video/fra/mcdonalds" animated="true" />
+    <!-- UEFA - UCL/UEL/UECL/USC - Just Eat -->
+    <record id="198" path="video/uefa/just eat" animated="true" />
+    <!-- Watford - MrQ -->
+    <record id="205" path="video/eng/watford/mrq" animated="true" />
+    <!-- ITA - Bologna - Saputo -->
+    <record id="139" path="static/ita/bologna/saputo" />
+    <!-- ITA - Bologna - Lavoropiu -->
+    <record id="224" path="static/ita/bologna/lavoropiu" />
+    <!-- ITA - Bologna - Selenella -->
+    <record id="241" path="static/ita/bologna/selenella" />
+    <!-- ITA - Bologna - Saputo -->
+    <record id="273" path="video/ita/bologna/saputo" animated="true" />
+    <!-- ITA - Bologna - Lavoropiu -->
+    <record id="283" path="video/ita/bologna/lavoropiu" animated="true" />
+    <!-- ITA - Bologna - Selenella -->
+    <record id="320" path="video/ita/bologna/selenella" animated="true" />
+    <!-- MLS - Continental -->
+    <record id="128" path="static/usa/continental" />
+    <!-- MLS - Continental -->
+    <record id="132" path="video/usa/continental" animated="true" />
+    <!-- LAT - TonyBet Virsliga -->
+    <record id="217" path="video/lat/tonybet virsliga" animated="true" />
+    <!-- LFP - McDonalds -->
+    <record id="154" path="static/fra/mcdonalds" />
+    <!-- LFP - Essilor -->
+    <record id="187" path="static/fra/essilor" />
+    <!-- LFP - Point.p -->
+    <record id="189" path="static/fra/pointp" />
+    <!-- LFP - Decathlon L2 -->
+    <record id="216" path="video/fra/decathlon l2" animated="true" />
+    <!-- LFP - Essilor -->
+    <record id="236" path="video/fra/essilor" animated="true" />
+    <!-- LFP - Point.p -->
+    <record id="242" path="video/fra/pointp" animated="true" />
+    <!-- ITA - Roma - AS Roma -->
+    <record id="264" path="static/ita/roma/as roma" />
+    <!-- ITA - Roma - Store -->
+    <record id="266" path="static/ita/roma/store" />
+    <!-- ITA - Roma - AS Roma -->
+    <record id="319" path="video/ita/roma/as roma" animated="true" />
+    <!-- ITA - Roma - Store -->
+    <record id="360" path="video/ita/roma/store" animated="true" />
+    <!-- ITA - Torino - JD Sports -->
+    <record id="384" path="static/ita/torino/jd sports" />
+    <!-- ITA - Torino - JD Sports -->
+    <record id="392" path="video/ita/torino/jd sports" animated="true" />
+    <!-- Wales - Adran Leagues -->
+    <record id="284" path="static/wal/adran" />
+    <!-- ITA - Fiorentina - Estra -->
+    <record id="379" path="video/ita/fiorentina/estra" animated="true" />
+    <!-- ITA - Fiorentina - Lamioni -->
+    <record id="387" path="video/ita/fiorentina/lamioni" animated="true" />
+    <!-- ITA - Juventus - Adidas -->
+    <record id="404" path="static/ita/juventus/adidas" />
+    <!-- ITA - Juventus - Allianz -->
+    <record id="407" path="static/ita/juventus/allianz" />
+    <!-- ITA - Juventus - Adidas -->
+    <record id="408" path="video/ita/juventus/adidas" animated="true" />
+    <!-- ITA - Juventus - Allianz -->
+    <record id="412" path="video/ita/juventus/allianz" animated="true" />
+    <!-- ITA - Hellas Verona - Drivalia -->
+    <record id="420" path="static/ita/hellas verona/drivalia" />
+    <!-- ITA - Hellas Verona - Drivalia -->
+    <record id="423" path="video/ita/hellas verona/drivalia" animated="true" />
+    <!-- UEFA - FootbALL -->
+    <record id="221" path="video/uefa/football" animated="true" />
+    <!-- SI Default - FM -->
+    <record id="127" path="static/default/fm" />
+    <!-- SI Default - FM Console -->
+    <record id="203" path="static/default/fm console" />
+    <!-- SI Default - FM Instagram -->
+    <record id="355" path="static/default/fm instagram" />
+    <!-- SI Default - LinkedIn -->
+    <record id="357" path="static/default/fm linkedin" />
+    <!-- SI Default - FM Mobile -->
+    <record id="358" path="static/default/fm mobile" />
+    <!-- SI Default - FM TikTok -->
+    <record id="377" path="static/default/fm tiktok" />
+    <!-- SI Default - FM Touch -->
+    <record id="424" path="static/default/fm touch" />
+    <!-- SI Default - FMFC -->
+    <record id="425" path="static/default/fmfc" />
+    <!-- SI Default - FM -->
+    <record id="455" path="video/default/fm" animated="true" />
+    <!-- AFC Wimbledon -->
+    <record id="142" path="static/eng/wimbledon/privateoffice" />
+    <!-- AFC Wimbledon -->
+    <record id="143" path="static/eng/wimbledon/togglit" />
+    <!-- AFC Wimbledon - Cappagh -->
+    <record id="179" path="video/eng/wimbledon/lotto" animated="true" />
+    <!-- AFC Wimbledon - Cherry Red -->
+    <record id="180" path="video/eng/wimbledon/cherryred" animated="true" />
+    <!-- AFC Wimbledon - silvermere -->
+    <record id="200" path="video/eng/wimbledon/silvermere" animated="true" />
+    <!-- AFC Wimbledon - Togglit -->
+    <record id="212" path="video/eng/wimbledon/togglit" animated="true" />
+    <!-- Premier League -->
+    <record id="105" path="video/eng/premier league/premierleague" animated="true" />
+    <!-- UEFA - Adidas -->
+    <record id="133" path="video/uefa/adidas" animated="true" />
+    <!-- UEFA - Lidl -->
+    <record id="136" path="video/uefa/lidl" animated="true" />
+    <!-- A-League -->
+    <record id="213" path="video/aus/a league" animated="true" />
+    <!-- Belgian Pro League -->
+    <record id="214" path="video/bel/fantasy pro league" animated="true" />
+    <record id="603" path="video/usa/rbc" animated="true" />
+    <!-- MLS - RBC -->
+    <record id="604" path="static/usa/rbc" />
+    <record id="605" path="static/cze/slavia praha/czechia" />
+    <record id="606" path="static/cze/slavia praha/prague" />
+    <record id="607" path="static/cze/slavia praha/slavia" />
+    <record id="610" path="static/cze/slavia praha/zazijsilu" />
+    <record id="611" path="video/cze/slavia praha/czechia" animated="true" />
+    <record id="612" path="video/cze/slavia praha/prague" animated="true" />
+    <record id="613" path="video/cze/slavia praha/zazijsilu" animated="true" />
+    <record id="614" path="video/cze/slavia praha/slavia" animated="true" />
+    <!-- MLS - Audi -->
+    <record id="617" path="static/usa/audi" />
+    <!-- MLS - Audi -->
+    <record id="618" path="video/usa/audi" animated="true" />
+    <!-- LIT - TopSport -->
+    <record id="619" path="static/lit/topsport" />
+    <!-- LIT - TopSport A Lyga -->
+    <record id="620" path="static/lit/topsport a lyga" />
+    <!-- LIT - Pragmatic Play -->
+    <record id="623" path="static/lit/pragmatic play" />
+    <!-- LIT - Pragmatic Play -->
+    <record id="636" path="video/lit/pragmatic play" animated="true" />
+    <!-- LIT - TopSport -->
+    <record id="637" path="video/lit/topsport" animated="true" />
+    <!-- LIT - TopSport A Lyga -->
+    <record id="643" path="video/lit/topsport a lyga" animated="true" />
+    <record id="653" path="static/sco/spfl alt" />
+    <record id="654" path="video/sco/spfl alt" animated="true" />
+    <record id="655" path="static/cro/ralu" />
+    <record id="656" path="static/cro/castore" />
+    <record id="659" path="video/cro/ralu" animated="true" />
+    <record id="660" path="video/cro/castore" animated="true" />
+    <record id="665" path="static/ger_w/googlepixel" />
+    <record id="670" path="video/ger_w/googlepixel" animated="true" />
+    <!-- CAN - Gatorade -->
+    <record id="677" path="static/can/gatorade" />
+    <!-- CAN - Westjet -->
+    <record id="678" path="static/can/westjet" />
+    <!-- CAN - Maple Lodge -->
+    <record id="679" path="static/can/maplelodge" />
+    <!-- CAN - Burnbrae Farm -->
+    <record id="680" path="video/can/burnbraefarm" animated="true" />
+    <!-- CAN - Maple Lodge -->
+    <record id="681" path="video/can/maplelodge" animated="true" />
+    <!-- CAN - Derbystar -->
+    <record id="682" path="video/can/derbystar" animated="true" />
+    <!-- CAN - One Soccer -->
+    <record id="683" path="video/can/one soccer" animated="true" />
+    <!-- CAN - Macron -->
+    <record id="684" path="video/can/macron" animated="true" />
+    <!-- Eredivisie - Lottery -->
+    <record id="383" path="video/ned/eredivisie lottery" animated="true" />
+    <!-- Eredivisie - Home of Dutch Football -->
+    <record id="405" path="video/ned/home of dutch football" animated="true" />
+    <record id="222" path="static/wal/become a coach" />
+    <record id="225" path="static/uefa/ucl tier 03" />
+    <record id="364" path="video/uefa/mastercard" animated="true" />
+    <!-- ITA - Serie B -->
+    <record id="365" path="video/ita/serie b/serie b" animated="true" />
+    <!-- UEFA - UWCL - Tier Dressing 01 -->
+    <record id="287" path="static/uefa/uwcl tier 01" />
+    <!-- ITA - Fiorentina - Play to be different -->
+    <record id="169" path="static/ita/fiorentina/playtobe" />
+    <record id="459" path="static/ita/genoa/slogan" />
+    <record id="460" path="static/ita/genoa/store" />
+    <record id="461" path="static/ita/genoa/socials" />
+    <record id="463" path="video/ita/genoa/slogan" animated="true" />
+    <record id="468" path="video/ita/genoa/store" animated="true" />
+    <record id="469" path="video/ita/genoa/socials" animated="true" />
+    <record id="148" path="static/ita/juventus/cygames" />
+    <record id="335" path="static/ita/juventus/jstore" />
+    <record id="685" path="video/ita/juventus/cygames" animated="true" />
+    <!-- ITA - Torino - Acrobatica -->
+    <record id="689" path="static/ita/torino/acrobatica" />
+    <record id="691" path="video/ita/torino/acrobatica" animated="true" />
+    <record id="694" path="static/ita/parma/parma esports" />
+    <record id="695" path="static/ita/parma/prometeon" />
+    <record id="696" path="static/ita/parma/credit agricole" />
+    <record id="697" path="static/ita/parma/inxaero" />
+    <record id="699" path="video/ita/parma/monster" animated="true" />
+    <record id="700" path="video/ita/parma/credit agricole" animated="true" />
+    <record id="701" path="video/ita/parma/prometeon" animated="true" />
+    <record id="702" path="video/ita/parma/parma esports" animated="true" />
+    <record id="703" path="video/ita/parma/inxaero" animated="true" />
+    <record id="710" path="video/ita/udinese/b360" animated="true" />
+    <record id="711" path="video/ita/udinese/bluenergy" animated="true" />
+    <record id="712" path="video/ita/udinese/fvg" animated="true" />
+    <record id="713" path="video/ita/udinese/macron" animated="true" />
+    <record id="112" path="static/ita/parma/monster" />
+    <!-- SI Default - FM Youtube -->
+    <record id="150" path="static/default/fm youtube" />
+    <record id="104" path="video/uefa/flix" animated="true" />
+    <!-- UEFA - UCL - Qatar Airways -->
+    <record id="135" path="video/uefa/qatar airways" animated="true" />
+    <record id="137" path="static/usa/door dash" />
+    <!-- MLS - Door Dash -->
+    <record id="141" path="video/usa/door dash" animated="true" />
+    <!-- Eredivisie - Ons Voetbal -->
+    <record id="151" path="static/ned/ons voetbal" />
+    <!-- Edivisie Socials -->
+    <record id="158" path="static/ned/edivisie socials" />
+    <!-- Edivisie - Socials -->
+    <record id="171" path="video/ned/edivisie socials" animated="true" />
+    <!-- Eredivisie - Ons Voetbal -->
+    <record id="178" path="video/ned/ons voetbal" animated="true" />
+    <record id="182" path="static/ita/genoa/kappa" />
+    <record id="183" path="static/ita/genoa/pulsee" />
+    <record id="184" path="video/ita/genoa/kappa" animated="true" />
+    <record id="190" path="video/ita/genoa/pulsee" animated="true" />
+    <record id="174" path="static/eng/wsl/wsl" />
+    <record id="191" path="static/eng/wsl/barclays wsl" />
+    <record id="194" path="video/uae/uae" animated="true" />
+    <record id="144" path="static/wal/adran prem" />
+    <record id="149" path="video/eng/wsl/wsl" animated="true" />
+    <record id="173" path="video/eng/wsl/barclays wsl" animated="true" />
+    <record id="195" path="video/den/aliga" animated="true" />
+    <record id="196" path="video/usa_w/nwsl" animated="true" />
+    <record id="197" path="static/usa_w/nwsl" />
+    <record id="204" path="static/usa_w/elf" />
+    <record id="206" path="static/ita_w/fiorentina/mediacom" />
+    <record id="207" path="video/ita_w/fiorentina/mediacom" animated="true" />
+    <record id="208" path="static/ita_w/como/como women" />
+    <record id="209" path="static/ita_w/como/como women logo" />
+    <record id="215" path="static/ita_w/como/como nike" />
+    <record id="218" path="video/ita_w/como/como women" animated="true" />
+    <record id="219" path="video/ita_w/como/como women logo" animated="true" />
+    <record id="220" path="video/ita_w/como/como nike" animated="true" />
+    <record id="223" path="static/ita_w/genoa/kappa" />
+    <record id="226" path="video/ita_w/genoa/kappa" animated="true" />
+    <record id="227" path="static/ita_w/juventus/juve marketing" />
+    <record id="229" path="video/ita_w/juventus/juve marketing" animated="true" />
+    <record id="244" path="static/ita_w/napoli/napoli" />
+    <record id="245" path="video/ita_w/napoli/napoli" animated="true" />
+    <record id="247" path="video/ita_w/parma/lavoropiu" animated="true" />
+    <record id="252" path="video/ita_w/parma/inxaero" animated="true" />
+    <record id="254" path="static/ita_w/parma/puma" />
+    <record id="255" path="static/ita_w/parma/inxaero" />
+    <record id="261" path="static/ita_w/ternana/universita cusano" />
+    <record id="262" path="video/ita_w/ternana/ternana women" animated="true" />
+    <record id="263" path="static/ita_w/sassuolo/mapei" />
+    <record id="265" path="video/ita_w/sassuolo/mapei" animated="true" />
+    <record id="201" path="video/aus/ninja slushi" animated="true" />
+    <record id="111" path="static/ger/bundesliga app" />
+    <record id="210" path="static/ger/topps" />
+    <record id="211" path="static/ger/aws" />
+    <record id="246" path="video/ger/bundesliga app" animated="true" />
+    <record id="268" path="video/ger/topps" animated="true" />
+    <record id="270" path="video/ger/aws" animated="true" />
+    <record id="285" path="static/kor/lingtea" />
+    <record id="286" path="static/kor/ea sports" />
+    <record id="288" path="video/kor/coupang play" animated="true" />
+    <record id="289" path="video/kor/ea sports" animated="true" />
+    <record id="290" path="static/eng/efl/kelloggs" />
+    <record id="291" path="static/eng/efl/vertu" />
+    <record id="293" path="video/eng/efl/vertu" animated="true" />
+    <record id="295" path="static/ger/funnyfrisch" />
+    <record id="296" path="static/ger/servicenow" />
+    <record id="302" path="video/ger/funnyfrisch" animated="true" />
+    <record id="304" path="video/ger/servicenow" animated="true" />
+    <record id="306" path="video/ger/derbystar" animated="true" />
+    <record id="308" path="video/aus/liberty" animated="true" />
+    <record id="160" path="video/usa_w/google pixel" animated="true" />
+    <record id="230" path="video/eng/premier league/arsenal/emirates" animated="true" />
+    <record id="309" path="video/eng/premier league/bournemouth/bu" animated="true" />
+    <record id="310" path="video/eng/premier league/bournemouth/eset" animated="true" />
+    <record id="311" path="video/eng/premier league/bournemouth/leos" animated="true" />
+    <record id="312" path="static/eng/premier league/brentford/home shirt" />
+    <record id="313" path="video/eng/premier league/brentford/home shirt" animated="true" />
+    <record id="314" path="static/eng/premier league/brighton/amex" />
+    <record id="317" path="static/eng/premier league/brighton/kissimmee" />
+    <record id="321" path="static/eng/premier league/brighton/nike" />
+    <record id="323" path="static/eng/premier league/brighton/snickers" />
+    <record id="337" path="video/eng/premier league/brighton/amex" animated="true" />
+    <record id="341" path="video/eng/premier league/brighton/kissimmee" animated="true" />
+    <record id="344" path="video/eng/premier league/brighton/nike" animated="true" />
+    <record id="346" path="video/eng/premier league/brighton/snickers" animated="true" />
+    <record id="348" path="static/eng/premier league/chelsea/ascott" />
+    <record id="356" path="static/eng/premier league/chelsea/ea" />
+    <record id="366" path="video/eng/premier league/chelsea/ascott" animated="true" />
+    <record id="368" path="video/eng/premier league/chelsea/ea" animated="true" />
+    <record id="370" path="static/eng/premier league/crystal palace/come on you palace" />
+    <record id="374" path="static/eng/premier league/crystal palace/palace for all" />
+    <record id="376" path="static/eng/premier league/crystal palace/south london proud" />
+    <record id="382" path="video/eng/premier league/crystal palace/come on you palace" animated="true" />
+    <record id="388" path="video/eng/premier league/crystal palace/palace for all" animated="true" />
+    <record id="394" path="video/eng/premier league/crystal palace/south london proud" animated="true" />
+    <record id="395" path="static/eng/premier league/everton/castore" />
+    <record id="396" path="static/eng/premier league/everton/christopher ward" />
+    <record id="397" path="static/eng/premier league/everton/efc membership" />
+    <record id="398" path="static/eng/premier league/everton/fanatics" />
+    <record id="399" path="static/eng/premier league/everton/hill dickinson" />
+    <record id="401" path="static/eng/premier league/everton/stadium tours" />
+    <record id="402" path="video/eng/premier league/everton/castore" animated="true" />
+    <record id="403" path="video/eng/premier league/everton/christopher ward" animated="true" />
+    <record id="413" path="video/eng/premier league/everton/efc membership" animated="true" />
+    <record id="417" path="video/eng/premier league/everton/fanatics" animated="true" />
+    <record id="419" path="video/eng/premier league/everton/hill dickinson" animated="true" />
+    <record id="426" path="video/eng/premier league/everton/stadium tours" animated="true" />
+    <record id="433" path="static/eng/premier league/fulham/kinetic sports" />
+    <record id="434" path="video/eng/premier league/fulham/kinetic sports" animated="true" />
+    <record id="436" path="video/eng/premier league/fulham/gomo" animated="true" />
+    <record id="438" path="video/eng/premier league/fulham/socials" animated="true" />
+    <record id="443" path="static/eng/premier league/leeds united/red bull" />
+    <record id="447" path="video/eng/premier league/leeds united/red bull" animated="true" />
+    <record id="456" path="static/eng/premier league/liverpool/axa" />
+    <record id="457" path="static/eng/premier league/liverpool/carlsberg" />
+    <record id="458" path="static/eng/premier league/liverpool/expedia" />
+    <record id="462" path="static/eng/premier league/liverpool/google pixel" />
+    <record id="470" path="static/eng/premier league/liverpool/standardchartered" />
+    <record id="471" path="video/eng/premier league/liverpool/axa" animated="true" />
+    <record id="472" path="video/eng/premier league/liverpool/carlsberg" animated="true" />
+    <record id="473" path="video/eng/premier league/liverpool/expedia" animated="true" />
+    <record id="475" path="video/eng/premier league/liverpool/google pixel" animated="true" />
+    <record id="478" path="video/eng/premier league/liverpool/standardchartered" animated="true" />
+    <record id="485" path="static/eng/premier league/man city/etihad" />
+    <record id="486" path="static/eng/premier league/man city/etisalat" />
+    <record id="487" path="static/eng/premier league/man city/experience abu dhabi" />
+    <record id="488" path="static/eng/premier league/man city/midea" />
+    <record id="489" path="static/eng/premier league/man city/puma" />
+    <record id="490" path="video/eng/premier league/man city/etihad" animated="true" />
+    <record id="491" path="video/eng/premier league/man city/etisalat" animated="true" />
+    <record id="492" path="video/eng/premier league/man city/experience abu dhabi" animated="true" />
+    <record id="493" path="video/eng/premier league/man city/midea" animated="true" />
+    <record id="494" path="video/eng/premier league/man city/puma" animated="true" />
+    <record id="495" path="static/eng/premier league/man utd/dxc" />
+    <record id="496" path="static/eng/premier league/man utd/snapdragon" />
+    <record id="497" path="video/eng/premier league/man utd/dxc" animated="true" />
+    <record id="498" path="video/eng/premier league/man utd/snapdragon" animated="true" />
+    <record id="499" path="static/eng/premier league/newcastle/adidas" />
+    <record id="500" path="static/eng/premier league/newcastle/noon deals" />
+    <record id="501" path="static/eng/premier league/newcastle/noon delivery" />
+    <record id="502" path="static/eng/premier league/newcastle/nufc store" />
+    <record id="503" path="static/eng/premier league/newcastle/sela" />
+    <record id="504" path="static/eng/premier league/newcastle/the mags" />
+    <record id="505" path="video/eng/premier league/newcastle/adidas" animated="true" />
+    <record id="506" path="video/eng/premier league/newcastle/noon" animated="true" />
+    <record id="507" path="video/eng/premier league/newcastle/nufc store" animated="true" />
+    <record id="508" path="video/eng/premier league/newcastle/sela" animated="true" />
+    <record id="509" path="video/eng/premier league/newcastle/the mags" animated="true" />
+    <record id="510" path="static/eng/premier league/tottenham/boss" />
+    <record id="511" path="video/eng/premier league/tottenham/boss" animated="true" />
+    <record id="512" path="static/eng/premier league/west ham/club london" />
+    <record id="513" path="static/eng/premier league/west ham/jeton" />
+    <record id="514" path="static/eng/premier league/west ham/lyca" />
+    <record id="515" path="static/eng/premier league/west ham/quickbooks" />
+    <record id="516" path="static/eng/premier league/west ham/whu socials" />
+    <record id="517" path="video/eng/premier league/west ham/club london" animated="true" />
+    <record id="518" path="video/eng/premier league/west ham/jeton" animated="true" />
+    <record id="519" path="video/eng/premier league/west ham/lyca" animated="true" />
+    <record id="520" path="video/eng/premier league/west ham/quickbooks" animated="true" />
+    <record id="521" path="video/eng/premier league/west ham/whu socials" animated="true" />
+    <record id="522" path="static/eng/premier league/wolves/drayton manor" />
+    <record id="523" path="static/eng/premier league/wolves/fear nothing" />
+    <record id="524" path="static/eng/premier league/wolves/jd sport" />
+    <record id="525" path="static/eng/premier league/wolves/monster" />
+    <record id="526" path="static/eng/premier league/wolves/sudu" />
+    <record id="527" path="static/eng/premier league/wolves/university of wolverhampton" />
+    <record id="528" path="video/eng/premier league/wolves/drayton manor" animated="true" />
+    <record id="529" path="video/eng/premier league/wolves/fear nothing" animated="true" />
+    <record id="530" path="video/eng/premier league/wolves/jd sport" animated="true" />
+    <record id="531" path="video/eng/premier league/wolves/monster" animated="true" />
+    <record id="532" path="video/eng/premier league/wolves/sudu" animated="true" />
+    <record id="533" path="video/eng/premier league/wolves/university of wolverhampton" animated="true" />
+    <!-- Watford - Koka -->
+    <record id="534" path="static/eng/watford/koka" />
+    <!-- FRA - trophee des champions -->
+    <record id="535" path="static/fra/trophee des champions" />
+    <!-- FRA - trophee des champions -->
+    <record id="536" path="video/fra/trophee des champions" animated="true" />
+    <record id="537" path="video/ita_w/serie a" animated="true" />
+    <record id="538" path="static/ita_w/serie a" />
+    <record id="539" path="static/eng/premier league/west ham/whu shop" />
+    <record id="540" path="video/eng/premier league/west ham/whu shop" animated="true" />
+    <!-- Leyton Orient - Suits Me -->
+    <record id="108" path="video/eng/leyton orient/suitsme" animated="true" />
+    <!-- Leyton Orient - Eastdil Secured -->
+    <record id="121" path="video/eng/leyton orient/eastdil secured" animated="true" />
+    <record id="541" path="static/eng/premier league/man city/nexen" />
+    <record id="542" path="video/eng/premier league/man city/nexen" animated="true" />
+    <record id="543" path="static/eng/premier league/bournemouth/eset" />
+    <record id="544" path="static/eng/premier league/tottenham/hpe" />
+    <record id="545" path="video/eng/premier league/tottenham/hpe" animated="true" />
+    <record id="122" path="video/eng/leyton orient/orient eticketing" animated="true" />
+    <record id="123" path="video/mex/club america socials" animated="true" />
+    <record id="277" path="video/mex/nuestras alas" animated="true" />
+    <record id="282" path="video/mex/grandes" animated="true" />
+    <record id="400" path="video/mex/ameshop" animated="true" />
+    <record id="418" path="video/mex/app" animated="true" />
+    <record id="546" path="video/eng/leyton orient/bet wright" animated="true" />
+    <record id="115" path="video/ita/hellas verona/aircash" animated="true" />
+    <record id="119" path="static/ita/hellas verona/aircash" />
+    <record id="106" path="video/arg/river" animated="true" />
+    <record id="120" path="static/arg/assist card" />
+    <record id="152" path="static/arg/betano" />
+    <record id="175" path="static/arg/direct tv" />
+    <record id="176" path="static/arg/mas monumental" />
+    <record id="307" path="static/ita/udinese/b360" />
+    <record id="318" path="static/ita/udinese/bluenergy" />
+    <record id="340" path="static/ita/udinese/fvg" />
+    <record id="345" path="static/ita/udinese/macron" />
+    <record id="378" path="video/eng/efl/fantasy" animated="true" />
+    <record id="118" path="video/eng/premier league/tottenham/express vpn green" animated="true" />
+    <record id="421" path="video/eng/premier league/tottenham/express vpn red" animated="true" />
+    <record id="422" path="video/eng/premier league/tottenham/express vpn blue" animated="true" />
+    <record id="474" path="static/eng/premier league/tottenham/express vpn green" />
+    <record id="477" path="static/eng/premier league/tottenham/express vpn red" />
+    <record id="547" path="video/eng/leyton orient/peritium" animated="true" />
+    <record id="548" path="video/eng/leyton orient/quattro" animated="true" />
+  </record>
+  <!-- this maps certain ads to specific positions around the pitch -->
+  <record id="ad_mappings" />
+  <!-- these are the default ads that will be displayed whenever the code fails to find the ad
+	it is supposed to show, shouldn't ever really happen, but it is here as a fall back option -->
+  <list id="default_value">
+    <!-- SI Default - FM Instagram -->
+    <record>
+      <string id="path" value="static/default/fm instagram" />
+    </record>
+    <!-- SI Default - FM Mobile -->
+    <record>
+      <string id="path" value="static/default/fm mobile" />
+    </record>
+    <!-- SI Default - Kick it Out -->
+    <record>
+      <string id="path" value="static/default/kickitout" />
+    </record>
+    <!-- SI Default - Special Effect -->
+    <record>
+      <string id="path" value="static/default/special effect" />
+      <string id="url" />
+    </record>
+    <!-- SI Default - War Child -->
+    <record>
+      <string id="path" value="static/default/warchild" />
+      <string id="url" />
+    </record>
+    <!-- SI Default - FM Tik Tok -->
+    <record>
+      <string id="path" value="static/default/fm tiktok" />
+      <string id="url" />
+    </record>
+    <!-- SI Default - FM Touch -->
+    <record>
+      <string id="path" value="static/default/fm touch" />
+      <string id="url" />
+    </record>
+    <!-- SI Default - FM Twitch -->
+    <record>
+      <string id="path" value="static/default/fm youtube" />
+      <string id="url" />
+    </record>
+    <!-- SI Default - FM LinkedIn -->
+    <record>
+      <string id="path" value="static/default/fm linkedin" />
+      <string id="url" />
+    </record>
+    <!-- SI Default - FM TikTok -->
+    <record>
+      <string id="path" value="static/default/fm tiktok" />
+      <string id="url" />
+    </record>
+    <!-- SI Default - FM -->
+    <record>
+      <string id="path" value="static/default/fm" />
+      <string id="url" />
+    </record>
+    <!-- SI Default - FM Console -->
+    <record>
+      <string id="path" value="static/default/fm console" />
+      <string id="url" />
+    </record>
+    <!-- SI Default - FMFC -->
+    <record>
+      <string id="path" value="static/default/fmfc" />
+      <string id="url" />
+    </record>
+  </list>
+  <!-- this property list contains lists of cell ids, the id of each list should match either a team
+	a competition or a nation that has special license requirements. The ids inside the list should then be
+	the ids of the ad cells that will be showed for home matches for the team, competition or matches played in the nation -->
+  <list id="items">
+    <record type="default">
+      <!-- this is the list of default cells that will never be replaced by dynamic content, basically these 3 ads will always show in any match -->
+      <list id="alsh">
+        <integer value="101" />
+        <integer value="102" />
+        <integer value="103" />
+      </list>
+      <!-- this is the list of cells that will be used when only default ads are allowed -->
+      <list id="deon">
+        <!-- ads that will always show -->
+        <record id="alsh" />
+        <!-- animated LED ads -->
+        <record id="sanm" />
+        <!-- in-house static ads -->
+        <record id="ssta" />
+        <record id="cvds" />
+      </list>
+      <!-- This is a replacement for 'deon' list as some leagues/clubs have restrictions on ads -->
+      <list id="newd">
+        <!-- ads that will always show -->
+        <record id="ssta" size="1" />
+        <!-- si/sega ads -->
+        <record id="alsh" size="1" />
+        <!-- animated LED ads -->
+        <record id="sanm" />
+        <record id="cvds" />
+      </list>
+      <!-- this is the list of charity ad cells only -->
+      <list id="char">
+        <integer value="101" />
+        <integer value="102" />
+        <integer value="103" />
+      </list>
+      <!-- this is the list of cells that will be used for any default matches -->
+      <list id="-1">
+        <record id="ssta" />
+        <record id="alsh" />
+        <record id="cvds" />
+        <record id="cvds" />
+        <record id="sanm" />
+      </list>
+      <!-- Similar to -1 but without the new ads case in some league are not permitted -->
+      <list id="defr">
+        <record id="newd" />
+      </list>
+      <!-- the list of ads used in australia -->
+      <list id="aust">
+        <integer value="213" />
+        <integer value="201" />
+        <integer value="308" />
+        <!-- use the default ads 7 times to get more than 50 cells -->
+        <record id="deon" size="1" />
+      </list>
+      <!-- the list of ads used in england -->
+      <list id="engl">
+        <record id="prst" />
+        <record id="ssta" />
+        <record id="alsh" />
+        <record id="cvds" />
+        <record id="cvds" />
+        <record id="sanm" />
+      </list>
+      <!-- the list of ads used in english football -->
+      <list id="efbl">
+        <!-- use the english ads 7 times to get more than 50 cells -->
+        <record id="prst" size="1" />
+        <record id="cvds" />
+        <record id="sanm" />
+        <record id="cvds" />
+        <record id="alsh" />
+        <record id="ssta" />
+      </list>
+      <!-- the list of ads used in the english conference league -->
+      <list id="ecnf">
+        <integer value="409" />
+        <!-- use the english ads 7 times to get more than 50 cells -->
+        <record id="efbl" size="2" />
+      </list>
+      <!-- the list of ads used in britain, except england -->
+      <list id="brit">
+        <record id="prst" />
+        <record id="deon" />
+      </list>
+      <!-- the list of ads used in britain, except england w/restrictions -->
+      <list id="brir">
+        <!-- default ads -->
+        <record id="newd" />
+        <record id="prst" />
+      </list>
+      <!-- List with all static and LED for MLS competitions -->
+      <list id="mlsa">
+        <integer value="138" />
+        <integer value="332" />
+        <integer value="617" />
+        <integer value="128" />
+        <integer value="330" />
+        <integer value="391" />
+        <integer value="604" />
+        <integer value="137" />
+        <integer value="240" />
+        <integer value="618" />
+        <integer value="132" />
+        <integer value="371" />
+        <integer value="373" />
+        <integer value="603" />
+        <integer value="393" />
+        <integer value="141" />
+        <record id="newd" />
+      </list>
+      <list id="ndef">
+        <record id="alsh" />
+        <record id="ssta" />
+        <record id="cvds" />
+        <record id="cvds" />
+        <record id="sanm" />
+      </list>
+      <!-- List of Ads to exclude from Xbox, Switch & Epic platforms -->
+      <list id="exlc">
+        <integer value="203" />
+        <integer value="358" />
+        <integer value="424" />
+        <integer value="445" />
+      </list>
+      <!-- List of Ads to exclude from Apple Arcade platform. Standard exclusions from list above plus some Gambling & Alcohol ads.  -->
+      <list id="exAA">
+        <integer value="113" />
+        <integer value="546" />
+        <integer value="156" />
+        <integer value="205" />
+        <integer value="278" />
+        <integer value="279" />
+        <integer value="280" />
+        <integer value="281" />
+        <integer value="619" />
+        <integer value="217" />
+        <integer value="620" />
+        <integer value="446" />
+        <integer value="451" />
+        <integer value="381" />
+        <integer value="623" />
+        <integer value="117" />
+        <integer value="126" />
+        <integer value="385" />
+        <integer value="653" />
+        <integer value="636" />
+        <integer value="637" />
+        <integer value="620" />
+        <integer value="643" />
+        <integer value="369" />
+        <integer value="354" />
+        <integer value="141" />
+        <integer value="665" />
+        <integer value="670" />
+        <integer value="153" />
+        <integer value="339" />
+        <integer value="160" />
+        <integer value="457" />
+        <integer value="472" />
+        <integer value="475" />
+        <integer value="462" />
+        <integer value="233" />
+        <integer value="654" />
+        <integer value="383" />
+        <integer value="259" />
+        <integer value="106" />
+        <integer value="152" />
+        <record id="exlc" />
+      </list>
+      <!-- Geolocalized Ads. No FB/Twitter ads.  Do not rename this list! -->
+      <list id="gchn">
+        <integer value="355" />
+        <integer value="357" />
+        <integer value="377" />
+        <record id="alsh" />
+      </list>
+      <list id="efl">
+        <integer value="113" />
+        <integer value="114" />
+        <integer value="251" />
+        <integer value="326" />
+        <integer value="117" />
+        <integer value="290" />
+        <integer value="291" />
+        <integer value="276" />
+        <integer value="172" />
+        <integer value="253" />
+        <integer value="336" />
+        <integer value="126" />
+        <integer value="293" />
+        <integer value="378" />
+      </list>
+      <list id="nir">
+        <integer value="328" />
+        <integer value="327" />
+      </list>
+      <!-- In-house static ads -->
+      <list id="ssta">
+        <integer value="127" />
+        <integer value="203" />
+        <integer value="355" />
+        <integer value="357" />
+        <integer value="358" />
+        <integer value="377" />
+        <integer value="424" />
+        <integer value="425" />
+        <integer value="101" />
+        <integer value="102" />
+        <integer value="103" />
+      </list>
+      <list id="sanm">
+        <integer value="455" />
+        <integer value="416" />
+        <integer value="349" />
+        <integer value="361" />
+        <integer value="362" />
+      </list>
+      <list id="cvds">
+        <integer value="349" />
+        <integer value="361" />
+        <integer value="362" />
+      </list>
+      <!-- List of ads for J League comps only -->
+      <list id="jpn">
+        <integer value="455" />
+        <integer value="416" />
+      </list>
+    </record>
+    <record type="competition">
+      <!-- australian a league regular season -->
+      <list id="215363">
+        <!-- australian ads -->
+        <record id="aust" />
+      </list>
+      <!-- australian a league final series -->
+      <list id="150995">
+        <!-- australian ads -->
+        <record id="aust" />
+      </list>
+      <!-- australian a league all stars game -->
+      <list id="214919">
+        <!-- australian ads -->
+        <record id="aust" />
+      </list>
+      <!-- Australian Hyundai A-League (National Soccer League successor) -->
+      <list id="129985">
+        <!-- australian ads -->
+        <record id="aust" />
+      </list>
+      <!-- english championship -->
+      <list id="12">
+        <integer value="113" />
+        <integer value="280" />
+        <record id="efl" />
+        <record id="efbl" />
+      </list>
+      <!-- english league 1 -->
+      <list id="13">
+        <integer value="113" />
+        <integer value="281" />
+        <record id="efl" />
+        <record id="efbl" />
+      </list>
+      <!-- english league 2 -->
+      <list id="14">
+        <integer value="113" />
+        <integer value="279" />
+        <record id="efl" />
+        <record id="efbl" />
+      </list>
+      <!-- english league cup -->
+      <list id="1301427">
+        <integer value="116" />
+        <record id="efl" />
+        <record id="efbl" />
+      </list>
+      <!-- Leasing.com Trophy -->
+      <list id="1301429">
+        <integer value="124" />
+        <integer value="228" />
+        <record id="efl" />
+        <record id="efbl" />
+      </list>
+      <!-- english conference league -->
+      <list id="109201">
+        <!-- conference league ads -->
+        <record id="ecnf" />
+      </list>
+      <!-- english conference league north -->
+      <list id="5123054">
+        <record id="ecnf" />
+      </list>
+      <!-- english conference league south -->
+      <list id="5123055">
+        <record id="ecnf" />
+      </list>
+      <!-- Cymru Premier -->
+      <list id="130672">
+        <integer value="292" />
+        <integer value="294" />
+        <integer value="297" />
+        <integer value="298" />
+        <integer value="333" />
+        <integer value="334" />
+        <integer value="284" />
+        <integer value="109" />
+        <integer value="110" />
+        <integer value="222" />
+        <!-- uses the default w/restrictions list -->
+        <record id="brit" />
+      </list>
+      <!-- french league 1 -->
+      <list id="16">
+        <integer value="131" />
+        <integer value="146" />
+        <integer value="130" />
+        <integer value="154" />
+        <integer value="187" />
+        <integer value="189" />
+        <integer value="125" />
+        <integer value="411" />
+        <integer value="410" />
+        <integer value="186" />
+        <integer value="236" />
+        <integer value="242" />
+        <integer value="181" />
+        <integer value="305" />
+        <!-- use the default ads 7 times to get more than 50 cells -->
+        <record id="newd" size="1" />
+      </list>
+      <!-- french league 2 -->
+      <list id="17">
+        <integer value="134" />
+        <integer value="147" />
+        <integer value="130" />
+        <integer value="125" />
+        <integer value="129" />
+        <integer value="187" />
+        <integer value="189" />
+        <integer value="353" />
+        <integer value="185" />
+        <integer value="410" />
+        <integer value="305" />
+        <integer value="216" />
+        <integer value="236" />
+        <integer value="242" />
+        <!-- use the default ads 7 times to get more than 50 cells -->
+        <record id="newd" size="7" />
+      </list>
+      <!-- french league cup -->
+      <list id="1301408">
+        <!-- use the default ads 7 times to get more than 50 cells -->
+        <record id="newd" size="7" />
+      </list>
+      <!-- mls -->
+      <list id="40">
+        <record id="mlsa" />
+      </list>
+      <!-- scottish premier league -->
+      <list id="45">
+        <integer value="369" />
+        <integer value="385" />
+        <integer value="653" />
+        <integer value="654" />
+        <!-- use the british ads w/restrictions -->
+        <record id="brir" size="7" />
+      </list>
+      <!-- scottish championship -->
+      <list id="46">
+        <integer value="369" />
+        <integer value="385" />
+        <integer value="653" />
+        <integer value="654" />
+        <!-- use the british ads w/restrictions -->
+        <record id="brir" size="7" />
+      </list>
+      <!-- scottish league 1 -->
+      <list id="47">
+        <integer value="369" />
+        <integer value="385" />
+        <integer value="653" />
+        <integer value="654" />
+        <!-- use the british ads w/restrictions -->
+        <record id="brir" size="7" />
+      </list>
+      <!-- scottish league 2 -->
+      <list id="48">
+        <integer value="369" />
+        <integer value="385" />
+        <integer value="653" />
+        <integer value="654" />
+        <!-- use the british ads w/restrictions -->
+        <record id="brir" size="7" />
+      </list>
+      <!-- italian serie a -->
+      <list id="32">
+        <record id="newd" />
+      </list>
+      <!-- italian serie b -->
+      <list id="33">
+        <integer value="365" />
+        <record id="newd" />
+      </list>
+      <!-- Holland - Eredivisie -->
+      <list id="29">
+        <integer value="259" />
+        <integer value="260" />
+        <integer value="383" />
+        <integer value="405" />
+        <integer value="158" />
+        <integer value="171" />
+        <integer value="151" />
+        <integer value="178" />
+        <!-- Defaults w/restrictions -->
+        <record id="defr" />
+      </list>
+      <!-- Holland - Keuken Kampioen Divisie -->
+      <list id="30">
+        <integer value="192" />
+        <integer value="199" />
+        <integer value="202" />
+        <!-- Defaults w/restrictions -->
+        <record id="defr" />
+      </list>
+      <!-- South Korea - K-League 1 -->
+      <list id="136407">
+        <integer value="237" />
+        <integer value="248" />
+        <integer value="249" />
+        <integer value="250" />
+        <integer value="286" />
+        <integer value="285" />
+        <integer value="465" />
+        <integer value="466" />
+        <integer value="289" />
+        <integer value="288" />
+        <integer value="464" />
+        <integer value="467" />
+        <!-- Defaults w/restrictions -->
+        <record id="defr" />
+      </list>
+      <!-- South Korea - K-League 2 -->
+      <list id="66029602">
+        <integer value="237" />
+        <integer value="248" />
+        <integer value="249" />
+        <integer value="250" />
+        <integer value="286" />
+        <integer value="285" />
+        <integer value="465" />
+        <integer value="466" />
+        <integer value="289" />
+        <integer value="288" />
+        <integer value="464" />
+        <integer value="467" />
+        <!-- Defaults w/restrictions -->
+        <record id="defr" />
+      </list>
+      <!-- Denmark - Superliga -->
+      <list id="6">
+        <integer value="350" />
+        <integer value="351" />
+        <integer value="354" />
+        <!-- Defaults w/restrictions -->
+        <record id="defr" />
+      </list>
+      <!-- Gibraltar - Premier Division -->
+      <list id="36500021">
+        <!-- Defaults w/restrictions -->
+        <record id="defr" />
+      </list>
+      <!-- Danske Bank Premiership -->
+      <list id="130023">
+        <integer value="164" />
+        <!-- Defaults w/restrictions -->
+        <record id="brit" />
+        <record id="nir" />
+      </list>
+      <!-- NIFL Championship 1 -->
+      <list id="130024">
+        <integer value="427" />
+        <!-- Defaults w/restrictions -->
+        <record id="brit" />
+        <record id="nir" />
+      </list>
+      <!-- NIFL Championship 2 -->
+      <list id="147023">
+        <!-- Defaults w/restrictions -->
+        <record id="brit" />
+        <record id="nir" />
+      </list>
+      <!-- Northern Irish Cup -->
+      <list id="130026">
+        <!-- Defaults w/restrictions -->
+        <record id="brit" />
+      </list>
+      <!-- Northern Irish League Cup -->
+      <list id="130027">
+        <!-- Defaults w/restrictions -->
+        <record id="brit" />
+      </list>
+      <!-- Northern Irish County Antrim Shield -->
+      <list id="130028">
+        <!-- Defaults w/restrictions -->
+        <record id="brit" />
+      </list>
+      <!-- Northern Irish Steel & Sons Cup -->
+      <list id="416327">
+        <!-- Defaults w/restrictions -->
+        <record id="brit" />
+      </list>
+      <!-- Northern Irish Intermediate Cup -->
+      <list id="418017">
+        <!-- Defaults w/restrictions -->
+        <record id="brit" />
+      </list>
+      <!-- Northern Irish Mid Ulster Cup -->
+      <list id="417858">
+        <!-- Defaults w/restrictions -->
+        <record id="brit" />
+      </list>
+      <!-- Poland Ekstraklasa -->
+      <list id="129558">
+        <integer value="329" />
+        <integer value="193" />
+        <record id="deon" />
+      </list>
+      <!-- American MLS All Stars Competition -->
+      <list id="109134">
+        <record id="mlsa" />
+      </list>
+      <!-- World Cup -->
+      <list id="1301385">
+        <record id="newd" />
+      </list>
+      <list id="1301388">
+        <record id="deon" />
+      </list>
+      <!-- American MLS Rivality Cups -->
+      <list id="209944">
+        <record id="mlsa" />
+      </list>
+      <!-- European Championships -->
+      <list id="95">
+        <record id="newd" />
+      </list>
+      <!-- Concacaf Gold Cup -->
+      <list id="145509">
+        <record id="newd" />
+      </list>
+      <!-- Copa America -->
+      <list id="1301389">
+        <record id="newd" />
+      </list>
+      <!-- Asian Nations Cup -->
+      <list id="102414">
+        <record id="newd" />
+      </list>
+      <list id="7">
+        <record id="defr" />
+      </list>
+      <list id="8">
+        <record id="defr" />
+      </list>
+      <list id="120798">
+        <record id="brit" />
+      </list>
+      <list id="1301431">
+        <record id="brit" />
+      </list>
+      <list id="129561">
+        <record id="deon" />
+      </list>
+      <list id="130674">
+        <integer value="298" />
+        <integer value="297" />
+        <integer value="334" />
+        <integer value="333" />
+        <integer value="109" />
+        <integer value="110" />
+        <integer value="284" />
+        <integer value="222" />
+        <record id="brit" />
+      </list>
+      <list id="130675">
+        <integer value="322" />
+        <integer value="107" />
+        <integer value="334" />
+        <integer value="333" />
+        <integer value="109" />
+        <integer value="110" />
+        <integer value="284" />
+        <integer value="222" />
+        <record id="brit" />
+      </list>
+      <!-- Bundesliga -->
+      <list id="22">
+        <integer value="140" />
+        <integer value="111" />
+        <integer value="210" />
+        <integer value="211" />
+        <integer value="295" />
+        <integer value="296" />
+        <integer value="177" />
+        <integer value="246" />
+        <integer value="268" />
+        <integer value="270" />
+        <integer value="302" />
+        <integer value="304" />
+        <integer value="306" />
+        <record id="newd" />
+      </list>
+      <list id="67">
+        <record id="ndef" />
+      </list>
+      <!-- 2. Bundesliga -->
+      <list id="23">
+        <integer value="140" />
+        <integer value="111" />
+        <integer value="210" />
+        <integer value="211" />
+        <integer value="295" />
+        <integer value="296" />
+        <integer value="177" />
+        <integer value="246" />
+        <integer value="268" />
+        <integer value="270" />
+        <integer value="302" />
+        <integer value="304" />
+        <integer value="306" />
+        <record id="newd" />
+      </list>
+      <list id="92030194">
+        <record id="newd" />
+      </list>
+      <!-- 3. Liga -->
+      <list id="35010926">
+        <integer value="145" />
+        <integer value="315" />
+        <record id="newd" />
+      </list>
+      <!-- Cymru North -->
+      <list id="29236869">
+        <integer value="292" />
+        <integer value="294" />
+        <integer value="333" />
+        <integer value="334" />
+        <integer value="297" />
+        <integer value="298" />
+        <integer value="109" />
+        <integer value="110" />
+        <integer value="284" />
+        <integer value="222" />
+        <record id="brit" />
+      </list>
+      <!-- Cymru South -->
+      <list id="29236870">
+        <integer value="292" />
+        <integer value="294" />
+        <integer value="333" />
+        <integer value="334" />
+        <integer value="297" />
+        <integer value="298" />
+        <integer value="109" />
+        <integer value="110" />
+        <integer value="284" />
+        <integer value="222" />
+        <record id="brit" />
+      </list>
+      <!-- Canadian Premier League -->
+      <list id="20502998">
+        <integer value="446" />
+        <integer value="449" />
+        <integer value="677" />
+        <integer value="267" />
+        <integer value="448" />
+        <integer value="678" />
+        <integer value="386" />
+        <integer value="372" />
+        <integer value="389" />
+        <integer value="380" />
+        <integer value="381" />
+        <integer value="679" />
+        <integer value="451" />
+        <integer value="450" />
+        <integer value="452" />
+        <integer value="453" />
+        <integer value="680" />
+        <integer value="454" />
+        <integer value="406" />
+        <integer value="256" />
+        <integer value="681" />
+        <integer value="682" />
+        <integer value="683" />
+        <integer value="684" />
+        <record id="newd" />
+      </list>
+      <!-- Optibet Virsliga -->
+      <list id="8403697">
+        <integer value="359" />
+        <integer value="217" />
+        <record id="newd" />
+      </list>
+      <!-- UEFA Champions League -->
+      <list id="1301394">
+        <integer value="347" />
+        <integer value="338" />
+        <integer value="347" />
+        <integer value="225" />
+        <integer value="440" />
+        <integer value="445" />
+        <integer value="198" />
+        <integer value="364" />
+        <integer value="444" />
+        <integer value="439" />
+        <integer value="135" />
+        <integer value="133" />
+        <integer value="221" />
+      </list>
+      <!-- UEFA Europa League -->
+      <list id="1301396">
+        <integer value="429" />
+        <integer value="428" />
+        <integer value="429" />
+        <integer value="430" />
+        <integer value="440" />
+        <integer value="435" />
+        <integer value="441" />
+        <integer value="437" />
+        <integer value="198" />
+        <integer value="136" />
+        <integer value="104" />
+        <integer value="221" />
+      </list>
+      <!-- UEFA Europa Conference League -->
+      <list id="31051584">
+        <integer value="375" />
+        <integer value="363" />
+        <integer value="375" />
+        <integer value="390" />
+        <integer value="440" />
+        <integer value="435" />
+        <integer value="442" />
+        <integer value="437" />
+        <integer value="198" />
+        <integer value="136" />
+        <integer value="104" />
+        <integer value="221" />
+      </list>
+      <!-- UEFA Super Cup -->
+      <list id="1301397">
+        <integer value="432" />
+        <integer value="431" />
+        <integer value="432" />
+        <integer value="480" />
+        <integer value="440" />
+        <integer value="445" />
+        <integer value="198" />
+        <integer value="364" />
+        <integer value="444" />
+        <integer value="439" />
+        <integer value="135" />
+        <integer value="133" />
+        <integer value="221" />
+      </list>
+      <list id="102428">
+        <record id="jpn" />
+      </list>
+      <list id="115424">
+        <record id="jpn" />
+      </list>
+      <list id="791180">
+        <record id="jpn" />
+      </list>
+      <list id="102430">
+        <record id="jpn" />
+      </list>
+      <list id="11">
+        <integer value="105" />
+        <record id="efbl" />
+        <record id="sanm" />
+        <record id="ssta" />
+      </list>
+      <list id="2300046">
+        <integer value="619" />
+        <integer value="620" />
+        <integer value="623" />
+        <integer value="636" />
+        <integer value="637" />
+        <integer value="643" />
+      </list>
+      <list id="2000148115">
+        <integer value="665" />
+        <integer value="665" />
+        <integer value="670" />
+        <integer value="670" />
+      </list>
+      <list id="2000169152">
+        <integer value="284" />
+        <integer value="144" />
+        <record id="brit" />
+      </list>
+      <list id="2000179924">
+        <integer value="287" />
+        <integer value="440" />
+        <integer value="221" />
+      </list>
+      <list id="2000101095">
+        <integer value="191" />
+        <integer value="174" />
+        <integer value="149" />
+        <integer value="173" />
+        <record id="efbl" />
+      </list>
+      <list id="2000107193">
+        <integer value="191" />
+        <integer value="174" />
+        <integer value="149" />
+        <integer value="173" />
+        <record id="efbl" />
+      </list>
+      <list id="7880000">
+        <integer value="194" />
+      </list>
+      <list id="2000168609">
+        <integer value="195" />
+      </list>
+      <list id="2000132563">
+        <integer value="197" />
+        <integer value="204" />
+        <integer value="196" />
+        <integer value="160" />
+      </list>
+      <list id="2000337713">
+        <record id="aust" />
+      </list>
+      <list id="2000337714">
+        <record id="aust" />
+      </list>
+      <list id="2000129935">
+        <record id="aust" />
+      </list>
+      <list id="109288">
+        <integer value="535" />
+        <integer value="154" />
+        <integer value="129" />
+        <integer value="131" />
+        <integer value="187" />
+        <integer value="130" />
+        <integer value="189" />
+        <integer value="536" />
+        <integer value="186" />
+        <integer value="353" />
+        <integer value="411" />
+        <integer value="236" />
+        <integer value="410" />
+        <integer value="242" />
+      </list>
+      <list id="2000168606">
+        <integer value="538" />
+        <integer value="537" />
+      </list>
+      <list id="1301428">
+        <record id="engl" />
+      </list>
+    </record>
+    <record type="team">
+      <!-- Watford -->
+      <list id="732">
+        <integer value="534" />
+        <integer value="414" />
+        <integer value="415" />
+        <integer value="205" />
+        <integer value="352" />
+      </list>
+      <!-- ITA - AS Roma -->
+      <list id="1100">
+        <integer value="264" />
+        <integer value="266" />
+        <integer value="319" />
+        <integer value="360" />
+        <record id="newd" />
+      </list>
+      <!-- ITA - Bologna -->
+      <list id="1111">
+        <integer value="238" />
+        <integer value="239" />
+        <integer value="139" />
+        <integer value="224" />
+        <integer value="241" />
+        <integer value="257" />
+        <integer value="258" />
+        <integer value="273" />
+        <integer value="283" />
+        <integer value="320" />
+        <!-- use default ads 7 times to get more than 50 cells -->
+        <record id="newd" size="7" />
+      </list>
+      <!-- ITA - Cagliari -->
+      <list id="1114">
+        <integer value="243" />
+        <integer value="156" />
+        <integer value="161" />
+        <integer value="165" />
+        <integer value="159" />
+        <integer value="316" />
+        <integer value="231" />
+        <integer value="232" />
+        <integer value="233" />
+        <integer value="188" />
+        <!-- use the default ads 7 times to get more than 50 cells -->
+        <record id="newd" size="1" />
+      </list>
+      <!-- ITA - Empoli -->
+      <list id="1126">
+        <integer value="269" />
+        <integer value="274" />
+        <integer value="271" />
+        <integer value="272" />
+        <integer value="166" />
+        <integer value="167" />
+        <integer value="168" />
+        <integer value="170" />
+      </list>
+      <!-- ITA - Fiorentina -->
+      <list id="1129">
+        <integer value="106" />
+        <integer value="324" />
+        <integer value="325" />
+        <integer value="481" />
+        <integer value="367" />
+        <integer value="482" />
+        <integer value="483" />
+        <integer value="484" />
+        <integer value="379" />
+        <integer value="387" />
+        <integer value="169" />
+      </list>
+      <!-- ITA - Genoa -->
+      <list id="1132">
+        <integer value="275" />
+        <integer value="331" />
+        <integer value="463" />
+        <integer value="468" />
+        <integer value="469" />
+        <integer value="459" />
+        <integer value="461" />
+        <integer value="460" />
+        <integer value="182" />
+        <integer value="183" />
+        <integer value="184" />
+        <integer value="190" />
+      </list>
+      <!-- ITA - Juventus -->
+      <list id="1139">
+        <integer value="404" />
+        <integer value="407" />
+        <integer value="408" />
+        <integer value="412" />
+        <integer value="685" />
+        <integer value="148" />
+        <integer value="335" />
+        <integer value="340" />
+        <integer value="227" />
+        <integer value="229" />
+      </list>
+      <!-- ITA - Torino -->
+      <list id="1174">
+        <integer value="153" />
+        <integer value="155" />
+        <integer value="157" />
+        <integer value="343" />
+        <integer value="339" />
+        <integer value="342" />
+        <integer value="384" />
+        <integer value="392" />
+        <integer value="689" />
+        <integer value="691" />
+      </list>
+      <!-- ITA - Udinese -->
+      <list id="1178">
+        <integer value="710" />
+        <integer value="711" />
+        <integer value="712" />
+        <integer value="713" />
+        <integer value="307" />
+        <integer value="318" />
+        <integer value="340" />
+        <integer value="345" />
+      </list>
+      <!-- ajax -->
+      <list id="992">
+        <!-- use the default ads 7 times to get more than 50 cells -->
+        <record id="newd" size="1" />
+      </list>
+      <!-- feyenoord -->
+      <list id="1013">
+        <!-- use the default ads 7 times to get more than 50 cells -->
+        <record id="newd" size="1" />
+      </list>
+      <!-- psv -->
+      <list id="1028">
+        <!-- use the default ads 7 times to get more than 50 cells -->
+        <record id="newd" size="1" />
+      </list>
+      <!-- team holland -->
+      <list id="784">
+        <!-- use the default ads 7 times to get more than 50 cells -->
+        <record id="newd" size="7" />
+      </list>
+      <!-- gibraltar -->
+      <list id="214394">
+        <!-- use the default ads 7 times to get more than 50 cells -->
+        <record id="newd" size="7" />
+      </list>
+      <!-- AFC Wimbledon -->
+      <list id="5110769">
+        <integer value="300" />
+        <integer value="143" />
+        <integer value="303" />
+        <integer value="127" />
+        <integer value="142" />
+        <integer value="299" />
+        <integer value="179" />
+        <integer value="180" />
+        <integer value="301" />
+        <integer value="455" />
+        <integer value="212" />
+        <integer value="200" />
+      </list>
+      <!-- ITA - Hellas Verona -->
+      <list id="2201">
+        <integer value="162" />
+        <integer value="163" />
+        <integer value="476" />
+        <integer value="234" />
+        <integer value="235" />
+        <integer value="479" />
+        <integer value="420" />
+        <integer value="119" />
+        <integer value="115" />
+        <integer value="423" />
+      </list>
+      <list id="600">
+        <integer value="309" />
+        <integer value="310" />
+        <integer value="311" />
+        <integer value="543" />
+      </list>
+      <list id="618">
+        <integer value="314" />
+        <integer value="317" />
+        <integer value="321" />
+        <integer value="323" />
+        <integer value="337" />
+        <integer value="341" />
+        <integer value="344" />
+        <integer value="346" />
+      </list>
+      <list id="654">
+        <integer value="433" />
+        <integer value="438" />
+        <integer value="436" />
+        <integer value="434" />
+      </list>
+      <list id="740">
+        <integer value="523" />
+        <integer value="522" />
+        <integer value="524" />
+        <integer value="525" />
+        <integer value="526" />
+        <integer value="527" />
+        <integer value="529" />
+        <integer value="528" />
+        <integer value="530" />
+        <integer value="531" />
+        <integer value="532" />
+        <integer value="533" />
+      </list>
+      <list id="642">
+        <integer value="370" />
+        <integer value="374" />
+        <integer value="376" />
+        <integer value="382" />
+        <integer value="388" />
+        <integer value="394" />
+      </list>
+      <list id="602">
+        <integer value="230" />
+      </list>
+      <list id="617">
+        <integer value="312" />
+        <integer value="313" />
+      </list>
+      <list id="630">
+        <integer value="348" />
+        <integer value="356" />
+        <integer value="366" />
+        <integer value="368" />
+      </list>
+      <list id="650">
+        <integer value="399" />
+        <integer value="396" />
+        <integer value="397" />
+        <integer value="395" />
+        <integer value="401" />
+        <integer value="398" />
+        <integer value="419" />
+        <integer value="402" />
+        <integer value="403" />
+        <integer value="413" />
+        <integer value="417" />
+        <integer value="426" />
+      </list>
+      <list id="676">
+        <integer value="456" />
+        <integer value="457" />
+        <integer value="458" />
+        <integer value="462" />
+        <integer value="470" />
+        <integer value="471" />
+        <integer value="472" />
+        <integer value="473" />
+        <integer value="475" />
+        <integer value="478" />
+      </list>
+      <list id="679">
+        <integer value="485" />
+        <integer value="486" />
+        <integer value="487" />
+        <integer value="488" />
+        <integer value="489" />
+        <integer value="541" />
+        <integer value="490" />
+        <integer value="491" />
+        <integer value="492" />
+        <integer value="493" />
+        <integer value="494" />
+        <integer value="542" />
+      </list>
+      <list id="680">
+        <integer value="495" />
+        <integer value="496" />
+        <integer value="497" />
+        <integer value="498" />
+      </list>
+      <list id="688">
+        <integer value="499" />
+        <integer value="500" />
+        <integer value="502" />
+        <integer value="503" />
+        <integer value="501" />
+        <integer value="503" />
+        <integer value="504" />
+        <integer value="505" />
+        <integer value="506" />
+        <integer value="507" />
+        <integer value="508" />
+        <integer value="509" />
+      </list>
+      <list id="728">
+        <integer value="510" />
+        <integer value="544" />
+        <integer value="474" />
+        <integer value="477" />
+        <integer value="511" />
+        <integer value="545" />
+        <integer value="118" />
+        <integer value="421" />
+        <integer value="422" />
+      </list>
+      <list id="735">
+        <integer value="516" />
+        <integer value="512" />
+        <integer value="513" />
+        <integer value="514" />
+        <integer value="515" />
+        <integer value="539" />
+        <integer value="521" />
+        <integer value="517" />
+        <integer value="518" />
+        <integer value="519" />
+        <integer value="520" />
+        <integer value="540" />
+      </list>
+      <list id="474">
+        <integer value="605" />
+        <integer value="606" />
+        <integer value="607" />
+        <integer value="610" />
+        <integer value="611" />
+        <integer value="612" />
+        <integer value="613" />
+        <integer value="614" />
+      </list>
+      <list id="432">
+        <integer value="655" />
+        <integer value="656" />
+        <integer value="659" />
+        <integer value="660" />
+      </list>
+      <list id="1156">
+        <integer value="112" />
+        <integer value="694" />
+        <integer value="695" />
+        <integer value="696" />
+        <integer value="697" />
+        <integer value="699" />
+        <integer value="700" />
+        <integer value="701" />
+        <integer value="702" />
+        <integer value="703" />
+        <record id="newd" />
+      </list>
+      <list id="2000209828">
+        <integer value="206" />
+        <integer value="207" />
+      </list>
+      <list id="2000209829">
+        <integer value="208" />
+        <integer value="209" />
+        <integer value="215" />
+        <integer value="218" />
+        <integer value="219" />
+        <integer value="220" />
+      </list>
+      <list id="2000252759">
+        <integer value="223" />
+        <integer value="226" />
+      </list>
+      <list id="2000176318">
+        <integer value="227" />
+        <integer value="229" />
+      </list>
+      <list id="2000252766">
+        <integer value="244" />
+        <integer value="245" />
+      </list>
+      <list id="2000209826">
+        <integer value="255" />
+        <integer value="254" />
+        <integer value="252" />
+        <integer value="247" />
+      </list>
+      <list id="2000252765">
+        <integer value="261" />
+        <integer value="262" />
+      </list>
+      <list id="2000209837">
+        <integer value="263" />
+        <integer value="265" />
+      </list>
+      <list id="2000209836">
+        <integer value="264" />
+        <integer value="266" />
+      </list>
+      <list id="671">
+        <integer value="443" />
+        <integer value="447" />
+      </list>
+      <list id="674">
+        <integer value="108" />
+        <integer value="121" />
+        <integer value="122" />
+        <integer value="546" />
+        <integer value="547" />
+        <integer value="548" />
+      </list>
+      <list id="1253">
+        <integer value="123" />
+        <integer value="277" />
+        <integer value="282" />
+        <integer value="400" />
+        <integer value="418" />
+      </list>
+      <list id="94">
+        <integer value="106" />
+        <integer value="120" />
+        <integer value="152" />
+        <integer value="175" />
+        <integer value="176" />
+      </list>
+    </record>
+    <record type="nation">
+      <!-- england -->
+      <list id="765">
+        <record id="engl" size="7" />
+      </list>
+      <!-- n. ireland -->
+      <list id="785">
+        <record id="brit" size="1" />
+      </list>
+      <!-- scotland -->
+      <list id="793">
+        <record id="brir" size="1" />
+      </list>
+      <!-- wales -->
+      <list id="801">
+        <record id="brit" size="1" />
+      </list>
+    </record>
+  </list>
+  <!-- This node of "extended_options" allows th specify other settings for club/competition/nation's ads. Available attributes: -->
+  <!-- "led_force_flag": Allows/deny LED digital ads for teams and competition. If a team/competition isn't found in this list -->
+  <!--                   it's going to be code driven based on club reputation, stadium size and nation level of developement. -->
+  <!-- "concatenate_next": By default 'false'. When true during result generation the search doesn't stop the the club/competition -->
+  <!--                     /nation's level but carries on adding ads from the next level. -->
+  <list id="extended_options">
+    <record type="competition">
+      <record id="150995" led_force_flag="true" />
+      <record id="214919" led_force_flag="true" />
+      <record id="129985" led_force_flag="true" />
+      <record id="5123054" led_force_flag="false" />
+      <record id="5123055" led_force_flag="false" />
+      <record id="1301385" led_force_flag="true" />
+      <record id="1301388" led_force_flag="true" />
+      <record id="32" led_force_flag="true" />
+      <record id="33" led_force_flag="true" />
+      <record id="95" led_force_flag="true" />
+      <record id="145509" led_force_flag="true" />
+      <record id="1301389" led_force_flag="true" />
+      <record id="102414" led_force_flag="true" />
+      <record id="22" led_force_flag="true" />
+      <record id="67" led_force_flag="true" />
+      <record id="130931" led_force_flag="true" />
+      <record id="23043714" led_force_flag="true" />
+      <record id="930953" led_force_flag="true" />
+      <record id="7" led_force_flag="true" />
+      <record id="6" led_force_flag="true" />
+      <record id="129558" led_force_flag="true" />
+      <record id="92030194" led_force_flag="true" />
+      <record id="20502998" led_force_flag="true" />
+      <record id="8403697" led_force_flag="true" />
+      <record id="1301394" exclude_club_ads="true" led_force_flag="true" />
+      <record id="1301396" exclude_club_ads="true" led_force_flag="true" />
+      <record id="31051584" exclude_club_ads="true" led_force_flag="true" />
+      <record id="1301397" exclude_club_ads="true" led_force_flag="true" />
+      <record id="2000179924" exclude_club_ads="true" led_force_flag="true" />
+      <record id="11" led_force_flag="true" />
+      <record id="2000168609" led_force_flag="true" />
+      <record id="2000168606" led_force_flag="true" />
+      <record id="109288" led_force_flag="true" />
+      <record id="2000148115" led_force_flag="true" />
+      <record id="29" led_force_flag="true" />
+      <record id="1301428" led_force_flag="true" />
+      <record id="7880000" led_force_flag="true" />
+    </record>
+    <record type="team">
+      <record id="1114" led_force_flag="true" />
+      <record id="732" concatenate_next="true" led_force_flag="true" />
+      <record id="600" concatenate_next="true" />
+      <record id="618" led_force_flag="true" concatenate_next="true" />
+      <record id="619" led_force_flag="true" concatenate_next="true" />
+      <record id="622" led_force_flag="true" concatenate_next="true" />
+      <record id="625" led_force_flag="true" concatenate_next="true" />
+      <record id="645" led_force_flag="true" concatenate_next="true" />
+      <record id="654" led_force_flag="true" concatenate_next="true" />
+      <record id="664" led_force_flag="true" concatenate_next="true" />
+      <record id="692" led_force_flag="true" concatenate_next="true" />
+      <record id="701" led_force_flag="true" concatenate_next="true" />
+      <record id="702" led_force_flag="true" concatenate_next="true" />
+      <record id="724" led_force_flag="true" concatenate_next="true" />
+      <record id="737" led_force_flag="true" concatenate_next="true" />
+      <record id="740" led_force_flag="true" concatenate_next="true" />
+      <record id="1591" led_force_flag="false" concatenate_next="true" />
+      <record id="1126" led_force_flag="true" />
+      <record id="3800256" led_force_flag="true" />
+      <record id="1488" led_force_flag="false" />
+      <record id="1905" led_force_flag="true" concatenate_next="true" />
+      <record id="108893" concatenate_next="true" led_force_flag="true" />
+      <record id="72000112" led_force_flag="true" concatenate_next="true" />
+      <record id="1907" led_force_flag="true" concatenate_next="true" />
+      <record id="105180" led_force_flag="true" concatenate_next="true" />
+      <record id="1909" led_force_flag="false" concatenate_next="true" />
+      <record id="72000160" led_force_flag="true" concatenate_next="true" />
+      <record id="72019000" led_force_flag="true" concatenate_next="true" />
+      <record id="980543" led_force_flag="true" concatenate_next="true" />
+      <record id="1910" led_force_flag="true" concatenate_next="true" />
+      <record id="72023746" led_force_flag="true" concatenate_next="true" />
+      <record id="72000789" led_force_flag="true" concatenate_next="true" />
+      <record id="975489" led_force_flag="true" concatenate_next="true" />
+      <record id="1913" led_force_flag="false" concatenate_next="true" />
+      <record id="1903" led_force_flag="false" concatenate_next="true" />
+      <record id="721" led_force_flag="true" concatenate_next="true" />
+      <record id="734" led_force_flag="true" concatenate_next="true" />
+      <record id="665" led_force_flag="true" concatenate_next="true" />
+      <record id="642" led_force_flag="true" concatenate_next="true" />
+      <record id="5110769" concatenate_next="true" led_force_flag="true" />
+      <record id="1451" led_force_flag="true" concatenate_next="true" />
+      <record id="129200" led_force_flag="true" />
+      <record id="711728" led_force_flag="true" concatenate_next="true" />
+      <record id="1452" led_force_flag="true" concatenate_next="true" />
+      <record id="710017" concatenate_next="true" />
+      <record id="129585" concatenate_next="true" />
+      <record id="1536" led_force_flag="true" concatenate_next="true" />
+      <record id="671" led_force_flag="true" concatenate_next="true" />
+      <record id="992" concatenate_next="true" />
+      <record id="1013" concatenate_next="true" />
+      <record id="1028" concatenate_next="true" />
+      <record id="505" led_force_flag="true" concatenate_next="true" />
+      <record id="1111" led_force_flag="true" />
+      <record id="714230" led_force_flag="true" concatenate_next="true" />
+      <record id="349" led_force_flag="true" />
+      <record id="130345" led_force_flag="true" />
+      <record id="130382" led_force_flag="true" />
+      <record id="130346" led_force_flag="true" />
+      <record id="130343" led_force_flag="true" />
+      <record id="130379" led_force_flag="true" />
+      <record id="4212168" led_force_flag="true" concatenate_next="true" />
+      <record id="606" led_force_flag="false" />
+      <record id="709" led_force_flag="false" />
+      <record id="700" led_force_flag="false" />
+      <record id="667" led_force_flag="true" concatenate_next="true" />
+      <record id="612" led_force_flag="false" />
+      <record id="708" led_force_flag="false" />
+      <record id="639" led_force_flag="false" />
+      <record id="691" led_force_flag="true" />
+      <record id="603" concatenate_next="true" led_force_flag="true" />
+      <record id="609" led_force_flag="true" />
+      <record id="614" led_force_flag="true" />
+      <record id="2220" led_force_flag="true" />
+      <record id="67023731" led_force_flag="true" />
+      <record id="1122" led_force_flag="true" />
+      <record id="602" concatenate_next="true" led_force_flag="true" />
+      <record id="617" led_force_flag="true" concatenate_next="true" />
+      <record id="630" concatenate_next="true" led_force_flag="true" />
+      <record id="650" concatenate_next="true" led_force_flag="true" />
+      <record id="676" led_force_flag="true" concatenate_next="true" />
+      <record id="679" concatenate_next="true" led_force_flag="true" />
+      <record id="673" concatenate_next="true" />
+      <record id="680" led_force_flag="true" concatenate_next="true" />
+      <record id="688" led_force_flag="true" concatenate_next="true" />
+      <record id="728" concatenate_next="true" led_force_flag="true" />
+      <record id="735" led_force_flag="true" concatenate_next="true" />
+      <record id="713" concatenate_next="true" led_force_flag="true" />
+      <record id="674" led_force_flag="true" concatenate_next="true" />
+      <record id="1253" led_force_flag="true" />
+      <record id="2000209837" led_force_flag="true" />
+      <record id="2000252765" led_force_flag="true" />
+      <record id="2000209826" led_force_flag="true" />
+      <record id="2000252766" led_force_flag="true" />
+      <record id="2000176318" led_force_flag="true" />
+      <record id="2000252759" led_force_flag="true" />
+      <record id="2000209829" led_force_flag="true" />
+      <record id="2000209828" led_force_flag="true" />
+      <record id="1156" led_force_flag="true" />
+      <record id="1149" led_force_flag="true" />
+      <record id="432" led_force_flag="true" />
+      <record id="474" led_force_flag="true" />
+      <record id="2201" led_force_flag="true" />
+      <record id="1178" led_force_flag="true" />
+      <record id="1174" led_force_flag="true" />
+      <record id="1139" led_force_flag="true" />
+      <record id="1132" led_force_flag="true" />
+      <record id="1129" led_force_flag="true" />
+      <record id="1100" led_force_flag="true" />
+      <record id="94" led_force_flag="true" />
+    </record>
+    <record type="nation" />
+    <!-- Stadium force LED support -->
+    <record type="stadium">
+      <record id="102969" led_force_flag="true" />
+      <record id="400123" led_force_flag="true" />
+      <record id="52029709" led_force_flag="true" />
+      <record id="102984" led_force_flag="true" />
+      <record id="102965" led_force_flag="true" />
+      <record id="18007286" led_force_flag="true" />
+      <record id="5209051" led_force_flag="true" />
+      <record id="1300190" led_force_flag="true" />
+    </record>
+  </list>
+  <!-- The game looks for the element the current country belongs too and then applies the rules. -->
+  <!-- Each node where the id not important is formed by two sub lists as follows: -->
+  <!-- "countries": A list of strings with he contry code compatible with the ISO 3166-1 alpha-2 code standard. -->
+  <!-- "rules": A list of record id and actions to take. The record is refers to an element from items/default. At the moment  -->
+  <list id="locale_options">
+    <record id="chna">
+      <list id="rules">
+        <record id="gchn" action="fixed" />
+      </list>
+      <list id="countries">
+        <string value="cn" />
+      </list>
+    </record>
+    <!-- This options block is used to filter out competition/clubs that need to apply local options -->
+    <!-- When a competition IS in this list then the IP is checked and the rules are applied. -->
+    <list id="options">
+      <record type="competition">
+        <!-- Arab Club Championship -->
+        <record id="5623042" />
+        <!-- Czech - Slovakian Super Cup -->
+        <record id="25054613" />
+        <!-- PreLibertadores Phase -->
+        <record id="135978" />
+        <!-- Royal League -->
+        <record id="150927" />
+        <!-- African Confederation Cup -->
+        <record id="12017574" />
+        <!-- North American Champions League -->
+        <record id="51002641" />
+        <!-- African Champions League -->
+        <record id="127299" />
+        <!-- Asian Champions League -->
+        <record id="127286" />
+        <!-- South American Recopa -->
+        <record id="102418" />
+        <!-- Copa Sudamericana -->
+        <record id="317567" />
+        <!-- Copa Libertadores -->
+        <record id="102415" />
+        <!-- Albanian Superleague -->
+        <record id="8350942" />
+        <!-- Algerian Cup -->
+        <record id="12015344" />
+        <!-- Algerian League 1 -->
+        <record id="12015290" />
+        <!-- Argentine Fourth Division -->
+        <record id="14028753" />
+        <!-- Argentine Metropolitan C Zone -->
+        <record id="14037258" />
+        <!-- Argentine Torneo Federal B -->
+        <record id="14037261" />
+        <!-- Argentine Metropolitan B Zone -->
+        <record id="108508" />
+        <!-- Argentine Torneo Federal A -->
+        <record id="108509" />
+        <!-- Argentine Third Division -->
+        <record id="108573" />
+        <!-- Argentine Second Division -->
+        <record id="102422" />
+        <!-- Argentine Pre Copa Sudamericana -->
+        <record id="216346" />
+        <!-- Supercopa Argentina -->
+        <record id="14063636" />
+        <!-- Argentine Pre-Libertadores -->
+        <record id="216347" />
+        <!-- Argentine Premier Division Opening Stage -->
+        <record id="74" />
+        <!-- Argentine Premier Division -->
+        <record id="102421" />
+        <!-- Copa Argentina -->
+        <record id="14043892" />
+        <!-- Argentine Premier Division Closing Stage -->
+        <record id="75" />
+        <!-- Austrian First Division -->
+        <record id="136544" />
+        <!-- Austrian FA Cup -->
+        <record id="136547" />
+        <!-- Austrian Premier Division -->
+        <record id="136543" />
+        <!-- Azeri Premier League -->
+        <record id="59006943" />
+        <!-- Belarusian First League -->
+        <record id="7483366" />
+        <!-- Belarusian Cup -->
+        <record id="7483372" />
+        <!-- Belarusian Super Cup -->
+        <record id="17012177" />
+        <!-- Belarusian Highest League -->
+        <record id="7483354" />
+        <!-- Belgian First Amateur Division -->
+        <record id="8154824" />
+        <!-- Belgian Pro League B -->
+        <record id="2" />
+        <!-- Belgian Pro League B Closing Stage -->
+        <record id="89062128" />
+        <!-- Belgian Pro League B Opening Stage -->
+        <record id="89062118" />
+        <!-- Belgian Cup -->
+        <record id="1301404" />
+        <!-- Belgian Pro League A -->
+        <record id="1" />
+        <!-- Bolivian Premier Division -->
+        <record id="86000000" />
+        <!-- Bosnian Premier League -->
+        <record id="8401073" />
+        <!-- Brazilian National Fourth Division -->
+        <record id="19127222" />
+        <!-- Brazilian Goi‡s State Championship -->
+        <record id="309680" />
+        <!-- Brazilian South-Minas-Rio Regional Championship -->
+        <record id="19272696" />
+        <!-- Brazilian Santa Catarina State Championship -->
+        <record id="309688" />
+        <!-- Brazilian Pernambuco State Championship -->
+        <record id="309684" />
+        <!-- Brazilian Bahia State Championship -->
+        <record id="309678" />
+        <!-- Brazilian Paran‡ State Championship -->
+        <record id="309686" />
+        <!-- Brazilian State Championships -->
+        <record id="146829" />
+        <!-- Brazilian Copa Verde -->
+        <record id="19222809" />
+        <!-- Brazilian National Third Division -->
+        <record id="107192" />
+        <!-- Brazilian Gaœcho State Championship -->
+        <record id="302205" />
+        <!-- Brazilian Minas Gerais State Championship -->
+        <record id="309682" />
+        <!-- Brazilian Rio de Janeiro State Championship -->
+        <record id="102424" />
+        <!-- Brazilian Northeast Regional Championship -->
+        <record id="309697" />
+        <!-- Brazilian S‹o Paulo State Championship -->
+        <record id="102426" />
+        <!-- Brazilian National Second Division -->
+        <record id="107191" />
+        <!-- Brazilian Cup -->
+        <record id="102427" />
+        <!-- Brazilian National First Division -->
+        <record id="102423" />
+        <!-- Bulgarian Super Cup -->
+        <record id="7504886" />
+        <!-- Bulgarian Cup -->
+        <record id="7500078" />
+        <!-- Bulgarian First League -->
+        <record id="7500000" />
+        <!-- Canadian Championship -->
+        <record id="72006960" />
+        <!-- Chilean First Division Transition Stage -->
+        <record id="217965" />
+        <!-- Chilean First Division Opening Stage -->
+        <record id="82" />
+        <!-- Chilean First Division Closing Stage -->
+        <record id="83" />
+        <!-- Chilean First Division -->
+        <record id="5250792" />
+        <!-- Chinese FA Cup -->
+        <record id="135941" />
+        <!-- Chinese Super League -->
+        <record id="130931" />
+        <!-- Colombian Super Cup -->
+        <record id="76033484" />
+        <!-- Colombian Second Division Second Phase -->
+        <record id="79" />
+        <!-- Colombian Second Division First Phase -->
+        <record id="78" />
+        <!-- Colombian Second Division -->
+        <record id="5260950" />
+        <!-- Colombian Cup -->
+        <record id="157425" />
+        <!-- Colombian First Division Second Phase -->
+        <record id="77" />
+        <!-- Colombian First Division First Phase -->
+        <record id="76" />
+        <!-- Colombian First Division -->
+        <record id="5260948" />
+        <!-- Primera Divisi—n de Costa Rica -->
+        <record id="80000563" />
+        <!-- Croatian Second League -->
+        <record id="129646" />
+        <!-- Croatian Cup -->
+        <record id="129648" />
+        <!-- Croatian First League -->
+        <record id="129645" />
+        <!-- Cypriot First Division -->
+        <record id="692430" />
+        <!-- Czech Second Division -->
+        <record id="131288" />
+        <!-- Czech FA Cup -->
+        <record id="136040" />
+        <!-- Czech First Division -->
+        <record id="131287" />
+        <!-- Danish Cup -->
+        <record id="1301406" />
+        <!-- Ecuadorian Serie A -->
+        <record id="80000566" />
+        <!-- Egyptian Cup -->
+        <record id="12015446" />
+        <!-- Egyptian Super Cup -->
+        <record id="162451" />
+        <!-- Egyptian Premier League -->
+        <record id="12015393" />
+        <!-- English Community Shield -->
+        <record id="1301428" />
+        <!-- English FA Cup -->
+        <record id="1301426" />
+        <!-- English Premier Division -->
+        <record id="11" />
+        <!-- Finnish Premier League -->
+        <record id="129120" />
+        <!-- French National -->
+        <record id="18" />
+        <!-- French Cup -->
+        <record id="1301407" />
+        <!-- Georgian National League -->
+        <record id="59126495" />
+        <!-- German Super Cup -->
+        <record id="92030194" />
+        <!-- German Third Division -->
+        <record id="35010926" />
+        <!-- German Second Division -->
+        <record id="23" />
+        <!-- German Cup -->
+        <record id="1301410" />
+        <!-- German First Division -->
+        <record id="22" />
+        <!-- Greek National B Division -->
+        <record id="129651" />
+        <!-- Greek Cup -->
+        <record id="129649" />
+        <!-- Greek Superleague -->
+        <record id="129650" />
+        <!-- Liga Nacional de Guatemala -->
+        <record id="87000495" />
+        <!-- Dutch Cup -->
+        <record id="1301411" />
+        <!-- Liga Nacional de Honduras -->
+        <record id="87000201" />
+        <!-- Hungarian Cup -->
+        <record id="7520395" />
+        <!-- Hungarian Division I -->
+        <record id="7520391" />
+        <!-- Icelandic Cup -->
+        <record id="7840174" />
+        <!-- Icelandic Premier Division -->
+        <record id="7840132" />
+        <!-- Iranian FA Cup -->
+        <record id="23087352" />
+        <!-- Iranian Professional League -->
+        <record id="1018789" />
+        <!-- Israeli National League -->
+        <record id="7860001" />
+        <!-- Israeli State Cup -->
+        <record id="7860002" />
+        <!-- Israeli Premier League -->
+        <record id="7860000" />
+        <!-- Italian Serie C -->
+        <record id="43127171" />
+        <!-- Italian Serie C/C -->
+        <record id="43127174" />
+        <!-- Italian Serie C/B -->
+        <record id="43127173" />
+        <!-- Italian Serie C/A -->
+        <record id="43127172" />
+        <!-- Jamaican National Premier League -->
+        <record id="81001093" />
+        <!-- Japanese League Cup -->
+        <record id="102430" />
+        <!-- Japanese N-League Division Two -->
+        <record id="115424" />
+        <!-- Japanese Emperor's Cup -->
+        <record id="102429" />
+        <!-- Japanese N-League Division One -->
+        <record id="102428" />
+        <!-- Kazakhstan Premier League -->
+        <record id="59007527" />
+        <!-- Kuwaiti Premier League -->
+        <record id="23063354" />
+        <!-- Latvian Higher League -->
+        <record id="8403697" />
+        <!-- Mexican Promotion League -->
+        <record id="135974" />
+        <!-- Mexican Promotion League Closing Stage -->
+        <record id="89" />
+        <!-- Mexican Promotion League Opening Stage -->
+        <record id="88" />
+        <!-- Mexican Super Cup -->
+        <record id="51045232" />
+        <!-- Mexican Champions Trophy -->
+        <record id="5666911" />
+        <!-- Mexican Cup Opening Stage -->
+        <record id="86" />
+        <!-- Mexican Cup Closing Stage -->
+        <record id="87" />
+        <!-- Mexican Cup -->
+        <record id="51013962" />
+        <!-- Mexican First Division Opening Stage -->
+        <record id="84" />
+        <!-- Mexican First Division Closing Stage -->
+        <record id="85" />
+        <!-- Mexican First Division -->
+        <record id="135973" />
+        <!-- Moldovan Divizia Na?ional? -->
+        <record id="59007607" />
+        <!-- Coupe du Tr™ne -->
+        <record id="12019393" />
+        <!-- Groupement National de Football 1 -->
+        <record id="12019395" />
+        <!-- New Zealand Premiership -->
+        <record id="432262" />
+        <!-- Norwegian First Division -->
+        <record id="1300398" />
+        <!-- Norwegian Super Cup -->
+        <record id="53051837" />
+        <!-- Norwegian Cup -->
+        <record id="1301419" />
+        <!-- Norwegian Premier Division -->
+        <record id="1300397" />
+        <!-- Paraguayan First Division -->
+        <record id="79010950" />
+        <!-- Peruvian First Division Opening Stage -->
+        <record id="215852" />
+        <!-- Peruvian First Division Closing Stage -->
+        <record id="215853" />
+        <!-- Peruvian First Division -->
+        <record id="5290551" />
+        <!-- Torneo de Verano -->
+        <record id="77056992" />
+        <!-- Peruvian First Division Aggregate Table -->
+        <record id="215854" />
+        <!-- Polish Super Cup -->
+        <record id="130937" />
+        <!-- Polish First Division -->
+        <record id="129559" />
+        <!-- Polish FA Cup -->
+        <record id="129562" />
+        <!-- Portugal Championship - Group E -->
+        <record id="55065662" />
+        <!-- Portugal Championship - Group D -->
+        <record id="55065661" />
+        <!-- Portugal Championship - Group C -->
+        <record id="55065660" />
+        <!-- Portugal Championship - Group B -->
+        <record id="55065659" />
+        <!-- Portugal Championship - Group A -->
+        <record id="55065643" />
+        <!-- Portugal Championship -->
+        <record id="55065454" />
+        <!-- Portuguese Second League -->
+        <record id="61" />
+        <!-- Supertaa -->
+        <record id="115065" />
+        <!-- Portuguese League Cup -->
+        <record id="55006606" />
+        <!-- Taa de Portugal -->
+        <record id="1301421" />
+        <!-- Portuguese Premier League -->
+        <record id="60" />
+        <!-- Qatari Stars League -->
+        <record id="5632126" />
+        <!-- Irish Premier Division -->
+        <record id="129372" />
+        <!-- Romanian Second League -->
+        <record id="150913" />
+        <!-- Romanian Super Cup -->
+        <record id="7540085" />
+        <!-- Romanian Cup -->
+        <record id="7540084" />
+        <!-- Romanian First League -->
+        <record id="7540024" />
+        <!-- Russian First Division -->
+        <record id="130487" />
+        <!-- Russian Super Cup -->
+        <record id="8053978" />
+        <!-- Russian Cup -->
+        <record id="130694" />
+        <!-- Russian Premier Division -->
+        <record id="130486" />
+        <!-- Saudi Champions Cup -->
+        <record id="23087388" />
+        <!-- Saudi Crown Prince Cup -->
+        <record id="7920265" />
+        <!-- Saudi Professional League -->
+        <record id="7920263" />
+        <!-- Scottish Cup -->
+        <record id="1301430" />
+        <!-- Serbian First League -->
+        <record id="5776050" />
+        <!-- Serbian Cup -->
+        <record id="136499" />
+        <!-- Serbian SuperLeague -->
+        <record id="132321" />
+        <!-- Slovak FA Cup -->
+        <record id="7560279" />
+        <!-- Slovak First Division -->
+        <record id="7560276" />
+        <!-- Slovenian Second League -->
+        <record id="7580001" />
+        <!-- Slovenian Cup -->
+        <record id="7580014" />
+        <!-- Slovenian First League -->
+        <record id="7580000" />
+        <!-- South African National First Division -->
+        <record id="131235" />
+        <!-- South African Knockout Cup -->
+        <record id="136517" />
+        <!-- South African Super Eight Cup -->
+        <record id="136516" />
+        <!-- South African FA Cup -->
+        <record id="146958" />
+        <!-- South African Premier Soccer League -->
+        <record id="131234" />
+        <!-- Korean FA Cup -->
+        <record id="136408" />
+        <!-- Spanish Super Cup -->
+        <record id="1301423" />
+        <!-- Spanish Second Division -->
+        <record id="68" />
+        <!-- Spanish Cup -->
+        <record id="1301422" />
+        <!-- Spanish First Division -->
+        <record id="67" />
+        <!-- Swedish First Division Elite -->
+        <record id="52" />
+        <!-- Swedish Premier Division -->
+        <record id="50" />
+        <!-- Swiss Challenge League -->
+        <record id="137890" />
+        <!-- Swiss Cup -->
+        <record id="137892" />
+        <!-- Swiss Super League -->
+        <record id="137889" />
+        <!-- TT Pro League -->
+        <record id="82000461" />
+        <!-- Tunisian League 2 - Group A -->
+        <record id="12065937" />
+        <!-- Tunisian League 2 -->
+        <record id="12040338" />
+        <!-- Tunisian League 2 - Group B -->
+        <record id="12065938" />
+        <!-- Tunisian Cup -->
+        <record id="12019218" />
+        <!-- Tunisian League 1 -->
+        <record id="12019164" />
+        <!-- Ukrainian First League -->
+        <record id="5314302" />
+        <!-- Ukrainian Super Cup -->
+        <record id="5320807" />
+        <!-- Ukrainian Cup -->
+        <record id="5314307" />
+        <!-- Ukrainian Premier League -->
+        <record id="5314301" />
+        <!-- U.A.E. League Cup -->
+        <record id="23155488" />
+        <!-- U.A.E. President's Cup -->
+        <record id="7880030" />
+        <!-- U.A.E. Professional League -->
+        <record id="7880000" />
+        <!-- American Second Division Spring Season -->
+        <record id="20030685" />
+        <!-- American Second Division Fall Season -->
+        <record id="20030686" />
+        <!-- American Second Division -->
+        <record id="20031444" />
+        <!-- American Second Division Regular Season -->
+        <record id="20040487" />
+        <!-- American Second Division Championship -->
+        <record id="20040488" />
+        <!-- US Cup -->
+        <record id="1301415" />
+        <!-- Uruguayan Intermedio -->
+        <record id="78079462" />
+        <!-- Uruguayan Liguilla Pre-Libertadores -->
+        <record id="78008540" />
+        <!-- Uruguayan Super Cup -->
+        <record id="78084647" />
+        <!-- Uruguayan First Division -->
+        <record id="5512770" />
+        <!-- Uruguayan First Division Annual Table -->
+        <record id="215831" />
+        <!-- Uruguayan First Division Opening Stage -->
+        <record id="80" />
+        <!-- Uruguayan First Division Closing Stage -->
+        <record id="81" />
+        <!-- Uzbek Cup -->
+        <record id="7900425" />
+        <!-- Uzbek Oliy Liga -->
+        <record id="7900421" />
+        <!-- Venezuelan Premier Division -->
+        <record id="86000001" />
+        <!-- Turkish 3. League -->
+        <record id="130277" />
+        <!-- Turkish Super League -->
+        <record id="130286" />
+        <!-- Turkish 1. League -->
+        <record id="463479" />
+        <!-- Turkish 2. League -->
+        <record id="463481" />
+        <!-- Turkish 2. League White Group -->
+        <record id="463485" />
+        <!-- Turkish 2. League Red Group -->
+        <record id="463486" />
+        <!-- Turkish Local Amateur League -->
+        <record id="70027104" />
+        <!-- Turkish 3. League Group 1 -->
+        <record id="70043162" />
+        <!-- Turkish 3. League Group 2 -->
+        <record id="70043163" />
+        <!-- Turkish 3. League Group 3 -->
+        <record id="70043164" />
+        <!-- ?stanbul Professional League -->
+        <record id="70053587" />
+        <!-- ?stanbul Amateur League -->
+        <record id="70053688" />
+        <!-- Turkish National League -->
+        <record id="70053752" />
+        <!-- Ankara Amateur League -->
+        <record id="70053773" />
+        <!-- Ankara Professional League -->
+        <record id="70053817" />
+        <!-- ?zmir Amateur League -->
+        <record id="70053839" />
+        <!-- Adana Amateur League -->
+        <record id="70054385" />
+        <!-- Adana Professional League -->
+        <record id="70054386" />
+        <!-- Trabzon Amateur League -->
+        <record id="70054477" />
+        <!-- Turkish Regional Amateur League -->
+        <record id="70055727" />
+        <!-- Turkish Super Amateur League -->
+        <record id="70084836" />
+        <!-- Turkish Regional Amateur League Group 1 -->
+        <record id="70086159" />
+        <!-- Turkish Regional Amateur League Group 2 -->
+        <record id="70086160" />
+        <!-- Turkish Regional Amateur League Group 3 -->
+        <record id="70086161" />
+        <!-- Turkish Regional Amateur League Group 4 -->
+        <record id="70086162" />
+        <!-- Turkish Regional Amateur League Group 5 -->
+        <record id="70086163" />
+        <!-- Turkish Regional Amateur League Group 6 -->
+        <record id="70086164" />
+        <!-- Turkish Regional Amateur League Group 7 -->
+        <record id="70086165" />
+        <!-- Turkish Regional Amateur League Group 8 -->
+        <record id="70086166" />
+        <!-- Turkish Regional Amateur League Group 9 -->
+        <record id="70086167" />
+        <!-- Turkish Regional Amateur League Group 10 -->
+        <record id="70086168" />
+        <!-- Turkish Regional Amateur League Group 11 -->
+        <record id="70086169" />
+        <!-- Turkish Regional Amateur League Group 12 -->
+        <record id="70086170" />
+        <!-- World Cup -->
+        <record id="1301385" />
+        <!-- European Football Championship -->
+        <record id="1301388" />
+        <!-- European Championship Qualifying -->
+        <record id="100109" />
+        <!-- European International League -->
+        <record id="90" />
+        <!-- European International League Division A -->
+        <record id="91" />
+        <!-- World Cup European Qualifying Section -->
+        <record id="100105" />
+        <!-- World Cup South American Qualifying Section -->
+        <record id="100103" />
+        <!-- European Championship Qualifying Playoff -->
+        <record id="95" />
+        <!-- Copa AmŽrica -->
+        <record id="1301389" />
+        <!-- African Cup of Nations -->
+        <record id="1301390" />
+        <!-- European International League Division B -->
+        <record id="92" />
+        <!-- World Cup Playoff -->
+        <record id="208999" />
+        <!-- Olympic Games -->
+        <record id="1301387" />
+        <!-- Copa AmŽrica Playoff -->
+        <record id="95035962" />
+        <!-- Asian Nations Cup -->
+        <record id="102414" />
+        <!-- Confederations Cup -->
+        <record id="131306" />
+        <!-- Under 20 World Cup -->
+        <record id="157097" />
+        <!-- European U21 Championship -->
+        <record id="150783" />
+        <!-- European International League Division C -->
+        <record id="93" />
+        <!-- World Cup African Qualifying Section -->
+        <record id="100104" />
+        <!-- North American Gold Cup -->
+        <record id="145509" />
+        <!-- World Cup Asian Qualifying Section -->
+        <record id="100102" />
+        <!-- European U21 Championship Qualifying -->
+        <record id="150784" />
+        <!-- European U19 Championship -->
+        <record id="150786" />
+        <!-- Afro-Asian Cup of Nations -->
+        <record id="5626857" />
+        <!-- European International League Division D -->
+        <record id="94" />
+        <!-- Confederations Cup Playoff -->
+        <record id="214717" />
+        <!-- Under 17 World Cup -->
+        <record id="13100167" />
+        <!-- South American U20 Championship -->
+        <record id="8830770" />
+        <!-- World Cup North American Qualifying Section -->
+        <record id="100101" />
+        <!-- Four Associations Tournament -->
+        <record id="162380" />
+        <!-- East Asian Cup -->
+        <record id="5626836" />
+        <!-- European U19 Championship Qualifying -->
+        <record id="150787" />
+        <!-- Arab Nations Cup -->
+        <record id="5626865" />
+        <!-- Asian Nations Cup Qualifying -->
+        <record id="102412" />
+        <!-- Gulf Cup of Nations -->
+        <record id="5626587" />
+        <!-- European U17 Championship -->
+        <record id="5781023" />
+        <!-- Supercl‡sico de las AmŽricas -->
+        <record id="19168653" />
+        <!-- African Cup of Nations Qualifying -->
+        <record id="147032" />
+        <!-- African U20 Cup of Nations -->
+        <record id="13100131" />
+        <!-- Asian Games Football Tournament -->
+        <record id="102413" />
+        <!-- South American U17 Championship -->
+        <record id="8830792" />
+        <!-- French Youth Invitational -->
+        <record id="208926" />
+        <!-- Under 23 Asian Nations Cup -->
+        <record id="23177175" />
+        <!-- World Cup Oceania Qualifying Section -->
+        <record id="100100" />
+        <!-- Oceania Nations Cup -->
+        <record id="129986" />
+        <!-- Pan American Games -->
+        <record id="19164238" />
+        <!-- African Championship of Nations -->
+        <record id="13100123" />
+        <!-- North American Gold Cup Playoff -->
+        <record id="215380" />
+        <!-- European U17 Championship Qualifying -->
+        <record id="5781024" />
+        <!-- Pan Arab Games Football Tournament -->
+        <record id="5626874" />
+        <!-- Olympic Games Playoff -->
+        <record id="215379" />
+        <!-- West Asian Football Federation Championship -->
+        <record id="5629195" />
+        <!-- Under 21 International -->
+        <record id="114554" />
+        <!-- African Championship of Nations Qualifying -->
+        <record id="13160886" />
+        <!-- Japanese Youth Invitational -->
+        <record id="19174258" />
+        <!-- Olympic Games North American Qualifying -->
+        <record id="157150" />
+        <!-- South East Asian Football Championship -->
+        <record id="5626560" />
+        <!-- Under 20 International -->
+        <record id="150919" />
+        <!-- Asian Under 19 Championship -->
+        <record id="5626772" />
+        <!-- South Asian Football Federation Championship -->
+        <record id="5626602" />
+        <!-- Central Asian Football Association Championship -->
+        <record id="23321806" />
+        <!-- Central American Nations Cup -->
+        <record id="87000416" />
+        <!-- African U23 Cup of Nations -->
+        <record id="13117767" />
+        <!-- Caribbean Championship -->
+        <record id="29047086" />
+        <!-- Under 18 International -->
+        <record id="150716" />
+        <!-- Under 19 International -->
+        <record id="150785" />
+        <!-- Friendly -->
+        <record id="150988" />
+        <!-- North American U20 Championship -->
+        <record id="157149" />
+        <!-- Asian Solidarity Cup -->
+        <record id="23390443" />
+        <!-- Pacific Games -->
+        <record id="167644" />
+      </record>
+    </list>
+  </list>
+  <!-- With 'disable_remote_ads_options' is possible to disable remote ads for copetitions,team,nation,stadium -->
+  <list id="disable_remote_ads_options">
+    <record type="competition">
+      <record id="1" />
+      <record id="6" />
+      <record id="7" />
+      <record id="8" />
+      <record id="11" />
+      <record id="12" />
+      <record id="13" />
+      <record id="14" />
+      <record id="16" />
+      <record id="17" />
+      <record id="22" />
+      <record id="23" />
+      <record id="29" />
+      <record id="30" />
+      <record id="33" />
+      <record id="40" />
+      <record id="45" />
+      <record id="46" />
+      <record id="47" />
+      <record id="48" />
+      <record id="102428" />
+      <record id="109134" />
+      <record id="109201" />
+      <record id="109288" />
+      <record id="115424" />
+      <record id="129558" />
+      <record id="130023" />
+      <record id="130024" />
+      <record id="130027" />
+      <record id="130672" />
+      <record id="130674" />
+      <record id="130675" />
+      <record id="136407" />
+      <record id="147023" />
+      <record id="150995" />
+      <record id="214404" />
+      <record id="214919" />
+      <record id="215363" />
+      <record id="215814" />
+      <record id="215815" />
+      <record id="791180" />
+      <record id="1301394" />
+      <record id="1301396" />
+      <record id="1301397" />
+      <record id="1301404" />
+      <record id="1301427" />
+      <record id="1301429" />
+      <record id="2300046" />
+      <record id="5123054" />
+      <record id="5123055" />
+      <record id="7880000" />
+      <record id="8403697" />
+      <record id="20502998" />
+      <record id="23155488" />
+      <record id="29236869" />
+      <record id="29236870" />
+      <record id="31051584" />
+      <record id="35010926" />
+      <record id="36532636" />
+      <record id="66029602" />
+      <record id="92030194" />
+      <record id="2000016262" />
+      <record id="2000129935" />
+      <record id="2000132563" />
+      <record id="2000138349" />
+      <record id="2000148115" />
+      <record id="2000168606" />
+      <record id="2000168609" />
+      <record id="2000169152" />
+      <record id="2000179924" />
+      <record id="2000181472" />
+      <record id="2000225855" />
+      <record id="2000230565" />
+      <record id="2000337713" />
+      <record id="2000337714" />
+    </record>
+    <record type="team">
+      <record id="432" />
+      <record id="474" />
+      <record id="600" />
+      <record id="602" />
+      <record id="617" />
+      <record id="618" />
+      <record id="630" />
+      <record id="642" />
+      <record id="650" />
+      <record id="654" />
+      <record id="671" />
+      <record id="674" />
+      <record id="676" />
+      <record id="679" />
+      <record id="680" />
+      <record id="688" />
+      <record id="728" />
+      <record id="732" />
+      <record id="735" />
+      <record id="740" />
+      <record id="784" />
+      <record id="992" />
+      <record id="1013" />
+      <record id="1028" />
+      <record id="1100" />
+      <record id="1111" />
+      <record id="1114" />
+      <record id="1126" />
+      <record id="1129" />
+      <record id="1132" />
+      <record id="1139" />
+      <record id="1149" />
+      <record id="1156" />
+      <record id="1174" />
+      <record id="1178" />
+      <record id="2201" />
+      <record id="214394" />
+      <record id="5110769" />
+      <record id="2000176318" />
+      <record id="2000209826" />
+      <record id="2000209828" />
+      <record id="2000209829" />
+      <record id="2000209836" />
+      <record id="2000209837" />
+      <record id="2000252759" />
+      <record id="2000252765" />
+      <record id="2000252766" />
+    </record>
+  </list>
+  <!-- Next one defines a list of Ads to exlcude by platform. The game will gather the ids from -->
+  <!-- this list and exlude these ids from the final list produced before getting into a match. -->
+  <!-- At the moment only 'MS Store' and 'Switch' support this -->
+  <!-- 'MS Store' is used for XBox on console and on Windows too -->
+  <!-- 'Apple Arcade' has an extended list of ads to exclude in a separate record. -->
+  <list id="exclude_ads_list_by_platform">
+    <record type="ms_store">
+      <record id="exlc" />
+    </record>
+    <record type="switch">
+      <record id="exlc" />
+    </record>
+    <record type="epic">
+      <record id="exlc" />
+    </record>
+    <record type="game_center">
+      <record id="exAA" />
+    </record>
+  </list>
+</record>
