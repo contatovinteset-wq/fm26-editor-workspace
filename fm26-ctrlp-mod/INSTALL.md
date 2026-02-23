@@ -1,77 +1,111 @@
-# Instalação do FM26 Ctrl+P Export Mod
+# FM26 Ctrl+P Export Mod - Instalação
 
-## Pré-requisitos
+## Requisitos
+- Football Manager 2026
+- MelonLoader 0.6.x ou superior
+- .NET 6.0 SDK (para compilar)
 
-1. **BepInEx-IL2CPP** instalado no Football Manager 2026
-   - Download: https://github.com/BepInEx/BepInEx/releases
-   - Versão recomendada: 6.0.0-pre.1 ou superior (IL2CPP)
+---
 
-2. **.NET 6.0 SDK** (para compilar o mod)
-   - Download: https://dotnet.microsoft.com/download
+## Passo 1: Instalar MelonLoader
 
-## Instalação do BepInEx
-
-1. Baixe `BepInEx-Unity-IL2CPP-win-x64-6.0.0-pre.1.zip` (ou versão similar)
-2. Extraia o conteúdo na pasta raiz do FM26
-3. Execute o jogo uma vez para gerar os arquivos de configuração
-4. Feche o jogo
-
-## Instalação do Mod
-
-### Opção 1: Baixar DLL pronta (se disponível)
-1. Copie `FM26ExportMod.dll` para:
+1. Baixe o instalador:
    ```
-   FM26\BepInEx\plugins\
+   https://github.com/LavaGang/MelonLoader/releases/latest
    ```
+   Procure por `MelonLoader.Installer.exe`
 
-### Opção 2: Compilar do código-fonte
+2. Execute o instalador
+3. Selecione o executável do FM26 (`FM26.exe`)
+4. Clique em **Install**
 
-1. Clone/baixe este repositório
-2. Abra terminal/prompt na pasta do projeto
-3. Execute:
-   ```bash
-   # Linux/Mac
-   ./build.sh
-   
-   # Windows
-   build.bat
+5. Estrutura após instalação:
    ```
-4. Copie o arquivo gerado:
-   ```
-   output/FM26ExportMod.dll
-   ```
-   Para:
-   ```
-   FM26\BepInEx\plugins\
+   Football Manager 26/
+   ├── FM26.exe
+   ├── version.dll
+   ├── MelonLoader/
+   ├── Mods/
+   └── UserLibs/
    ```
 
-## Teste
+---
 
-1. Inicie o Football Manager 2026
-2. Vá para qualquer tela com uma tabela (ex: elenco, jogadores)
-3. Pressione **Ctrl+P**
-4. Verifique se o arquivo foi exportado para:
-   ```
-   Documentos\Sports Interactive\Football Manager 2026\
-   ```
+## Passo 2: Compilar o Mod
 
-## Desinstalação
+### Opção A: Script de Build
+```bash
+# Windows
+build.bat
 
-Remova o arquivo:
+# Linux/Mac
+chmod +x build.sh
+./build.sh
 ```
-FM26\BepInEx\plugins\FM26ExportMod.dll
+
+### Opção B: Manual
+```bash
+dotnet restore
+dotnet build -c Release
 ```
+
+O DLL será gerado em: `bin/Release/net6.0/FM26ExportMod.dll`
+
+---
+
+## Passo 3: Instalar o Mod
+
+Copie o DLL compilado para a pasta `Mods/` do FM26:
+```
+De: bin/Release/net6.0/FM26ExportMod.dll
+Para: [FM26]/Mods/FM26ExportMod.dll
+```
+
+---
+
+## Passo 4: Testar
+
+1. Abra o jogo
+2. O console do MelonLoader deve aparecer
+3. Procure pela mensagem:
+   ```
+   [FM26ExportMod] ========================================
+   [FM26ExportMod] FM26 Ctrl+P Export Mod
+   [FM26ExportMod] Versão: 1.0.0 (MelonLoader)
+   ```
+
+4. No jogo, selecione um jogador ou tabela
+5. Pressione **Ctrl+P**
+6. Verifique o console para mensagens de sucesso/erro
+
+---
 
 ## Troubleshooting
 
-### O mod não carrega
-- Verifique se o BepInEx está instalado corretamente
-- Confira o arquivo `BepInEx\LogOutput.log` por erros
+### "MelonLoader não abre"
+- Instale o Visual C++ Redistributable:
+  ```
+  https://aka.ms/vs/17/release/vc_redist.x64.exe
+  ```
 
-### Ctrl+P não funciona
-- Verifique se o foco está em uma tabela/carousel
-- Algumas telas podem não ter a funcionalidade de exportação ativa
+### "Mod não carrega"
+- Verifique se `FM26ExportMod.dll` está na pasta `Mods/`
+- Verifique o arquivo `MelonLoader/latest.log`
 
-### Erro de compilação
-- Certifique-se de ter o .NET 6.0 SDK instalado
-- Atualize as referências de DLL se necessário
+### "Ctrl+P não funciona"
+- Verifique o console do MelonLoader para erros
+- O mod precisa de um carousel ativo (jogador selecionado)
+- Pode ser necessário ajustar o código para a versão específica do FM26
+
+---
+
+## Logs
+
+Arquivo de log: `[FM26]/MelonLoader/latest.log`
+
+---
+
+## Desinstalar
+
+1. Delete `FM26ExportMod.dll` da pasta `Mods/`
+2. Para remover o MelonLoader, use o instalador e clique em **Uninstall**

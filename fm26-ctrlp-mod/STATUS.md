@@ -1,85 +1,62 @@
 ## FM26 Ctrl+P Export Mod - Status
 
-### O que foi feito
+### ✅ Concluído
 
-#### Análise (Concluído)
+#### Análise
 - ✅ Descompilação via IL2CPP e dnSpy
 - ✅ Identificado `ExportCurrentItemToBinding` na classe `SICarousel`
 - ✅ Função de exportação existe mas está desconectada do input
-- ✅ Sistema de shortcuts é gerenciado por `ShortcutData` (singleton)
-- ✅ Não há atalho Ctrl+P definido nos keybindings
 
-#### Mod Criado
-- ✅ Código-fonte para **MelonLoader** (BepInEx não suporta FM26)
-- ✅ Scripts de build
-- ✅ Instruções de instalação
+#### Mod
+- ✅ Código-fonte convertido para **MelonLoader**
+- ✅ Scripts de build atualizados
+- ✅ Documentação atualizada
 
-### ⚠️ Problema com BepInEx
+---
+
+### ⚠️ Problema com BepInEx (Resolvido)
 
 O FM26 usa **Unity 6000.0.52f1** com **metadata version 31**.
-O BepInEx atual (versão 6 preview) só suporta até metadata version 29.
 
-**Erro:**
+**BepInEx não funciona:**
 ```
 Unsupported metadata version found! We support 23-29, got 31
 ```
 
-**Solução:** Usar **MelonLoader** que tem suporte mais recente.
+**Solução:** Usar **MelonLoader** ✅
 
 ---
 
-### Arquivos Gerados
+### Arquivos do Mod
 
 ```
 fm26-ctrlp-mod/
-├── FM26ExportMod.cs                    # Código do mod (MelonLoader)
-├── FM26ExportMod_MelonLoader.csproj    # Projeto .NET para MelonLoader
-├── FM26ExportMod.csproj                # Projeto original (BepInEx - não funciona)
-├── build.sh                            # Script build Linux/Mac
-├── build.bat                           # Script build Windows
-├── README.md                           # Documentação
-├── INSTALL.md                          # Guia BepInEx (não funciona)
-└── INSTALL_MELONLOADER.md              # Guia MelonLoader ✅
+├── FM26ExportMod.cs      # Código (MelonLoader)
+├── FM26ExportMod.csproj  # Projeto .NET 6.0
+├── build.bat             # Script Windows
+├── build.sh              # Script Linux/Mac
+├── README.md             # Documentação
+├── INSTALL.md            # Guia de instalação
+└── STATUS.md             # Este arquivo
 ```
-
----
-
-### Como Funciona
-
-1. O mod usa **MelonLoader** para hook no jogo
-2. No `OnUpdate()`, detecta quando **Ctrl+P** é pressionado
-3. Quando detectado:
-   - Usa reflection para encontrar objetos `SICarousel` ativos
-   - Chama `UpdateExportCurrentItemBinding(0)` via reflection
-   - Executa a exportação do item selecionado
 
 ---
 
 ### Próximos Passos
 
-1. **Instalar MelonLoader** no FM26
-   - Download: https://github.com/LavaGang/MelonLoader/releases
-   - Usar o Installer para instalar automaticamente
-
-2. **Compilar o mod**:
-   ```bash
-   dotnet build FM26ExportMod_MelonLoader.csproj -c Release
-   ```
-
-3. **Copiar DLL** para `Mods/FM26ExportMod.dll`
-
-4. **Testar no jogo**:
-   - Abrir jogo
-   - Verificar console do MelonLoader
-   - Selecionar jogador
-   - Pressionar Ctrl+P
-   - Verificar logs
+1. [ ] Compilar o mod
+2. [ ] Copiar para `Mods/FM26ExportMod.dll`
+3. [ ] Testar no jogo
+4. [ ] Ajustar código se necessário
 
 ---
 
-### Notas
+### Como Testar
 
-- O mod usa reflection para evitar dependências rígidas das DLLs do jogo
-- Isso torna o mod mais resistente a atualizações
-- Se não funcionar, precisaremos ajustar o método de chamada
-- Verificar logs em `MelonLoader/latest.log`
+1. Instalar MelonLoader ✅ (já feito pelo usuário)
+2. Compilar: `build.bat` ou `dotnet build -c Release`
+3. Copiar DLL para `Mods/`
+4. Abrir jogo
+5. Selecionar jogador
+6. Pressionar Ctrl+P
+7. Verificar console/log

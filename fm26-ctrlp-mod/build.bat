@@ -1,29 +1,34 @@
 @echo off
-REM Build script for FM26 Ctrl+P Export Mod (Windows)
+echo ========================================
+echo FM26 Ctrl+P Export Mod - Build Script
+echo ========================================
+echo.
 
-echo Building FM26 Export Mod...
-
-cd /d "%~dp0"
-
-REM Check if dotnet is installed
-where dotnet >nul 2>nul
-if %errorlevel% neq 0 (
-    echo Error: dotnet SDK not found. Please install .NET 6.0 SDK
+echo [1/3] Restaurando dependencias...
+dotnet restore
+if %ERRORLEVEL% neq 0 (
+    echo ERRO: Falha ao restaurar dependencias
+    pause
     exit /b 1
 )
 
-REM Restore packages
-echo Restoring packages...
-dotnet restore
-
-REM Build
-echo Building...
+echo.
+echo [2/3] Compilando mod (Release)...
 dotnet build -c Release
+if %ERRORLEVEL% neq 0 (
+    echo ERRO: Falha ao compilar
+    pause
+    exit /b 1
+)
 
-REM Copy output
-echo Copying output...
-if not exist output mkdir output
-copy bin\Release\net6.0\FM26ExportMod.dll output\
-
-echo Build complete! Output: output\FM26ExportMod.dll
+echo.
+echo [3/3] Build concluido!
+echo.
+echo ========================================
+echo DLL gerado em:
+echo bin\Release\net6.0\FM26ExportMod.dll
+echo.
+echo Copie para:
+echo [FM26]\Mods\FM26ExportMod.dll
+echo ========================================
 pause
