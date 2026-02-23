@@ -10,13 +10,12 @@ namespace FM26ExportMod
     {
         private int _frameCount = 0;
         private MethodInfo _getKeyMethod = null;
-        private Type _inputType = null;
         private Type _keyCodeType = null;
         
         public override void OnInitializeMelon()
         {
             MelonLogger.Msg("========================================");
-            MelonLogger.Msg("FM26 Ctrl+P Export Mod CARREGADO!");
+            MelonLogger.Msg("FM26 Ctrl+P Export Mod - DEBUG");
             MelonLogger.Msg("========================================");
             
             FindInputSystem();
@@ -24,73 +23,67 @@ namespace FM26ExportMod
         
         private void FindInputSystem()
         {
-            MelonLogger.Msg("[Init] Procurando sistema de Input...");
+            MelonLogger.Msg("[Init] Listando TODOS os tipos com 'Input' ou 'Key'...");
             
-            // Procura Input em todos os assemblies
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 try
                 {
-                    if (assembly.FullName.Contains("UnityEngine"))
-                    {
-                        MelonLogger.Msg("[Assembly] " + assembly.GetName().Name);
+                    var name = assembly.GetName().Name;
+                    if (!name.Contains("Unity") && !name.Contains("Melon"))
+                        continue;
                         
-                        var inputType = assembly.GetType("UnityEngine.Input");
-                        if (inputType != null)
+                    MelonLogger.Msg("[Assembly] " + name);
+                    
+                    foreach (var type in assembly.GetTypes())
+                    {
+                        if (type.Name.Contains("Input") || type.Name.Contains("Key"))
                         {
-                            MelonLogger.Msg("[Init] Encontrado UnityEngine.Input!");
+                            MelonLogger.Msg("[Tipo] " + type.FullName);
                             
-                            // Lista todos os métodos
-                            foreach (var method in inputType.GetMethods())
+                            // Se for Input, lista os métodos
+                            if (type.Name == "Input")
                             {
-                                if (method.Name.Contains("Key"))
+                                MelonLogger.Msg("  >>> INPUT ENCONTRADO! Metodos:");
+                                foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static))
                                 {
-                                    MelonLogger.Msg("[Method] " + method.Name + "(" + string.Join(", ", Array.ConvertAll(method.GetParameters(), p => p.ParameterType.Name)) + ")");
+                                    var ps = method.GetParameters();
+                                    if (method.Name.Contains("Key") || method.Name.Contains("Mouse") || method.Name.Contains("Button"))
+                                    {
+                                        MelonLogger.Msg("    " + method.Name + "(" + string.Join(", ", Array.ConvertAll(ps, p => p.ParameterType.Name)) + ")");
+                                    }
                                 }
                             }
-                            
-                            _inputType = inputType;
-                            
-                            // Tenta encontrar GetKeyDown com KeyCode enum
-                            var keyCodeType = assembly.GetType("UnityEngine.KeyCode");
-                            if (keyCodeType != null)
-                            {
-                                MelonLogger.Msg("[Init] Encontrado KeyCode enum!");
-                                _keyCodeType = keyCodeType;
-                                
-                                _getKeyMethod = inputType.GetMethod("GetKeyDown", new Type[] { keyCodeType });
-                                if (_getKeyMethod != null)
-                                {
-                                    MelonLogger.Msg("[Init] GetKeyDown(KeyCode) encontrado!");
-                                }
-                            }
-                            
-                            // Tenta GetKeyDown com int
-                            var getIntMethod = inputType.GetMethod("GetKeyDown", new Type[] { typeof(int) });
-                            if (getIntMethod != null)
-                            {
-                                MelonLogger.Msg("[Init] GetKeyDown(int) encontrado!");
-                                _getKeyMethod = getIntMethod;
-                            }
-                            
-                            // Tenta GetKey com string
-                            var getStringMethod = inputType.GetMethod("GetKeyDown", new Type[] { typeof(string) });
-                            if (getStringMethod != null)
-                            {
-                                MelonLogger.Msg("[Init] GetKeyDown(string) encontrado!");
-                            }
+                        }
+                        
+                        if (type.Name == "KeyCode")
+                        {
+                            MelonLogger.Msg("[KeyCode] Enum encontrado!");
+                            _keyCodeType = type;
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    MelonLogger.Msg("[Error] " + assembly.GetName().Name + ": " + ex.Message);
-                }
+                catch { }
             }
             
-            if (_getKeyMethod == null)
+            // Tenta encontrar Input diretamente
+            var inputType = Type.GetType("UnityEngine.Input, UnityEngine.InputModule");
+            if (inputType == null)
+                inputType = Type.GetType("UnityEngine.Input, UnityEngine.CoreModule");
+                
+            if (inputType != null)
             {
-                MelonLogger.Error("[Init] NAO encontrou GetKeyDown!");
+                MelonLogger.Msg("[Init] Input encontrado via Type.GetType: " + inputType.AssemblyQualifiedName);
+                
+                foreach (var method in inputType.GetMethods(BindingFlags.Public | BindingFlags.Static))
+                {
+                    var ps = method.GetParameters();
+                    MelonLogger.Msg("[Input." + method.Name + "] params: " + ps.Length);
+                }
+            }
+            else
+            {
+                MelonLogger.Error("[Init] Input NAO encontrado!");
             }
         }
         
@@ -98,90 +91,10 @@ namespace FM26ExportMod
         {
             _frameCount++;
             
-            // Log a cada 300 frames (~5 segundos)
-            if (_frameCount % 300 == 0)
+            if (_frameCount % 600 == 0)
             {
-                MelonLogger.Msg("[OnUpdate] Frame " + _frameCount);
+                MelonLogger.Msg("[OnUpdate] Frame " + _frameCount + " - Mod ainda rodando");
             }
-            
-            if (_getKeyMethod == null)
-                return;
-            
-            try
-            {
-                // Se usa KeyCode enum
-                if (_keyCodeType != null && _getKeyMethod.GetParameters()[0].ParameterType == _keyCodeType)
-                {
-                    // F10 = 10, P = 25, LeftControl = 27
-                    object f10Key = Enum.ToObject(_keyCodeType, 291);  // F10
-                    object pKey = Enum.ToObject(_keyCodeType, 112);    // P
-                    object ctrlKey = Enum.ToObject(_keyCodeType, 306); // LeftControl
-                    
-                    bool f10Pressed = (bool)_getKeyMethod.Invoke(null, new object[] { f10Key });
-                    bool pPressed = (bool)_getKeyMethod.Invoke(null, new object[] { pKey });
-                    bool ctrlPressed = (bool)_getKeyMethod.Invoke(null, new object[] { ctrlKey });
-                    
-                    if (f10Pressed)
-                    {
-                        MelonLogger.Msg(">>> F10 PRESSIONADO!");
-                    }
-                    
-                    if (ctrlPressed && pPressed)
-                    {
-                        MelonLogger.Msg(">>> Ctrl+P DETECTADO!");
-                        TryExport();
-                    }
-                }
-                else
-                {
-                    // Usa int
-                    bool f10Pressed = (bool)_getKeyMethod.Invoke(null, new object[] { 291 });
-                    bool pPressed = (bool)_getKeyMethod.Invoke(null, new object[] { 112 });
-                    bool ctrlPressed = (bool)_getKeyMethod.Invoke(null, new object[] { 306 });
-                    
-                    if (f10Pressed)
-                    {
-                        MelonLogger.Msg(">>> F10 PRESSIONADO!");
-                    }
-                    
-                    if (ctrlPressed && pPressed)
-                    {
-                        MelonLogger.Msg(">>> Ctrl+P DETECTADO!");
-                        TryExport();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (_frameCount % 300 == 0)
-                {
-                    MelonLogger.Error("[OnUpdate] Erro: " + ex.Message);
-                }
-            }
-        }
-        
-        private void TryExport()
-        {
-            MelonLogger.Msg("[Export] Procurando carousels...");
-            
-            int count = 0;
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                try
-                {
-                    foreach (var type in assembly.GetTypes())
-                    {
-                        if (type.Name.Contains("Carousel"))
-                        {
-                            MelonLogger.Msg("[Carousel] " + type.FullName);
-                            count++;
-                        }
-                    }
-                }
-                catch { }
-            }
-            
-            MelonLogger.Msg("[Export] Total de carousels encontrados: " + count);
         }
     }
 }
