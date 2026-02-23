@@ -2,9 +2,9 @@ using System;
 using System.Reflection;
 using MelonLoader;
 
-// Atributos que o MelonLoader PRECISA para reconhecer o mod
+// Atributo MelonInfo - OBRIGATÓRIO
 [assembly: MelonInfo(typeof(FM26ExportMod.FM26ExportMod), "FM26 Ctrl+P Export Mod", "1.0.0", "Koda Assistant")]
-[assembly: MelonGame("Sports Interactive", "Football Manager 2026")]
+// REMOVIDO MelonGame - para funcionar com qualquer jogo
 
 namespace FM26ExportMod
 {
