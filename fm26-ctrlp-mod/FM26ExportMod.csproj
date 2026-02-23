@@ -12,17 +12,35 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <!-- Referências do MelonLoader instalado no FM26 -->
+  <!-- Todas as referências necessárias do MelonLoader/IL2CPP -->
   <ItemGroup>
-    <!-- MelonLoader.dll -->
+    <!-- MelonLoader -->
     <Reference Include="MelonLoader">
       <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\net6\MelonLoader.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
-    <!-- UnityEngine.CoreModule.dll -->
+    <!-- Il2Cpp Interop -->
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- IL2CPP mscorlib -->
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- UnityEngine Core -->
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- UnityEngine Input -->
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.InputModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>

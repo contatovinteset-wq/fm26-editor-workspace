@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using UnityEngine;
 using MelonLoader;
 
 namespace FM26ExportMod
@@ -14,6 +13,9 @@ namespace FM26ExportMod
         private bool _initialized = false;
         private Type _carouselType = null;
         private MethodInfo _exportMethod = null;
+        private Type _inputType = null;
+        private MethodInfo _getKeyMethod = null;
+        private MethodInfo _getKeyDownMethod = null;
         
         public override void OnInitializeMelon()
         {
@@ -21,6 +23,30 @@ namespace FM26ExportMod
             MelonLogger.Msg("FM26 Ctrl+P Export Mod");
             MelonLogger.Msg("Versao: 1.0.0 (MelonLoader)");
             MelonLogger.Msg("========================================");
+            
+            // Encontra o tipo Input via reflection
+            FindInputType();
+        }
+        
+        private void FindInputType()
+        {
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                try
+                {
+                    var type = assembly.GetType("UnityEngine.Input");
+                    if (type != null)
+                    {
+                        _inputType = type;
+                        _getKeyMethod = type.GetMethod("GetKey", new Type[] { typeof(int) });
+                        _getKeyDownMethod = type.GetMethod("GetKeyDown", new Type[] { typeof(int) });
+                        MelonLogger.Msg("[Init] Input encontrado: " + assembly.FullName);
+                        return;
+                    }
+                }
+                catch { }
+            }
+            MelonLogger.Warning("[Init] UnityEngine.Input nao encontrado");
         }
         
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
@@ -36,10 +62,29 @@ namespace FM26ExportMod
                 _initialized = true;
             }
             
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
+            // Verifica Ctrl+P via reflection
+            if (CheckCtrlP())
             {
                 MelonLogger.Msg(">>> Ctrl+P detectado! Tentando exportar...");
                 TryExportCurrentItem();
+            }
+        }
+        
+        private bool CheckCtrlP()
+        {
+            if (_inputType == null || _getKeyMethod == null || _getKeyDownMethod == null)
+                return false;
+            
+            try
+            {
+                // LeftControl = 306, P = 112
+                bool ctrl = (bool)_getKeyMethod.Invoke(null, new object[] { 306 });
+                bool p = (bool)_getKeyDownMethod.Invoke(null, new object[] { 112 });
+                return ctrl && p;
+            }
+            catch
+            {
+                return false;
             }
         }
         
@@ -130,7 +175,14 @@ namespace FM26ExportMod
                     }
                 }
                 
-                var carouselObjects = UnityEngine.Object.FindObjectsOfType(_carouselType);
+                var findObjectsOfTypeMethod = typeof(UnityEngine.Object).GetMethod("FindObjectsOfType", new Type[] { typeof(Type) });
+                if (findObjectsOfTypeMethod == null)
+                {
+                    MelonLogger.Error("[Export] FindObjectsOfType nao encontrado");
+                    return;
+                }
+                
+                var carouselObjects = findObjectsOfTypeMethod.Invoke(null, new object[] { _carouselType }) as Array;
                 
                 if (carouselObjects == null || carouselObjects.Length == 0)
                 {
@@ -143,7 +195,7 @@ namespace FM26ExportMod
                 
                 foreach (var carousel in carouselObjects)
                 {
-                    MelonLogger.Msg("[Export] Processando carousel: " + carousel.name);
+                    MelonLogger.Msg("[Export] Processando carousel");
                     
                     if (_exportMethod != null)
                     {
