@@ -10,24 +10,17 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
-  <!--
-    Referências locais do MelonLoader instalado no FM26
-    
-    IMPORTANTE: Ajuste os caminhos abaixo para a sua instalação do FM26!
-    O caminho padrão do Steam é:
-    C:\Program Files (x86)\Steam\steamapps\common\Football Manager 26\
-  -->
-  
+  <!-- Referências do MelonLoader instalado no FM26 -->
   <ItemGroup>
     <!-- MelonLoader.dll -->
     <Reference Include="MelonLoader">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Football Manager 26\MelonLoader\MelonLoader.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\net6\MelonLoader.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
     <!-- UnityEngine.CoreModule.dll -->
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Football Manager 26\FM26_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
