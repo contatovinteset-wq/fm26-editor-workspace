@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Reflection;
 using UnityEngine;
 using MelonLoader;
@@ -20,27 +19,23 @@ namespace FM26ExportMod
         {
             MelonLogger.Msg("========================================");
             MelonLogger.Msg("FM26 Ctrl+P Export Mod");
-            MelonLogger.Msg("Versão: 1.0.0 (MelonLoader)");
-            MelonLogger.Msg("Autor: Koda Assistant");
+            MelonLogger.Msg("Versao: 1.0.0 (MelonLoader)");
             MelonLogger.Msg("========================================");
         }
         
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
-            // Reinicializa a cada cena carregada
             _initialized = false;
         }
         
         public override void OnUpdate()
         {
-            // Inicializa apenas uma vez por cena
             if (!_initialized)
             {
                 InitializeReflection();
                 _initialized = true;
             }
             
-            // Detecta Ctrl+P
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
             {
                 MelonLogger.Msg(">>> Ctrl+P detectado! Tentando exportar...");
@@ -54,12 +49,10 @@ namespace FM26ExportMod
             {
                 MelonLogger.Msg("[Init] Procurando tipos de carousel...");
                 
-                // Procura o tipo SICarousel em todos os assemblies
                 foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
                     try
                     {
-                        // Tenta diferentes nomes possíveis
                         var type = assembly.GetType("SI.Bindable.SICarousel");
                         if (type == null)
                             type = assembly.GetType("Bindable.SICarousel");
@@ -69,50 +62,34 @@ namespace FM26ExportMod
                         if (type != null)
                         {
                             _carouselType = type;
-                            MelonLogger.Msg($"[Init] Encontrado tipo: {type.FullName}");
-                            MelonLogger.Msg($"[Init] Assembly: {assembly.FullName}");
+                            MelonLogger.Msg("[Init] Encontrado tipo: " + type.FullName);
                             
-                            // Lista todos os métodos para debug
-                            MelonLogger.Msg("[Init] Métodos disponíveis:");
-                            foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance))
-                            {
-                                if (method.Name.Contains("Export") || method.Name.Contains("Binding"))
-                                {
-                                    MelonLogger.Msg($"  - {method.Name}({string.Join(", ", method.GetParameters().Length)} params)");
-                                }
-                            }
-                            
-                            // Busca o método de exportação
                             _exportMethod = type.GetMethod("UpdateExportCurrentItemBinding", 
                                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
                             
                             if (_exportMethod != null)
                             {
-                                MelonLogger.Msg("[Init] ✓ Método UpdateExportCurrentItemBinding encontrado!");
+                                MelonLogger.Msg("[Init] Metodo UpdateExportCurrentItemBinding encontrado!");
                             }
                             else
                             {
-                                MelonLogger.Warning("[Init] ✗ Método UpdateExportCurrentItemBinding não encontrado");
+                                MelonLogger.Warning("[Init] Metodo nao encontrado");
                             }
                             return;
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        // Ignora assemblies que não carregam
-                    }
+                    catch { }
                 }
                 
-                // Se não encontrou, lista tipos similares
                 if (_carouselType == null)
                 {
-                    MelonLogger.Warning("[Init] SICarousel não encontrado. Listando tipos similares...");
+                    MelonLogger.Warning("[Init] SICarousel nao encontrado");
                     LogAllCarouselTypes();
                 }
             }
             catch (Exception ex)
             {
-                MelonLogger.Error($"[Init] Erro: {ex.Message}");
+                MelonLogger.Error("[Init] Erro: " + ex.Message);
             }
         }
         
@@ -125,13 +102,11 @@ namespace FM26ExportMod
                 {
                     foreach (var type in assembly.GetTypes())
                     {
-                        if (type.Name.Contains("Carousel") || 
-                            type.Name.Contains("Export") ||
-                            type.Name.Contains("Binding"))
+                        if (type.Name.Contains("Carousel") || type.Name.Contains("Export"))
                         {
-                            MelonLogger.Msg($"  [Tipo] {type.FullName}");
+                            MelonLogger.Msg("  [Tipo] " + type.FullName);
                             count++;
-                            if (count > 50) return; // Limita output
+                            if (count > 30) return;
                         }
                     }
                 }
@@ -145,18 +120,16 @@ namespace FM26ExportMod
             {
                 if (_carouselType == null)
                 {
-                    MelonLogger.Error("[Export] Tipo SICarousel não inicializado");
-                    MelonLogger.Msg("[Export] Tentando inicializar novamente...");
+                    MelonLogger.Error("[Export] Tipo SICarousel nao inicializado");
                     InitializeReflection();
                     
                     if (_carouselType == null)
                     {
-                        MelonLogger.Error("[Export] Falha na reinicialização");
+                        MelonLogger.Error("[Export] Falha na reinicializacao");
                         return;
                     }
                 }
                 
-                // Encontra todos os objetos SICarousel ativos
                 var carouselObjects = UnityEngine.Object.FindObjectsOfType(_carouselType);
                 
                 if (carouselObjects == null || carouselObjects.Length == 0)
@@ -166,43 +139,39 @@ namespace FM26ExportMod
                     return;
                 }
                 
-                MelonLogger.Msg($"[Export] Encontrados {carouselObjects.Length} carousels ativos");
+                MelonLogger.Msg("[Export] Encontrados " + carouselObjects.Length + " carousels ativos");
                 
-                // Tenta exportar de cada carousel ativo
                 foreach (var carousel in carouselObjects)
                 {
-                    MelonLogger.Msg($"[Export] Processando carousel: {carousel.name}");
+                    MelonLogger.Msg("[Export] Processando carousel: " + carousel.name);
                     
                     if (_exportMethod != null)
                     {
-                        // Chama o método com índice 0 (item atual)
                         _exportMethod.Invoke(carousel, new object[] { 0 });
-                        MelonLogger.Msg("[Export] ✓ Comando de exportação enviado!");
+                        MelonLogger.Msg("[Export] Comando de exportacao enviado!");
                     }
                     else
                     {
-                        // Tenta métodos alternativos
                         TryAlternativeExport(carousel);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MelonLogger.Error($"[Export] Erro: {ex.Message}");
+                MelonLogger.Error("[Export] Erro: " + ex.Message);
                 if (ex.InnerException != null)
                 {
-                    MelonLogger.Error($"[Export] Inner: {ex.InnerException.Message}");
+                    MelonLogger.Error("[Export] Inner: " + ex.InnerException.Message);
                 }
             }
         }
         
         private void TryAlternativeExport(object carousel)
         {
-            MelonLogger.Msg("[Export] Tentando métodos alternativos...");
+            MelonLogger.Msg("[Export] Tentando metodos alternativos...");
             
             var type = carousel.GetType();
             
-            // Lista de possíveis métodos de exportação
             string[] possibleMethods = {
                 "ExportCurrentItem",
                 "ExportSelected",
@@ -216,25 +185,25 @@ namespace FM26ExportMod
                 var method = type.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
                 if (method != null)
                 {
-                    MelonLogger.Msg($"[Export] Tentando: {methodName}");
+                    MelonLogger.Msg("[Export] Tentando: " + methodName);
                     try
                     {
                         var parameters = method.GetParameters();
                         if (parameters.Length == 0)
                         {
                             method.Invoke(carousel, null);
-                            MelonLogger.Msg($"[Export] ✓ {methodName} executado!");
+                            MelonLogger.Msg("[Export] " + methodName + " executado!");
                             return;
                         }
                     }
                     catch (Exception ex)
                     {
-                        MelonLogger.Warning($"[Export] Falha em {methodName}: {ex.Message}");
+                        MelonLogger.Warning("[Export] Falha em " + methodName + ": " + ex.Message);
                     }
                 }
             }
             
-            MelonLogger.Error("[Export] Nenhum método alternativo funcionou");
+            MelonLogger.Error("[Export] Nenhum metodo alternativo funcionou");
         }
     }
 }
