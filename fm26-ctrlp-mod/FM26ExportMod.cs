@@ -12,16 +12,15 @@ namespace FM26ExportMod
     {
         public override void OnInitializeMelon()
         {
-            MelonLogger.BigMessage("========================================");
-            MelonLogger.BigMessage("FM26 Ctrl+P Export Mod CARREGADO!");
-            MelonLogger.BigMessage("========================================");
+            MelonLogger.Msg("========================================");
+            MelonLogger.Msg("FM26 Ctrl+P Export Mod CARREGADO!");
+            MelonLogger.Msg("========================================");
         }
         
         public override void OnUpdate()
         {
             try
             {
-                // Usa reflection para Input
                 var inputType = Type.GetType("UnityEngine.Input, UnityEngine.InputModule");
                 if (inputType == null)
                 {
