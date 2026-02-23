@@ -8,15 +8,28 @@
     <Product>FM26 Ctrl+P Export Mod</Product>
     <Version>1.0.0</Version>
     <OutputType>Library</OutputType>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
   </PropertyGroup>
 
+  <!--
+    Referências locais do MelonLoader instalado no FM26
+    
+    IMPORTANTE: Ajuste os caminhos abaixo para a sua instalação do FM26!
+    O caminho padrão do Steam é:
+    C:\Program Files (x86)\Steam\steamapps\common\Football Manager 26\
+  -->
+  
   <ItemGroup>
-    <!-- MelonLoader -->
-    <PackageReference Include="MelonLoader" Version="0.6.1" />
-    <!-- UnityEngine Modules -->
-    <PackageReference Include="UnityEngine.Modules" Version="2022.3.20" />
+    <!-- MelonLoader.dll -->
+    <Reference Include="MelonLoader">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Football Manager 26\MelonLoader\MelonLoader.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- UnityEngine.CoreModule.dll -->
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Football Manager 26\FM26_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 
 </Project>
