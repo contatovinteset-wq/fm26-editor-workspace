@@ -13,9 +13,31 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Apenas MelonLoader -->
+    <!-- MelonLoader -->
     <Reference Include="MelonLoader">
       <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\net6\MelonLoader.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- Novo Input System (Unity 6) -->
+    <Reference Include="UnityEngine.InputSystem">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.InputSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- Input Modules -->
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.InputModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <Reference Include="UnityEngine.InputForUIModule">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.InputForUIModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
