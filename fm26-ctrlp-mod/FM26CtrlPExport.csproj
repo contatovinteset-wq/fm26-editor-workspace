@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>FM26CtrlPExport</AssemblyName>
+    <Product>FM26 Ctrl+P Export Mod</Product>
+    <Version>1.0.0</Version>
+    <OutputType>Library</OutputType>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- BepInEx -->
+    <Reference Include="BepInEx.Core">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\BepInEx.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <Reference Include="BepInEx.IL2CPP">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\BepInEx.IL2CPP.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <Reference Include="0Harmony">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- UnityEngine -->
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\FM26_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\FM26_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>
