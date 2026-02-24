@@ -35,7 +35,7 @@
       <Private>false</Private>
     </Reference>
     
-    <!-- CoreModule para MonoBehaviour -->
+    <!-- CoreModule -->
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
       <Private>false</Private>
