@@ -2,12 +2,13 @@ using System;
 using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
+using BepInEx.Unity.IL2CPP;
 using UnityEngine;
 
 namespace FM26ExportMod
 {
     [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "1.0.0")]
-    public class FM26ExportPlugin : MonoBehaviour
+    public class FM26ExportPlugin : BaseUnityPlugin
     {
         internal static ManualLogSource Log;
         private MethodInfo _updateExportMethod = null;
@@ -15,7 +16,7 @@ namespace FM26ExportMod
         
         void Awake()
         {
-            Log = BepInEx.Logging.Logger.CreateLogSource("FM26CtrlP");
+            Log = Logger;
             Log.LogInfo("========================================");
             Log.LogInfo("FM26 Ctrl+P Export Mod v1.0.0");
             Log.LogInfo("========================================");
@@ -58,15 +59,16 @@ namespace FM26ExportMod
         
         void Update()
         {
-            // Ctrl+P
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
+            // Ctrl+P - usando KeyCode diretamente para evitar conflito
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftControl) && 
+                UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.P))
             {
                 Log.LogInfo(">>> Ctrl+P DETECTADO!");
                 TryExport();
             }
             
             // F10 - debug
-            if (Input.GetKeyDown(KeyCode.F10))
+            if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.F10))
             {
                 Log.LogInfo(">>> F10 - Listando tipos...");
                 LogAllTypes();
