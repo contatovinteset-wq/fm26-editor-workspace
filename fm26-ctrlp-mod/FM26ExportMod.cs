@@ -9,114 +9,115 @@ namespace FM26ExportMod
     public class FM26ExportMod : MelonMod
     {
         private int _frameCount = 0;
-        private Type _keyboardType = null;
-        private PropertyInfo _currentProperty = null;
-        private PropertyInfo _leftCtrlKey = null;
-        private PropertyInfo _pKey = null;
-        private PropertyInfo _f10Key = null;
-        private MethodInfo _isPressedMethod = null;
+        private MethodInfo _getKeyMethod = null;
+        private Type _keyCodeType = null;
+        private bool _initialized = false;
         
         public override void OnInitializeMelon()
         {
             MelonLogger.Msg("========================================");
             MelonLogger.Msg("FM26 Ctrl+P Export Mod v1.0.0");
-            MelonLogger.Msg("Unity 6 Input System");
             MelonLogger.Msg("========================================");
-            
-            InitializeInputSystem();
         }
         
-        private void InitializeInputSystem()
+        private void FindInput()
         {
-            MelonLogger.Msg("[Init] Procurando Input System...");
+            if (_initialized) return;
+            _initialized = true;
             
-            // Novo Input System: UnityEngine.InputSystem
-            var inputSystemAssembly = Type.GetType("UnityEngine.InputSystem.Keyboard, UnityEngine.InputSystem");
+            MelonLogger.Msg("[Init] Procurando Input...");
             
-            if (inputSystemAssembly == null)
+            // Lista todos os assemblies com Input no nome
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                // Tenta carregar o assembly diretamente
-                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                var name = assembly.GetName().Name;
+                if (name.Contains("Input"))
                 {
-                    if (assembly.GetName().Name == "UnityEngine.InputSystem")
+                    MelonLogger.Msg("[Assembly] " + name);
+                    
+                    // Procura tipo Input
+                    var inputType = assembly.GetType("UnityEngine.Input");
+                    if (inputType != null)
                     {
-                        MelonLogger.Msg("[Init] Assembly encontrado: " + assembly.FullName);
-                        _keyboardType = assembly.GetType("UnityEngine.InputSystem.Keyboard");
+                        MelonLogger.Msg("[Init] UnityEngine.Input encontrado em " + name);
                         
-                        if (_keyboardType != null)
+                        // Lista métodos
+                        foreach (var method in inputType.GetMethods(BindingFlags.Public | BindingFlags.Static))
                         {
-                            MelonLogger.Msg("[Init] Keyboard type encontrado!");
-                            
-                            // Keyboard.current
-                            _currentProperty = _keyboardType.GetProperty("current", BindingFlags.Public | BindingFlags.Static);
-                            if (_currentProperty != null)
+                            if (method.Name.Contains("Key"))
                             {
-                                MelonLogger.Msg("[Init] Keyboard.current encontrado!");
+                                var ps = method.GetParameters();
+                                MelonLogger.Msg("[Method] " + method.Name + "(" + (ps.Length > 0 ? ps[0].ParameterType.Name : "") + ")");
                             }
-                            
-                            // KeyControl.isPressed
-                            var keyControlType = assembly.GetType("UnityEngine.InputSystem.Controls.KeyControl");
-                            if (keyControlType != null)
+                        }
+                        
+                        // Tenta GetKeyDown com KeyCode
+                        var keyCodeType = assembly.GetType("UnityEngine.KeyCode");
+                        if (keyCodeType != null)
+                        {
+                            MelonLogger.Msg("[Init] KeyCode encontrado!");
+                            _keyCodeType = keyCodeType;
+                            _getKeyMethod = inputType.GetMethod("GetKeyDown", new Type[] { keyCodeType });
+                            if (_getKeyMethod != null)
                             {
-                                _isPressedMethod = keyControlType.GetProperty("isPressed")?.GetMethod;
-                                if (_isPressedMethod != null)
-                                {
-                                    MelonLogger.Msg("[Init] isPressed encontrado!");
-                                }
+                                MelonLogger.Msg("[Init] GetKeyDown(KeyCode) OK!");
+                                return;
                             }
-                            
-                            // leftCtrlKey, pKey, f10Key
-                            _leftCtrlKey = _keyboardType.GetProperty("leftCtrlKey", BindingFlags.Public | BindingFlags.Instance);
-                            _pKey = _keyboardType.GetProperty("pKey", BindingFlags.Public | BindingFlags.Instance);
-                            _f10Key = _keyboardType.GetProperty("f10Key", BindingFlags.Public | BindingFlags.Instance);
-                            
-                            if (_leftCtrlKey != null) MelonLogger.Msg("[Init] leftCtrlKey encontrado!");
-                            if (_pKey != null) MelonLogger.Msg("[Init] pKey encontrado!");
-                            if (_f10Key != null) MelonLogger.Msg("[Init] f10Key encontrado!");
-                            
+                        }
+                        
+                        // Tenta GetKeyDown com int
+                        _getKeyMethod = inputType.GetMethod("GetKeyDown", new Type[] { typeof(int) });
+                        if (_getKeyMethod != null)
+                        {
+                            MelonLogger.Msg("[Init] GetKeyDown(int) OK!");
                             return;
                         }
                     }
                 }
             }
             
-            MelonLogger.Error("[Init] Input System NAO encontrado!");
+            MelonLogger.Error("[Init] Input NAO encontrado!");
         }
         
         public override void OnUpdate()
         {
             _frameCount++;
             
-            if (_currentProperty == null || _isPressedMethod == null)
+            if (!_initialized)
             {
-                if (_frameCount % 600 == 0)
-                {
-                    MelonLogger.Msg("[OnUpdate] Aguardando Input System...");
-                }
-                return;
+                FindInput();
             }
+            
+            if (_frameCount % 300 == 0)
+            {
+                MelonLogger.Msg("[OnUpdate] Frame " + _frameCount);
+                
+                if (_getKeyMethod == null)
+                {
+                    FindInput();
+                }
+            }
+            
+            if (_getKeyMethod == null) return;
             
             try
             {
-                // Keyboard.current
-                var currentKeyboard = _currentProperty.GetValue(null);
-                if (currentKeyboard == null)
+                bool ctrlPressed, pPressed, f10Pressed;
+                
+                if (_keyCodeType != null)
                 {
-                    if (_frameCount % 600 == 0)
-                    {
-                        MelonLogger.Msg("[OnUpdate] Nenhum teclado detectado");
-                    }
-                    return;
+                    // Usa KeyCode enum
+                    ctrlPressed = (bool)_getKeyMethod.Invoke(null, new object[] { Enum.Parse(_keyCodeType, "LeftControl") });
+                    pPressed = (bool)_getKeyMethod.Invoke(null, new object[] { Enum.Parse(_keyCodeType, "P") });
+                    f10Pressed = (bool)_getKeyMethod.Invoke(null, new object[] { Enum.Parse(_keyCodeType, "F10") });
                 }
-                
-                // leftCtrlKey
-                var leftCtrlControl = _leftCtrlKey?.GetValue(currentKeyboard);
-                var pControl = _pKey?.GetValue(currentKeyboard);
-                var f10Control = _f10Key?.GetValue(currentKeyboard);
-                
-                bool ctrlPressed = leftCtrlControl != null && (bool)_isPressedMethod.Invoke(leftCtrlControl, null);
-                bool pPressed = pControl != null && (bool)_isPressedMethod.Invoke(pControl, null);
-                bool f10Pressed = f10Control != null && (bool)_isPressedMethod.Invoke(f10Control, null);
+                else
+                {
+                    // Usa int (key codes)
+                    ctrlPressed = (bool)_getKeyMethod.Invoke(null, new object[] { 306 }); // LeftControl
+                    pPressed = (bool)_getKeyMethod.Invoke(null, new object[] { 112 });   // P
+                    f10Pressed = (bool)_getKeyMethod.Invoke(null, new object[] { 291 }); // F10
+                }
                 
                 if (f10Pressed)
                 {
@@ -131,9 +132,9 @@ namespace FM26ExportMod
             }
             catch (Exception ex)
             {
-                if (_frameCount % 600 == 0)
+                if (_frameCount % 300 == 0)
                 {
-                    MelonLogger.Error("[OnUpdate] Erro: " + ex.Message);
+                    MelonLogger.Error("[Error] " + ex.Message);
                 }
             }
         }

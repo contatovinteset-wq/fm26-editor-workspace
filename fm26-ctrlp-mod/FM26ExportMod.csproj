@@ -19,13 +19,7 @@
       <Private>false</Private>
     </Reference>
     
-    <!-- Novo Input System (Unity 6) -->
-    <Reference Include="UnityEngine.InputSystem">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.InputSystem.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    
-    <!-- Input Modules -->
+    <!-- Input Modules que EXISTEM -->
     <Reference Include="UnityEngine.InputLegacyModule">
       <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>false</Private>
@@ -38,6 +32,12 @@
     
     <Reference Include="UnityEngine.InputForUIModule">
       <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.InputForUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- CoreModule para MonoBehaviour -->
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\MelonLoader\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
