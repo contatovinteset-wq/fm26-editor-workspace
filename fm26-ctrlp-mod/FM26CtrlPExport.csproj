@@ -19,13 +19,13 @@
       <Private>false</Private>
     </Reference>
     
-    <Reference Include="BepInEx.IL2CPP">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\BepInEx.IL2CPP.dll</HintPath>
+    <Reference Include="BepInEx.Unity.IL2CPP">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
     <Reference Include="0Harmony">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\unity-libs\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
