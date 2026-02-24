@@ -81,7 +81,11 @@ namespace FM26ExportMod
             {
                 if (_updateExportMethod != null && _carouselType != null)
                 {
-                    var objects = FindObjectsOfType(_carouselType);
+                    // Usa reflexão para chamar FindObjectsOfType<T>() genérico
+                    var findMethod = typeof(Object).GetMethod("FindObjectsOfType", Type.EmptyTypes);
+                    var genericMethod = findMethod.MakeGenericMethod(_carouselType);
+                    var objects = (Object[])genericMethod.Invoke(null, null);
+                    
                     Log.LogInfo($"[Export] Encontrados {objects.Length} carousels");
                     
                     foreach (var obj in objects)
