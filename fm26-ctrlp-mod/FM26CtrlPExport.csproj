@@ -29,6 +29,12 @@
       <Private>false</Private>
     </Reference>
     
+    <!-- Il2CppInterop Runtime - OBRIGATÓRIO para Il2CppObjectBase -->
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>..\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
     <!-- IL2CPP Interop - OBRIGATÓRIO para tipos básicos -->
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
