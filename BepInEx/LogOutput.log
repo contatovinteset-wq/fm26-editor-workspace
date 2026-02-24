@@ -1,0 +1,146 @@
+[Message: Preloader] BepInEx 6.0.0-be.738 - fm (06/11/2025 15:15:42)
+[Message: Preloader] Built from commit af0cba71fb69324aa4dfd651422bfa020309ce15
+[Info   :   BepInEx] System platform: Windows 10 64-bit
+[Info   :   BepInEx] Process bitness: 64-bit (x64)
+[Info   :   BepInEx] Running under Unity 6000.0.52f1
+[Info   :   BepInEx] Runtime version: 6.0.7
+[Info   :   BepInEx] Runtime information: .NET 6.0.7
+[Message:InteropManager] Downloading unity base libraries https://unity.bepinex.dev/libraries/6000.0.52.zip
+[Message:InteropManager] Extracting downloaded unity base libraries
+[Message:InteropManager] Running Cpp2IL to generate dummy assemblies from E:\Steam\steamapps\common\Football Manager 26\fm_Data/il2cpp_data/Metadata/global-metadata.dat
+[Info   :    Cpp2IL] [Library] Initializing Metadata...
+[Info   :    Cpp2IL] [Library] Using actual IL2CPP Metadata version 31
+[Info   :    Cpp2IL] [Library] Initialized Metadata in 776ms
+[Info   :    Cpp2IL] [Library] Using binary type Portable Executable (from LibCpp2IL)
+[Info   :    Cpp2IL] [Library] Searching Binary for Required Data...
+[Info   :    Cpp2IL] [Library] Got Binary codereg: 0x182133D20, metareg: 0x18292C6D0 in 357ms.
+[Info   :    Cpp2IL] [Library] Initializing Binary...
+[Info   :    Cpp2IL] [Library] Initialized Binary in 238ms
+[Info   :    Cpp2IL] [Library] Mapping pointers to Il2CppMethodDefinitions...
+[Info   :    Cpp2IL] [Library] Processed 126942 OK (133ms)
+[Info   :    Cpp2IL] [Program] Creating application model...
+[Info   :    Cpp2IL] [Program] Application model created in 3177,6938ms
+[Info   :InteropManager] Cpp2IL finished in 00:00:12.4037302
+[Info   :InteropManager] Generating interop assemblies
+[Info   :Il2CppInteropGen] Reading assemblies...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0070599
+[Info   :Il2CppInteropGen] Reading unity assemblies...
+[Info   :Il2CppInteropGen] Done in 00:00:00.1856484
+[Info   :Il2CppInteropGen] Creating rewrite assemblies...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0232092
+[Info   :Il2CppInteropGen] Computing renames...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0500323
+[Info   :Il2CppInteropGen] Creating typedefs...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0797102
+[Info   :Il2CppInteropGen] Computing struct blittability...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0173518
+[Info   :Il2CppInteropGen] Filling typedefs...
+[Info   :Il2CppInteropGen] Done in 00:00:00.2464488
+[Info   :Il2CppInteropGen] Filling generic constraints...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0083667
+[Info   :Il2CppInteropGen] Creating members...
+[Info   :Il2CppInteropGen] Done in 00:00:01.0982432
+[Info   :Il2CppInteropGen] Scanning method cross-references...
+[Info   :Il2CppInteropGen] Done in 00:00:01.4007167
+[Info   :Il2CppInteropGen] Finalizing method declarations...
+[Info   :Il2CppInteropGen] Done in 00:00:04.5695405
+[Info   :Il2CppInteropGen] 157 total potentially dead methods
+[Info   :Il2CppInteropGen] Filling method parameters...
+[Info   :Il2CppInteropGen] Done in 00:00:01.2998249
+[Info   :Il2CppInteropGen] Creating static constructors...
+[Info   :Il2CppInteropGen] Done in 00:00:01.4372835
+[Info   :Il2CppInteropGen] Creating value type fields...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0312381
+[Info   :Il2CppInteropGen] Creating enums...
+[Info   :Il2CppInteropGen] Done in 00:00:00.1079578
+[Info   :Il2CppInteropGen] Creating IntPtr constructors...
+[Info   :Il2CppInteropGen] Done in 00:00:00.1028612
+[Info   :Il2CppInteropGen] Creating non-blittable struct constructors...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0048481
+[Info   :Il2CppInteropGen] Creating generic method static constructors...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0909072
+[Info   :Il2CppInteropGen] Creating field accessors...
+[Info   :Il2CppInteropGen] Done in 00:00:01.9642942
+[Info   :Il2CppInteropGen] Filling methods...
+[Info   :Il2CppInteropGen] Done in 00:00:01.4607419
+[Info   :Il2CppInteropGen] Generating implicit conversions...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0501953
+[Info   :Il2CppInteropGen] Implementing awaiters...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0108384
+[Info   :Il2CppInteropGen] Creating properties...
+[Info   :Il2CppInteropGen] Done in 00:00:00.6021069
+[Info   :Il2CppInteropGen] Unstripping types...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0925466
+[Info   :Il2CppInteropGen] Unstripping fields...
+[Info   :Il2CppInteropGen] Restored 486 fields
+[Info   :Il2CppInteropGen] Failed to restore 13 fields
+[Info   :Il2CppInteropGen] Done in 00:00:00.0181384
+[Info   :Il2CppInteropGen] Unstripping methods...
+[Info   :Il2CppInteropGen] Restored 17181 methods
+[Info   :Il2CppInteropGen] Failed to restore 1129 methods
+[Info   :Il2CppInteropGen] Done in 00:00:01.2470007
+[Info   :Il2CppInteropGen] Unstripping method bodies...
+[Info   :Il2CppInteropGen] IL unstrip statistics: 10545 successful, 1498 failed
+[Info   :Il2CppInteropGen] Done in 00:00:00.6159550
+[Info   :Il2CppInteropGen] Writing xref cache...
+[Info   :Il2CppInteropGen] Done in 00:00:00.7780134
+[Info   :Il2CppInteropGen] Writing assemblies...
+[Info   :Il2CppInteropGen] Done in 00:00:10.1064245
+[Info   :Il2CppInteropGen] Writing method pointer map...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0476498
+[Info   :Il2CppInteropGen] Clearing static data...
+[Info   :Il2CppInteropGen] Done in 00:00:00.0000117
+[Info   :Il2CppInteropGen] Done!
+[Info   : Preloader] 0 patcher plugins loaded
+[Info   : Preloader] 0 assemblies discovered
+[Message:AssemblyPatcher] Executing 0 patch(es)
+[Message:   BepInEx] Chainloader initialized
+[Debug  : Preloader] Runtime invoke pointer: 0x7FFBE8DC89B0
+[Debug  :DobbyDetour] Preparing detour from 0x7FFBE8DC89B0 to 0x7FFBA87B38E4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFBA9EC0000
+[Debug  :DobbyDetour] Original: 7FFBE8DC89B0, Trampoline: 7FFBA9EC0000, diff: 3EF089B0
+[Debug  : Preloader] Runtime invoke patched
+[Debug  :Il2CppInterop] il2cpp_image_get_class: 0x7FFBE8DC8570
+[Debug  :Il2CppInterop] Image::GetType: 0x7FFBE8DB5380
+[Debug  :Il2CppInterop] imageGetTypeXrefs.Length: 2
+[Debug  :Il2CppInterop] getTypeInfoFromHandle: 7FFBE8D75190
+[Debug  :Il2CppInterop] MetadataCache::GetTypeInfoFromTypeDefinitionIndex found: 0x7FFBE8D68710
+[Debug  :DobbyDetour] Preparing detour from 0x7FFBE8D68710 to 0x7FFBA87B3924
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFBA9EC0020
+[Debug  :DobbyDetour] Original: 7FFBE8D68710, Trampoline: 7FFBA9EC0020, diff: 3EEA86F0
+[Debug  :Il2CppInterop] Class::GetDefaultFieldValue found: 0x7FFBE8D670E0
+[Debug  :DobbyDetour] Preparing detour from 0x7FFBE8D670E0 to 0x7FFBA87B3964
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFBA9EC0040
+[Debug  :DobbyDetour] Original: 7FFBE8D670E0, Trampoline: 7FFBA9EC0040, diff: 3EEA70A0
+[Warning:Il2CppInterop] Class::Init signatures have been exhausted, using a substitute!
+[Debug  :Il2CppInterop] Picked mono_class_instance_size as a Class::Init substitute
+[Debug  :Il2CppInterop] Class::Init: 0x7FFBE8DC91C0
+[Debug  :Il2CppInterop] il2cpp_class_from_il2cpp_type: 0x7FFBE8D58BF0
+[Debug  :Il2CppInterop] Class::FromIl2CppType found: 0x7FFBE8D71F70
+[Debug  :DobbyDetour] Preparing detour from 0x7FFBE8D71F70 to 0x7FFBA87B39A4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFBA9EC0060
+[Debug  :DobbyDetour] Original: 7FFBE8D71F70, Trampoline: 7FFBA9EC0060, diff: 3EEB1F10
+[Debug  :Il2CppInterop] il2cpp_class_from_name: 0x7FFBE8DC7E60
+[Debug  :Il2CppInterop] Class::FromName found: 0x7FFBE8D724D0
+[Debug  :DobbyDetour] Preparing detour from 0x7FFBE8D724D0 to 0x7FFBA87B39E4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFBA9EC0080
+[Debug  :DobbyDetour] Original: 7FFBE8D724D0, Trampoline: 7FFBA9EC0080, diff: 3EEB2450
+[Debug  :Il2CppInterop] GarbageCollector::RunFinalizer found: 0x7FFBE8DA6520
+[Debug  :DobbyDetour] Preparing detour from 0x7FFBE8DA6520 to 0x7FFBA87B3A24
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFBA9EC00A0
+[Debug  :DobbyDetour] Original: 7FFBE8DA6520, Trampoline: 7FFBA9EC00A0, diff: 3EEE6480
+[Info   :Il2CppInterop] Registered mono type Il2CppInterop.Runtime.DelegateSupport+Il2CppToMonoDelegateReference in il2cpp domain
+[Debug  :     Unity] Test call after applying unity logging hook
+[Debug  :InteropManager] Preloaded 159 interop assemblies in 368ms
+[Info   :   BepInEx] 0 plugins to load
+[Message:   BepInEx] Chainloader startup complete
+[Debug  : Preloader] Runtime invoke unpatched
+[Message:     Unity] RenderGraph is now enabled.
+[Warning:     Unity] Backtrace native integration status: Cannot initialize Crashpad client
+[Message:     Unity] Initialising plugin - game_plugin Feb 13 2026 16:31:46 FINAL
+[Message:     Unity] {"Timestamp":"2026-02-24T11:54:48.3636753-03:00","LogLevel":"Information","Category":"Default","Message":"GAME_PLUGIN::initialise() called (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\b2ac7840594b4618\\apps\\game\\plugin\\generic\\game_plugin_impl.cpp:1514\u003EC:\\TeamCity\\work\\b2ac7840594b4618\\apps\\game\\plugin\\generic\\game_plugin_impl.cpp:1514\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-02-24T11:54:48.4393328-03:00","LogLevel":"Information","Category":"default","Message":"Football Manager 26 plugin version: 26.1.3\u002B2266940 (fm26-rel-minor-update) (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\b2ac7840594b4618\\apps\\game\\plugin\\generic\\game_plugin_impl.cpp:786\u003EC:\\TeamCity\\work\\b2ac7840594b4618\\apps\\game\\plugin\\generic\\game_plugin_impl.cpp:786\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] Resolution changed: 1920x1080
+[Message:     Unity] Football Manager 26 version: 26.1.3.2266940
+[Message:     Unity] Shutting down plugin - game_plugin Feb 13 2026 16:31:46 FINAL
+[Warning:     Unity] Unloading the last loaded scene Assets/Scenes/Production/IntroScene.unity(build index: -1), is not supported. Please use SceneManager.LoadScene()/EditorSceneManager.OpenScene() to switch to another scene.
