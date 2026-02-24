@@ -15,28 +15,60 @@
   <ItemGroup>
     <!-- BepInEx Core -->
     <Reference Include="BepInEx.Core">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\BepInEx.Core.dll</HintPath>
+      <HintPath>..\BepInEx\core\BepInEx.Core.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
     <Reference Include="BepInEx.Unity.IL2CPP">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
+      <HintPath>..\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
     <Reference Include="0Harmony">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>..\BepInEx\core\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
-    <!-- UnityEngine (pasta interop para IL2CPP) -->
+    <!-- IL2CPP Interop - OBRIGATÓRIO para tipos básicos -->
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>..\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <Reference Include="Il2CppSystem">
+      <HintPath>..\BepInEx\interop\Il2CppSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <Reference Include="Il2CppSystem.Core">
+      <HintPath>..\BepInEx\interop\Il2CppSystem.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- UnityEngine -->
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <Reference Include="UnityEngine">
+      <HintPath>..\BepInEx\interop\UnityEngine.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>..\BepInEx\interop\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <!-- FM26 Game Assemblies (opcional, mas útil) -->
+    <Reference Include="FMGame">
+      <HintPath>..\BepInEx\interop\FMGame.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <Reference Include="FM.UI">
+      <HintPath>..\BepInEx\interop\FM.UI.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
