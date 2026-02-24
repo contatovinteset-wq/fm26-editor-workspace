@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- BepInEx -->
+    <!-- BepInEx Core -->
     <Reference Include="BepInEx.Core">
       <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\BepInEx.Core.dll</HintPath>
       <Private>false</Private>
@@ -25,18 +25,18 @@
     </Reference>
     
     <Reference Include="0Harmony">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\unity-libs\0Harmony.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
-    <!-- UnityEngine -->
+    <!-- UnityEngine (pasta interop para IL2CPP) -->
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\FM26_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\FM26_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
