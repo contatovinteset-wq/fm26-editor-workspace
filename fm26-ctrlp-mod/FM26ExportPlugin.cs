@@ -1,7 +1,5 @@
-using System;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
-using Il2CppSystem;
 using UnityEngine;
 
 namespace FM26CtrlPExport
@@ -32,7 +30,7 @@ namespace FM26CtrlPExport
                     Log.LogError("[Init] Não consegui obter Il2CppSystem.Type");
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 Log.LogError($"[Init] Erro: {ex.Message}");
                 Log.LogError($"[Init] StackTrace: {ex.StackTrace}");
