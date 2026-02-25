@@ -1,6 +1,7 @@
 using System;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
+using Il2CppSystem;
 using UnityEngine;
 
 namespace FM26CtrlPExport
@@ -19,10 +20,17 @@ namespace FM26CtrlPExport
                 var go = new GameObject("FM26CtrlP_Test");
                 UnityEngine.Object.DontDestroyOnLoad(go);
                 
-                // Usa AddComponent não-genérico
-                go.AddComponent(typeof(CtrlPRunner));
-                
-                Log.LogInfo("[Init] MonoBehaviour adicionado com sucesso!");
+                // Converte para Il2CppSystem.Type
+                var il2cppType = Il2CppSystem.Type.GetType("FM26CtrlPExport.CtrlPRunner");
+                if (il2cppType != null)
+                {
+                    go.AddComponent(il2cppType);
+                    Log.LogInfo("[Init] MonoBehaviour adicionado com sucesso!");
+                }
+                else
+                {
+                    Log.LogError("[Init] Não consegui obter Il2CppSystem.Type");
+                }
             }
             catch (Exception ex)
             {
