@@ -61,14 +61,14 @@ namespace FM26CtrlPExport
             }
             
             // Ctrl+P
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
+            if (UnityEngine.Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(KeyCode.P))
             {
                 Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
                 TryExport();
             }
             
             // F10 - Debug
-            if (Input.GetKeyDown(KeyCode.F10))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.F10))
             {
                 Debug.Log("[FM26CtrlP] >>> F10 - Listando tipos...");
                 ListTypes();
