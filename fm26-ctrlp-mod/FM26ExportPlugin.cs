@@ -17,7 +17,6 @@ namespace FM26CtrlPExport
                 Log.LogInfo("FM26 Ctrl+P Export v1.0.0 CARREGADO!");
                 Log.LogInfo("========================================");
                 
-                // Cria GameObject para rodar o MonoBehaviour
                 var go = new GameObject("FM26CtrlPRunner");
                 UnityEngine.Object.DontDestroyOnLoad(go);
                 go.AddComponent<CtrlPRunner>();
@@ -39,6 +38,50 @@ namespace FM26CtrlPExport
         private float _searchTimer = 0f;
         private bool _initialized = false;
         
+        // Input via reflection
+        private static Type _inputType = null;
+        private static MethodInfo _getKeyMethod = null;
+        private static MethodInfo _getKeyDownMethod = null;
+        private static Type _keyCodeType = null;
+        
+        static CtrlPRunner()
+        {
+            try
+            {
+                // Encontra o tipo Input em qualquer assembly
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    try
+                    {
+                        _inputType = assembly.GetType("UnityEngine.Input");
+                        if (_inputType != null)
+                        {
+                            _getKeyMethod = _inputType.GetMethod("GetKey", new Type[] { typeof(KeyCode) });
+                            _getKeyDownMethod = _inputType.GetMethod("GetKeyDown", new Type[] { typeof(KeyCode) });
+                            _keyCodeType = typeof(KeyCode);
+                            break;
+                        }
+                    }
+                    catch { }
+                }
+            }
+            catch { }
+        }
+        
+        private static bool GetKey(KeyCode key)
+        {
+            if (_getKeyMethod != null)
+                return (bool)_getKeyMethod.Invoke(null, new object[] { key });
+            return false;
+        }
+        
+        private static bool GetKeyDown(KeyCode key)
+        {
+            if (_getKeyDownMethod != null)
+                return (bool)_getKeyDownMethod.Invoke(null, new object[] { key });
+            return false;
+        }
+        
         void Awake()
         {
             Debug.Log("[FM26CtrlP] CtrlPRunner Awake()");
@@ -52,7 +95,6 @@ namespace FM26CtrlPExport
         
         void Update()
         {
-            // Busca método periodicamente se não encontrou
             _searchTimer += Time.deltaTime;
             if (!_initialized && _searchTimer > 5f)
             {
@@ -61,14 +103,14 @@ namespace FM26CtrlPExport
             }
             
             // Ctrl+P
-            if (UnityEngine.Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(KeyCode.P))
+            if (GetKey(KeyCode.LeftControl) && GetKeyDown(KeyCode.P))
             {
                 Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
                 TryExport();
             }
             
             // F10 - Debug
-            if (UnityEngine.Input.GetKeyDown(KeyCode.F10))
+            if (GetKeyDown(KeyCode.F10))
             {
                 Debug.Log("[FM26CtrlP] >>> F10 - Listando tipos...");
                 ListTypes();
