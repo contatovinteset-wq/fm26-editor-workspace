@@ -19,7 +19,9 @@ namespace FM26CtrlPExport
                 
                 var go = new GameObject("FM26CtrlPRunner");
                 UnityEngine.Object.DontDestroyOnLoad(go);
-                go.AddComponent<CtrlPRunner>();
+                
+                // Usa AddComponent não-genérico para evitar erro com Il2CppInterop
+                go.AddComponent(typeof(CtrlPRunner));
                 
                 Log.LogInfo("[Init] Componente adicionado com sucesso!");
             }
