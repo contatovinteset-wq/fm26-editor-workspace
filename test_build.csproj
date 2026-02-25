@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BepInEx.Core" HintPath="BepInEx/core/BepInEx.Core.dll" />
+    <Reference Include="BepInEx.Unity.Common" HintPath="BepInEx/core/BepInEx.Unity.Common.dll" />
+    <Reference Include="BepInEx.Unity.IL2CPP" HintPath="BepInEx/core/BepInEx.Unity.IL2CPP.dll" />
+  </ItemGroup>
+</Project>

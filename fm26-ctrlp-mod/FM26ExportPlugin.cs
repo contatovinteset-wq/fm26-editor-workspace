@@ -2,29 +2,36 @@ using System;
 using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
-using BepInEx.Unity.Common;
 using UnityEngine;
+using HarmonyLib;
 
 namespace FM26ExportMod
 {
+    // Plugin attribute - BepInEx 6 IL2CPP style
     [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "1.0.0")]
-    public class FM26ExportPlugin : BaseUnityPlugin
+    public class FM26ExportPlugin
     {
         internal static ManualLogSource Log;
-        private MethodInfo _updateExportMethod = null;
-        private Type _carouselType = null;
+        private static MethodInfo _updateExportMethod = null;
+        private static Type _carouselType = null;
+        private static GameObject _runnerObject;
         
-        void Awake()
+        public FM26ExportPlugin()
         {
-            Log = Logger;
+            Log = Logger.CreateLogSource("FM26CtrlP");
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export Mod v1.0.0");
+            Log.LogInfo("FM26 Ctrl+P Export Mod v1.0.0 - BepInEx 6 IL2CPP");
             Log.LogInfo("========================================");
             
-            FindExportMethod();
+            // Create a GameObject to run Update loop
+            _runnerObject = new GameObject("FM26CtrlPRunner");
+            _runnerObject.AddComponent<UpdateRunner>();
+            UnityEngine.Object.DontDestroyOnLoad(_runnerObject);
+            
+            Log.LogInfo("[Init] Plugin iniciado!");
         }
         
-        void FindExportMethod()
+        public static void FindExportMethod()
         {
             Log.LogInfo("[Init] Procurando ExportCurrentItemToBinding...");
             
@@ -46,7 +53,7 @@ namespace FM26ExportMod
                             
                             if (method != null)
                             {
-                                Log.LogInfo($"[OK] Metodo encontrado!");
+                                Log.LogInfo($"[OK] Metodo encontrado em {type.Name}!");
                                 _carouselType = type;
                                 _updateExportMethod = method;
                             }
@@ -57,25 +64,7 @@ namespace FM26ExportMod
             }
         }
         
-        void Update()
-        {
-            // Ctrl+P - usando KeyCode diretamente para evitar conflito
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftControl) && 
-                UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.P))
-            {
-                Log.LogInfo(">>> Ctrl+P DETECTADO!");
-                TryExport();
-            }
-            
-            // F10 - debug
-            if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.F10))
-            {
-                Log.LogInfo(">>> F10 - Listando tipos...");
-                LogAllTypes();
-            }
-        }
-        
-        void TryExport()
+        public static void TryExport()
         {
             Log.LogInfo("[Export] Iniciando...");
             
@@ -98,7 +87,8 @@ namespace FM26ExportMod
                 }
                 else
                 {
-                    Log.LogWarning("[Export] Metodo nao encontrado");
+                    Log.LogWarning("[Export] Metodo nao encontrado ainda. Procurando...");
+                    FindExportMethod();
                 }
             }
             catch (Exception ex)
@@ -107,7 +97,7 @@ namespace FM26ExportMod
             }
         }
         
-        void LogAllTypes()
+        public static void LogAllTypes()
         {
             int count = 0;
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
@@ -132,6 +122,28 @@ namespace FM26ExportMod
                 catch { }
             }
             Log.LogInfo($"[Debug] Total: {count}");
+        }
+    }
+    
+    // Helper MonoBehaviour to run Update loop
+    public class UpdateRunner : MonoBehaviour
+    {
+        void Update()
+        {
+            // Ctrl+P
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftControl) && 
+                UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.P))
+            {
+                FM26ExportPlugin.Log.LogInfo(">>> Ctrl+P DETECTADO!");
+                FM26ExportPlugin.TryExport();
+            }
+            
+            // F10 - debug
+            if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.F10))
+            {
+                FM26ExportPlugin.Log.LogInfo(">>> F10 - Listando tipos...");
+                FM26ExportPlugin.LogAllTypes();
+            }
         }
     }
 }

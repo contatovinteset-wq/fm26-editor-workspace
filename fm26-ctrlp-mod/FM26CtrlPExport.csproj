@@ -10,50 +10,32 @@
     <OutputType>Library</OutputType>
     <PlatformTarget>x64</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- Ignorar avisos de conflito de versão -->
+    <NoWarn>MSB3277</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- BepInEx Core -->
+    <!-- BepInEx Core - contém BepInPlugin attribute e Logger -->
     <Reference Include="BepInEx.Core">
       <HintPath>..\BepInEx\core\BepInEx.Core.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
-    <!-- BepInEx Unity Common - contém BaseUnityPlugin -->
-    <Reference Include="BepInEx.Unity.Common">
-      <HintPath>..\BepInEx\core\BepInEx.Unity.Common.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    
-    <Reference Include="BepInEx.Unity.IL2CPP">
-      <HintPath>..\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    
+    <!-- Harmony - para patches se necessário -->
     <Reference Include="0Harmony">
       <HintPath>..\BepInEx\core\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
-    <!-- Il2CppInterop Runtime - OBRIGATÓRIO para Il2CppObjectBase -->
+    <!-- Il2CppInterop Runtime - OBRIGATÓRIO para tipos IL2CPP -->
     <Reference Include="Il2CppInterop.Runtime">
       <HintPath>..\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
-    <!-- IL2CPP Interop - OBRIGATÓRIO para tipos básicos -->
+    <!-- IL2CPP mscorlib -->
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    
-    <Reference Include="Il2CppSystem">
-      <HintPath>..\BepInEx\interop\Il2CppSystem.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    
-    <Reference Include="Il2CppSystem.Core">
-      <HintPath>..\BepInEx\interop\Il2CppSystem.Core.dll</HintPath>
       <Private>false</Private>
     </Reference>
     
@@ -73,7 +55,7 @@
       <Private>false</Private>
     </Reference>
     
-    <!-- FM26 Game Assemblies (opcional, mas útil) -->
+    <!-- FM26 Game Assemblies -->
     <Reference Include="FMGame">
       <HintPath>..\BepInEx\interop\FMGame.dll</HintPath>
       <Private>false</Private>
