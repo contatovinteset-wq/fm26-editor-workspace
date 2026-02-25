@@ -7,53 +7,88 @@ using HarmonyLib;
 
 namespace FM26ExportMod
 {
-    // Plugin attribute - BepInEx 6 IL2CPP style
     [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "1.0.0")]
-    public class FM26ExportPlugin
+    public class Plugin
     {
         internal static ManualLogSource Log;
-        private static MethodInfo _updateExportMethod = null;
-        private static Type _carouselType = null;
-        private static GameObject _runnerObject;
         
-        public FM26ExportPlugin()
+        public Plugin()
         {
             Log = BepInEx.Logging.Logger.CreateLogSource("FM26CtrlP");
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export Mod v1.0.0 - BepInEx 6 IL2CPP");
+            Log.LogInfo("FM26 Ctrl+P Export Mod v1.0.0");
             Log.LogInfo("========================================");
             
-            // Create a GameObject to run Update loop
-            _runnerObject = new GameObject("FM26CtrlPRunner");
-            _runnerObject.AddComponent<UpdateRunner>();
-            UnityEngine.Object.DontDestroyOnLoad(_runnerObject);
+            // Apply Harmony patches
+            var harmony = new Harmony("com.koda.fm26.ctrlp");
+            harmony.PatchAll();
             
-            Log.LogInfo("[Init] Plugin iniciado!");
+            Log.LogInfo("[Harmony] Patches aplicados!");
+        }
+    }
+    
+    // Patch into GameObject.AddComponent to hook our UpdateRunner
+    [HarmonyPatch(typeof(GameObject), "AddComponent", new Type[] { typeof(Type) })]
+    public static class AddComponentPatch
+    {
+        private static GameObject _runner;
+        private static bool _initialized = false;
+        
+        static void Postfix()
+        {
+            if (_initialized) return;
+            
+            try
+            {
+                _initialized = true;
+                _runner = new GameObject("FM26CtrlPRunner");
+                _runner.AddComponent<UpdateRunner>();
+                UnityEngine.Object.DontDestroyOnLoad(_runner);
+                Plugin.Log.LogInfo("[Init] UpdateRunner injetado via Harmony!");
+            }
+            catch (Exception ex)
+            {
+                Plugin.Log.LogError($"[Init] Erro: {ex.Message}");
+            }
+        }
+    }
+    
+    // MonoBehaviour for Update loop
+    public class UpdateRunner : MonoBehaviour
+    {
+        private MethodInfo _updateExportMethod = null;
+        private Type _carouselType = null;
+        private float _searchTimer = 0f;
+        
+        void Awake()
+        {
+            Plugin.Log.LogInfo("[UpdateRunner] Awake!");
+            InvokeRepeating(nameof(SearchMethod), 2f, 5f);
         }
         
-        public static void FindExportMethod()
+        void SearchMethod()
         {
-            Log.LogInfo("[Init] Procurando ExportCurrentItemToBinding...");
+            if (_updateExportMethod != null) return;
+            
+            Plugin.Log.LogInfo("[Search] Procurando UpdateExportCurrentItemBinding...");
             
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 try
                 {
                     var name = assembly.GetName().Name;
-                    if (name.StartsWith("System") || name.StartsWith("Mono")) continue;
+                    if (name.StartsWith("System") || name.StartsWith("Mono") || name.StartsWith("mscorlib")) continue;
                     
                     foreach (var type in assembly.GetTypes())
                     {
                         if (type.Name.Contains("Carousel") || type.Name.Contains("TableView"))
                         {
-                            Log.LogInfo($"[Tipo] {type.FullName}");
-                            
                             var method = type.GetMethod("UpdateExportCurrentItemBinding", 
                                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
                             
                             if (method != null)
                             {
-                                Log.LogInfo($"[OK] Metodo encontrado em {type.Name}!");
+                                Plugin.Log.LogInfo($"[Search] ENCONTRADO: {type.FullName}");
                                 _carouselType = type;
                                 _updateExportMethod = method;
                             }
@@ -64,40 +99,53 @@ namespace FM26ExportMod
             }
         }
         
-        public static void TryExport()
+        void Update()
         {
-            Log.LogInfo("[Export] Iniciando...");
+            // Ctrl+P
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
+            {
+                Plugin.Log.LogInfo(">>> Ctrl+P PRESSIONADO!");
+                TryExport();
+            }
+            
+            // F10
+            if (Input.GetKeyDown(KeyCode.F10))
+            {
+                Plugin.Log.LogInfo(">>> F10 - Debug tipos");
+                LogAllTypes();
+            }
+        }
+        
+        void TryExport()
+        {
+            if (_updateExportMethod == null || _carouselType == null)
+            {
+                Plugin.Log.LogWarning("[Export] Metodo ainda nao encontrado");
+                SearchMethod();
+                return;
+            }
             
             try
             {
-                if (_updateExportMethod != null && _carouselType != null)
+                var findMethod = typeof(UnityEngine.Object).GetMethod("FindObjectsOfType", Type.EmptyTypes);
+                var genericMethod = findMethod.MakeGenericMethod(_carouselType);
+                var objects = (UnityEngine.Object[])genericMethod.Invoke(null, null);
+                
+                Plugin.Log.LogInfo($"[Export] {objects.Length} carousels encontrados");
+                
+                foreach (var obj in objects)
                 {
-                    // Usa reflexão para chamar FindObjectsOfType<T>() genérico
-                    var findMethod = typeof(UnityEngine.Object).GetMethod("FindObjectsOfType", Type.EmptyTypes);
-                    var genericMethod = findMethod.MakeGenericMethod(_carouselType);
-                    var objects = (UnityEngine.Object[])genericMethod.Invoke(null, null);
-                    
-                    Log.LogInfo($"[Export] Encontrados {objects.Length} carousels");
-                    
-                    foreach (var obj in objects)
-                    {
-                        Log.LogInfo($"[Export] Exportando: {obj.name}");
-                        _updateExportMethod.Invoke(obj, new object[] { 0 });
-                    }
-                }
-                else
-                {
-                    Log.LogWarning("[Export] Metodo nao encontrado ainda. Procurando...");
-                    FindExportMethod();
+                    Plugin.Log.LogInfo($"[Export] {obj.name}");
+                    _updateExportMethod.Invoke(obj, new object[] { 0 });
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Export] Erro: {ex.Message}");
+                Plugin.Log.LogError($"[Export] Erro: {ex.Message}");
             }
         }
         
-        public static void LogAllTypes()
+        void LogAllTypes()
         {
             int count = 0;
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
@@ -109,40 +157,15 @@ namespace FM26ExportMod
                     
                     foreach (var type in assembly.GetTypes())
                     {
-                        if (type.Name.Contains("Export") || 
-                            type.Name.Contains("Carousel") || 
-                            type.Name.Contains("Table"))
+                        if (type.Name.Contains("Export") || type.Name.Contains("Carousel") || type.Name.Contains("Table"))
                         {
-                            Log.LogInfo($"[Tipo] {type.FullName}");
+                            Plugin.Log.LogInfo($"[Tipo] {type.FullName}");
                             count++;
-                            if (count > 30) return;
+                            if (count > 50) return;
                         }
                     }
                 }
                 catch { }
-            }
-            Log.LogInfo($"[Debug] Total: {count}");
-        }
-    }
-    
-    // Helper MonoBehaviour to run Update loop
-    public class UpdateRunner : MonoBehaviour
-    {
-        void Update()
-        {
-            // Ctrl+P
-            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftControl) && 
-                UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.P))
-            {
-                FM26ExportPlugin.Log.LogInfo(">>> Ctrl+P DETECTADO!");
-                FM26ExportPlugin.TryExport();
-            }
-            
-            // F10 - debug
-            if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.F10))
-            {
-                FM26ExportPlugin.Log.LogInfo(">>> F10 - Listando tipos...");
-                FM26ExportPlugin.LogAllTypes();
             }
         }
     }
