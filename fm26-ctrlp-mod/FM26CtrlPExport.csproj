@@ -19,6 +19,12 @@
       <Private>false</Private>
     </Reference>
     
+    <!-- BepInEx Unity Common - contém BaseUnityPlugin -->
+    <Reference Include="BepInEx.Unity.Common">
+      <HintPath>..\BepInEx\core\BepInEx.Unity.Common.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
     <Reference Include="BepInEx.Unity.IL2CPP">
       <HintPath>..\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
       <Private>false</Private>
