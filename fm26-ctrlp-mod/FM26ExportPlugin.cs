@@ -10,6 +10,8 @@ namespace FM26CtrlPExport
     [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "1.0.0")]
     public class Plugin : BasePlugin
     {
+        public static int patchCount = 0;
+        
         public override void Load()
         {
             Log.LogInfo("========================================");
@@ -18,14 +20,10 @@ namespace FM26CtrlPExport
             
             try
             {
-                // Usa Harmony para patchear método do jogo
                 var harmony = new Harmony("com.koda.fm26.ctrlp");
+                Log.LogInfo("[Init] Procurando classes para patchear...");
                 
-                // Procura uma classe do jogo para patchear
-                // Por enquanto, vamos apenas logar que estamos tentando
-                Log.LogInfo("[Init] Procurando classe para patchear...");
-                
-                // Tenta encontrar qualquer classe com Update
+                int count = 0;
                 foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
                 {
                     try
@@ -36,24 +34,30 @@ namespace FM26CtrlPExport
                         
                         foreach (var type in asm.GetTypes())
                         {
-                            var updateMethod = type.GetMethod("Update", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                            if (updateMethod != null && updateMethod.GetParameters().Length == 0)
+                            try
                             {
-                                Log.LogInfo($"[Init] Encontrado: {type.FullName}.Update");
-                                
-                                // Patch o Update
-                                var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
-                                harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
-                                
-                                Log.LogInfo("[Init] Harmony patch aplicado!");
-                                return;
+                                var updateMethod = type.GetMethod("Update", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                                if (updateMethod != null && updateMethod.GetParameters().Length == 0)
+                                {
+                                    // Patch todos os Updates que encontrar
+                                    var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
+                                    harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
+                                    count++;
+                                    
+                                    if (count <= 10)
+                                        Log.LogInfo($"[Init] Patched: {type.FullName}.Update");
+                                    
+                                    if (count >= 50) break; // Limita a 50 patches
+                                }
                             }
+                            catch { }
                         }
+                        if (count >= 50) break;
                     }
                     catch { }
                 }
                 
-                Log.LogWarning("[Init] Não encontrou classe para patchear");
+                Log.LogInfo($"[Init] Total de patches: {count}");
             }
             catch (System.Exception ex)
             {
@@ -64,7 +68,11 @@ namespace FM26CtrlPExport
         
         public static void OnUpdate()
         {
-            Debug.Log("[FM26CtrlP] OnUpdate chamado!");
+            patchCount++;
+            if (patchCount % 100 == 0) // Loga a cada 100 chamadas
+            {
+                Debug.Log($"[FM26CtrlP] OnUpdate chamado! Total: {patchCount}");
+            }
         }
     }
 }
