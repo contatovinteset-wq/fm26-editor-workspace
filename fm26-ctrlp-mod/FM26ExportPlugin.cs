@@ -19,7 +19,8 @@ namespace FM26CtrlPExport
                 Log.LogInfo("========================================");
                 
                 // Aplica Harmony patch para rodar código no Update
-                Harmony.CreateAndPatchAll(typeof(Plugin));
+                var harmony = new Harmony("com.koda.fm26.ctrlp");
+                harmony.PatchAll();
                 
                 Log.LogInfo("[Init] Harmony patches aplicados!");
             }
