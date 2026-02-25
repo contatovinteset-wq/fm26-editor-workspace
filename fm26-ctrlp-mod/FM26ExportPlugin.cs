@@ -18,7 +18,7 @@ namespace FM26ExportMod
         
         public FM26ExportPlugin()
         {
-            Log = Logger.CreateLogSource("FM26CtrlP");
+            Log = BepInEx.Logging.Logger.CreateLogSource("FM26CtrlP");
             Log.LogInfo("========================================");
             Log.LogInfo("FM26 Ctrl+P Export Mod v1.0.0 - BepInEx 6 IL2CPP");
             Log.LogInfo("========================================");
