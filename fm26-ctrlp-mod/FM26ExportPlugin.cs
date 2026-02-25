@@ -16,15 +16,37 @@ namespace FM26CtrlPExport
             
             try
             {
-                // Tenta criar GameObject sem usar generics
                 var go = new GameObject("FM26CtrlP_Test");
                 UnityEngine.Object.DontDestroyOnLoad(go);
-                Log.LogInfo("[Init] GameObject criado com sucesso!");
+                
+                // Usa AddComponent não-genérico
+                go.AddComponent(typeof(CtrlPRunner));
+                
+                Log.LogInfo("[Init] MonoBehaviour adicionado com sucesso!");
             }
             catch (Exception ex)
             {
                 Log.LogError($"[Init] Erro: {ex.Message}");
+                Log.LogError($"[Init] StackTrace: {ex.StackTrace}");
             }
+        }
+    }
+    
+    public class CtrlPRunner : MonoBehaviour
+    {
+        void Awake()
+        {
+            Debug.Log("[FM26CtrlP] Awake!");
+        }
+        
+        void Start()
+        {
+            Debug.Log("[FM26CtrlP] Start!");
+        }
+        
+        void Update()
+        {
+            Debug.Log("[FM26CtrlP] Update!");
         }
     }
 }
