@@ -12,31 +12,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- BepInEx Core -->
     <Reference Include="BepInEx.Core">
       <HintPath>..\BepInEx\core\BepInEx.Core.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="BepInEx.Unity.IL2CPP">
       <HintPath>..\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    
-    <!-- Il2CppInterop -->
-    <Reference Include="Il2CppInterop.Runtime">
-      <HintPath>..\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    
-    <!-- UnityEngine -->
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    
-    <!-- IL2CPP mscorlib -->
-    <Reference Include="Il2Cppmscorlib">
-      <HintPath>..\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
