@@ -40,35 +40,46 @@ namespace FM26CtrlPExport
         {
             _frameCount++;
             
-            // Só busca método depois de 60 frames (deixa o jogo estabilizar)
-            if (!_searched && _frameCount > 60)
+            // Busca método depois de 300 frames (5 segundos a 60fps)
+            if (!_searched && _frameCount == 300)
             {
                 _searched = true;
                 FindExportMethod();
             }
             
-            // Só processa input depois de buscar
+            // Só processa depois de buscar
             if (!_searched) return;
             
-            try
+            // Ctrl+P - SÓ LOGA POR ENQUANTO
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
             {
-                // Ctrl+P
-                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
-                {
-                    Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
-                    TryExport();
-                }
+                Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO! Frame: " + _frameCount);
                 
-                // F10 - Debug
-                if (Input.GetKeyDown(KeyCode.F10))
+                if (_exportMethod != null && _targetType != null)
                 {
-                    Debug.Log("[FM26CtrlP] >>> F10 - Listando tipos...");
-                    ListTypes();
+                    Debug.Log($"[FM26CtrlP] Método disponível: {_targetType.FullName}.{_exportMethod.Name}");
+                    
+                    // Tenta encontrar objetos
+                    try
+                    {
+                        var objects = UnityEngine.Object.FindObjectsOfType(_targetType);
+                        Debug.Log($"[FM26CtrlP] FindObjectsOfType retornou: {(objects != null ? objects.Length.ToString() : "null")}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError($"[FM26CtrlP] Erro FindObjectsOfType: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("[FM26CtrlP] Método não encontrado ainda");
                 }
             }
-            catch (Exception ex)
+            
+            // F10 - Debug
+            if (Input.GetKeyDown(KeyCode.F10))
             {
-                Debug.LogError($"[FM26CtrlP] Erro: {ex.Message}");
+                Debug.Log($"[FM26CtrlP] Frame: {_frameCount}, Método encontrado: {_targetType?.FullName ?? "null"}");
             }
         }
         
@@ -114,70 +125,6 @@ namespace FM26CtrlPExport
             catch (Exception ex)
             {
                 Debug.LogError($"[FM26CtrlP] Erro na busca: {ex.Message}");
-            }
-        }
-        
-        private static void TryExport()
-        {
-            if (_exportMethod == null || _targetType == null)
-            {
-                Debug.LogWarning("[FM26CtrlP] Método de export não disponível");
-                return;
-            }
-            
-            try
-            {
-                var objects = UnityEngine.Object.FindObjectsOfType(_targetType);
-                if (objects != null && objects.Length > 0)
-                {
-                    Debug.Log($"[FM26CtrlP] {objects.Length} objetos encontrados");
-                    
-                    foreach (var obj in objects)
-                    {
-                        if (obj != null)
-                        {
-                            _exportMethod.Invoke(obj, new object[] { 0 });
-                        }
-                    }
-                    Debug.Log("[FM26CtrlP] Export concluído!");
-                }
-                else
-                {
-                    Debug.LogWarning("[FM26CtrlP] Nenhum objeto encontrado");
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[FM26CtrlP] Erro no export: {ex.Message}");
-            }
-        }
-        
-        private static void ListTypes()
-        {
-            int count = 0;
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                try
-                {
-                    var name = assembly.GetName().Name;
-                    if (name.StartsWith("System") || name.StartsWith("Mono")) continue;
-                    
-                    foreach (var type in assembly.GetTypes())
-                    {
-                        try
-                        {
-                            if (type.Name.Contains("Export") || type.Name.Contains("Carousel") || 
-                                type.Name.Contains("Table") || type.Name.Contains("View"))
-                            {
-                                Debug.Log($"[FM26CtrlP] {type.FullName}");
-                                count++;
-                                if (count > 30) return;
-                            }
-                        }
-                        catch { }
-                    }
-                }
-                catch { }
             }
         }
     }
