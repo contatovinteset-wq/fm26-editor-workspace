@@ -21,6 +21,10 @@
       <HintPath>..\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>..\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     
     <!-- Il2CppInterop -->
     <Reference Include="Il2CppInterop.Runtime">

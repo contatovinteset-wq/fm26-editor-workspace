@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
+using HarmonyLib;
 using UnityEngine;
 
 namespace FM26CtrlPExport
@@ -17,13 +18,10 @@ namespace FM26CtrlPExport
                 Log.LogInfo("FM26 Ctrl+P Export v1.0.0 CARREGADO!");
                 Log.LogInfo("========================================");
                 
-                var go = new GameObject("FM26CtrlPRunner");
-                UnityEngine.Object.DontDestroyOnLoad(go);
+                // Aplica Harmony patch para rodar código no Update
+                Harmony.CreateAndPatchAll(typeof(Plugin));
                 
-                // Usa AddComponent não-genérico para evitar erro com Il2CppInterop
-                go.AddComponent(typeof(CtrlPRunner));
-                
-                Log.LogInfo("[Init] Componente adicionado com sucesso!");
+                Log.LogInfo("[Init] Harmony patches aplicados!");
             }
             catch (Exception ex)
             {
@@ -31,26 +29,73 @@ namespace FM26CtrlPExport
                 Log.LogError($"[Init] StackTrace: {ex.StackTrace}");
             }
         }
+        
+        // Patch no Time.time para rodar nosso código periodicamente
+        [HarmonyPatch(typeof(Time), "get_time")]
+        [HarmonyPostfix]
+        public static void OnTimeUpdate(ref float __result)
+        {
+            try
+            {
+                CtrlPLogic.Update();
+            }
+            catch { }
+        }
     }
     
-    public class CtrlPRunner : MonoBehaviour
+    public static class CtrlPLogic
     {
-        private MethodInfo _exportMethod = null;
-        private Type _targetType = null;
-        private float _searchTimer = 0f;
-        private bool _initialized = false;
+        private static MethodInfo _exportMethod = null;
+        private static Type _targetType = null;
+        private static float _searchTimer = 0f;
+        private static bool _initialized = false;
+        private static float _lastTime = 0f;
         
         // Input via reflection
         private static Type _inputType = null;
         private static MethodInfo _getKeyMethod = null;
         private static MethodInfo _getKeyDownMethod = null;
-        private static Type _keyCodeType = null;
+        private static bool _reflectionReady = false;
         
-        static CtrlPRunner()
+        public static void Update()
+        {
+            // Inicializa reflection do Input
+            if (!_reflectionReady)
+            {
+                InitInputReflection();
+            }
+            
+            float currentTime = Time.time;
+            float deltaTime = currentTime - _lastTime;
+            _lastTime = currentTime;
+            
+            // Busca método periodicamente
+            _searchTimer += deltaTime;
+            if (!_initialized && _searchTimer > 5f)
+            {
+                _searchTimer = 0f;
+                SearchExportMethod();
+            }
+            
+            // Ctrl+P
+            if (GetKey(KeyCode.LeftControl) && GetKeyDown(KeyCode.P))
+            {
+                Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
+                TryExport();
+            }
+            
+            // F10 - Debug
+            if (GetKeyDown(KeyCode.F10))
+            {
+                Debug.Log("[FM26CtrlP] >>> F10 - Listando tipos...");
+                ListTypes();
+            }
+        }
+        
+        private static void InitInputReflection()
         {
             try
             {
-                // Encontra o tipo Input em qualquer assembly
                 foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
                     try
@@ -60,8 +105,12 @@ namespace FM26CtrlPExport
                         {
                             _getKeyMethod = _inputType.GetMethod("GetKey", new Type[] { typeof(KeyCode) });
                             _getKeyDownMethod = _inputType.GetMethod("GetKeyDown", new Type[] { typeof(KeyCode) });
-                            _keyCodeType = typeof(KeyCode);
-                            break;
+                            if (_getKeyMethod != null && _getKeyDownMethod != null)
+                            {
+                                _reflectionReady = true;
+                                Debug.Log("[FM26CtrlP] Input reflection inicializado!");
+                                return;
+                            }
                         }
                     }
                     catch { }
@@ -84,42 +133,7 @@ namespace FM26CtrlPExport
             return false;
         }
         
-        void Awake()
-        {
-            Debug.Log("[FM26CtrlP] CtrlPRunner Awake()");
-        }
-        
-        void Start()
-        {
-            Debug.Log("[FM26CtrlP] CtrlPRunner Start() - Buscando método...");
-            SearchExportMethod();
-        }
-        
-        void Update()
-        {
-            _searchTimer += Time.deltaTime;
-            if (!_initialized && _searchTimer > 5f)
-            {
-                _searchTimer = 0f;
-                SearchExportMethod();
-            }
-            
-            // Ctrl+P
-            if (GetKey(KeyCode.LeftControl) && GetKeyDown(KeyCode.P))
-            {
-                Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
-                TryExport();
-            }
-            
-            // F10 - Debug
-            if (GetKeyDown(KeyCode.F10))
-            {
-                Debug.Log("[FM26CtrlP] >>> F10 - Listando tipos...");
-                ListTypes();
-            }
-        }
-        
-        void SearchExportMethod()
+        private static void SearchExportMethod()
         {
             if (_initialized) return;
             
@@ -159,7 +173,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        void TryExport()
+        private static void TryExport()
         {
             if (_exportMethod == null || _targetType == null)
             {
@@ -191,7 +205,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        void ListTypes()
+        private static void ListTypes()
         {
             int count = 0;
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
