@@ -18,7 +18,6 @@ namespace FM26CtrlPExport
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
             
-            // Patch SI.Bindable.Bindings.Update (classe ativa)
             var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
             if (bindingsType != null)
             {
@@ -32,26 +31,66 @@ namespace FM26CtrlPExport
             }
         }
         
+        private static int _frameCount = 0;
+        private static bool _searched = false;
         private static MethodInfo _exportMethod = null;
         private static Type _targetType = null;
-        private static bool _initialized = false;
         
         public static void OnUpdate()
         {
+            _frameCount++;
+            
+            // Só busca método depois de 60 frames (deixa o jogo estabilizar)
+            if (!_searched && _frameCount > 60)
+            {
+                _searched = true;
+                FindExportMethod();
+            }
+            
+            // Só processa input depois de buscar
+            if (!_searched) return;
+            
             try
             {
-                // Busca método na primeira chamada
-                if (!_initialized)
+                // Ctrl+P
+                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
                 {
-                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                    Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
+                    TryExport();
+                }
+                
+                // F10 - Debug
+                if (Input.GetKeyDown(KeyCode.F10))
+                {
+                    Debug.Log("[FM26CtrlP] >>> F10 - Listando tipos...");
+                    ListTypes();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[FM26CtrlP] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void FindExportMethod()
+        {
+            try
+            {
+                Debug.Log("[FM26CtrlP] Buscando UpdateExportCurrentItemBinding...");
+                
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    try
                     {
-                        try
+                        var name = assembly.GetName().Name;
+                        if (name.StartsWith("System") || name.StartsWith("Mono") || 
+                            name.StartsWith("mscorlib") || name.StartsWith("Il2Cpp") ||
+                            name.StartsWith("BepInEx") || name.StartsWith("0Harmony"))
+                            continue;
+                        
+                        foreach (var type in assembly.GetTypes())
                         {
-                            var name = assembly.GetName().Name;
-                            if (name.StartsWith("System") || name.StartsWith("Mono") || name.StartsWith("mscorlib") || name.StartsWith("Il2Cpp"))
-                                continue;
-                            
-                            foreach (var type in assembly.GetTypes())
+                            try
                             {
                                 var method = type.GetMethod("UpdateExportCurrentItemBinding",
                                     BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
@@ -60,86 +99,86 @@ namespace FM26CtrlPExport
                                 {
                                     _targetType = type;
                                     _exportMethod = method;
-                                    _initialized = true;
-                                    Debug.Log($"[FM26CtrlP] ENCONTRADO: {type.FullName}");
+                                    Debug.Log($"[FM26CtrlP] ENCONTRADO: {type.FullName}.{method.Name}");
                                     return;
                                 }
                             }
+                            catch { }
                         }
-                        catch { }
                     }
-                    _initialized = true; // Marca como verificado mesmo se não encontrar
+                    catch { }
                 }
                 
-                // Verifica Ctrl+P
-                if (UnityEngine.Input.GetKey(KeyCode.LeftControl) && UnityEngine.Input.GetKeyDown(KeyCode.P))
+                Debug.LogWarning("[FM26CtrlP] Método UpdateExportCurrentItemBinding não encontrado");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[FM26CtrlP] Erro na busca: {ex.Message}");
+            }
+        }
+        
+        private static void TryExport()
+        {
+            if (_exportMethod == null || _targetType == null)
+            {
+                Debug.LogWarning("[FM26CtrlP] Método de export não disponível");
+                return;
+            }
+            
+            try
+            {
+                var objects = UnityEngine.Object.FindObjectsOfType(_targetType);
+                if (objects != null && objects.Length > 0)
                 {
-                    Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
+                    Debug.Log($"[FM26CtrlP] {objects.Length} objetos encontrados");
                     
-                    if (_exportMethod != null && _targetType != null)
+                    foreach (var obj in objects)
                     {
-                        try
+                        if (obj != null)
                         {
-                            var findMethod = typeof(UnityEngine.Object).GetMethod("FindObjectsOfType", new Type[] { typeof(Type) });
-                            if (findMethod != null)
-                            {
-                                var objects = findMethod.Invoke(null, new object[] { _targetType }) as Il2CppSystem.Array;
-                                if (objects != null)
-                                {
-                                    var count = objects.Length;
-                                    Debug.Log($"[FM26CtrlP] {count} objetos encontrados");
-                                    
-                                    for (int i = 0; i < count; i++)
-                                    {
-                                        var obj = objects.GetValue(i);
-                                        if (obj != null)
-                                        {
-                                            _exportMethod.Invoke(obj, new object[] { 0 });
-                                            Debug.Log($"[FM26CtrlP] Exportado: {i + 1}/{count}");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.LogError($"[FM26CtrlP] Erro no export: {ex.Message}");
+                            _exportMethod.Invoke(obj, new object[] { 0 });
                         }
                     }
-                    else
-                    {
-                        Debug.LogWarning("[FM26CtrlP] Método UpdateExportCurrentItemBinding não encontrado");
-                    }
+                    Debug.Log("[FM26CtrlP] Export concluído!");
                 }
-                
-                // F10 - Debug
-                if (UnityEngine.Input.GetKeyDown(KeyCode.F10))
+                else
                 {
-                    Debug.Log("[FM26CtrlP] >>> F10 - Listando tipos com 'Export' no nome...");
-                    int count = 0;
-                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                    {
-                        try
-                        {
-                            var name = assembly.GetName().Name;
-                            if (name.StartsWith("System") || name.StartsWith("Mono")) continue;
-                            
-                            foreach (var type in assembly.GetTypes())
-                            {
-                                if (type.Name.Contains("Export") || type.Name.Contains("Carousel") || 
-                                    type.Name.Contains("Table") || type.Name.Contains("View"))
-                                {
-                                    Debug.Log($"[FM26CtrlP] Tipo: {type.FullName}");
-                                    count++;
-                                    if (count > 20) return;
-                                }
-                            }
-                        }
-                        catch { }
-                    }
+                    Debug.LogWarning("[FM26CtrlP] Nenhum objeto encontrado");
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[FM26CtrlP] Erro no export: {ex.Message}");
+            }
+        }
+        
+        private static void ListTypes()
+        {
+            int count = 0;
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                try
+                {
+                    var name = assembly.GetName().Name;
+                    if (name.StartsWith("System") || name.StartsWith("Mono")) continue;
+                    
+                    foreach (var type in assembly.GetTypes())
+                    {
+                        try
+                        {
+                            if (type.Name.Contains("Export") || type.Name.Contains("Carousel") || 
+                                type.Name.Contains("Table") || type.Name.Contains("View"))
+                            {
+                                Debug.Log($"[FM26CtrlP] {type.FullName}");
+                                count++;
+                                if (count > 30) return;
+                            }
+                        }
+                        catch { }
+                    }
+                }
+                catch { }
+            }
         }
     }
 }
