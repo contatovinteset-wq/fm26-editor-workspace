@@ -39,9 +39,19 @@
       <Private>false</Private>
     </Reference>
     
-    <!-- IL2CPP mscorlib -->
+    <!-- IL2CPP mscorlib e System -->
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <Reference Include="Il2CppSystem">
+      <HintPath>..\BepInEx\interop\Il2CppSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    
+    <Reference Include="Il2CppSystem.Core">
+      <HintPath>..\BepInEx\interop\Il2CppSystem.Core.dll</HintPath>
       <Private>false</Private>
     </Reference>
     

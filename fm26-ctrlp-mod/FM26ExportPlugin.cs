@@ -4,18 +4,14 @@ using BepInEx;
 using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
 using UnityEngine;
-using HarmonyLib;
 
 namespace FM26ExportMod
 {
     [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "1.0.0")]
     public class FM26ExportPlugin : BasePlugin
-    {
-        internal static new ManualLogSource Log;
-        
+    {        
         public override void Load()
         {
-            Log = base.Log;
             Log.LogInfo("========================================");
             Log.LogInfo("FM26 Ctrl+P Export Mod v1.0.0");
             Log.LogInfo("========================================");
@@ -35,7 +31,7 @@ namespace FM26ExportMod
         
         void Start()
         {
-            FM26ExportPlugin.Log.LogInfo("[UpdateRunner] Start!");
+            Debug.Log("[FM26CtrlP] UpdateRunner Start!");
             InvokeRepeating(nameof(SearchMethod), 2f, 5f);
         }
         
@@ -43,25 +39,26 @@ namespace FM26ExportMod
         {
             if (_updateExportMethod != null) return;
             
-            FM26ExportPlugin.Log.LogInfo("[Search] Procurando UpdateExportCurrentItemBinding...");
+            Debug.Log("[FM26CtrlP] Procurando UpdateExportCurrentItemBinding...");
             
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 try
                 {
                     var name = assembly.GetName().Name;
-                    if (name.StartsWith("System") || name.StartsWith("Mono") || name.StartsWith("mscorlib")) continue;
+                    if (name.StartsWith("System") || name.StartsWith("Mono") || name.StartsWith("mscorlib") || name.StartsWith("netstandard")) continue;
                     
                     foreach (var type in assembly.GetTypes())
                     {
-                        if (type.Name.Contains("Carousel") || type.Name.Contains("TableView"))
+                        var typeName = type.Name;
+                        if (typeName.Contains("Carousel") || typeName.Contains("TableView") || typeName.Contains("Export"))
                         {
                             var method = type.GetMethod("UpdateExportCurrentItemBinding", 
                                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
                             
                             if (method != null)
                             {
-                                FM26ExportPlugin.Log.LogInfo($"[Search] ENCONTRADO: {type.FullName}");
+                                Debug.Log($"[FM26CtrlP] ENCONTRADO: {type.FullName}");
                                 _carouselType = type;
                                 _updateExportMethod = method;
                             }
@@ -74,17 +71,18 @@ namespace FM26ExportMod
         
         void Update()
         {
-            // Ctrl+P
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
+            // Ctrl+P - usa UnityEngine.Input explicitamente
+            if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftControl) && 
+                UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.P))
             {
-                FM26ExportPlugin.Log.LogInfo(">>> Ctrl+P PRESSIONADO!");
+                Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
                 TryExport();
             }
             
-            // F10
-            if (Input.GetKeyDown(KeyCode.F10))
+            // F10 - debug
+            if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.F10))
             {
-                FM26ExportPlugin.Log.LogInfo(">>> F10 - Debug tipos");
+                Debug.Log("[FM26CtrlP] >>> F10 - Debug tipos");
                 LogAllTypes();
             }
         }
@@ -93,7 +91,7 @@ namespace FM26ExportMod
         {
             if (_updateExportMethod == null || _carouselType == null)
             {
-                FM26ExportPlugin.Log.LogWarning("[Export] Metodo ainda nao encontrado");
+                Debug.LogWarning("[FM26CtrlP] Metodo ainda nao encontrado");
                 SearchMethod();
                 return;
             }
@@ -101,20 +99,32 @@ namespace FM26ExportMod
             try
             {
                 var findMethod = typeof(UnityEngine.Object).GetMethod("FindObjectsOfType", Type.EmptyTypes);
+                if (findMethod == null)
+                {
+                    Debug.LogError("[FM26CtrlP] FindObjectsOfType nao encontrado");
+                    return;
+                }
+                
                 var genericMethod = findMethod.MakeGenericMethod(_carouselType);
                 var objects = (UnityEngine.Object[])genericMethod.Invoke(null, null);
                 
-                FM26ExportPlugin.Log.LogInfo($"[Export] {objects.Length} carousels encontrados");
+                if (objects == null || objects.Length == 0)
+                {
+                    Debug.LogWarning("[FM26CtrlP] Nenhum carousel encontrado");
+                    return;
+                }
+                
+                Debug.Log($"[FM26CtrlP] {objects.Length} carousels encontrados");
                 
                 foreach (var obj in objects)
                 {
-                    FM26ExportPlugin.Log.LogInfo($"[Export] {obj.name}");
+                    Debug.Log($"[FM26CtrlP] Exportando: {obj.name}");
                     _updateExportMethod.Invoke(obj, new object[] { 0 });
                 }
             }
             catch (Exception ex)
             {
-                FM26ExportPlugin.Log.LogError($"[Export] Erro: {ex.Message}");
+                Debug.LogError($"[FM26CtrlP] Erro: {ex.Message}\n{ex.StackTrace}");
             }
         }
         
@@ -126,13 +136,14 @@ namespace FM26ExportMod
                 try
                 {
                     var name = assembly.GetName().Name;
-                    if (name.StartsWith("System") || name.StartsWith("Mono")) continue;
+                    if (name.StartsWith("System") || name.StartsWith("Mono") || name.StartsWith("netstandard")) continue;
                     
                     foreach (var type in assembly.GetTypes())
                     {
-                        if (type.Name.Contains("Export") || type.Name.Contains("Carousel") || type.Name.Contains("Table"))
+                        var typeName = type.Name;
+                        if (typeName.Contains("Export") || typeName.Contains("Carousel") || typeName.Contains("Table"))
                         {
-                            FM26ExportPlugin.Log.LogInfo($"[Tipo] {type.FullName}");
+                            Debug.Log($"[FM26CtrlP] Tipo: {type.FullName}");
                             count++;
                             if (count > 50) return;
                         }
@@ -140,6 +151,7 @@ namespace FM26ExportMod
                 }
                 catch { }
             }
+            Debug.Log($"[FM26CtrlP] Total de tipos: {count}");
         }
     }
 }
