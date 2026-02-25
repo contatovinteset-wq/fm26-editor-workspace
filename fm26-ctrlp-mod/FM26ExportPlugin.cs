@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
+using BepInEx.Unity.Common;
 using UnityEngine;
 
 namespace FM26ExportMod
