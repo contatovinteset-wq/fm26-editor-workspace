@@ -1,3 +1,4 @@
+using System;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
 using UnityEngine;
@@ -18,16 +19,23 @@ namespace FM26CtrlPExport
                 var go = new GameObject("FM26CtrlP_Test");
                 UnityEngine.Object.DontDestroyOnLoad(go);
                 
-                // Converte para Il2CppSystem.Type
-                var il2cppType = Il2CppSystem.Type.GetType("FM26CtrlPExport.CtrlPRunner");
-                if (il2cppType != null)
+                // Obtém o tipo via System.Type primeiro
+                var monoType = typeof(CtrlPRunner);
+                Log.LogInfo($"[Init] Tipo System: {monoType.FullName}");
+                Log.LogInfo($"[Init] Assembly: {monoType.Assembly.FullName}");
+                
+                // Tenta obter Il2CppSystem.Type via reflection
+                var il2CppType = Il2CppSystem.Type.GetTypeFromHandle(
+                    Il2CppSystem.RuntimeTypeHandle.op_Implicit(monoType.TypeHandle));
+                
+                if (il2CppType != null)
                 {
-                    go.AddComponent(il2cppType);
+                    go.AddComponent(il2CppType);
                     Log.LogInfo("[Init] MonoBehaviour adicionado com sucesso!");
                 }
                 else
                 {
-                    Log.LogError("[Init] Não consegui obter Il2CppSystem.Type");
+                    Log.LogError("[Init] Il2CppSystem.Type é null");
                 }
             }
             catch (System.Exception ex)
