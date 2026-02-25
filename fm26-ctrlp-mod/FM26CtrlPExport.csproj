@@ -24,6 +24,10 @@
       <HintPath>..\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>..\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>..\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
       <Private>false</Private>

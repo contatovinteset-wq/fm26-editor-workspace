@@ -1,6 +1,8 @@
 using System;
+using System.Reflection;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
+using HarmonyLib;
 using UnityEngine;
 
 namespace FM26CtrlPExport
@@ -16,27 +18,42 @@ namespace FM26CtrlPExport
             
             try
             {
-                var go = new GameObject("FM26CtrlP_Test");
-                UnityEngine.Object.DontDestroyOnLoad(go);
+                // Usa Harmony para patchear método do jogo
+                var harmony = new Harmony("com.koda.fm26.ctrlp");
                 
-                // Obtém o tipo via System.Type primeiro
-                var monoType = typeof(CtrlPRunner);
-                Log.LogInfo($"[Init] Tipo System: {monoType.FullName}");
-                Log.LogInfo($"[Init] Assembly: {monoType.Assembly.FullName}");
+                // Procura uma classe do jogo para patchear
+                // Por enquanto, vamos apenas logar que estamos tentando
+                Log.LogInfo("[Init] Procurando classe para patchear...");
                 
-                // Tenta obter Il2CppSystem.Type via reflection
-                var il2CppType = Il2CppSystem.Type.GetTypeFromHandle(
-                    Il2CppSystem.RuntimeTypeHandle.op_Implicit(monoType.TypeHandle));
-                
-                if (il2CppType != null)
+                // Tenta encontrar qualquer classe com Update
+                foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
                 {
-                    go.AddComponent(il2CppType);
-                    Log.LogInfo("[Init] MonoBehaviour adicionado com sucesso!");
+                    try
+                    {
+                        var name = asm.GetName().Name;
+                        if (name.StartsWith("System") || name.StartsWith("Mono") || name.StartsWith("mscorlib") || name.StartsWith("Il2Cpp"))
+                            continue;
+                        
+                        foreach (var type in asm.GetTypes())
+                        {
+                            var updateMethod = type.GetMethod("Update", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                            if (updateMethod != null && updateMethod.GetParameters().Length == 0)
+                            {
+                                Log.LogInfo($"[Init] Encontrado: {type.FullName}.Update");
+                                
+                                // Patch o Update
+                                var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
+                                harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
+                                
+                                Log.LogInfo("[Init] Harmony patch aplicado!");
+                                return;
+                            }
+                        }
+                    }
+                    catch { }
                 }
-                else
-                {
-                    Log.LogError("[Init] Il2CppSystem.Type é null");
-                }
+                
+                Log.LogWarning("[Init] Não encontrou classe para patchear");
             }
             catch (System.Exception ex)
             {
@@ -44,23 +61,10 @@ namespace FM26CtrlPExport
                 Log.LogError($"[Init] StackTrace: {ex.StackTrace}");
             }
         }
-    }
-    
-    public class CtrlPRunner : MonoBehaviour
-    {
-        void Awake()
-        {
-            Debug.Log("[FM26CtrlP] Awake!");
-        }
         
-        void Start()
+        public static void OnUpdate()
         {
-            Debug.Log("[FM26CtrlP] Start!");
-        }
-        
-        void Update()
-        {
-            Debug.Log("[FM26CtrlP] Update!");
+            Debug.Log("[FM26CtrlP] OnUpdate chamado!");
         }
     }
 }
