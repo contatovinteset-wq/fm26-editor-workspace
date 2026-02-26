@@ -164,41 +164,38 @@ namespace FM26CtrlPExport
         private static List<object> FindVisualElementsOfType(VisualElement root, Type targetType)
         {
             var result = new List<object>();
+            FindVisualElementsRecursive(root, targetType, result);
+            return result;
+        }
+        
+        private static void FindVisualElementsRecursive(VisualElement element, Type targetType, List<object> result)
+        {
+            if (element == null) return;
             
             try
             {
-                // Verificar se o root é do tipo
-                var rootType = root.GetType();
-                if (rootType == targetType || rootType.IsSubclassOf(targetType))
+                // Verificar se o elemento é do tipo
+                var elementType = element.GetType();
+                if (elementType == targetType || elementType.IsSubclassOf(targetType))
                 {
-                    result.Add(root);
+                    result.Add(element);
                 }
                 
-                // Iterar sobre filhos usando GetEnumerator manualmente
-                var children = root.Children();
-                var enumerator = children.GetEnumerator();
-                
-                while (enumerator.MoveNext())
+                // Usar childCount e indexer ao invés de Children()
+                int childCount = element.childCount;
+                for (int i = 0; i < childCount; i++)
                 {
-                    var child = enumerator.Current;
-                    if (child == null) continue;
-                    
-                    var childType = child.GetType();
-                    if (childType == targetType || childType.IsSubclassOf(targetType))
+                    var child = element[i];
+                    if (child != null)
                     {
-                        result.Add(child);
+                        FindVisualElementsRecursive(child, targetType, result);
                     }
-                    
-                    // Recursivamente buscar nos filhos
-                    result.AddRange(FindVisualElementsOfType(child, targetType));
                 }
             }
             catch (Exception ex)
             {
                 Debug.LogError($"[FM26CtrlP] Erro ao buscar elementos: {ex.Message}");
             }
-            
-            return result;
         }
         
         private static void LogUIDocuments()
@@ -238,12 +235,10 @@ namespace FM26CtrlPExport
                 Debug.Log($"[FM26CtrlP] {indent}{type.Name} ({element.name})");
             }
             
-            var children = element.Children();
-            var enumerator = children.GetEnumerator();
-            
-            while (enumerator.MoveNext())
+            int childCount = element.childCount;
+            for (int i = 0; i < childCount; i++)
             {
-                LogVisualElementTree(enumerator.Current, depth + 1);
+                LogVisualElementTree(element[i], depth + 1);
             }
         }
     }
