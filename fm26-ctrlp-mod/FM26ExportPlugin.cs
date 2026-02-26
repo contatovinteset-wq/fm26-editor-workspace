@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Collections.Generic;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
 using BepInEx.Logging;
@@ -45,7 +46,7 @@ namespace FM26CtrlPExport
         
         private static int _frameCount = 0;
         private static bool _initialized = false;
-        private static Il2CppSystem.Type _sicarouselType = null;
+        private static Type _sicarouselManagedType = null;
         private static MethodInfo _exportMethod = null;
         
         public static void OnUpdate()
@@ -91,31 +92,28 @@ namespace FM26CtrlPExport
             {
                 Log.LogInfo("[Init] Procurando tipos...");
                 
-                _sicarouselType = Il2CppSystem.Type.GetType("SI.Bindable.SICarousel, SI.Bindable");
+                // Usar tipo managed (não Il2CppSystem.Type)
+                _sicarouselManagedType = Type.GetType("SI.Bindable.SICarousel, SI.Bindable");
                 
-                if (_sicarouselType != null)
+                if (_sicarouselManagedType != null)
                 {
-                    Log.LogInfo($"[Init] Tipo Il2Cpp obtido: {_sicarouselType.FullName}");
+                    Log.LogInfo($"[Init] Tipo managed obtido: {_sicarouselManagedType.FullName}");
                     
-                    var managedType = Type.GetType("SI.Bindable.SICarousel, SI.Bindable");
-                    if (managedType != null)
+                    _exportMethod = _sicarouselManagedType.GetMethod("UpdateExportCurrentItemBinding",
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                    
+                    if (_exportMethod != null)
                     {
-                        _exportMethod = managedType.GetMethod("UpdateExportCurrentItemBinding",
-                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                        
-                        if (_exportMethod != null)
-                        {
-                            Log.LogInfo($"[Init] Método encontrado: {_exportMethod.Name}");
-                        }
-                        else
-                        {
-                            Log.LogWarning("[Init] Método NÃO encontrado");
-                        }
+                        Log.LogInfo($"[Init] Método encontrado: {_exportMethod.Name}");
+                    }
+                    else
+                    {
+                        Log.LogWarning("[Init] Método NÃO encontrado");
                     }
                 }
                 else
                 {
-                    Log.LogError("[Init] Falha ao obter Il2CppSystem.Type");
+                    Log.LogError("[Init] Falha ao obter tipo managed");
                 }
             }
             catch (Exception ex)
@@ -130,9 +128,9 @@ namespace FM26CtrlPExport
             
             try
             {
-                if (_sicarouselType == null)
+                if (_sicarouselManagedType == null)
                 {
-                    Log.LogError("[Export] _sicarouselType é null");
+                    Log.LogError("[Export] _sicarouselManagedType é null");
                     return;
                 }
                 
@@ -142,46 +140,52 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                Log.LogInfo("[Export] Buscando objetos...");
-                var objects = UnityEngine.Object.FindObjectsOfType(_sicarouselType);
+                Log.LogInfo("[Export] Buscando objetos com Resources.FindObjectsOfTypeAll...");
                 
-                if (objects == null)
+                // Usar Resources.FindObjectsOfTypeAll que funciona com qualquer tipo
+                var allObjects = Resources.FindObjectsOfTypeAll(_sicarouselManagedType);
+                
+                if (allObjects == null || allObjects.Length == 0)
                 {
-                    Log.LogWarning("[Export] FindObjectsOfType retornou null");
+                    Log.LogWarning("[Export] Nenhum carousel encontrado");
                     return;
                 }
                 
-                var count = objects.Length;
-                Log.LogInfo($"[Export] {count} objetos encontrados");
+                Log.LogInfo($"[Export] {allObjects.Length} objetos encontrados");
                 
-                if (count == 0)
-                {
-                    Log.LogWarning("[Export] Nenhum carousel ativo na cena");
-                    return;
-                }
-                
-                for (int i = 0; i < count; i++)
+                int success = 0;
+                foreach (var obj in allObjects)
                 {
                     try
                     {
-                        var obj = objects[i];
-                        if (obj == null)
+                        if (obj == null) continue;
+                        
+                        var mono = obj as MonoBehaviour;
+                        if (mono == null)
                         {
-                            Log.LogWarning($"[Export] Objeto {i} é null, pulando");
+                            Log.LogWarning($"[Export] Objeto não é MonoBehaviour: {obj.GetType().Name}");
                             continue;
                         }
                         
-                        Log.LogInfo($"[Export] Exportando {i + 1}/{count}: {obj.name}");
+                        // Pular objetos que estão no DontDestroyOnLoad ou são hidden
+                        if (mono.gameObject.hideFlags != HideFlags.None)
+                        {
+                            Log.LogInfo($"[Export] Pulando objeto hidden: {mono.gameObject.name}");
+                            continue;
+                        }
+                        
+                        Log.LogInfo($"[Export] Exportando: {mono.gameObject.name}");
                         _exportMethod.Invoke(obj, new object[] { 0 });
-                        Log.LogInfo($"[Export] OK: {obj.name}");
+                        success++;
+                        Log.LogInfo($"[Export] OK: {mono.gameObject.name}");
                     }
                     catch (Exception ex)
                     {
-                        Log.LogError($"[Export] Erro no objeto {i}: {ex.Message}");
+                        Log.LogError($"[Export] Erro no objeto: {ex.Message}");
                     }
                 }
                 
-                Log.LogInfo("[Export] >>> CONCLUÍDO!");
+                Log.LogInfo($"[Export] >>> CONCLUÍDO! {success} exportações");
             }
             catch (Exception ex)
             {
