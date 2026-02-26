@@ -42,8 +42,8 @@ namespace FM26CtrlPExport
         private static bool _initialized = false;
         private static MethodInfo _exportMethod = null;
         private static Type _sicarouselType = null;
-        private static Type _streamedObjectListType = null;
-        private static Type _baseVerticalCollectionViewType = null;
+        private static Type _actionDispatcherType = null;
+        private static MethodInfo _performActionMethod = null;
         
         public static void OnUpdate()
         {
@@ -70,14 +70,8 @@ namespace FM26CtrlPExport
             
             if (Keyboard.current.f10Key.wasPressedThisFrame)
             {
-                Debug.Log("[FM26CtrlP] >>> F10 - Debug COMPLETO");
-                LogAllVisualElements();
-            }
-            
-            if (Keyboard.current.f11Key.wasPressedThisFrame)
-            {
-                Debug.Log("[FM26CtrlP] >>> F11 - Lista todos os tipos");
-                ListAllTypes();
+                Debug.Log("[FM26CtrlP] >>> F10 - Debug");
+                TryActionDispatcher();
             }
         }
         
@@ -86,25 +80,38 @@ namespace FM26CtrlPExport
             try
             {
                 _sicarouselType = Type.GetType("SI.Bindable.SICarousel, SI.Bindable");
-                _streamedObjectListType = Type.GetType("SI.Bindable.StreamedObjectList, SI.Bindable");
-                _baseVerticalCollectionViewType = Type.GetType("UnityEngine.UIElements.BaseVerticalCollectionView, UnityEngine.UIElementsModule");
                 
                 if (_sicarouselType != null)
                 {
-                    Debug.Log($"[FM26CtrlP] SICarousel: {_sicarouselType.FullName}");
+                    Debug.Log($"[FM26CtrlP] Tipo: {_sicarouselType.FullName}");
+                    Log.LogInfo($"[Init] Tipo: {_sicarouselType.FullName}");
+                    
                     _exportMethod = _sicarouselType.GetMethod("UpdateExportCurrentItemBinding",
                         BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                    
                     if (_exportMethod != null)
-                        Debug.Log($"[FM26CtrlP] Método UpdateExportCurrentItemBinding encontrado");
+                    {
+                        Debug.Log($"[FM26CtrlP] Método: {_exportMethod.Name}");
+                        Log.LogInfo($"[Init] Método: {_exportMethod.Name}");
+                    }
                 }
                 
-                if (_streamedObjectListType != null)
-                    Debug.Log($"[FM26CtrlP] StreamedObjectList: {_streamedObjectListType.FullName}");
-                
-                if (_baseVerticalCollectionViewType != null)
-                    Debug.Log($"[FM26CtrlP] BaseVerticalCollectionView: {_baseVerticalCollectionViewType.FullName}");
-                
-                Log.LogInfo("[Init] Tipos carregados");
+                // Buscar ActionDispatcher
+                _actionDispatcherType = Type.GetType("FM.ActionSystem.ActionDispatcher, FM.ActionSystem");
+                if (_actionDispatcherType != null)
+                {
+                    Log.LogInfo($"[Init] ActionDispatcher encontrado");
+                    _performActionMethod = _actionDispatcherType.GetMethod("PerformAction",
+                        BindingFlags.Public | BindingFlags.Static);
+                    if (_performActionMethod != null)
+                    {
+                        Log.LogInfo($"[Init] PerformAction encontrado");
+                    }
+                }
+                else
+                {
+                    Log.LogWarning("[Init] ActionDispatcher não encontrado");
+                }
             }
             catch (Exception ex)
             {
@@ -114,15 +121,21 @@ namespace FM26CtrlPExport
         
         private static void DoExport()
         {
+            if (_exportMethod == null || _sicarouselType == null)
+            {
+                Log.LogError("[Export] Tipos não inicializados");
+                TryActionDispatcher();
+                return;
+            }
+            
             try
             {
-                Log.LogInfo("[Export] Buscando VisualElements...");
+                Log.LogInfo("[Export] Buscando UIDocuments...");
                 
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                Log.LogInfo($"[Export] {uiDocs.Length} UIDocuments");
+                Log.LogInfo($"[Export] {uiDocs.Length} UIDocuments encontrados");
                 
                 int exported = 0;
-                var foundTypes = new HashSet<string>();
                 
                 foreach (var doc in uiDocs)
                 {
@@ -132,140 +145,127 @@ namespace FM26CtrlPExport
                     if (root == null) continue;
                     
                     Debug.Log($"[FM26CtrlP] UIDocument: {doc.name}");
+                    Log.LogInfo($"[Export] UIDocument: {doc.name}");
                     
-                    // Buscar TODOS os VisualElements e verificar tipo
-                    FindAndExportElements(root, foundTypes, ref exported);
+                    var carousels = FindVisualElementsOfType(root, _sicarouselType);
+                    Log.LogInfo($"[Export] {carousels.Count} carousels em {doc.name}");
+                    
+                    foreach (var carousel in carousels)
+                    {
+                        try
+                        {
+                            Debug.Log($"[FM26CtrlP] Carousel encontrado, exportando...");
+                            _exportMethod.Invoke(carousel, new object[] { 0 });
+                            exported++;
+                            Debug.Log($"[FM26CtrlP] Exportado!");
+                            Log.LogInfo($"[Export] Exportado!");
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.LogError($"[FM26CtrlP] Erro ao exportar: {ex.Message}");
+                        }
+                    }
                 }
                 
-                Log.LogInfo($"[Export] Tipos encontrados: {string.Join(", ", foundTypes)}");
                 Log.LogInfo($"[Export] Total exportados: {exported}");
+                
+                if (exported == 0)
+                {
+                    Log.LogWarning("[Export] Nenhum carousel encontrado. Tentando ActionDispatcher...");
+                    TryActionDispatcher();
+                }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Export] Erro: {ex.Message}\n{ex.StackTrace}");
+                Log.LogError($"[Export] Erro: {ex.Message}");
+                Log.LogError($"[Export] Stack: {ex.StackTrace}");
             }
         }
         
-        private static void FindAndExportElements(VisualElement element, HashSet<string> foundTypes, ref int exported)
+        private static void TryActionDispatcher()
+        {
+            // TeamExport = 1719039301
+            const uint teamExportActionId = 1719039301u;
+            
+            try
+            {
+                Log.LogInfo("[Action] Tentando executar TeamExport via ActionDispatcher...");
+                
+                if (_actionDispatcherType == null)
+                {
+                    _actionDispatcherType = Type.GetType("FM.ActionSystem.ActionDispatcher, FM.ActionSystem");
+                    if (_actionDispatcherType == null)
+                    {
+                        Log.LogError("[Action] ActionDispatcher não encontrado");
+                        return;
+                    }
+                    
+                    _performActionMethod = _actionDispatcherType.GetMethod("PerformAction",
+                        BindingFlags.Public | BindingFlags.Static);
+                }
+                
+                if (_performActionMethod == null)
+                {
+                    Log.LogError("[Action] PerformAction não encontrado");
+                    return;
+                }
+                
+                // Criar TypedValue vazio
+                var typedValueType = Type.GetType("SI.TypedValue, SI");
+                object typedValue = null;
+                if (typedValueType != null)
+                {
+                    typedValue = Activator.CreateInstance(typedValueType);
+                }
+                
+                // Parâmetros: ActionID actionID, uint eventID, InteropReference action, TypedValue data, bool checkForConfirmation
+                // TeamExport não tem eventID específico, vamos usar 0
+                Log.LogInfo($"[Action] Chamando PerformAction com ID {teamExportActionId}");
+                
+                _performActionMethod.Invoke(null, new object[] { teamExportActionId, 0u, null, typedValue, false });
+                
+                Log.LogInfo("[Action] TeamExport executado!");
+                Debug.Log("[FM26CtrlP] >>> TeamExport executado via ActionDispatcher!");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Action] Erro: {ex.Message}");
+                Log.LogError($"[Action] Stack: {ex.StackTrace}");
+            }
+        }
+        
+        private static List<object> FindVisualElementsOfType(VisualElement root, Type targetType)
+        {
+            var result = new List<object>();
+            FindVisualElementsRecursive(root, targetType, result);
+            return result;
+        }
+        
+        private static void FindVisualElementsRecursive(VisualElement element, Type targetType, List<object> result)
         {
             if (element == null) return;
             
-            var type = element.GetType();
-            var typeName = type.Name;
-            
-            // Registrar tipos de lista/tabela/carousel
-            if (typeName.Contains("Carousel") || typeName.Contains("List") || 
-                typeName.Contains("Table") || typeName.Contains("View") ||
-                typeName.Contains("Collection"))
-            {
-                foundTypes.Add(typeName);
-                Debug.Log($"[FM26CtrlP] Encontrado: {typeName} ({element.name})");
-                
-                // Verificar se tem método de export
-                if (_exportMethod != null && (type == _sicarouselType || type.IsSubclassOf(_sicarouselType)))
-                {
-                    try
-                    {
-                        _exportMethod.Invoke(element, new object[] { 0 });
-                        exported++;
-                        Debug.Log($"[FM26CtrlP] EXPORTADO: {typeName}");
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.LogError($"[FM26CtrlP] Erro ao exportar: {ex.Message}");
-                    }
-                }
-            }
-            
-            // Recursão nos filhos
-            int childCount = element.childCount;
-            for (int i = 0; i < childCount; i++)
-            {
-                FindAndExportElements(element[i], foundTypes, ref exported);
-            }
-        }
-        
-        private static void LogAllVisualElements()
-        {
             try
             {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                Debug.Log($"[FM26CtrlP] === {uiDocs.Length} UIDocuments ===");
-                
-                foreach (var doc in uiDocs)
+                var elementType = element.GetType();
+                if (elementType == targetType || elementType.IsSubclassOf(targetType))
                 {
-                    if (doc == null) continue;
-                    Debug.Log($"[FM26CtrlP] \n=== UIDocument: {doc.name} ===");
-                    
-                    var root = doc.rootVisualElement;
-                    if (root != null)
+                    result.Add(element);
+                }
+                
+                int childCount = element.childCount;
+                for (int i = 0; i < childCount; i++)
+                {
+                    var child = element[i];
+                    if (child != null)
                     {
-                        LogElementTree(root, 0, 8);
+                        FindVisualElementsRecursive(child, targetType, result);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[FM26CtrlP] Log erro: {ex.Message}");
-            }
-        }
-        
-        private static void LogElementTree(VisualElement element, int depth, int maxDepth)
-        {
-            if (element == null || depth > maxDepth) return;
-            
-            var indent = new string(' ', depth * 2);
-            var type = element.GetType();
-            var typeName = type.Name;
-            
-            // Logar TODOS os elementos
-            Debug.Log($"[FM26CtrlP] {indent}{typeName} ({element.name}) childCount={element.childCount}");
-            
-            int childCount = element.childCount;
-            for (int i = 0; i < childCount; i++)
-            {
-                LogElementTree(element[i], depth + 1, maxDepth);
-            }
-        }
-        
-        private static void ListAllTypes()
-        {
-            try
-            {
-                var types = new HashSet<string>();
-                
-                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                {
-                    try
-                    {
-                        var name = assembly.GetName().Name;
-                        if (!name.StartsWith("SI.") && !name.StartsWith("FM.") && 
-                            !name.Contains("UIElements") && !name.Contains("Unity")) continue;
-                        
-                        foreach (var type in assembly.GetTypes())
-                        {
-                            var tName = type.Name;
-                            if (tName.Contains("List") || tName.Contains("Table") || 
-                                tName.Contains("View") || tName.Contains("Carousel") ||
-                                tName.Contains("Export") || tName.Contains("Collection"))
-                            {
-                                types.Add($"{type.FullName}");
-                            }
-                        }
-                    }
-                    catch { }
-                }
-                
-                foreach (var t in types)
-                {
-                    Debug.Log($"[FM26CtrlP] TYPE: {t}");
-                }
-                
-                Debug.Log($"[FM26CtrlP] Total: {types.Count} tipos");
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[FM26CtrlP] ListAllTypes erro: {ex.Message}");
+                Debug.LogError($"[FM26CtrlP] Erro ao buscar elementos: {ex.Message}");
             }
         }
     }
