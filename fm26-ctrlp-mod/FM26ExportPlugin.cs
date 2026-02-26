@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Linq;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
 using BepInEx.Logging;
@@ -178,7 +179,8 @@ namespace FM26CtrlPExport
                 }
                 
                 // Iterar sobre filhos
-                foreach (var child in root.Children())
+                var children = root.Children();
+                foreach (var child in children.ToList())
                 {
                     if (child == null) continue;
                     
@@ -237,7 +239,7 @@ namespace FM26CtrlPExport
                 Debug.Log($"[FM26CtrlP] {indent}{type.Name} ({element.name})");
             }
             
-            foreach (var child in element.Children())
+            foreach (var child in element.Children().ToList())
             {
                 LogVisualElementTree(child, depth + 1);
             }
