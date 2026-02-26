@@ -40,46 +40,52 @@ namespace FM26CtrlPExport
         {
             _frameCount++;
             
-            // Busca método depois de 300 frames (5 segundos a 60fps)
+            // Busca método depois de 300 frames
             if (!_searched && _frameCount == 300)
             {
                 _searched = true;
                 FindExportMethod();
             }
             
-            // Só processa depois de buscar
             if (!_searched) return;
             
-            // Ctrl+P - SÓ LOGA POR ENQUANTO
+            // Ctrl+P
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
             {
-                Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO! Frame: " + _frameCount);
+                Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
                 
                 if (_exportMethod != null && _targetType != null)
                 {
-                    Debug.Log($"[FM26CtrlP] Método disponível: {_targetType.FullName}.{_exportMethod.Name}");
+                    Debug.Log($"[FM26CtrlP] Método: {_targetType.FullName}.{_exportMethod.Name}");
                     
-                    // Tenta encontrar objetos
+                    // Usa Object.FindObjectsOfType(Type) via reflexão
                     try
                     {
-                        var objects = UnityEngine.Object.FindObjectsOfType(_targetType);
-                        Debug.Log($"[FM26CtrlP] FindObjectsOfType retornou: {(objects != null ? objects.Length.ToString() : "null")}");
+                        var findMethod = typeof(UnityEngine.Object).GetMethod("FindObjectsOfType", new Type[] { typeof(Type) });
+                        if (findMethod != null)
+                        {
+                            var result = findMethod.Invoke(null, new object[] { _targetType });
+                            if (result != null)
+                            {
+                                var array = result as Array;
+                                if (array != null)
+                                {
+                                    Debug.Log($"[FM26CtrlP] Encontrados {array.Length} objetos");
+                                }
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {
-                        Debug.LogError($"[FM26CtrlP] Erro FindObjectsOfType: {ex.Message}");
+                        Debug.LogError($"[FM26CtrlP] Erro: {ex.Message}");
                     }
-                }
-                else
-                {
-                    Debug.LogWarning("[FM26CtrlP] Método não encontrado ainda");
                 }
             }
             
             // F10 - Debug
             if (Input.GetKeyDown(KeyCode.F10))
             {
-                Debug.Log($"[FM26CtrlP] Frame: {_frameCount}, Método encontrado: {_targetType?.FullName ?? "null"}");
+                Debug.Log($"[FM26CtrlP] Frame: {_frameCount}, Tipo: {_targetType?.FullName ?? "null"}");
             }
         }
         
@@ -120,7 +126,7 @@ namespace FM26CtrlPExport
                     catch { }
                 }
                 
-                Debug.LogWarning("[FM26CtrlP] Método UpdateExportCurrentItemBinding não encontrado");
+                Debug.LogWarning("[FM26CtrlP] Método não encontrado");
             }
             catch (Exception ex)
             {
