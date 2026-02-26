@@ -39,6 +39,7 @@ namespace FM26CtrlPExport
         
         private static int _frameCount = 0;
         private static bool _initialized = false;
+        private static Il2CppSystem.Type _sicarouselIl2CppType = null;
         private static Type _sicarouselManagedType = null;
         private static MethodInfo _exportMethod = null;
         
@@ -81,13 +82,17 @@ namespace FM26CtrlPExport
         {
             try
             {
-                // Usar tipo managed (não Il2CppSystem.Type)
+                // Obter tipo managed para reflection
                 _sicarouselManagedType = Type.GetType("SI.Bindable.SICarousel, SI.Bindable");
                 
-                if (_sicarouselManagedType != null)
+                // Obter tipo IL2CPP para FindObjectsOfTypeAll
+                _sicarouselIl2CppType = Il2CppSystem.Type.GetType("SI.Bindable.SICarousel, SI.Bindable");
+                
+                if (_sicarouselManagedType != null && _sicarouselIl2CppType != null)
                 {
-                    Debug.Log($"[FM26CtrlP] Tipo managed obtido: {_sicarouselManagedType.FullName}");
-                    Log.LogInfo($"[Init] Tipo managed obtido: {_sicarouselManagedType.FullName}");
+                    Debug.Log($"[FM26CtrlP] Tipo managed: {_sicarouselManagedType.FullName}");
+                    Debug.Log($"[FM26CtrlP] Tipo IL2CPP: {_sicarouselIl2CppType.FullName}");
+                    Log.LogInfo($"[Init] Tipos obtidos com sucesso");
                     
                     _exportMethod = _sicarouselManagedType.GetMethod("UpdateExportCurrentItemBinding",
                         BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
@@ -104,8 +109,8 @@ namespace FM26CtrlPExport
                 }
                 else
                 {
-                    Debug.LogError("[FM26CtrlP] Falha ao obter tipo managed");
-                    Log.LogError("[Init] Falha ao obter tipo managed");
+                    Debug.LogError("[FM26CtrlP] Falha ao obter tipos");
+                    Log.LogError("[Init] Falha ao obter tipos");
                 }
             }
             catch (Exception ex)
@@ -117,9 +122,9 @@ namespace FM26CtrlPExport
         
         private static void DoExport()
         {
-            if (_sicarouselManagedType == null)
+            if (_sicarouselIl2CppType == null)
             {
-                Log.LogError("[Export] Tipo não inicializado");
+                Log.LogError("[Export] Tipo IL2CPP não inicializado");
                 return;
             }
             
@@ -133,8 +138,8 @@ namespace FM26CtrlPExport
             {
                 Log.LogInfo("[Export] Buscando objetos com Resources.FindObjectsOfTypeAll...");
                 
-                // Resources.FindObjectsOfTypeAll funciona com qualquer tipo
-                var objects = Resources.FindObjectsOfTypeAll(_sicarouselManagedType);
+                // Usar Il2CppSystem.Type para IL2CPP
+                var objects = Resources.FindObjectsOfTypeAll(_sicarouselIl2CppType);
                 
                 if (objects == null || objects.Length == 0)
                 {
