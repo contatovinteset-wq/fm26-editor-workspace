@@ -2,16 +2,21 @@ using System;
 using System.Reflection;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
+using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace FM26CtrlPExport
 {
     [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "1.0.0")]
     public class Plugin : BasePlugin
     {
+        internal static new ManualLogSource Log;
+        
         public override void Load()
         {
+            Log = base.Log;
             Log.LogInfo("========================================");
             Log.LogInfo("FM26 Ctrl+P Export v1.0.0 CARREGADO!");
             Log.LogInfo("========================================");
@@ -50,11 +55,25 @@ namespace FM26CtrlPExport
             
             if (!_initialized) return;
             
-            // Ctrl+P - EXPORTA
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
+            // Teclado disponível?
+            if (Keyboard.current == null) return;
+            
+            // Ctrl+P - NOVO INPUT SYSTEM
+            bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
+            bool p = Keyboard.current.pKey.wasPressedThisFrame;
+            
+            if (ctrl && p)
             {
                 Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
+                Log.LogInfo(">>> Ctrl+P PRESSIONADO!");
                 DoExport();
+            }
+            
+            // F10 - Debug: lista tipos
+            if (Keyboard.current.f10Key.wasPressedThisFrame)
+            {
+                Debug.Log("[FM26CtrlP] >>> F10 - Debug tipos");
+                LogTypes();
             }
         }
         
@@ -139,6 +158,33 @@ namespace FM26CtrlPExport
             {
                 Debug.LogError($"[FM26CtrlP] Erro no export: {ex.Message}");
             }
+        }
+        
+        private static void LogTypes()
+        {
+            int count = 0;
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                try
+                {
+                    var name = assembly.GetName().Name;
+                    if (name.StartsWith("System") || name.StartsWith("Mono")) continue;
+                    
+                    foreach (var type in assembly.GetTypes())
+                    {
+                        if (type.Name.Contains("Export") || 
+                            type.Name.Contains("Carousel") || 
+                            type.Name.Contains("Table"))
+                        {
+                            Debug.Log($"[FM26CtrlP] Tipo: {type.FullName}");
+                            count++;
+                            if (count > 30) return;
+                        }
+                    }
+                }
+                catch { }
+            }
+            Debug.Log($"[FM26CtrlP] Total de tipos: {count}");
         }
     }
 }
