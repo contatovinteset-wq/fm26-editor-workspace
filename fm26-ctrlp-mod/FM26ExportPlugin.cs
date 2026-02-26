@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using System.Collections.Generic;
-using System.Linq;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
 using BepInEx.Logging;
@@ -113,8 +112,6 @@ namespace FM26CtrlPExport
             {
                 Log.LogInfo("[Export] Buscando UIDocuments...");
                 
-                // SICarousel é um VisualElement, não MonoBehaviour
-                // Preciso buscar via UIDocument.rootVisualElement
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
                 Log.LogInfo($"[Export] {uiDocs.Length} UIDocuments encontrados");
                 
@@ -130,7 +127,6 @@ namespace FM26CtrlPExport
                     Debug.Log($"[FM26CtrlP] UIDocument: {doc.name}");
                     Log.LogInfo($"[Export] UIDocument: {doc.name}");
                     
-                    // Buscar VisualElements do tipo SICarousel na árvore
                     var carousels = FindVisualElementsOfType(root, _sicarouselType);
                     Log.LogInfo($"[Export] {carousels.Count} carousels em {doc.name}");
                     
@@ -178,10 +174,13 @@ namespace FM26CtrlPExport
                     result.Add(root);
                 }
                 
-                // Iterar sobre filhos
+                // Iterar sobre filhos usando GetEnumerator manualmente
                 var children = root.Children();
-                foreach (var child in children.ToList())
+                var enumerator = children.GetEnumerator();
+                
+                while (enumerator.MoveNext())
                 {
+                    var child = enumerator.Current;
                     if (child == null) continue;
                     
                     var childType = child.GetType();
@@ -239,9 +238,12 @@ namespace FM26CtrlPExport
                 Debug.Log($"[FM26CtrlP] {indent}{type.Name} ({element.name})");
             }
             
-            foreach (var child in element.Children().ToList())
+            var children = element.Children();
+            var enumerator = children.GetEnumerator();
+            
+            while (enumerator.MoveNext())
             {
-                LogVisualElementTree(child, depth + 1);
+                LogVisualElementTree(enumerator.Current, depth + 1);
             }
         }
     }
