@@ -18,6 +18,7 @@ namespace FM26CtrlPExport
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
             
+            // Patch SI.Bindable.Bindings.Update
             var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
             if (bindingsType != null)
             {
@@ -32,105 +33,111 @@ namespace FM26CtrlPExport
         }
         
         private static int _frameCount = 0;
-        private static bool _searched = false;
+        private static bool _initialized = false;
+        private static Il2CppSystem.Type _sicarouselType = null;
         private static MethodInfo _exportMethod = null;
-        private static Type _targetType = null;
         
         public static void OnUpdate()
         {
             _frameCount++;
             
-            // Busca método depois de 300 frames
-            if (!_searched && _frameCount == 300)
+            // Inicializa depois de 300 frames
+            if (!_initialized && _frameCount == 300)
             {
-                _searched = true;
-                FindExportMethod();
+                _initialized = true;
+                InitializeTypes();
             }
             
-            if (!_searched) return;
+            if (!_initialized) return;
             
-            // Ctrl+P
+            // Ctrl+P - EXPORTA
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
             {
                 Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
-                
-                if (_exportMethod != null && _targetType != null)
-                {
-                    Debug.Log($"[FM26CtrlP] Método: {_targetType.FullName}.{_exportMethod.Name}");
-                    
-                    // Usa Object.FindObjectsOfType(Type) via reflexão
-                    try
-                    {
-                        var findMethod = typeof(UnityEngine.Object).GetMethod("FindObjectsOfType", new Type[] { typeof(Type) });
-                        if (findMethod != null)
-                        {
-                            var result = findMethod.Invoke(null, new object[] { _targetType });
-                            if (result != null)
-                            {
-                                var array = result as Array;
-                                if (array != null)
-                                {
-                                    Debug.Log($"[FM26CtrlP] Encontrados {array.Length} objetos");
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.LogError($"[FM26CtrlP] Erro: {ex.Message}");
-                    }
-                }
-            }
-            
-            // F10 - Debug
-            if (Input.GetKeyDown(KeyCode.F10))
-            {
-                Debug.Log($"[FM26CtrlP] Frame: {_frameCount}, Tipo: {_targetType?.FullName ?? "null"}");
+                DoExport();
             }
         }
         
-        private static void FindExportMethod()
+        private static void InitializeTypes()
         {
             try
             {
-                Debug.Log("[FM26CtrlP] Buscando UpdateExportCurrentItemBinding...");
+                // Obtém Il2CppSystem.Type para SICarousel
+                _sicarouselType = Il2CppSystem.Type.GetType("SI.Bindable.SICarousel, SI.Bindable");
                 
-                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                if (_sicarouselType != null)
                 {
-                    try
+                    Debug.Log($"[FM26CtrlP] Tipo Il2Cpp obtido: {_sicarouselType.FullName}");
+                    
+                    // Encontra o método via managed type
+                    var managedType = Type.GetType("SI.Bindable.SICarousel, SI.Bindable");
+                    if (managedType != null)
                     {
-                        var name = assembly.GetName().Name;
-                        if (name.StartsWith("System") || name.StartsWith("Mono") || 
-                            name.StartsWith("mscorlib") || name.StartsWith("Il2Cpp") ||
-                            name.StartsWith("BepInEx") || name.StartsWith("0Harmony"))
-                            continue;
+                        _exportMethod = managedType.GetMethod("UpdateExportCurrentItemBinding",
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
                         
-                        foreach (var type in assembly.GetTypes())
+                        if (_exportMethod != null)
                         {
-                            try
-                            {
-                                var method = type.GetMethod("UpdateExportCurrentItemBinding",
-                                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                                
-                                if (method != null)
-                                {
-                                    _targetType = type;
-                                    _exportMethod = method;
-                                    Debug.Log($"[FM26CtrlP] ENCONTRADO: {type.FullName}.{method.Name}");
-                                    return;
-                                }
-                            }
-                            catch { }
+                            Debug.Log($"[FM26CtrlP] Método encontrado: {_exportMethod.Name}");
                         }
                     }
-                    catch { }
                 }
-                
-                Debug.LogWarning("[FM26CtrlP] Método não encontrado");
+                else
+                {
+                    Debug.LogError("[FM26CtrlP] Falha ao obter Il2CppSystem.Type");
+                }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"[FM26CtrlP] Erro na busca: {ex.Message}");
+                Debug.LogError($"[FM26CtrlP] Erro na inicialização: {ex.Message}");
+            }
+        }
+        
+        private static void DoExport()
+        {
+            if (_sicarouselType == null || _exportMethod == null)
+            {
+                Debug.LogError("[FM26CtrlP] Tipos não inicializados");
+                return;
+            }
+            
+            try
+            {
+                // Usa Object.FindObjectsOfType com Il2CppSystem.Type
+                var objects = UnityEngine.Object.FindObjectsOfType(_sicarouselType);
+                
+                if (objects != null)
+                {
+                    var count = objects.Length;
+                    Debug.Log($"[FM26CtrlP] {count} objetos SICarousel encontrados");
+                    
+                    for (int i = 0; i < count; i++)
+                    {
+                        var obj = objects[i];
+                        if (obj != null)
+                        {
+                            try
+                            {
+                                _exportMethod.Invoke(obj, new object[] { 0 });
+                                Debug.Log($"[FM26CtrlP] Exportado {i + 1}/{count}");
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.LogError($"[FM26CtrlP] Erro ao exportar objeto {i}: {ex.Message}");
+                            }
+                        }
+                    }
+                    
+                    Debug.Log("[FM26CtrlP] >>> EXPORTAÇÃO CONCLUÍDA!");
+                }
+                else
+                {
+                    Debug.LogWarning("[FM26CtrlP] Nenhum objeto encontrado");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[FM26CtrlP] Erro no export: {ex.Message}");
             }
         }
     }
