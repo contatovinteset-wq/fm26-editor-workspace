@@ -3,6 +3,7 @@ using System.Reflection;
 using BepInEx;
 using BepInEx.Logging;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace FM26ExportMod
 {
@@ -58,15 +59,21 @@ namespace FM26ExportMod
         
         void Update()
         {
-            // Ctrl+P
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P))
+            // Precisa checar se o teclado está disponível
+            if (Keyboard.current == null) return;
+            
+            // Ctrl+P - usando novo Input System
+            bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
+            bool p = Keyboard.current.pKey.wasPressedThisFrame;
+            
+            if (ctrl && p)
             {
                 Log.LogInfo(">>> Ctrl+P DETECTADO!");
                 TryExport();
             }
             
             // F10 - debug
-            if (Input.GetKeyDown(KeyCode.F10))
+            if (Keyboard.current.f10Key.wasPressedThisFrame)
             {
                 Log.LogInfo(">>> F10 - Listando tipos...");
                 LogAllTypes();
