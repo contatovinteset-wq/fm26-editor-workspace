@@ -44,6 +44,11 @@
       <HintPath>..\BepInEx\interop\Unity.InputSystem.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    
+    <Reference Include="Unity.InputSystem">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\Unity.InputSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 
 </Project>
