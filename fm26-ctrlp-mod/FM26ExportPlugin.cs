@@ -1,138 +1,227 @@
 using System;
 using System.Reflection;
 using BepInEx;
+using BepInEx.Unity.IL2CPP;
 using BepInEx.Logging;
+using HarmonyLib;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace FM26ExportMod
+namespace FM26CtrlPExport
 {
     [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "1.0.0")]
-    public class FM26ExportPlugin : MonoBehaviour
+    public class Plugin : BasePlugin
     {
-        internal static ManualLogSource Log;
-        private MethodInfo _updateExportMethod = null;
-        private Type _carouselType = null;
+        internal static new ManualLogSource Log;
         
-        void Awake()
+        public override void Load()
         {
-            Log = BepInEx.Logging.Logger.CreateLogSource("FM26CtrlP");
+            Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export Mod v1.0.0");
+            Log.LogInfo("FM26 Ctrl+P Export v1.0.0 CARREGADO!");
             Log.LogInfo("========================================");
             
-            FindExportMethod();
+            try
+            {
+                var harmony = new Harmony("com.koda.fm26.ctrlp");
+                
+                var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
+                if (bindingsType != null)
+                {
+                    var updateMethod = bindingsType.GetMethod("Update", BindingFlags.Public | BindingFlags.Instance);
+                    if (updateMethod != null)
+                    {
+                        var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
+                        harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
+                        Log.LogInfo("[Init] Patched SI.Bindable.Bindings.Update");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Init] Erro: {ex.Message}");
+            }
         }
         
-        void FindExportMethod()
+        private static int _frameCount = 0;
+        private static bool _initialized = false;
+        private static Il2CppSystem.Type _sicarouselType = null;
+        private static MethodInfo _exportMethod = null;
+        
+        public static void OnUpdate()
         {
-            Log.LogInfo("[Init] Procurando ExportCurrentItemToBinding...");
-            
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            try
             {
-                try
+                _frameCount++;
+                
+                if (!_initialized && _frameCount == 300)
                 {
-                    var name = assembly.GetName().Name;
-                    if (name.StartsWith("System") || name.StartsWith("Mono")) continue;
+                    _initialized = true;
+                    InitializeTypes();
+                }
+                
+                if (!_initialized) return;
+                if (Keyboard.current == null) return;
+                
+                bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
+                bool p = Keyboard.current.pKey.wasPressedThisFrame;
+                
+                if (ctrl && p)
+                {
+                    Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
+                    Log.LogInfo(">>> Ctrl+P PRESSIONADO!");
+                    DoExport();
+                }
+                
+                if (Keyboard.current.f10Key.wasPressedThisFrame)
+                {
+                    Debug.Log("[FM26CtrlP] >>> F10 - Debug");
+                    LogTypes();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"[FM26CtrlP] OnUpdate erro: {ex.Message}");
+            }
+        }
+        
+        private static void InitializeTypes()
+        {
+            try
+            {
+                Log.LogInfo("[Init] Procurando tipos...");
+                
+                _sicarouselType = Il2CppSystem.Type.GetType("SI.Bindable.SICarousel, SI.Bindable");
+                
+                if (_sicarouselType != null)
+                {
+                    Log.LogInfo($"[Init] Tipo Il2Cpp obtido: {_sicarouselType.FullName}");
                     
-                    foreach (var type in assembly.GetTypes())
+                    var managedType = Type.GetType("SI.Bindable.SICarousel, SI.Bindable");
+                    if (managedType != null)
                     {
-                        if (type.Name.Contains("Carousel") || type.Name.Contains("TableView"))
+                        _exportMethod = managedType.GetMethod("UpdateExportCurrentItemBinding",
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                        
+                        if (_exportMethod != null)
                         {
-                            Log.LogInfo($"[Tipo] {type.FullName}");
-                            
-                            var method = type.GetMethod("UpdateExportCurrentItemBinding", 
-                                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                            
-                            if (method != null)
-                            {
-                                Log.LogInfo($"[OK] Metodo encontrado!");
-                                _carouselType = type;
-                                _updateExportMethod = method;
-                            }
+                            Log.LogInfo($"[Init] Método encontrado: {_exportMethod.Name}");
+                        }
+                        else
+                        {
+                            Log.LogWarning("[Init] Método NÃO encontrado");
                         }
                     }
                 }
-                catch { }
+                else
+                {
+                    Log.LogError("[Init] Falha ao obter Il2CppSystem.Type");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Init] Erro: {ex.Message}");
             }
         }
         
-        void Update()
-        {
-            // Precisa checar se o teclado está disponível
-            if (Keyboard.current == null) return;
-            
-            // Ctrl+P - usando novo Input System
-            bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
-            bool p = Keyboard.current.pKey.wasPressedThisFrame;
-            
-            if (ctrl && p)
-            {
-                Log.LogInfo(">>> Ctrl+P DETECTADO!");
-                TryExport();
-            }
-            
-            // F10 - debug
-            if (Keyboard.current.f10Key.wasPressedThisFrame)
-            {
-                Log.LogInfo(">>> F10 - Listando tipos...");
-                LogAllTypes();
-            }
-        }
-        
-        void TryExport()
+        private static void DoExport()
         {
             Log.LogInfo("[Export] Iniciando...");
             
             try
             {
-                if (_updateExportMethod != null && _carouselType != null)
+                if (_sicarouselType == null)
                 {
-                    var objects = FindObjectsOfType(_carouselType);
-                    Log.LogInfo($"[Export] Encontrados {objects.Length} carousels");
-                    
-                    foreach (var obj in objects)
+                    Log.LogError("[Export] _sicarouselType é null");
+                    return;
+                }
+                
+                if (_exportMethod == null)
+                {
+                    Log.LogError("[Export] _exportMethod é null");
+                    return;
+                }
+                
+                Log.LogInfo("[Export] Buscando objetos...");
+                var objects = UnityEngine.Object.FindObjectsOfType(_sicarouselType);
+                
+                if (objects == null)
+                {
+                    Log.LogWarning("[Export] FindObjectsOfType retornou null");
+                    return;
+                }
+                
+                var count = objects.Length;
+                Log.LogInfo($"[Export] {count} objetos encontrados");
+                
+                if (count == 0)
+                {
+                    Log.LogWarning("[Export] Nenhum carousel ativo na cena");
+                    return;
+                }
+                
+                for (int i = 0; i < count; i++)
+                {
+                    try
                     {
-                        Log.LogInfo($"[Export] Exportando: {obj.name}");
-                        _updateExportMethod.Invoke(obj, new object[] { 0 });
+                        var obj = objects[i];
+                        if (obj == null)
+                        {
+                            Log.LogWarning($"[Export] Objeto {i} é null, pulando");
+                            continue;
+                        }
+                        
+                        Log.LogInfo($"[Export] Exportando {i + 1}/{count}: {obj.name}");
+                        _exportMethod.Invoke(obj, new object[] { 0 });
+                        Log.LogInfo($"[Export] OK: {obj.name}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.LogError($"[Export] Erro no objeto {i}: {ex.Message}");
                     }
                 }
-                else
-                {
-                    Log.LogWarning("[Export] Metodo nao encontrado");
-                }
+                
+                Log.LogInfo("[Export] >>> CONCLUÍDO!");
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Export] Erro: {ex.Message}");
+                Log.LogError($"[Export] Erro geral: {ex.Message}");
+                Log.LogError($"[Export] Stack: {ex.StackTrace}");
             }
         }
         
-        void LogAllTypes()
+        private static void LogTypes()
         {
-            int count = 0;
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            try
             {
-                try
+                int count = 0;
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
-                    var name = assembly.GetName().Name;
-                    if (name.StartsWith("System") || name.StartsWith("Mono")) continue;
-                    
-                    foreach (var type in assembly.GetTypes())
+                    try
                     {
-                        if (type.Name.Contains("Export") || 
-                            type.Name.Contains("Carousel") || 
-                            type.Name.Contains("Table"))
+                        var name = assembly.GetName().Name;
+                        if (name.StartsWith("System") || name.StartsWith("Mono")) continue;
+                        
+                        foreach (var type in assembly.GetTypes())
                         {
-                            Log.LogInfo($"[Tipo] {type.FullName}");
-                            count++;
-                            if (count > 30) return;
+                            if (type.Name.Contains("Export") || 
+                                type.Name.Contains("Carousel") || 
+                                type.Name.Contains("Table"))
+                            {
+                                Debug.Log($"[FM26CtrlP] Tipo: {type.FullName}");
+                                count++;
+                                if (count > 30) return;
+                            }
                         }
                     }
+                    catch { }
                 }
-                catch { }
+                Debug.Log($"[FM26CtrlP] Total: {count}");
             }
-            Log.LogInfo($"[Debug] Total: {count}");
+            catch (Exception ex)
+            {
+                Debug.LogError($"[FM26CtrlP] LogTypes erro: {ex.Message}");
+            }
         }
     }
 }
