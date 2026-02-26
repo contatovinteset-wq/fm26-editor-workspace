@@ -40,6 +40,10 @@
       <HintPath>..\BepInEx\interop\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="UnityEngine.InputSystem">
+      <HintPath>..\BepInEx\interop\UnityEngine.InputSystem.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 
 </Project>
