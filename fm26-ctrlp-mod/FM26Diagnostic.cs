@@ -245,36 +245,17 @@ namespace FM26Diagnostic
                     }
                 }
                 
-                // 2. VisualElements ativos
-                Log.LogInfo("[Diag] Buscando VisualElements...");
-                var allVisualElements = Resources.FindObjectsOfTypeAll<VisualElement>();
-                Log.LogInfo($"[Diag] {allVisualElements.Length} VisualElements encontrados");
+                // 2. Buscar VisualElements via UIDocuments
+                Log.LogInfo("[Diag] Buscando VisualElements via UIDocuments...");
                 
-                // Filtrar por tipos interessantes
                 int tableCount = 0;
                 int listCount = 0;
                 int carouselCount = 0;
                 
-                foreach (var ve in allVisualElements)
+                foreach (var doc in uiDocs)
                 {
-                    if (ve == null) continue;
-                    var typeName = ve.GetType().Name;
-                    
-                    if (typeName.Contains("Table") && tableCount < 5)
-                    {
-                        Log.LogInfo($"[Diag] Table: {typeName} ({ve.name})");
-                        tableCount++;
-                    }
-                    if (typeName.Contains("List") && listCount < 5)
-                    {
-                        Log.LogInfo($"[Diag] List: {typeName} ({ve.name})");
-                        listCount++;
-                    }
-                    if (typeName.Contains("Carousel") && carouselCount < 5)
-                    {
-                        Log.LogInfo($"[Diag] Carousel: {typeName} ({ve.name})");
-                        carouselCount++;
-                    }
+                    if (doc?.rootVisualElement == null) continue;
+                    CountVisualElementsRecursive(doc.rootVisualElement, ref tableCount, ref listCount, ref carouselCount);
                 }
                 
                 Log.LogInfo($"[Diag] Resumo: {tableCount} Tables, {listCount} Lists, {carouselCount} Carousels");
@@ -361,6 +342,35 @@ namespace FM26Diagnostic
                 types[i] = parms[i].ParameterType.Name;
             }
             return types;
+        }
+        
+        private static void CountVisualElementsRecursive(VisualElement element, ref int tableCount, ref int listCount, ref int carouselCount)
+        {
+            if (element == null) return;
+            
+            var typeName = element.GetType().Name;
+            
+            if (typeName.Contains("Table") && tableCount < 5)
+            {
+                Log.LogInfo($"[Diag] Table: {typeName} ({element.name})");
+                tableCount++;
+            }
+            if (typeName.Contains("List") && listCount < 5)
+            {
+                Log.LogInfo($"[Diag] List: {typeName} ({element.name})");
+                listCount++;
+            }
+            if (typeName.Contains("Carousel") && carouselCount < 5)
+            {
+                Log.LogInfo($"[Diag] Carousel: {typeName} ({element.name})");
+                carouselCount++;
+            }
+            
+            // Recursivamente buscar nos filhos
+            for (int i = 0; i < element.childCount; i++)
+            {
+                CountVisualElementsRecursive(element[i], ref tableCount, ref listCount, ref carouselCount);
+            }
         }
     }
 }
