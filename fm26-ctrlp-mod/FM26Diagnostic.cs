@@ -11,20 +11,22 @@ using UnityEngine.UIElements;
 
 namespace FM26Diagnostic
 {
-    [BepInPlugin("com.koda.fm26.diagnostic", "FM26 Diagnostic", "1.0.0")]
+    [BepInPlugin("com.koda.fm26.diagnostic", "FM26 Diagnostic", "1.1.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
+        private static Harmony _harmony;
         
         public override void Load()
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Diagnostic v1.0.0 CARREGADO!");
+            Log.LogInfo("FM26 Diagnostic v1.1.0 CARREGADO!");
             Log.LogInfo("========================================");
             
-            var harmony = new Harmony("com.koda.fm26.diagnostic");
+            _harmony = new Harmony("com.koda.fm26.diagnostic");
             
+            // Patch no Update de Bindings para detectar inputs
             var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
             if (bindingsType != null)
             {
@@ -32,7 +34,7 @@ namespace FM26Diagnostic
                 if (updateMethod != null)
                 {
                     var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
-                    harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
+                    _harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
                     Log.LogInfo("[Init] Patched SI.Bindable.Bindings.Update");
                 }
             }
@@ -54,11 +56,11 @@ namespace FM26Diagnostic
             if (!_initialized) return;
             if (Keyboard.current == null) return;
             
-            // F9 - Diagnóstico completo de assemblies
+            // F9 - PanelManager
             if (Keyboard.current.f9Key.wasPressedThisFrame)
             {
-                Debug.Log("[FM26Diag] >>> F9 - Listando assemblies");
-                ListAllAssemblies();
+                Debug.Log("[FM26Diag] >>> F9 - PanelManager Test");
+                TestPanelManager();
             }
             
             // F10 - Buscar tipos com Export
@@ -94,29 +96,174 @@ namespace FM26Diagnostic
             }
         }
         
-        private static void ListAllAssemblies()
+        private static void TestPanelManager()
         {
             try
             {
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                Log.LogInfo($"[Diag] {assemblies.Length} assemblies carregados");
+                Log.LogInfo("[Diag] Buscando PanelManager...");
                 
-                int count = 0;
-                foreach (var asm in assemblies)
+                // Tentar encontrar PanelManager via singleton
+                var panelManagerType = Type.GetType("PanelManager, SI.Bindable");
+                if (panelManagerType == null)
                 {
-                    var name = asm.GetName().Name;
-                    if (name.StartsWith("SI.") || name.StartsWith("FM.") || 
-                        name.StartsWith("Football") || name.Contains("Manager"))
+                    panelManagerType = Type.GetType("PanelManager");
+                }
+                
+                if (panelManagerType == null)
+                {
+                    Log.LogWarning("[Diag] PanelManager type não encontrado");
+                    return;
+                }
+                
+                Log.LogInfo($"[Diag] PanelManager type: {panelManagerType.FullName}");
+                
+                // Tentar acessar Instance
+                var instanceProperty = panelManagerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static);
+                if (instanceProperty != null)
+                {
+                    var instance = instanceProperty.GetValue(null);
+                    Log.LogInfo($"[Diag] PanelManager.Instance: {instance != null}");
+                    
+                    if (instance != null)
                     {
-                        Log.LogInfo($"[Diag] Assembly: {name}");
-                        count++;
-                        if (count > 50) break;
+                        // Tentar chamar GetOpenPanelInHighestLayer
+                        var method = panelManagerType.GetMethod("GetOpenPanelInHighestLayer", BindingFlags.Public | BindingFlags.Instance);
+                        if (method != null)
+                        {
+                            var panel = method.Invoke(instance, new object?[] { null });
+                            Log.LogInfo($"[Diag] HighestLayerPanel: {panel != null}");
+                            
+                            if (panel != null)
+                            {
+                                Log.LogInfo($"[Diag] Panel Type: {panel.GetType().FullName}");
+                                ScanPanelForTables(panel);
+                            }
+                        }
+                        
+                        // Tentar acessar Panels list
+                        var panelsProp = panelManagerType.GetProperty("Panels");
+                        if (panelsProp != null)
+                        {
+                            var panels = panelsProp.GetValue(instance);
+                            Log.LogInfo($"[Diag] Panels: {panels}");
+                        }
+                    }
+                }
+                else
+                {
+                    Log.LogWarning("[Diag] PanelManager.Instance não encontrado");
+                    
+                    // Tentar Object.FindObjectOfType
+                    var findMethod = typeof(UnityEngine.Object).GetMethod("FindObjectOfType", BindingFlags.Public | BindingFlags.Static);
+                    if (findMethod != null)
+                    {
+                        var genericFind = findMethod.MakeGenericMethod(panelManagerType);
+                        var manager = genericFind.Invoke(null, null);
+                        Log.LogInfo($"[Diag] FindObjectOfType<PanelManager>: {manager != null}");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Diag] Erro: {ex.Message}");
+                Log.LogError($"[Diag] Erro: {ex.Message}\n{ex.StackTrace}");
+            }
+        }
+        
+        private static void ScanPanelForTables(object panel)
+        {
+            try
+            {
+                // Panel é VisualElement, então podemos navegar pelos filhos
+                if (panel is VisualElement visualPanel)
+                {
+                    Log.LogInfo("[Diag] Panel é VisualElement, navegando...");
+                    ScanVisualElementRecursive(visualPanel, 0);
+                }
+                else
+                {
+                    Log.LogInfo($"[Diag] Panel não é VisualElement: {panel.GetType().Name}");
+                    
+                    // Tentar encontrar uma propriedade que seja VisualElement
+                    var props = panel.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                    foreach (var prop in props)
+                    {
+                        if (typeof(VisualElement).IsAssignableFrom(prop.PropertyType))
+                        {
+                            var value = prop.GetValue(panel);
+                            if (value != null)
+                            {
+                                Log.LogInfo($"[Diag] Encontrado VisualElement em {prop.Name}");
+                                ScanVisualElementRecursive((VisualElement)value, 0);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Diag] Erro scan panel: {ex.Message}");
+            }
+        }
+        
+        private static void ScanVisualElementRecursive(VisualElement element, int depth)
+        {
+            if (depth > 10) return; // Limitar profundidade
+            if (element == null) return;
+            
+            var typeName = element.GetType().Name;
+            
+            // Procurar por tabelas/listas específicas
+            if (typeName.Contains("StreamedTable") || typeName.Contains("StreamedList") ||
+                typeName.Contains("StreamedObjectList"))
+            {
+                Log.LogInfo($"[Diag]   {' '.Repeat(depth)}\u2b50 {typeName} : {element.name}");
+                
+                // Tentar chamar método de export
+                TryExportTable(element);
+            }
+            else if (depth < 3)
+            {
+                // Mostrar primeiros elementos
+                //Log.LogInfo($"[Diag]   {' '.Repeat(depth)}{typeName} : {element.name}");
+            }
+            
+            // Recursão nos filhos
+            for (int i = 0; i < element.childCount; i++)
+            {
+                ScanVisualElementRecursive(element[i], depth + 1);
+            }
+        }
+        
+        private static void TryExportTable(VisualElement table)
+        {
+            try
+            {
+                var tableType = table.GetType();
+                Log.LogInfo($"[Diag] Tentando exportar {tableType.FullName}");
+                
+                // Procurar property que retorne StreamedTableView
+                var props = tableType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                foreach (var prop in props)
+                {
+                    if (prop.PropertyType.Name.Contains("View"))
+                    {
+                        Log.LogInfo($"[Diag]   View property: {prop.Name} -> {prop.PropertyType.Name}");
+                    }
+                }
+                
+                // Procurar métodos de export
+                var methods = tableType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+                foreach (var method in methods)
+                {
+                    if (method.Name.Contains("Export") || method.Name.Contains("Data"))
+                    {
+                        Log.LogInfo($"[Diag]   Method: {method.Name}({string.Join(", ", GetParamTypes(method))}) -> {method.ReturnType.Name}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Diag] Erro export: {ex.Message}");
             }
         }
         
@@ -141,11 +288,11 @@ namespace FM26Diagnostic
                                 Log.LogInfo($"[Diag] Tipo: {type.FullName}");
                                 
                                 // Listar métodos
-                                foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static))
+                                foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance))
                                 {
                                     if (method.Name.Contains("Export") || method.Name.Contains("export"))
                                     {
-                                        Log.LogInfo($"[Diag]   Método: {method.Name}({string.Join(", ", GetParamTypes(method))})");
+                                        Log.LogInfo($"[Diag]   Método: {method.Name}() -> {method.ReturnType.Name}");
                                     }
                                 }
                                 
@@ -181,18 +328,17 @@ namespace FM26Diagnostic
                         
                         foreach (var type in asm.GetTypes())
                         {
-                            if (type.Name.Contains("Table") || type.Name.Contains("List") || 
-                                type.Name.Contains("View") || type.Name.Contains("Grid"))
+                            if (type.Name.Contains("Streamed"))
                             {
-                                if (type.Name.Contains("Streamed") || type.Name.Contains("Player") || 
-                                    type.Name.Contains("Squad") || type.Name.Contains("Team"))
+                                if (type.Name.Contains("Table") || type.Name.Contains("List") || 
+                                    type.Name.Contains("View"))
                                 {
                                     Log.LogInfo($"[Diag] Tipo: {type.FullName}");
                                     
                                     // Verificar se é VisualElement
                                     if (typeof(VisualElement).IsAssignableFrom(type))
                                     {
-                                        Log.LogInfo($"[Diag]   -> É VisualElement!");
+                                        Log.LogInfo("[Diag]   -> É VisualElement!");
                                     }
                                     
                                     count++;
@@ -371,6 +517,18 @@ namespace FM26Diagnostic
             {
                 CountVisualElementsRecursive(element[i], ref tableCount, ref listCount, ref carouselCount);
             }
+        }
+    }
+    
+    // Extensão para string
+    public static class StringExtensions
+    {
+        public static string Repeat(this string str, int count)
+        {
+            var sb = new System.Text.StringBuilder();
+            for (int i = 0; i < count; i++)
+                sb.Append(str);
+            return sb.ToString();
         }
     }
 }
