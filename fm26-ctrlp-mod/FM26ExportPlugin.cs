@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.6.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.6.1")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.6.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.6.1 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -106,7 +106,7 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                Log.LogInfo($"[F9] Report encontrado com {report.childCount} filhos");
+                Log.LogInfo($"[F9] Report com {report.childCount} filhos");
                 
                 for (int i = 0; i < report.childCount; i++)
                 {
@@ -114,20 +114,36 @@ namespace FM26CtrlPExport
                     if (child == null) continue;
                     
                     string name = child.name ?? "(sem nome)";
-                    string typeName = child.GetType().Name;
-                    Log.LogInfo($"[F9]   [{i}] {name} ({typeName})");
+                    Log.LogInfo($"[F9] [{i}] {name}");
                     
-                    // Verificar se tem filhos com dados
-                    if (child.childCount > 0 && child.childCount < 50)
+                    // Se for Body, explorar mais
+                    if (name == "Body")
                     {
-                        for (int j = 0; j < Math.Min(5, child.childCount); j++)
+                        Log.LogInfo($"[F9]   -> Body tem {child.childCount} filhos:");
+                        for (int j = 0; j < child.childCount && j < 20; j++)
                         {
-                            var subChild = child[j];
-                            if (subChild != null)
+                            var bodyChild = child[j];
+                            if (bodyChild == null) continue;
+                            
+                            string bName = bodyChild.name ?? "(sem nome)";
+                            string bType = bodyChild.GetType().Name;
+                            int bChildren = bodyChild.childCount;
+                            
+                            Log.LogInfo($"[F9]     [{j}] {bName} ({bType}) - {bChildren} filhos");
+                            
+                            // Mostrar netos do Body
+                            if (bChildren > 0 && bChildren < 50)
                             {
-                                string subName = subChild.name ?? "(sem nome)";
-                                string subType = subChild.GetType().Name;
-                                Log.LogInfo($"[F9]     [{j}] {subName} ({subType})");
+                                for (int k = 0; k < Math.Min(10, bChildren); k++)
+                                {
+                                    var grandChild = bodyChild[k];
+                                    if (grandChild != null)
+                                    {
+                                        string gName = grandChild.name ?? "(sem nome)";
+                                        string gType = grandChild.GetType().Name;
+                                        Log.LogInfo($"[F9]       [{k}] {gName} ({gType})");
+                                    }
+                                }
                             }
                         }
                     }
@@ -251,36 +267,38 @@ namespace FM26CtrlPExport
             {
                 var type = element.GetType();
                 string typeName = type.FullName ?? "";
+                string elementName = element.name ?? "";
                 
-                // Verificar se é um elemento com dados
-                bool mightHaveData = typeName.Contains("Streamed") || 
-                                     typeName.Contains("Table") ||
-                                     typeName.Contains("List");
-                
-                if (mightHaveData)
+                // Logar todos os elementos no nível 2-3
+                if (depth >= 2 && depth <= 4)
                 {
-                    Log.LogInfo($"[Export] Verificando {element.name} ({typeName})");
-                    
-                    // Tentar pegar a propriedade dataSource
-                    try
+                    Log.LogInfo($"[Export] {' ', depth * 2}Verificando: {elementName} ({typeName})");
+                }
+                
+                // Tentar pegar dataSource de QUALQUER elemento
+                try
+                {
+                    var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
+                    if (dsProp != null)
                     {
-                        var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
-                        if (dsProp != null)
+                        var ds = dsProp.GetValue(element);
+                        if (ds != null)
                         {
-                            var ds = dsProp.GetValue(element);
+                            Log.LogInfo($"[Export] {' ', depth * 2}  dataSource: {ds.GetType().FullName}");
+                            
                             if (ds is IList list && list.Count > 0)
                             {
                                 foundData = list;
-                                Log.LogInfo($"[Export] ✅ dataSource tem {list.Count} itens");
+                                Log.LogInfo($"[Export] ✅ Encontrado {list.Count} itens em {elementName}!");
                                 return;
                             }
                         }
                     }
-                    catch { }
                 }
+                catch { }
                 
                 // Recursão
-                for (int i = 0; i < element.childCount && i < 20; i++)
+                for (int i = 0; i < element.childCount && i < 30; i++)
                 {
                     FindDataRecursive(element[i], ref foundData, depth + 1, maxDepth);
                     if (foundData != null) return;
