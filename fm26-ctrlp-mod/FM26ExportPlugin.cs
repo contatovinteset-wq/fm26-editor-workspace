@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Collections;
 using System.Collections.Generic;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
@@ -11,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.3.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.5.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -20,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.3.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.5.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -46,6 +47,11 @@ namespace FM26CtrlPExport
         private static Type _streamedListViewType;
         private static Type _streamedObjectListType;
         
+        // Propriedades via reflection
+        private static PropertyInfo _dataSourceProp;
+        private static PropertyInfo _dataSourcePathProp;
+        private static PropertyInfo _sourceDataProp;
+        
         public static void OnUpdate()
         {
             _frameCount++;
@@ -70,36 +76,36 @@ namespace FM26CtrlPExport
                 DoExport();
             }
             
-            // F9 - Buscar DADOS no Report (versão segura)
+            // F9 - Investigar dataSource dos elementos
             if (Keyboard.current.f9Key.wasPressedThisFrame)
             {
-                Debug.Log("[FM26CtrlP] >>> F9 - Buscar dados no Report");
-                Log.LogInfo(">>> F9 - Buscar dados no Report");
-                FindDataInReport();
+                Debug.Log("[FM26CtrlP] >>> F9 - Investigar dataSource");
+                Log.LogInfo(">>> F9 - Investigar dataSource");
+                InvestigateDataSource();
             }
             
-            // F10 - Buscar tabelas
+            // F10 - Buscar StreamedListView ativos
             if (Keyboard.current.f10Key.wasPressedThisFrame)
             {
-                Debug.Log("[FM26CtrlP] >>> F10 - Buscar tabelas");
-                Log.LogInfo(">>> F10 - Buscar tabelas");
-                FindTablesViaUIDocuments();
+                Debug.Log("[FM26CtrlP] >>> F10 - Buscar StreamedListView");
+                Log.LogInfo(">>> F10 - Buscar StreamedListView");
+                FindActiveStreamedLists();
             }
             
-            // F11 - Listar filhos do Report
+            // F11 - Investigar bindings
             if (Keyboard.current.f11Key.wasPressedThisFrame)
             {
-                Debug.Log("[FM26CtrlP] >>> F11 - Listar filhos do Report");
-                Log.LogInfo(">>> F11 - Listar filhos do Report");
-                ListReportChildren();
+                Debug.Log("[FM26CtrlP] >>> F11 - Investigar bindings");
+                Log.LogInfo(">>> F11 - Investigar bindings");
+                InvestigateBindings();
             }
             
-            // F12 - Buscar tipos com Dados
+            // F12 - Dump completo do elemento Report
             if (Keyboard.current.f12Key.wasPressedThisFrame)
             {
-                Debug.Log("[FM26CtrlP] >>> F12 - Buscar tipos com Dados");
-                Log.LogInfo(">>> F12 - Buscar tipos com Dados");
-                FindDataTypes();
+                Debug.Log("[FM26CtrlP] >>> F12 - Dump do Report");
+                Log.LogInfo(">>> F12 - Dump do Report");
+                DumpReportElement();
             }
         }
         
@@ -107,6 +113,7 @@ namespace FM26CtrlPExport
         {
             try
             {
+                // Tipos do SI.Bindable
                 _streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
                 Log.LogInfo($"[Init] StreamedTable: {(_streamedTableType != null ? "OK" : "NÃO")}");
                 
@@ -115,6 +122,20 @@ namespace FM26CtrlPExport
                 
                 _streamedObjectListType = Type.GetType("SI.Bindable.StreamedObjectList, SI.Bindable");
                 Log.LogInfo($"[Init] StreamedObjectList: {(_streamedObjectListType != null ? "OK" : "NÃO")}");
+                
+                // Propriedades do VisualElement
+                var veType = typeof(VisualElement);
+                _dataSourceProp = veType.GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
+                _dataSourcePathProp = veType.GetProperty("dataSourcePath", BindingFlags.Public | BindingFlags.Instance);
+                
+                Log.LogInfo($"[Init] dataSource prop: {(_dataSourceProp != null ? "OK" : "NÃO")}");
+                
+                // Propriedade SourceData do StreamedListView
+                if (_streamedListViewType != null)
+                {
+                    _sourceDataProp = _streamedListViewType.GetProperty("SourceData", BindingFlags.NonPublic | BindingFlags.Instance);
+                    Log.LogInfo($"[Init] SourceData prop: {(_sourceDataProp != null ? "OK" : "NÃO")}");
+                }
             }
             catch (Exception ex)
             {
@@ -122,169 +143,170 @@ namespace FM26CtrlPExport
             }
         }
         
-        // Versão SEGURA - foca em encontrar dados, não em dump completo
-        private static void FindDataInReport()
+        // F9 - Investigar dataSource dos elementos
+        private static void InvestigateDataSource()
         {
             try
             {
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                Log.LogInfo($"[FindData] {uiDocs.Length} UIDocuments");
+                Log.LogInfo($"[DataSource] {uiDocs.Length} UIDocuments");
                 
                 foreach (var doc in uiDocs)
                 {
-                    if (doc == null) continue;
+                    if (doc == null || doc.name != "PanelManager") continue;
                     var root = doc.rootVisualElement;
                     if (root == null) continue;
                     
-                    if (doc.name != "PanelManager") continue;
-                    
-                    // Encontrar Report
+                    // Procurar Report
                     for (int i = 0; i < root.childCount; i++)
                     {
                         var child = root[i];
                         if (child?.name == "Report")
                         {
-                            Log.LogInfo($"[FindData] Report encontrado");
-                            SearchForDataInElement(child, 0, 5);
+                            Log.LogInfo($"[DataSource] Report encontrado");
+                            ScanDataSourceRecursive(child, 0, 8);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[FindData] Erro: {ex.Message}");
+                Log.LogError($"[DataSource] Erro: {ex.Message}");
             }
         }
         
-        private static void SearchForDataInElement(VisualElement element, int depth, int maxDepth)
+        private static void ScanDataSourceRecursive(VisualElement element, int depth, int maxDepth)
         {
             if (element == null || depth > maxDepth) return;
             
             try
             {
-                var elemType = element.GetType();
-                string elemName = element.name ?? "";
+                string name = element.name ?? "";
+                var type = element.GetType();
+                string typeName = type.FullName ?? type.Name ?? "";
+                string indent = new string(' ', depth * 2);
                 
-                // Logar elemento atual
-                Log.LogInfo($"[Search] {new string(' ', depth*2)}{elemName} ({elemType.Name})");
-                
-                // Se for um "Report", investigar propriedades de dados
-                if (elemName.Contains("Report") || elemName.Contains("Search") || elemName.Contains("Squad"))
+                // Verificar se tem dataSource
+                object dataSource = null;
+                if (_dataSourceProp != null)
                 {
-                    Log.LogInfo($"[Search] === Investigando {elemName} ===");
-                    SafeInspectDataProperties(element);
-                }
-                
-                // Recursão nos filhos
-                for (int i = 0; i < element.childCount && i < 20; i++)
-                {
-                    SearchForDataInElement(element[i], depth + 1, maxDepth);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Search] Erro no elemento: {ex.Message}");
-            }
-        }
-        
-        // Inspeção SEGURA de propriedades - foca em dados
-        private static void SafeInspectDataProperties(object obj)
-        {
-            if (obj == null) return;
-            
-            try
-            {
-                var objType = obj.GetType();
-                Log.LogInfo($"[Inspect] Tipo: {objType.Name}");
-                
-                // Lista de nomes de propriedades que podem ter dados
-                string[] dataProps = { "Data", "Items", "List", "Players", "Rows", "Columns", 
-                    "Source", "Count", "Values", "Results", "Entities" };
-                
-                var props = objType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                
-                int found = 0;
-                foreach (var prop in props)
-                {
-                    if (found >= 10) break; // Limitar a 10 propriedades
-                    
                     try
                     {
-                        string propName = prop.Name;
-                        
-                        // Pular indexadores e propriedades com parâmetros
-                        if (prop.GetIndexParameters().Length > 0) continue;
-                        
-                        // Verificar se o nome parece ter dados
-                        bool isDataProp = false;
-                        foreach (var dataName in dataProps)
-                        {
-                            if (propName.ToLower().Contains(dataName.ToLower()))
-                            {
-                                isDataProp = true;
-                                break;
-                            }
-                        }
-                        
-                        if (!isDataProp) continue;
-                        
-                        var propType = prop.PropertyType;
-                        
-                        // Tentar obter valor com segurança
-                        object value = null;
-                        try
-                        {
-                            value = prop.GetValue(obj);
-                        }
-                        catch
-                        {
-                            continue; // Pular se não conseguir acessar
-                        }
-                        
-                        if (value == null) continue;
-                        
-                        string info = $"[Inspect] {propName}: {propType.Name}";
-                        
-                        // Se for lista/coleção, mostrar count
-                        if (propType.IsGenericType || propType.IsArray)
+                        dataSource = _dataSourceProp.GetValue(element);
+                    }
+                    catch { }
+                }
+                
+                // Se tem dataSource, logar
+                if (dataSource != null)
+                {
+                    Log.LogInfo($"[DataSource] {indent}{name} -> dataSource: {dataSource.GetType().FullName}");
+                    InspectObject(dataSource, depth + 1);
+                }
+                
+                // NOVO: Verificar pelo nome do tipo (IL2CPP-safe)
+                bool isStreamedTable = typeName.Contains("StreamedTable");
+                bool isStreamedList = typeName.Contains("StreamedListView") || 
+                                      typeName.Contains("StreamedObjectList");
+                
+                if (isStreamedTable || isStreamedList)
+                {
+                    Log.LogInfo($"[DataSource] {indent}⭐ {name} É {typeName}!");
+                    
+                    // Procurar qualquer propriedade que retorne IList
+                    var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                    foreach (var prop in props)
+                    {
+                        if (typeof(IList).IsAssignableFrom(prop.PropertyType))
                         {
                             try
                             {
-                                var countProp = propType.GetProperty("Count");
-                                if (countProp != null)
+                                var value = prop.GetValue(element);
+                                if (value is IList list)
                                 {
-                                    var count = countProp.GetValue(value);
-                                    info += $" (Count={count})";
+                                    Log.LogInfo($"[DataSource] {indent}  -> {prop.Name}: {list.Count} itens");
                                     
-                                    // Se tiver itens, mostrar tipo do primeiro
-                                    if (count != null && (int)count > 0)
+                                    if (list.Count > 0)
                                     {
-                                        var getItemMethod = propType.GetMethod("get_Item");
-                                        if (getItemMethod != null)
-                                        {
-                                            var firstItem = getItemMethod.Invoke(value, new object[] { 0 });
-                                            if (firstItem != null)
-                                            {
-                                                info += $" FirstItem: {firstItem.GetType().Name}";
-                                            }
-                                        }
+                                        Log.LogInfo($"[DataSource] {indent}  -> Tipo do item: {list[0]?.GetType().FullName}");
+                                        DumpObjectProperties(list[0], "PrimeiroItem");
+                                        
+                                        // Salvar para exportação
+                                        _lastFoundData = list;
+                                        _lastFoundElement = element;
+                                        _lastFoundPropertyName = prop.Name;
                                     }
                                 }
                             }
                             catch { }
                         }
-                        
-                        Debug.Log($"[FM26CtrlP] {info}");
-                        Log.LogInfo(info);
-                        found++;
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.LogError($"[Inspect] Erro prop: {ex.Message}");
                     }
                 }
                 
-                Log.LogInfo($"[Inspect] {found} propriedades de dados encontradas");
+                // Recursão nos filhos - aumentar limite
+                for (int i = 0; i < element.childCount && i < 100; i++)
+                {
+                    ScanDataSourceRecursive(element[i], depth + 1, maxDepth);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[DataSource] Erro no elemento: {ex.Message}");
+            }
+        }
+        
+        private static void InspectObject(object obj, int depth)
+        {
+            if (obj == null || depth > 3) return;
+            
+            try
+            {
+                var type = obj.GetType();
+                
+                // Se for lista, mostrar count
+                if (obj is IList list)
+                {
+                    Log.LogInfo($"[Inspect] É IList com {list.Count} itens");
+                    if (list.Count > 0)
+                    {
+                        Log.LogInfo($"[Inspect] Tipo do item: {list[0]?.GetType().FullName}");
+                    }
+                    return;
+                }
+                
+                // Se for dicionário, mostrar count
+                if (obj is IDictionary dict)
+                {
+                    Log.LogInfo($"[Inspect] É IDictionary com {dict.Count} itens");
+                    return;
+                }
+                
+                // Listar propriedades públicas relevantes
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                int count = 0;
+                
+                foreach (var prop in props)
+                {
+                    if (count >= 15) break;
+                    if (prop.GetIndexParameters().Length > 0) continue;
+                    
+                    try
+                    {
+                        var value = prop.GetValue(obj);
+                        if (value == null) continue;
+                        
+                        string info = $"[Inspect] {prop.Name}: {value.GetType().Name}";
+                        
+                        if (value is IList l)
+                        {
+                            info += $" (Count={l.Count})";
+                        }
+                        
+                        Log.LogInfo(info);
+                        count++;
+                    }
+                    catch { }
+                }
             }
             catch (Exception ex)
             {
@@ -292,14 +314,59 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindTablesViaUIDocuments()
+        private static void DumpObjectProperties(object obj, string label)
+        {
+            if (obj == null) return;
+            
+            try
+            {
+                var type = obj.GetType();
+                Log.LogInfo($"[{label}] Tipo: {type.FullName}");
+                
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                
+                int count = 0;
+                foreach (var prop in props)
+                {
+                    if (count >= 30) break;
+                    if (prop.GetIndexParameters().Length > 0) continue;
+                    
+                    try
+                    {
+                        var value = prop.GetValue(obj);
+                        string valueStr = value?.ToString() ?? "null";
+                        if (valueStr.Length > 50) valueStr = valueStr.Substring(0, 50) + "...";
+                        
+                        Log.LogInfo($"[{label}] {prop.Name} = {valueStr}");
+                        count++;
+                    }
+                    catch { }
+                }
+                
+                Log.LogInfo($"[{label}] {count} propriedades listadas");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[{label}] Erro: {ex.Message}");
+            }
+        }
+        
+        // F10 - Buscar instâncias ativas de StreamedListView
+        private static void FindActiveStreamedLists()
         {
             try
             {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                Log.LogInfo($"[Tables] {uiDocs.Length} UIDocuments");
+                Log.LogInfo("[ActiveLists] Buscando StreamedListView ativos...");
                 
-                int tables = 0, lists = 0;
+                if (_streamedListViewType == null)
+                {
+                    Log.LogError("[ActiveLists] Tipo StreamedListView não encontrado");
+                    return;
+                }
+                
+                // Buscar todos os VisualElements e verificar se são StreamedListView
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                int found = 0;
                 
                 foreach (var doc in uiDocs)
                 {
@@ -307,55 +374,183 @@ namespace FM26CtrlPExport
                     var root = doc.rootVisualElement;
                     if (root == null) continue;
                     
-                    var (t, l) = ScanForTables(root, 0, 10);
-                    tables += t;
-                    lists += l;
+                    found += ScanForStreamedList(root, 0, 15);
                 }
                 
-                Log.LogInfo($"[Tables] Total: {tables} tabelas, {lists} listas");
+                Log.LogInfo($"[ActiveLists] Total encontrados: {found}");
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Tables] Erro: {ex.Message}");
+                Log.LogError($"[ActiveLists] Erro: {ex.Message}");
             }
         }
         
-        private static (int tables, int lists) ScanForTables(VisualElement element, int depth, int maxDepth)
+        private static int ScanForStreamedList(VisualElement element, int depth, int maxDepth)
         {
-            if (element == null || depth > maxDepth) return (0, 0);
+            if (element == null || depth > maxDepth) return 0;
             
-            int tables = 0, lists = 0;
+            int found = 0;
             
             try
             {
-                var elemType = element.GetType();
+                var type = element.GetType();
+                string typeName = type.FullName ?? type.Name ?? "";
+                string elementName = element.name ?? "";
                 
-                if (_streamedTableType != null && _streamedTableType.IsAssignableFrom(elemType))
+                // NOVO: Verificar pelo nome do tipo (IL2CPP-safe)
+                bool isStreamedTable = typeName.Contains("StreamedTable") || 
+                                       elementName.Contains("Table") ||
+                                       elementName.Contains("List");
+                
+                bool isStreamedListView = typeName.Contains("StreamedListView") ||
+                                          typeName.Contains("StreamedObjectList") ||
+                                          elementName.Contains("ListView");
+                
+                if (isStreamedTable || isStreamedListView)
                 {
-                    tables++;
-                    Log.LogInfo($"[Scan] TABLE: {element.name}");
+                    found++;
+                    Log.LogInfo($"[ActiveLists] ⭐ ENCONTRADO: {elementName} ({typeName})");
+                    
+                    // Tentar encontrar dados via reflection em propriedades comuns
+                    TryExtractDataFromElement(element, depth);
                 }
                 
-                if ((_streamedListViewType != null && _streamedListViewType.IsAssignableFrom(elemType)) ||
-                    (_streamedObjectListType != null && _streamedObjectListType.IsAssignableFrom(elemType)))
+                // Recursão - aumentar limite para garantir que achamos tudo
+                for (int i = 0; i < element.childCount && i < 100; i++)
                 {
-                    lists++;
-                    Log.LogInfo($"[Scan] LIST: {element.name}");
-                }
-                
-                for (int i = 0; i < element.childCount && i < 30; i++)
-                {
-                    var (t, l) = ScanForTables(element[i], depth + 1, maxDepth);
-                    tables += t;
-                    lists += l;
+                    found += ScanForStreamedList(element[i], depth + 1, maxDepth);
                 }
             }
             catch { }
             
-            return (tables, lists);
+            return found;
         }
         
-        private static void ListReportChildren()
+        private static void TryExtractDataFromElement(VisualElement element, int depth)
+        {
+            try
+            {
+                var type = element.GetType();
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                
+                foreach (var prop in props)
+                {
+                    string propName = prop.Name.ToLower();
+                    
+                    // Procurar propriedades que parecem conter dados
+                    if (propName.Contains("data") || propName.Contains("items") || 
+                        propName.Contains("source") || propName.Contains("list"))
+                    {
+                        try
+                        {
+                            var value = prop.GetValue(element);
+                            if (value == null) continue;
+                            
+                            if (value is IList list)
+                            {
+                                Log.LogInfo($"[ActiveLists]   -> {prop.Name}: {list.Count} itens");
+                                
+                                if (list.Count > 0)
+                                {
+                                    Log.LogInfo($"[ActiveLists]   -> Tipo do item: {list[0]?.GetType().FullName}");
+                                    DumpObjectProperties(list[0], "Item0");
+                                }
+                                
+                                // Salvar referência para exportação
+                                _lastFoundData = list;
+                                _lastFoundElement = element;
+                                _lastFoundPropertyName = prop.Name;
+                            }
+                        }
+                        catch { }
+                    }
+                }
+            }
+            catch { }
+        }
+        
+        private static IList _lastFoundData;
+        private static VisualElement _lastFoundElement;
+        private static string _lastFoundPropertyName;
+        
+        // F11 - Investigar bindings
+        private static void InvestigateBindings()
+        {
+            try
+            {
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                
+                foreach (var doc in uiDocs)
+                {
+                    if (doc == null || doc.name != "PanelManager") continue;
+                    var root = doc.rootVisualElement;
+                    if (root == null) continue;
+                    
+                    // Procurar Report
+                    for (int i = 0; i < root.childCount; i++)
+                    {
+                        var child = root[i];
+                        if (child?.name == "Report")
+                        {
+                            Log.LogInfo($"[Bindings] Report encontrado");
+                            ScanBindingsRecursive(child, 0, 6);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Bindings] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void ScanBindingsRecursive(VisualElement element, int depth, int maxDepth)
+        {
+            if (element == null || depth > maxDepth) return;
+            
+            try
+            {
+                string name = element.name ?? "";
+                var type = element.GetType();
+                
+                // Procurar campos de binding
+                var bindingFields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+                
+                foreach (var field in bindingFields)
+                {
+                    string fieldName = field.Name.ToLower();
+                    
+                    if (fieldName.Contains("binding") || fieldName.Contains("data") || fieldName.Contains("source"))
+                    {
+                        try
+                        {
+                            var value = field.GetValue(element);
+                            if (value != null)
+                            {
+                                Log.LogInfo($"[Bindings] {name}.{field.Name}: {value.GetType().Name}");
+                                
+                                // Se for lista, mostrar count
+                                if (value is IList list)
+                                {
+                                    Log.LogInfo($"[Bindings] -> Count: {list.Count}");
+                                }
+                            }
+                        }
+                        catch { }
+                    }
+                }
+                
+                // Recursão limitada
+                for (int i = 0; i < element.childCount && i < 20; i++)
+                {
+                    ScanBindingsRecursive(element[i], depth + 1, maxDepth);
+                }
+            }
+            catch { }
+        }
+        
+        // F12 - Dump completo do Report
+        private static void DumpReportElement()
         {
             try
             {
@@ -372,79 +567,195 @@ namespace FM26CtrlPExport
                         var child = root[i];
                         if (child?.name == "Report")
                         {
-                            Log.LogInfo($"[List] Report encontrado, {child.childCount} filhos:");
-                            
-                            for (int j = 0; j < child.childCount && j < 10; j++)
-                            {
-                                var sub = child[j];
-                                if (sub == null) continue;
-                                Log.LogInfo($"[List] [{j}] {sub.name} ({sub.GetType().Name})");
-                            }
+                            Log.LogInfo($"[Dump] === DUMP DO REPORT ===");
+                            DumpElementRecursive(child, 0, 8);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[List] Erro: {ex.Message}");
+                Log.LogError($"[Dump] Erro: {ex.Message}");
             }
         }
         
-        private static void FindDataTypes()
+        private static void DumpElementRecursive(VisualElement element, int depth, int maxDepth)
         {
+            if (element == null || depth > maxDepth) return;
+            
             try
             {
-                Log.LogInfo("[Types] Buscando tipos com dados de jogador...");
+                string indent = new string(' ', depth * 2);
+                string name = element.name ?? "(sem nome)";
+                var type = element.GetType();
+                string typeName = type.FullName ?? type.Name ?? "";
                 
-                int found = 0;
+                // Só mostrar elementos interessantes ou no início
+                bool isInteresting = typeName.Contains("Streamed") || 
+                                     typeName.Contains("Table") || 
+                                     typeName.Contains("List") ||
+                                     name.Contains("Table") ||
+                                     name.Contains("List") ||
+                                     depth <= 3;
                 
-                foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+                if (isInteresting)
                 {
-                    try
+                    Log.LogInfo($"[Dump] {indent}{name} ({typeName})");
+                    
+                    // Se tiver dataSource, mostrar
+                    if (_dataSourceProp != null)
                     {
-                        var name = asm.GetName().Name;
-                        if (!name.StartsWith("SI.") && !name.StartsWith("FM.")) continue;
-                        
-                        foreach (var type in asm.GetTypes())
+                        try
                         {
-                            string typeName = type.Name.ToLower();
-                            
-                            if (typeName.Contains("playerdata") || 
-                                typeName.Contains("playerlist") ||
-                                typeName.Contains("squaddata") ||
-                                typeName.Contains("teamdata") ||
-                                typeName.Contains("searchresult"))
+                            var ds = _dataSourceProp.GetValue(element);
+                            if (ds != null)
                             {
-                                Log.LogInfo($"[Types] {type.FullName}");
-                                found++;
+                                Log.LogInfo($"[Dump] {indent}  dataSource: {ds.GetType().FullName}");
                                 
-                                if (found >= 20) break;
+                                if (ds is IList list)
+                                {
+                                    Log.LogInfo($"[Dump] {indent}  -> IList com {list.Count} itens!");
+                                }
                             }
                         }
+                        catch { }
                     }
-                    catch { }
                     
-                    if (found >= 20) break;
+                    // NOVO: Procurar propriedades que retornam IList
+                    var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                    foreach (var prop in props)
+                    {
+                        if (typeof(IList).IsAssignableFrom(prop.PropertyType))
+                        {
+                            try
+                            {
+                                var val = prop.GetValue(element);
+                                if (val is IList list && list.Count > 0)
+                                {
+                                    Log.LogInfo($"[Dump] {indent}  -> {prop.Name}: {list.Count} itens");
+                                    
+                                    // Salvar referência
+                                    _lastFoundData = list;
+                                    _lastFoundElement = element;
+                                    _lastFoundPropertyName = prop.Name;
+                                }
+                            }
+                            catch { }
+                        }
+                    }
                 }
                 
-                Log.LogInfo($"[Types] {found} tipos encontrados");
+                // Recursão - explorar mais filhos
+                int childLimit = depth <= 4 ? 50 : 20;
+                for (int i = 0; i < element.childCount && i < childLimit; i++)
+                {
+                    DumpElementRecursive(element[i], depth + 1, maxDepth);
+                }
             }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Types] Erro: {ex.Message}");
-            }
+            catch { }
         }
         
         private static void DoExport()
         {
             try
             {
-                Log.LogInfo("[Export] Buscando dados para exportar...");
-                FindDataInReport();
+                Log.LogInfo("[Export] Iniciando exportação...");
+                
+                // Primeiro, buscar dados ativos
+                FindActiveStreamedLists();
+                
+                // Se encontramos dados, exportar
+                if (_lastFoundData != null && _lastFoundData.Count > 0)
+                {
+                    ExportToCsv(_lastFoundData);
+                }
+                else
+                {
+                    Log.LogWarning("[Export] Nenhum dado encontrado. Certifique-se de que uma tabela está visível.");
+                }
             }
             catch (Exception ex)
             {
                 Log.LogError($"[Export] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void ExportToCsv(IList data)
+        {
+            try
+            {
+                if (data == null || data.Count == 0)
+                {
+                    Log.LogWarning("[Export] Lista vazia, nada para exportar");
+                    return;
+                }
+                
+                Log.LogInfo($"[Export] Exportando {data.Count} registros...");
+                
+                var firstItem = data[0];
+                if (firstItem == null)
+                {
+                    Log.LogError("[Export] Primeiro item é null");
+                    return;
+                }
+                
+                var type = firstItem.GetType();
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                
+                // Preparar CSV
+                var csv = new System.Text.StringBuilder();
+                
+                // Header
+                var headers = new List<string>();
+                foreach (var prop in props)
+                {
+                    if (prop.GetIndexParameters().Length == 0)
+                    {
+                        headers.Add(prop.Name);
+                    }
+                }
+                csv.AppendLine(string.Join(";", headers));
+                
+                // Dados
+                int rowCount = 0;
+                foreach (var item in data)
+                {
+                    if (item == null) continue;
+                    
+                    var values = new List<string>();
+                    foreach (var prop in props)
+                    {
+                        if (prop.GetIndexParameters().Length > 0) continue;
+                        
+                        try
+                        {
+                            var value = prop.GetValue(item);
+                            string str = value?.ToString() ?? "";
+                            // Escapar ; e 
+                            str = str.Replace(";", ",").Replace("\n", " ").Replace("\r", "");
+                            values.Add(str);
+                        }
+                        catch
+                        {
+                            values.Add("");
+                        }
+                    }
+                    csv.AppendLine(string.Join(";", values));
+                    rowCount++;
+                }
+                
+                // Salvar arquivo
+                var path = System.IO.Path.Combine(
+                    BepInEx.Paths.PluginPath, 
+                    $"FM26_Export_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
+                );
+                
+                System.IO.File.WriteAllText(path, csv.ToString());
+                Log.LogInfo($"[Export] ✅ {rowCount} linhas salvas em: {path}");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Export] Erro ao gerar CSV: {ex.Message}");
             }
         }
     }
