@@ -216,7 +216,7 @@ namespace FM26Diagnostic
             if (typeName.Contains("StreamedTable") || typeName.Contains("StreamedList") ||
                 typeName.Contains("StreamedObjectList"))
             {
-                Log.LogInfo($"[Diag]   {' '.Repeat(depth)}\u2b50 {typeName} : {element.name}");
+                Log.LogInfo($"[Diag]   {new string(' ', depth)}\u2b50 {typeName} : {element.name}");
                 
                 // Tentar chamar método de export
                 TryExportTable(element);
@@ -224,7 +224,7 @@ namespace FM26Diagnostic
             else if (depth < 3)
             {
                 // Mostrar primeiros elementos
-                //Log.LogInfo($"[Diag]   {' '.Repeat(depth)}{typeName} : {element.name}");
+                //Log.LogInfo($"[Diag]   {new string(' ', depth)}{typeName} : {element.name}");
             }
             
             // Recursão nos filhos
