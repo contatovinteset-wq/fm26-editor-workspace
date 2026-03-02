@@ -272,7 +272,8 @@ namespace FM26CtrlPExport
                 // Logar todos os elementos no nível 2-3
                 if (depth >= 2 && depth <= 4)
                 {
-                    Log.LogInfo($"[Export] {' ', depth * 2}Verificando: {elementName} ({typeName})");
+                    string indent = new string(' ', depth * 2);
+                    Log.LogInfo($"[Export] {indent}Verificando: {elementName} ({typeName})");
                 }
                 
                 // Tentar pegar dataSource de QUALQUER elemento
@@ -284,7 +285,8 @@ namespace FM26CtrlPExport
                         var ds = dsProp.GetValue(element);
                         if (ds != null)
                         {
-                            Log.LogInfo($"[Export] {' ', depth * 2}  dataSource: {ds.GetType().FullName}");
+                            string indent2 = new string(' ', depth * 2);
+                            Log.LogInfo($"[Export] {indent2}  dataSource: {ds.GetType().FullName}");
                             
                             if (ds is IList list && list.Count > 0)
                             {
