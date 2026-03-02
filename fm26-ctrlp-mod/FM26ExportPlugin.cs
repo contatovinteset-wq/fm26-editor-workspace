@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "1.0.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "1.1.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -20,7 +20,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v1.0.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v1.1.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -47,12 +47,13 @@ namespace FM26CtrlPExport
         private static Type _streamedTableType;
         private static Type _streamedTableViewType;
         private static Type _streamedListViewType;
+        private static Type _streamedObjectListType;
         private static Type _streamedTableViewSettingsCollectionType;
+        private static Type _customViewExportDataType;
         
         // Métodos
         private static MethodInfo _getOpenPanelMethod;
         private static MethodInfo _tryGetPanelMethod;
-        private static MethodInfo _getRootVisualElementMethod;
         private static MethodInfo _createExportDataMethod;
         
         public static void OnUpdate()
@@ -69,13 +70,30 @@ namespace FM26CtrlPExport
             if (Keyboard.current == null) return;
             
             bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
-            bool p = Keyboard.current.pKey.wasPressedThisFrame;
+            bool shift = Keyboard.current.leftShiftKey.isPressed || Keyboard.current.rightShiftKey.isPressed;
             
-            if (ctrl && p)
+            // Ctrl+P - Exportar tabela visível
+            if (ctrl && Keyboard.current.pKey.wasPressedThisFrame)
             {
                 Debug.Log("[FM26CtrlP] >>> Ctrl+P PRESSIONADO!");
                 Log.LogInfo(">>> Ctrl+P PRESSIONADO!");
-                DoExportViaPanelManager();
+                DoExportAllTables();
+            }
+            
+            // F9 - Buscar TODAS as tabelas em runtime (via Resources)
+            if (Keyboard.current.f9Key.wasPressedThisFrame)
+            {
+                Debug.Log("[FM26CtrlP] >>> F9 - Buscar todas as tabelas em runtime");
+                Log.LogInfo(">>> F9 - Buscando todas as tabelas via Resources.FindObjectsOfTypeAll");
+                FindAllTablesViaResources();
+            }
+            
+            // F10 - Tentar export via CustomViewExportData
+            if (Keyboard.current.f10Key.wasPressedThisFrame)
+            {
+                Debug.Log("[FM26CtrlP] >>> F10 - Export via CustomViewExportData");
+                Log.LogInfo(">>> F10 - Tentando export via CustomViewExportData");
+                TryExportViaCustomView();
             }
             
             // F11 - Buscar tabelas no painel ativo
@@ -93,6 +111,14 @@ namespace FM26CtrlPExport
                 Log.LogInfo(">>> F12 - Listando painéis abertos");
                 ListOpenPanels();
             }
+            
+            // Ctrl+Shift+D - Dump completo
+            if (ctrl && shift && Keyboard.current.dKey.wasPressedThisFrame)
+            {
+                Debug.Log("[FM26CtrlP] >>> Ctrl+Shift+D - DUMP COMPLETO");
+                Log.LogInfo(">>> Ctrl+Shift+D - DUMP COMPLETO");
+                FullDiagnostic();
+            }
         }
         
         private static void InitializeTypes()
@@ -104,22 +130,6 @@ namespace FM26CtrlPExport
                 if (_panelManagerType != null)
                 {
                     Log.LogInfo($"[Init] PanelManager encontrado: {_panelManagerType.FullName}");
-                    
-                    // Singleton instance
-                    var instanceProp = _panelManagerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static);
-                    if (instanceProp == null)
-                    {
-                        // Tentar get_GetInstance
-                        var getInstanceMethod = _panelManagerType.GetMethod("get_Instance", BindingFlags.Public | BindingFlags.Static);
-                        if (getInstanceMethod != null)
-                        {
-                            Log.LogInfo("[Init] get_Instance encontrado");
-                        }
-                    }
-                    else
-                    {
-                        Log.LogInfo("[Init] Instance property encontrada");
-                    }
                     
                     _getOpenPanelMethod = _panelManagerType.GetMethod("GetOpenPanelInHighestLayer", BindingFlags.Public | BindingFlags.Instance);
                     _tryGetPanelMethod = _panelManagerType.GetMethod("TryGetPanel", new Type[] { typeof(uint), _panelManagerType.MakeByRefType() });
@@ -146,6 +156,13 @@ namespace FM26CtrlPExport
                     Log.LogInfo($"[Init] StreamedListView encontrado");
                 }
                 
+                // StreamedObjectList
+                _streamedObjectListType = Type.GetType("SI.Bindable.StreamedObjectList, SI.Bindable");
+                if (_streamedObjectListType != null)
+                {
+                    Log.LogInfo($"[Init] StreamedObjectList encontrado");
+                }
+                
                 // StreamedTableView
                 _streamedTableViewType = Type.GetType("SI.Bindable.StreamedTableView, SI.Bindable");
                 if (_streamedTableViewType != null)
@@ -164,6 +181,13 @@ namespace FM26CtrlPExport
                         Log.LogInfo($"[Init] CreateExportDataFromCustomView encontrado");
                     }
                 }
+                
+                // CustomViewExportData
+                _customViewExportDataType = Type.GetType("SI.Bindable.CustomViewExportData, SI.Bindable");
+                if (_customViewExportDataType != null)
+                {
+                    Log.LogInfo($"[Init] CustomViewExportData encontrado");
+                }
             }
             catch (Exception ex)
             {
@@ -178,7 +202,6 @@ namespace FM26CtrlPExport
             
             try
             {
-                // ManualSingleton<T>.Instance
                 var baseType = _panelManagerType.BaseType;
                 if (baseType != null && baseType.IsGenericType)
                 {
@@ -189,14 +212,12 @@ namespace FM26CtrlPExport
                     }
                 }
                 
-                // Tentar property direta
                 var directInstanceProp = _panelManagerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static);
                 if (directInstanceProp != null)
                 {
                     return directInstanceProp.GetValue(null);
                 }
                 
-                // Tentar campo
                 var instanceField = _panelManagerType.GetField("s_instance", BindingFlags.NonPublic | BindingFlags.Static);
                 if (instanceField != null)
                 {
@@ -211,6 +232,285 @@ namespace FM26CtrlPExport
             return null;
         }
         
+        // ============================================
+        // NOVO: Buscar TODAS as tabelas via Resources
+        // ============================================
+        private static void FindAllTablesViaResources()
+        {
+            try
+            {
+                Log.LogInfo("[F9] === Buscando TODAS as tabelas em runtime ===");
+                
+                if (_streamedTableType != null)
+                {
+                    var tables = Resources.FindObjectsOfTypeAll(_streamedTableType);
+                    Log.LogInfo($"[F9] StreamedTable encontrados: {tables.Length}");
+                    
+                    foreach (var table in tables)
+                    {
+                        if (table != null)
+                        {
+                            var ve = table as VisualElement;
+                            var name = ve != null ? ve.name : "unnamed";
+                            Log.LogInfo($"[F9]   - {table.GetType().Name}: {name}");
+                            
+                            // Tentar obter dados
+                            InspectTable(table);
+                        }
+                    }
+                }
+                
+                if (_streamedListViewType != null)
+                {
+                    var listViews = Resources.FindObjectsOfTypeAll(_streamedListViewType);
+                    Log.LogInfo($"[F9] StreamedListView encontrados: {listViews.Length}");
+                }
+                
+                if (_streamedObjectListType != null)
+                {
+                    var objLists = Resources.FindObjectsOfTypeAll(_streamedObjectListType);
+                    Log.LogInfo($"[F9] StreamedObjectList encontrados: {objLists.Length}");
+                }
+                
+                Log.LogInfo("[F9] === Fim da busca ===");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[F9] Erro: {ex.Message}");
+            }
+        }
+        
+        // ============================================
+        // NOVO: Tentar export via CustomViewExportData
+        // ============================================
+        private static void TryExportViaCustomView()
+        {
+            try
+            {
+                Log.LogInfo("[F10] === Tentando export via CustomViewExportData ===");
+                
+                // Buscar todas as instâncias de StreamedTableViewSettingsCollection
+                if (_streamedTableViewSettingsCollectionType != null)
+                {
+                    var settingsCollections = Resources.FindObjectsOfTypeAll(_streamedTableViewSettingsCollectionType);
+                    Log.LogInfo($"[F10] StreamedTableViewSettingsCollection encontrados: {settingsCollections.Length}");
+                    
+                    foreach (var settings in settingsCollections)
+                    {
+                        if (_createExportDataMethod != null)
+                        {
+                            Log.LogInfo("[F10] Tentando CreateExportDataFromCustomView...");
+                            var result = _createExportDataMethod.Invoke(settings, null);
+                            Log.LogInfo($"[F10] Resultado: {result?.GetType().Name ?? "null"}");
+                        }
+                    }
+                }
+                
+                // Buscar CustomViewExportData diretamente
+                if (_customViewExportDataType != null)
+                {
+                    var exportData = Resources.FindObjectsOfTypeAll(_customViewExportDataType);
+                    Log.LogInfo($"[F10] CustomViewExportData encontrados: {exportData.Length}");
+                }
+                
+                Log.LogInfo("[F10] === Fim da tentativa ===");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[F10] Erro: {ex.Message}");
+            }
+        }
+        
+        // ============================================
+        // NOVO: Exportar todas as tabelas (Ctrl+P)
+        // ============================================
+        private static void DoExportAllTables()
+        {
+            try
+            {
+                Log.LogInfo("[Ctrl+P] === EXPORTANDO TODAS AS TABELAS ===");
+                
+                int totalExported = 0;
+                
+                // 1. Buscar via Resources (todas as instâncias ativas)
+                if (_streamedTableType != null)
+                {
+                    var tables = Resources.FindObjectsOfTypeAll(_streamedTableType);
+                    Log.LogInfo($"[Ctrl+P] StreamedTable ativos: {tables.Length}");
+                    
+                    foreach (var table in tables)
+                    {
+                        if (ExportSingleTable(table))
+                        {
+                            totalExported++;
+                        }
+                    }
+                }
+                
+                // 2. Buscar StreamedListView também
+                if (_streamedListViewType != null)
+                {
+                    var listViews = Resources.FindObjectsOfTypeAll(_streamedListViewType);
+                    Log.LogInfo($"[Ctrl+P] StreamedListView ativos: {listViews.Length}");
+                }
+                
+                Log.LogInfo($"[Ctrl+P] === EXPORTAÇÃO COMPLETA: {totalExported} tabelas ===");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Ctrl+P] Erro: {ex.Message}");
+            }
+        }
+        
+        // ============================================
+        // NOVO: Inspecionar uma tabela
+        // ============================================
+        private static void InspectTable(object table)
+        {
+            try
+            {
+                var tableType = table.GetType();
+                
+                // Propriedades relevantes
+                var props = tableType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                foreach (var prop in props)
+                {
+                    if (prop.Name.Contains("Data") || prop.Name.Contains("Items") || prop.Name.Contains("List") || prop.Name.Contains("View"))
+                    {
+                        try
+                        {
+                            var value = prop.GetValue(table);
+                            Log.LogInfo($"[Inspect]   {prop.Name} = {value?.GetType().Name ?? "null"}");
+                        }
+                        catch { }
+                    }
+                }
+                
+                // Campos relevantes
+                var fields = tableType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+                foreach (var field in fields)
+                {
+                    if (field.Name.Contains("data") || field.Name.Contains("items") || field.Name.Contains("_list"))
+                    {
+                        try
+                        {
+                            var value = field.GetValue(table);
+                            Log.LogInfo($"[Inspect]   {field.Name} = {value?.GetType().Name ?? "null"}");
+                        }
+                        catch { }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Inspect] Erro: {ex.Message}");
+            }
+        }
+        
+        // ============================================
+        // NOVO: Exportar tabela individual
+        // ============================================
+        private static bool ExportSingleTable(object table)
+        {
+            try
+            {
+                var tableType = table.GetType();
+                var ve = table as VisualElement;
+                var name = ve != null ? ve.name : tableType.Name;
+                
+                Log.LogInfo($"[Export] Exportando: {name}");
+                
+                // Tentar encontrar método GetData ou similar
+                var getDataMethod = tableType.GetMethod("GetData", BindingFlags.Public | BindingFlags.Instance);
+                if (getDataMethod != null)
+                {
+                    var data = getDataMethod.Invoke(table, null);
+                    Log.LogInfo($"[Export]   GetData() = {data?.GetType().Name ?? "null"}");
+                    return true;
+                }
+                
+                // Tentar propriedade Data
+                var dataProp = tableType.GetProperty("Data", BindingFlags.Public | BindingFlags.Instance);
+                if (dataProp != null)
+                {
+                    var data = dataProp.GetValue(table);
+                    Log.LogInfo($"[Export]   Data = {data?.GetType().Name ?? "null"}");
+                    return true;
+                }
+                
+                // Tentar propriedade Items
+                var itemsProp = tableType.GetProperty("Items", BindingFlags.Public | BindingFlags.Instance);
+                if (itemsProp != null)
+                {
+                    var items = itemsProp.GetValue(table);
+                    Log.LogInfo($"[Export]   Items = {items?.GetType().Name ?? "null"}");
+                    return true;
+                }
+                
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Export] Erro: {ex.Message}");
+                return false;
+            }
+        }
+        
+        // ============================================
+        // NOVO: Diagnóstico completo
+        // ============================================
+        private static void FullDiagnostic()
+        {
+            try
+            {
+                Log.LogInfo("[Diag] === DIAGNÓSTICO COMPLETO ===");
+                
+                // 1. Assemblies
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                Log.LogInfo($"[Diag] Assemblies carregados: {assemblies.Length}");
+                
+                int siBindableCount = 0;
+                int fmUiCount = 0;
+                
+                foreach (var asm in assemblies)
+                {
+                    var name = asm.GetName().Name;
+                    if (name.StartsWith("SI.Bindable")) siBindableCount++;
+                    if (name.StartsWith("FM.UI")) fmUiCount++;
+                }
+                
+                Log.LogInfo($"[Diag] SI.Bindable*: {siBindableCount}");
+                Log.LogInfo($"[Diag] FM.UI*: {fmUiCount}");
+                
+                // 2. Todos os tipos export
+                var allTypes = new List<Type>();
+                foreach (var asm in assemblies)
+                {
+                    try
+                    {
+                        allTypes.AddRange(asm.GetTypes());
+                    }
+                    catch { }
+                }
+                
+                var exportTypes = allTypes.FindAll(t => t.Name.Contains("Export"));
+                Log.LogInfo($"[Diag] Tipos com 'Export' no nome: {exportTypes.Count}");
+                foreach (var t in exportTypes)
+                {
+                    Log.LogInfo($"[Diag]   - {t.FullName}");
+                }
+                
+                Log.LogInfo("[Diag] === FIM DO DIAGNÓSTICO ===");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Diag] Erro: {ex.Message}");
+            }
+        }
+        
+        // ============================================
+        // MÉTODOS EXISTENTES
+        // ============================================
         private static void ListOpenPanels()
         {
             try
@@ -222,7 +522,6 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                // Obter lista de painéis
                 var panelsProp = _panelManagerType.GetProperty("Panels", BindingFlags.Public | BindingFlags.Instance);
                 if (panelsProp != null)
                 {
@@ -230,43 +529,21 @@ namespace FM26CtrlPExport
                     if (panels != null)
                     {
                         Log.LogInfo($"[Panels] {panels.Count} painéis na lista");
-                        
-                        foreach (var panelId in panels)
-                        {
-                            Debug.Log($"[FM26CtrlP] PanelID: {panelId}");
-                            Log.LogInfo($"[Panels] PanelID: {panelId}");
-                        }
                     }
                 }
                 
-                // Tentar GetOpenPanelInHighestLayer
                 if (_getOpenPanelMethod != null)
                 {
                     var openPanel = _getOpenPanelMethod.Invoke(panelManager, new object[] { 9, null });
                     if (openPanel != null)
                     {
-                        Debug.Log($"[FM26CtrlP] Painel aberto: {openPanel.GetType().Name}");
-                        Log.LogInfo($"[Panels] Painel aberto no topo: {openPanel.GetType().Name}");
-                        
-                        // Obter PanelID
-                        var panelIdProp = _panelType?.GetProperty("PanelID", BindingFlags.Public | BindingFlags.Instance);
-                        if (panelIdProp != null)
-                        {
-                            var panelId = panelIdProp.GetValue(openPanel);
-                            Debug.Log($"[FM26CtrlP] PanelID: {panelId}");
-                            Log.LogInfo($"[Panels] PanelID: {panelId}");
-                        }
-                    }
-                    else
-                    {
-                        Log.LogInfo("[Panels] Nenhum painel aberto no topo");
+                        Log.LogInfo($"[Panels] Painel ativo: {openPanel.GetType().Name}");
                     }
                 }
             }
             catch (Exception ex)
             {
                 Log.LogError($"[Panels] Erro: {ex.Message}");
-                Debug.LogError($"[FM26CtrlP] Erro: {ex.Message}");
             }
         }
         
@@ -281,12 +558,7 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                // Obter painel ativo
-                if (_getOpenPanelMethod == null)
-                {
-                    Log.LogError("[Tables] Método GetOpenPanelInHighestLayer não encontrado");
-                    return;
-                }
+                if (_getOpenPanelMethod == null) return;
                 
                 var activePanel = _getOpenPanelMethod.Invoke(panelManager, new object[] { 9, null });
                 if (activePanel == null)
@@ -295,168 +567,20 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                Debug.Log($"[FM26CtrlP] Painel ativo: {activePanel.GetType().Name}");
-                Log.LogInfo($"[Tables] Painel ativo: {activePanel.GetType().Name}");
-                
-                // Panel é VisualElement, podemos buscar filhos
                 var panelElement = activePanel as VisualElement;
-                if (panelElement == null)
-                {
-                    Log.LogError("[Tables] Painel não é VisualElement");
-                    return;
-                }
+                if (panelElement == null) return;
                 
-                // Buscar tabelas
                 var tables = FindVisualElementsOfType(panelElement, _streamedTableType);
-                var listViews = FindVisualElementsOfType(panelElement, _streamedListViewType);
+                Log.LogInfo($"[Tables] {tables.Count} StreamedTables no painel ativo");
                 
-                Log.LogInfo($"[Tables] {tables.Count} StreamedTables encontrados");
-                Log.LogInfo($"[Tables] {listViews.Count} StreamedListViews encontrados");
-                
-                foreach (var table in tables)
+                foreach (var t in tables)
                 {
-                    var ve = table as VisualElement;
-                    if (ve != null)
-                    {
-                        Debug.Log($"[FM26CtrlP] StreamedTable: {ve.name}");
-                        Log.LogInfo($"[Tables] StreamedTable: {ve.name}");
-                    }
-                }
-                
-                // Buscar em todos os painéis do PanelManager
-                Log.LogInfo("[Tables] Buscando em todos os painéis...");
-                
-                var panelsProp = _panelManagerType.GetProperty("Panels", BindingFlags.Public | BindingFlags.Instance);
-                if (panelsProp != null)
-                {
-                    var panels = panelsProp.GetValue(panelManager) as System.Collections.IList;
-                    if (panels != null)
-                    {
-                        foreach (var panelId in panels)
-                        {
-                            // TryGetPanel(uint id, out Panel panel)
-                            if (_tryGetPanelMethod != null)
-                            {
-                                var parameters = new object[] { panelId, null };
-                                var found = (bool)_tryGetPanelMethod.Invoke(panelManager, parameters);
-                                if (found && parameters[1] != null)
-                                {
-                                    var panel = parameters[1] as VisualElement;
-                                    if (panel != null)
-                                    {
-                                        var panelTables = FindVisualElementsOfType(panel, _streamedTableType);
-                                        if (panelTables.Count > 0)
-                                        {
-                                            Log.LogInfo($"[Tables] {panelTables.Count} tabelas no painel {panelId}");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    InspectTable(t);
                 }
             }
             catch (Exception ex)
             {
                 Log.LogError($"[Tables] Erro: {ex.Message}");
-                Debug.LogError($"[FM26CtrlP] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void DoExportViaPanelManager()
-        {
-            try
-            {
-                var panelManager = GetPanelManagerInstance();
-                if (panelManager == null)
-                {
-                    Log.LogError("[Export] PanelManager não encontrado");
-                    return;
-                }
-                
-                // Obter painel ativo
-                if (_getOpenPanelMethod == null)
-                {
-                    Log.LogError("[Export] Método GetOpenPanelInHighestLayer não encontrado");
-                    return;
-                }
-                
-                var activePanel = _getOpenPanelMethod.Invoke(panelManager, new object[] { 9, null });
-                if (activePanel == null)
-                {
-                    Log.LogInfo("[Export] Nenhum painel ativo");
-                    return;
-                }
-                
-                var panelElement = activePanel as VisualElement;
-                if (panelElement == null)
-                {
-                    Log.LogError("[Export] Painel não é VisualElement");
-                    return;
-                }
-                
-                // Buscar StreamedTable
-                var tables = FindVisualElementsOfType(panelElement, _streamedTableType);
-                Log.LogInfo($"[Export] {tables.Count} StreamedTables encontrados no painel ativo");
-                
-                if (tables.Count == 0)
-                {
-                    // Buscar em todos os UIDocuments também
-                    var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                    foreach (var doc in uiDocs)
-                    {
-                        if (doc == null) continue;
-                        var root = doc.rootVisualElement;
-                        if (root == null) continue;
-                        
-                        var docTables = FindVisualElementsOfType(root, _streamedTableType);
-                        tables.AddRange(docTables);
-                    }
-                    Log.LogInfo($"[Export] Total após busca em UIDocuments: {tables.Count}");
-                }
-                
-                foreach (var table in tables)
-                {
-                    try
-                    {
-                        Debug.Log($"[FM26CtrlP] Processando tabela...");
-                        Log.LogInfo($"[Export] Processando tabela...");
-                        
-                        // Verificar se tem método de export direto
-                        var tableType = table.GetType();
-                        
-                        // Buscar método Export ou similar
-                        var exportMethods = tableType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
-                        foreach (var method in exportMethods)
-                        {
-                            if (method.Name.Contains("Export") || method.Name.Contains("CreateExport"))
-                            {
-                                Debug.Log($"[FM26CtrlP] Método encontrado: {method.Name}");
-                                Log.LogInfo($"[Export] Método encontrado: {method.Name}");
-                            }
-                        }
-                        
-                        // Verificar propriedades
-                        var props = tableType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                        foreach (var prop in props)
-                        {
-                            if (prop.Name.Contains("Export") || prop.Name.Contains("Data"))
-                            {
-                                Debug.Log($"[FM26CtrlP] Propriedade: {prop.Name}");
-                                Log.LogInfo($"[Export] Propriedade: {prop.Name}");
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.LogError($"[FM26CtrlP] Erro ao processar tabela: {ex.Message}");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Export] Erro: {ex.Message}");
-                Debug.LogError($"[FM26CtrlP] Erro: {ex.Message}");
             }
         }
         
@@ -464,7 +588,7 @@ namespace FM26CtrlPExport
         {
             var result = new List<object>();
             if (root == null || targetType == null) return result;
-            FindVisualElementsRecursive(root, targetType, result, 0, 20);
+            FindVisualElementsRecursive(root, targetType, result, 0, 50);
             return result;
         }
         
@@ -475,10 +599,9 @@ namespace FM26CtrlPExport
             try
             {
                 var elementType = element.GetType();
-                if (elementType == targetType || (targetType != null && targetType.IsAssignableFrom(elementType)))
+                if (elementType == targetType || targetType.IsAssignableFrom(elementType))
                 {
                     result.Add(element);
-                    Debug.Log($"[FM26CtrlP] Encontrado: {elementType.Name} (depth: {depth})");
                 }
                 
                 int childCount = element.childCount;
@@ -491,10 +614,7 @@ namespace FM26CtrlPExport
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Debug.LogError($"[FM26CtrlP] Erro ao buscar elementos: {ex.Message}");
-            }
+            catch { }
         }
     }
 }
