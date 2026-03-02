@@ -259,7 +259,8 @@ namespace FM26CtrlPExport
             
             if (hasInterestingName || hasInterestingType)
             {
-                Log.LogInfo($"[FindData] {' ',depth*2}>>> {elemName} ({elemType.Name})");
+                string indent = new string(' ', depth * 2);
+                Log.LogInfo($"[FindData] {indent}>>> {elemName} ({elemType.Name})");
                 DumpElementFull(element, depth, 2);
             }
             
