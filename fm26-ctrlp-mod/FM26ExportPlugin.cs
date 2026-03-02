@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.5.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.5.1")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.5.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.5.1 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -358,6 +358,11 @@ namespace FM26CtrlPExport
             {
                 Log.LogInfo("[ActiveLists] Buscando StreamedListView ativos...");
                 
+                // Resetar contador
+                _totalScanned = 0;
+                _lastFoundData = null;
+                _lastFoundElement = null;
+                
                 if (_streamedListViewType == null)
                 {
                     Log.LogError("[ActiveLists] Tipo StreamedListView não encontrado");
@@ -374,10 +379,16 @@ namespace FM26CtrlPExport
                     var root = doc.rootVisualElement;
                     if (root == null) continue;
                     
-                    found += ScanForStreamedList(root, 0, 15);
+                    found += ScanForStreamedList(root, 0, 12);
                 }
                 
                 Log.LogInfo($"[ActiveLists] Total encontrados: {found}");
+                Log.LogInfo($"[ActiveLists] Total escaneados: {_totalScanned}");
+                
+                if (_lastFoundData != null)
+                {
+                    Log.LogInfo($"[ActiveLists] ✅ Dados prontos para exportar: {_lastFoundData.Count} itens");
+                }
             }
             catch (Exception ex)
             {
@@ -385,9 +396,14 @@ namespace FM26CtrlPExport
             }
         }
         
+        private static int _totalScanned = 0;
+        private const int MAX_TOTAL_SCAN = 5000; // Limite total de elementos
+        
         private static int ScanForStreamedList(VisualElement element, int depth, int maxDepth)
         {
             if (element == null || depth > maxDepth) return 0;
+            if (_totalScanned > MAX_TOTAL_SCAN) return 0; // Proteção contra loop infinito
+            _totalScanned++;
             
             int found = 0;
             
@@ -397,16 +413,17 @@ namespace FM26CtrlPExport
                 string typeName = type.FullName ?? type.Name ?? "";
                 string elementName = element.name ?? "";
                 
-                // NOVO: Verificar pelo nome do tipo (IL2CPP-safe)
-                bool isStreamedTable = typeName.Contains("StreamedTable") || 
-                                       elementName.Contains("Table") ||
-                                       elementName.Contains("List");
+                // MAIS ESPECÍFICO: Só pegar se tiver "Streamed" no nome
+                bool isStreamedElement = typeName.Contains("Streamed");
                 
-                bool isStreamedListView = typeName.Contains("StreamedListView") ||
-                                          typeName.Contains("StreamedObjectList") ||
-                                          elementName.Contains("ListView");
+                // Ou se o nome do elemento indicar tabela de dados
+                bool isDataTable = elementName.Contains("StreamedTable") ||
+                                   elementName.Contains("StreamedList") ||
+                                   elementName.Contains("PlayerList") ||
+                                   elementName.Contains("SquadList") ||
+                                   elementName.Contains("DataTable");
                 
-                if (isStreamedTable || isStreamedListView)
+                if (isStreamedElement || isDataTable)
                 {
                     found++;
                     Log.LogInfo($"[ActiveLists] ⭐ ENCONTRADO: {elementName} ({typeName})");
@@ -415,13 +432,17 @@ namespace FM26CtrlPExport
                     TryExtractDataFromElement(element, depth);
                 }
                 
-                // Recursão - aumentar limite para garantir que achamos tudo
-                for (int i = 0; i < element.childCount && i < 100; i++)
+                // Recursão - limite menor para evitar travamento
+                int childLimit = Math.Min(element.childCount, 30);
+                for (int i = 0; i < childLimit; i++)
                 {
                     found += ScanForStreamedList(element[i], depth + 1, maxDepth);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Log.LogError($"[ActiveLists] Erro: {ex.Message}");
+            }
             
             return found;
         }
@@ -433,37 +454,43 @@ namespace FM26CtrlPExport
                 var type = element.GetType();
                 var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
                 
+                int checkedProps = 0;
                 foreach (var prop in props)
                 {
-                    string propName = prop.Name.ToLower();
+                    if (checkedProps > 20) break; // Limite de props para verificar
+                    checkedProps++;
                     
-                    // Procurar propriedades que parecem conter dados
-                    if (propName.Contains("data") || propName.Contains("items") || 
-                        propName.Contains("source") || propName.Contains("list"))
+                    // Só pegar propriedades que parecem conter dados (não UI)
+                    if (prop.PropertyType.IsPrimitive || 
+                        prop.PropertyType == typeof(string) ||
+                        prop.PropertyType == typeof(VisualElement))
+                        continue;
+                    
+                    try
                     {
-                        try
+                        var value = prop.GetValue(element);
+                        if (value == null) continue;
+                        
+                        if (value is IList list)
                         {
-                            var value = prop.GetValue(element);
-                            if (value == null) continue;
+                            Log.LogInfo($"[ActiveLists]   -> {prop.Name}: {list.Count} itens");
                             
-                            if (value is IList list)
+                            if (list.Count > 0)
                             {
-                                Log.LogInfo($"[ActiveLists]   -> {prop.Name}: {list.Count} itens");
-                                
-                                if (list.Count > 0)
+                                var firstItem = list[0];
+                                if (firstItem != null)
                                 {
-                                    Log.LogInfo($"[ActiveLists]   -> Tipo do item: {list[0]?.GetType().FullName}");
-                                    DumpObjectProperties(list[0], "Item0");
+                                    Log.LogInfo($"[ActiveLists]   -> Tipo do item: {firstItem.GetType().FullName}");
+                                    
+                                    // Salvar referência para exportação
+                                    _lastFoundData = list;
+                                    _lastFoundElement = element;
+                                    _lastFoundPropertyName = prop.Name;
                                 }
-                                
-                                // Salvar referência para exportação
-                                _lastFoundData = list;
-                                _lastFoundElement = element;
-                                _lastFoundPropertyName = prop.Name;
                             }
                         }
-                        catch { }
                     }
+                    catch { }
                 }
             }
             catch { }
