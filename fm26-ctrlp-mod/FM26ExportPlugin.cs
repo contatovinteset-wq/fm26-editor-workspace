@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.9.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.10.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.9.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.10.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -60,39 +60,28 @@ namespace FM26CtrlPExport
                 bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
                 bool p = Keyboard.current.pKey.wasPressedThisFrame;
                 
-                // Ctrl+P - EXPORTAR
                 if (ctrl && p)
                 {
                     Log.LogInfo(">>> Ctrl+P - EXPORTAR");
                     SafeExport();
                 }
                 
-                // F9 - DUMP SIMPLES (só nome e filhos)
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - DUMP HIERARQUIA");
-                    DumpHierarchy();
+                    Log.LogInfo(">>> F9 - Buscar IList em TODAS as props");
+                    FindAllIListProperties();
                 }
                 
-                // F10 - Buscar dataSource em TODOS os UIDocuments
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Buscar dataSource GLOBAL");
-                    FindAllDataSourcesGlobal();
+                    Log.LogInfo(">>> F10 - Buscar StreamedTable/ListView");
+                    FindStreamedElements();
                 }
                 
-                // F11 - Dump PROFUNDO do primeiro UIDocument
                 if (Keyboard.current.f11Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F11 - Dump PROFUNDO");
-                    DumpDeep();
-                }
-                
-                // F12 - Diagnóstico
-                if (Keyboard.current.f12Key.wasPressedThisFrame)
-                {
-                    Log.LogInfo(">>> F12 - Diagnóstico");
-                    Diagnose();
+                    Log.LogInfo(">>> F11 - Testar tipos StreamedTable");
+                    TestStreamedTypes();
                 }
             }
             catch (Exception ex)
@@ -101,13 +90,13 @@ namespace FM26CtrlPExport
             }
         }
         
-        // F9 - DUMP de TODOS os UIDocuments
-        private static void DumpHierarchy()
+        // F9 - Procurar TODAS as propriedades IList
+        private static void FindAllIListProperties()
         {
             try
             {
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                Log.LogInfo($"[F9] ===== {uiDocs.Length} UIDocuments =====");
+                int totalFound = 0;
                 
                 foreach (var doc in uiDocs)
                 {
@@ -117,12 +106,12 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        Log.LogInfo($"[F9] === {doc.name} ===");
-                        DumpElementSimple(root, 0, 8);
+                        FindIListRecursive(root, ref totalFound, 0, 15, doc.name);
                     }
                     catch { }
                 }
-                Log.LogInfo("[F9] ===== FIM =====");
+                
+                Log.LogInfo($"[F9] Total IList encontradas: {totalFound}");
             }
             catch (Exception ex)
             {
@@ -130,91 +119,33 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void DumpElementSimple(VisualElement element, int depth, int maxDepth)
+        private static void FindIListRecursive(VisualElement element, ref int count, int depth, int maxDepth, string docName)
         {
             if (element == null || depth > maxDepth) return;
             
             try
             {
-                string indent = new string(' ', depth * 2);
-                string name = element.name ?? "(null)";
-                int childCount = element.childCount;
+                var type = element.GetType();
+                string elementName = element.name ?? "(null)";
                 
-                // Só mostrar nome e quantidade de filhos
-                Log.LogInfo($"[F9] {indent}{name} [{childCount}]");
+                // Procurar TODAS as propriedades
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
                 
-                // Recursão
-                for (int i = 0; i < childCount && i < 100; i++)
+                foreach (var prop in props)
                 {
+                    if (prop.GetIndexParameters().Length > 0) continue;
+                    
                     try
                     {
-                        DumpElementSimple(element[i], depth + 1, maxDepth);
-                    }
-                    catch { }
-                }
-            }
-            catch { }
-        }
-        
-        // F10 - Buscar TODOS os dataSources em TODOS os UIDocuments
-        private static void FindAllDataSourcesGlobal()
-        {
-            try
-            {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                Log.LogInfo($"[F10] Buscando em {uiDocs.Length} UIDocuments...");
-                
-                int total = 0;
-                foreach (var doc in uiDocs)
-                {
-                    if (doc == null) continue;
-                    try
-                    {
-                        var root = doc.rootVisualElement;
-                        if (root == null) continue;
+                        var value = prop.GetValue(element);
+                        if (value == null) continue;
                         
-                        int found = 0;
-                        FindDataSourcesRecursive(root, ref found, 0, 20, doc.name);
-                        total += found;
-                    }
-                    catch { }
-                }
-                Log.LogInfo($"[F10] Total dataSources encontrados: {total}");
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[F10] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void FindDataSourcesRecursive(VisualElement element, ref int count, int depth, int maxDepth, string docName)
-        {
-            if (element == null || depth > maxDepth) return;
-            
-            try
-            {
-                string name = element.name ?? "(null)";
-                
-                // Verificar dataSource
-                var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
-                if (dsProp != null)
-                {
-                    try
-                    {
-                        var ds = dsProp.GetValue(element);
-                        if (ds != null)
+                        if (value is IList list && list.Count > 0)
                         {
                             count++;
-                            string dsType = ds.GetType().Name;
-                            
-                            if (ds is IList list)
-                            {
-                                Log.LogInfo($"[F10] ✅ [{docName}] {name}: {dsType} ({list.Count} itens)");
-                            }
-                            else
-                            {
-                                Log.LogInfo($"[F10] 📌 [{docName}] {name}: {dsType}");
-                            }
+                            string propType = value.GetType().Name;
+                            string itemType = list[0]?.GetType().Name ?? "?";
+                            Log.LogInfo($"[F9] ✅ [{docName}] {elementName}.{prop.Name}: {propType}<{itemType}> ({list.Count} itens)");
                         }
                     }
                     catch { }
@@ -225,7 +156,7 @@ namespace FM26CtrlPExport
                 {
                     try
                     {
-                        FindDataSourcesRecursive(element[i], ref count, depth + 1, maxDepth, docName);
+                        FindIListRecursive(element[i], ref count, depth + 1, maxDepth, docName);
                     }
                     catch { }
                 }
@@ -233,90 +164,22 @@ namespace FM26CtrlPExport
             catch { }
         }
         
-        // F11 - Dump PROFUNDO (até 20 níveis)
-        private static void DumpDeep()
+        // F10 - Buscar elementos que são StreamedTable/ListView
+        private static void FindStreamedElements()
         {
             try
             {
-                var report = FindReportElement();
-                if (report == null)
-                {
-                    Log.LogWarning("[F11] Report não encontrado");
-                    return;
-                }
+                // Carregar tipos
+                var streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
+                var streamedListViewType = Type.GetType("SI.Bindable.StreamedListView, SI.Bindable");
+                var streamedObjectListType = Type.GetType("SI.Bindable.StreamedObjectList, SI.Bindable");
                 
-                Log.LogInfo("[F11] ===== DUMP PROFUNDO =====");
-                DumpElementDeep(report, 0, 20);
-                Log.LogInfo("[F11] ===== FIM =====");
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[F11] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void DumpElementDeep(VisualElement element, int depth, int maxDepth)
-        {
-            if (element == null || depth > maxDepth) return;
-            
-            try
-            {
-                string indent = new string(' ', Math.Min(depth, 40));
-                string name = element.name ?? "(null)";
-                int childCount = element.childCount;
-                
-                Log.LogInfo($"[F11] {indent}{name} [{childCount}]");
-                
-                // Recursão mais profunda
-                for (int i = 0; i < childCount && i < 200; i++)
-                {
-                    try
-                    {
-                        DumpElementDeep(element[i], depth + 1, maxDepth);
-                    }
-                    catch { }
-                }
-            }
-            catch { }
-        }
-        
-        // F12 - Diagnóstico
-        private static void Diagnose()
-        {
-            try
-            {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                Log.LogInfo($"[F12] {uiDocs.Length} UIDocuments");
-                
-                foreach (var doc in uiDocs)
-                {
-                    if (doc == null) continue;
-                    try
-                    {
-                        Log.LogInfo($"[F12]   {doc.name}: {doc.rootVisualElement?.childCount ?? 0} filhos");
-                    }
-                    catch { }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[F12] Erro: {ex.Message}");
-            }
-        }
-        
-        // Ctrl+P - Exportar (busca em TODOS os UIDocuments)
-        private static void SafeExport()
-        {
-            try
-            {
-                Log.LogInfo("[Export] Buscando dados em TODOS os UIDocuments...");
+                Log.LogInfo($"[F10] StreamedTable: {streamedTableType != null}");
+                Log.LogInfo($"[F10] StreamedListView: {streamedListViewType != null}");
+                Log.LogInfo($"[F10] StreamedObjectList: {streamedObjectListType != null}");
                 
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                Log.LogInfo($"[Export] {uiDocs.Length} UIDocuments encontrados");
-                
-                IList foundData = null;
-                string foundElement = "";
-                string foundDoc = "";
+                int totalFound = 0;
                 
                 foreach (var doc in uiDocs)
                 {
@@ -326,25 +189,158 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        FindDataForExport(root, ref foundData, ref foundElement, 0, 20);
-                        
-                        if (foundData != null)
+                        FindStreamedRecursive(root, ref totalFound, 0, 20, doc.name, streamedTableType, streamedListViewType, streamedObjectListType);
+                    }
+                    catch { }
+                }
+                
+                Log.LogInfo($"[F10] Total StreamedElements: {totalFound}");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[F10] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void FindStreamedRecursive(VisualElement element, ref int count, int depth, int maxDepth, string docName, Type stType, Type slvType, Type solType)
+        {
+            if (element == null || depth > maxDepth) return;
+            
+            try
+            {
+                var type = element.GetType();
+                string typeName = type.FullName ?? type.Name;
+                string elementName = element.name ?? "(null)";
+                
+                bool isStreamed = typeName.Contains("StreamedTable") || 
+                                  typeName.Contains("StreamedListView") ||
+                                  typeName.Contains("StreamedObjectList");
+                
+                if (isStreamed)
+                {
+                    count++;
+                    Log.LogInfo($"[F10] ⭐ [{docName}] {elementName}: {typeName}");
+                    
+                    // Listar propriedades do elemento
+                    try
+                    {
+                        var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                        foreach (var prop in props)
                         {
-                            foundDoc = doc.name;
-                            break;
+                            if (prop.GetIndexParameters().Length > 0) continue;
+                            if (prop.Name == "name" || prop.Name == "childCount") continue;
+                            
+                            try
+                            {
+                                var value = prop.GetValue(element);
+                                if (value == null) continue;
+                                
+                                if (value is IList list)
+                                {
+                                    Log.LogInfo($"[F10]   {prop.Name}: IList ({list.Count} itens)");
+                                }
+                                else if (value is IEnumerable en && !(value is string))
+                                {
+                                    Log.LogInfo($"[F10]   {prop.Name}: {value.GetType().Name}");
+                                }
+                            }
+                            catch { }
                         }
+                    }
+                    catch { }
+                }
+                
+                // Recursão
+                for (int i = 0; i < element.childCount && i < 100; i++)
+                {
+                    try
+                    {
+                        FindStreamedRecursive(element[i], ref count, depth + 1, maxDepth, docName, stType, slvType, solType);
+                    }
+                    catch { }
+                }
+            }
+            catch { }
+        }
+        
+        // F11 - Testar tipos StreamedTable diretamente
+        private static void TestStreamedTypes()
+        {
+            try
+            {
+                var streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
+                if (streamedTableType == null)
+                {
+                    Log.LogWarning("[F11] StreamedTable não encontrado");
+                    return;
+                }
+                
+                Log.LogInfo($"[F11] StreamedType: {streamedTableType.FullName}");
+                Log.LogInfo("[F11] Propriedades:");
+                
+                var props = streamedTableType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+                foreach (var prop in props)
+                {
+                    Log.LogInfo($"[F11]   {prop.PropertyType.Name} {prop.Name}");
+                }
+                
+                Log.LogInfo("[F11] Campos:");
+                var fields = streamedTableType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+                foreach (var field in fields)
+                {
+                    Log.LogInfo($"[F11]   {field.FieldType.Name} {field.Name}");
+                }
+                
+                Log.LogInfo("[F11] Métodos:");
+                var methods = streamedTableType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+                foreach (var method in methods)
+                {
+                    if (!method.Name.StartsWith("get_") && !method.Name.StartsWith("set_"))
+                    {
+                        Log.LogInfo($"[F11]   {method.ReturnType.Name} {method.Name}()");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[F11] Erro: {ex.Message}");
+            }
+        }
+        
+        // Ctrl+P - Exportar
+        private static void SafeExport()
+        {
+            try
+            {
+                Log.LogInfo("[Export] Buscando IList em todas as propriedades...");
+                
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                IList foundData = null;
+                string foundInfo = "";
+                
+                foreach (var doc in uiDocs)
+                {
+                    if (doc == null) continue;
+                    try
+                    {
+                        var root = doc.rootVisualElement;
+                        if (root == null) continue;
+                        
+                        FindDataForExport(root, ref foundData, ref foundInfo, 0, 15, doc.name);
+                        
+                        if (foundData != null) break;
                     }
                     catch { }
                 }
                 
                 if (foundData != null && foundData.Count > 0)
                 {
-                    Log.LogInfo($"[Export] ✅ Encontrado {foundData.Count} itens em [{foundDoc}] {foundElement}");
+                    Log.LogInfo($"[Export] ✅ {foundInfo} ({foundData.Count} itens)");
                     ExportToCsv(foundData);
                 }
                 else
                 {
-                    Log.LogWarning("[Export] Nenhum dado encontrado. Use F10 para ver dataSources.");
+                    Log.LogWarning("[Export] Nenhum dado encontrado. Use F9.");
                 }
             }
             catch (Exception ex)
@@ -353,22 +349,30 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindDataForExport(VisualElement element, ref IList foundData, ref string foundName, int depth, int maxDepth)
+        private static void FindDataForExport(VisualElement element, ref IList foundData, ref string foundInfo, int depth, int maxDepth, string docName)
         {
             if (element == null || depth > maxDepth || foundData != null) return;
             
             try
             {
-                var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
-                if (dsProp != null)
+                var type = element.GetType();
+                string elementName = element.name ?? "(null)";
+                
+                // Procurar propriedades IList
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                
+                foreach (var prop in props)
                 {
+                    if (prop.GetIndexParameters().Length > 0) continue;
+                    if (foundData != null) break;
+                    
                     try
                     {
-                        var ds = dsProp.GetValue(element);
-                        if (ds is IList list && list.Count > 0)
+                        var value = prop.GetValue(element);
+                        if (value is IList list && list.Count > 5) // Pelo menos 5 itens
                         {
                             foundData = list;
-                            foundName = element.name ?? "(null)";
+                            foundInfo = $"[{docName}] {elementName}.{prop.Name}";
                             return;
                         }
                     }
@@ -380,44 +384,13 @@ namespace FM26CtrlPExport
                 {
                     try
                     {
-                        FindDataForExport(element[i], ref foundData, ref foundName, depth + 1, maxDepth);
+                        FindDataForExport(element[i], ref foundData, ref foundInfo, depth + 1, maxDepth, docName);
                         if (foundData != null) return;
                     }
                     catch { }
                 }
             }
             catch { }
-        }
-        
-        private static VisualElement FindReportElement()
-        {
-            try
-            {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                
-                foreach (var doc in uiDocs)
-                {
-                    if (doc == null || doc.name != "PanelManager") continue;
-                    var root = doc.rootVisualElement;
-                    if (root == null) continue;
-                    
-                    for (int i = 0; i < root.childCount; i++)
-                    {
-                        try
-                        {
-                            var child = root[i];
-                            if (child?.name == "Report")
-                            {
-                                return child;
-                            }
-                        }
-                        catch { }
-                    }
-                }
-            }
-            catch { }
-            
-            return null;
         }
         
         private static void ExportToCsv(IList data)
