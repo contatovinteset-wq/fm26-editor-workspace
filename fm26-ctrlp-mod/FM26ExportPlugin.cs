@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.12.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.13.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.12.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.13.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -68,14 +68,14 @@ namespace FM26CtrlPExport
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Contar StreamedElements");
-                    CountStreamed();
+                    Log.LogInfo(">>> F9 - Buscar prop m_rows");
+                    FindRowsProperty();
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Info m_rows");
-                    InfoRowsField();
+                    Log.LogInfo(">>> F10 - Info prop m_rows no tipo");
+                    InfoRowsProperty();
                 }
             }
             catch (Exception ex)
@@ -84,11 +84,21 @@ namespace FM26CtrlPExport
             }
         }
         
-        // F9 - Contar elementos StreamedTable/ListView
-        private static void CountStreamed()
+        // F9 - Buscar elementos que TÊM a propriedade m_rows
+        private static void FindRowsProperty()
         {
             try
             {
+                var streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
+                PropertyInfo rowsProp = null;
+                
+                // Buscar m_rows como PROPRIEDADE (não campo)
+                if (streamedTableType != null)
+                {
+                    rowsProp = streamedTableType.GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                    Log.LogInfo($"[F9] m_rows como prop: {rowsProp != null}");
+                }
+                
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
                 int count = 0;
                 
@@ -100,12 +110,12 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        CountStreamedRecursive(root, ref count, 0, 15, doc.name);
+                        FindRowsRecursive(root, ref count, 0, 15, doc.name);
                     }
                     catch { }
                 }
                 
-                Log.LogInfo($"[F9] Total StreamedElements: {count}");
+                Log.LogInfo($"[F9] Total com m_rows: {count}");
             }
             catch (Exception ex)
             {
@@ -113,27 +123,47 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void CountStreamedRecursive(VisualElement element, ref int count, int depth, int maxDepth, string docName)
+        private static void FindRowsRecursive(VisualElement element, ref int count, int depth, int maxDepth, string docName)
         {
             if (element == null || depth > maxDepth) return;
             
             try
             {
                 var type = element.GetType();
-                string typeName = type.FullName ?? "";
                 string elementName = element.name ?? "";
                 
-                if (typeName.Contains("StreamedTable") || typeName.Contains("StreamedListView"))
+                // Buscar propriedade m_rows
+                var rowsProp = type.GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                
+                if (rowsProp != null)
                 {
                     count++;
-                    Log.LogInfo($"[F9] ⭐ [{docName}] {elementName}: {typeName}");
+                    Log.LogInfo($"[F9] ⭐ [{docName}] {elementName}: tem m_rows!");
+                    
+                    try
+                    {
+                        var rows = rowsProp.GetValue(element) as IList;
+                        if (rows != null)
+                        {
+                            Log.LogInfo($"[F9]    m_rows tem {rows.Count} itens");
+                        }
+                        else
+                        {
+                            Log.LogInfo($"[F9]    m_rows é null");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.LogInfo($"[F9]    Erro ao ler: {ex.Message}");
+                    }
                 }
                 
+                // Recursão
                 for (int i = 0; i < element.childCount && i < 50; i++)
                 {
                     try
                     {
-                        CountStreamedRecursive(element[i], ref count, depth + 1, maxDepth, docName);
+                        FindRowsRecursive(element[i], ref count, depth + 1, maxDepth, docName);
                     }
                     catch { }
                 }
@@ -141,8 +171,8 @@ namespace FM26CtrlPExport
             catch { }
         }
         
-        // F10 - Info do campo m_rows
-        private static void InfoRowsField()
+        // F10 - Info da propriedade m_rows no tipo StreamedTable
+        private static void InfoRowsProperty()
         {
             try
             {
@@ -153,32 +183,40 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                // Procurar campo m_rows
-                var rowsField = streamedTableType.GetField("m_rows", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (rowsField != null)
+                Log.LogInfo($"[F10] Tipo: {streamedTableType.FullName}");
+                
+                // Buscar como propriedade
+                var rowsProp = streamedTableType.GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                if (rowsProp != null)
                 {
-                    Log.LogInfo($"[F10] m_rows encontrado: {rowsField.FieldType.FullName}");
+                    Log.LogInfo($"[F10] m_rows PROP: {rowsProp.PropertyType.FullName}");
+                    Log.LogInfo($"[F10]   CanRead: {rowsProp.CanRead}");
+                    Log.LogInfo($"[F10]   CanWrite: {rowsProp.CanWrite}");
                 }
                 else
                 {
-                    Log.LogWarning("[F10] m_rows não encontrado como campo");
-                    
-                    // Tentar como propriedade
-                    var rowsProp = streamedTableType.GetProperty("m_rows", BindingFlags.NonPublic | BindingFlags.Instance);
-                    if (rowsProp != null)
-                    {
-                        Log.LogInfo($"[F10] m_rows como prop: {rowsProp.PropertyType.FullName}");
-                    }
+                    Log.LogWarning("[F10] m_rows não é propriedade");
                 }
                 
-                // Listar todos os campos com "row" no nome
-                Log.LogInfo("[F10] Campos com 'row':");
-                var fields = streamedTableType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                foreach (var f in fields)
+                // Buscar como campo
+                var rowsField = streamedTableType.GetField("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                if (rowsField != null)
                 {
-                    if (f.Name.ToLower().Contains("row"))
+                    Log.LogInfo($"[F10] m_rows FIELD: {rowsField.FieldType.FullName}");
+                }
+                else
+                {
+                    Log.LogWarning("[F10] m_rows não é campo");
+                }
+                
+                // Listar todas as props com "row"
+                Log.LogInfo("[F10] Props com 'row':");
+                var props = streamedTableType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                foreach (var p in props)
+                {
+                    if (p.Name.ToLower().Contains("row"))
                     {
-                        Log.LogInfo($"[F10]   {f.FieldType.Name} {f.Name}");
+                        Log.LogInfo($"[F10]   {p.PropertyType.Name} {p.Name}");
                     }
                 }
             }
@@ -188,26 +226,12 @@ namespace FM26CtrlPExport
             }
         }
         
-        // Ctrl+P - Exportar (SÓ tenta m_rows)
+        // Ctrl+P - Exportar
         private static void SafeExport()
         {
             try
             {
-                Log.LogInfo("[Export] Buscando StreamedTable com m_rows...");
-                
-                var streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
-                if (streamedTableType == null)
-                {
-                    Log.LogWarning("[Export] StreamedTable não encontrado");
-                    return;
-                }
-                
-                var rowsField = streamedTableType.GetField("m_rows", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (rowsField == null)
-                {
-                    Log.LogWarning("[Export] Campo m_rows não encontrado");
-                    return;
-                }
+                Log.LogInfo("[Export] Buscando elementos com m_rows...");
                 
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
                 IList foundData = null;
@@ -221,7 +245,7 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        FindRows(root, ref foundData, ref foundInfo, 0, 15, doc.name, streamedTableType, rowsField);
+                        FindAndExport(root, ref foundData, ref foundInfo, 0, 15, doc.name);
                         
                         if (foundData != null) break;
                     }
@@ -235,7 +259,7 @@ namespace FM26CtrlPExport
                 }
                 else
                 {
-                    Log.LogWarning("[Export] Nenhum dado encontrado. Use F9 para ver se há StreamedTable.");
+                    Log.LogWarning("[Export] Nenhum dado encontrado. Use F9 para ver se há m_rows.");
                 }
             }
             catch (Exception ex)
@@ -244,24 +268,25 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindRows(VisualElement element, ref IList foundData, ref string foundInfo, int depth, int maxDepth, string docName, Type stType, FieldInfo rowsField)
+        private static void FindAndExport(VisualElement element, ref IList foundData, ref string foundInfo, int depth, int maxDepth, string docName)
         {
             if (element == null || depth > maxDepth || foundData != null) return;
             
             try
             {
                 var type = element.GetType();
-                string typeName = type.FullName ?? "";
                 string elementName = element.name ?? "";
                 
-                // Verificar se é StreamedTable
-                if (typeName.Contains("StreamedTable"))
+                // Buscar propriedade m_rows
+                var rowsProp = type.GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                
+                if (rowsProp != null)
                 {
-                    Log.LogInfo($"[Export] Encontrado StreamedTable: {elementName}");
+                    Log.LogInfo($"[Export] Encontrado {elementName} com m_rows");
                     
                     try
                     {
-                        var rows = rowsField.GetValue(element) as IList;
+                        var rows = rowsProp.GetValue(element) as IList;
                         if (rows != null && rows.Count > 0)
                         {
                             foundData = rows;
@@ -284,7 +309,7 @@ namespace FM26CtrlPExport
                 {
                     try
                     {
-                        FindRows(element[i], ref foundData, ref foundInfo, depth + 1, maxDepth, docName, stType, rowsField);
+                        FindAndExport(element[i], ref foundData, ref foundInfo, depth + 1, maxDepth, docName);
                         if (foundData != null) return;
                     }
                     catch { }
