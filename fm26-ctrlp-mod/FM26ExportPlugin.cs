@@ -42,12 +42,6 @@ namespace FM26CtrlPExport
         private static int _frameCount = 0;
         private static bool _initialized = false;
         
-        // Cache de tipos
-        private static Type _streamedTableType;
-        private static Type _streamedListViewType;
-        private static Type _bindingRootType;
-        private static PropertyInfo _mRowsProp;
-        
         public static void OnUpdate()
         {
             try
@@ -57,7 +51,6 @@ namespace FM26CtrlPExport
                 if (!_initialized && _frameCount == 300)
                 {
                     _initialized = true;
-                    CacheTypes();
                     Log.LogInfo("[Init] Pronto!");
                 }
                 
@@ -97,24 +90,12 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void CacheTypes()
-        {
-            _streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
-            _streamedListViewType = Type.GetType("SI.Bindable.StreamedListView, SI.Bindable");
-            _bindingRootType = Type.GetType("SI.Bindable.BindingRoot, SI.Bindable");
-            
-            if (_streamedTableType != null)
-            {
-                _mRowsProp = _streamedTableType.GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                Log.LogInfo($"[Cache] StreamedTable: {_streamedTableType != null}, m_rows prop: {_mRowsProp != null}");
-            }
-        }
-        
         // F9 - Tentar cast direto
         private static void FindByCast()
         {
             try
             {
+                var streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
                 int count = 0;
                 int elementsChecked = 0;
@@ -127,7 +108,7 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        FindByCastRecursive(root, ref count, ref elementsChecked, 0, 20, doc.name);
+                        FindByCastRecursive(root, streamedTableType, ref count, ref elementsChecked, 0, 20, doc.name);
                     }
                     catch { }
                 }
@@ -140,7 +121,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindByCastRecursive(VisualElement element, ref int count, ref int checkedCount, int depth, int maxDepth, string docName)
+        private static void FindByCastRecursive(VisualElement element, Type streamedTableType, ref int count, ref int checkedCount, int depth, int maxDepth, string docName)
         {
             if (element == null || depth > maxDepth) return;
             
@@ -151,18 +132,21 @@ namespace FM26CtrlPExport
                 string typeName = type.FullName ?? type.Name;
                 string elementName = element.name ?? "";
                 
-                // Tentar cast direto
-                if (_streamedTableType != null && _streamedTableType.IsAssignableFrom(type))
+                // Verificar se o tipo é compatível
+                bool isStreamedTable = false;
+                if (streamedTableType != null && streamedTableType.IsAssignableFrom(type))
                 {
-                    count++;
-                    Log.LogInfo($"[F9] ⭐ CAST OK! [{docName}] {elementName} é StreamedTable!");
-                    TryReadMRows(element);
+                    isStreamedTable = true;
                 }
-                // Verificar se o nome do tipo contém "Streamed"
-                else if (typeName.Contains("StreamedTable") || typeName.Contains("StreamedList"))
+                else if (typeName.Contains("StreamedTable"))
+                {
+                    isStreamedTable = true;
+                }
+                
+                if (isStreamedTable)
                 {
                     count++;
-                    Log.LogInfo($"[F9] ⭐ Por nome! [{docName}] {elementName} tipo={typeName}");
+                    Log.LogInfo($"[F9] ⭐ ENCONTROU! [{docName}] {elementName} tipo={typeName}");
                     TryReadMRows(element);
                 }
                 
@@ -171,7 +155,7 @@ namespace FM26CtrlPExport
                 {
                     try
                     {
-                        FindByCastRecursive(element[i], ref count, ref checkedCount, depth + 1, maxDepth, docName);
+                        FindByCastRecursive(element[i], streamedTableType, ref count, ref checkedCount, depth + 1, maxDepth, docName);
                     }
                     catch { }
                 }
@@ -188,7 +172,7 @@ namespace FM26CtrlPExport
                 
                 if (mRowsProp == null)
                 {
-                    Log.LogInfo($"[F9]    m_rows não encontrado neste tipo");
+                    Log.LogInfo($"[F9]    m_rows não encontrado");
                     return;
                 }
                 
@@ -196,11 +180,6 @@ namespace FM26CtrlPExport
                 if (mRows != null)
                 {
                     Log.LogInfo($"[F9]    m_rows: {mRows.Count} itens!");
-                    if (mRows.Count > 0)
-                    {
-                        var first = mRows[0];
-                        Log.LogInfo($"[F9]    Primeiro item: {first?.GetType().Name ?? "null"}");
-                    }
                 }
                 else
                 {
@@ -209,11 +188,11 @@ namespace FM26CtrlPExport
             }
             catch (Exception ex)
             {
-                Log.LogWarning($"[F9]    Erro ao ler m_rows: {ex.Message}");
+                Log.LogWarning($"[F9]    Erro: {ex.Message}");
             }
         }
         
-        // F10 - Listar todos os tipos de elementos
+        // F10 - Listar todos os tipos
         private static void ListAllElementTypes()
         {
             try
@@ -230,21 +209,23 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        CollectTypes(root, types, ref totalElements, 0, 15);
+                        CollectTypes(root, types, ref totalElements, 0, 20);
                     }
                     catch { }
                 }
                 
-                Log.LogInfo($"[F10] Total elementos: {totalElements}");
-                Log.LogInfo($"[F10] Tipos únicos: {types.Count}");
+                Log.LogInfo($"[F10] Total elementos: {totalElements}, tipos únicos: {types.Count}");
                 
+                int relevant = 0;
                 foreach (var t in types)
                 {
                     if (t.Contains("Table") || t.Contains("List") || t.Contains("Stream") || t.Contains("Row") || t.Contains("Data"))
                     {
                         Log.LogInfo($"[F10] ⭐ {t}");
+                        relevant++;
                     }
                 }
+                Log.LogInfo($"[F10] Tipos relevantes: {relevant}");
             }
             catch (Exception ex)
             {
@@ -295,7 +276,7 @@ namespace FM26CtrlPExport
                     catch { }
                 }
                 
-                Log.LogInfo($"[F11] Elementos com nome relevante: {count}");
+                Log.LogInfo($"[F11] Elementos relevantes: {count}");
             }
             catch (Exception ex)
             {
@@ -364,7 +345,7 @@ namespace FM26CtrlPExport
                 }
                 else
                 {
-                    Log.LogWarning("[Export] Nenhum dado. Use F9/F10/F11 para diagnosticar.");
+                    Log.LogWarning("[Export] Nenhum dado. Use F9/F10/F11.");
                 }
             }
             catch (Exception ex)
@@ -380,9 +361,7 @@ namespace FM26CtrlPExport
             try
             {
                 var type = element.GetType();
-                string typeName = type.FullName ?? type.Name;
                 
-                // Tentar ler m_rows
                 var mRowsProp = type.GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
                 
                 if (mRowsProp != null)
@@ -392,7 +371,7 @@ namespace FM26CtrlPExport
                         var mRows = mRowsProp.GetValue(element) as IList;
                         if (mRows != null && mRows.Count > 0)
                         {
-                            Log.LogInfo($"[Export] Encontrado m_rows com {mRows.Count} itens em {element.name}");
+                            Log.LogInfo($"[Export] m_rows com {mRows.Count} itens em {element.name}");
                             foundData = mRows;
                             return;
                         }
@@ -400,7 +379,6 @@ namespace FM26CtrlPExport
                     catch { }
                 }
                 
-                // Recursão
                 for (int i = 0; i < element.childCount && i < 100; i++)
                 {
                     try
@@ -431,35 +409,26 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                // m_rows é List<ValueTuple<BindingRoot, VisualElement>>
-                // Precisamos extrair BindingRoot de cada tupla
                 var itemType = firstItem.GetType();
                 Log.LogInfo($"[Export] Tipo do item: {itemType.FullName}");
                 
                 // Verificar se é ValueTuple
                 if (itemType.Name.StartsWith("ValueTuple"))
                 {
-                    Log.LogInfo("[Export] Item é ValueTuple - extraindo Item1 (BindingRoot)...");
-                    
+                    Log.LogInfo("[Export] É ValueTuple - extraindo Item1...");
                     var item1Prop = itemType.GetProperty("Item1");
                     if (item1Prop != null)
                     {
-                        var bindingRoot = item1Prop.GetValue(firstItem);
-                        if (bindingRoot != null)
-                        {
-                            Log.LogInfo($"[Export] BindingRoot: {bindingRoot.GetType().FullName}");
-                            ExportBindingRoots(data, item1Prop);
-                            return;
-                        }
+                        ExportBindingRoots(data, item1Prop);
+                        return;
                     }
                 }
                 
-                // Fallback: exportar propriedades diretas
                 ExportGeneric(data);
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Export] Erro CSV: {ex.Message}");
+                Log.LogError($"[Export] Erro: {ex.Message}");
             }
         }
         
@@ -480,6 +449,8 @@ namespace FM26CtrlPExport
                     Log.LogWarning("[Export] Nenhum BindingRoot");
                     return;
                 }
+                
+                Log.LogInfo($"[Export] {bindingRoots.Count} BindingRoots");
                 
                 var first = bindingRoots[0];
                 var type = first.GetType();
@@ -528,7 +499,7 @@ namespace FM26CtrlPExport
                 );
                 
                 System.IO.File.WriteAllText(path, csv.ToString());
-                Log.LogInfo($"[Export] ✅ {rowCount} linhas salvas em: {path}");
+                Log.LogInfo($"[Export] ✅ {rowCount} linhas em: {path}");
             }
             catch (Exception ex)
             {
@@ -587,7 +558,7 @@ namespace FM26CtrlPExport
                 );
                 
                 System.IO.File.WriteAllText(path, csv.ToString());
-                Log.LogInfo($"[Export] ✅ {rowCount} linhas salvas em: {path}");
+                Log.LogInfo($"[Export] ✅ {rowCount} linhas em: {path}");
             }
             catch (Exception ex)
             {
