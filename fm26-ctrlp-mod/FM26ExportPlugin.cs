@@ -63,29 +63,29 @@ namespace FM26CtrlPExport
                 // Ctrl+P - EXPORTAR
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - DUMP COMPLETO E EXPORT");
-                    DumpAndExport();
+                    Log.LogInfo(">>> Ctrl+P - EXPORTAR");
+                    SafeExport();
                 }
                 
-                // F9 - Dump hierarquia COMPLETA
+                // F9 - DUMP COMPLETO
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - DUMP HIERARQUIA COMPLETA");
-                    DumpHierarchy();
+                    Log.LogInfo(">>> F9 - DUMP COMPLETO");
+                    DumpEverything();
                 }
                 
-                // F10 - Procurar dataSource em TUDO
+                // F10 - Buscar dataSource
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - PROCURAR DATASOURCE");
+                    Log.LogInfo(">>> F10 - Buscar dataSource");
                     FindAllDataSources();
                 }
                 
-                // F12 - Listar TODOS os tipos encontrados
+                // F12 - Diagnóstico simples
                 if (Keyboard.current.f12Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F12 - LISTAR TIPOS");
-                    ListAllTypes();
+                    Log.LogInfo(">>> F12 - Diagnóstico");
+                    Diagnose();
                 }
             }
             catch (Exception ex)
@@ -94,8 +94,8 @@ namespace FM26CtrlPExport
             }
         }
         
-        // F9 - Dump COMPLETO da hierarquia (15 níveis)
-        private static void DumpHierarchy()
+        // F9 - DUMP COMPLETO de toda a hierarquia
+        private static void DumpEverything()
         {
             try
             {
@@ -106,9 +106,9 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                Log.LogInfo($"[F9] === DUMP COMPLETO ===");
-                DumpElement(report, 0, 15);
-                Log.LogInfo($"[F9] === FIM DO DUMP ===");
+                Log.LogInfo("[F9] ===== DUMP COMPLETO =====");
+                DumpElement(report, 0, 10);
+                Log.LogInfo("[F9] ===== FIM DO DUMP =====");
             }
             catch (Exception ex)
             {
@@ -124,30 +124,81 @@ namespace FM26CtrlPExport
             {
                 string indent = new string(' ', depth * 2);
                 string name = element.name ?? "(null)";
-                string typeName = element.GetType().FullName;
+                string typeName = element.GetType().Name;
                 int childCount = element.childCount;
                 
-                // Logar elemento
-                Log.LogInfo($"{indent}[{depth}] {name} ({typeName}) - {childCount} filhos");
+                // Mostrar elemento
+                Log.LogInfo($"[F9] {indent}{name} ({typeName}) [{childCount} filhos]");
                 
-                // Se tiver poucos filhos, mostrar todos
-                // Se tiver muitos, mostrar apenas os primeiros
-                int childrenToShow = childCount > 50 ? 10 : childCount;
-                
-                for (int i = 0; i < childrenToShow; i++)
+                // Se tiver dataSource, mostrar
+                try
                 {
-                    DumpElement(element[i], depth + 1, maxDepth);
+                    var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
+                    if (dsProp != null)
+                    {
+                        var ds = dsProp.GetValue(element);
+                        if (ds != null)
+                        {
+                            string dsType = ds.GetType().FullName;
+                            if (ds is IList list)
+                            {
+                                Log.LogInfo($"[F9] {indent}  >>> dataSource: {dsType} ({list.Count} itens)");
+                            }
+                            else
+                            {
+                                Log.LogInfo($"[F9] {indent}  >>> dataSource: {dsType}");
+                            }
+                        }
+                    }
+                }
+                catch { }
+                
+                // Mostrar TODAS as propriedades no nível 3-4 (mais fundo)
+                if (depth >= 3 && depth <= 5)
+                {
+                    try
+                    {
+                        var props = element.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                        foreach (var prop in props)
+                        {
+                            if (prop.GetIndexParameters().Length > 0) continue;
+                            if (prop.Name == "name" || prop.Name == "childCount") continue;
+                            
+                            try
+                            {
+                                var value = prop.GetValue(element);
+                                if (value == null) continue;
+                                
+                                string valueStr = value.ToString();
+                                if (valueStr.Length > 50) valueStr = valueStr.Substring(0, 50) + "...";
+                                
+                                // Filtrar propriedades interessantes
+                                if (value is IList || 
+                                    prop.Name.Contains("Data") || 
+                                    prop.Name.Contains("List") ||
+                                    prop.Name.Contains("Item") ||
+                                    prop.Name.Contains("Source"))
+                                {
+                                    string listInfo = value is IList l ? $" ({l.Count} itens)" : "";
+                                    Log.LogInfo($"[F9] {indent}  {prop.Name}: {valueStr}{listInfo}");
+                                }
+                            }
+                            catch { }
+                        }
+                    }
+                    catch { }
                 }
                 
-                if (childCount > 50)
+                // Recursão nos filhos
+                for (int i = 0; i < childCount && i < 50; i++)
                 {
-                    Log.LogInfo($"{indent}... ({childCount - 10} filhos ocultos)");
+                    DumpElement(element[i], depth + 1, maxDepth);
                 }
             }
             catch { }
         }
         
-        // F10 - Procurar dataSource em TODOS os elementos
+        // F10 - Buscar TODOS os dataSources
         private static void FindAllDataSources()
         {
             try
@@ -160,8 +211,8 @@ namespace FM26CtrlPExport
                 }
                 
                 int found = 0;
-                FindDataSourcesRecursive(report, ref found, 0, 20);
-                Log.LogInfo($"[F10] Total de dataSources encontrados: {found}");
+                FindDataSourcesRecursive(report, ref found, 0, 15);
+                Log.LogInfo($"[F10] Total dataSources encontrados: {found}");
             }
             catch (Exception ex)
             {
@@ -175,30 +226,40 @@ namespace FM26CtrlPExport
             
             try
             {
-                // Tentar pegar dataSource
+                // Verificar dataSource
                 var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
                 if (dsProp != null)
                 {
-                    var ds = dsProp.GetValue(element);
-                    if (ds != null)
+                    try
                     {
-                        count++;
-                        string name = element.name ?? "(null)";
-                        string dsType = ds.GetType().FullName;
-                        
-                        if (ds is IList list)
+                        var ds = dsProp.GetValue(element);
+                        if (ds != null)
                         {
-                            Log.LogInfo($"[F10] ✅ {name}: dataSource = {dsType} ({list.Count} itens)");
-                        }
-                        else
-                        {
-                            Log.LogInfo($"[F10] 📦 {name}: dataSource = {dsType}");
+                            count++;
+                            string name = element.name ?? "(null)";
+                            string dsType = ds.GetType().FullName;
+                            
+                            if (ds is IList list)
+                            {
+                                Log.LogInfo($"[F10] ✅ {name}: {dsType} ({list.Count} itens)");
+                                
+                                // Se tem itens, mostrar o tipo do primeiro
+                                if (list.Count > 0 && list[0] != null)
+                                {
+                                    Log.LogInfo($"[F10]    Primeiro item: {list[0].GetType().FullName}");
+                                }
+                            }
+                            else
+                            {
+                                Log.LogInfo($"[F10] 📌 {name}: {dsType}");
+                            }
                         }
                     }
+                    catch { }
                 }
                 
                 // Recursão
-                for (int i = 0; i < element.childCount && i < 100; i++)
+                for (int i = 0; i < element.childCount && i < 50; i++)
                 {
                     FindDataSourcesRecursive(element[i], ref count, depth + 1, maxDepth);
                 }
@@ -206,25 +267,18 @@ namespace FM26CtrlPExport
             catch { }
         }
         
-        // F12 - Listar todos os tipos únicos encontrados
-        private static void ListAllTypes()
+        // F12 - Diagnóstico simples
+        private static void Diagnose()
         {
             try
             {
-                var report = FindReportElement();
-                if (report == null)
-                {
-                    Log.LogWarning("[F12] Report não encontrado");
-                    return;
-                }
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                Log.LogInfo($"[F12] {uiDocs.Length} UIDocuments");
                 
-                var types = new HashSet<string>();
-                CollectTypes(report, types, 0, 20);
-                
-                Log.LogInfo($"[F12] {types.Count} tipos únicos:");
-                foreach (var t in types)
+                foreach (var doc in uiDocs)
                 {
-                    Log.LogInfo($"[F12]   {t}");
+                    if (doc == null) continue;
+                    Log.LogInfo($"[F12]   {doc.name}: {doc.rootVisualElement?.childCount ?? 0} filhos");
                 }
             }
             catch (Exception ex)
@@ -233,27 +287,13 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void CollectTypes(VisualElement element, HashSet<string> types, int depth, int maxDepth)
+        // Ctrl+P - Exportar
+        private static void SafeExport()
         {
-            if (element == null || depth > maxDepth) return;
-            
             try
             {
-                types.Add(element.GetType().FullName);
+                Log.LogInfo("[Export] Buscando dados...");
                 
-                for (int i = 0; i < element.childCount && i < 100; i++)
-                {
-                    CollectTypes(element[i], types, depth + 1, maxDepth);
-                }
-            }
-            catch { }
-        }
-        
-        // Ctrl+P - Dump + Export
-        private static void DumpAndExport()
-        {
-            try
-            {
                 var report = FindReportElement();
                 if (report == null)
                 {
@@ -264,7 +304,7 @@ namespace FM26CtrlPExport
                 // Procurar dataSource com dados
                 IList foundData = null;
                 string foundElement = "";
-                FindDataForExport(report, ref foundData, ref foundElement, 0, 20);
+                FindDataForExport(report, ref foundData, ref foundElement, 0, 15);
                 
                 if (foundData != null && foundData.Count > 0)
                 {
@@ -273,7 +313,7 @@ namespace FM26CtrlPExport
                 }
                 else
                 {
-                    Log.LogWarning("[Export] Nenhum dataSource com lista encontrado. Use F10 para ver todos os dataSources.");
+                    Log.LogWarning("[Export] Nenhum dado encontrado. Use F10 para ver dataSources.");
                 }
             }
             catch (Exception ex)
@@ -282,7 +322,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindDataForExport(VisualElement element, ref IList foundData, ref string foundElement, int depth, int maxDepth)
+        private static void FindDataForExport(VisualElement element, ref IList foundData, ref string foundName, int depth, int maxDepth)
         {
             if (element == null || depth > maxDepth || foundData != null) return;
             
@@ -295,15 +335,15 @@ namespace FM26CtrlPExport
                     if (ds is IList list && list.Count > 0)
                     {
                         foundData = list;
-                        foundElement = element.name ?? "(null)";
+                        foundName = element.name ?? "(null)";
                         return;
                     }
                 }
                 
                 // Recursão
-                for (int i = 0; i < element.childCount && i < 100; i++)
+                for (int i = 0; i < element.childCount && i < 50; i++)
                 {
-                    FindDataForExport(element[i], ref foundData, ref foundElement, depth + 1, maxDepth);
+                    FindDataForExport(element[i], ref foundData, ref foundName, depth + 1, maxDepth);
                     if (foundData != null) return;
                 }
             }
