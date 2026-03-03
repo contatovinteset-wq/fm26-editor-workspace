@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.15.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.16.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.15.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.16.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -47,41 +47,33 @@ namespace FM26CtrlPExport
             try
             {
                 _frameCount++;
-                
                 if (!_initialized && _frameCount == 300)
                 {
                     _initialized = true;
-                    Log.LogInfo("[Init] Pronto!");
+                    Log.LogInfo("[Init] Pronto para v2.16.0!");
                 }
                 
-                if (!_initialized) return;
-                if (Keyboard.current == null) return;
+                if (!_initialized || Keyboard.current == null) return;
                 
                 bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
                 bool p = Keyboard.current.pKey.wasPressedThisFrame;
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - EXPORTAR");
-                    SafeExport();
+                    Log.LogInfo(">>> Ctrl+P - EXPORTAÇÃO BRUTA");
+                    BruteForceExport();
                 }
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Buscar QUALQUER IList");
-                    FindAnyIList();
+                    Log.LogInfo(">>> F9 - Investigar PlayerSearchReport");
+                    InvestigateReport("PlayerSearchReport");
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Listar UIDocuments");
-                    ListUIDocuments();
-                }
-                
-                if (Keyboard.current.f11Key.wasPressedThisFrame)
-                {
-                    Log.LogInfo(">>> F11 - Dump hierarquia completa");
-                    DumpHierarchy();
+                    Log.LogInfo(">>> F10 - Investigar TeamSquadReport");
+                    InvestigateReport("TeamSquadReport");
                 }
             }
             catch (Exception ex)
@@ -90,456 +82,187 @@ namespace FM26CtrlPExport
             }
         }
         
-        // F9 - Buscar qualquer elemento que tenha uma propriedade IList
-        private static void FindAnyIList()
+        private static void InvestigateReport(string reportName)
         {
             try
             {
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                int listsFound = 0;
-                int elementsChecked = 0;
-                
                 foreach (var doc in uiDocs)
                 {
-                    if (doc == null) continue;
-                    try
+                    if (doc == null || doc.name != "PanelManager") continue;
+                    var root = doc.rootVisualElement;
+                    if (root == null) continue;
+                    
+                    var report = FindElementByName(root, reportName, 0, 30);
+                    if (report != null)
                     {
-                        var root = doc.rootVisualElement;
-                        if (root == null) continue;
-                        
-                        FindIListRecursive(root, ref listsFound, ref elementsChecked, 0, 50, doc.name);
+                        Log.LogInfo($"[Diag] ⭐ Encontrou {reportName}!");
+                        DumpElementDetails(report);
                     }
-                    catch { }
+                    else
+                    {
+                        Log.LogWarning($"[Diag] {reportName} não encontrado no PanelManager");
+                    }
                 }
-                
-                Log.LogInfo($"[F9] Elementos: {elementsChecked}, ILists: {listsFound}");
             }
             catch (Exception ex)
             {
-                Log.LogError($"[F9] Erro: {ex.Message}");
+                Log.LogError($"[Diag] Erro: {ex.Message}");
             }
         }
         
-        private static void FindIListRecursive(VisualElement element, ref int count, ref int checkedCount, int depth, int maxDepth, string docName)
+        private static VisualElement FindElementByName(VisualElement element, string name, int depth, int maxDepth)
+        {
+            if (element == null || depth > maxDepth) return null;
+            if (element.name == name) return element;
+            
+            for (int i = 0; i < element.childCount; i++)
+            {
+                var found = FindElementByName(element[i], name, depth + 1, maxDepth);
+                if (found != null) return found;
+            }
+            return null;
+        }
+        
+        private static void DumpElementDetails(VisualElement element)
+        {
+            try
+            {
+                var type = element.GetType();
+                Log.LogInfo($"[Dump] Nome: {element.name}, Tipo: {type.FullName}");
+                
+                // Tentar ler m_rows via propriedade ou campo em todos os descendentes
+                Log.LogInfo("[Dump] Buscando m_rows nos filhos...");
+                int foundCount = 0;
+                SearchMRowsRecursive(element, ref foundCount, 0, 10);
+                Log.LogInfo($"[Dump] Fim da busca. Encontrados: {foundCount}");
+            }
+            catch (Exception ex) { Log.LogError($"[Dump] Erro: {ex.Message}"); }
+        }
+        
+        private static void SearchMRowsRecursive(VisualElement element, ref int count, int depth, int maxDepth)
         {
             if (element == null || depth > maxDepth) return;
             
+            var type = element.GetType();
+            var mRowsProp = type.GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            if (mRowsProp != null)
+            {
+                count++;
+                Log.LogInfo($"[Found] ⭐ {element.name} [{type.Name}] tem m_rows!");
+                try {
+                    var val = mRowsProp.GetValue(element) as IList;
+                    Log.LogInfo($"[Found]    Itens: {val?.Count ?? 0}");
+                } catch {}
+            }
+            
+            for (int i = 0; i < element.childCount; i++)
+                SearchMRowsRecursive(element[i], ref count, depth + 1, maxDepth);
+        }
+        
+        private static void BruteForceExport()
+        {
             try
             {
-                checkedCount++;
-                var type = element.GetType();
-                string elementName = element.name ?? "";
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                IList dataToExport = null;
                 
-                // Buscar TODAS as propriedades
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                
-                foreach (var prop in props)
+                foreach (var doc in uiDocs)
                 {
-                    if (prop.GetIndexParameters().Length > 0) continue;
-                    if (prop.Name == "Item") continue;
+                    if (doc == null || doc.name != "PanelManager") continue;
+                    var root = doc.rootVisualElement;
+                    if (root == null) continue;
                     
-                    try
+                    // Estratégia v2.16.0: Buscar especificamente nos Reports
+                    string[] targets = { "PlayerSearchReport", "TeamSquadReport", "ReportBody", "Body" };
+                    foreach (var targetName in targets)
                     {
-                        var propType = prop.PropertyType;
-                        
-                        // Verificar se é IList ou IEnumerable (mas não string)
-                        if (typeof(IList).IsAssignableFrom(propType) || 
-                            (propType.Name.Contains("List") && propType != typeof(string)))
+                        var target = FindElementByName(root, targetName, 0, 30);
+                        if (target != null)
                         {
-                            var value = prop.GetValue(element) as IList;
-                            if (value != null && value.Count > 0)
-                            {
-                                count++;
-                                Log.LogInfo($"[F9] ⭐ [{docName}] {elementName}.{prop.Name} = {value.Count} itens");
-                                Log.LogInfo($"[F9]    Tipo: {propType.Name}");
-                                
-                                var first = value[0];
-                                if (first != null)
-                                {
-                                    Log.LogInfo($"[F9]    Item: {first.GetType().Name}");
-                                }
-                            }
+                            Log.LogInfo($"[Export] Escaneando {targetName}...");
+                            dataToExport = FindFirstPopulatedRows(target, 0, 15);
+                            if (dataToExport != null) break;
                         }
                     }
-                    catch { }
+                    if (dataToExport != null) break;
                 }
                 
-                // Recursão
-                for (int i = 0; i < element.childCount && i < 200; i++)
+                if (dataToExport != null)
                 {
-                    try
-                    {
-                        FindIListRecursive(element[i], ref count, ref checkedCount, depth + 1, maxDepth, docName);
-                    }
-                    catch { }
-                }
-            }
-            catch { }
-        }
-        
-        // F10 - Listar todos os UIDocuments
-        private static void ListUIDocuments()
-        {
-            try
-            {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                Log.LogInfo($"[F10] UIDocuments encontrados: {uiDocs.Length}");
-                
-                foreach (var doc in uiDocs)
-                {
-                    if (doc == null) continue;
-                    try
-                    {
-                        var root = doc.rootVisualElement;
-                        Log.LogInfo($"[F10] - {doc.name}: root={root?.name ?? "null"}, children={root?.childCount ?? 0}");
-                    }
-                    catch { }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[F10] Erro: {ex.Message}");
-            }
-        }
-        
-        // F11 - Dump da hierarquia (primeiros 100 elementos)
-        private static void DumpHierarchy()
-        {
-            try
-            {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                int total = 0;
-                
-                foreach (var doc in uiDocs)
-                {
-                    if (doc == null) continue;
-                    try
-                    {
-                        var root = doc.rootVisualElement;
-                        if (root == null) continue;
-                        
-                        Log.LogInfo($"[F11] === {doc.name} ===");
-                        DumpElement(root, 0, 5, ref total, 100);
-                    }
-                    catch { }
-                }
-                
-                Log.LogInfo($"[F11] Total dumpado: {total}");
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[F11] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void DumpElement(VisualElement element, int depth, int maxDepth, ref int total, int limit)
-        {
-            if (element == null || depth > maxDepth || total >= limit) return;
-            
-            try
-            {
-                total++;
-                string indent = new string(' ', depth * 2);
-                string name = element.name ?? "(no name)";
-                string type = element.GetType().Name;
-                int children = element.childCount;
-                
-                Log.LogInfo($"[F11] {indent}{name} [{type}] ({children} filhos)");
-                
-                for (int i = 0; i < children && i < 20; i++)
-                {
-                    try
-                    {
-                        DumpElement(element[i], depth + 1, maxDepth, ref total, limit);
-                    }
-                    catch { }
-                }
-            }
-            catch { }
-        }
-        
-        // Ctrl+P - Exportar
-        private static void SafeExport()
-        {
-            try
-            {
-                Log.LogInfo("[Export] Buscando ILists...");
-                
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                IList foundData = null;
-                string foundInfo = "";
-                
-                foreach (var doc in uiDocs)
-                {
-                    if (doc == null) continue;
-                    try
-                    {
-                        var root = doc.rootVisualElement;
-                        if (root == null) continue;
-                        
-                        FindAndExport(root, ref foundData, ref foundInfo, 0, 50, doc.name);
-                        
-                        if (foundData != null) break;
-                    }
-                    catch { }
-                }
-                
-                if (foundData != null && foundData.Count > 0)
-                {
-                    Log.LogInfo($"[Export] ✅ {foundInfo}");
-                    ExportToCsv(foundData);
+                    Log.LogInfo($"[Export] ✅ Dados capturados! Total: {dataToExport.Count}");
+                    ExportCsv(dataToExport);
                 }
                 else
                 {
-                    Log.LogWarning("[Export] Nenhum IList com dados. Use F9.");
+                    Log.LogWarning("[Export] Nada encontrado. A tabela pode não estar usando 'm_rows' ou está protegida.");
                 }
             }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Export] Erro: {ex.Message}");
-            }
+            catch (Exception ex) { Log.LogError($"[Export] Critico: {ex.Message}"); }
         }
         
-        private static void FindAndExport(VisualElement element, ref IList foundData, ref string foundInfo, int depth, int maxDepth, string docName)
+        private static IList FindFirstPopulatedRows(VisualElement element, int depth, int maxDepth)
         {
-            if (element == null || depth > maxDepth || foundData != null) return;
+            if (element == null || depth > maxDepth) return null;
             
-            try
+            var prop = element.GetType().GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            if (prop != null)
             {
-                var type = element.GetType();
-                string elementName = element.name ?? "";
-                
-                // Priorizar m_rows
-                var mRowsProp = type.GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                if (mRowsProp != null)
-                {
-                    try
-                    {
-                        var mRows = mRowsProp.GetValue(element) as IList;
-                        if (mRows != null && mRows.Count > 0)
-                        {
-                            foundData = mRows;
-                            foundInfo = $"[{docName}] {elementName}.m_rows ({mRows.Count} itens)";
-                            return;
-                        }
-                    }
-                    catch { }
-                }
-                
-                // Buscar outras Listas
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                foreach (var prop in props)
-                {
-                    if (foundData != null) break;
-                    if (prop.GetIndexParameters().Length > 0) continue;
-                    if (prop.Name == "Item") continue;
-                    
-                    try
-                    {
-                        if (typeof(IList).IsAssignableFrom(prop.PropertyType))
-                        {
-                            var value = prop.GetValue(element) as IList;
-                            if (value != null && value.Count > 10) // Mínimo 10 itens
-                            {
-                                foundData = value;
-                                foundInfo = $"[{docName}] {elementName}.{prop.Name} ({value.Count} itens)";
-                                return;
-                            }
-                        }
-                    }
-                    catch { }
-                }
-                
-                // Recursão
-                for (int i = 0; i < element.childCount && i < 200; i++)
-                {
-                    try
-                    {
-                        FindAndExport(element[i], ref foundData, ref foundInfo, depth + 1, maxDepth, docName);
-                        if (foundData != null) return;
-                    }
-                    catch { }
-                }
+                var val = prop.GetValue(element) as IList;
+                if (val != null && val.Count > 0) return val;
             }
-            catch { }
+            
+            for (int i = 0; i < element.childCount; i++)
+            {
+                var found = FindFirstPopulatedRows(element[i], depth + 1, maxDepth);
+                if (found != null) return found;
+            }
+            return null;
         }
         
-        private static void ExportToCsv(IList data)
-        {
-            try
-            {
-                if (data == null || data.Count == 0)
-                {
-                    Log.LogWarning("[Export] Lista vazia");
-                    return;
-                }
-                
-                var firstItem = data[0];
-                if (firstItem == null)
-                {
-                    Log.LogError("[Export] Primeiro item é null");
-                    return;
-                }
-                
-                var itemType = firstItem.GetType();
-                Log.LogInfo($"[Export] Tipo: {itemType.FullName}");
-                
-                // ValueTuple?
-                if (itemType.Name.StartsWith("ValueTuple"))
-                {
-                    var item1Prop = itemType.GetProperty("Item1");
-                    if (item1Prop != null)
-                    {
-                        var firstBinding = item1Prop.GetValue(firstItem);
-                        if (firstBinding != null)
-                        {
-                            Log.LogInfo($"[Export] Item1: {firstBinding.GetType().FullName}");
-                            ExportBindingRoots(data, item1Prop);
-                            return;
-                        }
-                    }
-                }
-                
-                ExportGeneric(data);
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Export] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void ExportBindingRoots(IList data, PropertyInfo item1Prop)
-        {
-            try
-            {
-                var bindingRoots = new List<object>();
-                foreach (var item in data)
-                {
-                    if (item == null) continue;
-                    var br = item1Prop.GetValue(item);
-                    if (br != null) bindingRoots.Add(br);
-                }
-                
-                if (bindingRoots.Count == 0)
-                {
-                    Log.LogWarning("[Export] Nenhum BindingRoot");
-                    return;
-                }
-                
-                Log.LogInfo($"[Export] {bindingRoots.Count} BindingRoots");
-                
-                var first = bindingRoots[0];
-                var type = first.GetType();
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                
-                var csv = new System.Text.StringBuilder();
-                var headers = new List<string>();
-                
-                foreach (var prop in props)
-                {
-                    if (prop.GetIndexParameters().Length == 0 && prop.Name != "Item")
-                    {
-                        headers.Add(prop.Name);
-                    }
-                }
-                csv.AppendLine(string.Join(";", headers));
-                
-                int rowCount = 0;
-                foreach (var br in bindingRoots)
-                {
-                    if (br == null) continue;
-                    
-                    var values = new List<string>();
-                    foreach (var prop in props)
-                    {
-                        if (prop.GetIndexParameters().Length > 0 || prop.Name == "Item") continue;
-                        
-                        try
-                        {
-                            var value = prop.GetValue(br);
-                            string str = (value?.ToString() ?? "").Replace(";", ",").Replace("\n", " ").Replace("\r", "");
-                            values.Add(str);
-                        }
-                        catch
-                        {
-                            values.Add("");
-                        }
-                    }
-                    csv.AppendLine(string.Join(";", values));
-                    rowCount++;
-                }
-                
-                var path = System.IO.Path.Combine(
-                    BepInEx.Paths.PluginPath, 
-                    $"FM26_Export_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
-                );
-                
-                System.IO.File.WriteAllText(path, csv.ToString());
-                Log.LogInfo($"[Export] ✅ {rowCount} linhas em: {path}");
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Export] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void ExportGeneric(IList data)
+        private static void ExportCsv(IList data)
         {
             try
             {
                 var first = data[0];
-                var type = first.GetType();
+                if (first == null) return;
+                
+                // Tenta extrair BindingRoot de ValueTuple (Comum em StreamedTable)
+                object targetObj = first;
+                var tupleProp = first.GetType().GetProperty("Item1");
+                if (tupleProp != null) targetObj = tupleProp.GetValue(first);
+                
+                var type = targetObj.GetType();
                 var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
                 
                 var csv = new System.Text.StringBuilder();
-                var headers = new List<string>();
-                
-                foreach (var prop in props)
-                {
-                    if (prop.GetIndexParameters().Length == 0)
-                    {
-                        headers.Add(prop.Name);
-                    }
-                }
+                List<string> headers = new List<string>();
+                foreach (var p in props) if (p.GetIndexParameters().Length == 0) headers.Add(p.Name);
                 csv.AppendLine(string.Join(";", headers));
                 
-                int rowCount = 0;
                 foreach (var item in data)
                 {
                     if (item == null) continue;
+                    object rowObj = item;
+                    if (tupleProp != null) rowObj = tupleProp.GetValue(item);
                     
-                    var values = new List<string>();
-                    foreach (var prop in props)
+                    List<string> values = new List<string>();
+                    foreach (var p in props)
                     {
-                        if (prop.GetIndexParameters().Length > 0) continue;
-                        
-                        try
-                        {
-                            var value = prop.GetValue(item);
-                            string str = (value?.ToString() ?? "").Replace(";", ",").Replace("\n", " ").Replace("\r", "");
-                            values.Add(str);
-                        }
-                        catch
-                        {
-                            values.Add("");
-                        }
+                        if (p.GetIndexParameters().Length > 0) continue;
+                        try {
+                            var val = p.GetValue(rowObj);
+                            values.Add((val?.ToString() ?? "").Replace(";", ","));
+                        } catch { values.Add(""); }
                     }
                     csv.AppendLine(string.Join(";", values));
-                    rowCount++;
                 }
                 
-                var path = System.IO.Path.Combine(
-                    BepInEx.Paths.PluginPath, 
-                    $"FM26_Export_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
-                );
-                
+                string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Brute_{DateTime.Now:yyyyMMdd_HHmm}.csv");
                 System.IO.File.WriteAllText(path, csv.ToString());
-                Log.LogInfo($"[Export] ✅ {rowCount} linhas em: {path}");
+                Log.LogInfo($"[Export] Salvo em: {path}");
             }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Export] Erro: {ex.Message}");
-            }
+            catch (Exception ex) { Log.LogError($"[CSV] Erro: {ex.Message}"); }
         }
     }
 }
