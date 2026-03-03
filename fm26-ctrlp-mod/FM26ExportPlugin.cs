@@ -89,16 +89,6 @@ namespace FM26CtrlPExport
         {
             try
             {
-                var streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
-                PropertyInfo rowsProp = null;
-                
-                // Buscar m_rows como PROPRIEDADE (não campo)
-                if (streamedTableType != null)
-                {
-                    rowsProp = streamedTableType.GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                    Log.LogInfo($"[F9] m_rows como prop: {rowsProp != null}");
-                }
-                
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
                 int count = 0;
                 
@@ -190,8 +180,6 @@ namespace FM26CtrlPExport
                 if (rowsProp != null)
                 {
                     Log.LogInfo($"[F10] m_rows PROP: {rowsProp.PropertyType.FullName}");
-                    Log.LogInfo($"[F10]   CanRead: {rowsProp.CanRead}");
-                    Log.LogInfo($"[F10]   CanWrite: {rowsProp.CanWrite}");
                 }
                 else
                 {
@@ -259,7 +247,7 @@ namespace FM26CtrlPExport
                 }
                 else
                 {
-                    Log.LogWarning("[Export] Nenhum dado encontrado. Use F9 para ver se há m_rows.");
+                    Log.LogWarning("[Export] Nenhum dado encontrado. Use F9.");
                 }
             }
             catch (Exception ex)
