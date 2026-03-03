@@ -12,24 +12,16 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.11.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.12.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
-        
-        // Nomes de propriedades que geralmente têm listas de dados
-        private static readonly string[] _dataProps = new string[]
-        {
-            "items", "Items", "list", "List", "data", "Data",
-            "rows", "Rows", "source", "Source", "dataSource", "DataSource",
-            "itemsSource", "ItemsSource", "binding", "Binding"
-        };
         
         public override void Load()
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.11.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.12.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -76,14 +68,14 @@ namespace FM26CtrlPExport
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Buscar props seguras");
-                    FindSafeProps();
+                    Log.LogInfo(">>> F9 - Contar StreamedElements");
+                    CountStreamed();
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Info tipos Streamed");
-                    InfoStreamedTypes();
+                    Log.LogInfo(">>> F10 - Info m_rows");
+                    InfoRowsField();
                 }
             }
             catch (Exception ex)
@@ -92,38 +84,13 @@ namespace FM26CtrlPExport
             }
         }
         
-        // F9 - Buscar propriedades seguras
-        private static void FindSafeProps()
+        // F9 - Contar elementos StreamedTable/ListView
+        private static void CountStreamed()
         {
             try
             {
-                var streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
-                var streamedListViewType = Type.GetType("SI.Bindable.StreamedListView, SI.Bindable");
-                
-                if (streamedTableType != null)
-                {
-                    Log.LogInfo("[F9] === StreamedTable props ===");
-                    var props = streamedTableType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-                    foreach (var p in props)
-                    {
-                        Log.LogInfo($"[F9]   {p.PropertyType.Name} {p.Name}");
-                    }
-                }
-                
-                if (streamedListViewType != null)
-                {
-                    Log.LogInfo("[F9] === StreamedListView props ===");
-                    var props = streamedListViewType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-                    foreach (var p in props)
-                    {
-                        Log.LogInfo($"[F9]   {p.PropertyType.Name} {p.Name}");
-                    }
-                }
-                
-                // Verificar se há instâncias desses tipos
-                Log.LogInfo("[F9] === Buscando instâncias ===");
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                int found = 0;
+                int count = 0;
                 
                 foreach (var doc in uiDocs)
                 {
@@ -133,12 +100,12 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        CountStreamedElements(root, ref found, 0, 15, doc.name);
+                        CountStreamedRecursive(root, ref count, 0, 15, doc.name);
                     }
                     catch { }
                 }
                 
-                Log.LogInfo($"[F9] Total StreamedElements: {found}");
+                Log.LogInfo($"[F9] Total StreamedElements: {count}");
             }
             catch (Exception ex)
             {
@@ -146,7 +113,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void CountStreamedElements(VisualElement element, ref int count, int depth, int maxDepth, string docName)
+        private static void CountStreamedRecursive(VisualElement element, ref int count, int depth, int maxDepth, string docName)
         {
             if (element == null || depth > maxDepth) return;
             
@@ -162,12 +129,11 @@ namespace FM26CtrlPExport
                     Log.LogInfo($"[F9] ⭐ [{docName}] {elementName}: {typeName}");
                 }
                 
-                // Recursão simples
                 for (int i = 0; i < element.childCount && i < 50; i++)
                 {
                     try
                     {
-                        CountStreamedElements(element[i], ref count, depth + 1, maxDepth, docName);
+                        CountStreamedRecursive(element[i], ref count, depth + 1, maxDepth, docName);
                     }
                     catch { }
                 }
@@ -175,45 +141,44 @@ namespace FM26CtrlPExport
             catch { }
         }
         
-        // F10 - Info tipos Streamed
-        private static void InfoStreamedTypes()
+        // F10 - Info do campo m_rows
+        private static void InfoRowsField()
         {
             try
             {
-                var types = new string[]
+                var streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
+                if (streamedTableType == null)
                 {
-                    "SI.Bindable.StreamedTable, SI.Bindable",
-                    "SI.Bindable.StreamedListView, SI.Bindable",
-                    "SI.Bindable.StreamedObjectList, SI.Bindable"
-                };
+                    Log.LogWarning("[F10] StreamedTable não encontrado");
+                    return;
+                }
                 
-                foreach (var typeName in types)
+                // Procurar campo m_rows
+                var rowsField = streamedTableType.GetField("m_rows", BindingFlags.NonPublic | BindingFlags.Instance);
+                if (rowsField != null)
                 {
-                    var t = Type.GetType(typeName);
-                    if (t == null)
+                    Log.LogInfo($"[F10] m_rows encontrado: {rowsField.FieldType.FullName}");
+                }
+                else
+                {
+                    Log.LogWarning("[F10] m_rows não encontrado como campo");
+                    
+                    // Tentar como propriedade
+                    var rowsProp = streamedTableType.GetProperty("m_rows", BindingFlags.NonPublic | BindingFlags.Instance);
+                    if (rowsProp != null)
                     {
-                        Log.LogInfo($"[F10] {typeName}: NÃO ENCONTRADO");
-                        continue;
+                        Log.LogInfo($"[F10] m_rows como prop: {rowsProp.PropertyType.FullName}");
                     }
-                    
-                    Log.LogInfo($"[F10] === {t.Name} ===");
-                    
-                    // Campos públicos
-                    var fields = t.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-                    foreach (var f in fields)
+                }
+                
+                // Listar todos os campos com "row" no nome
+                Log.LogInfo("[F10] Campos com 'row':");
+                var fields = streamedTableType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                foreach (var f in fields)
+                {
+                    if (f.Name.ToLower().Contains("row"))
                     {
-                        Log.LogInfo($"[F10]   field: {f.FieldType.Name} {f.Name}");
-                    }
-                    
-                    // Métodos que retornam algo
-                    var methods = t.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-                    foreach (var m in methods)
-                    {
-                        if (m.Name.StartsWith("get_") && m.GetParameters().Length == 0)
-                        {
-                            string propName = m.Name.Substring(4);
-                            Log.LogInfo($"[F10]   prop: {m.ReturnType.Name} {propName}");
-                        }
+                        Log.LogInfo($"[F10]   {f.FieldType.Name} {f.Name}");
                     }
                 }
             }
@@ -223,15 +188,26 @@ namespace FM26CtrlPExport
             }
         }
         
-        // Ctrl+P - Exportar
+        // Ctrl+P - Exportar (SÓ tenta m_rows)
         private static void SafeExport()
         {
             try
             {
-                Log.LogInfo("[Export] Buscando dados...");
+                Log.LogInfo("[Export] Buscando StreamedTable com m_rows...");
                 
                 var streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
-                var streamedListViewType = Type.GetType("SI.Bindable.StreamedListView, SI.Bindable");
+                if (streamedTableType == null)
+                {
+                    Log.LogWarning("[Export] StreamedTable não encontrado");
+                    return;
+                }
+                
+                var rowsField = streamedTableType.GetField("m_rows", BindingFlags.NonPublic | BindingFlags.Instance);
+                if (rowsField == null)
+                {
+                    Log.LogWarning("[Export] Campo m_rows não encontrado");
+                    return;
+                }
                 
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
                 IList foundData = null;
@@ -245,7 +221,7 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        FindAndExport(root, ref foundData, ref foundInfo, 0, 15, doc.name, streamedTableType, streamedListViewType);
+                        FindRows(root, ref foundData, ref foundInfo, 0, 15, doc.name, streamedTableType, rowsField);
                         
                         if (foundData != null) break;
                     }
@@ -259,7 +235,7 @@ namespace FM26CtrlPExport
                 }
                 else
                 {
-                    Log.LogWarning("[Export] Nenhum dado encontrado.");
+                    Log.LogWarning("[Export] Nenhum dado encontrado. Use F9 para ver se há StreamedTable.");
                 }
             }
             catch (Exception ex)
@@ -268,7 +244,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindAndExport(VisualElement element, ref IList foundData, ref string foundInfo, int depth, int maxDepth, string docName, Type stType, Type slvType)
+        private static void FindRows(VisualElement element, ref IList foundData, ref string foundInfo, int depth, int maxDepth, string docName, Type stType, FieldInfo rowsField)
         {
             if (element == null || depth > maxDepth || foundData != null) return;
             
@@ -278,59 +254,28 @@ namespace FM26CtrlPExport
                 string typeName = type.FullName ?? "";
                 string elementName = element.name ?? "";
                 
-                // Verificar se é um StreamedTable/ListView
-                bool isStreamed = typeName.Contains("StreamedTable") || typeName.Contains("StreamedListView");
-                
-                if (isStreamed)
+                // Verificar se é StreamedTable
+                if (typeName.Contains("StreamedTable"))
                 {
-                    Log.LogInfo($"[Export] Encontrado: {elementName} ({typeName})");
+                    Log.LogInfo($"[Export] Encontrado StreamedTable: {elementName}");
                     
-                    // Tentar pegar dados via método GetList ou similar
-                    var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance);
-                    foreach (var m in methods)
+                    try
                     {
-                        if (foundData != null) break;
-                        
-                        try
+                        var rows = rowsField.GetValue(element) as IList;
+                        if (rows != null && rows.Count > 0)
                         {
-                            // Procurar métodos que retornam IList
-                            if (typeof(IList).IsAssignableFrom(m.ReturnType) && m.GetParameters().Length == 0)
-                            {
-                                var result = m.Invoke(element, null);
-                                if (result is IList list && list.Count > 0)
-                                {
-                                    foundData = list;
-                                    foundInfo = $"[{docName}] {elementName}.{m.Name}()";
-                                    break;
-                                }
-                            }
+                            foundData = rows;
+                            foundInfo = $"[{docName}] {elementName}.m_rows";
+                            return;
                         }
-                        catch { }
+                        else
+                        {
+                            Log.LogInfo($"[Export] m_rows vazio ou null");
+                        }
                     }
-                    
-                    // Tentar campos
-                    if (foundData == null)
+                    catch (Exception ex)
                     {
-                        var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
-                        foreach (var f in fields)
-                        {
-                            if (foundData != null) break;
-                            
-                            try
-                            {
-                                if (typeof(IList).IsAssignableFrom(f.FieldType))
-                                {
-                                    var result = f.GetValue(element);
-                                    if (result is IList list && list.Count > 0)
-                                    {
-                                        foundData = list;
-                                        foundInfo = $"[{docName}] {elementName}.{f.Name}";
-                                        break;
-                                    }
-                                }
-                            }
-                            catch { }
-                        }
+                        Log.LogWarning($"[Export] Erro ao ler m_rows: {ex.Message}");
                     }
                 }
                 
@@ -339,7 +284,7 @@ namespace FM26CtrlPExport
                 {
                     try
                     {
-                        FindAndExport(element[i], ref foundData, ref foundInfo, depth + 1, maxDepth, docName, stType, slvType);
+                        FindRows(element[i], ref foundData, ref foundInfo, depth + 1, maxDepth, docName, stType, rowsField);
                         if (foundData != null) return;
                     }
                     catch { }
