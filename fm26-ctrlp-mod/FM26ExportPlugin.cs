@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.8.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.9.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.8.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.9.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -74,11 +74,18 @@ namespace FM26CtrlPExport
                     DumpHierarchy();
                 }
                 
-                // F10 - Buscar dataSource
+                // F10 - Buscar dataSource em TODOS os UIDocuments
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Buscar dataSource");
-                    FindAllDataSources();
+                    Log.LogInfo(">>> F10 - Buscar dataSource GLOBAL");
+                    FindAllDataSourcesGlobal();
+                }
+                
+                // F11 - Dump PROFUNDO do primeiro UIDocument
+                if (Keyboard.current.f11Key.wasPressedThisFrame)
+                {
+                    Log.LogInfo(">>> F11 - Dump PROFUNDO");
+                    DumpDeep();
                 }
                 
                 // F12 - Diagnóstico
@@ -94,20 +101,27 @@ namespace FM26CtrlPExport
             }
         }
         
-        // F9 - DUMP SIMPLES da hierarquia (sem acessar propriedades)
+        // F9 - DUMP de TODOS os UIDocuments
         private static void DumpHierarchy()
         {
             try
             {
-                var report = FindReportElement();
-                if (report == null)
-                {
-                    Log.LogWarning("[F9] Report não encontrado");
-                    return;
-                }
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                Log.LogInfo($"[F9] ===== {uiDocs.Length} UIDocuments =====");
                 
-                Log.LogInfo("[F9] ===== HIERARQUIA =====");
-                DumpElementSimple(report, 0, 12);
+                foreach (var doc in uiDocs)
+                {
+                    if (doc == null) continue;
+                    try
+                    {
+                        var root = doc.rootVisualElement;
+                        if (root == null) continue;
+                        
+                        Log.LogInfo($"[F9] === {doc.name} ===");
+                        DumpElementSimple(root, 0, 8);
+                    }
+                    catch { }
+                }
                 Log.LogInfo("[F9] ===== FIM =====");
             }
             catch (Exception ex)
@@ -142,21 +156,30 @@ namespace FM26CtrlPExport
             catch { }
         }
         
-        // F10 - Buscar TODOS os dataSources
-        private static void FindAllDataSources()
+        // F10 - Buscar TODOS os dataSources em TODOS os UIDocuments
+        private static void FindAllDataSourcesGlobal()
         {
             try
             {
-                var report = FindReportElement();
-                if (report == null)
-                {
-                    Log.LogWarning("[F10] Report não encontrado");
-                    return;
-                }
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                Log.LogInfo($"[F10] Buscando em {uiDocs.Length} UIDocuments...");
                 
-                int found = 0;
-                FindDataSourcesRecursive(report, ref found, 0, 15);
-                Log.LogInfo($"[F10] Total dataSources encontrados: {found}");
+                int total = 0;
+                foreach (var doc in uiDocs)
+                {
+                    if (doc == null) continue;
+                    try
+                    {
+                        var root = doc.rootVisualElement;
+                        if (root == null) continue;
+                        
+                        int found = 0;
+                        FindDataSourcesRecursive(root, ref found, 0, 20, doc.name);
+                        total += found;
+                    }
+                    catch { }
+                }
+                Log.LogInfo($"[F10] Total dataSources encontrados: {total}");
             }
             catch (Exception ex)
             {
@@ -164,7 +187,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindDataSourcesRecursive(VisualElement element, ref int count, int depth, int maxDepth)
+        private static void FindDataSourcesRecursive(VisualElement element, ref int count, int depth, int maxDepth, string docName)
         {
             if (element == null || depth > maxDepth) return;
             
@@ -172,7 +195,7 @@ namespace FM26CtrlPExport
             {
                 string name = element.name ?? "(null)";
                 
-                // Verificar dataSource - SÓ isso, sem outras propriedades
+                // Verificar dataSource
                 var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
                 if (dsProp != null)
                 {
@@ -186,11 +209,11 @@ namespace FM26CtrlPExport
                             
                             if (ds is IList list)
                             {
-                                Log.LogInfo($"[F10] ✅ {name}: {dsType} ({list.Count} itens)");
+                                Log.LogInfo($"[F10] ✅ [{docName}] {name}: {dsType} ({list.Count} itens)");
                             }
                             else
                             {
-                                Log.LogInfo($"[F10] 📌 {name}: {dsType}");
+                                Log.LogInfo($"[F10] 📌 [{docName}] {name}: {dsType}");
                             }
                         }
                     }
@@ -202,7 +225,54 @@ namespace FM26CtrlPExport
                 {
                     try
                     {
-                        FindDataSourcesRecursive(element[i], ref count, depth + 1, maxDepth);
+                        FindDataSourcesRecursive(element[i], ref count, depth + 1, maxDepth, docName);
+                    }
+                    catch { }
+                }
+            }
+            catch { }
+        }
+        
+        // F11 - Dump PROFUNDO (até 20 níveis)
+        private static void DumpDeep()
+        {
+            try
+            {
+                var report = FindReportElement();
+                if (report == null)
+                {
+                    Log.LogWarning("[F11] Report não encontrado");
+                    return;
+                }
+                
+                Log.LogInfo("[F11] ===== DUMP PROFUNDO =====");
+                DumpElementDeep(report, 0, 20);
+                Log.LogInfo("[F11] ===== FIM =====");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[F11] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void DumpElementDeep(VisualElement element, int depth, int maxDepth)
+        {
+            if (element == null || depth > maxDepth) return;
+            
+            try
+            {
+                string indent = new string(' ', Math.Min(depth, 40));
+                string name = element.name ?? "(null)";
+                int childCount = element.childCount;
+                
+                Log.LogInfo($"[F11] {indent}{name} [{childCount}]");
+                
+                // Recursão mais profunda
+                for (int i = 0; i < childCount && i < 200; i++)
+                {
+                    try
+                    {
+                        DumpElementDeep(element[i], depth + 1, maxDepth);
                     }
                     catch { }
                 }
@@ -234,28 +304,42 @@ namespace FM26CtrlPExport
             }
         }
         
-        // Ctrl+P - Exportar
+        // Ctrl+P - Exportar (busca em TODOS os UIDocuments)
         private static void SafeExport()
         {
             try
             {
-                Log.LogInfo("[Export] Buscando dados...");
+                Log.LogInfo("[Export] Buscando dados em TODOS os UIDocuments...");
                 
-                var report = FindReportElement();
-                if (report == null)
-                {
-                    Log.LogWarning("[Export] Report não encontrado");
-                    return;
-                }
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                Log.LogInfo($"[Export] {uiDocs.Length} UIDocuments encontrados");
                 
-                // Procurar dataSource com dados
                 IList foundData = null;
                 string foundElement = "";
-                FindDataForExport(report, ref foundData, ref foundElement, 0, 15);
+                string foundDoc = "";
+                
+                foreach (var doc in uiDocs)
+                {
+                    if (doc == null) continue;
+                    try
+                    {
+                        var root = doc.rootVisualElement;
+                        if (root == null) continue;
+                        
+                        FindDataForExport(root, ref foundData, ref foundElement, 0, 20);
+                        
+                        if (foundData != null)
+                        {
+                            foundDoc = doc.name;
+                            break;
+                        }
+                    }
+                    catch { }
+                }
                 
                 if (foundData != null && foundData.Count > 0)
                 {
-                    Log.LogInfo($"[Export] ✅ Encontrado {foundData.Count} itens em {foundElement}");
+                    Log.LogInfo($"[Export] ✅ Encontrado {foundData.Count} itens em [{foundDoc}] {foundElement}");
                     ExportToCsv(foundData);
                 }
                 else
