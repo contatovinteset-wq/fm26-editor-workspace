@@ -86,6 +86,7 @@ namespace FM26CtrlPExport
         {
             try
             {
+                _totalElements = 0;
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
                 foreach (var doc in uiDocs)
                 {
@@ -97,9 +98,8 @@ namespace FM26CtrlPExport
                     if (report != null)
                     {
                         Log.LogInfo($"[Deep] === {reportName} === childCount: {report.childCount}");
-                        
-                        // Mapear com profundidade 12
                         MapElementDeep(report, 0, 12);
+                        Log.LogInfo($"[Deep] Total elementos: {_totalElements}");
                     }
                     else
                     {
@@ -119,11 +119,10 @@ namespace FM26CtrlPExport
         {
             if (element == null || depth > maxDepth) return;
             _totalElements++;
-            if (_totalElements > 500) return; // Limite de segurança
+            if (_totalElements > 500) return;
             
             string indent = new string(' ', depth * 2);
             
-            // Verificar dataSource
             string dsInfo = "";
             try
             {
@@ -139,7 +138,6 @@ namespace FM26CtrlPExport
             }
             catch { }
             
-            // Marcar elementos suspeitos
             string marker = "";
             string nameLower = element.name.ToLower();
             if (nameLower.Contains("table") || nameLower.Contains("list") || 
@@ -151,7 +149,6 @@ namespace FM26CtrlPExport
             
             Log.LogInfo($"[Deep] {indent}{element.name} ({element.GetType().Name}) [{element.childCount}]{dsInfo}{marker}");
             
-            // Recursão em TODOS os filhos
             for (int i = 0; i < element.childCount; i++)
             {
                 MapElementDeep(element[i], depth + 1, maxDepth);
@@ -171,7 +168,6 @@ namespace FM26CtrlPExport
                     
                     Log.LogInfo($"[Table] Escaneando UIDocument: {doc.name}");
                     
-                    // Buscar elementos com "StreamedTable" no nome ou tipo
                     var found = new List<VisualElement>();
                     FindElementsWithPattern(root, found, 0, 30, 
                         e => e.name.Contains("Streamed") || 
@@ -184,7 +180,6 @@ namespace FM26CtrlPExport
                     {
                         Log.LogInfo($"[Table] ⭐ {e.name} ({e.GetType().Name}) childCount={e.childCount}");
                         
-                        // Explorar dataSource
                         try
                         {
                             var dsProp = e.GetType().GetProperty("dataSource");
@@ -236,7 +231,7 @@ namespace FM26CtrlPExport
                 foreach (var p in props)
                 {
                     if (p.GetIndexParameters().Length > 0) continue;
-                    if (p.Name.Length > 30) continue; // Ignorar nomes muito longos
+                    if (p.Name.Length > 30) continue;
                     
                     try
                     {
@@ -270,7 +265,6 @@ namespace FM26CtrlPExport
                     var root = doc.rootVisualElement;
                     if (root == null) continue;
                     
-                    // Buscar qualquer elemento com dados
                     var found = new List<VisualElement>();
                     FindElementsWithPattern(root, found, 0, 30, e => true);
                     
@@ -362,7 +356,6 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                // Tenta extrair Item1 de ValueTuple
                 var item1Prop = first.GetType().GetProperty("Item1");
                 object targetObj = item1Prop != null ? item1Prop.GetValue(first) : first;
                 
