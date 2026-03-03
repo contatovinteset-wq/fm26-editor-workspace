@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.18.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.19.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.18.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.19.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -60,20 +60,20 @@ namespace FM26CtrlPExport
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - Exportar via dataSource");
-                    ExportFromDataSource();
+                    Log.LogInfo(">>> Ctrl+P - Exportar");
+                    ExportData();
                 }
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Investigar dataSource do PlayerSearchReport");
-                    InvestigateDataSource("PlayerSearchReport");
+                    Log.LogInfo(">>> F9 - Mapear hierarquia PlayerSearchReport");
+                    MapHierarchy("PlayerSearchReport");
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Investigar dataSource do TeamSquadReport");
-                    InvestigateDataSource("TeamSquadReport");
+                    Log.LogInfo(">>> F10 - Mapear hierarquia TeamSquadReport");
+                    MapHierarchy("TeamSquadReport");
                 }
             }
             catch (Exception ex)
@@ -82,7 +82,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void InvestigateDataSource(string reportName)
+        private static void MapHierarchy(string reportName)
         {
             try
             {
@@ -96,131 +96,101 @@ namespace FM26CtrlPExport
                     var report = FindElementByName(root, reportName, 0, 30);
                     if (report != null)
                     {
-                        Log.LogInfo($"[DS] === {reportName} ===");
+                        Log.LogInfo($"[Map] === {reportName} ===");
+                        Log.LogInfo($"[Map] childCount: {report.childCount}");
                         
-                        // Ler dataSource
-                        var dsProp = report.GetType().GetProperty("dataSource");
-                        if (dsProp != null)
-                        {
-                            try
-                            {
-                                var ds = dsProp.GetValue(report);
-                                if (ds != null)
-                                {
-                                    Log.LogInfo($"[DS] dataSource: {ds.GetType().FullName}");
-                                    ExploreObject(ds, "dataSource", 0, 3);
-                                }
-                                else
-                                {
-                                    Log.LogInfo($"[DS] dataSource é null");
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                Log.LogWarning($"[DS] Erro ao ler dataSource: {ex.Message}");
-                            }
-                        }
-                        
-                        // Ler bindings
-                        var bindingsProp = report.GetType().GetProperty("bindings");
-                        if (bindingsProp != null)
-                        {
-                            try
-                            {
-                                var bindings = bindingsProp.GetValue(report) as IList;
-                                if (bindings != null)
-                                {
-                                    Log.LogInfo($"[DS] bindings: {bindings.Count} itens");
-                                }
-                            }
-                            catch { }
-                        }
-                        
-                        // Ler hierarquia de filhos
-                        Log.LogInfo($"[DS] Filhos diretos: {report.childCount}");
-                        for (int i = 0; i < report.childCount && i < 10; i++)
-                        {
-                            var child = report[i];
-                            if (child != null)
-                            {
-                                Log.LogInfo($"[DS]   [{i}] {child.name} ({child.GetType().Name})");
-                                
-                                // Verificar dataSource do filho
-                                var childDsProp = child.GetType().GetProperty("dataSource");
-                                if (childDsProp != null)
-                                {
-                                    try
-                                    {
-                                        var childDs = childDsProp.GetValue(child);
-                                        if (childDs != null)
-                                        {
-                                            Log.LogInfo($"[DS]      dataSource: {childDs.GetType().Name}");
-                                        }
-                                    }
-                                    catch { }
-                                }
-                            }
-                        }
+                        // Mapear hierarquia completa
+                        MapElement(report, 0, 5);
                     }
                     else
                     {
-                        Log.LogWarning($"[DS] {reportName} não encontrado");
+                        Log.LogWarning($"[Map] {reportName} não encontrado");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[DS] Erro: {ex.Message}");
+                Log.LogError($"[Map] Erro: {ex.Message}");
             }
         }
         
-        private static void ExploreObject(object obj, string path, int depth, int maxDepth)
+        private static void MapElement(VisualElement element, int depth, int maxDepth)
         {
-            if (obj == null || depth > maxDepth) return;
+            if (element == null || depth > maxDepth) return;
+            
+            string indent = new string(' ', depth * 2);
+            string dsInfo = "";
+            
+            // Tentar ler dataSource
+            try
+            {
+                var dsProp = element.GetType().GetProperty("dataSource");
+                if (dsProp != null)
+                {
+                    var ds = dsProp.GetValue(element);
+                    if (ds != null)
+                    {
+                        dsInfo = $" [DS: {ds.GetType().Name}]";
+                        
+                        // Se tem dataSource, explorar
+                        ExploreDataSource(ds, depth + 1, 2);
+                    }
+                }
+            }
+            catch { }
+            
+            // Verificar se parece com tabela/lista
+            string typeHint = "";
+            string nameLower = element.name.ToLower();
+            if (nameLower.Contains("table") || nameLower.Contains("list") || 
+                nameLower.Contains("row") || nameLower.Contains("item") ||
+                nameLower.Contains("streamed"))
+            {
+                typeHint = " ⭐";
+            }
+            
+            Log.LogInfo($"[Map] {indent}{element.name} ({element.GetType().Name}){dsInfo}{typeHint}");
+            
+            // Recursão nos filhos
+            for (int i = 0; i < element.childCount && i < 20; i++)
+            {
+                MapElement(element[i], depth + 1, maxDepth);
+            }
+        }
+        
+        private static void ExploreDataSource(object ds, int depth, int maxDepth)
+        {
+            if (ds == null || depth > maxDepth) return;
             
             try
             {
-                var type = obj.GetType();
+                var type = ds.GetType();
+                string indent = new string(' ', depth * 2);
                 
-                // Propriedades comuns que podem ter dados
-                string[] interestingProps = { "items", "rows", "data", "list", "players", "source", "value" };
-                
+                // Procurar propriedades que parecem listas
                 var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
                 foreach (var p in props)
                 {
                     if (p.GetIndexParameters().Length > 0) continue;
-                    if (p.Name == "Item") continue;
                     
                     string nameLower = p.Name.ToLower();
-                    bool isInteresting = false;
-                    foreach (var interest in interestingProps)
-                    {
-                        if (nameLower.Contains(interest))
-                        {
-                            isInteresting = true;
-                            break;
-                        }
-                    }
+                    bool isList = nameLower.Contains("list") || nameLower.Contains("items") ||
+                                  nameLower.Contains("rows") || nameLower.Contains("data") ||
+                                  nameLower.Contains("players") || nameLower.Contains("source");
                     
-                    if (isInteresting || depth == 0)
+                    if (isList || p.PropertyType.Name.Contains("List") || p.PropertyType.Name.Contains("IList"))
                     {
                         try
                         {
-                            var val = p.GetValue(obj);
-                            if (val == null) continue;
-                            
+                            var val = p.GetValue(ds);
                             if (val is IList list)
                             {
-                                Log.LogInfo($"[DS] {path}.{p.Name}: List com {list.Count} itens!");
+                                Log.LogInfo($"[DS] {indent}{p.Name}: List<{list.Count} itens>");
                                 if (list.Count > 0)
                                 {
-                                    Log.LogInfo($"[DS]    Primeiro: {list[0]?.GetType().Name ?? "null"}");
+                                    var first = list[0];
+                                    Log.LogInfo($"[DS] {indent}  Primeiro: {first?.GetType().Name ?? "null"}");
                                 }
-                            }
-                            else if (!p.PropertyType.IsPrimitive && p.PropertyType != typeof(string))
-                            {
-                                Log.LogInfo($"[DS] {path}.{p.Name}: {p.PropertyType.Name}");
-                                ExploreObject(val, $"{path}.{p.Name}", depth + 1, maxDepth);
                             }
                         }
                         catch { }
@@ -230,7 +200,7 @@ namespace FM26CtrlPExport
             catch { }
         }
         
-        private static void ExportFromDataSource()
+        private static void ExportData()
         {
             try
             {
@@ -248,20 +218,20 @@ namespace FM26CtrlPExport
                         var target = FindElementByName(root, targetName, 0, 30);
                         if (target == null) continue;
                         
-                        Log.LogInfo($"[Export] Escaneando {targetName} e filhos...");
+                        Log.LogInfo($"[Export] Buscando dados em {targetName}...");
                         
-                        // Tentar encontrar dados no target e seus filhos
-                        var data = FindDataInElementTree(target, 0, 15);
+                        // Buscar recursivamente
+                        var data = FindDataInTree(target, 0, 10);
                         if (data != null)
                         {
-                            Log.LogInfo($"[Export] ✅ Dados encontrados: {data.Count} itens");
+                            Log.LogInfo($"[Export] ✅ Dados: {data.Count} itens");
                             ExportCsv(data);
                             return;
                         }
                     }
                 }
                 
-                Log.LogWarning("[Export] Nenhum dataSource com lista encontrado.");
+                Log.LogWarning("[Export] Nenhum dado encontrado.");
             }
             catch (Exception ex)
             {
@@ -269,45 +239,22 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static IList FindDataInElementTree(VisualElement element, int depth, int maxDepth)
+        private static IList FindDataInTree(VisualElement element, int depth, int maxDepth)
         {
             if (element == null || depth > maxDepth) return null;
             
+            // Verificar dataSource
             try
             {
-                // Verificar dataSource
                 var dsProp = element.GetType().GetProperty("dataSource");
                 if (dsProp != null)
                 {
-                    try
+                    var ds = dsProp.GetValue(element);
+                    if (ds != null)
                     {
-                        var ds = dsProp.GetValue(element);
-                        if (ds != null)
-                        {
-                            var list = FindListInObject(ds, 0, 5);
-                            if (list != null && list.Count > 0) return list;
-                        }
+                        var list = FindListInObject(ds, 0, 3);
+                        if (list != null && list.Count > 0) return list;
                     }
-                    catch { }
-                }
-                
-                // Verificar propriedades diretas
-                var props = element.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                foreach (var p in props)
-                {
-                    if (p.GetIndexParameters().Length > 0) continue;
-                    if (p.Name == "Item") continue;
-                    
-                    try
-                    {
-                        var val = p.GetValue(element);
-                        if (val is IList list && list.Count > 5)
-                        {
-                            Log.LogInfo($"[Export] Lista em {element.name}.{p.Name}: {list.Count}");
-                            return list;
-                        }
-                    }
-                    catch { }
                 }
             }
             catch { }
@@ -315,7 +262,7 @@ namespace FM26CtrlPExport
             // Recursão nos filhos
             for (int i = 0; i < element.childCount && i < 50; i++)
             {
-                var found = FindDataInElementTree(element[i], depth + 1, maxDepth);
+                var found = FindDataInTree(element[i], depth + 1, maxDepth);
                 if (found != null) return found;
             }
             
@@ -340,6 +287,7 @@ namespace FM26CtrlPExport
                         var val = p.GetValue(obj);
                         if (val is IList list && list.Count > 0)
                         {
+                            Log.LogInfo($"[Find] Encontrado: {p.Name} com {list.Count} itens");
                             return list;
                         }
                         else if (val != null && !p.PropertyType.IsPrimitive && p.PropertyType != typeof(string))
