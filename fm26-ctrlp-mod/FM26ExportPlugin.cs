@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.7.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.8.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.7.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.8.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -67,11 +67,11 @@ namespace FM26CtrlPExport
                     SafeExport();
                 }
                 
-                // F9 - DUMP COMPLETO
+                // F9 - DUMP SIMPLES (só nome e filhos)
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - DUMP COMPLETO");
-                    DumpEverything();
+                    Log.LogInfo(">>> F9 - DUMP HIERARQUIA");
+                    DumpHierarchy();
                 }
                 
                 // F10 - Buscar dataSource
@@ -81,7 +81,7 @@ namespace FM26CtrlPExport
                     FindAllDataSources();
                 }
                 
-                // F12 - Diagnóstico simples
+                // F12 - Diagnóstico
                 if (Keyboard.current.f12Key.wasPressedThisFrame)
                 {
                     Log.LogInfo(">>> F12 - Diagnóstico");
@@ -94,8 +94,8 @@ namespace FM26CtrlPExport
             }
         }
         
-        // F9 - DUMP COMPLETO de toda a hierarquia
-        private static void DumpEverything()
+        // F9 - DUMP SIMPLES da hierarquia (sem acessar propriedades)
+        private static void DumpHierarchy()
         {
             try
             {
@@ -106,9 +106,9 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                Log.LogInfo("[F9] ===== DUMP COMPLETO =====");
-                DumpElement(report, 0, 10);
-                Log.LogInfo("[F9] ===== FIM DO DUMP =====");
+                Log.LogInfo("[F9] ===== HIERARQUIA =====");
+                DumpElementSimple(report, 0, 12);
+                Log.LogInfo("[F9] ===== FIM =====");
             }
             catch (Exception ex)
             {
@@ -116,7 +116,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void DumpElement(VisualElement element, int depth, int maxDepth)
+        private static void DumpElementSimple(VisualElement element, int depth, int maxDepth)
         {
             if (element == null || depth > maxDepth) return;
             
@@ -124,75 +124,19 @@ namespace FM26CtrlPExport
             {
                 string indent = new string(' ', depth * 2);
                 string name = element.name ?? "(null)";
-                string typeName = element.GetType().Name;
                 int childCount = element.childCount;
                 
-                // Mostrar elemento
-                Log.LogInfo($"[F9] {indent}{name} ({typeName}) [{childCount} filhos]");
+                // Só mostrar nome e quantidade de filhos
+                Log.LogInfo($"[F9] {indent}{name} [{childCount}]");
                 
-                // Se tiver dataSource, mostrar
-                try
-                {
-                    var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
-                    if (dsProp != null)
-                    {
-                        var ds = dsProp.GetValue(element);
-                        if (ds != null)
-                        {
-                            string dsType = ds.GetType().FullName;
-                            if (ds is IList list)
-                            {
-                                Log.LogInfo($"[F9] {indent}  >>> dataSource: {dsType} ({list.Count} itens)");
-                            }
-                            else
-                            {
-                                Log.LogInfo($"[F9] {indent}  >>> dataSource: {dsType}");
-                            }
-                        }
-                    }
-                }
-                catch { }
-                
-                // Mostrar TODAS as propriedades no nível 3-4 (mais fundo)
-                if (depth >= 3 && depth <= 5)
+                // Recursão
+                for (int i = 0; i < childCount && i < 100; i++)
                 {
                     try
                     {
-                        var props = element.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                        foreach (var prop in props)
-                        {
-                            if (prop.GetIndexParameters().Length > 0) continue;
-                            if (prop.Name == "name" || prop.Name == "childCount") continue;
-                            
-                            try
-                            {
-                                var value = prop.GetValue(element);
-                                if (value == null) continue;
-                                
-                                string valueStr = value.ToString();
-                                if (valueStr.Length > 50) valueStr = valueStr.Substring(0, 50) + "...";
-                                
-                                // Filtrar propriedades interessantes
-                                if (value is IList || 
-                                    prop.Name.Contains("Data") || 
-                                    prop.Name.Contains("List") ||
-                                    prop.Name.Contains("Item") ||
-                                    prop.Name.Contains("Source"))
-                                {
-                                    string listInfo = value is IList l ? $" ({l.Count} itens)" : "";
-                                    Log.LogInfo($"[F9] {indent}  {prop.Name}: {valueStr}{listInfo}");
-                                }
-                            }
-                            catch { }
-                        }
+                        DumpElementSimple(element[i], depth + 1, maxDepth);
                     }
                     catch { }
-                }
-                
-                // Recursão nos filhos
-                for (int i = 0; i < childCount && i < 50; i++)
-                {
-                    DumpElement(element[i], depth + 1, maxDepth);
                 }
             }
             catch { }
@@ -226,7 +170,9 @@ namespace FM26CtrlPExport
             
             try
             {
-                // Verificar dataSource
+                string name = element.name ?? "(null)";
+                
+                // Verificar dataSource - SÓ isso, sem outras propriedades
                 var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
                 if (dsProp != null)
                 {
@@ -236,18 +182,11 @@ namespace FM26CtrlPExport
                         if (ds != null)
                         {
                             count++;
-                            string name = element.name ?? "(null)";
-                            string dsType = ds.GetType().FullName;
+                            string dsType = ds.GetType().Name;
                             
                             if (ds is IList list)
                             {
                                 Log.LogInfo($"[F10] ✅ {name}: {dsType} ({list.Count} itens)");
-                                
-                                // Se tem itens, mostrar o tipo do primeiro
-                                if (list.Count > 0 && list[0] != null)
-                                {
-                                    Log.LogInfo($"[F10]    Primeiro item: {list[0].GetType().FullName}");
-                                }
                             }
                             else
                             {
@@ -259,15 +198,19 @@ namespace FM26CtrlPExport
                 }
                 
                 // Recursão
-                for (int i = 0; i < element.childCount && i < 50; i++)
+                for (int i = 0; i < element.childCount && i < 100; i++)
                 {
-                    FindDataSourcesRecursive(element[i], ref count, depth + 1, maxDepth);
+                    try
+                    {
+                        FindDataSourcesRecursive(element[i], ref count, depth + 1, maxDepth);
+                    }
+                    catch { }
                 }
             }
             catch { }
         }
         
-        // F12 - Diagnóstico simples
+        // F12 - Diagnóstico
         private static void Diagnose()
         {
             try
@@ -278,7 +221,11 @@ namespace FM26CtrlPExport
                 foreach (var doc in uiDocs)
                 {
                     if (doc == null) continue;
-                    Log.LogInfo($"[F12]   {doc.name}: {doc.rootVisualElement?.childCount ?? 0} filhos");
+                    try
+                    {
+                        Log.LogInfo($"[F12]   {doc.name}: {doc.rootVisualElement?.childCount ?? 0} filhos");
+                    }
+                    catch { }
                 }
             }
             catch (Exception ex)
@@ -331,20 +278,28 @@ namespace FM26CtrlPExport
                 var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
                 if (dsProp != null)
                 {
-                    var ds = dsProp.GetValue(element);
-                    if (ds is IList list && list.Count > 0)
+                    try
                     {
-                        foundData = list;
-                        foundName = element.name ?? "(null)";
-                        return;
+                        var ds = dsProp.GetValue(element);
+                        if (ds is IList list && list.Count > 0)
+                        {
+                            foundData = list;
+                            foundName = element.name ?? "(null)";
+                            return;
+                        }
                     }
+                    catch { }
                 }
                 
                 // Recursão
-                for (int i = 0; i < element.childCount && i < 50; i++)
+                for (int i = 0; i < element.childCount && i < 100; i++)
                 {
-                    FindDataForExport(element[i], ref foundData, ref foundName, depth + 1, maxDepth);
-                    if (foundData != null) return;
+                    try
+                    {
+                        FindDataForExport(element[i], ref foundData, ref foundName, depth + 1, maxDepth);
+                        if (foundData != null) return;
+                    }
+                    catch { }
                 }
             }
             catch { }
@@ -364,11 +319,15 @@ namespace FM26CtrlPExport
                     
                     for (int i = 0; i < root.childCount; i++)
                     {
-                        var child = root[i];
-                        if (child?.name == "Report")
+                        try
                         {
-                            return child;
+                            var child = root[i];
+                            if (child?.name == "Report")
+                            {
+                                return child;
+                            }
                         }
+                        catch { }
                     }
                 }
             }
