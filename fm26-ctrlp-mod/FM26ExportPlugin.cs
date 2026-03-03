@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.14.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.15.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.14.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.15.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -68,20 +68,20 @@ namespace FM26CtrlPExport
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Cast direto para StreamedTable");
-                    FindByCast();
+                    Log.LogInfo(">>> F9 - Buscar QUALQUER IList");
+                    FindAnyIList();
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Listar TODOS os tipos de elementos");
-                    ListAllElementTypes();
+                    Log.LogInfo(">>> F10 - Listar UIDocuments");
+                    ListUIDocuments();
                 }
                 
                 if (Keyboard.current.f11Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F11 - Buscar por nome 'table'");
-                    FindByName();
+                    Log.LogInfo(">>> F11 - Dump hierarquia completa");
+                    DumpHierarchy();
                 }
             }
             catch (Exception ex)
@@ -90,14 +90,13 @@ namespace FM26CtrlPExport
             }
         }
         
-        // F9 - Tentar cast direto
-        private static void FindByCast()
+        // F9 - Buscar qualquer elemento que tenha uma propriedade IList
+        private static void FindAnyIList()
         {
             try
             {
-                var streamedTableType = Type.GetType("SI.Bindable.StreamedTable, SI.Bindable");
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                int count = 0;
+                int listsFound = 0;
                 int elementsChecked = 0;
                 
                 foreach (var doc in uiDocs)
@@ -108,12 +107,12 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        FindByCastRecursive(root, streamedTableType, ref count, ref elementsChecked, 0, 20, doc.name);
+                        FindIListRecursive(root, ref listsFound, ref elementsChecked, 0, 50, doc.name);
                     }
                     catch { }
                 }
                 
-                Log.LogInfo($"[F9] Elementos verificados: {elementsChecked}, StreamedTable encontrados: {count}");
+                Log.LogInfo($"[F9] Elementos: {elementsChecked}, ILists: {listsFound}");
             }
             catch (Exception ex)
             {
@@ -121,7 +120,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindByCastRecursive(VisualElement element, Type streamedTableType, ref int count, ref int checkedCount, int depth, int maxDepth, string docName)
+        private static void FindIListRecursive(VisualElement element, ref int count, ref int checkedCount, int depth, int maxDepth, string docName)
         {
             if (element == null || depth > maxDepth) return;
             
@@ -129,33 +128,48 @@ namespace FM26CtrlPExport
             {
                 checkedCount++;
                 var type = element.GetType();
-                string typeName = type.FullName ?? type.Name;
                 string elementName = element.name ?? "";
                 
-                // Verificar se o tipo é compatível
-                bool isStreamedTable = false;
-                if (streamedTableType != null && streamedTableType.IsAssignableFrom(type))
-                {
-                    isStreamedTable = true;
-                }
-                else if (typeName.Contains("StreamedTable"))
-                {
-                    isStreamedTable = true;
-                }
+                // Buscar TODAS as propriedades
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
                 
-                if (isStreamedTable)
+                foreach (var prop in props)
                 {
-                    count++;
-                    Log.LogInfo($"[F9] ⭐ ENCONTROU! [{docName}] {elementName} tipo={typeName}");
-                    TryReadMRows(element);
+                    if (prop.GetIndexParameters().Length > 0) continue;
+                    if (prop.Name == "Item") continue;
+                    
+                    try
+                    {
+                        var propType = prop.PropertyType;
+                        
+                        // Verificar se é IList ou IEnumerable (mas não string)
+                        if (typeof(IList).IsAssignableFrom(propType) || 
+                            (propType.Name.Contains("List") && propType != typeof(string)))
+                        {
+                            var value = prop.GetValue(element) as IList;
+                            if (value != null && value.Count > 0)
+                            {
+                                count++;
+                                Log.LogInfo($"[F9] ⭐ [{docName}] {elementName}.{prop.Name} = {value.Count} itens");
+                                Log.LogInfo($"[F9]    Tipo: {propType.Name}");
+                                
+                                var first = value[0];
+                                if (first != null)
+                                {
+                                    Log.LogInfo($"[F9]    Item: {first.GetType().Name}");
+                                }
+                            }
+                        }
+                    }
+                    catch { }
                 }
                 
                 // Recursão
-                for (int i = 0; i < element.childCount && i < 100; i++)
+                for (int i = 0; i < element.childCount && i < 200; i++)
                 {
                     try
                     {
-                        FindByCastRecursive(element[i], streamedTableType, ref count, ref checkedCount, depth + 1, maxDepth, docName);
+                        FindIListRecursive(element[i], ref count, ref checkedCount, depth + 1, maxDepth, docName);
                     }
                     catch { }
                 }
@@ -163,43 +177,13 @@ namespace FM26CtrlPExport
             catch { }
         }
         
-        private static void TryReadMRows(object element)
-        {
-            try
-            {
-                var type = element.GetType();
-                var mRowsProp = type.GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                
-                if (mRowsProp == null)
-                {
-                    Log.LogInfo($"[F9]    m_rows não encontrado");
-                    return;
-                }
-                
-                var mRows = mRowsProp.GetValue(element) as IList;
-                if (mRows != null)
-                {
-                    Log.LogInfo($"[F9]    m_rows: {mRows.Count} itens!");
-                }
-                else
-                {
-                    Log.LogInfo($"[F9]    m_rows é null");
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogWarning($"[F9]    Erro: {ex.Message}");
-            }
-        }
-        
-        // F10 - Listar todos os tipos
-        private static void ListAllElementTypes()
+        // F10 - Listar todos os UIDocuments
+        private static void ListUIDocuments()
         {
             try
             {
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                var types = new HashSet<string>();
-                int totalElements = 0;
+                Log.LogInfo($"[F10] UIDocuments encontrados: {uiDocs.Length}");
                 
                 foreach (var doc in uiDocs)
                 {
@@ -207,25 +191,10 @@ namespace FM26CtrlPExport
                     try
                     {
                         var root = doc.rootVisualElement;
-                        if (root == null) continue;
-                        
-                        CollectTypes(root, types, ref totalElements, 0, 20);
+                        Log.LogInfo($"[F10] - {doc.name}: root={root?.name ?? "null"}, children={root?.childCount ?? 0}");
                     }
                     catch { }
                 }
-                
-                Log.LogInfo($"[F10] Total elementos: {totalElements}, tipos únicos: {types.Count}");
-                
-                int relevant = 0;
-                foreach (var t in types)
-                {
-                    if (t.Contains("Table") || t.Contains("List") || t.Contains("Stream") || t.Contains("Row") || t.Contains("Data"))
-                    {
-                        Log.LogInfo($"[F10] ⭐ {t}");
-                        relevant++;
-                    }
-                }
-                Log.LogInfo($"[F10] Tipos relevantes: {relevant}");
             }
             catch (Exception ex)
             {
@@ -233,35 +202,13 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void CollectTypes(VisualElement element, HashSet<string> types, ref int count, int depth, int maxDepth)
-        {
-            if (element == null || depth > maxDepth) return;
-            
-            try
-            {
-                count++;
-                var type = element.GetType();
-                types.Add(type.FullName ?? type.Name);
-                
-                for (int i = 0; i < element.childCount && i < 100; i++)
-                {
-                    try
-                    {
-                        CollectTypes(element[i], types, ref count, depth + 1, maxDepth);
-                    }
-                    catch { }
-                }
-            }
-            catch { }
-        }
-        
-        // F11 - Buscar por nome
-        private static void FindByName()
+        // F11 - Dump da hierarquia (primeiros 100 elementos)
+        private static void DumpHierarchy()
         {
             try
             {
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                int count = 0;
+                int total = 0;
                 
                 foreach (var doc in uiDocs)
                 {
@@ -271,12 +218,13 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        FindByNameRecursive(root, ref count, 0, 20, doc.name);
+                        Log.LogInfo($"[F11] === {doc.name} ===");
+                        DumpElement(root, 0, 5, ref total, 100);
                     }
                     catch { }
                 }
                 
-                Log.LogInfo($"[F11] Elementos relevantes: {count}");
+                Log.LogInfo($"[F11] Total dumpado: {total}");
             }
             catch (Exception ex)
             {
@@ -284,28 +232,25 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindByNameRecursive(VisualElement element, ref int count, int depth, int maxDepth, string docName)
+        private static void DumpElement(VisualElement element, int depth, int maxDepth, ref int total, int limit)
         {
-            if (element == null || depth > maxDepth) return;
+            if (element == null || depth > maxDepth || total >= limit) return;
             
             try
             {
-                string name = (element.name ?? "").ToLower();
-                var type = element.GetType();
-                string typeName = (type.FullName ?? type.Name).ToLower();
+                total++;
+                string indent = new string(' ', depth * 2);
+                string name = element.name ?? "(no name)";
+                string type = element.GetType().Name;
+                int children = element.childCount;
                 
-                if (name.Contains("table") || name.Contains("list") || name.Contains("row") || 
-                    typeName.Contains("table") || typeName.Contains("stream"))
-                {
-                    count++;
-                    Log.LogInfo($"[F11] [{docName}] name={element.name} type={type.Name}");
-                }
+                Log.LogInfo($"[F11] {indent}{name} [{type}] ({children} filhos)");
                 
-                for (int i = 0; i < element.childCount && i < 100; i++)
+                for (int i = 0; i < children && i < 20; i++)
                 {
                     try
                     {
-                        FindByNameRecursive(element[i], ref count, depth + 1, maxDepth, docName);
+                        DumpElement(element[i], depth + 1, maxDepth, ref total, limit);
                     }
                     catch { }
                 }
@@ -318,10 +263,11 @@ namespace FM26CtrlPExport
         {
             try
             {
-                Log.LogInfo("[Export] Buscando dados...");
+                Log.LogInfo("[Export] Buscando ILists...");
                 
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
                 IList foundData = null;
+                string foundInfo = "";
                 
                 foreach (var doc in uiDocs)
                 {
@@ -331,7 +277,7 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        FindAndExport(root, ref foundData, 0, 20);
+                        FindAndExport(root, ref foundData, ref foundInfo, 0, 50, doc.name);
                         
                         if (foundData != null) break;
                     }
@@ -340,12 +286,12 @@ namespace FM26CtrlPExport
                 
                 if (foundData != null && foundData.Count > 0)
                 {
-                    Log.LogInfo($"[Export] ✅ {foundData.Count} itens");
+                    Log.LogInfo($"[Export] ✅ {foundInfo}");
                     ExportToCsv(foundData);
                 }
                 else
                 {
-                    Log.LogWarning("[Export] Nenhum dado. Use F9/F10/F11.");
+                    Log.LogWarning("[Export] Nenhum IList com dados. Use F9.");
                 }
             }
             catch (Exception ex)
@@ -354,16 +300,17 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindAndExport(VisualElement element, ref IList foundData, int depth, int maxDepth)
+        private static void FindAndExport(VisualElement element, ref IList foundData, ref string foundInfo, int depth, int maxDepth, string docName)
         {
             if (element == null || depth > maxDepth || foundData != null) return;
             
             try
             {
                 var type = element.GetType();
+                string elementName = element.name ?? "";
                 
+                // Priorizar m_rows
                 var mRowsProp = type.GetProperty("m_rows", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                
                 if (mRowsProp != null)
                 {
                     try
@@ -371,19 +318,44 @@ namespace FM26CtrlPExport
                         var mRows = mRowsProp.GetValue(element) as IList;
                         if (mRows != null && mRows.Count > 0)
                         {
-                            Log.LogInfo($"[Export] m_rows com {mRows.Count} itens em {element.name}");
                             foundData = mRows;
+                            foundInfo = $"[{docName}] {elementName}.m_rows ({mRows.Count} itens)";
                             return;
                         }
                     }
                     catch { }
                 }
                 
-                for (int i = 0; i < element.childCount && i < 100; i++)
+                // Buscar outras Listas
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                foreach (var prop in props)
+                {
+                    if (foundData != null) break;
+                    if (prop.GetIndexParameters().Length > 0) continue;
+                    if (prop.Name == "Item") continue;
+                    
+                    try
+                    {
+                        if (typeof(IList).IsAssignableFrom(prop.PropertyType))
+                        {
+                            var value = prop.GetValue(element) as IList;
+                            if (value != null && value.Count > 10) // Mínimo 10 itens
+                            {
+                                foundData = value;
+                                foundInfo = $"[{docName}] {elementName}.{prop.Name} ({value.Count} itens)";
+                                return;
+                            }
+                        }
+                    }
+                    catch { }
+                }
+                
+                // Recursão
+                for (int i = 0; i < element.childCount && i < 200; i++)
                 {
                     try
                     {
-                        FindAndExport(element[i], ref foundData, depth + 1, maxDepth);
+                        FindAndExport(element[i], ref foundData, ref foundInfo, depth + 1, maxDepth, docName);
                         if (foundData != null) return;
                     }
                     catch { }
@@ -410,17 +382,21 @@ namespace FM26CtrlPExport
                 }
                 
                 var itemType = firstItem.GetType();
-                Log.LogInfo($"[Export] Tipo do item: {itemType.FullName}");
+                Log.LogInfo($"[Export] Tipo: {itemType.FullName}");
                 
-                // Verificar se é ValueTuple
+                // ValueTuple?
                 if (itemType.Name.StartsWith("ValueTuple"))
                 {
-                    Log.LogInfo("[Export] É ValueTuple - extraindo Item1...");
                     var item1Prop = itemType.GetProperty("Item1");
                     if (item1Prop != null)
                     {
-                        ExportBindingRoots(data, item1Prop);
-                        return;
+                        var firstBinding = item1Prop.GetValue(firstItem);
+                        if (firstBinding != null)
+                        {
+                            Log.LogInfo($"[Export] Item1: {firstBinding.GetType().FullName}");
+                            ExportBindingRoots(data, item1Prop);
+                            return;
+                        }
                     }
                 }
                 
