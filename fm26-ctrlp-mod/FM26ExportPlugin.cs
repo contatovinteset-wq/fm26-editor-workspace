@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.6.1")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.7.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.6.1 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.7.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -63,29 +63,29 @@ namespace FM26CtrlPExport
                 // Ctrl+P - EXPORTAR
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - EXPORTAR");
-                    SafeExport();
+                    Log.LogInfo(">>> Ctrl+P - DUMP COMPLETO E EXPORT");
+                    DumpAndExport();
                 }
                 
-                // F9 - Investigar Report
+                // F9 - Dump hierarquia COMPLETA
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Investigar Report");
-                    InvestigateReport();
+                    Log.LogInfo(">>> F9 - DUMP HIERARQUIA COMPLETA");
+                    DumpHierarchy();
                 }
                 
-                // F10 - Buscar tabelas
+                // F10 - Procurar dataSource em TUDO
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Buscar tabelas");
-                    FindTables();
+                    Log.LogInfo(">>> F10 - PROCURAR DATASOURCE");
+                    FindAllDataSources();
                 }
                 
-                // F12 - Diagnóstico simples
+                // F12 - Listar TODOS os tipos encontrados
                 if (Keyboard.current.f12Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F12 - Diagnóstico");
-                    Diagnose();
+                    Log.LogInfo(">>> F12 - LISTAR TIPOS");
+                    ListAllTypes();
                 }
             }
             catch (Exception ex)
@@ -94,8 +94,8 @@ namespace FM26CtrlPExport
             }
         }
         
-        // F9 - Investigar estrutura do Report
-        private static void InvestigateReport()
+        // F9 - Dump COMPLETO da hierarquia (15 níveis)
+        private static void DumpHierarchy()
         {
             try
             {
@@ -106,48 +106,9 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                Log.LogInfo($"[F9] Report com {report.childCount} filhos");
-                
-                for (int i = 0; i < report.childCount; i++)
-                {
-                    var child = report[i];
-                    if (child == null) continue;
-                    
-                    string name = child.name ?? "(sem nome)";
-                    Log.LogInfo($"[F9] [{i}] {name}");
-                    
-                    // Se for Body, explorar mais
-                    if (name == "Body")
-                    {
-                        Log.LogInfo($"[F9]   -> Body tem {child.childCount} filhos:");
-                        for (int j = 0; j < child.childCount && j < 20; j++)
-                        {
-                            var bodyChild = child[j];
-                            if (bodyChild == null) continue;
-                            
-                            string bName = bodyChild.name ?? "(sem nome)";
-                            string bType = bodyChild.GetType().Name;
-                            int bChildren = bodyChild.childCount;
-                            
-                            Log.LogInfo($"[F9]     [{j}] {bName} ({bType}) - {bChildren} filhos");
-                            
-                            // Mostrar netos do Body
-                            if (bChildren > 0 && bChildren < 50)
-                            {
-                                for (int k = 0; k < Math.Min(10, bChildren); k++)
-                                {
-                                    var grandChild = bodyChild[k];
-                                    if (grandChild != null)
-                                    {
-                                        string gName = grandChild.name ?? "(sem nome)";
-                                        string gType = grandChild.GetType().Name;
-                                        Log.LogInfo($"[F9]       [{k}] {gName} ({gType})");
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                Log.LogInfo($"[F9] === DUMP COMPLETO ===");
+                DumpElement(report, 0, 15);
+                Log.LogInfo($"[F9] === FIM DO DUMP ===");
             }
             catch (Exception ex)
             {
@@ -155,8 +116,39 @@ namespace FM26CtrlPExport
             }
         }
         
-        // F10 - Buscar tabelas
-        private static void FindTables()
+        private static void DumpElement(VisualElement element, int depth, int maxDepth)
+        {
+            if (element == null || depth > maxDepth) return;
+            
+            try
+            {
+                string indent = new string(' ', depth * 2);
+                string name = element.name ?? "(null)";
+                string typeName = element.GetType().FullName;
+                int childCount = element.childCount;
+                
+                // Logar elemento
+                Log.LogInfo($"{indent}[{depth}] {name} ({typeName}) - {childCount} filhos");
+                
+                // Se tiver poucos filhos, mostrar todos
+                // Se tiver muitos, mostrar apenas os primeiros
+                int childrenToShow = childCount > 50 ? 10 : childCount;
+                
+                for (int i = 0; i < childrenToShow; i++)
+                {
+                    DumpElement(element[i], depth + 1, maxDepth);
+                }
+                
+                if (childCount > 50)
+                {
+                    Log.LogInfo($"{indent}... ({childCount - 10} filhos ocultos)");
+                }
+            }
+            catch { }
+        }
+        
+        // F10 - Procurar dataSource em TODOS os elementos
+        private static void FindAllDataSources()
         {
             try
             {
@@ -168,8 +160,8 @@ namespace FM26CtrlPExport
                 }
                 
                 int found = 0;
-                FindTablesRecursive(report, ref found, 0, 6);
-                Log.LogInfo($"[F10] Total de elementos 'Streamed' encontrados: {found}");
+                FindDataSourcesRecursive(report, ref found, 0, 20);
+                Log.LogInfo($"[F10] Total de dataSources encontrados: {found}");
             }
             catch (Exception ex)
             {
@@ -177,46 +169,62 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindTablesRecursive(VisualElement element, ref int count, int depth, int maxDepth)
+        private static void FindDataSourcesRecursive(VisualElement element, ref int count, int depth, int maxDepth)
         {
             if (element == null || depth > maxDepth) return;
             
             try
             {
-                string typeName = element.GetType().FullName ?? "";
-                string elementName = element.name ?? "";
-                
-                // Verificar se parece uma tabela/lista de dados
-                bool isStreamed = typeName.Contains("Streamed");
-                bool isTable = elementName.Contains("Table") || elementName.Contains("List");
-                
-                if (isStreamed || isTable)
+                // Tentar pegar dataSource
+                var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
+                if (dsProp != null)
                 {
-                    count++;
-                    Log.LogInfo($"[F10] ⭐ {elementName} ({typeName})");
+                    var ds = dsProp.GetValue(element);
+                    if (ds != null)
+                    {
+                        count++;
+                        string name = element.name ?? "(null)";
+                        string dsType = ds.GetType().FullName;
+                        
+                        if (ds is IList list)
+                        {
+                            Log.LogInfo($"[F10] ✅ {name}: dataSource = {dsType} ({list.Count} itens)");
+                        }
+                        else
+                        {
+                            Log.LogInfo($"[F10] 📦 {name}: dataSource = {dsType}");
+                        }
+                    }
                 }
                 
                 // Recursão
-                for (int i = 0; i < element.childCount && i < 30; i++)
+                for (int i = 0; i < element.childCount && i < 100; i++)
                 {
-                    FindTablesRecursive(element[i], ref count, depth + 1, maxDepth);
+                    FindDataSourcesRecursive(element[i], ref count, depth + 1, maxDepth);
                 }
             }
             catch { }
         }
         
-        // F12 - Diagnóstico simples
-        private static void Diagnose()
+        // F12 - Listar todos os tipos únicos encontrados
+        private static void ListAllTypes()
         {
             try
             {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                Log.LogInfo($"[F12] {uiDocs.Length} UIDocuments");
-                
-                foreach (var doc in uiDocs)
+                var report = FindReportElement();
+                if (report == null)
                 {
-                    if (doc == null) continue;
-                    Log.LogInfo($"[F12]   {doc.name}: {doc.rootVisualElement?.childCount ?? 0} filhos");
+                    Log.LogWarning("[F12] Report não encontrado");
+                    return;
+                }
+                
+                var types = new HashSet<string>();
+                CollectTypes(report, types, 0, 20);
+                
+                Log.LogInfo($"[F12] {types.Count} tipos únicos:");
+                foreach (var t in types)
+                {
+                    Log.LogInfo($"[F12]   {t}");
                 }
             }
             catch (Exception ex)
@@ -225,13 +233,27 @@ namespace FM26CtrlPExport
             }
         }
         
-        // Ctrl+P - Exportar
-        private static void SafeExport()
+        private static void CollectTypes(VisualElement element, HashSet<string> types, int depth, int maxDepth)
+        {
+            if (element == null || depth > maxDepth) return;
+            
+            try
+            {
+                types.Add(element.GetType().FullName);
+                
+                for (int i = 0; i < element.childCount && i < 100; i++)
+                {
+                    CollectTypes(element[i], types, depth + 1, maxDepth);
+                }
+            }
+            catch { }
+        }
+        
+        // Ctrl+P - Dump + Export
+        private static void DumpAndExport()
         {
             try
             {
-                Log.LogInfo("[Export] Buscando dados...");
-                
                 var report = FindReportElement();
                 if (report == null)
                 {
@@ -239,18 +261,19 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                // Procurar elemento com dados
+                // Procurar dataSource com dados
                 IList foundData = null;
-                FindDataRecursive(report, ref foundData, 0, 8);
+                string foundElement = "";
+                FindDataForExport(report, ref foundData, ref foundElement, 0, 20);
                 
                 if (foundData != null && foundData.Count > 0)
                 {
-                    Log.LogInfo($"[Export] Encontrado {foundData.Count} itens");
+                    Log.LogInfo($"[Export] ✅ Encontrado {foundData.Count} itens em {foundElement}");
                     ExportToCsv(foundData);
                 }
                 else
                 {
-                    Log.LogWarning("[Export] Nenhum dado encontrado. Tente F9 para ver a estrutura.");
+                    Log.LogWarning("[Export] Nenhum dataSource com lista encontrado. Use F10 para ver todos os dataSources.");
                 }
             }
             catch (Exception ex)
@@ -259,50 +282,28 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindDataRecursive(VisualElement element, ref IList foundData, int depth, int maxDepth)
+        private static void FindDataForExport(VisualElement element, ref IList foundData, ref string foundElement, int depth, int maxDepth)
         {
             if (element == null || depth > maxDepth || foundData != null) return;
             
             try
             {
-                var type = element.GetType();
-                string typeName = type.FullName ?? "";
-                string elementName = element.name ?? "";
-                
-                // Logar todos os elementos no nível 2-3
-                if (depth >= 2 && depth <= 4)
+                var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
+                if (dsProp != null)
                 {
-                    string indent = new string(' ', depth * 2);
-                    Log.LogInfo($"[Export] {indent}Verificando: {elementName} ({typeName})");
-                }
-                
-                // Tentar pegar dataSource de QUALQUER elemento
-                try
-                {
-                    var dsProp = typeof(VisualElement).GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
-                    if (dsProp != null)
+                    var ds = dsProp.GetValue(element);
+                    if (ds is IList list && list.Count > 0)
                     {
-                        var ds = dsProp.GetValue(element);
-                        if (ds != null)
-                        {
-                            string indent2 = new string(' ', depth * 2);
-                            Log.LogInfo($"[Export] {indent2}  dataSource: {ds.GetType().FullName}");
-                            
-                            if (ds is IList list && list.Count > 0)
-                            {
-                                foundData = list;
-                                Log.LogInfo($"[Export] ✅ Encontrado {list.Count} itens em {elementName}!");
-                                return;
-                            }
-                        }
+                        foundData = list;
+                        foundElement = element.name ?? "(null)";
+                        return;
                     }
                 }
-                catch { }
                 
                 // Recursão
-                for (int i = 0; i < element.childCount && i < 30; i++)
+                for (int i = 0; i < element.childCount && i < 100; i++)
                 {
-                    FindDataRecursive(element[i], ref foundData, depth + 1, maxDepth);
+                    FindDataForExport(element[i], ref foundData, ref foundElement, depth + 1, maxDepth);
                     if (foundData != null) return;
                 }
             }
