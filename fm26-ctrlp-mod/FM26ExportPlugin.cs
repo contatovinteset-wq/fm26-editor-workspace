@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.26.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.27.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,7 +22,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.26.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.27.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -42,6 +42,7 @@ namespace FM26CtrlPExport
         
         private static int _frameCount = 0;
         private static bool _initialized = false;
+        private static Type _playerType = null;
         
         public static void OnUpdate()
         {
@@ -52,6 +53,13 @@ namespace FM26CtrlPExport
                 {
                     _initialized = true;
                     Log.LogInfo("[Init] Pronto!");
+                    
+                    // Cache do tipo Player
+                    _playerType = FindPlayerType();
+                    if (_playerType != null)
+                    {
+                        Log.LogInfo($"[Init] Tipo Player encontrado: {_playerType.FullName}");
+                    }
                 }
                 
                 if (!_initialized || Keyboard.current == null) return;
@@ -61,20 +69,20 @@ namespace FM26CtrlPExport
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - Exportar");
-                    TryExportFromTypes();
+                    Log.LogInfo(">>> Ctrl+P - Exportar jogadores");
+                    TryExportPlayers();
                 }
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Buscar tipos com 'Player' ou 'Squad' no nome");
-                    FindPlayerTypes();
+                    Log.LogInfo(">>> F9 - Mostrar propriedades do tipo Player");
+                    ShowPlayerProperties();
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Buscar instâncias de tipos de dados");
-                    FindDataInstances();
+                    Log.LogInfo(">>> F10 - Buscar instâncias de Player");
+                    FindPlayerInstances();
                 }
             }
             catch (Exception ex)
@@ -83,75 +91,118 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindPlayerTypes()
+        private static Type FindPlayerType()
         {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            
+            foreach (var asm in assemblies)
+            {
+                try
+                {
+                    var types = asm.GetTypes();
+                    foreach (var t in types)
+                    {
+                        // Buscar tipo Player com muitas propriedades (49)
+                        if (t.Name == "Player" && !t.Namespace.Contains("UnityEngine"))
+                        {
+                            var props = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                            if (props.Length >= 40)
+                            {
+                                return t;
+                            }
+                        }
+                    }
+                }
+                catch { }
+            }
+            return null;
+        }
+        
+        private static void ShowPlayerProperties()
+        {
+            if (_playerType == null)
+            {
+                Log.LogWarning("[Props] Tipo Player não encontrado");
+                return;
+            }
+            
             try
             {
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                var types = new List<Type>();
+                Log.LogInfo($"[Props] Tipo: {_playerType.FullName}");
+                Log.LogInfo($"[Props] Assembly: {_playerType.Assembly.GetName().Name}");
                 
-                foreach (var asm in assemblies)
+                var props = _playerType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                Log.LogInfo($"[Props] {props.Length} propriedades públicas:");
+                
+                foreach (var p in props.Take(30))
+                {
+                    string info = $"  {p.Name}: {p.PropertyType.Name}";
+                    
+                    // Destacar propriedades interessantes
+                    var name = p.Name.ToLower();
+                    if (name.Contains("name") || name.Contains("age") || name.Contains("club") || 
+                        name.Contains("position") || name.Contains("nation") || name.Contains("value"))
+                    {
+                        info += " ⭐";
+                    }
+                    
+                    Log.LogInfo($"[Props] {info}");
+                }
+                
+                // Verificar métodos estáticos
+                var staticMethods = _playerType.GetMethods(BindingFlags.Static | BindingFlags.Public);
+                Log.LogInfo($"[Props] {staticMethods.Length} métodos estáticos:");
+                foreach (var m in staticMethods.Take(10))
+                {
+                    Log.LogInfo($"[Props]   static {m.ReturnType.Name} {m.Name}()");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Props] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void FindPlayerInstances()
+        {
+            if (_playerType == null)
+            {
+                Log.LogWarning("[Inst] Tipo Player não encontrado");
+                return;
+            }
+            
+            try
+            {
+                Log.LogInfo("[Inst] Buscando instâncias de Player...");
+                
+                // 1. Propriedades estáticas
+                var staticProps = _playerType.GetProperties(BindingFlags.Static | BindingFlags.Public);
+                foreach (var p in staticProps)
                 {
                     try
                     {
-                        var asmTypes = asm.GetTypes();
-                        foreach (var t in asmTypes)
+                        var val = p.GetValue(null);
+                        if (val != null)
                         {
-                            var name = t.Name.ToLower();
-                            if ((name.Contains("player") || name.Contains("squad") || name.Contains("person")) 
-                                && !name.Contains("element") 
-                                && !name.Contains("visual")
-                                && !name.Contains("panel"))
+                            if (val is IList list)
                             {
-                                types.Add(t);
+                                Log.LogInfo($"[Inst] ⭐⭐⭐ {p.Name}: List<{list.Count}>");
+                            }
+                            else if (val.GetType().Name == "Player")
+                            {
+                                Log.LogInfo($"[Inst] ⭐ {p.Name}: Player instance");
+                            }
+                            else
+                            {
+                                Log.LogInfo($"[Inst] {p.Name}: {val.GetType().Name}");
                             }
                         }
                     }
                     catch { }
                 }
                 
-                Log.LogInfo($"[Type] {types.Count} tipos encontrados");
-                
-                // Mostrar os primeiros 30
-                foreach (var t in types.Take(30))
-                {
-                    string info = $"{t.Name}";
-                    
-                    // Verificar se é uma classe com dados (tem propriedades)
-                    var props = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                    if (props.Length > 0)
-                    {
-                        info += $" [{props.Length} props]";
-                        
-                        // Verificar se tem lista
-                        foreach (var p in props)
-                        {
-                            if (typeof(IList).IsAssignableFrom(p.PropertyType))
-                            {
-                                info += " ⭐ IList!";
-                                break;
-                            }
-                        }
-                    }
-                    
-                    Log.LogInfo($"[Type] {info}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Type] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void FindDataInstances()
-        {
-            try
-            {
-                // Buscar tipos que parecem conter dados
-                var targetTypes = new[] { "PlayerSearchResult", "PlayerList", "SquadData", "PlayerItem", "PersonList" };
-                
+                // 2. Buscar em outros tipos
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                
                 foreach (var asm in assemblies)
                 {
                     try
@@ -159,27 +210,23 @@ namespace FM26CtrlPExport
                         var types = asm.GetTypes();
                         foreach (var t in types)
                         {
-                            var name = t.Name;
-                            if (!targetTypes.Any(n => name.Contains(n))) continue;
+                            // Tipos com nomes suspeitos
+                            var name = t.Name.ToLower();
+                            if (!name.Contains("squad") && !name.Contains("team") && !name.Contains("roster")) continue;
                             
-                            Log.LogInfo($"[Inst] Tipo: {t.FullName}");
-                            
-                            // Tentar encontrar instância estática
-                            var props = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
-                            foreach (var p in props)
+                            var staticProps2 = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
+                            foreach (var p in staticProps2)
                             {
                                 try
                                 {
                                     var val = p.GetValue(null);
-                                    if (val != null)
+                                    if (val is IList list && list.Count > 0)
                                     {
-                                        if (val is IList list && list.Count > 0)
+                                        // Verificar se é lista de Player
+                                        var first = list[0];
+                                        if (first != null && first.GetType().Name == "Player")
                                         {
-                                            Log.LogInfo($"[Inst] ⭐ {p.Name}: List<{list.Count}>");
-                                        }
-                                        else
-                                        {
-                                            Log.LogInfo($"[Inst] {p.Name}: {val.GetType().Name}");
+                                            Log.LogInfo($"[Inst] ⭐⭐⭐ {t.Name}.{p.Name}: List<Player> ({list.Count} itens)");
                                         }
                                     }
                                 }
@@ -189,6 +236,22 @@ namespace FM26CtrlPExport
                     }
                     catch { }
                 }
+                
+                // 3. Buscar Object.FindObjectsOfType para Player (MonoBehaviour)
+                try
+                {
+                    var findMethod = typeof(Object).GetMethod("FindObjectsOfType", Type.EmptyTypes);
+                    if (findMethod != null)
+                    {
+                        var genericMethod = findMethod.MakeGenericMethod(_playerType);
+                        var players = genericMethod.Invoke(null, null) as Array;
+                        if (players != null && players.Length > 0)
+                        {
+                            Log.LogInfo($"[Inst] ⭐⭐⭐ FindObjectOfType: {players.Length} Player objects");
+                        }
+                    }
+                }
+                catch { }
             }
             catch (Exception ex)
             {
@@ -196,11 +259,17 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void TryExportFromTypes()
+        private static void TryExportPlayers()
         {
+            if (_playerType == null)
+            {
+                Log.LogWarning("[Export] Tipo Player não encontrado");
+                return;
+            }
+            
             try
             {
-                // Buscar qualquer tipo que tenha uma lista de objetos
+                // Buscar qualquer lista de Player
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies();
                 
                 foreach (var asm in assemblies)
@@ -210,30 +279,20 @@ namespace FM26CtrlPExport
                         var types = asm.GetTypes();
                         foreach (var t in types)
                         {
-                            // Verificar propriedades estáticas com IList
-                            var props = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
-                            foreach (var p in props)
+                            var staticProps = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
+                            foreach (var p in staticProps)
                             {
                                 try
                                 {
                                     var val = p.GetValue(null);
-                                    if (val is IList list && list.Count > 5)
+                                    if (val is IList list && list.Count > 0)
                                     {
-                                        // Verificar se o primeiro item parece ter dados de jogador
                                         var first = list[0];
-                                        if (first != null)
+                                        if (first != null && first.GetType().Name == "Player")
                                         {
-                                            var itemType = first.GetType();
-                                            var itemProps = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                                            
-                                            // Procurar propriedades comuns de jogador
-                                            var propNames = itemProps.Select(x => x.Name.ToLower()).ToList();
-                                            if (propNames.Any(n => n.Contains("name") || n.Contains("age") || n.Contains("club")))
-                                            {
-                                                Log.LogInfo($"[Export] Encontrado: {t.Name}.{p.Name}: List<{list.Count}>");
-                                                ExportCsv(list);
-                                                return;
-                                            }
+                                            Log.LogInfo($"[Export] Encontrado: {t.Name}.{p.Name}: {list.Count} jogadores");
+                                            ExportCsv(list);
+                                            return;
                                         }
                                     }
                                 }
@@ -244,7 +303,7 @@ namespace FM26CtrlPExport
                     catch { }
                 }
                 
-                Log.LogWarning("[Export] Nenhum dado encontrado nos tipos.");
+                Log.LogWarning("[Export] Nenhuma lista de Player encontrada");
             }
             catch (Exception ex)
             {
@@ -257,47 +316,41 @@ namespace FM26CtrlPExport
             try
             {
                 var first = data[0];
-                if (first == null)
-                {
-                    Log.LogWarning("[CSV] Primeiro item é null");
-                    return;
-                }
+                if (first == null) return;
                 
                 var type = first.GetType();
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(p => p.GetIndexParameters().Length == 0 && p.Name.Length < 30)
+                    .ToList();
                 
                 var csv = new System.Text.StringBuilder();
-                var headers = new List<string>();
                 
-                foreach (var p in props)
-                {
-                    if (p.GetIndexParameters().Length == 0 && p.Name.Length < 30) headers.Add(p.Name);
-                }
-                csv.AppendLine(string.Join(";", headers));
+                // Headers
+                csv.AppendLine(string.Join(";", props.Select(p => p.Name)));
                 
+                // Data
                 int count = 0;
                 foreach (var item in data)
                 {
                     if (item == null) continue;
                     
-                    var values = new List<string>();
-                    foreach (var p in props)
+                    var values = props.Select(p =>
                     {
-                        if (p.GetIndexParameters().Length > 0 || p.Name.Length >= 30) continue;
                         try
                         {
                             var val = p.GetValue(item);
-                            values.Add((val?.ToString() ?? "").Replace(";", ","));
+                            return (val?.ToString() ?? "").Replace(";", ",").Replace("\n", " ");
                         }
-                        catch { values.Add(""); }
-                    }
+                        catch { return ""; }
+                    });
+                    
                     csv.AppendLine(string.Join(";", values));
                     count++;
                 }
                 
                 string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Export_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
                 System.IO.File.WriteAllText(path, csv.ToString());
-                Log.LogInfo($"[CSV] ✅ {count} linhas em: {path}");
+                Log.LogInfo($"[CSV] ✅ {count} jogadores exportados: {path}");
             }
             catch (Exception ex)
             {
