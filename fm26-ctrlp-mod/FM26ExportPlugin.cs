@@ -61,20 +61,20 @@ namespace FM26CtrlPExport
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - Exportar");
-                    TryExport();
+                    Log.LogInfo(">>> Ctrl+P - Buscar e exportar");
+                    FindAndExport();
                 }
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Buscar tipos PlayerSearch/PlayerDatabase");
-                    FindPlayerSearchTypes();
+                    Log.LogInfo(">>> F9 - Buscar tipos Search/Database/Recruitment");
+                    FindSearchTypes();
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Listar TODOS tipos SI.Bindable (primeiros 100)");
-                    ListAllBindableTypes();
+                    Log.LogInfo(">>> F10 - Buscar elementos UI 'search' e 'database'");
+                    FindSearchUIElements();
                 }
             }
             catch (Exception ex)
@@ -83,121 +83,154 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindPlayerSearchTypes()
+        private static void FindSearchTypes()
         {
             try
             {
-                var asm = AppDomain.CurrentDomain.GetAssemblies()
-                    .FirstOrDefault(a => a.GetName().Name == "SI.Bindable");
+                var keywords = new[] { "search", "database", "recruitment", "shortlist", "scout" };
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                int count = 0;
                 
-                if (asm == null)
+                foreach (var asm in assemblies)
                 {
-                    Log.LogWarning("[Search] SI.Bindable não encontrado");
-                    return;
-                }
-                
-                var types = asm.GetTypes();
-                
-                // Buscar tipos relacionados a Player Search/Database
-                var searchTypes = types.Where(t => 
-                {
-                    var name = t.Name.ToLower();
-                    return name.Contains("playersearch") || 
-                           name.Contains("playerdatabase") ||
-                           name.Contains("playerlist") ||
-                           name.Contains("searchresult") ||
-                           name.Contains("playerrow") ||
-                           name.Contains("playeritem") ||
-                           name.Contains("personsearch") ||
-                           name.Contains("squadlist");
-                }).ToList();
-                
-                Log.LogInfo($"[Search] {searchTypes.Count} tipos encontrados");
-                
-                foreach (var t in searchTypes.Take(30))
-                {
-                    var props = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                    var staticProps = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
+                    var asmName = asm.GetName().Name;
+                    if (!asmName.StartsWith("SI.") && !asmName.StartsWith("FM.")) continue;
                     
-                    string info = $"{t.Name} [{props.Length} props, {staticProps.Count()} static]";
-                    
-                    // Verificar se tem propriedades com dados de jogador
-                    var hasPlayerData = props.Any(p => 
+                    try
                     {
-                        var name = p.Name.ToLower();
-                        return name.Contains("name") || name.Contains("age") || 
-                               name.Contains("position") || name.Contains("club") ||
-                               name.Contains("nation") || name.Contains("value");
-                    });
-                    
-                    if (hasPlayerData) info += " ⭐";
-                    
-                    Log.LogInfo($"[Search] {info}");
-                    
-                    // Verificar propriedades estáticas para dados
-                    foreach (var sp in staticProps)
-                    {
-                        try
+                        var types = asm.GetTypes();
+                        foreach (var t in types)
                         {
-                            var val = sp.GetValue(null);
-                            if (val != null)
+                            var nameLower = t.Name.ToLower();
+                            if (!keywords.Any(k => nameLower.Contains(k))) continue;
+                            
+                            // Verificar propriedades estáticas
+                            var staticProps = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
+                            var staticFields = t.GetFields(BindingFlags.Static | BindingFlags.Public);
+                            
+                            string info = $"{t.Name} ({asmName})";
+                            
+                            // Verificar se tem dados
+                            foreach (var p in staticProps)
                             {
-                                if (val is IEnumerable en && !(val is string))
+                                try
                                 {
-                                    int count = 0;
-                                    foreach (var item in en)
+                                    var val = p.GetValue(null);
+                                    if (val is IEnumerable en && !(val is string))
                                     {
-                                        count++;
-                                        if (count >= 100) break;
-                                    }
-                                    if (count > 0)
-                                    {
-                                        Log.LogInfo($"[Search]   static {sp.Name}: {count} itens ⭐⭐⭐");
+                                        int cnt = 0;
+                                        foreach (var item in en) { cnt++; if (cnt >= 10) break; }
+                                        if (cnt > 0)
+                                        {
+                                            info += $" ⭐ static {p.Name}: {cnt}+ itens";
+                                        }
                                     }
                                 }
+                                catch { }
+                            }
+                            
+                            Log.LogInfo($"[Type] {info}");
+                            count++;
+                            if (count >= 30) return;
+                        }
+                    }
+                    catch { }
+                }
+                
+                Log.LogInfo($"[Type] Total: {count} tipos encontrados");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Type] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void FindSearchUIElements()
+        {
+            try
+            {
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                
+                foreach (var doc in uiDocs)
+                {
+                    if (doc == null || doc.name != "PanelManager") continue;
+                    var root = doc.rootVisualElement;
+                    if (root == null) continue;
+                    
+                    // Buscar elementos com nomes relevantes
+                    var keywords = new[] { "search", "database", "recruitment", "shortlist", "scout", "player" };
+                    var elements = new List<VisualElement>();
+                    
+                    FindElementsWithKeywords(root, elements, keywords, 0, 50);
+                    
+                    Log.LogInfo($"[UI] {elements.Count} elementos encontrados");
+                    
+                    foreach (var el in elements.Take(20))
+                    {
+                        string info = $"{el.name} ({el.GetType().Name}) [{el.childCount}]";
+                        
+                        // Verificar propriedades especiais
+                        var type = el.GetType();
+                        var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                        
+                        foreach (var p in props)
+                        {
+                            var pName = p.Name.ToLower();
+                            if (pName.Contains("data") || pName.Contains("source") || pName.Contains("item") || pName.Contains("list"))
+                            {
+                                try
+                                {
+                                    var val = p.GetValue(el);
+                                    if (val != null)
+                                    {
+                                        info += $" | {p.Name}: {val.GetType().Name}";
+                                        
+                                        if (val is IEnumerable en && !(val is string))
+                                        {
+                                            int cnt = 0;
+                                            foreach (var item in en) { cnt++; if (cnt >= 10) break; }
+                                            if (cnt > 0) info += $" ({cnt}+)";
+                                        }
+                                    }
+                                }
+                                catch { }
                             }
                         }
-                        catch { }
+                        
+                        Log.LogInfo($"[UI] {info}");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Search] Erro: {ex.Message}");
+                Log.LogError($"[UI] Erro: {ex.Message}");
             }
         }
         
-        private static void ListAllBindableTypes()
+        private static void FindElementsWithKeywords(VisualElement element, List<VisualElement> results, string[] keywords, int depth, int maxDepth)
         {
-            try
+            if (element == null || depth > maxDepth) return;
+            
+            var nameLower = element.name.ToLower();
+            if (keywords.Any(k => nameLower.Contains(k)))
             {
-                var asm = AppDomain.CurrentDomain.GetAssemblies()
-                    .FirstOrDefault(a => a.GetName().Name == "SI.Bindable");
-                
-                if (asm == null) return;
-                
-                var types = asm.GetTypes();
-                Log.LogInfo($"[List] {types.Length} tipos em SI.Bindable:");
-                
-                // Mostrar todos os tipos com "Data" no nome
-                var dataTypes = types.Where(t => t.Name.Contains("Data")).Take(50);
-                foreach (var t in dataTypes)
-                {
-                    Log.LogInfo($"[List] {t.Name}");
-                }
+                results.Add(element);
             }
-            catch (Exception ex)
+            
+            for (int i = 0; i < element.childCount; i++)
             {
-                Log.LogError($"[List] Erro: {ex.Message}");
+                FindElementsWithKeywords(element[i], results, keywords, depth + 1, maxDepth);
             }
         }
         
-        private static void TryExport()
+        private static void FindAndExport()
         {
             try
             {
-                // Buscar em todos assemblies por IEnumerable estático
-                foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+                // 1. Buscar em tipos estáticos
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                
+                foreach (var asm in assemblies)
                 {
                     var asmName = asm.GetName().Name;
                     if (!asmName.StartsWith("SI.") && !asmName.StartsWith("FM.")) continue;
@@ -222,7 +255,7 @@ namespace FM26CtrlPExport
                                             if (list.Count >= 10000) break;
                                         }
                                         
-                                        if (list.Count > 5)
+                                        if (list.Count > 10)
                                         {
                                             var first = list[0];
                                             if (first != null)
@@ -230,15 +263,16 @@ namespace FM26CtrlPExport
                                                 var itemType = first.GetType();
                                                 var props = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
                                                 
-                                                // Verificar se tem dados de jogador
+                                                // Verificar se tem propriedades que parecem dados de jogador
                                                 var propNames = props.Select(x => x.Name.ToLower()).ToList();
                                                 bool hasPlayerData = propNames.Any(n => 
                                                     n.Contains("name") || n.Contains("age") || 
-                                                    n.Contains("position") || n.Contains("club"));
+                                                    n.Contains("position") || n.Contains("club") ||
+                                                    n.Contains("value") || n.Contains("nation"));
                                                 
                                                 if (hasPlayerData)
                                                 {
-                                                    Log.LogInfo($"[Export] {asmName}.{t.Name}.{p.Name}: {list.Count} jogadores ⭐⭐⭐");
+                                                    Log.LogInfo($"[Export] {asmName}.{t.Name}.{p.Name}: {list.Count} itens");
                                                     ExportCsv(list);
                                                     return;
                                                 }
@@ -253,12 +287,67 @@ namespace FM26CtrlPExport
                     catch { }
                 }
                 
-                Log.LogWarning("[Export] Nenhum dado de jogador encontrado");
+                // 2. Buscar nos elementos UI
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                foreach (var doc in uiDocs)
+                {
+                    if (doc == null || doc.name != "PanelManager") continue;
+                    var root = doc.rootVisualElement;
+                    if (root == null) continue;
+                    
+                    var found = FindEnumerableInUI(root, 0, 50);
+                    if (found != null)
+                    {
+                        var list = new List<object>();
+                        foreach (var item in found) { list.Add(item); if (list.Count >= 10000) break; }
+                        
+                        if (list.Count > 10)
+                        {
+                            Log.LogInfo($"[Export] UI: {list.Count} itens");
+                            ExportCsv(list);
+                            return;
+                        }
+                    }
+                }
+                
+                Log.LogWarning("[Export] Nenhum dado encontrado");
             }
             catch (Exception ex)
             {
                 Log.LogError($"[Export] Erro: {ex.Message}");
             }
+        }
+        
+        private static IEnumerable FindEnumerableInUI(VisualElement element, int depth, int maxDepth)
+        {
+            if (element == null || depth > maxDepth) return null;
+            
+            var type = element.GetType();
+            var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            
+            foreach (var p in props)
+            {
+                try
+                {
+                    var val = p.GetValue(element);
+                    if (val is IEnumerable en && !(val is string))
+                    {
+                        // Verificar se tem itens
+                        var list = new List<object>();
+                        foreach (var item in en) { list.Add(item); if (list.Count >= 20) break; }
+                        if (list.Count > 10) return en;
+                    }
+                }
+                catch { }
+            }
+            
+            for (int i = 0; i < element.childCount; i++)
+            {
+                var found = FindEnumerableInUI(element[i], depth + 1, maxDepth);
+                if (found != null) return found;
+            }
+            
+            return null;
         }
         
         private static void ExportCsv(List<object> data)
