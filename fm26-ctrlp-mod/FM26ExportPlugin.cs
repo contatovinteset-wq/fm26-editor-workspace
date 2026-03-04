@@ -237,10 +237,10 @@ namespace FM26CtrlPExport
                     catch { }
                 }
                 
-                // 3. Buscar Object.FindObjectsOfType para Player (MonoBehaviour)
+                // 3. Buscar UnityEngine.Object.FindObjectsOfType para Player (MonoBehaviour)
                 try
                 {
-                    var findMethod = typeof(Object).GetMethod("FindObjectsOfType", Type.EmptyTypes);
+                    var findMethod = typeof(UnityEngine.Object).GetMethod("FindObjectsOfType", Type.EmptyTypes);
                     if (findMethod != null)
                     {
                         var genericMethod = findMethod.MakeGenericMethod(_playerType);
