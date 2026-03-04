@@ -61,20 +61,14 @@ namespace FM26CtrlPExport
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - Exportar");
-                    TryExport();
+                    Log.LogInfo(">>> Ctrl+P - Investigar CustomViewExportData e exportar");
+                    InvestigateAndExport();
                 }
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Buscar tipos Player* em SI.Bindable");
-                    FindPlayerTypesInBindable();
-                }
-                
-                if (Keyboard.current.f10Key.wasPressedThisFrame)
-                {
-                    Log.LogInfo(">>> F10 - Investigar CustomViewExportData");
-                    InvestigateExportDataTypes();
+                    Log.LogInfo(">>> F9 - Propriedades do CustomViewExportData");
+                    ShowCustomViewExportDataProps();
                 }
             }
             catch (Exception ex)
@@ -83,190 +77,174 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindPlayerTypesInBindable()
+        private static void ShowCustomViewExportDataProps()
         {
             try
             {
-                var asm = AppDomain.CurrentDomain.GetAssemblies()
-                    .FirstOrDefault(a => a.GetName().Name == "SI.Bindable");
-                
-                if (asm == null)
+                var type = Type.GetType("SI.Bindable.CustomViewExportData, SI.Bindable");
+                if (type == null)
                 {
-                    Log.LogWarning("[Type] SI.Bindable não encontrado");
+                    Log.LogWarning("[CVE] Tipo não encontrado");
                     return;
                 }
                 
-                var types = asm.GetTypes();
-                Log.LogInfo($"[Type] {types.Length} tipos em SI.Bindable");
+                Log.LogInfo($"[CVE] Tipo: {type.FullName}");
                 
-                // Buscar tipos com "Player" no nome
-                var playerTypes = types.Where(t => 
-                    t.Name.ToLower().Contains("player") || 
-                    t.Name.ToLower().Contains("person") ||
-                    t.Name.ToLower().Contains("squad")).Take(30);
+                // Todas as propriedades de instância
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                Log.LogInfo($"[CVE] {props.Length} propriedades de instância:");
                 
-                foreach (var t in playerTypes)
+                foreach (var p in props)
                 {
-                    string info = $"{t.Name}";
-                    
-                    // Verificar propriedades
-                    var props = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                    if (props.Length > 0)
-                    {
-                        info += $" [{props.Length} props]";
-                        
-                        // Verificar se tem dados
-                        var dataProps = props.Where(p => 
-                            p.Name.ToLower().Contains("name") ||
-                            p.Name.ToLower().Contains("age") ||
-                            p.Name.ToLower().Contains("id") ||
-                            p.Name.ToLower().Contains("club"));
-                        
-                        if (dataProps.Any())
-                        {
-                            info += " ⭐";
-                        }
-                    }
-                    
-                    Log.LogInfo($"[Type] {info}");
+                    Log.LogInfo($"[CVE]   {p.Name}: {p.PropertyType.Name}");
                 }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Type] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void InvestigateExportDataTypes()
-        {
-            try
-            {
-                var asm = AppDomain.CurrentDomain.GetAssemblies()
-                    .FirstOrDefault(a => a.GetName().Name == "SI.Bindable");
                 
-                if (asm == null) return;
+                // Propriedades estáticas
+                var staticProps = type.GetProperties(BindingFlags.Static | BindingFlags.Public);
+                Log.LogInfo($"[CVE] {staticProps.Length} propriedades estáticas:");
                 
-                var types = asm.GetTypes();
-                
-                // Buscar tipos com "Export" ou "Data" no nome
-                var exportTypes = types.Where(t => 
-                    t.Name.Contains("Export") || 
-                    t.Name.Contains("Data") ||
-                    t.Name.Contains("Item") ||
-                    t.Name.Contains("Row") ||
-                    t.Name.Contains("Entry")).Take(30);
-                
-                Log.LogInfo($"[Export] Tipos com Export/Data/Item/Row/Entry:");
-                
-                foreach (var t in exportTypes)
+                foreach (var p in staticProps)
                 {
-                    Log.LogInfo($"[Export] {t.Name}");
-                    
-                    // Propriedades estáticas
-                    var staticProps = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
-                    foreach (var p in staticProps)
-                    {
-                        try
-                        {
-                            var val = p.GetValue(null);
-                            if (val != null)
-                            {
-                                string valInfo = val.GetType().Name;
-                                
-                                // Contar se for enumerable
-                                if (val is IEnumerable en && !(val is string))
-                                {
-                                    int count = 0;
-                                    foreach (var item in en)
-                                    {
-                                        count++;
-                                        if (count >= 1000) break;
-                                    }
-                                    if (count > 0)
-                                    {
-                                        Log.LogInfo($"[Export]   static {p.Name}: {count} itens ⭐⭐⭐");
-                                    }
-                                }
-                                else
-                                {
-                                    Log.LogInfo($"[Export]   static {p.Name}: {valInfo}");
-                                }
-                            }
-                        }
-                        catch { }
-                    }
-                    
-                    // Propriedades de instância
-                    var props = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                    if (props.Length > 0 && props.Length < 30)
-                    {
-                        Log.LogInfo($"[Export]   Props: {string.Join(", ", props.Take(10).Select(p => p.Name))}");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Export] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void TryExport()
-        {
-            try
-            {
-                // Buscar em todos assemblies
-                foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
-                {
-                    var asmName = asm.GetName().Name;
-                    if (!asmName.StartsWith("SI.") && !asmName.StartsWith("FM.")) continue;
+                    Log.LogInfo($"[CVE]   static {p.Name}: {p.PropertyType.Name}");
                     
                     try
                     {
-                        var types = asm.GetTypes();
-                        foreach (var t in types)
+                        var val = p.GetValue(null);
+                        if (val != null)
                         {
-                            var staticProps = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
-                            foreach (var p in staticProps)
+                            Log.LogInfo($"[CVE]     = {val.GetType().Name}");
+                            
+                            if (val is IEnumerable en && !(val is string))
                             {
-                                try
+                                int count = 0;
+                                foreach (var item in en)
                                 {
-                                    var val = p.GetValue(null);
-                                    if (val is IEnumerable en && !(val is string))
-                                    {
-                                        var list = new List<object>();
-                                        foreach (var item in en)
-                                        {
-                                            list.Add(item);
-                                            if (list.Count >= 10000) break;
-                                        }
-                                        
-                                        if (list.Count > 5)
-                                        {
-                                            var first = list[0];
-                                            if (first != null)
-                                            {
-                                                var itemType = first.GetType();
-                                                var props = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                                                
-                                                // Verificar se tem dados úteis
-                                                if (props.Length >= 3)
-                                                {
-                                                    Log.LogInfo($"[Export] {asmName}.{t.Name}.{p.Name}: {list.Count} itens");
-                                                    ExportCsv(list);
-                                                    return;
-                                                }
-                                            }
-                                        }
-                                    }
+                                    count++;
+                                    if (count >= 100) break;
                                 }
-                                catch { }
+                                Log.LogInfo($"[CVE]     → {count} itens!");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.LogInfo($"[CVE]     Erro: {ex.Message}");
+                    }
+                }
+                
+                // Campos
+                var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static);
+                Log.LogInfo($"[CVE] {fields.Length} campos estáticos:");
+                
+                foreach (var f in fields)
+                {
+                    Log.LogInfo($"[CVE]   static {f.Name}: {f.FieldType.Name}");
+                    
+                    try
+                    {
+                        var val = f.GetValue(null);
+                        if (val != null)
+                        {
+                            Log.LogInfo($"[CVE]     = {val.GetType().Name}");
+                        }
+                    }
+                    catch { }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[CVE] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void InvestigateAndExport()
+        {
+            try
+            {
+                var type = Type.GetType("SI.Bindable.CustomViewExportData, SI.Bindable");
+                if (type == null)
+                {
+                    Log.LogWarning("[Export] CustomViewExportData não encontrado");
+                    return;
+                }
+                
+                // Buscar qualquer propriedade/campo estático com IEnumerable
+                var staticProps = type.GetProperties(BindingFlags.Static | BindingFlags.Public);
+                var staticFields = type.GetFields(BindingFlags.Static | BindingFlags.Public);
+                
+                foreach (var p in staticProps)
+                {
+                    try
+                    {
+                        var val = p.GetValue(null);
+                        if (val is IEnumerable en && !(val is string))
+                        {
+                            var list = en.Cast<object>().Take(10000).ToList();
+                            if (list.Count > 0)
+                            {
+                                Log.LogInfo($"[Export] {p.Name}: {list.Count} itens");
+                                ExportCsv(list);
+                                return;
                             }
                         }
                     }
                     catch { }
                 }
                 
-                Log.LogWarning("[Export] Nenhum dado encontrado");
+                foreach (var f in staticFields)
+                {
+                    try
+                    {
+                        var val = f.GetValue(null);
+                        if (val is IEnumerable en && !(val is string))
+                        {
+                            var list = en.Cast<object>().Take(10000).ToList();
+                            if (list.Count > 0)
+                            {
+                                Log.LogInfo($"[Export] {f.Name}: {list.Count} itens");
+                                ExportCsv(list);
+                                return;
+                            }
+                        }
+                    }
+                    catch { }
+                }
+                
+                // Se não tem dados estáticos, criar instância e verificar
+                try
+                {
+                    var instance = Activator.CreateInstance(type);
+                    if (instance != null)
+                    {
+                        Log.LogInfo($"[Export] Instância criada: {instance.GetType().Name}");
+                        
+                        var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                        foreach (var p in props)
+                        {
+                            try
+                            {
+                                var val = p.GetValue(instance);
+                                if (val is IEnumerable en && !(val is string))
+                                {
+                                    var list = en.Cast<object>().Take(10000).ToList();
+                                    if (list.Count > 0)
+                                    {
+                                        Log.LogInfo($"[Export] {p.Name}: {list.Count} itens");
+                                        ExportCsv(list);
+                                        return;
+                                    }
+                                }
+                            }
+                            catch { }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.LogInfo($"[Export] Erro ao criar instância: {ex.Message}");
+                }
+                
+                Log.LogWarning("[Export] Nenhum dado encontrado em CustomViewExportData");
             }
             catch (Exception ex)
             {
