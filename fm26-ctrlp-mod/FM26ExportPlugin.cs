@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.28.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.29.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,11 +22,12 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.28.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.29.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
             
+            // Hook no Bindings.Update para capturar dados
             var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
             if (bindingsType != null)
             {
@@ -37,11 +38,33 @@ namespace FM26CtrlPExport
                     harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
                     Log.LogInfo("[Init] Patched SI.Bindable.Bindings.Update");
                 }
+                
+                // Hook no construtor de Bindings
+                var ctor = bindingsType.GetConstructor(Type.EmptyTypes);
+                if (ctor != null)
+                {
+                    var ctorPatch = typeof(Plugin).GetMethod("OnBindingsCtor", BindingFlags.Static | BindingFlags.Public);
+                    harmony.Patch(ctor, postfix: new HarmonyMethod(ctorPatch));
+                    Log.LogInfo("[Init] Patched Bindings.ctor");
+                }
             }
         }
         
         private static int _frameCount = 0;
         private static bool _initialized = false;
+        private static List<object> _capturedBindings = new List<object>();
+        
+        public static void OnBindingsCtor(object __instance)
+        {
+            try
+            {
+                if (_capturedBindings.Count < 100)
+                {
+                    _capturedBindings.Add(__instance);
+                }
+            }
+            catch { }
+        }
         
         public static void OnUpdate()
         {
@@ -52,6 +75,7 @@ namespace FM26CtrlPExport
                 {
                     _initialized = true;
                     Log.LogInfo("[Init] Pronto!");
+                    Log.LogInfo($"[Init] Capturados {_capturedBindings.Count} bindings");
                 }
                 
                 if (!_initialized || Keyboard.current == null) return;
@@ -62,19 +86,19 @@ namespace FM26CtrlPExport
                 if (ctrl && p)
                 {
                     Log.LogInfo(">>> Ctrl+P - Exportar");
-                    TryExport();
+                    ExportFromCapturedBindings();
                 }
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Buscar tipos com IList em SI.*");
-                    FindTypesWithList();
+                    Log.LogInfo(">>> F9 - Listar assemblies");
+                    ListAssemblies();
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Buscar dados em BindingRemapper/tables");
-                    FindBindingData();
+                    Log.LogInfo(">>> F10 - Investigar bindings capturados");
+                    InvestigateBindings();
                 }
             }
             catch (Exception ex)
@@ -83,114 +107,80 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindTypesWithList()
+        private static void ListAssemblies()
         {
             try
             {
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                int count = 0;
+                Log.LogInfo($"[Asm] {assemblies.Length} assemblies carregados");
                 
                 foreach (var asm in assemblies)
                 {
-                    var asmName = asm.GetName().Name;
-                    if (!asmName.StartsWith("SI.") && !asmName.StartsWith("FM.")) continue;
-                    
-                    try
+                    var name = asm.GetName().Name;
+                    if (name.StartsWith("SI.") || name.StartsWith("FM.") || name.Contains("Football"))
                     {
-                        var types = asm.GetTypes();
-                        foreach (var t in types)
+                        try
                         {
-                            // Verificar se tem propriedade com IList
-                            var props = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                            foreach (var p in props)
-                            {
-                                if (typeof(IList).IsAssignableFrom(p.PropertyType))
-                                {
-                                    Log.LogInfo($"[Type] {t.Name}.{p.Name}: {p.PropertyType.Name} ({asmName})");
-                                    count++;
-                                    if (count >= 30) return;
-                                    break;
-                                }
-                            }
+                            var types = asm.GetTypes();
+                            Log.LogInfo($"[Asm] {name}: {types.Length} tipos");
+                        }
+                        catch
+                        {
+                            Log.LogInfo($"[Asm] {name}: erro ao listar tipos");
                         }
                     }
-                    catch { }
                 }
-                
-                Log.LogInfo($"[Type] Total: {count} tipos com IList");
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Type] Erro: {ex.Message}");
+                Log.LogError($"[Asm] Erro: {ex.Message}");
             }
         }
         
-        private static void FindBindingData()
+        private static void InvestigateBindings()
         {
             try
             {
-                // Buscar qualquer objeto que tenha "tables", "squad", "players" no nome
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                Log.LogInfo($"[Bind] {_capturedBindings.Count} bindings capturados");
                 
-                foreach (var asm in assemblies)
+                foreach (var binding in _capturedBindings.Take(10))
                 {
-                    var asmName = asm.GetName().Name;
-                    if (!asmName.StartsWith("SI.") && !asmName.StartsWith("FM.")) continue;
-                    
                     try
                     {
-                        var types = asm.GetTypes();
-                        foreach (var t in types)
+                        var type = binding.GetType();
+                        Log.LogInfo($"[Bind] {type.Name}");
+                        
+                        // Propriedades públicas
+                        var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                        foreach (var p in props.Take(10))
                         {
-                            var nameLower = t.Name.ToLower();
-                            if (!nameLower.Contains("table") && !nameLower.Contains("squad") && 
-                                !nameLower.Contains("player") && !nameLower.Contains("list")) continue;
-                            
-                            // Propriedades estáticas
-                            var staticProps = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
-                            foreach (var p in staticProps)
+                            try
                             {
-                                try
+                                var val = p.GetValue(binding);
+                                string valType = val?.GetType().Name ?? "null";
+                                Log.LogInfo($"[Bind]   {p.Name}: {valType}");
+                                
+                                // Se for IEnumerable, mostrar count
+                                if (val is IEnumerable en && !(val is string))
                                 {
-                                    var val = p.GetValue(null);
-                                    if (val != null)
+                                    int count = 0;
+                                    foreach (var item in en)
                                     {
-                                        if (val is IList list && list.Count > 0)
-                                        {
-                                            Log.LogInfo($"[Bind] ⭐⭐⭐ {t.Name}.{p.Name}: List<{list.Count}>");
-                                            ShowFirstItem(list);
-                                        }
+                                        count++;
+                                        if (count >= 100) break;
+                                    }
+                                    if (count > 0)
+                                    {
+                                        Log.LogInfo($"[Bind]     → {count} itens!");
                                     }
                                 }
-                                catch { }
                             }
+                            catch { }
                         }
                     }
-                    catch { }
-                }
-                
-                // Buscar nos elementos UI também
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                foreach (var doc in uiDocs)
-                {
-                    if (doc == null || doc.name != "PanelManager") continue;
-                    var root = doc.rootVisualElement;
-                    if (root == null) continue;
-                    
-                    // Buscar elementos com "tables" no nome
-                    var tables = new List<VisualElement>();
-                    FindElementsWithName(root, tables, "tables");
-                    
-                    foreach (var t in tables)
+                    catch (Exception ex)
                     {
-                        Log.LogInfo($"[Bind] UI: {t.name} ({t.childCount} filhos)");
-                        
-                        // Explorar filhos
-                        for (int i = 0; i < t.childCount && i < 5; i++)
-                        {
-                            var child = t[i];
-                            Log.LogInfo($"[Bind]   [{i}] {child.name} ({child.GetType().Name})");
-                        }
+                        Log.LogError($"[Bind] Erro: {ex.Message}");
                     }
                 }
             }
@@ -200,88 +190,46 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void ShowFirstItem(IList list)
+        private static void ExportFromCapturedBindings()
         {
             try
             {
-                if (list.Count == 0) return;
-                var first = list[0];
-                if (first == null) return;
-                
-                var type = first.GetType();
-                Log.LogInfo($"[Bind]   Item[0]: {type.Name}");
-                
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                foreach (var p in props.Take(10))
+                foreach (var binding in _capturedBindings)
                 {
                     try
                     {
-                        var val = p.GetValue(first);
-                        string valStr = val?.ToString() ?? "null";
-                        if (valStr.Length > 30) valStr = valStr.Substring(0, 30) + "...";
-                        Log.LogInfo($"[Bind]     {p.Name}: {valStr}");
-                    }
-                    catch { }
-                }
-            }
-            catch { }
-        }
-        
-        private static void FindElementsWithName(VisualElement element, List<VisualElement> results, string namePart)
-        {
-            if (element == null) return;
-            if (element.name.ToLower().Contains(namePart)) results.Add(element);
-            
-            for (int i = 0; i < element.childCount; i++)
-            {
-                FindElementsWithName(element[i], results, namePart);
-            }
-        }
-        
-        private static void TryExport()
-        {
-            try
-            {
-                // Buscar qualquer lista em qualquer lugar
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                
-                foreach (var asm in assemblies)
-                {
-                    try
-                    {
-                        var types = asm.GetTypes();
-                        foreach (var t in types)
+                        var type = binding.GetType();
+                        var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                        
+                        foreach (var p in props)
                         {
-                            var staticProps = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
-                            foreach (var p in staticProps)
+                            try
                             {
-                                try
+                                var val = p.GetValue(binding);
+                                if (val is IEnumerable en && !(val is string))
                                 {
-                                    var val = p.GetValue(null);
-                                    if (val is IList list && list.Count > 5)
+                                    var list = new List<object>();
+                                    foreach (var item in en)
                                     {
-                                        // Verificar se parece ter dados
-                                        var first = list[0];
-                                        if (first != null)
-                                        {
-                                            var props = first.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                                            if (props.Length >= 3)
-                                            {
-                                                Log.LogInfo($"[Export] {t.Name}.{p.Name}: {list.Count} itens");
-                                                ExportCsv(list);
-                                                return;
-                                            }
-                                        }
+                                        list.Add(item);
+                                        if (list.Count >= 10000) break;
+                                    }
+                                    
+                                    if (list.Count > 5)
+                                    {
+                                        Log.LogInfo($"[Export] {type.Name}.{p.Name}: {list.Count} itens");
+                                        ExportCsv(list);
+                                        return;
                                     }
                                 }
-                                catch { }
                             }
+                            catch { }
                         }
                     }
                     catch { }
                 }
                 
-                Log.LogWarning("[Export] Nenhum dado encontrado");
+                Log.LogWarning("[Export] Nenhum dado encontrado nos bindings");
             }
             catch (Exception ex)
             {
@@ -289,7 +237,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void ExportCsv(IList data)
+        private static void ExportCsv(List<object> data)
         {
             try
             {
@@ -321,8 +269,6 @@ namespace FM26CtrlPExport
                     
                     csv.AppendLine(string.Join(";", values));
                     count++;
-                    
-                    if (count >= 10000) break; // Limite
                 }
                 
                 string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Export_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
