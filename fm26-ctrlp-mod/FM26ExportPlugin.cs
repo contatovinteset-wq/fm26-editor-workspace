@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.37.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.38.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,7 +22,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.37.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.38.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -56,25 +56,25 @@ namespace FM26CtrlPExport
                 
                 if (!_initialized || Keyboard.current == null) return;
                 
+                if (Keyboard.current.f9Key.wasPressedThisFrame)
+                {
+                    Log.LogInfo(">>> F9 - Debug: Listar TODOS os VisualElements");
+                    DebugAllVisualElements();
+                }
+                
+                if (Keyboard.current.f10Key.wasPressedThisFrame)
+                {
+                    Log.LogInfo(">>> F10 - Buscar propriedades 'data' em todos elementos");
+                    FindDataProperties();
+                }
+                
                 bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
                 bool p = Keyboard.current.pKey.wasPressedThisFrame;
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - Exportar StreamedTable.SourceData");
-                    ExportFromStreamedTable();
-                }
-                
-                if (Keyboard.current.f9Key.wasPressedThisFrame)
-                {
-                    Log.LogInfo(">>> F9 - Listar StreamedTables ativos");
-                    ListStreamedTables();
-                }
-                
-                if (Keyboard.current.f10Key.wasPressedThisFrame)
-                {
-                    Log.LogInfo(">>> F10 - Detalhes do primeiro item de SourceData");
-                    ShowSourceDataItemDetails();
+                    Log.LogInfo(">>> Ctrl+P - Tentar exportar via BindingMethod");
+                    TryExportViaBinding();
                 }
             }
             catch (Exception ex)
@@ -83,39 +83,78 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void ListStreamedTables()
+        private static void DebugAllVisualElements()
         {
             try
             {
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                int total = 0;
+                Log.LogInfo($"[Debug] {uiDocs.Length} UIDocuments");
+                
+                var typeCounts = new Dictionary<string, int>();
+                var elementsWithData = new List<VisualElement>();
                 
                 foreach (var doc in uiDocs)
                 {
                     if (doc == null || doc.rootVisualElement == null) continue;
                     
-                    var tables = new List<VisualElement>();
-                    FindElementsByType(doc.rootVisualElement, "StreamedTable", tables, 0, 50);
+                    Log.LogInfo($"[Debug] Doc: {doc.name}");
                     
-                    foreach (var table in tables)
-                    {
-                        total++;
-                        var sourceData = GetSourceData(table);
-                        var itemCount = GetItemCount(table);
-                        
-                        Log.LogInfo($"[ST] {table.name} - ItemCount: {itemCount}, SourceData: {(sourceData != null ? "present" : "null")}");
-                    }
+                    TraverseElement(doc.rootVisualElement, 0, 3, typeCounts, elementsWithData);
                 }
                 
-                Log.LogInfo($"[ST] Total: {total} StreamedTables");
+                // Top 20 tipos
+                Log.LogInfo("[Debug] Tipos mais comuns:");
+                foreach (var kv in typeCounts.OrderByDescending(x => x.Value).Take(20))
+                {
+                    Log.LogInfo($"[Debug]   {kv.Key}: {kv.Value}");
+                }
+                
+                // Elementos com dados
+                Log.LogInfo($"[Debug] {elementsWithData.Count} elementos com 'SourceData' não-nulo");
+                foreach (var el in elementsWithData.Take(10))
+                {
+                    Log.LogInfo($"[Debug]   {el.name} -> tem dados!");
+                }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[ST] Erro: {ex.Message}");
+                Log.LogError($"[Debug] Erro: {ex.Message}\n{ex.StackTrace}");
             }
         }
         
-        private static void ShowSourceDataItemDetails()
+        private static void TraverseElement(VisualElement element, int depth, int maxDepth, 
+            Dictionary<string, int> typeCounts, List<VisualElement> elementsWithData)
+        {
+            if (element == null || depth > maxDepth) return;
+            
+            // Contar tipo
+            var typeName = element.GetType().Name;
+            if (!typeCounts.ContainsKey(typeName)) typeCounts[typeName] = 0;
+            typeCounts[typeName]++;
+            
+            // Verificar SourceData
+            try
+            {
+                var sourceDataProp = element.GetType().GetProperty("SourceData", BindingFlags.Public | BindingFlags.Instance);
+                if (sourceDataProp != null)
+                {
+                    var data = sourceDataProp.GetValue(element);
+                    if (data != null)
+                    {
+                        elementsWithData.Add(element);
+                    }
+                }
+            }
+            catch { }
+            
+            // Filhos
+            for (int i = 0; i < element.childCount && i < 100; i++)
+            {
+                TraverseElement(element[i], depth + 1, maxDepth, typeCounts, elementsWithData);
+            }
+        }
+        
+        private static void FindDataProperties()
         {
             try
             {
@@ -125,45 +164,8 @@ namespace FM26CtrlPExport
                 {
                     if (doc == null || doc.rootVisualElement == null) continue;
                     
-                    var tables = new List<VisualElement>();
-                    FindElementsByType(doc.rootVisualElement, "StreamedTable", tables, 0, 50);
-                    
-                    foreach (var table in tables)
-                    {
-                        var sourceData = GetSourceData(table);
-                        if (sourceData == null) continue;
-                        
-                        // Pegar primeiro item
-                        var enumerator = sourceData.GetEnumerator();
-                        if (enumerator.MoveNext())
-                        {
-                            var first = enumerator.Current;
-                            if (first != null)
-                            {
-                                var type = first.GetType();
-                                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                                
-                                Log.LogInfo($"[Data] Tipo do item: {type.FullName}");
-                                Log.LogInfo($"[Data] {props.Length} propriedades:");
-                                
-                                foreach (var p in props.Take(30))
-                                {
-                                    try
-                                    {
-                                        var val = p.GetValue(first);
-                                        var valStr = val?.ToString() ?? "null";
-                                        if (valStr.Length > 50) valStr = valStr.Substring(0, 50) + "...";
-                                        Log.LogInfo($"[Data]   {p.Name}: {valStr}");
-                                    }
-                                    catch { }
-                                }
-                                return;
-                            }
-                        }
-                    }
+                    FindDataInTree(doc.rootVisualElement, 0, 5);
                 }
-                
-                Log.LogWarning("[Data] Nenhum item encontrado");
             }
             catch (Exception ex)
             {
@@ -171,140 +173,79 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void ExportFromStreamedTable()
-        {
-            try
-            {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                
-                foreach (var doc in uiDocs)
-                {
-                    if (doc == null || doc.rootVisualElement == null) continue;
-                    
-                    var tables = new List<VisualElement>();
-                    FindElementsByType(doc.rootVisualElement, "StreamedTable", tables, 0, 50);
-                    
-                    foreach (var table in tables)
-                    {
-                        var sourceData = GetSourceData(table);
-                        if (sourceData == null) continue;
-                        
-                        Log.LogInfo($"[Export] Tabela: {table.name}");
-                        
-                        var list = new List<object>();
-                        foreach (var item in sourceData)
-                        {
-                            list.Add(item);
-                            if (list.Count >= 50000) break;
-                        }
-                        
-                        if (list.Count > 0)
-                        {
-                            Log.LogInfo($"[Export] {list.Count} itens encontrados");
-                            ExportCsv(list);
-                            return;
-                        }
-                    }
-                }
-                
-                Log.LogWarning("[Export] Nenhum dado encontrado");
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Export] Erro: {ex.Message}\n{ex.StackTrace}");
-            }
-        }
-        
-        private static IList GetSourceData(VisualElement element)
-        {
-            try
-            {
-                var type = element.GetType();
-                var prop = type.GetProperty("SourceData", BindingFlags.Public | BindingFlags.Instance);
-                if (prop != null)
-                {
-                    return prop.GetValue(element) as IList;
-                }
-            }
-            catch { }
-            return null;
-        }
-        
-        private static int GetItemCount(VisualElement element)
-        {
-            try
-            {
-                var type = element.GetType();
-                var prop = type.GetProperty("ItemCount", BindingFlags.Public | BindingFlags.Instance);
-                if (prop != null)
-                {
-                    return (int)prop.GetValue(element);
-                }
-            }
-            catch { }
-            return 0;
-        }
-        
-        private static void FindElementsByType(VisualElement element, string typeName, List<VisualElement> results, int depth, int maxDepth)
+        private static void FindDataInTree(VisualElement element, int depth, int maxDepth)
         {
             if (element == null || depth > maxDepth) return;
             
-            if (element.GetType().Name == typeName)
+            var type = element.GetType();
+            
+            // Buscar propriedades que parecem conter dados
+            var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(p => p.Name.ToLower().Contains("data") || 
+                            p.Name.ToLower().Contains("source") ||
+                            p.Name.ToLower().Contains("item") ||
+                            p.Name.ToLower().Contains("list"))
+                .ToList();
+            
+            foreach (var prop in props)
             {
-                results.Add(element);
+                try
+                {
+                    var val = prop.GetValue(element);
+                    if (val != null)
+                    {
+                        var valType = val.GetType();
+                        Log.LogInfo($"[Data] {element.name}.{prop.Name}: {valType.Name}");
+                        
+                        // Se for lista, mostrar count
+                        if (val is IList list)
+                        {
+                            Log.LogInfo($"[Data]   -> IList com {list.Count} itens!");
+                            
+                            if (list.Count > 0)
+                            {
+                                var first = list[0];
+                                Log.LogInfo($"[Data]   -> Primeiro: {first?.GetType().FullName ?? "null"}");
+                            }
+                        }
+                    }
+                }
+                catch { }
             }
             
-            for (int i = 0; i < element.childCount; i++)
+            // Filhos
+            for (int i = 0; i < element.childCount && i < 50; i++)
             {
-                FindElementsByType(element[i], typeName, results, depth + 1, maxDepth);
+                FindDataInTree(element[i], depth + 1, maxDepth);
             }
         }
         
-        private static void ExportCsv(List<object> data)
+        private static void TryExportViaBinding()
         {
             try
             {
-                if (data.Count == 0) return;
-                
-                var first = data[0];
-                if (first == null) return;
-                
-                var type = first.GetType();
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(p => p.GetIndexParameters().Length == 0 && p.Name.Length < 40)
-                    .ToList();
-                
-                var csv = new System.Text.StringBuilder();
-                csv.AppendLine(string.Join(";", props.Select(p => p.Name)));
-                
-                int count = 0;
-                foreach (var item in data)
+                // Buscar Bindings.Update para pegar instância capturada
+                var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
+                if (bindingsType == null)
                 {
-                    if (item == null) continue;
-                    
-                    var values = props.Select(p =>
-                    {
-                        try
-                        {
-                            var val = p.GetValue(item);
-                            var str = val?.ToString() ?? "";
-                            return str.Replace(";", ",").Replace("\n", " ").Replace("\r", "");
-                        }
-                        catch { return ""; }
-                    });
-                    
-                    csv.AppendLine(string.Join(";", values));
-                    count++;
+                    Log.LogWarning("[Export] Bindings type não encontrado");
+                    return;
                 }
                 
-                string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Export_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
-                System.IO.File.WriteAllText(path, csv.ToString());
-                Log.LogInfo($"[CSV] ✅ {count} linhas exportadas!");
-                Log.LogInfo($"[CSV] Arquivo: {path}");
+                // DataSet property
+                var dataSetProp = bindingsType.GetProperty("DataSet", BindingFlags.Public | BindingFlags.Instance);
+                if (dataSetProp == null)
+                {
+                    Log.LogWarning("[Export] DataSet property não encontrada");
+                    return;
+                }
+                
+                Log.LogInfo("[Export] Bindings.DataSet encontrado!");
+                Log.LogInfo("[Export] Tipo: " + dataSetProp.PropertyType.FullName);
             }
             catch (Exception ex)
             {
-                Log.LogError($"[CSV] Erro: {ex.Message}");
+                Log.LogError($"[Export] Erro: {ex.Message}");
             }
         }
     }
