@@ -13,67 +13,29 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.36.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.37.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
-        internal static object _bindingsInstance = null;
-        internal static Type _bindingsType = null;
         
         public override void Load()
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.36.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.37.0 CARREGADO!");
             Log.LogInfo("========================================");
             
-            // Buscar tipo Bindings em todos assemblies
-            foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                try
-                {
-                    var types = asm.GetTypes();
-                    foreach (var t in types)
-                    {
-                        if (t.Name == "Bindings" && t.Namespace == "")
-                        {
-                            _bindingsType = t;
-                            Log.LogInfo($"[Init] Bindings encontrado: {t.FullName} em {asm.GetName().Name}");
-                            
-                            // Hook no Update
-                            var harmony = new Harmony("com.koda.fm26.ctrlp");
-                            var updateMethod = t.GetMethod("Update", BindingFlags.Public | BindingFlags.Instance);
-                            if (updateMethod != null)
-                            {
-                                var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
-                                harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
-                                Log.LogInfo("[Init] Patched Bindings.Update");
-                            }
-                            break;
-                        }
-                    }
-                }
-                catch { }
-            }
+            var harmony = new Harmony("com.koda.fm26.ctrlp");
             
-            if (_bindingsType == null)
+            var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
+            if (bindingsType != null)
             {
-                Log.LogWarning("[Init] Bindings não encontrado, tentando via SI.Bindable.Bindings");
-                
-                var altType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
-                if (altType != null)
+                var updateMethod = bindingsType.GetMethod("Update", BindingFlags.Public | BindingFlags.Instance);
+                if (updateMethod != null)
                 {
-                    _bindingsType = altType;
-                    Log.LogInfo($"[Init] Tipo alternativo: {altType.FullName}");
-                    
-                    var harmony = new Harmony("com.koda.fm26.ctrlp");
-                    var updateMethod = altType.GetMethod("Update", BindingFlags.Public | BindingFlags.Instance);
-                    if (updateMethod != null)
-                    {
-                        var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
-                        harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
-                        Log.LogInfo("[Init] Patched SI.Bindable.Bindings.Update");
-                    }
+                    var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
+                    harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
+                    Log.LogInfo("[Init] Patched SI.Bindable.Bindings.Update");
                 }
             }
         }
@@ -81,17 +43,10 @@ namespace FM26CtrlPExport
         private static int _frameCount = 0;
         private static bool _initialized = false;
         
-        public static void OnUpdate(object __instance)
+        public static void OnUpdate()
         {
             try
             {
-                // Capturar instância
-                if (_bindingsInstance == null && __instance != null)
-                {
-                    _bindingsInstance = __instance;
-                    Log.LogInfo($"[Hook] Bindings capturada!");
-                }
-                
                 _frameCount++;
                 if (!_initialized && _frameCount == 300)
                 {
@@ -106,20 +61,20 @@ namespace FM26CtrlPExport
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - Exportar via StreamedTable");
-                    ExportViaStreamedTable();
+                    Log.LogInfo(">>> Ctrl+P - Exportar StreamedTable.SourceData");
+                    ExportFromStreamedTable();
                 }
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Listar Bindings.DataSet");
-                    ListBindingsDataSet();
+                    Log.LogInfo(">>> F9 - Listar StreamedTables ativos");
+                    ListStreamedTables();
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Investigar StreamedTable");
-                    InvestigateStreamedTable();
+                    Log.LogInfo(">>> F10 - Detalhes do primeiro item de SourceData");
+                    ShowSourceDataItemDetails();
                 }
             }
             catch (Exception ex)
@@ -128,100 +83,31 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void ListBindingsDataSet()
+        private static void ListStreamedTables()
         {
             try
             {
-                if (_bindingsInstance == null)
-                {
-                    Log.LogWarning("[Bind] Bindings não capturada");
-                    return;
-                }
-                
-                var type = _bindingsInstance.GetType();
-                Log.LogInfo($"[Bind] Tipo: {type.Name}");
-                
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                Log.LogInfo($"[Bind] {props.Length} propriedades:");
-                
-                foreach (var p in props)
-                {
-                    Log.LogInfo($"[Bind]   {p.Name}: {p.PropertyType.Name}");
-                }
-                
-                // DataSet
-                var dataSetProp = props.FirstOrDefault(p => p.Name == "DataSet");
-                if (dataSetProp != null)
-                {
-                    var dataSet = dataSetProp.GetValue(_bindingsInstance);
-                    if (dataSet is IEnumerable en)
-                    {
-                        int count = 0;
-                        foreach (var _ in en) { count++; if (count >= 10000) break; }
-                        Log.LogInfo($"[Bind] DataSet: {count} itens");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Bind] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void InvestigateStreamedTable()
-        {
-            try
-            {
-                // Buscar StreamedTable
-                var streamedTableType = AppDomain.CurrentDomain.GetAssemblies()
-                    .SelectMany(a => { try { return a.GetTypes(); } catch { return Type.EmptyTypes; } })
-                    .FirstOrDefault(t => t.Name == "StreamedTable");
-                
-                if (streamedTableType == null)
-                {
-                    Log.LogWarning("[ST] StreamedTable não encontrado");
-                    return;
-                }
-                
-                Log.LogInfo($"[ST] Tipo: {streamedTableType.FullName}");
-                
-                // Propriedades
-                var props = streamedTableType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                Log.LogInfo($"[ST] {props.Length} propriedades:");
-                
-                foreach (var p in props)
-                {
-                    Log.LogInfo($"[ST]   {p.Name}: {p.PropertyType.Name}");
-                }
-                
-                // Campos
-                var fields = streamedTableType.GetFields(BindingFlags.Public | BindingFlags.Instance);
-                Log.LogInfo($"[ST] {fields.Length} campos públicos:");
-                
-                foreach (var f in fields)
-                {
-                    Log.LogInfo($"[ST]   {f.Name}: {f.FieldType.Name}");
-                }
-                
-                // Buscar instâncias ativas
                 var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                int total = 0;
+                
                 foreach (var doc in uiDocs)
                 {
                     if (doc == null || doc.rootVisualElement == null) continue;
                     
                     var tables = new List<VisualElement>();
-                    FindElementsOfType(doc.rootVisualElement, "StreamedTable", tables, 0, 30);
+                    FindElementsByType(doc.rootVisualElement, "StreamedTable", tables, 0, 50);
                     
-                    if (tables.Count > 0)
+                    foreach (var table in tables)
                     {
-                        Log.LogInfo($"[ST] {tables.Count} StreamedTables encontrados em {doc.name}");
+                        total++;
+                        var sourceData = GetSourceData(table);
+                        var itemCount = GetItemCount(table);
                         
-                        foreach (var table in tables.Take(3))
-                        {
-                            Log.LogInfo($"[ST]   {table.name} ({table.childCount} filhos)");
-                        }
+                        Log.LogInfo($"[ST] {table.name} - ItemCount: {itemCount}, SourceData: {(sourceData != null ? "present" : "null")}");
                     }
                 }
+                
+                Log.LogInfo($"[ST] Total: {total} StreamedTables");
             }
             catch (Exception ex)
             {
@@ -229,7 +115,137 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void FindElementsOfType(VisualElement element, string typeName, List<VisualElement> results, int depth, int maxDepth)
+        private static void ShowSourceDataItemDetails()
+        {
+            try
+            {
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                
+                foreach (var doc in uiDocs)
+                {
+                    if (doc == null || doc.rootVisualElement == null) continue;
+                    
+                    var tables = new List<VisualElement>();
+                    FindElementsByType(doc.rootVisualElement, "StreamedTable", tables, 0, 50);
+                    
+                    foreach (var table in tables)
+                    {
+                        var sourceData = GetSourceData(table);
+                        if (sourceData == null) continue;
+                        
+                        // Pegar primeiro item
+                        var enumerator = sourceData.GetEnumerator();
+                        if (enumerator.MoveNext())
+                        {
+                            var first = enumerator.Current;
+                            if (first != null)
+                            {
+                                var type = first.GetType();
+                                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                                
+                                Log.LogInfo($"[Data] Tipo do item: {type.FullName}");
+                                Log.LogInfo($"[Data] {props.Length} propriedades:");
+                                
+                                foreach (var p in props.Take(30))
+                                {
+                                    try
+                                    {
+                                        var val = p.GetValue(first);
+                                        var valStr = val?.ToString() ?? "null";
+                                        if (valStr.Length > 50) valStr = valStr.Substring(0, 50) + "...";
+                                        Log.LogInfo($"[Data]   {p.Name}: {valStr}");
+                                    }
+                                    catch { }
+                                }
+                                return;
+                            }
+                        }
+                    }
+                }
+                
+                Log.LogWarning("[Data] Nenhum item encontrado");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Data] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void ExportFromStreamedTable()
+        {
+            try
+            {
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                
+                foreach (var doc in uiDocs)
+                {
+                    if (doc == null || doc.rootVisualElement == null) continue;
+                    
+                    var tables = new List<VisualElement>();
+                    FindElementsByType(doc.rootVisualElement, "StreamedTable", tables, 0, 50);
+                    
+                    foreach (var table in tables)
+                    {
+                        var sourceData = GetSourceData(table);
+                        if (sourceData == null) continue;
+                        
+                        Log.LogInfo($"[Export] Tabela: {table.name}");
+                        
+                        var list = new List<object>();
+                        foreach (var item in sourceData)
+                        {
+                            list.Add(item);
+                            if (list.Count >= 50000) break;
+                        }
+                        
+                        if (list.Count > 0)
+                        {
+                            Log.LogInfo($"[Export] {list.Count} itens encontrados");
+                            ExportCsv(list);
+                            return;
+                        }
+                    }
+                }
+                
+                Log.LogWarning("[Export] Nenhum dado encontrado");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Export] Erro: {ex.Message}\n{ex.StackTrace}");
+            }
+        }
+        
+        private static IList GetSourceData(VisualElement element)
+        {
+            try
+            {
+                var type = element.GetType();
+                var prop = type.GetProperty("SourceData", BindingFlags.Public | BindingFlags.Instance);
+                if (prop != null)
+                {
+                    return prop.GetValue(element) as IList;
+                }
+            }
+            catch { }
+            return null;
+        }
+        
+        private static int GetItemCount(VisualElement element)
+        {
+            try
+            {
+                var type = element.GetType();
+                var prop = type.GetProperty("ItemCount", BindingFlags.Public | BindingFlags.Instance);
+                if (prop != null)
+                {
+                    return (int)prop.GetValue(element);
+                }
+            }
+            catch { }
+            return 0;
+        }
+        
+        private static void FindElementsByType(VisualElement element, string typeName, List<VisualElement> results, int depth, int maxDepth)
         {
             if (element == null || depth > maxDepth) return;
             
@@ -240,79 +256,7 @@ namespace FM26CtrlPExport
             
             for (int i = 0; i < element.childCount; i++)
             {
-                FindElementsOfType(element[i], typeName, results, depth + 1, maxDepth);
-            }
-        }
-        
-        private static void ExportViaStreamedTable()
-        {
-            try
-            {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                
-                foreach (var doc in uiDocs)
-                {
-                    if (doc == null || doc.rootVisualElement == null) continue;
-                    
-                    var tables = new List<VisualElement>();
-                    FindElementsOfType(doc.rootVisualElement, "StreamedTable", tables, 0, 40);
-                    FindElementsOfType(doc.rootVisualElement, "StreamedListView", tables, 0, 40);
-                    
-                    foreach (var table in tables)
-                    {
-                        Log.LogInfo($"[Export] {table.GetType().Name}: {table.name}");
-                        
-                        // Verificar propriedades de dados
-                        var type = table.GetType();
-                        var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                        
-                        foreach (var p in props)
-                        {
-                            var name = p.Name.ToLower();
-                            if (!name.Contains("data") && !name.Contains("source") && 
-                                !name.Contains("item") && !name.Contains("list")) continue;
-                            
-                            try
-                            {
-                                var val = p.GetValue(table);
-                                if (val == null) continue;
-                                
-                                Log.LogInfo($"[Export]   {p.Name}: {val.GetType().Name}");
-                                
-                                if (val is IEnumerable en && !(val is string))
-                                {
-                                    var list = new List<object>();
-                                    foreach (var item in en)
-                                    {
-                                        list.Add(item);
-                                        if (list.Count >= 10000) break;
-                                    }
-                                    
-                                    if (list.Count > 5)
-                                    {
-                                        Log.LogInfo($"[Export]   ⭐ {list.Count} itens!");
-                                        
-                                        // Verificar tipo do primeiro item
-                                        var first = list[0];
-                                        if (first != null)
-                                        {
-                                            Log.LogInfo($"[Export]   Item tipo: {first.GetType().Name}");
-                                            ExportCsv(list);
-                                            return;
-                                        }
-                                    }
-                                }
-                            }
-                            catch { }
-                        }
-                    }
-                }
-                
-                Log.LogWarning("[Export] Nenhum dado encontrado");
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Export] Erro: {ex.Message}");
+                FindElementsByType(element[i], typeName, results, depth + 1, maxDepth);
             }
         }
         
@@ -320,12 +264,14 @@ namespace FM26CtrlPExport
         {
             try
             {
+                if (data.Count == 0) return;
+                
                 var first = data[0];
                 if (first == null) return;
                 
                 var type = first.GetType();
                 var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(p => p.GetIndexParameters().Length == 0 && p.Name.Length < 30)
+                    .Where(p => p.GetIndexParameters().Length == 0 && p.Name.Length < 40)
                     .ToList();
                 
                 var csv = new System.Text.StringBuilder();
@@ -341,7 +287,8 @@ namespace FM26CtrlPExport
                         try
                         {
                             var val = p.GetValue(item);
-                            return (val?.ToString() ?? "").Replace(";", ",").Replace("\n", " ");
+                            var str = val?.ToString() ?? "";
+                            return str.Replace(";", ",").Replace("\n", " ").Replace("\r", "");
                         }
                         catch { return ""; }
                     });
@@ -352,7 +299,8 @@ namespace FM26CtrlPExport
                 
                 string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Export_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
                 System.IO.File.WriteAllText(path, csv.ToString());
-                Log.LogInfo($"[CSV] ✅ {count} linhas: {path}");
+                Log.LogInfo($"[CSV] ✅ {count} linhas exportadas!");
+                Log.LogInfo($"[CSV] Arquivo: {path}");
             }
             catch (Exception ex)
             {
