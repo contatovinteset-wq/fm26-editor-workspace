@@ -1,0 +1,10 @@
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\netstandard2.1\FM26Diagnostic.csproj.AssemblyReference.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\netstandard2.1\FM26Diagnostic.GeneratedMSBuildEditorConfig.editorconfig
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\netstandard2.1\FM26Diagnostic.AssemblyInfoInputs.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\netstandard2.1\FM26Diagnostic.AssemblyInfo.cs
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\netstandard2.1\FM26Diagnostic.csproj.CoreCompileInputs.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\bin\Release\netstandard2.1\FM26Diagnostic.deps.json
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\bin\Release\netstandard2.1\FM26Diagnostic.dll
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\bin\Release\netstandard2.1\FM26Diagnostic.pdb
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\netstandard2.1\FM26Diagnostic.dll
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\netstandard2.1\FM26Diagnostic.pdb

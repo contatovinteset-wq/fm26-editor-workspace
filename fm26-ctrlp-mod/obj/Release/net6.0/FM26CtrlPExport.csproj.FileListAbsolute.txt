@@ -1,0 +1,12 @@
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\net6.0\FM26CtrlPExport.csproj.AssemblyReference.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\net6.0\FM26CtrlPExport.GeneratedMSBuildEditorConfig.editorconfig
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\net6.0\FM26CtrlPExport.AssemblyInfoInputs.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\net6.0\FM26CtrlPExport.AssemblyInfo.cs
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\net6.0\FM26CtrlPExport.csproj.CoreCompileInputs.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\bin\Release\net6.0\FM26CtrlPExport.deps.json
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\bin\Release\net6.0\FM26CtrlPExport.dll
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\bin\Release\net6.0\FM26CtrlPExport.pdb
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\net6.0\FM26CtrlPExport.dll
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\net6.0\refint\FM26CtrlPExport.dll
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\net6.0\FM26CtrlPExport.pdb
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-ctrlp-mod\obj\Release\net6.0\ref\FM26CtrlPExport.dll
