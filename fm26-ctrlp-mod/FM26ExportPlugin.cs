@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.30.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.31.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,7 +22,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.30.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.31.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -67,13 +67,13 @@ namespace FM26CtrlPExport
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Mapear tela atual (elementos UI)");
-                    MapCurrentScreen();
+                    Log.LogInfo(">>> F9 - Mapear elementos com nomes relevantes");
+                    MapCurrentScreenSafe();
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Buscar tipos com 'Search' no nome");
+                    Log.LogInfo(">>> F10 - Buscar tipos C# com 'PlayerSearch'");
                     FindSearchTypes();
                 }
             }
@@ -83,7 +83,7 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void MapCurrentScreen()
+        private static void MapCurrentScreenSafe()
         {
             try
             {
@@ -95,18 +95,37 @@ namespace FM26CtrlPExport
                     var root = doc.rootVisualElement;
                     if (root == null) continue;
                     
-                    // Buscar elementos com nomes relacionados a player/search/database
+                    // Buscar elementos com nomes relevantes - APENAS nomes, sem acessar propriedades
                     var relevant = new List<VisualElement>();
                     FindRelevantElements(root, relevant, 0, 40);
                     
-                    Log.LogInfo($"[Map] {relevant.Count} elementos relevantes encontrados:");
+                    Log.LogInfo($"[Map] {relevant.Count} elementos relevantes encontrados");
                     
-                    foreach (var el in relevant.Take(30))
+                    // Mostrar apenas os primeiros 20, sem verificar dados
+                    foreach (var el in relevant.Take(20))
                     {
-                        Log.LogInfo($"[Map] {el.name} ({el.childCount} filhos)");
-                        
-                        // Verificar se tem dados
-                        CheckForData(el, "  ");
+                        try
+                        {
+                            Log.LogInfo($"[Map] {el.name} ({el.childCount} filhos)");
+                        }
+                        catch { }
+                    }
+                    
+                    // Agora verificar dados APENAS nos elementos com > 10 filhos (possíveis tabelas)
+                    Log.LogInfo($"[Map] === Elementos com muitos filhos (possíveis tabelas) ===");
+                    
+                    var tables = relevant.Where(e => e.childCount > 10).Take(10);
+                    foreach (var el in tables)
+                    {
+                        try
+                        {
+                            Log.LogInfo($"[Map] {el.name} ({el.childCount} filhos) - verificando dados...");
+                            CheckForDataSafe(el);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.LogError($"[Map] Erro em {el.name}: {ex.Message}");
+                        }
                     }
                 }
             }
@@ -120,50 +139,59 @@ namespace FM26CtrlPExport
         {
             if (element == null || depth > maxDepth) return;
             
-            var name = element.name.ToLower();
-            if (name.Contains("player") || name.Contains("search") || name.Contains("database") ||
-                name.Contains("squad") || name.Contains("roster") || name.Contains("table") ||
-                name.Contains("list") || name.Contains("result") || name.Contains("item"))
+            try
             {
-                results.Add(element);
+                var name = element.name.ToLower();
+                if (name.Contains("player") || name.Contains("search") || name.Contains("database") ||
+                    name.Contains("squad") || name.Contains("roster") || name.Contains("table") ||
+                    name.Contains("list") || name.Contains("result") || name.Contains("item") ||
+                    name.Contains("row") || name.Contains("column"))
+                {
+                    results.Add(element);
+                }
             }
+            catch { }
             
             for (int i = 0; i < element.childCount; i++)
             {
-                FindRelevantElements(element[i], results, depth + 1, maxDepth);
+                try
+                {
+                    FindRelevantElements(element[i], results, depth + 1, maxDepth);
+                }
+                catch { }
             }
         }
         
-        private static void CheckForData(VisualElement element, string indent)
+        private static void CheckForDataSafe(VisualElement element)
         {
             try
             {
                 var type = element.GetType();
                 
-                // Propriedades públicas
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                foreach (var p in props)
+                // Apenas verificar se existe propriedade dataSource
+                var dsProp = type.GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
+                if (dsProp != null)
                 {
-                    var name = p.Name.ToLower();
-                    if (!name.Contains("data") && !name.Contains("source") && !name.Contains("item") && 
-                        !name.Contains("list") && !name.Contains("row") && !name.Contains("bind")) continue;
-                    
                     try
                     {
-                        var val = p.GetValue(element);
-                        if (val == null) continue;
-                        
-                        if (val is IEnumerable en && !(val is string))
+                        var ds = dsProp.GetValue(element);
+                        if (ds != null)
                         {
-                            int count = 0;
-                            foreach (var item in en)
+                            Log.LogInfo($"[Map]   dataSource: {ds.GetType().Name}");
+                            
+                            // Verificar se tem IEnumerable
+                            if (ds is IEnumerable en && !(ds is string))
                             {
-                                count++;
-                                if (count >= 200) break;
-                            }
-                            if (count > 0)
-                            {
-                                Log.LogInfo($"[Map] {indent}{p.Name}: {count} itens ⭐⭐⭐");
+                                int count = 0;
+                                foreach (var item in en)
+                                {
+                                    count++;
+                                    if (count >= 500) break;
+                                }
+                                if (count > 0)
+                                {
+                                    Log.LogInfo($"[Map]   ⭐⭐⭐ {count} itens encontrados!");
+                                }
                             }
                         }
                     }
@@ -192,8 +220,7 @@ namespace FM26CtrlPExport
                         {
                             var name = t.Name.ToLower();
                             if (name.Contains("playersearch") || name.Contains("searchresult") ||
-                                name.Contains("playerdata") || name.Contains("searchdata") ||
-                                name.Contains("databaseresult"))
+                                name.Contains("playerdata") || name.Contains("searchdata"))
                             {
                                 found.Add(t);
                             }
@@ -202,18 +229,16 @@ namespace FM26CtrlPExport
                     catch { }
                 }
                 
-                Log.LogInfo($"[Type] {found.Count} tipos com 'Search' encontrados");
+                Log.LogInfo($"[Type] {found.Count} tipos encontrados");
                 
-                foreach (var t in found.Take(20))
+                foreach (var t in found.Take(15))
                 {
-                    var props = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                    Log.LogInfo($"[Type] {t.Name} [{props.Length} props]");
-                    
-                    // Mostrar propriedades interessantes
-                    foreach (var p in props.Take(15))
+                    try
                     {
-                        Log.LogInfo($"[Type]   {p.Name}: {p.PropertyType.Name}");
+                        var props = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                        Log.LogInfo($"[Type] {t.Name} [{props.Length} props]");
                     }
+                    catch { }
                 }
             }
             catch (Exception ex)
@@ -259,13 +284,13 @@ namespace FM26CtrlPExport
             try
             {
                 var type = element.GetType();
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                var dsProp = type.GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
                 
-                foreach (var p in props)
+                if (dsProp != null)
                 {
                     try
                     {
-                        var val = p.GetValue(element);
+                        var val = dsProp.GetValue(element);
                         if (val is IEnumerable en && !(val is string))
                         {
                             var list = new List<object>();
@@ -296,8 +321,12 @@ namespace FM26CtrlPExport
             
             for (int i = 0; i < element.childCount; i++)
             {
-                var found = FindDataInTree(element[i], depth + 1, maxDepth);
-                if (found != null) return found;
+                try
+                {
+                    var found = FindDataInTree(element[i], depth + 1, maxDepth);
+                    if (found != null) return found;
+                }
+                catch { }
             }
             
             return null;
