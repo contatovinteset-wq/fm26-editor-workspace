@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.32.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.33.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,7 +22,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.32.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.33.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -67,14 +67,14 @@ namespace FM26CtrlPExport
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Investigar PlayerDataPoint");
-                    InvestigatePlayerDataPoint();
+                    Log.LogInfo(">>> F9 - Buscar tipos Player em SI.Bindable");
+                    FindPlayerTypesInBindable();
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Investigar SearchResultReference");
-                    InvestigateSearchResultReference();
+                    Log.LogInfo(">>> F10 - Buscar tipos Person em FM.Core");
+                    FindPersonTypesInCore();
                 }
             }
             catch (Exception ex)
@@ -83,149 +83,165 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void InvestigatePlayerDataPoint()
+        private static void FindPlayerTypesInBindable()
         {
             try
             {
-                // Buscar tipo PlayerDataPoint
-                var type = AppDomain.CurrentDomain.GetAssemblies()
-                    .SelectMany(a => { try { return a.GetTypes(); } catch { return Type.EmptyTypes; } })
-                    .FirstOrDefault(t => t.Name == "PlayerDataPoint");
+                var asm = AppDomain.CurrentDomain.GetAssemblies()
+                    .FirstOrDefault(a => a.GetName().Name == "SI.Bindable");
                 
-                if (type == null)
+                if (asm == null)
                 {
-                    Log.LogWarning("[PDP] Tipo não encontrado");
+                    Log.LogWarning("[Bind] Assembly não encontrado");
                     return;
                 }
                 
-                Log.LogInfo($"[PDP] Tipo: {type.FullName}");
+                var types = asm.GetTypes();
+                Log.LogInfo($"[Bind] {types.Length} tipos em SI.Bindable");
                 
-                // Propriedades de instância
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                Log.LogInfo($"[PDP] {props.Length} propriedades de instância:");
-                foreach (var p in props)
+                // Buscar tipos com Player, Person, Squad, Roster no nome
+                var relevant = types.Where(t => 
                 {
-                    Log.LogInfo($"[PDP]   {p.Name}: {p.PropertyType.Name}");
-                }
+                    var name = t.Name.ToLower();
+                    return name.Contains("player") || name.Contains("person") || 
+                           name.Contains("squad") || name.Contains("roster") ||
+                           name.Contains("athlete") || name.Contains("footballer");
+                }).ToList();
                 
-                // Propriedades estáticas
-                var staticProps = type.GetProperties(BindingFlags.Static | BindingFlags.Public);
-                Log.LogInfo($"[PDP] {staticProps.Length} propriedades estáticas:");
-                foreach (var p in staticProps)
+                Log.LogInfo($"[Bind] {relevant.Count} tipos relevantes:");
+                
+                foreach (var t in relevant.Take(30))
                 {
-                    Log.LogInfo($"[PDP]   static {p.Name}: {p.PropertyType.Name}");
+                    var props = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                    Log.LogInfo($"[Bind] {t.Name} [{props.Length} props]");
                     
-                    try
+                    // Mostrar propriedades interessantes
+                    var interesting = props.Where(p => 
                     {
-                        var val = p.GetValue(null);
-                        if (val != null)
+                        var name = p.Name.ToLower();
+                        return name.Contains("name") || name.Contains("age") || 
+                               name.Contains("club") || name.Contains("team") ||
+                               name.Contains("position") || name.Contains("value") ||
+                               name.Contains("id") || name.Contains("nation");
+                    });
+                    
+                    foreach (var p in interesting.Take(8))
+                    {
+                        Log.LogInfo($"[Bind]   {p.Name}: {p.PropertyType.Name}");
+                    }
+                    
+                    // Verificar propriedades estáticas com dados
+                    var staticProps = t.GetProperties(BindingFlags.Static | BindingFlags.Public);
+                    foreach (var p in staticProps)
+                    {
+                        try
                         {
-                            Log.LogInfo($"[PDP]     valor: {val.GetType().Name}");
-                            
-                            if (val is IEnumerable en && !(val is string))
+                            var val = p.GetValue(null);
+                            if (val != null)
                             {
-                                int count = 0;
-                                foreach (var item in en)
+                                if (val is IEnumerable en && !(val is string))
                                 {
-                                    count++;
-                                    if (count >= 1000) break;
+                                    int count = 0;
+                                    foreach (var item in en)
+                                    {
+                                        count++;
+                                        if (count >= 1000) break;
+                                    }
+                                    if (count > 0)
+                                    {
+                                        Log.LogInfo($"[Bind]   ⭐ static {p.Name}: {count} itens!");
+                                    }
                                 }
-                                Log.LogInfo($"[PDP]     ⭐ {count} itens!");
                             }
                         }
+                        catch { }
                     }
-                    catch { }
-                }
-                
-                // Campos estáticos
-                var fields = type.GetFields(BindingFlags.Static | BindingFlags.Public);
-                Log.LogInfo($"[PDP] {fields.Length} campos estáticos:");
-                foreach (var f in fields)
-                {
-                    Log.LogInfo($"[PDP]   static {f.Name}: {f.FieldType.Name}");
-                    
-                    try
-                    {
-                        var val = f.GetValue(null);
-                        if (val != null)
-                        {
-                            if (val is IEnumerable en && !(val is string))
-                            {
-                                int count = 0;
-                                foreach (var item in en)
-                                {
-                                    count++;
-                                    if (count >= 1000) break;
-                                }
-                                Log.LogInfo($"[PDP]     ⭐ {count} itens!");
-                            }
-                        }
-                    }
-                    catch { }
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[PDP] Erro: {ex.Message}");
+                Log.LogError($"[Bind] Erro: {ex.Message}");
             }
         }
         
-        private static void InvestigateSearchResultReference()
+        private static void FindPersonTypesInCore()
         {
             try
             {
-                // Buscar tipo SearchResultReference
-                var type = AppDomain.CurrentDomain.GetAssemblies()
-                    .SelectMany(a => { try { return a.GetTypes(); } catch { return Type.EmptyTypes; } })
-                    .FirstOrDefault(t => t.Name == "SearchResultReference");
+                // Buscar em todos assemblies SI.* e FM.*
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                    .Where(a => 
+                    {
+                        var name = a.GetName().Name;
+                        return name.StartsWith("SI.") || name.StartsWith("FM.");
+                    })
+                    .ToList();
                 
-                if (type == null)
+                var allTypes = new List<Type>();
+                foreach (var asm in assemblies)
                 {
-                    Log.LogWarning("[SRR] Tipo não encontrado");
-                    return;
-                }
-                
-                Log.LogInfo($"[SRR] Tipo: {type.FullName}");
-                
-                // Propriedades de instância
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                Log.LogInfo($"[SRR] {props.Length} propriedades:");
-                foreach (var p in props)
-                {
-                    Log.LogInfo($"[SRR]   {p.Name}: {p.PropertyType.Name}");
-                }
-                
-                // Propriedades estáticas
-                var staticProps = type.GetProperties(BindingFlags.Static | BindingFlags.Public);
-                foreach (var p in staticProps)
-                {
-                    Log.LogInfo($"[SRR]   static {p.Name}: {p.PropertyType.Name}");
-                    
                     try
                     {
-                        var val = p.GetValue(null);
-                        if (val != null)
-                        {
-                            Log.LogInfo($"[SRR]     valor: {val.GetType().Name}");
-                            
-                            if (val is IEnumerable en && !(val is string))
-                            {
-                                int count = 0;
-                                foreach (var item in en)
-                                {
-                                    count++;
-                                    if (count >= 1000) break;
-                                }
-                                Log.LogInfo($"[SRR]     ⭐ {count} itens!");
-                            }
-                        }
+                        allTypes.AddRange(asm.GetTypes());
                     }
                     catch { }
+                }
+                
+                Log.LogInfo($"[Core] {allTypes.Count} tipos em SI.* + FM.*");
+                
+                // Buscar tipos que PARECEM dados de jogador (não UI, não Match)
+                var playerDataTypes = allTypes.Where(t => 
+                {
+                    var name = t.Name.ToLower();
+                    var ns = t.Namespace?.ToLower() ?? "";
+                    
+                    // Ignorar UI e Match
+                    if (ns.Contains(".ui") || ns.Contains(".match")) return false;
+                    
+                    // Mas deve ter Player, Person, Footballer no nome
+                    return name.Contains("player") || name.Contains("person") ||
+                           name.Contains("footballer") || name.Contains("athlete") ||
+                           name.Contains("squad") || name.Contains("roster");
+                }).ToList();
+                
+                Log.LogInfo($"[Core] {playerDataTypes.Count} tipos de dados (não-UI, não-Match):");
+                
+                foreach (var t in playerDataTypes.Take(25))
+                {
+                    var props = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                    var name = t.Name;
+                    var ns = t.Namespace ?? "?";
+                    
+                    // Filtrar apenas tipos com propriedades interessantes
+                    var hasName = props.Any(p => p.Name.ToLower().Contains("name"));
+                    var hasAge = props.Any(p => p.Name.ToLower().Contains("age"));
+                    var hasClub = props.Any(p => p.Name.ToLower().Contains("club") || p.Name.ToLower().Contains("team"));
+                    
+                    var marker = (hasName || hasAge || hasClub) ? "⭐" : "";
+                    
+                    Log.LogInfo($"[Core] {name} [{props.Length} props] {ns} {marker}");
+                    
+                    if (hasName || hasAge || hasClub)
+                    {
+                        var interesting = props.Where(p => 
+                        {
+                            var n = p.Name.ToLower();
+                            return n.Contains("name") || n.Contains("age") || 
+                                   n.Contains("club") || n.Contains("team") ||
+                                   n.Contains("position") || n.Contains("value") ||
+                                   n.Contains("nation") || n.Contains("id");
+                        }).Take(10);
+                        
+                        foreach (var p in interesting)
+                        {
+                            Log.LogInfo($"[Core]   {p.Name}: {p.PropertyType.Name}");
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[SRR] Erro: {ex.Message}");
+                Log.LogError($"[Core] Erro: {ex.Message}");
             }
         }
         
@@ -233,69 +249,40 @@ namespace FM26CtrlPExport
         {
             try
             {
-                // Buscar todos os objetos UnityEngine.Object que contenham dados de jogador
+                // Buscar todos os objetos e verificar tipos relevantes
                 var allObjects = Resources.FindObjectsOfTypeAll<UnityEngine.Object>();
                 
-                Log.LogInfo($"[Export] {allObjects.Length} objetos Unity encontrados");
+                Log.LogInfo($"[Export] {allObjects.Length} objetos Unity");
                 
-                int count = 0;
+                // Tipos relevantes que podem ter dados
+                var relevantTypeNames = new[] { 
+                    "player", "person", "squad", "roster", 
+                    "footballer", "athlete", "search", "database"
+                };
+                
                 foreach (var obj in allObjects)
                 {
                     if (obj == null) continue;
                     
                     var type = obj.GetType();
-                    var name = type.Name.ToLower();
+                    var typeName = type.Name.ToLower();
+                    var ns = type.Namespace?.ToLower() ?? "";
                     
-                    // Verificar se é um tipo relevante
-                    if (name.Contains("playerdata") || name.Contains("searchresult") ||
-                        name.Contains("squaddata") || name.Contains("rosterdata"))
-                    {
-                        Log.LogInfo($"[Export] Objeto: {type.Name}");
-                        count++;
-                        
-                        // Verificar propriedades IEnumerable
-                        var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                        foreach (var p in props)
-                        {
-                            try
-                            {
-                                var val = p.GetValue(obj);
-                                if (val is IEnumerable en && !(val is string))
-                                {
-                                    var list = new List<object>();
-                                    foreach (var item in en)
-                                    {
-                                        list.Add(item);
-                                        if (list.Count >= 10000) break;
-                                    }
-                                    
-                                    if (list.Count > 5)
-                                    {
-                                        Log.LogInfo($"[Export] ⭐⭐⭐ {p.Name}: {list.Count} itens!");
-                                        ExportCsv(list);
-                                        return;
-                                    }
-                                }
-                            }
-                            catch { }
-                        }
-                    }
-                }
-                
-                Log.LogInfo($"[Export] {count} objetos relevantes encontrados, mas sem dados IEnumerable");
-                
-                // Fallback: buscar SI.Bindable.CustomViewExportData
-                var exportType = Type.GetType("SI.Bindable.CustomViewExportData, SI.Bindable");
-                if (exportType != null)
-                {
-                    Log.LogInfo($"[Export] Investigando CustomViewExportData...");
+                    // Ignorar UI e Match
+                    if (ns.Contains(".ui") || ns.Contains(".match")) continue;
                     
-                    var staticProps = exportType.GetProperties(BindingFlags.Static | BindingFlags.Public);
-                    foreach (var p in staticProps)
+                    // Verificar se é relevante
+                    if (!relevantTypeNames.Any(n => typeName.Contains(n))) continue;
+                    
+                    Log.LogInfo($"[Export] Objeto: {type.Name} ({type.Namespace})");
+                    
+                    // Verificar propriedades IEnumerable
+                    var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                    foreach (var p in props)
                     {
                         try
                         {
-                            var val = p.GetValue(null);
+                            var val = p.GetValue(obj);
                             if (val is IEnumerable en && !(val is string))
                             {
                                 var list = new List<object>();
@@ -305,9 +292,9 @@ namespace FM26CtrlPExport
                                     if (list.Count >= 10000) break;
                                 }
                                 
-                                if (list.Count > 0)
+                                if (list.Count > 5)
                                 {
-                                    Log.LogInfo($"[Export] CustomViewExportData.{p.Name}: {list.Count} itens");
+                                    Log.LogInfo($"[Export] ⭐⭐⭐ {p.Name}: {list.Count} itens!");
                                     ExportCsv(list);
                                     return;
                                 }
@@ -317,7 +304,7 @@ namespace FM26CtrlPExport
                     }
                 }
                 
-                Log.LogWarning("[Export] Nenhum dado exportável encontrado");
+                Log.LogWarning("[Export] Nenhum dado encontrado");
             }
             catch (Exception ex)
             {
