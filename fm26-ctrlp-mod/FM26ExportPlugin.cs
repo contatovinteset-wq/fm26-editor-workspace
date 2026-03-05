@@ -13,73 +13,90 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.35.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.36.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
         internal static object _bindingsInstance = null;
+        internal static Type _bindingsType = null;
         
         public override void Load()
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.35.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.36.0 CARREGADO!");
             Log.LogInfo("========================================");
             
-            var harmony = new Harmony("com.koda.fm26.ctrlp");
+            // Buscar tipo Bindings em todos assemblies
+            foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                try
+                {
+                    var types = asm.GetTypes();
+                    foreach (var t in types)
+                    {
+                        if (t.Name == "Bindings" && t.Namespace == "")
+                        {
+                            _bindingsType = t;
+                            Log.LogInfo($"[Init] Bindings encontrado: {t.FullName} em {asm.GetName().Name}");
+                            
+                            // Hook no Update
+                            var harmony = new Harmony("com.koda.fm26.ctrlp");
+                            var updateMethod = t.GetMethod("Update", BindingFlags.Public | BindingFlags.Instance);
+                            if (updateMethod != null)
+                            {
+                                var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
+                                harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
+                                Log.LogInfo("[Init] Patched Bindings.Update");
+                            }
+                            break;
+                        }
+                    }
+                }
+                catch { }
+            }
             
-            // Bindings está no namespace global, não em SI.Bindable
-            var bindingsType = Type.GetType("Bindings, SI.Bindable");
-            if (bindingsType != null)
+            if (_bindingsType == null)
             {
-                Log.LogInfo($"[Init] Bindings type: {bindingsType.FullName}");
+                Log.LogWarning("[Init] Bindings não encontrado, tentando via SI.Bindable.Bindings");
                 
-                // Hook no construtor para capturar instância
-                var ctor = bindingsType.GetConstructor(Type.EmptyTypes);
-                if (ctor != null)
+                var altType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
+                if (altType != null)
                 {
-                    var ctorPatch = typeof(Plugin).GetMethod("OnBindingsCtor", BindingFlags.Static | BindingFlags.Public);
-                    harmony.Patch(ctor, postfix: new HarmonyMethod(ctorPatch));
-                    Log.LogInfo("[Init] Hooked Bindings.ctor()");
-                }
-                
-                // Hook no Update
-                var updateMethod = bindingsType.GetMethod("Update", BindingFlags.Public | BindingFlags.Instance);
-                if (updateMethod != null)
-                {
-                    var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
-                    harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
-                    Log.LogInfo("[Init] Patched Bindings.Update");
+                    _bindingsType = altType;
+                    Log.LogInfo($"[Init] Tipo alternativo: {altType.FullName}");
+                    
+                    var harmony = new Harmony("com.koda.fm26.ctrlp");
+                    var updateMethod = altType.GetMethod("Update", BindingFlags.Public | BindingFlags.Instance);
+                    if (updateMethod != null)
+                    {
+                        var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
+                        harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
+                        Log.LogInfo("[Init] Patched SI.Bindable.Bindings.Update");
+                    }
                 }
             }
-            else
-            {
-                Log.LogWarning("[Init] Bindings type não encontrado");
-            }
-        }
-        
-        public static void OnBindingsCtor(object __instance)
-        {
-            _bindingsInstance = __instance;
-            Log.LogInfo($"[Hook] Bindings instance capturada: {__instance.GetType().Name}");
         }
         
         private static int _frameCount = 0;
         private static bool _initialized = false;
         
-        public static void OnUpdate()
+        public static void OnUpdate(object __instance)
         {
             try
             {
+                // Capturar instância
+                if (_bindingsInstance == null && __instance != null)
+                {
+                    _bindingsInstance = __instance;
+                    Log.LogInfo($"[Hook] Bindings capturada!");
+                }
+                
                 _frameCount++;
                 if (!_initialized && _frameCount == 300)
                 {
                     _initialized = true;
                     Log.LogInfo("[Init] Pronto!");
-                    if (_bindingsInstance != null)
-                    {
-                        Log.LogInfo($"[Init] Bindings capturada: {_bindingsInstance.GetType().Name}");
-                    }
                 }
                 
                 if (!_initialized || Keyboard.current == null) return;
@@ -89,60 +106,25 @@ namespace FM26CtrlPExport
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - Exportar via Bindings.DataSet");
-                    ExportViaBindingsDataSet();
+                    Log.LogInfo(">>> Ctrl+P - Exportar via StreamedTable");
+                    ExportViaStreamedTable();
                 }
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Listar tipos em Bindings.DataSet");
+                    Log.LogInfo(">>> F9 - Listar Bindings.DataSet");
                     ListBindingsDataSet();
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Listar todos os tipos no assembly SI.Bindable");
-                    ListAllTypesInBindable();
+                    Log.LogInfo(">>> F10 - Investigar StreamedTable");
+                    InvestigateStreamedTable();
                 }
             }
             catch (Exception ex)
             {
                 Log.LogError($"[OnUpdate] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void ListAllTypesInBindable()
-        {
-            try
-            {
-                var asm = AppDomain.CurrentDomain.GetAssemblies()
-                    .FirstOrDefault(a => a.GetName().Name == "SI.Bindable");
-                
-                if (asm == null)
-                {
-                    Log.LogWarning("[Asm] SI.Bindable não encontrado");
-                    return;
-                }
-                
-                var types = asm.GetTypes();
-                Log.LogInfo($"[Asm] {types.Length} tipos em SI.Bindable");
-                
-                // Buscar tipos com Bindings, Data, TypedValue no nome
-                var relevant = types.Where(t => 
-                {
-                    var name = t.Name.ToLower();
-                    return name.Contains("bindings") || name.Contains("typedvalue") || 
-                           name.Contains("ireadonlydata") || name.Contains("idata");
-                }).Take(20);
-                
-                foreach (var t in relevant)
-                {
-                    Log.LogInfo($"[Asm] {t.FullName} ({t.Name})");
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Asm] Erro: {ex.Message}");
             }
         }
         
@@ -152,23 +134,22 @@ namespace FM26CtrlPExport
             {
                 if (_bindingsInstance == null)
                 {
-                    Log.LogWarning("[Bind] Nenhuma instância de Bindings capturada");
+                    Log.LogWarning("[Bind] Bindings não capturada");
                     return;
                 }
                 
-                var bindingsType = _bindingsInstance.GetType();
-                Log.LogInfo($"[Bind] Tipo: {bindingsType.FullName}");
+                var type = _bindingsInstance.GetType();
+                Log.LogInfo($"[Bind] Tipo: {type.Name}");
                 
-                // Propriedades públicas
-                var props = bindingsType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
                 Log.LogInfo($"[Bind] {props.Length} propriedades:");
                 
-                foreach (var p in props.Take(20))
+                foreach (var p in props)
                 {
                     Log.LogInfo($"[Bind]   {p.Name}: {p.PropertyType.Name}");
                 }
                 
-                // Buscar DataSet
+                // DataSet
                 var dataSetProp = props.FirstOrDefault(p => p.Name == "DataSet");
                 if (dataSetProp != null)
                 {
@@ -176,158 +157,196 @@ namespace FM26CtrlPExport
                     if (dataSet is IEnumerable en)
                     {
                         int count = 0;
-                        var types = new Dictionary<string, int>();
-                        
-                        foreach (var item in en)
-                        {
-                            count++;
-                            if (count >= 5000) break;
-                            
-                            var itemType = item?.GetType().Name ?? "null";
-                            if (!types.ContainsKey(itemType))
-                                types[itemType] = 0;
-                            types[itemType]++;
-                        }
-                        
+                        foreach (var _ in en) { count++; if (count >= 10000) break; }
                         Log.LogInfo($"[Bind] DataSet: {count} itens");
-                        
-                        foreach (var kvp in types.OrderByDescending(x => x.Value).Take(15))
-                        {
-                            Log.LogInfo($"[Bind]   {kvp.Key}: {kvp.Value}");
-                        }
                     }
-                }
-                else
-                {
-                    Log.LogWarning("[Bind] Propriedade DataSet não encontrada");
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Bind] Erro: {ex.Message}\n{ex.StackTrace}");
+                Log.LogError($"[Bind] Erro: {ex.Message}");
             }
         }
         
-        private static void ExportViaBindingsDataSet()
+        private static void InvestigateStreamedTable()
         {
             try
             {
-                if (_bindingsInstance == null)
+                // Buscar StreamedTable
+                var streamedTableType = AppDomain.CurrentDomain.GetAssemblies()
+                    .SelectMany(a => { try { return a.GetTypes(); } catch { return Type.EmptyTypes; } })
+                    .FirstOrDefault(t => t.Name == "StreamedTable");
+                
+                if (streamedTableType == null)
                 {
-                    Log.LogWarning("[Export] Nenhuma instância de Bindings capturada");
+                    Log.LogWarning("[ST] StreamedTable não encontrado");
                     return;
                 }
                 
-                var bindingsType = _bindingsInstance.GetType();
-                var dataSetProp = bindingsType.GetProperty("DataSet", BindingFlags.Public | BindingFlags.Instance);
+                Log.LogInfo($"[ST] Tipo: {streamedTableType.FullName}");
                 
-                if (dataSetProp == null)
+                // Propriedades
+                var props = streamedTableType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                Log.LogInfo($"[ST] {props.Length} propriedades:");
+                
+                foreach (var p in props)
                 {
-                    Log.LogWarning("[Export] DataSet não encontrado");
-                    return;
+                    Log.LogInfo($"[ST]   {p.Name}: {p.PropertyType.Name}");
                 }
                 
-                var dataSet = dataSetProp.GetValue(_bindingsInstance);
-                if (!(dataSet is IEnumerable en))
+                // Campos
+                var fields = streamedTableType.GetFields(BindingFlags.Public | BindingFlags.Instance);
+                Log.LogInfo($"[ST] {fields.Length} campos públicos:");
+                
+                foreach (var f in fields)
                 {
-                    Log.LogWarning("[Export] DataSet não é IEnumerable");
-                    return;
+                    Log.LogInfo($"[ST]   {f.Name}: {f.FieldType.Name}");
                 }
                 
-                // Buscar tipos no assembly
-                var asm = AppDomain.CurrentDomain.GetAssemblies()
-                    .FirstOrDefault(a => a.GetName().Name == "SI.Bindable");
-                
-                var iReadOnlyData = asm?.GetTypes().FirstOrDefault(t => t.Name == "IReadOnlyData");
-                var typedValueType = asm?.GetTypes().FirstOrDefault(t => t.Name == "TypedValue");
-                
-                if (iReadOnlyData == null || typedValueType == null)
+                // Buscar instâncias ativas
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                foreach (var doc in uiDocs)
                 {
-                    Log.LogWarning("[Export] Tipos não encontrados");
-                    return;
-                }
-                
-                var valueProp = iReadOnlyData.GetProperty("Value");
-                var dataTypeProp = typedValueType.GetProperty("DataType", BindingFlags.Public | BindingFlags.Instance);
-                
-                if (valueProp == null || dataTypeProp == null)
-                {
-                    Log.LogWarning("[Export] Propriedades não encontradas");
-                    return;
-                }
-                
-                Log.LogInfo($"[Export] IReadOnlyData.Value: {valueProp.PropertyType.Name}");
-                Log.LogInfo($"[Export] TypedValue.DataType: {dataTypeProp.PropertyType.Name}");
-                
-                // Coletar dados
-                var dataByType = new Dictionary<string, List<object>>();
-                int total = 0;
-                
-                foreach (var item in en)
-                {
-                    total++;
-                    if (total >= 10000) break;
+                    if (doc == null || doc.rootVisualElement == null) continue;
                     
-                    try
+                    var tables = new List<VisualElement>();
+                    FindElementsOfType(doc.rootVisualElement, "StreamedTable", tables, 0, 30);
+                    
+                    if (tables.Count > 0)
                     {
-                        var value = valueProp.GetValue(item);
-                        if (value == null) continue;
+                        Log.LogInfo($"[ST] {tables.Count} StreamedTables encontrados em {doc.name}");
                         
-                        var dataType = (Type)dataTypeProp.GetValue(value);
-                        var typeName = dataType?.Name ?? "null";
-                        
-                        // Filtrar tipos relevantes
-                        var lower = typeName.ToLower();
-                        if (lower.Contains("player") || lower.Contains("person") ||
-                            lower.Contains("squad") || lower.Contains("club") ||
-                            lower.Contains("team") || lower.Contains("match") ||
-                            lower.Contains("string") || lower.Contains("int"))
+                        foreach (var table in tables.Take(3))
                         {
-                            if (!dataByType.ContainsKey(typeName))
-                                dataByType[typeName] = new List<object>();
-                            dataByType[typeName].Add(value);
+                            Log.LogInfo($"[ST]   {table.name} ({table.childCount} filhos)");
                         }
                     }
-                    catch { }
-                }
-                
-                Log.LogInfo($"[Export] {total} itens processados");
-                
-                foreach (var kvp in dataByType.OrderByDescending(x => x.Value.Count).Take(15))
-                {
-                    Log.LogInfo($"[Export]   {kvp.Key}: {kvp.Value.Count}");
-                }
-                
-                // Exportar se encontrou dados suficientes
-                var playerData = dataByType.FirstOrDefault(x => 
-                    x.Key.ToLower().Contains("player") || x.Key.ToLower().Contains("person"));
-                
-                if (playerData.Value != null && playerData.Value.Count > 5)
-                {
-                    ExportTypedValues(playerData.Key, playerData.Value);
-                }
-                else
-                {
-                    Log.LogWarning("[Export] Dados insuficientes para exportar");
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Export] Erro: {ex.Message}\n{ex.StackTrace}");
+                Log.LogError($"[ST] Erro: {ex.Message}");
             }
         }
         
-        private static void ExportTypedValues(string typeName, List<object> typedValues)
+        private static void FindElementsOfType(VisualElement element, string typeName, List<VisualElement> results, int depth, int maxDepth)
+        {
+            if (element == null || depth > maxDepth) return;
+            
+            if (element.GetType().Name == typeName)
+            {
+                results.Add(element);
+            }
+            
+            for (int i = 0; i < element.childCount; i++)
+            {
+                FindElementsOfType(element[i], typeName, results, depth + 1, maxDepth);
+            }
+        }
+        
+        private static void ExportViaStreamedTable()
         {
             try
             {
+                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                
+                foreach (var doc in uiDocs)
+                {
+                    if (doc == null || doc.rootVisualElement == null) continue;
+                    
+                    var tables = new List<VisualElement>();
+                    FindElementsOfType(doc.rootVisualElement, "StreamedTable", tables, 0, 40);
+                    FindElementsOfType(doc.rootVisualElement, "StreamedListView", tables, 0, 40);
+                    
+                    foreach (var table in tables)
+                    {
+                        Log.LogInfo($"[Export] {table.GetType().Name}: {table.name}");
+                        
+                        // Verificar propriedades de dados
+                        var type = table.GetType();
+                        var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                        
+                        foreach (var p in props)
+                        {
+                            var name = p.Name.ToLower();
+                            if (!name.Contains("data") && !name.Contains("source") && 
+                                !name.Contains("item") && !name.Contains("list")) continue;
+                            
+                            try
+                            {
+                                var val = p.GetValue(table);
+                                if (val == null) continue;
+                                
+                                Log.LogInfo($"[Export]   {p.Name}: {val.GetType().Name}");
+                                
+                                if (val is IEnumerable en && !(val is string))
+                                {
+                                    var list = new List<object>();
+                                    foreach (var item in en)
+                                    {
+                                        list.Add(item);
+                                        if (list.Count >= 10000) break;
+                                    }
+                                    
+                                    if (list.Count > 5)
+                                    {
+                                        Log.LogInfo($"[Export]   ⭐ {list.Count} itens!");
+                                        
+                                        // Verificar tipo do primeiro item
+                                        var first = list[0];
+                                        if (first != null)
+                                        {
+                                            Log.LogInfo($"[Export]   Item tipo: {first.GetType().Name}");
+                                            ExportCsv(list);
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                            catch { }
+                        }
+                    }
+                }
+                
+                Log.LogWarning("[Export] Nenhum dado encontrado");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Export] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void ExportCsv(List<object> data)
+        {
+            try
+            {
+                var first = data[0];
+                if (first == null) return;
+                
+                var type = first.GetType();
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(p => p.GetIndexParameters().Length == 0 && p.Name.Length < 30)
+                    .ToList();
+                
                 var csv = new System.Text.StringBuilder();
-                csv.AppendLine($"Index;Type;Value");
+                csv.AppendLine(string.Join(";", props.Select(p => p.Name)));
                 
                 int count = 0;
-                foreach (var tv in typedValues.Take(500))
+                foreach (var item in data)
                 {
-                    csv.AppendLine($"{count};{typeName};{tv?.ToString() ?? "null"}");
+                    if (item == null) continue;
+                    
+                    var values = props.Select(p =>
+                    {
+                        try
+                        {
+                            var val = p.GetValue(item);
+                            return (val?.ToString() ?? "").Replace(";", ",").Replace("\n", " ");
+                        }
+                        catch { return ""; }
+                    });
+                    
+                    csv.AppendLine(string.Join(";", values));
                     count++;
                 }
                 
