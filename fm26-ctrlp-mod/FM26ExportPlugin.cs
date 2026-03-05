@@ -9,11 +9,10 @@ using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.41.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.42.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.41.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.42.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -70,31 +69,28 @@ namespace FM26CtrlPExport
                 
                 if (!_initialized) return;
                 
-                try
-                {
-                    if (Keyboard.current == null) return;
-                }
+                try { if (Keyboard.current == null) return; }
                 catch { return; }
                 
                 try
                 {
                     if (Keyboard.current.f9Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F9 pressionado");
-                        ShowDataSet();
+                        Log.LogInfo(">>> F9 - Mostrar DataSet.Count");
+                        ShowDataSetCount();
                     }
                 }
-                catch (Exception ex) { Log.LogError($"[F9] Erro: {ex.Message}"); }
+                catch (Exception ex) { Log.LogError($"[F9] {ex.Message}"); }
                 
                 try
                 {
                     if (Keyboard.current.f10Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F10 pressionado");
-                        ShowFirstDataItem();
+                        Log.LogInfo(">>> F10 - Mostrar primeiro item");
+                        ShowFirstItem();
                     }
                 }
-                catch (Exception ex) { Log.LogError($"[F10] Erro: {ex.Message}"); }
+                catch (Exception ex) { Log.LogError($"[F10] {ex.Message}"); }
                 
                 try
                 {
@@ -103,223 +99,158 @@ namespace FM26CtrlPExport
                     
                     if (ctrl && p)
                     {
-                        Log.LogInfo(">>> Ctrl+P pressionado");
-                        ExportDataSet();
+                        Log.LogInfo(">>> Ctrl+P - Exportar");
+                        ExportData();
                     }
                 }
-                catch (Exception ex) { Log.LogError($"[CtrlP] Erro: {ex.Message}"); }
+                catch (Exception ex) { Log.LogError($"[CtrlP] {ex.Message}"); }
             }
-            catch (Exception ex) { Log.LogError($"[OnUpdate] Erro: {ex.Message}"); }
+            catch (Exception ex) { Log.LogError($"[OnUpdate] {ex.Message}"); }
         }
         
-        private static void ShowDataSet()
+        private static void ShowDataSetCount()
         {
             try
             {
-                Log.LogInfo("[DS] Iniciando...");
-                
-                if (_bindingsInstance == null)
-                {
-                    Log.LogWarning("[DS] _bindingsInstance é null!");
-                    return;
-                }
-                
-                Log.LogInfo("[DS] _bindingsInstance OK");
+                if (_bindingsInstance == null) { Log.LogWarning("[DS] Null instance"); return; }
                 
                 var type = _bindingsInstance.GetType();
-                Log.LogInfo($"[DS] Tipo: {type.FullName}");
-                
                 var dataSetProp = type.GetProperty("DataSet");
-                if (dataSetProp == null)
-                {
-                    Log.LogWarning("[DS] Propriedade DataSet não encontrada");
-                    
-                    // Listar todas as propriedades
-                    var allProps = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                    Log.LogInfo($"[DS] Propriedades disponíveis: {string.Join(", ", allProps.Select(p => p.Name))}");
-                    return;
-                }
+                if (dataSetProp == null) { Log.LogWarning("[DS] DataSet prop null"); return; }
                 
-                Log.LogInfo("[DS] Propriedade DataSet encontrada, tentando GetValue...");
+                var dataSet = dataSetProp.GetValue(_bindingsInstance);
+                if (dataSet == null) { Log.LogWarning("[DS] DataSet null"); return; }
                 
-                object dataSet = null;
-                try
-                {
-                    dataSet = dataSetProp.GetValue(_bindingsInstance);
-                }
-                catch (Exception ex)
-                {
-                    Log.LogError($"[DS] Erro ao obter DataSet: {ex.Message}");
-                    return;
-                }
+                // Usar reflexão para Count
+                var dsType = dataSet.GetType();
+                var countProp = dsType.GetProperty("Count");
                 
-                if (dataSet == null)
-                {
-                    Log.LogWarning("[DS] DataSet é null");
-                    return;
-                }
-                
-                Log.LogInfo($"[DS] DataSet OK! Tipo: {dataSet.GetType().FullName}");
-                
-                // Contar
-                var countProp = dataSet.GetType().GetProperty("Count");
                 if (countProp != null)
+                {
+                    var count = (int)countProp.GetValue(dataSet);
+                    Log.LogInfo($"[DS] Count: {count}");
+                }
+                else
+                {
+                    Log.LogWarning("[DS] Count property not found");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[DS] {ex.Message}");
+            }
+        }
+        
+        private static void ShowFirstItem()
+        {
+            try
+            {
+                if (_bindingsInstance == null) { Log.LogWarning("[Item] Null instance"); return; }
+                
+                var type = _bindingsInstance.GetType();
+                var dataSetProp = type.GetProperty("DataSet");
+                if (dataSetProp == null) { Log.LogWarning("[Item] DataSet prop null"); return; }
+                
+                var dataSet = dataSetProp.GetValue(_bindingsInstance);
+                if (dataSet == null) { Log.LogWarning("[Item] DataSet null"); return; }
+                
+                var dsType = dataSet.GetType();
+                
+                // Usar indexer via reflexão
+                var indexer = dsType.GetProperty("Item");
+                if (indexer == null)
+                {
+                    Log.LogWarning("[Item] Indexer not found");
+                    return;
+                }
+                
+                // Pegar primeiro item
+                var item = indexer.GetValue(dataSet, new object[] { 0 });
+                if (item == null)
+                {
+                    Log.LogWarning("[Item] First item is null");
+                    return;
+                }
+                
+                var itemType = item.GetType();
+                Log.LogInfo($"[Item] Tipo: {itemType.FullName}");
+                
+                // Propriedades
+                var props = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                Log.LogInfo($"[Item] {props.Length} propriedades:");
+                
+                foreach (var p in props.Take(20))
                 {
                     try
                     {
-                        var count = (int)countProp.GetValue(dataSet);
-                        Log.LogInfo($"[DS] DataSet.Count: {count}");
+                        var val = p.GetValue(item);
+                        var valStr = val?.ToString() ?? "null";
+                        if (valStr.Length > 50) valStr = valStr.Substring(0, 50) + "...";
+                        Log.LogInfo($"[Item]   {p.Name}: {valStr}");
                     }
-                    catch (Exception ex) { Log.LogError($"[DS] Erro ao obter Count: {ex.Message}"); }
+                    catch { }
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[DS] Erro geral: {ex.Message}\n{ex.StackTrace}");
+                Log.LogError($"[Item] {ex.Message}\n{ex.StackTrace}");
             }
         }
         
-        private static void ShowFirstDataItem()
+        private static void ExportData()
         {
             try
             {
-                Log.LogInfo("[Item] Iniciando...");
-                
-                if (_bindingsInstance == null)
-                {
-                    Log.LogWarning("[Item] _bindingsInstance é null!");
-                    return;
-                }
+                if (_bindingsInstance == null) { Log.LogWarning("[Export] Null instance"); return; }
                 
                 var type = _bindingsInstance.GetType();
                 var dataSetProp = type.GetProperty("DataSet");
-                
-                if (dataSetProp == null)
-                {
-                    Log.LogWarning("[Item] DataSet property não encontrada");
-                    return;
-                }
+                if (dataSetProp == null) { Log.LogWarning("[Export] DataSet prop null"); return; }
                 
                 var dataSet = dataSetProp.GetValue(_bindingsInstance);
-                if (dataSet == null)
+                if (dataSet == null) { Log.LogWarning("[Export] DataSet null"); return; }
+                
+                var dsType = dataSet.GetType();
+                var countProp = dsType.GetProperty("Count");
+                var indexer = dsType.GetProperty("Item");
+                
+                if (countProp == null || indexer == null)
                 {
-                    Log.LogWarning("[Item] DataSet é null");
+                    Log.LogWarning("[Export] Count or Indexer not found");
                     return;
                 }
                 
-                // Tentar como IEnumerable
-                var enumerable = dataSet as IEnumerable;
-                if (enumerable == null)
+                var count = (int)countProp.GetValue(dataSet);
+                Log.LogInfo($"[Export] {count} itens");
+                
+                if (count == 0)
                 {
-                    Log.LogWarning($"[Item] DataSet não é IEnumerable. Tipo: {dataSet.GetType().FullName}");
+                    Log.LogWarning("[Export] Empty");
                     return;
                 }
                 
-                Log.LogInfo("[Item] Iterando...");
-                int i = 0;
-                foreach (var item in enumerable)
-                {
-                    if (item == null)
-                    {
-                        Log.LogInfo($"[Item] [{i}] = null");
-                        i++;
-                        continue;
-                    }
-                    
-                    var itemType = item.GetType();
-                    Log.LogInfo($"[Item] [{i}] Tipo: {itemType.FullName}");
-                    
-                    // Propriedades
-                    var props = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                    Log.LogInfo($"[Item] {props.Length} propriedades");
-                    
-                    foreach (var p in props.Take(15))
-                    {
-                        try
-                        {
-                            var val = p.GetValue(item);
-                            var valStr = val?.ToString() ?? "null";
-                            if (valStr.Length > 50) valStr = valStr.Substring(0, 50) + "...";
-                            Log.LogInfo($"[Item]   {p.Name}: {valStr}");
-                        }
-                        catch (Exception ex) { Log.LogInfo($"[Item]   {p.Name}: ERRO - {ex.Message}"); }
-                    }
-                    
-                    i++;
-                    if (i >= 3) break; // Primeiros 3
-                }
+                // Pegar primeiro item para descobrir propriedades
+                var firstItem = indexer.GetValue(dataSet, new object[] { 0 });
+                if (firstItem == null) { Log.LogWarning("[Export] First item null"); return; }
                 
-                Log.LogInfo($"[Item] Total: {i} itens");
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Item] Erro: {ex.Message}\n{ex.StackTrace}");
-            }
-        }
-        
-        private static void ExportDataSet()
-        {
-            try
-            {
-                Log.LogInfo("[Export] Iniciando...");
-                
-                if (_bindingsInstance == null)
-                {
-                    Log.LogWarning("[Export] _bindingsInstance é null!");
-                    return;
-                }
-                
-                var type = _bindingsInstance.GetType();
-                var dataSetProp = type.GetProperty("DataSet");
-                
-                if (dataSetProp == null)
-                {
-                    Log.LogWarning("[Export] DataSet property não encontrada");
-                    return;
-                }
-                
-                var dataSet = dataSetProp.GetValue(_bindingsInstance);
-                if (dataSet == null)
-                {
-                    Log.LogWarning("[Export] DataSet é null");
-                    return;
-                }
-                
-                var enumerable = dataSet as IEnumerable;
-                if (enumerable == null)
-                {
-                    Log.LogWarning("[Export] DataSet não é IEnumerable");
-                    return;
-                }
-                
-                var items = new List<object>();
-                foreach (var item in enumerable)
-                {
-                    if (item != null) items.Add(item);
-                    if (items.Count >= 50000) break;
-                }
-                
-                if (items.Count == 0)
-                {
-                    Log.LogWarning("[Export] DataSet vazio");
-                    return;
-                }
-                
-                Log.LogInfo($"[Export] {items.Count} itens");
-                
-                var firstType = items[0].GetType();
-                var props = firstType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                var itemType = firstItem.GetType();
+                var props = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                     .Where(p => p.GetIndexParameters().Length == 0)
                     .ToList();
                 
                 var csv = new System.Text.StringBuilder();
                 csv.AppendLine(string.Join(";", props.Select(p => p.Name)));
                 
-                int count = 0;
-                foreach (var item in items)
+                int exported = 0;
+                int maxItems = Math.Min(count, 50000);
+                
+                for (int i = 0; i < maxItems; i++)
                 {
                     try
                     {
+                        var item = indexer.GetValue(dataSet, new object[] { i });
+                        if (item == null) continue;
+                        
                         var values = props.Select(p =>
                         {
                             try
@@ -330,8 +261,9 @@ namespace FM26CtrlPExport
                             }
                             catch { return ""; }
                         });
+                        
                         csv.AppendLine(string.Join(";", values));
-                        count++;
+                        exported++;
                     }
                     catch { }
                 }
@@ -339,12 +271,12 @@ namespace FM26CtrlPExport
                 string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Export_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
                 System.IO.File.WriteAllText(path, csv.ToString());
                 
-                Log.LogInfo($"[Export] ✅ {count} linhas!");
-                Log.LogInfo($"[Export] Arquivo: {path}");
+                Log.LogInfo($"[Export] ✅ {exported} linhas!");
+                Log.LogInfo($"[Export] {path}");
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Export] Erro: {ex.Message}\n{ex.StackTrace}");
+                Log.LogError($"[Export] {ex.Message}\n{ex.StackTrace}");
             }
         }
     }
