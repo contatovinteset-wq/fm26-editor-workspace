@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.38.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.39.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,21 +22,28 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.38.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.39.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
             
-            var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
-            if (bindingsType != null)
+            try
             {
-                var updateMethod = bindingsType.GetMethod("Update", BindingFlags.Public | BindingFlags.Instance);
-                if (updateMethod != null)
+                var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
+                if (bindingsType != null)
                 {
-                    var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
-                    harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
-                    Log.LogInfo("[Init] Patched SI.Bindable.Bindings.Update");
+                    var updateMethod = bindingsType.GetMethod("Update", BindingFlags.Public | BindingFlags.Instance);
+                    if (updateMethod != null)
+                    {
+                        var patchMethod = typeof(Plugin).GetMethod("OnUpdate", BindingFlags.Static | BindingFlags.Public);
+                        harmony.Patch(updateMethod, postfix: new HarmonyMethod(patchMethod));
+                        Log.LogInfo("[Init] Patched SI.Bindable.Bindings.Update");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Init] Erro no patch: {ex.Message}");
             }
         }
         
@@ -54,198 +61,181 @@ namespace FM26CtrlPExport
                     Log.LogInfo("[Init] Pronto!");
                 }
                 
-                if (!_initialized || Keyboard.current == null) return;
+                if (!_initialized) return;
                 
-                if (Keyboard.current.f9Key.wasPressedThisFrame)
-                {
-                    Log.LogInfo(">>> F9 - Debug: Listar TODOS os VisualElements");
-                    DebugAllVisualElements();
-                }
-                
-                if (Keyboard.current.f10Key.wasPressedThisFrame)
-                {
-                    Log.LogInfo(">>> F10 - Buscar propriedades 'data' em todos elementos");
-                    FindDataProperties();
-                }
-                
-                bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
-                bool p = Keyboard.current.pKey.wasPressedThisFrame;
-                
-                if (ctrl && p)
-                {
-                    Log.LogInfo(">>> Ctrl+P - Tentar exportar via BindingMethod");
-                    TryExportViaBinding();
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[OnUpdate] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void DebugAllVisualElements()
-        {
-            try
-            {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                Log.LogInfo($"[Debug] {uiDocs.Length} UIDocuments");
-                
-                var typeCounts = new Dictionary<string, int>();
-                var elementsWithData = new List<VisualElement>();
-                
-                foreach (var doc in uiDocs)
-                {
-                    if (doc == null || doc.rootVisualElement == null) continue;
-                    
-                    Log.LogInfo($"[Debug] Doc: {doc.name}");
-                    
-                    TraverseElement(doc.rootVisualElement, 0, 3, typeCounts, elementsWithData);
-                }
-                
-                // Top 20 tipos
-                Log.LogInfo("[Debug] Tipos mais comuns:");
-                foreach (var kv in typeCounts.OrderByDescending(x => x.Value).Take(20))
-                {
-                    Log.LogInfo($"[Debug]   {kv.Key}: {kv.Value}");
-                }
-                
-                // Elementos com dados
-                Log.LogInfo($"[Debug] {elementsWithData.Count} elementos com 'SourceData' não-nulo");
-                foreach (var el in elementsWithData.Take(10))
-                {
-                    Log.LogInfo($"[Debug]   {el.name} -> tem dados!");
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Debug] Erro: {ex.Message}\n{ex.StackTrace}");
-            }
-        }
-        
-        private static void TraverseElement(VisualElement element, int depth, int maxDepth, 
-            Dictionary<string, int> typeCounts, List<VisualElement> elementsWithData)
-        {
-            if (element == null || depth > maxDepth) return;
-            
-            // Contar tipo
-            var typeName = element.GetType().Name;
-            if (!typeCounts.ContainsKey(typeName)) typeCounts[typeName] = 0;
-            typeCounts[typeName]++;
-            
-            // Verificar SourceData
-            try
-            {
-                var sourceDataProp = element.GetType().GetProperty("SourceData", BindingFlags.Public | BindingFlags.Instance);
-                if (sourceDataProp != null)
-                {
-                    var data = sourceDataProp.GetValue(element);
-                    if (data != null)
-                    {
-                        elementsWithData.Add(element);
-                    }
-                }
-            }
-            catch { }
-            
-            // Filhos
-            for (int i = 0; i < element.childCount && i < 100; i++)
-            {
-                TraverseElement(element[i], depth + 1, maxDepth, typeCounts, elementsWithData);
-            }
-        }
-        
-        private static void FindDataProperties()
-        {
-            try
-            {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
-                
-                foreach (var doc in uiDocs)
-                {
-                    if (doc == null || doc.rootVisualElement == null) continue;
-                    
-                    FindDataInTree(doc.rootVisualElement, 0, 5);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Data] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void FindDataInTree(VisualElement element, int depth, int maxDepth)
-        {
-            if (element == null || depth > maxDepth) return;
-            
-            var type = element.GetType();
-            
-            // Buscar propriedades que parecem conter dados
-            var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(p => p.Name.ToLower().Contains("data") || 
-                            p.Name.ToLower().Contains("source") ||
-                            p.Name.ToLower().Contains("item") ||
-                            p.Name.ToLower().Contains("list"))
-                .ToList();
-            
-            foreach (var prop in props)
-            {
                 try
                 {
-                    var val = prop.GetValue(element);
-                    if (val != null)
+                    if (Keyboard.current == null) return;
+                }
+                catch { return; }
+                
+                try
+                {
+                    if (Keyboard.current.f9Key.wasPressedThisFrame)
                     {
-                        var valType = val.GetType();
-                        Log.LogInfo($"[Data] {element.name}.{prop.Name}: {valType.Name}");
-                        
-                        // Se for lista, mostrar count
-                        if (val is IList list)
-                        {
-                            Log.LogInfo($"[Data]   -> IList com {list.Count} itens!");
-                            
-                            if (list.Count > 0)
-                            {
-                                var first = list[0];
-                                Log.LogInfo($"[Data]   -> Primeiro: {first?.GetType().FullName ?? "null"}");
-                            }
-                        }
+                        Log.LogInfo(">>> F9 - Scan seguro de UI");
+                        SafeScanUI();
+                    }
+                }
+                catch { }
+                
+                try
+                {
+                    if (Keyboard.current.f10Key.wasPressedThisFrame)
+                    {
+                        Log.LogInfo(">>> F10 - Buscar Bindings.DataSet");
+                        FindBindingsDataSet();
                     }
                 }
                 catch { }
             }
-            
-            // Filhos
-            for (int i = 0; i < element.childCount && i < 50; i++)
-            {
-                FindDataInTree(element[i], depth + 1, maxDepth);
-            }
+            catch { }
         }
         
-        private static void TryExportViaBinding()
+        /// <summary>
+        /// Scan SEGURO da UI - profundidade limitada, try-catch em tudo
+        /// </summary>
+        private static void SafeScanUI()
         {
             try
             {
-                // Buscar Bindings.Update para pegar instância capturada
-                var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
-                if (bindingsType == null)
+                UIDocument[] uiDocs = null;
+                try { uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>(); }
+                catch { Log.LogWarning("[Scan] Erro ao buscar UIDocuments"); return; }
+                
+                if (uiDocs == null) { Log.LogWarning("[Scan] uiDocs null"); return; }
+                
+                Log.LogInfo($"[Scan] {uiDocs.Length} UIDocuments encontrados");
+                
+                int totalElements = 0;
+                int maxElements = 100; // LIMITE DE SEGURANÇA
+                
+                foreach (var doc in uiDocs)
                 {
-                    Log.LogWarning("[Export] Bindings type não encontrado");
-                    return;
+                    if (totalElements >= maxElements) break;
+                    if (doc == null) continue;
+                    
+                    string docName = "unknown";
+                    try { docName = doc.name; } catch { }
+                    Log.LogInfo($"[Scan] Doc: {docName}");
+                    
+                    VisualElement root = null;
+                    try { root = doc.rootVisualElement; } catch { }
+                    if (root == null) continue;
+                    
+                    // Apenas 2 níveis de profundidade, 10 filhos por nível
+                    try
+                    {
+                        for (int i = 0; i < root.childCount && i < 10; i++)
+                        {
+                            if (totalElements >= maxElements) break;
+                            
+                            VisualElement child = null;
+                            try { child = root[i]; }
+                            catch { continue; }
+                            
+                            if (child == null) continue;
+                            totalElements++;
+                            
+                            // Logar tipo e nome
+                            string typeName = "unknown";
+                            string elemName = "unknown";
+                            try { typeName = child.GetType().Name; } catch { }
+                            try { elemName = child.name; } catch { }
+                            
+                            Log.LogInfo($"[Scan]   {typeName}: {elemName}");
+                            
+                            // Segundo nível
+                            try
+                            {
+                                for (int j = 0; j < child.childCount && j < 5; j++)
+                                {
+                                    VisualElement grandchild = null;
+                                    try { grandchild = child[j]; }
+                                    catch { continue; }
+                                    
+                                    if (grandchild == null) continue;
+                                    totalElements++;
+                                    
+                                    string gcType = "unknown";
+                                    string gcName = "unknown";
+                                    try { gcType = grandchild.GetType().Name; } catch { }
+                                    try { gcName = grandchild.name; } catch { }
+                                    
+                                    Log.LogInfo($"[Scan]     {gcType}: {gcName}");
+                                }
+                            }
+                            catch { }
+                        }
+                    }
+                    catch { }
                 }
                 
-                // DataSet property
-                var dataSetProp = bindingsType.GetProperty("DataSet", BindingFlags.Public | BindingFlags.Instance);
-                if (dataSetProp == null)
-                {
-                    Log.LogWarning("[Export] DataSet property não encontrada");
-                    return;
-                }
-                
-                Log.LogInfo("[Export] Bindings.DataSet encontrado!");
-                Log.LogInfo("[Export] Tipo: " + dataSetProp.PropertyType.FullName);
+                Log.LogInfo($"[Scan] Total: {totalElements} elementos escaneados");
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Export] Erro: {ex.Message}");
+                Log.LogError($"[Scan] Erro geral: {ex.Message}");
+            }
+        }
+        
+        /// <summary>
+        /// Buscar Bindings.DataSet via hook estático
+        /// </summary>
+        private static void FindBindingsDataSet()
+        {
+            try
+            {
+                // O tipo Bindings está em SI.Bindable
+                var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
+                if (bindingsType == null)
+                {
+                    Log.LogWarning("[Bind] Tipo Bindings não encontrado");
+                    
+                    // Tentar buscar em todos assemblies
+                    foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+                    {
+                        try
+                        {
+                            var types = asm.GetTypes();
+                            foreach (var t in types)
+                            {
+                                if (t.Name == "Bindings")
+                                {
+                                    Log.LogInfo($"[Bind] Encontrado em: {asm.GetName().Name}");
+                                }
+                            }
+                        }
+                        catch { }
+                    }
+                    return;
+                }
+                
+                Log.LogInfo($"[Bind] Tipo encontrado: {bindingsType.FullName}");
+                
+                // Listar propriedades públicas
+                var props = bindingsType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                Log.LogInfo($"[Bind] {props.Length} propriedades públicas:");
+                
+                foreach (var p in props.Take(20))
+                {
+                    try
+                    {
+                        Log.LogInfo($"[Bind]   {p.Name}: {p.PropertyType.Name}");
+                    }
+                    catch { }
+                }
+                
+                // Buscar DataSet especificamente
+                var dataSetProp = bindingsType.GetProperty("DataSet");
+                if (dataSetProp != null)
+                {
+                    Log.LogInfo($"[Bind] DataSet encontrado! Tipo: {dataSetProp.PropertyType.FullName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Bind] Erro: {ex.Message}");
             }
         }
     }
