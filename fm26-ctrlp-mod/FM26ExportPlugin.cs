@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.31.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.32.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,7 +22,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.31.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.32.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -61,20 +61,20 @@ namespace FM26CtrlPExport
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - Exportar da tela atual");
-                    ExportFromCurrentScreen();
+                    Log.LogInfo(">>> Ctrl+P - Exportar");
+                    TryExportData();
                 }
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Mapear elementos com nomes relevantes");
-                    MapCurrentScreenSafe();
+                    Log.LogInfo(">>> F9 - Investigar PlayerDataPoint");
+                    InvestigatePlayerDataPoint();
                 }
                 
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Buscar tipos C# com 'PlayerSearch'");
-                    FindSearchTypes();
+                    Log.LogInfo(">>> F10 - Investigar SearchResultReference");
+                    InvestigateSearchResultReference();
                 }
             }
             catch (Exception ex)
@@ -83,253 +83,246 @@ namespace FM26CtrlPExport
             }
         }
         
-        private static void MapCurrentScreenSafe()
+        private static void InvestigatePlayerDataPoint()
         {
             try
             {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                // Buscar tipo PlayerDataPoint
+                var type = AppDomain.CurrentDomain.GetAssemblies()
+                    .SelectMany(a => { try { return a.GetTypes(); } catch { return Type.EmptyTypes; } })
+                    .FirstOrDefault(t => t.Name == "PlayerDataPoint");
                 
-                foreach (var doc in uiDocs)
+                if (type == null)
                 {
-                    if (doc == null || doc.name != "PanelManager") continue;
-                    var root = doc.rootVisualElement;
-                    if (root == null) continue;
-                    
-                    // Buscar elementos com nomes relevantes - APENAS nomes, sem acessar propriedades
-                    var relevant = new List<VisualElement>();
-                    FindRelevantElements(root, relevant, 0, 40);
-                    
-                    Log.LogInfo($"[Map] {relevant.Count} elementos relevantes encontrados");
-                    
-                    // Mostrar apenas os primeiros 20, sem verificar dados
-                    foreach (var el in relevant.Take(20))
-                    {
-                        try
-                        {
-                            Log.LogInfo($"[Map] {el.name} ({el.childCount} filhos)");
-                        }
-                        catch { }
-                    }
-                    
-                    // Agora verificar dados APENAS nos elementos com > 10 filhos (possíveis tabelas)
-                    Log.LogInfo($"[Map] === Elementos com muitos filhos (possíveis tabelas) ===");
-                    
-                    var tables = relevant.Where(e => e.childCount > 10).Take(10);
-                    foreach (var el in tables)
-                    {
-                        try
-                        {
-                            Log.LogInfo($"[Map] {el.name} ({el.childCount} filhos) - verificando dados...");
-                            CheckForDataSafe(el);
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.LogError($"[Map] Erro em {el.name}: {ex.Message}");
-                        }
-                    }
+                    Log.LogWarning("[PDP] Tipo não encontrado");
+                    return;
                 }
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Map] Erro: {ex.Message}");
-            }
-        }
-        
-        private static void FindRelevantElements(VisualElement element, List<VisualElement> results, int depth, int maxDepth)
-        {
-            if (element == null || depth > maxDepth) return;
-            
-            try
-            {
-                var name = element.name.ToLower();
-                if (name.Contains("player") || name.Contains("search") || name.Contains("database") ||
-                    name.Contains("squad") || name.Contains("roster") || name.Contains("table") ||
-                    name.Contains("list") || name.Contains("result") || name.Contains("item") ||
-                    name.Contains("row") || name.Contains("column"))
-                {
-                    results.Add(element);
-                }
-            }
-            catch { }
-            
-            for (int i = 0; i < element.childCount; i++)
-            {
-                try
-                {
-                    FindRelevantElements(element[i], results, depth + 1, maxDepth);
-                }
-                catch { }
-            }
-        }
-        
-        private static void CheckForDataSafe(VisualElement element)
-        {
-            try
-            {
-                var type = element.GetType();
                 
-                // Apenas verificar se existe propriedade dataSource
-                var dsProp = type.GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
-                if (dsProp != null)
+                Log.LogInfo($"[PDP] Tipo: {type.FullName}");
+                
+                // Propriedades de instância
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                Log.LogInfo($"[PDP] {props.Length} propriedades de instância:");
+                foreach (var p in props)
                 {
+                    Log.LogInfo($"[PDP]   {p.Name}: {p.PropertyType.Name}");
+                }
+                
+                // Propriedades estáticas
+                var staticProps = type.GetProperties(BindingFlags.Static | BindingFlags.Public);
+                Log.LogInfo($"[PDP] {staticProps.Length} propriedades estáticas:");
+                foreach (var p in staticProps)
+                {
+                    Log.LogInfo($"[PDP]   static {p.Name}: {p.PropertyType.Name}");
+                    
                     try
                     {
-                        var ds = dsProp.GetValue(element);
-                        if (ds != null)
+                        var val = p.GetValue(null);
+                        if (val != null)
                         {
-                            Log.LogInfo($"[Map]   dataSource: {ds.GetType().Name}");
+                            Log.LogInfo($"[PDP]     valor: {val.GetType().Name}");
                             
-                            // Verificar se tem IEnumerable
-                            if (ds is IEnumerable en && !(ds is string))
+                            if (val is IEnumerable en && !(val is string))
                             {
                                 int count = 0;
                                 foreach (var item in en)
                                 {
                                     count++;
-                                    if (count >= 500) break;
+                                    if (count >= 1000) break;
                                 }
-                                if (count > 0)
-                                {
-                                    Log.LogInfo($"[Map]   ⭐⭐⭐ {count} itens encontrados!");
-                                }
+                                Log.LogInfo($"[PDP]     ⭐ {count} itens!");
                             }
                         }
                     }
                     catch { }
                 }
-            }
-            catch { }
-        }
-        
-        private static void FindSearchTypes()
-        {
-            try
-            {
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(a => a.GetName().Name.StartsWith("SI.") || a.GetName().Name.StartsWith("FM."))
-                    .ToList();
                 
-                var found = new List<Type>();
-                
-                foreach (var asm in assemblies)
+                // Campos estáticos
+                var fields = type.GetFields(BindingFlags.Static | BindingFlags.Public);
+                Log.LogInfo($"[PDP] {fields.Length} campos estáticos:");
+                foreach (var f in fields)
                 {
+                    Log.LogInfo($"[PDP]   static {f.Name}: {f.FieldType.Name}");
+                    
                     try
                     {
-                        var types = asm.GetTypes();
-                        foreach (var t in types)
+                        var val = f.GetValue(null);
+                        if (val != null)
                         {
-                            var name = t.Name.ToLower();
-                            if (name.Contains("playersearch") || name.Contains("searchresult") ||
-                                name.Contains("playerdata") || name.Contains("searchdata"))
+                            if (val is IEnumerable en && !(val is string))
                             {
-                                found.Add(t);
+                                int count = 0;
+                                foreach (var item in en)
+                                {
+                                    count++;
+                                    if (count >= 1000) break;
+                                }
+                                Log.LogInfo($"[PDP]     ⭐ {count} itens!");
                             }
                         }
-                    }
-                    catch { }
-                }
-                
-                Log.LogInfo($"[Type] {found.Count} tipos encontrados");
-                
-                foreach (var t in found.Take(15))
-                {
-                    try
-                    {
-                        var props = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                        Log.LogInfo($"[Type] {t.Name} [{props.Length} props]");
                     }
                     catch { }
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Type] Erro: {ex.Message}");
+                Log.LogError($"[PDP] Erro: {ex.Message}");
             }
         }
         
-        private static void ExportFromCurrentScreen()
+        private static void InvestigateSearchResultReference()
         {
             try
             {
-                var uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>();
+                // Buscar tipo SearchResultReference
+                var type = AppDomain.CurrentDomain.GetAssemblies()
+                    .SelectMany(a => { try { return a.GetTypes(); } catch { return Type.EmptyTypes; } })
+                    .FirstOrDefault(t => t.Name == "SearchResultReference");
                 
-                foreach (var doc in uiDocs)
+                if (type == null)
                 {
-                    if (doc == null || doc.name != "PanelManager") continue;
-                    var root = doc.rootVisualElement;
-                    if (root == null) continue;
+                    Log.LogWarning("[SRR] Tipo não encontrado");
+                    return;
+                }
+                
+                Log.LogInfo($"[SRR] Tipo: {type.FullName}");
+                
+                // Propriedades de instância
+                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                Log.LogInfo($"[SRR] {props.Length} propriedades:");
+                foreach (var p in props)
+                {
+                    Log.LogInfo($"[SRR]   {p.Name}: {p.PropertyType.Name}");
+                }
+                
+                // Propriedades estáticas
+                var staticProps = type.GetProperties(BindingFlags.Static | BindingFlags.Public);
+                foreach (var p in staticProps)
+                {
+                    Log.LogInfo($"[SRR]   static {p.Name}: {p.PropertyType.Name}");
                     
-                    // Buscar dados em toda a árvore
-                    var data = FindDataInTree(root, 0, 50);
-                    if (data != null && data.Count > 0)
+                    try
                     {
-                        Log.LogInfo($"[Export] Encontrado: {data.Count} itens");
-                        ExportCsv(data);
-                        return;
+                        var val = p.GetValue(null);
+                        if (val != null)
+                        {
+                            Log.LogInfo($"[SRR]     valor: {val.GetType().Name}");
+                            
+                            if (val is IEnumerable en && !(val is string))
+                            {
+                                int count = 0;
+                                foreach (var item in en)
+                                {
+                                    count++;
+                                    if (count >= 1000) break;
+                                }
+                                Log.LogInfo($"[SRR]     ⭐ {count} itens!");
+                            }
+                        }
+                    }
+                    catch { }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[SRR] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void TryExportData()
+        {
+            try
+            {
+                // Buscar todos os objetos UnityEngine.Object que contenham dados de jogador
+                var allObjects = Resources.FindObjectsOfTypeAll<UnityEngine.Object>();
+                
+                Log.LogInfo($"[Export] {allObjects.Length} objetos Unity encontrados");
+                
+                int count = 0;
+                foreach (var obj in allObjects)
+                {
+                    if (obj == null) continue;
+                    
+                    var type = obj.GetType();
+                    var name = type.Name.ToLower();
+                    
+                    // Verificar se é um tipo relevante
+                    if (name.Contains("playerdata") || name.Contains("searchresult") ||
+                        name.Contains("squaddata") || name.Contains("rosterdata"))
+                    {
+                        Log.LogInfo($"[Export] Objeto: {type.Name}");
+                        count++;
+                        
+                        // Verificar propriedades IEnumerable
+                        var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                        foreach (var p in props)
+                        {
+                            try
+                            {
+                                var val = p.GetValue(obj);
+                                if (val is IEnumerable en && !(val is string))
+                                {
+                                    var list = new List<object>();
+                                    foreach (var item in en)
+                                    {
+                                        list.Add(item);
+                                        if (list.Count >= 10000) break;
+                                    }
+                                    
+                                    if (list.Count > 5)
+                                    {
+                                        Log.LogInfo($"[Export] ⭐⭐⭐ {p.Name}: {list.Count} itens!");
+                                        ExportCsv(list);
+                                        return;
+                                    }
+                                }
+                            }
+                            catch { }
+                        }
                     }
                 }
                 
-                Log.LogWarning("[Export] Nenhum dado encontrado na tela atual");
+                Log.LogInfo($"[Export] {count} objetos relevantes encontrados, mas sem dados IEnumerable");
+                
+                // Fallback: buscar SI.Bindable.CustomViewExportData
+                var exportType = Type.GetType("SI.Bindable.CustomViewExportData, SI.Bindable");
+                if (exportType != null)
+                {
+                    Log.LogInfo($"[Export] Investigando CustomViewExportData...");
+                    
+                    var staticProps = exportType.GetProperties(BindingFlags.Static | BindingFlags.Public);
+                    foreach (var p in staticProps)
+                    {
+                        try
+                        {
+                            var val = p.GetValue(null);
+                            if (val is IEnumerable en && !(val is string))
+                            {
+                                var list = new List<object>();
+                                foreach (var item in en)
+                                {
+                                    list.Add(item);
+                                    if (list.Count >= 10000) break;
+                                }
+                                
+                                if (list.Count > 0)
+                                {
+                                    Log.LogInfo($"[Export] CustomViewExportData.{p.Name}: {list.Count} itens");
+                                    ExportCsv(list);
+                                    return;
+                                }
+                            }
+                        }
+                        catch { }
+                    }
+                }
+                
+                Log.LogWarning("[Export] Nenhum dado exportável encontrado");
             }
             catch (Exception ex)
             {
                 Log.LogError($"[Export] Erro: {ex.Message}");
             }
-        }
-        
-        private static IList FindDataInTree(VisualElement element, int depth, int maxDepth)
-        {
-            if (element == null || depth > maxDepth) return null;
-            
-            try
-            {
-                var type = element.GetType();
-                var dsProp = type.GetProperty("dataSource", BindingFlags.Public | BindingFlags.Instance);
-                
-                if (dsProp != null)
-                {
-                    try
-                    {
-                        var val = dsProp.GetValue(element);
-                        if (val is IEnumerable en && !(val is string))
-                        {
-                            var list = new List<object>();
-                            foreach (var item in en)
-                            {
-                                list.Add(item);
-                                if (list.Count >= 10000) break;
-                            }
-                            
-                            if (list.Count > 5)
-                            {
-                                var first = list[0];
-                                if (first != null)
-                                {
-                                    var itemProps = first.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                                    if (itemProps.Length >= 3)
-                                    {
-                                        return list;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    catch { }
-                }
-            }
-            catch { }
-            
-            for (int i = 0; i < element.childCount; i++)
-            {
-                try
-                {
-                    var found = FindDataInTree(element[i], depth + 1, maxDepth);
-                    if (found != null) return found;
-                }
-                catch { }
-            }
-            
-            return null;
         }
         
         private static void ExportCsv(IList data)
