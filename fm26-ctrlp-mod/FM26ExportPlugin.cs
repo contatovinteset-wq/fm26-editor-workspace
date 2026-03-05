@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.39.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.40.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,7 +22,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.39.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.40.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -47,13 +47,22 @@ namespace FM26CtrlPExport
             }
         }
         
+        // Instância capturada do Bindings
+        private static object _bindingsInstance = null;
         private static int _frameCount = 0;
         private static bool _initialized = false;
         
-        public static void OnUpdate()
+        public static void OnUpdate(object __instance)
         {
             try
             {
+                // Capturar instância
+                if (_bindingsInstance == null && __instance != null)
+                {
+                    _bindingsInstance = __instance;
+                    Log.LogInfo("[Hook] Bindings capturada!");
+                }
+                
                 _frameCount++;
                 if (!_initialized && _frameCount == 300)
                 {
@@ -73,8 +82,8 @@ namespace FM26CtrlPExport
                 {
                     if (Keyboard.current.f9Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F9 - Scan seguro de UI");
-                        SafeScanUI();
+                        Log.LogInfo(">>> F9 - Mostrar Bindings.DataSet");
+                        ShowDataSet();
                     }
                 }
                 catch { }
@@ -83,8 +92,21 @@ namespace FM26CtrlPExport
                 {
                     if (Keyboard.current.f10Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F10 - Buscar Bindings.DataSet");
-                        FindBindingsDataSet();
+                        Log.LogInfo(">>> F10 - Mostrar primeiro IReadOnlyData");
+                        ShowFirstDataItem();
+                    }
+                }
+                catch { }
+                
+                try
+                {
+                    bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
+                    bool p = Keyboard.current.pKey.wasPressedThisFrame;
+                    
+                    if (ctrl && p)
+                    {
+                        Log.LogInfo(">>> Ctrl+P - Exportar DataSet para CSV");
+                        ExportDataSet();
                     }
                 }
                 catch { }
@@ -92,150 +114,188 @@ namespace FM26CtrlPExport
             catch { }
         }
         
-        /// <summary>
-        /// Scan SEGURO da UI - profundidade limitada, try-catch em tudo
-        /// </summary>
-        private static void SafeScanUI()
+        private static void ShowDataSet()
         {
             try
             {
-                UIDocument[] uiDocs = null;
-                try { uiDocs = Resources.FindObjectsOfTypeAll<UIDocument>(); }
-                catch { Log.LogWarning("[Scan] Erro ao buscar UIDocuments"); return; }
-                
-                if (uiDocs == null) { Log.LogWarning("[Scan] uiDocs null"); return; }
-                
-                Log.LogInfo($"[Scan] {uiDocs.Length} UIDocuments encontrados");
-                
-                int totalElements = 0;
-                int maxElements = 100; // LIMITE DE SEGURANÇA
-                
-                foreach (var doc in uiDocs)
+                if (_bindingsInstance == null)
                 {
-                    if (totalElements >= maxElements) break;
-                    if (doc == null) continue;
-                    
-                    string docName = "unknown";
-                    try { docName = doc.name; } catch { }
-                    Log.LogInfo($"[Scan] Doc: {docName}");
-                    
-                    VisualElement root = null;
-                    try { root = doc.rootVisualElement; } catch { }
-                    if (root == null) continue;
-                    
-                    // Apenas 2 níveis de profundidade, 10 filhos por nível
-                    try
-                    {
-                        for (int i = 0; i < root.childCount && i < 10; i++)
-                        {
-                            if (totalElements >= maxElements) break;
-                            
-                            VisualElement child = null;
-                            try { child = root[i]; }
-                            catch { continue; }
-                            
-                            if (child == null) continue;
-                            totalElements++;
-                            
-                            // Logar tipo e nome
-                            string typeName = "unknown";
-                            string elemName = "unknown";
-                            try { typeName = child.GetType().Name; } catch { }
-                            try { elemName = child.name; } catch { }
-                            
-                            Log.LogInfo($"[Scan]   {typeName}: {elemName}");
-                            
-                            // Segundo nível
-                            try
-                            {
-                                for (int j = 0; j < child.childCount && j < 5; j++)
-                                {
-                                    VisualElement grandchild = null;
-                                    try { grandchild = child[j]; }
-                                    catch { continue; }
-                                    
-                                    if (grandchild == null) continue;
-                                    totalElements++;
-                                    
-                                    string gcType = "unknown";
-                                    string gcName = "unknown";
-                                    try { gcType = grandchild.GetType().Name; } catch { }
-                                    try { gcName = grandchild.name; } catch { }
-                                    
-                                    Log.LogInfo($"[Scan]     {gcType}: {gcName}");
-                                }
-                            }
-                            catch { }
-                        }
-                    }
-                    catch { }
-                }
-                
-                Log.LogInfo($"[Scan] Total: {totalElements} elementos escaneados");
-            }
-            catch (Exception ex)
-            {
-                Log.LogError($"[Scan] Erro geral: {ex.Message}");
-            }
-        }
-        
-        /// <summary>
-        /// Buscar Bindings.DataSet via hook estático
-        /// </summary>
-        private static void FindBindingsDataSet()
-        {
-            try
-            {
-                // O tipo Bindings está em SI.Bindable
-                var bindingsType = Type.GetType("SI.Bindable.Bindings, SI.Bindable");
-                if (bindingsType == null)
-                {
-                    Log.LogWarning("[Bind] Tipo Bindings não encontrado");
-                    
-                    // Tentar buscar em todos assemblies
-                    foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
-                    {
-                        try
-                        {
-                            var types = asm.GetTypes();
-                            foreach (var t in types)
-                            {
-                                if (t.Name == "Bindings")
-                                {
-                                    Log.LogInfo($"[Bind] Encontrado em: {asm.GetName().Name}");
-                                }
-                            }
-                        }
-                        catch { }
-                    }
+                    Log.LogWarning("[DS] Nenhuma instância de Bindings capturada");
                     return;
                 }
                 
-                Log.LogInfo($"[Bind] Tipo encontrado: {bindingsType.FullName}");
+                var type = _bindingsInstance.GetType();
+                var dataSetProp = type.GetProperty("DataSet");
                 
-                // Listar propriedades públicas
-                var props = bindingsType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                Log.LogInfo($"[Bind] {props.Length} propriedades públicas:");
-                
-                foreach (var p in props.Take(20))
+                if (dataSetProp == null)
                 {
-                    try
-                    {
-                        Log.LogInfo($"[Bind]   {p.Name}: {p.PropertyType.Name}");
-                    }
-                    catch { }
+                    Log.LogWarning("[DS] Propriedade DataSet não encontrada");
+                    return;
                 }
                 
-                // Buscar DataSet especificamente
-                var dataSetProp = bindingsType.GetProperty("DataSet");
-                if (dataSetProp != null)
+                var dataSet = dataSetProp.GetValue(_bindingsInstance);
+                if (dataSet == null)
                 {
-                    Log.LogInfo($"[Bind] DataSet encontrado! Tipo: {dataSetProp.PropertyType.FullName}");
+                    Log.LogWarning("[DS] DataSet é null");
+                    return;
+                }
+                
+                // Contar itens
+                var countProp = dataSet.GetType().GetProperty("Count");
+                if (countProp != null)
+                {
+                    var count = (int)countProp.GetValue(dataSet);
+                    Log.LogInfo($"[DS] DataSet.Count: {count}");
+                }
+                
+                // Tentar iterar
+                var enumerable = dataSet as IEnumerable;
+                if (enumerable != null)
+                {
+                    int i = 0;
+                    foreach (var item in enumerable)
+                    {
+                        if (i < 3) // Mostrar primeiros 3
+                        {
+                            var itemType = item?.GetType().Name ?? "null";
+                            Log.LogInfo($"[DS]   [{i}]: {itemType}");
+                        }
+                        i++;
+                        if (i >= 1000) break; // Limite de segurança
+                    }
+                    Log.LogInfo($"[DS] Total iterado: {i}");
                 }
             }
             catch (Exception ex)
             {
-                Log.LogError($"[Bind] Erro: {ex.Message}");
+                Log.LogError($"[DS] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void ShowFirstDataItem()
+        {
+            try
+            {
+                if (_bindingsInstance == null)
+                {
+                    Log.LogWarning("[Item] Nenhuma instância de Bindings");
+                    return;
+                }
+                
+                var type = _bindingsInstance.GetType();
+                var dataSetProp = type.GetProperty("DataSet");
+                
+                if (dataSetProp == null) return;
+                
+                var dataSet = dataSetProp.GetValue(_bindingsInstance) as IEnumerable;
+                if (dataSet == null) return;
+                
+                foreach (var item in dataSet)
+                {
+                    if (item == null) continue;
+                    
+                    var itemType = item.GetType();
+                    Log.LogInfo($"[Item] Tipo: {itemType.FullName}");
+                    
+                    // Listar propriedades
+                    var props = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                    Log.LogInfo($"[Item] {props.Length} propriedades:");
+                    
+                    foreach (var p in props.Take(20))
+                    {
+                        try
+                        {
+                            var val = p.GetValue(item);
+                            var valStr = val?.ToString() ?? "null";
+                            if (valStr.Length > 60) valStr = valStr.Substring(0, 60) + "...";
+                            Log.LogInfo($"[Item]   {p.Name}: {valStr}");
+                        }
+                        catch { }
+                    }
+                    
+                    return; // Só primeiro item
+                }
+                
+                Log.LogWarning("[Item] DataSet vazio");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Item] Erro: {ex.Message}");
+            }
+        }
+        
+        private static void ExportDataSet()
+        {
+            try
+            {
+                if (_bindingsInstance == null)
+                {
+                    Log.LogWarning("[Export] Nenhuma instância de Bindings");
+                    return;
+                }
+                
+                var type = _bindingsInstance.GetType();
+                var dataSetProp = type.GetProperty("DataSet");
+                
+                if (dataSetProp == null) return;
+                
+                var dataSet = dataSetProp.GetValue(_bindingsInstance) as IEnumerable;
+                if (dataSet == null) return;
+                
+                var items = new List<object>();
+                foreach (var item in dataSet)
+                {
+                    if (item != null) items.Add(item);
+                    if (items.Count >= 50000) break;
+                }
+                
+                if (items.Count == 0)
+                {
+                    Log.LogWarning("[Export] DataSet vazio");
+                    return;
+                }
+                
+                Log.LogInfo($"[Export] {items.Count} itens para exportar");
+                
+                // Descobrir propriedades do primeiro item
+                var firstType = items[0].GetType();
+                var props = firstType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(p => p.GetIndexParameters().Length == 0)
+                    .ToList();
+                
+                var csv = new System.Text.StringBuilder();
+                csv.AppendLine(string.Join(";", props.Select(p => p.Name)));
+                
+                int count = 0;
+                foreach (var item in items)
+                {
+                    try
+                    {
+                        var values = props.Select(p =>
+                        {
+                            try
+                            {
+                                var val = p.GetValue(item);
+                                var str = val?.ToString() ?? "";
+                                return str.Replace(";", ",").Replace("\n", " ").Replace("\r", "");
+                            }
+                            catch { return ""; }
+                        });
+                        csv.AppendLine(string.Join(";", values));
+                        count++;
+                    }
+                    catch { }
+                }
+                
+                string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Export_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
+                System.IO.File.WriteAllText(path, csv.ToString());
+                
+                Log.LogInfo($"[Export] ✅ {count} linhas exportadas!");
+                Log.LogInfo($"[Export] Arquivo: {path}");
+            }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Export] Erro: {ex.Message}");
             }
         }
     }
