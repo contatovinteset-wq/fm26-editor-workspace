@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.46.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.47.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.46.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.47.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -73,8 +73,8 @@ namespace FM26CtrlPExport
                 {
                     if (Keyboard.current.f9Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F9 - Listar DataTypes únicos");
-                        ListDataTypes();
+                        Log.LogInfo(">>> F9 - Listar tipos reais dos valores");
+                        ListRealTypes();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[F9] {ex.Message}"); }
@@ -83,8 +83,8 @@ namespace FM26CtrlPExport
                 {
                     if (Keyboard.current.f10Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F10 - Explorar métodos do TypedValue");
-                        ExploreTypedValueMethods();
+                        Log.LogInfo(">>> F10 - Testar Get() em alguns TypedValues");
+                        TestGetMethod();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[F10] {ex.Message}"); }
@@ -96,8 +96,8 @@ namespace FM26CtrlPExport
                     
                     if (ctrl && p)
                     {
-                        Log.LogInfo(">>> Ctrl+P - Extrair valores reais");
-                        ExtractRealValues();
+                        Log.LogInfo(">>> Ctrl+P - Exportar valores via Get()");
+                        ExportViaGet();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[CtrlP] {ex.Message}"); }
@@ -153,7 +153,7 @@ namespace FM26CtrlPExport
             return values;
         }
         
-        private static void ListDataTypes()
+        private static void ListRealTypes()
         {
             try
             {
@@ -161,30 +161,34 @@ namespace FM26CtrlPExport
                 Log.LogInfo($"[Types] {typedValues.Count} TypedValues");
                 
                 var typeCounts = new Dictionary<string, int>();
+                int tested = 0;
                 
                 foreach (var tv in typedValues)
                 {
                     try
                     {
-                        var dataTypeProp = tv.GetType().GetProperty("DataType");
-                        if (dataTypeProp == null) continue;
+                        var tvType = tv.GetType();
+                        var getMethod = tvType.GetMethod("Get", Type.EmptyTypes);
+                        if (getMethod == null) continue;
                         
-                        var dt = dataTypeProp.GetValue(tv);
-                        var name = dt?.ToString() ?? "null";
+                        var result = getMethod.Invoke(tv, null);
+                        tested++;
                         
-                        // Simplificar nome
-                        if (name.Contains(","))
+                        if (result == null)
                         {
-                            var parts = name.Split(',');
-                            name = parts[0];
+                            if (!typeCounts.ContainsKey("null")) typeCounts["null"] = 0;
+                            typeCounts["null"]++;
+                            continue;
                         }
                         
-                        if (!typeCounts.ContainsKey(name)) typeCounts[name] = 0;
-                        typeCounts[name]++;
+                        var resultType = result.GetType().Name;
+                        if (!typeCounts.ContainsKey(resultType)) typeCounts[resultType] = 0;
+                        typeCounts[resultType]++;
                     }
                     catch { }
                 }
                 
+                Log.LogInfo($"[Types] Testados: {tested}");
                 Log.LogInfo("[Types] Tipos encontrados:");
                 foreach (var kvp in typeCounts.OrderByDescending(x => x.Value).Take(30))
                 {
@@ -194,134 +198,152 @@ namespace FM26CtrlPExport
             catch (Exception ex) { Log.LogError($"[Types] {ex.Message}"); }
         }
         
-        private static void ExploreTypedValueMethods()
+        private static void TestGetMethod()
         {
             try
             {
                 var typedValues = GetAllTypedValues();
-                if (typedValues.Count == 0) { Log.LogWarning("[Meth] Nenhum TypedValue"); return; }
+                if (typedValues.Count == 0) { Log.LogWarning("[Get] Nenhum TypedValue"); return; }
                 
-                var tv = typedValues[0];
-                var tvType = tv.GetType();
+                int tested = 0;
+                int success = 0;
                 
-                Log.LogInfo($"[Meth] Tipo: {tvType.FullName}");
-                
-                // Métodos
-                var methods = tvType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
-                Log.LogInfo($"[Meth] {methods.Length} métodos:");
-                
-                foreach (var m in methods)
-                {
-                    if (m.DeclaringType == tvType || m.DeclaringType?.Name == "TypedValue")
-                    {
-                        var pars = string.Join(", ", m.GetParameters().Select(p => p.Name));
-                        Log.LogInfo($"[Meth]   {m.Name}({pars}) -> {m.ReturnType.Name}");
-                    }
-                }
-                
-                // Campos
-                var fields = tvType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                Log.LogInfo($"[Meth] {fields.Length} campos:");
-                
-                foreach (var f in fields)
-                {
-                    Log.LogInfo($"[Meth]   {f.Name}: {f.FieldType.Name}");
-                }
-                
-                // Tentar GetValue
-                try
-                {
-                    var getValueMethod = tvType.GetMethod("GetValue");
-                    if (getValueMethod != null)
-                    {
-                        var result = getValueMethod.Invoke(tv, null);
-                        if (result != null)
-                        {
-                            Log.LogInfo($"[Meth] GetValue() = {result.GetType().Name}");
-                            
-                            // Explorar resultado
-                            var resultType = result.GetType();
-                            var resultProps = resultType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                            Log.LogInfo($"[Meth] Resultado tem {resultProps.Length} propriedades:");
-                            
-                            foreach (var p in resultProps.Take(10))
-                            {
-                                try
-                                {
-                                    var v = p.GetValue(result);
-                                    var vs = v?.ToString() ?? "null";
-                                    if (vs.Length > 50) vs = vs.Substring(0, 50) + "...";
-                                    Log.LogInfo($"[Meth]   {p.Name}: {vs}");
-                                }
-                                catch { }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex) { Log.LogWarning($"[Meth] GetValue erro: {ex.Message}"); }
-            }
-            catch (Exception ex) { Log.LogError($"[Meth] {ex.Message}"); }
-        }
-        
-        private static void ExtractRealValues()
-        {
-            try
-            {
-                var typedValues = GetAllTypedValues();
-                Log.LogInfo($"[Extract] {typedValues.Count} TypedValues");
-                
-                // Encontrar TypedValues com dados de jogador
-                int extracted = 0;
-                
-                foreach (var tv in typedValues.Take(100))
+                foreach (var tv in typedValues.Take(20))
                 {
                     try
                     {
                         var tvType = tv.GetType();
+                        var getMethod = tvType.GetMethod("Get", Type.EmptyTypes);
+                        if (getMethod == null) { Log.LogWarning($"[Get] Método Get não encontrado"); continue; }
                         
-                        // Tentar GetValue
-                        var getValueMethod = tvType.GetMethod("GetValue");
-                        if (getValueMethod == null) continue;
+                        tested++;
+                        var result = getMethod.Invoke(tv, null);
                         
-                        var result = getValueMethod.Invoke(tv, null);
+                        if (result == null)
+                        {
+                            Log.LogInfo($"[Get] [{tested}] = null");
+                            continue;
+                        }
+                        
+                        success++;
+                        var resultType = result.GetType();
+                        Log.LogInfo($"[Get] [{tested}] {resultType.Name}");
+                        
+                        // Propriedades
+                        var props = resultType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                        Log.LogInfo($"[Get]   {props.Length} props");
+                        
+                        foreach (var p in props.Take(8))
+                        {
+                            try
+                            {
+                                var v = p.GetValue(result);
+                                var vs = v?.ToString() ?? "null";
+                                if (vs.Length > 40) vs = vs.Substring(0, 40) + "...";
+                                Log.LogInfo($"[Get]     {p.Name}: {vs}");
+                            }
+                            catch { }
+                        }
+                    }
+                    catch (Exception ex) { Log.LogWarning($"[Get] Erro: {ex.Message}"); }
+                }
+                
+                Log.LogInfo($"[Get] Sucesso: {success}/{tested}");
+            }
+            catch (Exception ex) { Log.LogError($"[Get] {ex.Message}"); }
+        }
+        
+        private static void ExportViaGet()
+        {
+            try
+            {
+                var typedValues = GetAllTypedValues();
+                Log.LogInfo($"[Export] {typedValues.Count} TypedValues");
+                
+                // Coletar todos os valores
+                var values = new List<object>();
+                var typeCounts = new Dictionary<string, int>();
+                
+                foreach (var tv in typedValues)
+                {
+                    try
+                    {
+                        var tvType = tv.GetType();
+                        var getMethod = tvType.GetMethod("Get", Type.EmptyTypes);
+                        if (getMethod == null) continue;
+                        
+                        var result = getMethod.Invoke(tv, null);
                         if (result == null) continue;
                         
-                        var resultType = result.GetType();
+                        values.Add(result);
                         
-                        // Se tem propriedades que parecem dados de jogador
-                        var props = resultType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                        var propNames = props.Select(p => p.Name.ToLower()).ToList();
-                        
-                        bool hasPlayerProps = propNames.Any(n => 
-                            n.Contains("name") || n.Contains("age") || n.Contains("club") || 
-                            n.Contains("position") || n.Contains("value") || n.Contains("rating"));
-                        
-                        if (hasPlayerProps)
-                        {
-                            Log.LogInfo($"[Extract] Tipo: {resultType.Name}");
-                            extracted++;
-                            
-                            foreach (var p in props.Take(15))
-                            {
-                                try
-                                {
-                                    var v = p.GetValue(result);
-                                    var vs = v?.ToString() ?? "null";
-                                    if (vs.Length > 60) vs = vs.Substring(0, 60) + "...";
-                                    Log.LogInfo($"[Extract]   {p.Name}: {vs}");
-                                }
-                                catch { }
-                            }
-                            
-                            if (extracted >= 5) break;
-                        }
+                        var typeName = result.GetType().Name;
+                        if (!typeCounts.ContainsKey(typeName)) typeCounts[typeName] = 0;
+                        typeCounts[typeName]++;
                     }
                     catch { }
                 }
                 
-                Log.LogInfo($"[Extract] {extracted} itens com dados relevantes");
+                Log.LogInfo($"[Export] {values.Count} valores extraídos");
+                foreach (var kvp in typeCounts.OrderByDescending(x => x.Value).Take(10))
+                {
+                    Log.LogInfo($"[Export]   {kvp.Key}: {kvp.Value}");
+                }
+                
+                if (values.Count == 0) { Log.LogWarning("[Export] Nenhum valor"); return; }
+                
+                // Agrupar por tipo
+                var byType = values.GroupBy(v => v.GetType().Name).ToDictionary(g => g.Key, g => g.ToList());
+                
+                // Exportar cada tipo
+                foreach (var kvp in byType)
+                {
+                    var typeName = kvp.Key;
+                    var items = kvp.Value;
+                    
+                    if (items.Count == 0) continue;
+                    
+                    // Descobrir propriedades
+                    var first = items[0];
+                    var props = first.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                        .Where(p => p.GetIndexParameters().Length == 0)
+                        .ToList();
+                    
+                    if (props.Count == 0) continue;
+                    
+                    var csv = new System.Text.StringBuilder();
+                    csv.AppendLine(string.Join(";", props.Select(p => p.Name)));
+                    
+                    int exported = 0;
+                    foreach (var item in items)
+                    {
+                        try
+                        {
+                            var row = props.Select(p =>
+                            {
+                                try
+                                {
+                                    var v = p.GetValue(item);
+                                    var s = v?.ToString() ?? "";
+                                    return s.Replace(";", ",").Replace("\n", " ").Replace("\r", "");
+                                }
+                                catch { return ""; }
+                            });
+                            
+                            csv.AppendLine(string.Join(";", row));
+                            exported++;
+                        }
+                        catch { }
+                    }
+                    
+                    string safeName = string.Join("_", typeName.Split(System.IO.Path.GetInvalidFileNameChars()));
+                    string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_{safeName}_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
+                    System.IO.File.WriteAllText(path, csv.ToString());
+                    
+                    Log.LogInfo($"[Export] ✅ {typeName}: {exported} linhas -> {path}");
+                }
             }
-            catch (Exception ex) { Log.LogError($"[Extract] {ex.Message}"); }
+            catch (Exception ex) { Log.LogError($"[Export] {ex.Message}"); }
         }
     }
 }
