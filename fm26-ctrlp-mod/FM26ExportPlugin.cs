@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.47.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.48.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.47.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.48.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -73,8 +73,8 @@ namespace FM26CtrlPExport
                 {
                     if (Keyboard.current.f9Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F9 - Listar tipos reais dos valores");
-                        ListRealTypes();
+                        Log.LogInfo(">>> F9 - Listar métodos Get disponíveis");
+                        ListGetMethods();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[F9] {ex.Message}"); }
@@ -83,8 +83,8 @@ namespace FM26CtrlPExport
                 {
                     if (Keyboard.current.f10Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F10 - Testar Get() em alguns TypedValues");
-                        TestGetMethod();
+                        Log.LogInfo(">>> F10 - Testar Get() específico");
+                        TestGetSpecific();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[F10] {ex.Message}"); }
@@ -96,8 +96,8 @@ namespace FM26CtrlPExport
                     
                     if (ctrl && p)
                     {
-                        Log.LogInfo(">>> Ctrl+P - Exportar valores via Get()");
-                        ExportViaGet();
+                        Log.LogInfo(">>> Ctrl+P - Exportar valores");
+                        ExportValues();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[CtrlP] {ex.Message}"); }
@@ -153,114 +153,154 @@ namespace FM26CtrlPExport
             return values;
         }
         
-        private static void ListRealTypes()
+        private static MethodInfo FindGetNonGenericMethod(Type tvType)
         {
-            try
+            // Buscar método Get() que retorna Object e não é genérico
+            var methods = tvType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+            
+            foreach (var m in methods)
             {
-                var typedValues = GetAllTypedValues();
-                Log.LogInfo($"[Types] {typedValues.Count} TypedValues");
-                
-                var typeCounts = new Dictionary<string, int>();
-                int tested = 0;
-                
-                foreach (var tv in typedValues)
+                if (m.Name == "Get" && 
+                    !m.IsGenericMethod && 
+                    m.GetParameters().Length == 0 &&
+                    m.ReturnType == typeof(object))
                 {
-                    try
-                    {
-                        var tvType = tv.GetType();
-                        var getMethod = tvType.GetMethod("Get", Type.EmptyTypes);
-                        if (getMethod == null) continue;
-                        
-                        var result = getMethod.Invoke(tv, null);
-                        tested++;
-                        
-                        if (result == null)
-                        {
-                            if (!typeCounts.ContainsKey("null")) typeCounts["null"] = 0;
-                            typeCounts["null"]++;
-                            continue;
-                        }
-                        
-                        var resultType = result.GetType().Name;
-                        if (!typeCounts.ContainsKey(resultType)) typeCounts[resultType] = 0;
-                        typeCounts[resultType]++;
-                    }
-                    catch { }
-                }
-                
-                Log.LogInfo($"[Types] Testados: {tested}");
-                Log.LogInfo("[Types] Tipos encontrados:");
-                foreach (var kvp in typeCounts.OrderByDescending(x => x.Value).Take(30))
-                {
-                    Log.LogInfo($"[Types]   {kvp.Key}: {kvp.Value}");
+                    return m;
                 }
             }
-            catch (Exception ex) { Log.LogError($"[Types] {ex.Message}"); }
+            
+            // Tentar pelo nome completo
+            return methods.FirstOrDefault(m => 
+                m.Name == "Get" && 
+                m.GetParameters().Length == 0 && 
+                !m.ContainsGenericParameters);
         }
         
-        private static void TestGetMethod()
+        private static void ListGetMethods()
         {
             try
             {
                 var typedValues = GetAllTypedValues();
-                if (typedValues.Count == 0) { Log.LogWarning("[Get] Nenhum TypedValue"); return; }
+                Log.LogInfo($"[Methods] {typedValues.Count} TypedValues");
                 
-                int tested = 0;
+                if (typedValues.Count == 0) { Log.LogWarning("[Methods] Nenhum"); return; }
+                
+                var tv = typedValues[0];
+                var tvType = tv.GetType();
+                
+                Log.LogInfo($"[Methods] Tipo: {tvType.FullName}");
+                
+                var methods = tvType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+                var getMethods = methods.Where(m => m.Name == "Get").ToList();
+                
+                Log.LogInfo($"[Methods] {getMethods.Count} métodos 'Get':");
+                
+                foreach (var m in getMethods)
+                {
+                    var pars = string.Join(", ", m.GetParameters().Select(p => $"{p.ParameterType.Name} {p.Name}"));
+                    var genArgs = m.IsGenericMethod ? $"<{string.Join(", ", m.GetGenericArguments().Select(a => a.Name))}>" : "";
+                    Log.LogInfo($"[Methods]   Get{genArgs}({pars}) -> {m.ReturnType.Name} (IsGeneric: {m.IsGenericMethod})");
+                }
+                
+                // Encontrar o método correto
+                var getMethod = FindGetNonGenericMethod(tvType);
+                if (getMethod != null)
+                {
+                    Log.LogInfo($"[Methods] ✅ Método encontrado: {getMethod}");
+                    
+                    // Testar
+                    try
+                    {
+                        var result = getMethod.Invoke(tv, null);
+                        if (result != null)
+                        {
+                            Log.LogInfo($"[Methods] Resultado: {result.GetType().Name}");
+                        }
+                        else
+                        {
+                            Log.LogInfo($"[Methods] Resultado: null");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.LogWarning($"[Methods] Erro ao invocar: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    Log.LogWarning("[Methods] ❌ Método Get() não-genérico não encontrado");
+                }
+            }
+            catch (Exception ex) { Log.LogError($"[Methods] {ex.Message}"); }
+        }
+        
+        private static void TestGetSpecific()
+        {
+            try
+            {
+                var typedValues = GetAllTypedValues();
+                if (typedValues.Count == 0) { Log.LogWarning("[Test] Nenhum TypedValue"); return; }
+                
                 int success = 0;
+                int tested = 0;
                 
-                foreach (var tv in typedValues.Take(20))
+                foreach (var tv in typedValues.Take(30))
                 {
                     try
                     {
                         var tvType = tv.GetType();
-                        var getMethod = tvType.GetMethod("Get", Type.EmptyTypes);
-                        if (getMethod == null) { Log.LogWarning($"[Get] Método Get não encontrado"); continue; }
+                        var getMethod = FindGetNonGenericMethod(tvType);
+                        
+                        if (getMethod == null) continue;
                         
                         tested++;
                         var result = getMethod.Invoke(tv, null);
                         
                         if (result == null)
                         {
-                            Log.LogInfo($"[Get] [{tested}] = null");
+                            Log.LogInfo($"[Test] [{tested}] = null");
                             continue;
                         }
                         
                         success++;
                         var resultType = result.GetType();
-                        Log.LogInfo($"[Get] [{tested}] {resultType.Name}");
+                        Log.LogInfo($"[Test] [{tested}] {resultType.Name}");
                         
                         // Propriedades
                         var props = resultType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                        Log.LogInfo($"[Get]   {props.Length} props");
+                        Log.LogInfo($"[Test]   {props.Length} props");
                         
-                        foreach (var p in props.Take(8))
+                        foreach (var p in props.Take(6))
                         {
                             try
                             {
                                 var v = p.GetValue(result);
                                 var vs = v?.ToString() ?? "null";
                                 if (vs.Length > 40) vs = vs.Substring(0, 40) + "...";
-                                Log.LogInfo($"[Get]     {p.Name}: {vs}");
+                                Log.LogInfo($"[Test]     {p.Name}: {vs}");
                             }
                             catch { }
                         }
                     }
-                    catch (Exception ex) { Log.LogWarning($"[Get] Erro: {ex.Message}"); }
+                    catch (Exception ex)
+                    {
+                        Log.LogWarning($"[Test] Erro: {ex.Message}");
+                    }
                 }
                 
-                Log.LogInfo($"[Get] Sucesso: {success}/{tested}");
+                Log.LogInfo($"[Test] Sucesso: {success}/{tested}");
             }
-            catch (Exception ex) { Log.LogError($"[Get] {ex.Message}"); }
+            catch (Exception ex) { Log.LogError($"[Test] {ex.Message}"); }
         }
         
-        private static void ExportViaGet()
+        private static void ExportValues()
         {
             try
             {
                 var typedValues = GetAllTypedValues();
                 Log.LogInfo($"[Export] {typedValues.Count} TypedValues");
                 
-                // Coletar todos os valores
+                // Coletar valores
                 var values = new List<object>();
                 var typeCounts = new Dictionary<string, int>();
                 
@@ -269,7 +309,8 @@ namespace FM26CtrlPExport
                     try
                     {
                         var tvType = tv.GetType();
-                        var getMethod = tvType.GetMethod("Get", Type.EmptyTypes);
+                        var getMethod = FindGetNonGenericMethod(tvType);
+                        
                         if (getMethod == null) continue;
                         
                         var result = getMethod.Invoke(tv, null);
@@ -285,17 +326,17 @@ namespace FM26CtrlPExport
                 }
                 
                 Log.LogInfo($"[Export] {values.Count} valores extraídos");
-                foreach (var kvp in typeCounts.OrderByDescending(x => x.Value).Take(10))
+                
+                foreach (var kvp in typeCounts.OrderByDescending(x => x.Value).Take(15))
                 {
                     Log.LogInfo($"[Export]   {kvp.Key}: {kvp.Value}");
                 }
                 
                 if (values.Count == 0) { Log.LogWarning("[Export] Nenhum valor"); return; }
                 
-                // Agrupar por tipo
+                // Agrupar por tipo e exportar
                 var byType = values.GroupBy(v => v.GetType().Name).ToDictionary(g => g.Key, g => g.ToList());
                 
-                // Exportar cada tipo
                 foreach (var kvp in byType)
                 {
                     var typeName = kvp.Key;
@@ -303,7 +344,6 @@ namespace FM26CtrlPExport
                     
                     if (items.Count == 0) continue;
                     
-                    // Descobrir propriedades
                     var first = items[0];
                     var props = first.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
                         .Where(p => p.GetIndexParameters().Length == 0)
@@ -340,7 +380,7 @@ namespace FM26CtrlPExport
                     string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_{safeName}_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
                     System.IO.File.WriteAllText(path, csv.ToString());
                     
-                    Log.LogInfo($"[Export] ✅ {typeName}: {exported} linhas -> {path}");
+                    Log.LogInfo($"[Export] ✅ {typeName}: {exported} linhas");
                 }
             }
             catch (Exception ex) { Log.LogError($"[Export] {ex.Message}"); }
