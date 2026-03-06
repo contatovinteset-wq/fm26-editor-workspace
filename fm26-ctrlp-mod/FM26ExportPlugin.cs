@@ -9,11 +9,10 @@ using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.50.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.51.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.50.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.51.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -74,8 +73,8 @@ namespace FM26CtrlPExport
                 {
                     if (Keyboard.current.f9Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F9 - Listar TODOS os métodos do TypedValue");
-                        ListAllMethods();
+                        Log.LogInfo(">>> F9 - Listar itens com m_value não-null");
+                        ListNonEmptyMValues();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[F9] {ex.Message}"); }
@@ -84,8 +83,8 @@ namespace FM26CtrlPExport
                 {
                     if (Keyboard.current.f10Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F10 - Buscar checkboxes selecionados na UI");
-                        FindCheckboxes();
+                        Log.LogInfo(">>> F10 - Explorar DataType do TypedValue");
+                        ExploreDataTypes();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[F10] {ex.Message}"); }
@@ -97,8 +96,8 @@ namespace FM26CtrlPExport
                     
                     if (ctrl && p)
                     {
-                        Log.LogInfo(">>> Ctrl+P - Exportar jogadores selecionados");
-                        ExportSelected();
+                        Log.LogInfo(">>> Ctrl+P - Extrair e exportar valores");
+                        ExtractAndExport();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[CtrlP] {ex.Message}"); }
@@ -106,264 +105,363 @@ namespace FM26CtrlPExport
             catch { }
         }
         
-        private static void ListAllMethods()
+        private static object GetMData()
         {
-            try
-            {
-                var typedValueType = Type.GetType("SI.Core.TypedValue, SI.Core");
-                if (typedValueType == null) { Log.LogWarning("[Meth] Tipo não encontrado"); return; }
-                
-                Log.LogInfo($"[Meth] Tipo: {typedValueType.FullName}");
-                
-                var methods = typedValueType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
-                Log.LogInfo($"[Meth] {methods.Length} métodos:");
-                
-                foreach (var m in methods)
-                {
-                    var pars = string.Join(", ", m.GetParameters().Select(p => $"{p.ParameterType.Name} {p.Name}"));
-                    Log.LogInfo($"[Meth]   {m.ReturnType.Name} {m.Name}({pars})");
-                }
-                
-                var fields = typedValueType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                Log.LogInfo($"[Meth] {fields.Length} campos:");
-                
-                foreach (var f in fields)
-                {
-                    Log.LogInfo($"[Meth]   {f.FieldType.Name} {f.Name}");
-                }
-            }
-            catch (Exception ex) { Log.LogError($"[Meth] {ex.Message}"); }
-        }
-        
-        private static List<Toggle> GetAllToggles(VisualElement root)
-        {
-            var toggles = new List<Toggle>();
-            try
-            {
-                // Navegar manualmente pela árvore
-                void FindToggles(VisualElement element, int depth)
-                {
-                    if (element == null || depth > 10) return;
-                    
-                    try
-                    {
-                        if (element is Toggle toggle)
-                        {
-                            toggles.Add(toggle);
-                        }
-                    }
-                    catch { }
-                    
-                    // Filhos
-                    try
-                    {
-                        int childCount = element.childCount;
-                        for (int i = 0; i < childCount && toggles.Count < 1000; i++)
-                        {
-                            try
-                            {
-                                var child = element.ElementAt(i);
-                                FindToggles(child, depth + 1);
-                            }
-                            catch { }
-                        }
-                    }
-                    catch { }
-                }
-                
-                FindToggles(root, 0);
-            }
-            catch { }
+            if (_bindingsInstance == null) return null;
             
-            return toggles;
+            var type = _bindingsInstance.GetType();
+            var mDataProp = type.GetProperty("m_data", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+            
+            if (mDataProp != null) return mDataProp.GetValue(_bindingsInstance);
+            
+            var mDataField = type.GetField("m_data", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+            return mDataField?.GetValue(_bindingsInstance);
         }
         
-        private static void FindCheckboxes()
+        private static void ListNonEmptyMValues()
         {
             try
             {
-                var uiDocs = UnityEngine.Object.FindObjectsOfType<UIDocument>();
-                Log.LogInfo($"[UI] {uiDocs.Length} UIDocuments");
-                
-                foreach (var doc in uiDocs)
-                {
-                    try
-                    {
-                        var root = doc.rootVisualElement;
-                        if (root == null) continue;
-                        
-                        Log.LogInfo($"[UI] Document: {doc.name}");
-                        
-                        var toggles = GetAllToggles(root);
-                        Log.LogInfo($"[UI] {toggles.Count} Toggles");
-                        
-                        int selected = 0;
-                        int count = 0;
-                        
-                        foreach (var toggle in toggles)
-                        {
-                            if (count >= 20) break;
-                            count++;
-                            
-                            try
-                            {
-                                if (toggle.value)
-                                {
-                                    selected++;
-                                    Log.LogInfo($"[UI] Toggle selecionado: {toggle.name}");
-                                    
-                                    var parent = toggle.parent;
-                                    int depth = 0;
-                                    while (parent != null && depth < 3)
-                                    {
-                                        Log.LogInfo($"[UI]   Parent[{depth}]: {parent.GetType().Name} '{parent.name}'");
-                                        parent = parent.parent;
-                                        depth++;
-                                    }
-                                }
-                            }
-                            catch { }
-                        }
-                        
-                        Log.LogInfo($"[UI] {selected} selecionados (de {count} verificados)");
-                    }
-                    catch { }
-                }
-            }
-            catch (Exception ex) { Log.LogError($"[UI] {ex.Message}"); }
-        }
-        
-        private static void ExportSelected()
-        {
-            try
-            {
-                var uiDocs = UnityEngine.Object.FindObjectsOfType<UIDocument>();
-                
-                int totalSelected = 0;
-                var selectedRows = new List<VisualElement>();
-                
-                foreach (var doc in uiDocs)
-                {
-                    try
-                    {
-                        var root = doc.rootVisualElement;
-                        if (root == null) continue;
-                        
-                        var toggles = GetAllToggles(root);
-                        
-                        foreach (var toggle in toggles)
-                        {
-                            try
-                            {
-                                if (toggle.value)
-                                {
-                                    totalSelected++;
-                                    
-                                    var parent = toggle.parent;
-                                    int depth = 0;
-                                    while (parent != null && depth < 5)
-                                    {
-                                        var parentType = parent.GetType().Name;
-                                        if (parentType.Contains("Row") || parentType.Contains("Item") || parentType.Contains("Cell"))
-                                        {
-                                            selectedRows.Add(parent);
-                                            break;
-                                        }
-                                        parent = parent.parent;
-                                        depth++;
-                                    }
-                                }
-                            }
-                            catch { }
-                        }
-                    }
-                    catch { }
-                }
-                
-                Log.LogInfo($"[Export] {totalSelected} checkboxes selecionados");
-                Log.LogInfo($"[Export] {selectedRows.Count} linhas encontradas");
-                
-                if (selectedRows.Count == 0)
-                {
-                    Log.LogWarning("[Export] Nenhuma linha encontrada. Tentando m_data...");
-                    ExportFromMData();
-                    return;
-                }
-                
-                if (selectedRows.Count > 0)
-                {
-                    var firstRow = selectedRows[0];
-                    Log.LogInfo($"[Export] Primeira linha: {firstRow.GetType().Name}");
-                    
-                    var props = firstRow.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                    Log.LogInfo($"[Export] {props.Length} propriedades:");
-                    
-                    foreach (var p in props)
-                    {
-                        try
-                        {
-                            var v = p.GetValue(firstRow);
-                            var vs = v?.ToString() ?? "null";
-                            if (vs.Length > 40) vs = vs.Substring(0, 40) + "...";
-                            Log.LogInfo($"[Export]   {p.Name}: {vs}");
-                        }
-                        catch { }
-                    }
-                }
-            }
-            catch (Exception ex) { Log.LogError($"[Export] {ex.Message}"); }
-        }
-        
-        private static void ExportFromMData()
-        {
-            try
-            {
-                if (_bindingsInstance == null) { Log.LogWarning("[Data] Bindings null"); return; }
-                
-                var type = _bindingsInstance.GetType();
-                var mDataProp = type.GetProperty("m_data", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                var mDataField = type.GetField("m_data", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                
-                object mData = null;
-                if (mDataProp != null) mData = mDataProp.GetValue(_bindingsInstance);
-                else if (mDataField != null) mData = mDataField.GetValue(_bindingsInstance);
-                
-                if (mData == null) { Log.LogWarning("[Data] m_data null"); return; }
+                var mData = GetMData();
+                if (mData == null) { Log.LogWarning("[List] m_data null"); return; }
                 
                 var listType = mData.GetType();
                 var countProp = listType.GetProperty("Count");
                 var indexer = listType.GetProperty("Item");
                 
-                if (countProp == null || indexer == null) { Log.LogWarning("[Data] Sem Count/Indexer"); return; }
+                if (countProp == null || indexer == null) { Log.LogWarning("[List] Sem Count/Indexer"); return; }
                 
                 int total = (int)countProp.GetValue(mData);
-                Log.LogInfo($"[Data] Total: {total} itens");
+                Log.LogInfo($"[List] Total: {total} itens");
                 
-                if (total > 0)
+                int withValue = 0;
+                int withHandler = 0;
+                var typeSamples = new Dictionary<string, int>();
+                
+                for (int i = 0; i < total; i++)
                 {
-                    var item = indexer.GetValue(mData, new object[] { 0 });
-                    if (item != null)
+                    try
                     {
+                        var item = indexer.GetValue(mData, new object[] { i });
+                        if (item == null) continue;
+                        
                         var itemType = item.GetType();
-                        Log.LogInfo($"[Data] Item tipo: {itemType.Name}");
                         
-                        var props = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                        Log.LogInfo($"[Data] {props.Length} propriedades:");
+                        // m_value
+                        var mValueProp = itemType.GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                        if (mValueProp != null)
+                        {
+                            var mValue = mValueProp.GetValue(item);
+                            if (mValue != null)
+                            {
+                                withValue++;
+                                
+                                // DataType do TypedValue
+                                var tvType = mValue.GetType();
+                                var dataTypeProp = tvType.GetProperty("DataType");
+                                if (dataTypeProp != null)
+                                {
+                                    var dt = dataTypeProp.GetValue(mValue);
+                                    var dtName = dt?.ToString() ?? "null";
+                                    if (dtName.Contains(",")) dtName = dtName.Split(',')[0];
+                                    
+                                    if (!typeSamples.ContainsKey(dtName)) typeSamples[dtName] = 0;
+                                    typeSamples[dtName]++;
+                                }
+                            }
+                        }
                         
-                        foreach (var p in props)
+                        // handler
+                        var handlerProp = itemType.GetProperty("handler", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                        if (handlerProp != null && handlerProp.GetValue(item) != null) withHandler++;
+                    }
+                    catch { }
+                }
+                
+                Log.LogInfo($"[List] Com m_value: {withValue}");
+                Log.LogInfo($"[List] Com handler: {withHandler}");
+                Log.LogInfo($"[List] DataTypes encontrados:");
+                
+                foreach (var kvp in typeSamples.OrderByDescending(x => x.Value).Take(20))
+                {
+                    Log.LogInfo($"[List]   {kvp.Key}: {kvp.Value}");
+                }
+            }
+            catch (Exception ex) { Log.LogError($"[List] {ex.Message}"); }
+        }
+        
+        private static void ExploreDataTypes()
+        {
+            try
+            {
+                var mData = GetMData();
+                if (mData == null) { Log.LogWarning("[Exp] m_data null"); return; }
+                
+                var listType = mData.GetType();
+                var countProp = listType.GetProperty("Count");
+                var indexer = listType.GetProperty("Item");
+                
+                if (countProp == null || indexer == null) return;
+                
+                int total = (int)countProp.GetValue(mData);
+                int found = 0;
+                
+                for (int i = 0; i < total && found < 10; i++)
+                {
+                    try
+                    {
+                        var item = indexer.GetValue(mData, new object[] { i });
+                        if (item == null) continue;
+                        
+                        var itemType = item.GetType();
+                        var mValueProp = itemType.GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                        
+                        if (mValueProp == null) continue;
+                        
+                        var mValue = mValueProp.GetValue(item);
+                        if (mValue == null) continue;
+                        
+                        found++;
+                        
+                        var tvType = mValue.GetType();
+                        Log.LogInfo($"[Exp] Item [{i}] - TypedValue");
+                        
+                        // DataType
+                        var dataTypeProp = tvType.GetProperty("DataType");
+                        if (dataTypeProp != null)
+                        {
+                            var dt = dataTypeProp.GetValue(mValue);
+                            Log.LogInfo($"[Exp]   DataType: {dt}");
+                        }
+                        
+                        // IsNull
+                        var isNullProp = tvType.GetProperty("IsNull");
+                        if (isNullProp != null)
+                        {
+                            var isNull = isNullProp.GetValue(mValue);
+                            Log.LogInfo($"[Exp]   IsNull: {isNull}");
+                        }
+                        
+                        // IsValueType
+                        var isValueTypeProp = tvType.GetProperty("IsValueType");
+                        if (isValueTypeProp != null)
+                        {
+                            var isValueType = isValueTypeProp.GetValue(mValue);
+                            Log.LogInfo($"[Exp]   IsValueType: {isValueType}");
+                        }
+                        
+                        // AsString
+                        try
+                        {
+                            var asStringMethod = tvType.GetMethod("AsString");
+                            if (asStringMethod != null)
+                            {
+                                var str = asStringMethod.Invoke(mValue, null);
+                                Log.LogInfo($"[Exp]   AsString: {str}");
+                            }
+                        }
+                        catch (Exception ex) { Log.LogInfo($"[Exp]   AsString erro: {ex.Message}"); }
+                        
+                        // Get() sem parâmetros
+                        try
+                        {
+                            var getMethod = tvType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                                .FirstOrDefault(m => m.Name == "Get" && !m.IsGenericMethod && m.GetParameters().Length == 0);
+                            
+                            if (getMethod != null)
+                            {
+                                var obj = getMethod.Invoke(mValue, null);
+                                if (obj != null)
+                                {
+                                    Log.LogInfo($"[Exp]   Get(): {obj.GetType().Name}");
+                                    
+                                    // Tentar ToString
+                                    try
+                                    {
+                                        var toString = obj.ToString();
+                                        if (!string.IsNullOrEmpty(toString) && toString.Length < 100)
+                                        {
+                                            Log.LogInfo($"[Exp]   Get().ToString(): {toString}");
+                                        }
+                                    }
+                                    catch { }
+                                    
+                                    // Propriedades do objeto retornado
+                                    var objType = obj.GetType();
+                                    var objProps = objType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                                    Log.LogInfo($"[Exp]   Get() tem {objProps.Length} props");
+                                    
+                                    foreach (var p in objProps.Take(5))
+                                    {
+                                        try
+                                        {
+                                            var v = p.GetValue(obj);
+                                            var vs = v?.ToString() ?? "null";
+                                            if (vs.Length > 40) vs = vs.Substring(0, 40) + "...";
+                                            Log.LogInfo($"[Exp]     {p.Name}: {vs}");
+                                        }
+                                        catch { }
+                                    }
+                                }
+                                else
+                                {
+                                    Log.LogInfo($"[Exp]   Get(): null");
+                                }
+                            }
+                        }
+                        catch (Exception ex) { Log.LogInfo($"[Exp]   Get() erro: {ex.Message}"); }
+                    }
+                    catch { }
+                }
+                
+                if (found == 0) Log.LogWarning("[Exp] Nenhum m_value encontrado");
+            }
+            catch (Exception ex) { Log.LogError($"[Exp] {ex.Message}"); }
+        }
+        
+        private static void ExtractAndExport()
+        {
+            try
+            {
+                var mData = GetMData();
+                if (mData == null) { Log.LogWarning("[Export] m_data null"); return; }
+                
+                var listType = mData.GetType();
+                var countProp = listType.GetProperty("Count");
+                var indexer = listType.GetProperty("Item");
+                
+                if (countProp == null || indexer == null) return;
+                
+                int total = (int)countProp.GetValue(mData);
+                
+                // Coletar todos os TypedValues
+                var typedValues = new List<object>();
+                
+                for (int i = 0; i < total; i++)
+                {
+                    try
+                    {
+                        var item = indexer.GetValue(mData, new object[] { i });
+                        if (item == null) continue;
+                        
+                        var itemType = item.GetType();
+                        var mValueProp = itemType.GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                        
+                        if (mValueProp == null) continue;
+                        
+                        var mValue = mValueProp.GetValue(item);
+                        if (mValue != null) typedValues.Add(mValue);
+                    }
+                    catch { }
+                }
+                
+                Log.LogInfo($"[Export] {typedValues.Count} TypedValues");
+                
+                // Extrair valores via Get()
+                var extractedValues = new List<Tuple<object, string>>();
+                
+                foreach (var tv in typedValues)
+                {
+                    try
+                    {
+                        var tvType = tv.GetType();
+                        var getMethod = tvType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                            .FirstOrDefault(m => m.Name == "Get" && !m.IsGenericMethod && m.GetParameters().Length == 0);
+                        
+                        if (getMethod == null) continue;
+                        
+                        var obj = getMethod.Invoke(tv, null);
+                        if (obj == null) continue;
+                        
+                        // Tipo do objeto
+                        var objType = obj.GetType();
+                        var typeName = objType.Name;
+                        
+                        extractedValues.Add(Tuple.Create(obj, typeName));
+                    }
+                    catch { }
+                }
+                
+                Log.LogInfo($"[Export] {extractedValues.Count} valores extraídos");
+                
+                // Agrupar por tipo
+                var byType = extractedValues.GroupBy(v => v.Item2).ToDictionary(g => g.Key, g => g.ToList());
+                
+                foreach (var kvp in byType)
+                {
+                    Log.LogInfo($"[Export]   {kvp.Key}: {kvp.Value.Count}");
+                }
+                
+                // Exportar cada tipo
+                foreach (var kvp in byType)
+                {
+                    var typeName = kvp.Key;
+                    var items = kvp.Value;
+                    
+                    if (items.Count == 0) continue;
+                    
+                    var first = items[0].Item1;
+                    var firstType = first.GetType();
+                    
+                    var props = firstType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                        .Where(p => p.GetIndexParameters().Length == 0)
+                        .ToList();
+                    
+                    if (props.Count == 0)
+                    {
+                        // Tentar AsString
+                        var strValues = new List<string>();
+                        foreach (var item in items)
                         {
                             try
                             {
-                                var v = p.GetValue(item);
-                                var vt = v?.GetType().Name ?? "null";
-                                Log.LogInfo($"[Data]   {p.Name}: {vt}");
+                                strValues.Add(item.Item1?.ToString() ?? "");
                             }
                             catch { }
                         }
+                        
+                        if (strValues.Count > 0)
+                        {
+                            string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_{typeName}_{DateTime.Now:yyyyMMdd_HHmmss}.txt");
+                            System.IO.File.WriteAllLines(path, strValues);
+                            Log.LogInfo($"[Export] ✅ {typeName}: {strValues.Count} linhas (texto)");
+                        }
+                        continue;
                     }
+                    
+                    var csv = new System.Text.StringBuilder();
+                    csv.AppendLine(string.Join(";", props.Select(p => p.Name)));
+                    
+                    int exported = 0;
+                    foreach (var item in items)
+                    {
+                        try
+                        {
+                            var row = props.Select(p =>
+                            {
+                                try
+                                {
+                                    var v = p.GetValue(item.Item1);
+                                    var s = v?.ToString() ?? "";
+                                    return s.Replace(";", ",").Replace("\n", " ").Replace("\r", "");
+                                }
+                                catch { return ""; }
+                            });
+                            
+                            csv.AppendLine(string.Join(";", row));
+                            exported++;
+                        }
+                        catch { }
+                    }
+                    
+                    string safeName = string.Join("_", typeName.Split(System.IO.Path.GetInvalidFileNameChars()));
+                    string csvPath = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_{safeName}_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
+                    System.IO.File.WriteAllText(csvPath, csv.ToString());
+                    
+                    Log.LogInfo($"[Export] ✅ {typeName}: {exported} linhas");
                 }
             }
-            catch (Exception ex) { Log.LogError($"[Data] {ex.Message}"); }
+            catch (Exception ex) { Log.LogError($"[Export] {ex.Message}"); }
         }
     }
 }
