@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.45.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.46.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.45.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.46.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -73,8 +73,8 @@ namespace FM26CtrlPExport
                 {
                     if (Keyboard.current.f9Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F9 - Contar itens com m_value não-null");
-                        CountNonEmptyValues();
+                        Log.LogInfo(">>> F9 - Listar DataTypes únicos");
+                        ListDataTypes();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[F9] {ex.Message}"); }
@@ -83,8 +83,8 @@ namespace FM26CtrlPExport
                 {
                     if (Keyboard.current.f10Key.wasPressedThisFrame)
                     {
-                        Log.LogInfo(">>> F10 - Explorar TypedValue");
-                        ExploreTypedValue();
+                        Log.LogInfo(">>> F10 - Explorar métodos do TypedValue");
+                        ExploreTypedValueMethods();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[F10] {ex.Message}"); }
@@ -96,8 +96,8 @@ namespace FM26CtrlPExport
                     
                     if (ctrl && p)
                     {
-                        Log.LogInfo(">>> Ctrl+P - Exportar TypedValues");
-                        ExportTypedValues();
+                        Log.LogInfo(">>> Ctrl+P - Extrair valores reais");
+                        ExtractRealValues();
                     }
                 }
                 catch (Exception ex) { Log.LogError($"[CtrlP] {ex.Message}"); }
@@ -118,194 +118,210 @@ namespace FM26CtrlPExport
             return mDataField?.GetValue(_bindingsInstance);
         }
         
-        private static void CountNonEmptyValues()
+        private static List<object> GetAllTypedValues()
         {
-            try
+            var values = new List<object>();
+            var mData = GetMData();
+            if (mData == null) return values;
+            
+            var listType = mData.GetType();
+            var countProp = listType.GetProperty("Count");
+            var indexer = listType.GetProperty("Item");
+            
+            if (countProp == null || indexer == null) return values;
+            
+            int total = (int)countProp.GetValue(mData);
+            
+            for (int i = 0; i < total; i++)
             {
-                var mData = GetMData();
-                if (mData == null) { Log.LogWarning("[Count] m_data null"); return; }
-                
-                var listType = mData.GetType();
-                var countProp = listType.GetProperty("Count");
-                var indexer = listType.GetProperty("Item");
-                
-                if (countProp == null || indexer == null) { Log.LogWarning("[Count] Sem Count/Indexer"); return; }
-                
-                int total = (int)countProp.GetValue(mData);
-                int withValue = 0;
-                int withHandler = 0;
-                
-                for (int i = 0; i < total; i++)
+                try
                 {
-                    try
-                    {
-                        var item = indexer.GetValue(mData, new object[] { i });
-                        if (item == null) continue;
-                        
-                        var itemType = item.GetType();
-                        var mValueProp = itemType.GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                        var handlerProp = itemType.GetProperty("handler", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                        
-                        if (mValueProp != null)
-                        {
-                            var val = mValueProp.GetValue(item);
-                            if (val != null) withValue++;
-                        }
-                        
-                        if (handlerProp != null)
-                        {
-                            var handler = handlerProp.GetValue(item);
-                            if (handler != null) withHandler++;
-                        }
-                    }
-                    catch { }
+                    var item = indexer.GetValue(mData, new object[] { i });
+                    if (item == null) continue;
+                    
+                    var itemType = item.GetType();
+                    var mValueProp = itemType.GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                    
+                    if (mValueProp == null) continue;
+                    
+                    var val = mValueProp.GetValue(item);
+                    if (val != null) values.Add(val);
                 }
-                
-                Log.LogInfo($"[Count] Total: {total}");
-                Log.LogInfo($"[Count] Com m_value: {withValue}");
-                Log.LogInfo($"[Count] Com handler: {withHandler}");
+                catch { }
             }
-            catch (Exception ex) { Log.LogError($"[Count] {ex.Message}"); }
+            
+            return values;
         }
         
-        private static void ExploreTypedValue()
+        private static void ListDataTypes()
         {
             try
             {
-                var mData = GetMData();
-                if (mData == null) { Log.LogWarning("[TV] m_data null"); return; }
+                var typedValues = GetAllTypedValues();
+                Log.LogInfo($"[Types] {typedValues.Count} TypedValues");
                 
-                var listType = mData.GetType();
-                var countProp = listType.GetProperty("Count");
-                var indexer = listType.GetProperty("Item");
+                var typeCounts = new Dictionary<string, int>();
                 
-                if (countProp == null || indexer == null) return;
-                
-                int total = (int)countProp.GetValue(mData);
-                int found = 0;
-                
-                for (int i = 0; i < total && found < 5; i++)
+                foreach (var tv in typedValues)
                 {
                     try
                     {
-                        var item = indexer.GetValue(mData, new object[] { i });
-                        if (item == null) continue;
+                        var dataTypeProp = tv.GetType().GetProperty("DataType");
+                        if (dataTypeProp == null) continue;
                         
-                        var itemType = item.GetType();
-                        var mValueProp = itemType.GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                        var dt = dataTypeProp.GetValue(tv);
+                        var name = dt?.ToString() ?? "null";
                         
-                        if (mValueProp == null) continue;
-                        
-                        var val = mValueProp.GetValue(item);
-                        if (val == null) continue;
-                        
-                        found++;
-                        
-                        var valType = val.GetType();
-                        Log.LogInfo($"[TV] Item [{i}] - Tipo: {valType.FullName}");
-                        
-                        // Propriedades do TypedValue
-                        var props = valType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                        Log.LogInfo($"[TV] {props.Length} propriedades:");
-                        
-                        foreach (var p in props)
+                        // Simplificar nome
+                        if (name.Contains(","))
                         {
-                            try
+                            var parts = name.Split(',');
+                            name = parts[0];
+                        }
+                        
+                        if (!typeCounts.ContainsKey(name)) typeCounts[name] = 0;
+                        typeCounts[name]++;
+                    }
+                    catch { }
+                }
+                
+                Log.LogInfo("[Types] Tipos encontrados:");
+                foreach (var kvp in typeCounts.OrderByDescending(x => x.Value).Take(30))
+                {
+                    Log.LogInfo($"[Types]   {kvp.Key}: {kvp.Value}");
+                }
+            }
+            catch (Exception ex) { Log.LogError($"[Types] {ex.Message}"); }
+        }
+        
+        private static void ExploreTypedValueMethods()
+        {
+            try
+            {
+                var typedValues = GetAllTypedValues();
+                if (typedValues.Count == 0) { Log.LogWarning("[Meth] Nenhum TypedValue"); return; }
+                
+                var tv = typedValues[0];
+                var tvType = tv.GetType();
+                
+                Log.LogInfo($"[Meth] Tipo: {tvType.FullName}");
+                
+                // Métodos
+                var methods = tvType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+                Log.LogInfo($"[Meth] {methods.Length} métodos:");
+                
+                foreach (var m in methods)
+                {
+                    if (m.DeclaringType == tvType || m.DeclaringType?.Name == "TypedValue")
+                    {
+                        var pars = string.Join(", ", m.GetParameters().Select(p => p.Name));
+                        Log.LogInfo($"[Meth]   {m.Name}({pars}) -> {m.ReturnType.Name}");
+                    }
+                }
+                
+                // Campos
+                var fields = tvType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                Log.LogInfo($"[Meth] {fields.Length} campos:");
+                
+                foreach (var f in fields)
+                {
+                    Log.LogInfo($"[Meth]   {f.Name}: {f.FieldType.Name}");
+                }
+                
+                // Tentar GetValue
+                try
+                {
+                    var getValueMethod = tvType.GetMethod("GetValue");
+                    if (getValueMethod != null)
+                    {
+                        var result = getValueMethod.Invoke(tv, null);
+                        if (result != null)
+                        {
+                            Log.LogInfo($"[Meth] GetValue() = {result.GetType().Name}");
+                            
+                            // Explorar resultado
+                            var resultType = result.GetType();
+                            var resultProps = resultType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                            Log.LogInfo($"[Meth] Resultado tem {resultProps.Length} propriedades:");
+                            
+                            foreach (var p in resultProps.Take(10))
                             {
-                                var v = p.GetValue(val);
-                                var vs = v?.ToString() ?? "null";
-                                if (vs.Length > 60) vs = vs.Substring(0, 60) + "...";
-                                Log.LogInfo($"[TV]   {p.Name}: {vs}");
+                                try
+                                {
+                                    var v = p.GetValue(result);
+                                    var vs = v?.ToString() ?? "null";
+                                    if (vs.Length > 50) vs = vs.Substring(0, 50) + "...";
+                                    Log.LogInfo($"[Meth]   {p.Name}: {vs}");
+                                }
+                                catch { }
                             }
-                            catch { }
+                        }
+                    }
+                }
+                catch (Exception ex) { Log.LogWarning($"[Meth] GetValue erro: {ex.Message}"); }
+            }
+            catch (Exception ex) { Log.LogError($"[Meth] {ex.Message}"); }
+        }
+        
+        private static void ExtractRealValues()
+        {
+            try
+            {
+                var typedValues = GetAllTypedValues();
+                Log.LogInfo($"[Extract] {typedValues.Count} TypedValues");
+                
+                // Encontrar TypedValues com dados de jogador
+                int extracted = 0;
+                
+                foreach (var tv in typedValues.Take(100))
+                {
+                    try
+                    {
+                        var tvType = tv.GetType();
+                        
+                        // Tentar GetValue
+                        var getValueMethod = tvType.GetMethod("GetValue");
+                        if (getValueMethod == null) continue;
+                        
+                        var result = getValueMethod.Invoke(tv, null);
+                        if (result == null) continue;
+                        
+                        var resultType = result.GetType();
+                        
+                        // Se tem propriedades que parecem dados de jogador
+                        var props = resultType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                        var propNames = props.Select(p => p.Name.ToLower()).ToList();
+                        
+                        bool hasPlayerProps = propNames.Any(n => 
+                            n.Contains("name") || n.Contains("age") || n.Contains("club") || 
+                            n.Contains("position") || n.Contains("value") || n.Contains("rating"));
+                        
+                        if (hasPlayerProps)
+                        {
+                            Log.LogInfo($"[Extract] Tipo: {resultType.Name}");
+                            extracted++;
+                            
+                            foreach (var p in props.Take(15))
+                            {
+                                try
+                                {
+                                    var v = p.GetValue(result);
+                                    var vs = v?.ToString() ?? "null";
+                                    if (vs.Length > 60) vs = vs.Substring(0, 60) + "...";
+                                    Log.LogInfo($"[Extract]   {p.Name}: {vs}");
+                                }
+                                catch { }
+                            }
+                            
+                            if (extracted >= 5) break;
                         }
                     }
                     catch { }
                 }
                 
-                if (found == 0) Log.LogWarning("[TV] Nenhum TypedValue encontrado");
+                Log.LogInfo($"[Extract] {extracted} itens com dados relevantes");
             }
-            catch (Exception ex) { Log.LogError($"[TV] {ex.Message}"); }
-        }
-        
-        private static void ExportTypedValues()
-        {
-            try
-            {
-                var mData = GetMData();
-                if (mData == null) { Log.LogWarning("[Export] m_data null"); return; }
-                
-                var listType = mData.GetType();
-                var countProp = listType.GetProperty("Count");
-                var indexer = listType.GetProperty("Item");
-                
-                if (countProp == null || indexer == null) return;
-                
-                int total = (int)countProp.GetValue(mData);
-                
-                // Coletar todos os TypedValues
-                var values = new List<object>();
-                
-                for (int i = 0; i < total; i++)
-                {
-                    try
-                    {
-                        var item = indexer.GetValue(mData, new object[] { i });
-                        if (item == null) continue;
-                        
-                        var itemType = item.GetType();
-                        var mValueProp = itemType.GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                        
-                        if (mValueProp == null) continue;
-                        
-                        var val = mValueProp.GetValue(item);
-                        if (val != null) values.Add(val);
-                    }
-                    catch { }
-                }
-                
-                Log.LogInfo($"[Export] {values.Count} TypedValues");
-                
-                if (values.Count == 0) { Log.LogWarning("[Export] Nenhum valor"); return; }
-                
-                // Descobrir propriedades
-                var firstType = values[0].GetType();
-                var props = firstType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                    .Where(p => p.GetIndexParameters().Length == 0)
-                    .ToList();
-                
-                var csv = new System.Text.StringBuilder();
-                csv.AppendLine(string.Join(";", props.Select(p => p.Name)));
-                
-                int exported = 0;
-                foreach (var val in values)
-                {
-                    try
-                    {
-                        var row = props.Select(p =>
-                        {
-                            try
-                            {
-                                var v = p.GetValue(val);
-                                var s = v?.ToString() ?? "";
-                                return s.Replace(";", ",").Replace("\n", " ").Replace("\r", "");
-                            }
-                            catch { return ""; }
-                        });
-                        
-                        csv.AppendLine(string.Join(";", row));
-                        exported++;
-                    }
-                    catch { }
-                }
-                
-                string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Export_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
-                System.IO.File.WriteAllText(path, csv.ToString());
-                
-                Log.LogInfo($"[Export] ✅ {exported} linhas!");
-                Log.LogInfo($"[Export] {path}");
-            }
-            catch (Exception ex) { Log.LogError($"[Export] {ex.Message}"); }
+            catch (Exception ex) { Log.LogError($"[Extract] {ex.Message}"); }
         }
     }
 }
