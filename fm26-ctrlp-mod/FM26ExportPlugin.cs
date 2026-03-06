@@ -110,7 +110,6 @@ namespace FM26CtrlPExport
         {
             try
             {
-                // Pegar um TypedValue
                 var typedValueType = Type.GetType("SI.Core.TypedValue, SI.Core");
                 if (typedValueType == null) { Log.LogWarning("[Meth] Tipo não encontrado"); return; }
                 
@@ -125,7 +124,6 @@ namespace FM26CtrlPExport
                     Log.LogInfo($"[Meth]   {m.ReturnType.Name} {m.Name}({pars})");
                 }
                 
-                // Campos
                 var fields = typedValueType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
                 Log.LogInfo($"[Meth] {fields.Length} campos:");
                 
@@ -137,11 +135,53 @@ namespace FM26CtrlPExport
             catch (Exception ex) { Log.LogError($"[Meth] {ex.Message}"); }
         }
         
+        private static List<Toggle> GetAllToggles(VisualElement root)
+        {
+            var toggles = new List<Toggle>();
+            try
+            {
+                // Navegar manualmente pela árvore
+                void FindToggles(VisualElement element, int depth)
+                {
+                    if (element == null || depth > 10) return;
+                    
+                    try
+                    {
+                        if (element is Toggle toggle)
+                        {
+                            toggles.Add(toggle);
+                        }
+                    }
+                    catch { }
+                    
+                    // Filhos
+                    try
+                    {
+                        int childCount = element.childCount;
+                        for (int i = 0; i < childCount && toggles.Count < 1000; i++)
+                        {
+                            try
+                            {
+                                var child = element.ElementAt(i);
+                                FindToggles(child, depth + 1);
+                            }
+                            catch { }
+                        }
+                    }
+                    catch { }
+                }
+                
+                FindToggles(root, 0);
+            }
+            catch { }
+            
+            return toggles;
+        }
+        
         private static void FindCheckboxes()
         {
             try
             {
-                // Buscar UIDocuments
                 var uiDocs = UnityEngine.Object.FindObjectsOfType<UIDocument>();
                 Log.LogInfo($"[UI] {uiDocs.Length} UIDocuments");
                 
@@ -154,13 +194,17 @@ namespace FM26CtrlPExport
                         
                         Log.LogInfo($"[UI] Document: {doc.name}");
                         
-                        // Buscar checkboxes/toggles
-                        var toggles = root.Query<Toggle>().ToList();
+                        var toggles = GetAllToggles(root);
                         Log.LogInfo($"[UI] {toggles.Count} Toggles");
                         
                         int selected = 0;
-                        foreach (var toggle in toggles.Take(20))
+                        int count = 0;
+                        
+                        foreach (var toggle in toggles)
                         {
+                            if (count >= 20) break;
+                            count++;
+                            
                             try
                             {
                                 if (toggle.value)
@@ -168,7 +212,6 @@ namespace FM26CtrlPExport
                                     selected++;
                                     Log.LogInfo($"[UI] Toggle selecionado: {toggle.name}");
                                     
-                                    // Explorar parent
                                     var parent = toggle.parent;
                                     int depth = 0;
                                     while (parent != null && depth < 3)
@@ -182,7 +225,7 @@ namespace FM26CtrlPExport
                             catch { }
                         }
                         
-                        Log.LogInfo($"[UI] {selected} selecionados");
+                        Log.LogInfo($"[UI] {selected} selecionados (de {count} verificados)");
                     }
                     catch { }
                 }
@@ -194,7 +237,6 @@ namespace FM26CtrlPExport
         {
             try
             {
-                // Buscar checkboxes selecionados
                 var uiDocs = UnityEngine.Object.FindObjectsOfType<UIDocument>();
                 
                 int totalSelected = 0;
@@ -207,7 +249,7 @@ namespace FM26CtrlPExport
                         var root = doc.rootVisualElement;
                         if (root == null) continue;
                         
-                        var toggles = root.Query<Toggle>().ToList();
+                        var toggles = GetAllToggles(root);
                         
                         foreach (var toggle in toggles)
                         {
@@ -217,12 +259,10 @@ namespace FM26CtrlPExport
                                 {
                                     totalSelected++;
                                     
-                                    // Encontrar a linha da tabela (parent)
                                     var parent = toggle.parent;
                                     int depth = 0;
                                     while (parent != null && depth < 5)
                                     {
-                                        // Verificar se é uma linha de tabela
                                         var parentType = parent.GetType().Name;
                                         if (parentType.Contains("Row") || parentType.Contains("Item") || parentType.Contains("Cell"))
                                         {
@@ -250,17 +290,15 @@ namespace FM26CtrlPExport
                     return;
                 }
                 
-                // Explorar primeira linha
                 if (selectedRows.Count > 0)
                 {
                     var firstRow = selectedRows[0];
                     Log.LogInfo($"[Export] Primeira linha: {firstRow.GetType().Name}");
                     
-                    // Propriedades
                     var props = firstRow.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
                     Log.LogInfo($"[Export] {props.Length} propriedades:");
                     
-                    foreach (var p in props.Take(15))
+                    foreach (var p in props)
                     {
                         try
                         {
@@ -301,7 +339,6 @@ namespace FM26CtrlPExport
                 int total = (int)countProp.GetValue(mData);
                 Log.LogInfo($"[Data] Total: {total} itens");
                 
-                // Pegar primeiro item e explorar
                 if (total > 0)
                 {
                     var item = indexer.GetValue(mData, new object[] { 0 });
