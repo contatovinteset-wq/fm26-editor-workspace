@@ -9,10 +9,11 @@ using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.55.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.56.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,8 +22,8 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.55.0");
-            Log.LogInfo("Base de Dados de Jogadores");
+            Log.LogInfo("FM26 Ctrl+P Export v2.56.0");
+            Log.LogInfo("Player Database -> Ctrl+P");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -41,40 +42,41 @@ namespace FM26CtrlPExport
                     }
                 }
             }
-            catch (Exception ex) { Log.LogError($"[ERRO] {ex.Message}"); }
+            catch { }
         }
         
         private static object _bindingsInstance = null;
         private static int _frameCount = 0;
         private static bool _initialized = false;
-        private static List<Dictionary<string, string>> _lastTableData = null;
+        private static List<string[]> _tableData = null;
         
         public static void OnUpdate(object __instance)
         {
             try
             {
-                if (_bindingsInstance == null && __instance != null)
-                {
-                    _bindingsInstance = __instance;
-                    Log.LogInfo("[OK] Bindings capturado");
-                }
+                if (_bindingsInstance == null && __instance != null) _bindingsInstance = __instance;
                 
                 _frameCount++;
                 if (!_initialized && _frameCount == 300)
                 {
                     _initialized = true;
-                    Log.LogInfo("[OK] Sistema pronto - F9=Buscar tabela, Ctrl+P=Exportar");
+                    Log.LogInfo("[OK] F9=Diagnóstico, F10=Buscar tabela, Ctrl+P=Exportar");
                 }
                 
                 if (!_initialized) return;
                 
-                try { if (Keyboard.current == null) return; }
-                catch { return; }
+                try { if (Keyboard.current == null) return; } catch { return; }
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Buscar tabela de jogadores");
-                    FindPlayerTable();
+                    Log.LogInfo(">>> F9 - Diagnóstico UI");
+                    DiagnoseUI();
+                }
+                
+                if (Keyboard.current.f10Key.wasPressedThisFrame)
+                {
+                    Log.LogInfo(">>> F10 - Buscar tabela na UI");
+                    FindTableInUI();
                 }
                 
                 bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
@@ -82,239 +84,222 @@ namespace FM26CtrlPExport
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - Exportar tabela");
-                    ExportTable();
+                    Log.LogInfo(">>> Ctrl+P - Exportar");
+                    Export();
                 }
             }
             catch { }
         }
         
-        private static object GetMData()
-        {
-            if (_bindingsInstance == null) return null;
-            
-            var type = _bindingsInstance.GetType();
-            var mDataProp = type.GetProperty("m_data", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-            if (mDataProp != null) return mDataProp.GetValue(_bindingsInstance);
-            
-            var mDataField = type.GetField("m_data", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-            return mDataField?.GetValue(_bindingsInstance);
-        }
-        
-        private static string AsString(object typedValue)
+        private static void DiagnoseUI()
         {
             try
             {
-                var method = typedValue.GetType().GetMethod("AsString");
-                return method?.Invoke(typedValue, null)?.ToString() ?? "";
-            }
-            catch { return ""; }
-        }
-        
-        private static object CallGet(object typedValue)
-        {
-            try
-            {
-                var method = typedValue.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                    .FirstOrDefault(m => m.Name == "Get" && !m.IsGenericMethod && m.GetParameters().Length == 0);
-                return method?.Invoke(typedValue, null);
-            }
-            catch { return null; }
-        }
-        
-        private static string GetTypeName(object obj)
-        {
-            try
-            {
-                var getIl2CppType = obj.GetType().GetMethod("GetIl2CppType");
-                if (getIl2CppType != null)
+                var docs = UnityEngine.Object.FindObjectsOfType<UIDocument>();
+                Log.LogInfo($"[UI] {docs.Length} UIDocuments");
+                
+                foreach (var doc in docs)
                 {
-                    var t = getIl2CppType.Invoke(obj, null);
-                    return t?.ToString() ?? "Unknown";
-                }
-            }
-            catch { }
-            return obj.GetType().Name;
-        }
-        
-        private static void FindPlayerTable()
-        {
-            try
-            {
-                var mData = GetMData();
-                if (mData == null) { Log.LogWarning("[Tabela] m_data null"); return; }
-                
-                var listType = mData.GetType();
-                var countProp = listType.GetProperty("Count");
-                var indexer = listType.GetProperty("Item");
-                
-                if (countProp == null || indexer == null) return;
-                
-                int total = (int)countProp.GetValue(mData);
-                Log.LogInfo($"[Tabela] {total} itens no sistema");
-                
-                // Buscar estruturas que parecem ser linhas de tabela
-                // List<TypedValue> com múltiplos itens = provavelmente uma linha
-                var tableRows = new List<List<string>>();
-                
-                for (int i = 0; i < total; i++)
-                {
-                    try
+                    Log.LogInfo($"[UI] Document: {doc.name}");
+                    var root = doc.rootVisualElement;
+                    if (root == null) continue;
+                    
+                    Log.LogInfo($"[UI] Root: {root.GetType().Name}");
+                    
+                    // Procurar "Report" - provavelmente a tabela
+                    void ScanElement(VisualElement el, int depth)
                     {
-                        var item = indexer.GetValue(mData, new object[] { i });
-                        if (item == null) continue;
+                        if (el == null || depth > 8) return;
                         
-                        var mValueProp = item.GetType().GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                        if (mValueProp == null) continue;
-                        
-                        var mValue = mValueProp.GetValue(item);
-                        if (mValue == null) continue;
-                        
-                        var asString = AsString(mValue);
-                        
-                        // List<TypedValue> = linha de tabela
-                        if (asString.Contains("List`1[SI.Core.TypedValue]"))
+                        try
                         {
-                            var row = ExtractListValues(mValue);
-                            if (row.Count >= 5 && row.Count <= 30) // Linha de tabela típica
+                            var name = el.name ?? "";
+                            var type = el.GetType().Name;
+                            
+                            if (depth <= 3 || name.Contains("Report") || name.Contains("Table") || name.Contains("List") || name.Contains("Row") || name.Contains("Item"))
                             {
-                                tableRows.Add(row);
+                                var prefix = new string(' ', depth * 2);
+                                Log.LogInfo($"[UI] {prefix}{type} ({name}) childCount={el.childCount}");
+                            }
+                            
+                            // Se for "Report", explorar mais
+                            if (name == "Report" && depth < 5)
+                            {
+                                Log.LogInfo($"[UI] *** REPORT ENCONTRADO ***");
+                                for (int i = 0; i < el.childCount && i < 20; i++)
+                                {
+                                    try
+                                    {
+                                        var child = el.ElementAt(i);
+                                        Log.LogInfo($"[UI]   Report[{i}]: {child.GetType().Name} ({child.name})");
+                                        
+                                        // Explorar filhos do filho
+                                        for (int j = 0; j < child.childCount && j < 10; j++)
+                                        {
+                                            var subchild = child.ElementAt(j);
+                                            Log.LogInfo($"[UI]     [{j}]: {subchild.GetType().Name} ({subchild.name})");
+                                        }
+                                    }
+                                    catch { }
+                                }
+                            }
+                            
+                            // Navegar filhos
+                            for (int i = 0; i < el.childCount && i < 50; i++)
+                            {
+                                try { ScanElement(el.ElementAt(i), depth + 1); } catch { }
                             }
                         }
-                    }
-                    catch { }
-                }
-                
-                Log.LogInfo($"[Tabela] {tableRows.Count} linhas encontradas");
-                
-                if (tableRows.Count > 0)
-                {
-                    // Mostrar estrutura da primeira linha
-                    Log.LogInfo("[Tabela] Primeira linha:");
-                    var firstRow = tableRows[0];
-                    for (int j = 0; j < firstRow.Count; j++)
-                    {
-                        Log.LogInfo($"[Tabela]   Col {j}: {firstRow[j]}");
+                        catch { }
                     }
                     
-                    _lastTableData = tableRows.Select((row, idx) => 
+                    ScanElement(root, 0);
+                }
+            }
+            catch (Exception ex) { Log.LogError($"[UI] {ex.Message}"); }
+        }
+        
+        private static void FindTableInUI()
+        {
+            try
+            {
+                var docs = UnityEngine.Object.FindObjectsOfType<UIDocument>();
+                
+                foreach (var doc in docs)
+                {
+                    var root = doc.rootVisualElement;
+                    if (root == null) continue;
+                    
+                    // Procurar "Report"
+                    void FindReport(VisualElement el, int depth)
                     {
-                        var dict = new Dictionary<string, string>();
-                        for (int j = 0; j < row.Count; j++)
+                        if (el == null || depth > 5) return;
+                        
+                        try
                         {
-                            dict[$"Col{j}"] = row[j];
+                            if (el.name == "Report")
+                            {
+                                Log.LogInfo($"[Tabela] Report encontrado!");
+                                ExtractTableFromReport(el);
+                                return;
+                            }
+                            
+                            for (int i = 0; i < el.childCount && i < 30; i++)
+                            {
+                                try { FindReport(el.ElementAt(i), depth + 1); } catch { }
+                            }
                         }
-                        return dict;
-                    }).ToList();
+                        catch { }
+                    }
+                    
+                    FindReport(root, 0);
                 }
             }
             catch (Exception ex) { Log.LogError($"[Tabela] {ex.Message}"); }
         }
         
-        private static List<string> ExtractListValues(object typedValue)
+        private static void ExtractTableFromReport(VisualElement report)
         {
-            var result = new List<string>();
-            
             try
             {
-                var obj = CallGet(typedValue);
-                if (obj == null) return result;
+                _tableData = new List<string[]>();
                 
-                var objType = obj.GetType();
+                Log.LogInfo($"[Tabela] Report tem {report.childCount} filhos");
                 
-                // Tentar Cast para IEnumerable
-                var castMethod = objType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                    .FirstOrDefault(m => m.Name == "Cast" && m.IsGenericMethod);
-                
-                if (castMethod != null)
-                {
-                    var genericCast = castMethod.MakeGenericMethod(typeof(object));
-                    var enumerable = genericCast.Invoke(obj, null) as IEnumerable;
-                    
-                    if (enumerable != null)
-                    {
-                        foreach (var item in enumerable)
-                        {
-                            if (item != null)
-                            {
-                                // É um TypedValue?
-                                var itemAsString = item.GetType().GetMethod("AsString");
-                                if (itemAsString != null)
-                                {
-                                    var val = itemAsString.Invoke(item, null)?.ToString() ?? "";
-                                    result.Add(val);
-                                }
-                                else
-                                {
-                                    result.Add(item.ToString());
-                                }
-                            }
-                        }
-                        return result;
-                    }
-                }
-                
-                // Fallback: tentar acessar via reflection
-                var fields = objType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                foreach (var f in fields)
+                // Estrutura esperada: Report -> Container -> Rows
+                for (int i = 0; i < report.childCount && i < 100; i++)
                 {
                     try
                     {
-                        var val = f.GetValue(obj);
-                        if (val != null)
+                        var container = report.ElementAt(i);
+                        Log.LogInfo($"[Tabela] Container[{i}]: {container.GetType().Name} ({container.name}) childCount={container.childCount}");
+                        
+                        // Procurar linhas dentro do container
+                        for (int j = 0; j < container.childCount && j < 100; j++)
                         {
-                            result.Add(val.ToString());
+                            try
+                            {
+                                var row = container.ElementAt(j);
+                                var rowType = row.GetType().Name;
+                                var rowName = row.name;
+                                
+                                // Extrair texto de cada elemento
+                                var rowValues = new List<string>();
+                                
+                                void ExtractText(VisualElement el, int d)
+                                {
+                                    if (el == null || d > 4) return;
+                                    
+                                    try
+                                    {
+                                        // Se tem texto, extrair
+                                        var textProp = el.GetType().GetProperty("text", BindingFlags.Public | BindingFlags.Instance);
+                                        if (textProp != null)
+                                        {
+                                            var text = textProp.GetValue(el)?.ToString() ?? "";
+                                            if (!string.IsNullOrEmpty(text) && text.Length < 100)
+                                            {
+                                                rowValues.Add(text);
+                                            }
+                                        }
+                                        
+                                        // Navegar filhos
+                                        for (int k = 0; k < el.childCount && k < 20; k++)
+                                        {
+                                            ExtractText(el.ElementAt(k), d + 1);
+                                        }
+                                    }
+                                    catch { }
+                                }
+                                
+                                ExtractText(row, 0);
+                                
+                                if (rowValues.Count > 0)
+                                {
+                                    _tableData.Add(rowValues.ToArray());
+                                    if (_tableData.Count <= 5)
+                                    {
+                                        Log.LogInfo($"[Tabela] Linha {j}: {string.Join(" | ", rowValues.Take(10))}");
+                                    }
+                                }
+                            }
+                            catch { }
                         }
                     }
                     catch { }
                 }
+                
+                Log.LogInfo($"[Tabela] Total: {_tableData.Count} linhas extraídas");
             }
-            catch { }
-            
-            return result;
+            catch (Exception ex) { Log.LogError($"[Tabela] {ex.Message}"); }
         }
         
-        private static void ExportTable()
+        private static void Export()
         {
             try
             {
-                if (_lastTableData == null || _lastTableData.Count == 0)
+                if (_tableData == null || _tableData.Count == 0)
                 {
-                    Log.LogWarning("[Export] Nenhuma tabela encontrada. Aperte F9 primeiro.");
+                    Log.LogWarning("[Export] Nenhuma tabela. Aperte F10 primeiro.");
                     return;
                 }
                 
-                // Detectar colunas
-                var allCols = new HashSet<string>();
-                foreach (var row in _lastTableData)
-                {
-                    foreach (var key in row.Keys) allCols.Add(key);
-                }
+                // Encontrar máximo de colunas
+                int maxCols = _tableData.Max(r => r.Length);
                 
-                var sortedCols = allCols.OrderBy(c => int.Parse(c.Replace("Col", ""))).ToList();
-                
-                // CSV
                 var csv = new System.Text.StringBuilder();
-                csv.AppendLine(string.Join(";", sortedCols));
                 
-                foreach (var row in _lastTableData)
+                foreach (var row in _tableData)
                 {
-                    var values = sortedCols.Select(c => 
-                    {
-                        if (row.TryGetValue(c, out var v))
-                        {
-                            return v.Replace(";", ",").Replace("\n", " ").Replace("\r", "");
-                        }
-                        return "";
-                    });
+                    var values = row.Select(v => v.Replace(";", ",").Replace("\n", " ").Replace("\r", "")).ToList();
+                    while (values.Count < maxCols) values.Add("");
                     csv.AppendLine(string.Join(";", values));
                 }
                 
-                string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Jogadores_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
+                string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Players_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
                 System.IO.File.WriteAllText(path, csv.ToString());
                 
-                Log.LogInfo($"[Export] ✅ {_lastTableData.Count} jogadores exportados");
-                Log.LogInfo($"[Export] Arquivo: {path}");
+                Log.LogInfo($"[Export] ✅ {_tableData.Count} linhas -> {path}");
             }
             catch (Exception ex) { Log.LogError($"[Export] {ex.Message}"); }
         }
