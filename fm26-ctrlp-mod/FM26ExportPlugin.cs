@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.56.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.57.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,8 +22,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.56.0");
-            Log.LogInfo("Player Database -> Ctrl+P");
+            Log.LogInfo("FM26 Ctrl+P Export v2.57.0");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -60,7 +59,7 @@ namespace FM26CtrlPExport
                 if (!_initialized && _frameCount == 300)
                 {
                     _initialized = true;
-                    Log.LogInfo("[OK] F9=Diagnóstico, F10=Buscar tabela, Ctrl+P=Exportar");
+                    Log.LogInfo("[OK] F9=Explorar PlayerSearchReport, Ctrl+P=Exportar");
                 }
                 
                 if (!_initialized) return;
@@ -69,14 +68,8 @@ namespace FM26CtrlPExport
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Diagnóstico UI");
-                    DiagnoseUI();
-                }
-                
-                if (Keyboard.current.f10Key.wasPressedThisFrame)
-                {
-                    Log.LogInfo(">>> F10 - Buscar tabela na UI");
-                    FindTableInUI();
+                    Log.LogInfo(">>> F9 - Explorar PlayerSearchReport");
+                    ExplorePlayerSearchReport();
                 }
                 
                 bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
@@ -91,187 +84,160 @@ namespace FM26CtrlPExport
             catch { }
         }
         
-        private static void DiagnoseUI()
+        private static void ExplorePlayerSearchReport()
         {
             try
             {
                 var docs = UnityEngine.Object.FindObjectsOfType<UIDocument>();
-                Log.LogInfo($"[UI] {docs.Length} UIDocuments");
                 
                 foreach (var doc in docs)
                 {
-                    Log.LogInfo($"[UI] Document: {doc.name}");
+                    if (doc.name != "PanelManager") continue;
+                    
                     var root = doc.rootVisualElement;
                     if (root == null) continue;
                     
-                    Log.LogInfo($"[UI] Root: {root.GetType().Name}");
+                    // Encontrar Report -> Body -> PlayerSearchReport
+                    VisualElement report = null;
+                    VisualElement reportBody = null;
+                    VisualElement playerSearchReport = null;
                     
-                    // Procurar "Report" - provavelmente a tabela
-                    void ScanElement(VisualElement el, int depth)
+                    for (int i = 0; i < root.childCount; i++)
                     {
-                        if (el == null || depth > 8) return;
+                        var child = root.ElementAt(i);
+                        if (child.name == "Report")
+                        {
+                            report = child;
+                            break;
+                        }
+                    }
+                    
+                    if (report == null) { Log.LogWarning("[Explore] Report não encontrado"); return; }
+                    
+                    // Procurar Body dentro do Report
+                    for (int i = 0; i < report.childCount; i++)
+                    {
+                        var child = report.ElementAt(i);
+                        if (child.name == "Body")
+                        {
+                            reportBody = child;
+                            break;
+                        }
+                    }
+                    
+                    if (reportBody == null) { Log.LogWarning("[Explore] Body não encontrado"); return; }
+                    
+                    // Procurar PlayerSearchReport dentro do Body
+                    for (int i = 0; i < reportBody.childCount; i++)
+                    {
+                        var child = reportBody.ElementAt(i);
+                        if (child.name == "PlayerSearchReport")
+                        {
+                            playerSearchReport = child;
+                            break;
+                        }
+                    }
+                    
+                    if (playerSearchReport == null) { Log.LogWarning("[Explore] PlayerSearchReport não encontrado"); return; }
+                    
+                    Log.LogInfo($"[Explore] PlayerSearchReport encontrado! childCount={playerSearchReport.childCount}");
+                    
+                    // Explorar profundamente
+                    _tableData = new List<string[]>();
+                    
+                    void DeepScan(VisualElement el, int depth, List<string> currentRow)
+                    {
+                        if (el == null || depth > 15) return;
                         
                         try
                         {
+                            var type = el.GetType();
                             var name = el.name ?? "";
-                            var type = el.GetType().Name;
                             
-                            if (depth <= 3 || name.Contains("Report") || name.Contains("Table") || name.Contains("List") || name.Contains("Row") || name.Contains("Item"))
+                            // Tentar extrair texto
+                            var textProp = type.GetProperty("text", BindingFlags.Public | BindingFlags.Instance);
+                            if (textProp != null)
                             {
-                                var prefix = new string(' ', depth * 2);
-                                Log.LogInfo($"[UI] {prefix}{type} ({name}) childCount={el.childCount}");
+                                try
+                                {
+                                    var text = textProp.GetValue(el)?.ToString() ?? "";
+                                    if (!string.IsNullOrWhiteSpace(text) && text.Length < 200)
+                                    {
+                                        currentRow.Add(text.Trim());
+                                    }
+                                }
+                                catch { }
                             }
                             
-                            // Se for "Report", explorar mais
-                            if (name == "Report" && depth < 5)
+                            // Verificar se é uma "linha" (baseado no nome ou tipo)
+                            var isRow = name.Contains("Row") || name.Contains("Item") || name.Contains("Line") || type.Name.Contains("Row");
+                            
+                            // Se tem filhos, explorar
+                            if (el.childCount > 0)
                             {
-                                Log.LogInfo($"[UI] *** REPORT ENCONTRADO ***");
-                                for (int i = 0; i < el.childCount && i < 20; i++)
+                                // Se parece ser uma linha, criar nova lista para os filhos
+                                if (isRow && currentRow.Count > 0)
                                 {
-                                    try
+                                    // Salvar linha anterior se tiver dados
+                                    if (currentRow.Count >= 3)
                                     {
-                                        var child = el.ElementAt(i);
-                                        Log.LogInfo($"[UI]   Report[{i}]: {child.GetType().Name} ({child.name})");
-                                        
-                                        // Explorar filhos do filho
-                                        for (int j = 0; j < child.childCount && j < 10; j++)
-                                        {
-                                            var subchild = child.ElementAt(j);
-                                            Log.LogInfo($"[UI]     [{j}]: {subchild.GetType().Name} ({subchild.name})");
-                                        }
+                                        _tableData.Add(currentRow.ToArray());
+                                        Log.LogInfo($"[Explore] Linha salva: {string.Join(" | ", currentRow.Take(5))}...");
                                     }
-                                    catch { }
+                                    currentRow = new List<string>();
+                                }
+                                
+                                for (int i = 0; i < el.childCount && i < 100; i++)
+                                {
+                                    DeepScan(el.ElementAt(i), depth + 1, currentRow);
                                 }
                             }
-                            
-                            // Navegar filhos
-                            for (int i = 0; i < el.childCount && i < 50; i++)
-                            {
-                                try { ScanElement(el.ElementAt(i), depth + 1); } catch { }
-                            }
                         }
                         catch { }
                     }
                     
-                    ScanElement(root, 0);
-                }
-            }
-            catch (Exception ex) { Log.LogError($"[UI] {ex.Message}"); }
-        }
-        
-        private static void FindTableInUI()
-        {
-            try
-            {
-                var docs = UnityEngine.Object.FindObjectsOfType<UIDocument>();
-                
-                foreach (var doc in docs)
-                {
-                    var root = doc.rootVisualElement;
-                    if (root == null) continue;
+                    DeepScan(playerSearchReport, 0, new List<string>());
                     
-                    // Procurar "Report"
-                    void FindReport(VisualElement el, int depth)
+                    Log.LogInfo($"[Explore] Total extraído: {_tableData.Count} linhas");
+                    
+                    // Se não encontrou linhas, mostrar estrutura
+                    if (_tableData.Count == 0)
                     {
-                        if (el == null || depth > 5) return;
+                        Log.LogInfo("[Explore] Extraindo TODOS os textos...");
+                        _tableData.Clear();
                         
-                        try
+                        void ExtractAllText(VisualElement el, int depth)
                         {
-                            if (el.name == "Report")
-                            {
-                                Log.LogInfo($"[Tabela] Report encontrado!");
-                                ExtractTableFromReport(el);
-                                return;
-                            }
+                            if (el == null || depth > 20) return;
                             
-                            for (int i = 0; i < el.childCount && i < 30; i++)
-                            {
-                                try { FindReport(el.ElementAt(i), depth + 1); } catch { }
-                            }
-                        }
-                        catch { }
-                    }
-                    
-                    FindReport(root, 0);
-                }
-            }
-            catch (Exception ex) { Log.LogError($"[Tabela] {ex.Message}"); }
-        }
-        
-        private static void ExtractTableFromReport(VisualElement report)
-        {
-            try
-            {
-                _tableData = new List<string[]>();
-                
-                Log.LogInfo($"[Tabela] Report tem {report.childCount} filhos");
-                
-                // Estrutura esperada: Report -> Container -> Rows
-                for (int i = 0; i < report.childCount && i < 100; i++)
-                {
-                    try
-                    {
-                        var container = report.ElementAt(i);
-                        Log.LogInfo($"[Tabela] Container[{i}]: {container.GetType().Name} ({container.name}) childCount={container.childCount}");
-                        
-                        // Procurar linhas dentro do container
-                        for (int j = 0; j < container.childCount && j < 100; j++)
-                        {
                             try
                             {
-                                var row = container.ElementAt(j);
-                                var rowType = row.GetType().Name;
-                                var rowName = row.name;
+                                var type = el.GetType();
+                                var textProp = type.GetProperty("text", BindingFlags.Public | BindingFlags.Instance);
                                 
-                                // Extrair texto de cada elemento
-                                var rowValues = new List<string>();
-                                
-                                void ExtractText(VisualElement el, int d)
+                                if (textProp != null)
                                 {
-                                    if (el == null || d > 4) return;
-                                    
-                                    try
+                                    var text = textProp.GetValue(el)?.ToString() ?? "";
+                                    if (!string.IsNullOrWhiteSpace(text) && text.Length < 100)
                                     {
-                                        // Se tem texto, extrair
-                                        var textProp = el.GetType().GetProperty("text", BindingFlags.Public | BindingFlags.Instance);
-                                        if (textProp != null)
-                                        {
-                                            var text = textProp.GetValue(el)?.ToString() ?? "";
-                                            if (!string.IsNullOrEmpty(text) && text.Length < 100)
-                                            {
-                                                rowValues.Add(text);
-                                            }
-                                        }
-                                        
-                                        // Navegar filhos
-                                        for (int k = 0; k < el.childCount && k < 20; k++)
-                                        {
-                                            ExtractText(el.ElementAt(k), d + 1);
-                                        }
+                                        var prefix = new string(' ', depth * 2);
+                                        Log.LogInfo($"[TXT] {prefix}{text.Trim()}");
                                     }
-                                    catch { }
                                 }
                                 
-                                ExtractText(row, 0);
-                                
-                                if (rowValues.Count > 0)
+                                for (int i = 0; i < el.childCount && i < 200; i++)
                                 {
-                                    _tableData.Add(rowValues.ToArray());
-                                    if (_tableData.Count <= 5)
-                                    {
-                                        Log.LogInfo($"[Tabela] Linha {j}: {string.Join(" | ", rowValues.Take(10))}");
-                                    }
+                                    ExtractAllText(el.ElementAt(i), depth + 1);
                                 }
                             }
                             catch { }
                         }
+                        
+                        ExtractAllText(playerSearchReport, 0);
                     }
-                    catch { }
                 }
-                
-                Log.LogInfo($"[Tabela] Total: {_tableData.Count} linhas extraídas");
             }
-            catch (Exception ex) { Log.LogError($"[Tabela] {ex.Message}"); }
+            catch (Exception ex) { Log.LogError($"[Explore] {ex.Message}"); }
         }
         
         private static void Export()
@@ -280,11 +246,10 @@ namespace FM26CtrlPExport
             {
                 if (_tableData == null || _tableData.Count == 0)
                 {
-                    Log.LogWarning("[Export] Nenhuma tabela. Aperte F10 primeiro.");
+                    Log.LogWarning("[Export] Nenhuma tabela. Aperte F9 primeiro.");
                     return;
                 }
                 
-                // Encontrar máximo de colunas
                 int maxCols = _tableData.Max(r => r.Length);
                 
                 var csv = new System.Text.StringBuilder();
