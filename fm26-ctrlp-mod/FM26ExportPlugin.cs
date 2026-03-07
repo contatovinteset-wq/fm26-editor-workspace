@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.53.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.54.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.53.0 CARREGADO!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.54.0 CARREGADO!");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -69,28 +69,28 @@ namespace FM26CtrlPExport
                 try { if (Keyboard.current == null) return; }
                 catch { return; }
                 
-                // F9 - Explora FM.UI.PersonReference
+                // F9 - Testa GetEnumerator nas listas
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Explorar PersonReference");
-                    ExplorePersonReferences();
+                    Log.LogInfo(">>> F9 - Testar GetEnumerator");
+                    TestGetEnumerator();
                 }
                 
-                // F10 - Explora List<TypedValue> aninhados em detalhe
+                // F10 - Lista TODOS os métodos de um TypedValue
                 if (Keyboard.current.f10Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F10 - Explorar List<TypedValue> detalhado");
-                    ExploreNestedListsDetailed();
+                    Log.LogInfo(">>> F10 - Listar métodos do objeto Get()");
+                    ListMethodsOfGetObject();
                 }
                 
-                // Ctrl+P - Exporta jogadores em formato tabela
+                // Ctrl+P - Exporta usando nova abordagem
                 bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
                 bool p = Keyboard.current.pKey.wasPressedThisFrame;
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - Exportar jogadores");
-                    ExportPlayers();
+                    Log.LogInfo(">>> Ctrl+P - Exportar via GetEnumerator");
+                    ExportViaEnumerator();
                 }
             }
             catch { }
@@ -129,160 +129,26 @@ namespace FM26CtrlPExport
             catch { return null; }
         }
         
-        private static object TryUnbox(object il2cppObject, Type targetType)
-        {
-            try
-            {
-                var unboxMethod = il2cppObject.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                    .FirstOrDefault(m => m.Name == "Unbox" && m.IsGenericMethod);
-                
-                if (unboxMethod != null)
-                {
-                    var genericMethod = unboxMethod.MakeGenericMethod(targetType);
-                    return genericMethod.Invoke(il2cppObject, null);
-                }
-            }
-            catch { }
-            
-            return null;
-        }
-        
-        private static void ExplorePersonReferences()
+        private static void TestGetEnumerator()
         {
             try
             {
                 var mData = GetMData();
-                if (mData == null) { Log.LogWarning("[Person] m_data null"); return; }
+                if (mData == null) { Log.LogWarning("[Enum] m_data null"); return; }
                 
                 var listType = mData.GetType();
                 var countProp = listType.GetProperty("Count");
                 var indexer = listType.GetProperty("Item");
                 
-                if (countProp == null || indexer == null) return;
+                int total = countProp != null ? (int)countProp.GetValue(mData) : 0;
+                Log.LogInfo($"[Enum] Total via Count: {total}");
                 
-                int total = (int)countProp.GetValue(mData);
-                int personCount = 0;
-                
+                // Procurar List<TypedValue>
                 for (int i = 0; i < total; i++)
                 {
                     try
                     {
-                        var item = indexer.GetValue(mData, new object[] { i });
-                        if (item == null) continue;
-                        
-                        var mValueProp = item.GetType().GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                        if (mValueProp == null) continue;
-                        
-                        var mValue = mValueProp.GetValue(item);
-                        if (mValue == null) continue;
-                        
-                        var asString = CallAsString(mValue);
-                        if (asString != "FM.UI.PersonReference") continue;
-                        
-                        personCount++;
-                        
-                        if (personCount <= 5) // Explorar os primeiros 5
-                        {
-                            Log.LogInfo($"[Person] === PersonReference #{personCount} (índice {i}) ===");
-                            
-                            // Get() para pegar o objeto
-                            var obj = CallGet(mValue);
-                            if (obj != null)
-                            {
-                                Log.LogInfo($"[Person] Get() tipo: {obj.GetType().FullName}");
-                                
-                                // Propriedades do objeto
-                                var props = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                                Log.LogInfo($"[Person] {props.Length} propriedades");
-                                
-                                foreach (var p in props.Take(15))
-                                {
-                                    try
-                                    {
-                                        var v = p.GetValue(obj);
-                                        var vs = v?.ToString() ?? "null";
-                                        if (vs.Length > 50) vs = vs.Substring(0, 50) + "...";
-                                        Log.LogInfo($"[Person]   {p.Name}: {vs}");
-                                    }
-                                    catch (Exception ex) { Log.LogInfo($"[Person]   {p.Name}: ERRO - {ex.Message}"); }
-                                }
-                                
-                                // Campos
-                                var fields = obj.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
-                                Log.LogInfo($"[Person] {fields.Length} campos públicos");
-                                
-                                foreach (var f in fields.Take(10))
-                                {
-                                    try
-                                    {
-                                        var v = f.GetValue(obj);
-                                        var vs = v?.ToString() ?? "null";
-                                        if (vs.Length > 50) vs = vs.Substring(0, 50) + "...";
-                                        Log.LogInfo($"[Person]   {f.Name}: {vs}");
-                                    }
-                                    catch { }
-                                }
-                            }
-                            else
-                            {
-                                Log.LogWarning("[Person] Get() retornou null");
-                            }
-                            
-                            // DataKey associado
-                            try
-                            {
-                                var keyProp = item.GetType().GetProperty("key", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-                                if (keyProp != null)
-                                {
-                                    var key = keyProp.GetValue(item);
-                                    if (key != null)
-                                    {
-                                        Log.LogInfo($"[Person] DataKey tipo: {key.GetType().Name}");
-                                        var keyProps = key.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                                        foreach (var kp in keyProps.Take(5))
-                                        {
-                                            try
-                                            {
-                                                var kv = kp.GetValue(key);
-                                                Log.LogInfo($"[Person]   Key.{kp.Name}: {kv}");
-                                            }
-                                            catch { }
-                                        }
-                                    }
-                                }
-                            }
-                            catch { }
-                        }
-                    }
-                    catch { }
-                }
-                
-                Log.LogInfo($"[Person] Total: {personCount} PersonReferences");
-            }
-            catch (Exception ex) { Log.LogError($"[Person] {ex.Message}"); }
-        }
-        
-        private static void ExploreNestedListsDetailed()
-        {
-            try
-            {
-                var mData = GetMData();
-                if (mData == null) return;
-                
-                var listType = mData.GetType();
-                var countProp = listType.GetProperty("Count");
-                var indexer = listType.GetProperty("Item");
-                
-                if (countProp == null || indexer == null) return;
-                
-                int total = (int)countProp.GetValue(mData);
-                int listCount = 0;
-                
-                for (int i = 0; i < total; i++)
-                {
-                    try
-                    {
-                        var item = indexer.GetValue(mData, new object[] { i });
+                        var item = indexer?.GetValue(mData, new object[] { i });
                         if (item == null) continue;
                         
                         var mValueProp = item.GetType().GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
@@ -294,73 +160,86 @@ namespace FM26CtrlPExport
                         var asString = CallAsString(mValue);
                         if (!asString.Contains("List`1[SI.Core.TypedValue]")) continue;
                         
-                        listCount++;
+                        Log.LogInfo($"[Enum] === Lista em índice {i} ===");
                         
-                        if (listCount <= 3) // Explorar as primeiras 3 listas
+                        var obj = CallGet(mValue);
+                        if (obj == null) { Log.LogWarning("[Enum] Get() null"); continue; }
+                        
+                        var objType = obj.GetType();
+                        Log.LogInfo($"[Enum] Tipo: {objType.FullName}");
+                        
+                        // Tentar GetEnumerator
+                        var getEnumMethod = objType.GetMethod("GetEnumerator");
+                        if (getEnumMethod != null)
                         {
-                            Log.LogInfo($"[List] === Lista #{listCount} (índice {i}) ===");
+                            Log.LogInfo("[Enum] GetEnumerator() encontrado!");
                             
-                            var obj = CallGet(mValue);
-                            if (obj == null) { Log.LogWarning("[List] Get() null"); continue; }
-                            
-                            // Tentar acessar como lista
-                            var objType = obj.GetType();
-                            var countPropList = objType.GetProperty("Count");
-                            var indexerList = objType.GetProperty("Item");
-                            
-                            if (countPropList != null && indexerList != null)
+                            try
                             {
-                                int count = (int)countPropList.GetValue(obj);
-                                Log.LogInfo($"[List] Tamanho: {count} itens");
-                                
-                                // Explorar todos os itens da lista
-                                for (int j = 0; j < Math.Min(count, 20); j++)
+                                var enumerator = getEnumMethod.Invoke(obj, null);
+                                if (enumerator != null)
                                 {
-                                    try
+                                    Log.LogInfo($"[Enum] Enumerator tipo: {enumerator.GetType().FullName}");
+                                    
+                                    // Métodos do enumerator
+                                    var enumType = enumerator.GetType();
+                                    var moveNextMethod = enumType.GetMethod("MoveNext");
+                                    var currentProp = enumType.GetProperty("Current");
+                                    
+                                    if (moveNextMethod != null && currentProp != null)
                                     {
-                                        var inner = indexerList.GetValue(obj, new object[] { j });
-                                        if (inner == null) { Log.LogInfo($"[List]   [{j}]: null"); continue; }
+                                        Log.LogInfo("[Enum] Iterando:");
+                                        int count = 0;
                                         
-                                        var innerAsString = CallAsString(inner);
-                                        Log.LogInfo($"[List]   [{j}]: {innerAsString}");
-                                        
-                                        // Se for PersonReference, explorar mais
-                                        if (innerAsString == "FM.UI.PersonReference" || innerAsString.StartsWith("FM.UI."))
+                                        while ((bool)moveNextMethod.Invoke(enumerator, null) && count < 20)
                                         {
-                                            var innerObj = CallGet(inner);
-                                            if (innerObj != null)
+                                            try
                                             {
-                                                var innerProps = innerObj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                                                foreach (var ip in innerProps.Take(3))
+                                                var current = currentProp.GetValue(enumerator);
+                                                if (current == null) { Log.LogInfo($"[Enum]   [{count}]: null"); }
+                                                else
                                                 {
-                                                    try
-                                                    {
-                                                        var ipv = ip.GetValue(innerObj);
-                                                        Log.LogInfo($"[List]       {ip.Name}: {ipv}");
-                                                    }
-                                                    catch { }
+                                                    var currentAsString = CallAsString(current);
+                                                    Log.LogInfo($"[Enum]   [{count}]: {currentAsString}");
                                                 }
                                             }
+                                            catch (Exception ex) { Log.LogInfo($"[Enum]   [{count}]: ERRO - {ex.Message}"); }
+                                            
+                                            count++;
                                         }
+                                        
+                                        Log.LogInfo($"[Enum] Total iterado: {count}");
                                     }
-                                    catch { }
+                                    else
+                                    {
+                                        Log.LogWarning("[Enum] MoveNext/Current não encontrados");
+                                    }
                                 }
                             }
-                            else
-                            {
-                                Log.LogWarning("[List] Sem Count/Indexer");
-                            }
+                            catch (Exception ex) { Log.LogError($"[Enum] GetEnumerator erro: {ex.Message}"); }
                         }
+                        else
+                        {
+                            Log.LogWarning("[Enum] GetEnumerator() não encontrado");
+                        }
+                        
+                        // Listar TODOS os métodos do objeto
+                        var allMethods = objType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+                        Log.LogInfo($"[Enum] {allMethods.Length} métodos públicos:");
+                        foreach (var m in allMethods.Take(20))
+                        {
+                            Log.LogInfo($"[Enum]   {m.ReturnType.Name} {m.Name}({m.GetParameters().Length})");
+                        }
+                        
+                        return; // Só testa o primeiro
                     }
                     catch { }
                 }
-                
-                Log.LogInfo($"[List] Total: {listCount} List<TypedValue>");
             }
-            catch (Exception ex) { Log.LogError($"[List] {ex.Message}"); }
+            catch (Exception ex) { Log.LogError($"[Enum] {ex.Message}"); }
         }
         
-        private static void ExportPlayers()
+        private static void ListMethodsOfGetObject()
         {
             try
             {
@@ -375,9 +254,75 @@ namespace FM26CtrlPExport
                 
                 int total = (int)countProp.GetValue(mData);
                 
-                var players = new List<Dictionary<string, string>>();
+                // Pegar primeiro TypedValue com dados
+                for (int i = 0; i < total; i++)
+                {
+                    try
+                    {
+                        var item = indexer.GetValue(mData, new object[] { i });
+                        if (item == null) continue;
+                        
+                        var mValueProp = item.GetType().GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                        if (mValueProp == null) continue;
+                        
+                        var mValue = mValueProp.GetValue(item);
+                        if (mValue == null) continue;
+                        
+                        var obj = CallGet(mValue);
+                        if (obj == null) continue;
+                        
+                        var objType = obj.GetType();
+                        Log.LogInfo($"[Meth] Objeto tipo: {objType.FullName}");
+                        
+                        // TODOS os métodos
+                        var methods = objType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                        Log.LogInfo($"[Meth] {methods.Length} métodos:");
+                        
+                        foreach (var m in methods)
+                        {
+                            var pars = string.Join(", ", m.GetParameters().Select(p => p.ParameterType.Name));
+                            Log.LogInfo($"[Meth]   {m.ReturnType.Name} {m.Name}({pars})");
+                        }
+                        
+                        // TODOS os campos
+                        var fields = objType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                        Log.LogInfo($"[Meth] {fields.Length} campos:");
+                        
+                        foreach (var f in fields)
+                        {
+                            try
+                            {
+                                var v = f.GetValue(obj);
+                                Log.LogInfo($"[Meth]   {f.FieldType.Name} {f.Name} = {v}");
+                            }
+                            catch { Log.LogInfo($"[Meth]   {f.FieldType.Name} {f.Name}"); }
+                        }
+                        
+                        return;
+                    }
+                    catch { }
+                }
+            }
+            catch (Exception ex) { Log.LogError($"[Meth] {ex.Message}"); }
+        }
+        
+        private static void ExportViaEnumerator()
+        {
+            try
+            {
+                var mData = GetMData();
+                if (mData == null) return;
                 
-                // Buscar List<TypedValue> que podem conter jogadores
+                var listType = mData.GetType();
+                var countProp = listType.GetProperty("Count");
+                var indexer = listType.GetProperty("Item");
+                
+                if (countProp == null || indexer == null) return;
+                
+                int total = (int)countProp.GetValue(mData);
+                
+                var allValues = new List<string>();
+                
                 for (int i = 0; i < total; i++)
                 {
                     try
@@ -393,83 +338,69 @@ namespace FM26CtrlPExport
                         
                         var asString = CallAsString(mValue);
                         
-                        // Se for List<TypedValue>, explorar
+                        // Se for lista, iterar
                         if (asString.Contains("List`1[SI.Core.TypedValue]"))
                         {
                             var obj = CallGet(mValue);
                             if (obj == null) continue;
                             
-                            var objType = obj.GetType();
-                            var countPropList = objType.GetProperty("Count");
-                            var indexerList = objType.GetProperty("Item");
+                            var getEnumMethod = obj.GetType().GetMethod("GetEnumerator");
+                            if (getEnumMethod == null) continue;
                             
-                            if (countPropList == null || indexerList == null) continue;
+                            var enumerator = getEnumMethod.Invoke(obj, null);
+                            if (enumerator == null) continue;
                             
-                            int count = (int)countPropList.GetValue(obj);
+                            var enumType = enumerator.GetType();
+                            var moveNextMethod = enumType.GetMethod("MoveNext");
+                            var currentProp = enumType.GetProperty("Current");
                             
-                            // Se a lista tem entre 5 e 50 itens, pode ser uma linha de jogador
-                            if (count >= 5 && count <= 50)
+                            if (moveNextMethod == null || currentProp == null) continue;
+                            
+                            var rowValues = new List<string>();
+                            
+                            while ((bool)moveNextMethod.Invoke(enumerator, null))
                             {
-                                var row = new Dictionary<string, string>();
-                                
-                                for (int j = 0; j < count; j++)
+                                try
                                 {
-                                    try
+                                    var current = currentProp.GetValue(enumerator);
+                                    if (current != null)
                                     {
-                                        var inner = indexerList.GetValue(obj, new object[] { j });
-                                        if (inner == null) continue;
-                                        
-                                        var innerAsString = CallAsString(inner);
-                                        row[$"col_{j}"] = innerAsString;
+                                        var currentAsString = CallAsString(current);
+                                        rowValues.Add(currentAsString);
                                     }
-                                    catch { }
                                 }
-                                
-                                if (row.Count > 0) players.Add(row);
+                                catch { }
                             }
+                            
+                            if (rowValues.Count > 0)
+                            {
+                                allValues.Add(string.Join(";", rowValues));
+                            }
+                        }
+                        else
+                        {
+                            allValues.Add(asString);
                         }
                     }
                     catch { }
                 }
                 
-                Log.LogInfo($"[Export] {players.Count} linhas de dados encontradas");
-                
-                if (players.Count == 0)
+                if (allValues.Count == 0)
                 {
-                    Log.LogWarning("[Export] Nenhum dado estruturado encontrado");
+                    Log.LogWarning("[Export] Nenhum valor");
                     return;
                 }
                 
-                // Encontrar todas as colunas
-                var allCols = new HashSet<string>();
-                foreach (var row in players)
-                {
-                    foreach (var key in row.Keys) allCols.Add(key);
-                }
-                
-                var sortedCols = allCols.OrderBy(c => int.Parse(c.Replace("col_", ""))).ToList();
-                
-                // Exportar CSV
                 var csv = new System.Text.StringBuilder();
-                csv.AppendLine(string.Join(";", sortedCols));
-                
-                foreach (var row in players)
+                foreach (var v in allValues)
                 {
-                    var values = sortedCols.Select(c => 
-                    {
-                        if (row.TryGetValue(c, out var v))
-                        {
-                            return v.Replace(";", ",").Replace("\n", " ").Replace("\r", "");
-                        }
-                        return "";
-                    });
-                    csv.AppendLine(string.Join(";", values));
+                    csv.AppendLine(v.Replace("\n", " ").Replace("\r", ""));
                 }
                 
-                string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Players_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
+                string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Export_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
                 System.IO.File.WriteAllText(path, csv.ToString());
                 
-                Log.LogInfo($"[Export] ✅ {players.Count} linhas exportadas");
+                Log.LogInfo($"[Export] ✅ {allValues.Count} linhas");
                 Log.LogInfo($"[Export] Arquivo: {path}");
             }
             catch (Exception ex) { Log.LogError($"[Export] {ex.Message}"); }
