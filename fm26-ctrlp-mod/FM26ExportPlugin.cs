@@ -13,7 +13,7 @@ using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.57.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.58.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,7 +22,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.57.0");
+            Log.LogInfo("FM26 Ctrl+P Export v2.58.0");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -47,7 +47,6 @@ namespace FM26CtrlPExport
         private static object _bindingsInstance = null;
         private static int _frameCount = 0;
         private static bool _initialized = false;
-        private static List<string[]> _tableData = null;
         
         public static void OnUpdate(object __instance)
         {
@@ -59,7 +58,7 @@ namespace FM26CtrlPExport
                 if (!_initialized && _frameCount == 300)
                 {
                     _initialized = true;
-                    Log.LogInfo("[OK] F9=Explorar PlayerSearchReport, Ctrl+P=Exportar");
+                    Log.LogInfo("[OK] F9=Analisar PlayerSearchReport, F10=Tipos de elementos, Ctrl+P=Exportar Bindings");
                 }
                 
                 if (!_initialized) return;
@@ -68,8 +67,14 @@ namespace FM26CtrlPExport
                 
                 if (Keyboard.current.f9Key.wasPressedThisFrame)
                 {
-                    Log.LogInfo(">>> F9 - Explorar PlayerSearchReport");
-                    ExplorePlayerSearchReport();
+                    Log.LogInfo(">>> F9 - Analisar PlayerSearchReport");
+                    AnalyzePlayerSearchReport();
+                }
+                
+                if (Keyboard.current.f10Key.wasPressedThisFrame)
+                {
+                    Log.LogInfo(">>> F10 - Listar tipos de elementos");
+                    ListElementTypes();
                 }
                 
                 bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
@@ -77,14 +82,14 @@ namespace FM26CtrlPExport
                 
                 if (ctrl && p)
                 {
-                    Log.LogInfo(">>> Ctrl+P - Exportar");
-                    Export();
+                    Log.LogInfo(">>> Ctrl+P - Exportar via Bindings");
+                    ExportFromBindings();
                 }
             }
             catch { }
         }
         
-        private static void ExplorePlayerSearchReport()
+        private static void AnalyzePlayerSearchReport()
         {
             try
             {
@@ -97,174 +102,223 @@ namespace FM26CtrlPExport
                     var root = doc.rootVisualElement;
                     if (root == null) continue;
                     
-                    // Encontrar Report -> Body -> PlayerSearchReport
-                    VisualElement report = null;
-                    VisualElement reportBody = null;
-                    VisualElement playerSearchReport = null;
-                    
-                    for (int i = 0; i < root.childCount; i++)
+                    // Encontrar PlayerSearchReport
+                    VisualElement FindElement(VisualElement parent, string name)
                     {
-                        var child = root.ElementAt(i);
-                        if (child.name == "Report")
-                        {
-                            report = child;
-                            break;
-                        }
-                    }
-                    
-                    if (report == null) { Log.LogWarning("[Explore] Report não encontrado"); return; }
-                    
-                    // Procurar Body dentro do Report
-                    for (int i = 0; i < report.childCount; i++)
-                    {
-                        var child = report.ElementAt(i);
-                        if (child.name == "Body")
-                        {
-                            reportBody = child;
-                            break;
-                        }
-                    }
-                    
-                    if (reportBody == null) { Log.LogWarning("[Explore] Body não encontrado"); return; }
-                    
-                    // Procurar PlayerSearchReport dentro do Body
-                    for (int i = 0; i < reportBody.childCount; i++)
-                    {
-                        var child = reportBody.ElementAt(i);
-                        if (child.name == "PlayerSearchReport")
-                        {
-                            playerSearchReport = child;
-                            break;
-                        }
-                    }
-                    
-                    if (playerSearchReport == null) { Log.LogWarning("[Explore] PlayerSearchReport não encontrado"); return; }
-                    
-                    Log.LogInfo($"[Explore] PlayerSearchReport encontrado! childCount={playerSearchReport.childCount}");
-                    
-                    // Explorar profundamente
-                    _tableData = new List<string[]>();
-                    
-                    void DeepScan(VisualElement el, int depth, List<string> currentRow)
-                    {
-                        if (el == null || depth > 15) return;
+                        if (parent == null) return null;
+                        if (parent.name == name) return parent;
                         
+                        for (int i = 0; i < parent.childCount; i++)
+                        {
+                            var found = FindElement(parent.ElementAt(i), name);
+                            if (found != null) return found;
+                        }
+                        return null;
+                    }
+                    
+                    var playerSearchReport = FindElement(root, "PlayerSearchReport");
+                    
+                    if (playerSearchReport == null)
+                    {
+                        Log.LogWarning("[Analyze] PlayerSearchReport não encontrado");
+                        return;
+                    }
+                    
+                    Log.LogInfo($"[Analyze] PlayerSearchReport encontrado!");
+                    Log.LogInfo($"[Analyze] Tipo: {playerSearchReport.GetType().FullName}");
+                    Log.LogInfo($"[Analyze] childCount: {playerSearchReport.childCount}");
+                    
+                    // Listar TODAS as propriedades
+                    var type = playerSearchReport.GetType();
+                    var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                    Log.LogInfo($"[Analyze] {props.Length} propriedades:");
+                    
+                    foreach (var p in props.Take(30))
+                    {
                         try
                         {
-                            var type = el.GetType();
-                            var name = el.name ?? "";
-                            
-                            // Tentar extrair texto
-                            var textProp = type.GetProperty("text", BindingFlags.Public | BindingFlags.Instance);
-                            if (textProp != null)
-                            {
-                                try
-                                {
-                                    var text = textProp.GetValue(el)?.ToString() ?? "";
-                                    if (!string.IsNullOrWhiteSpace(text) && text.Length < 200)
-                                    {
-                                        currentRow.Add(text.Trim());
-                                    }
-                                }
-                                catch { }
-                            }
-                            
-                            // Verificar se é uma "linha" (baseado no nome ou tipo)
-                            var isRow = name.Contains("Row") || name.Contains("Item") || name.Contains("Line") || type.Name.Contains("Row");
-                            
-                            // Se tem filhos, explorar
-                            if (el.childCount > 0)
-                            {
-                                // Se parece ser uma linha, criar nova lista para os filhos
-                                if (isRow && currentRow.Count > 0)
-                                {
-                                    // Salvar linha anterior se tiver dados
-                                    if (currentRow.Count >= 3)
-                                    {
-                                        _tableData.Add(currentRow.ToArray());
-                                        Log.LogInfo($"[Explore] Linha salva: {string.Join(" | ", currentRow.Take(5))}...");
-                                    }
-                                    currentRow = new List<string>();
-                                }
-                                
-                                for (int i = 0; i < el.childCount && i < 100; i++)
-                                {
-                                    DeepScan(el.ElementAt(i), depth + 1, currentRow);
-                                }
-                            }
+                            var val = p.GetValue(playerSearchReport);
+                            var valStr = val?.ToString() ?? "null";
+                            if (valStr.Length > 50) valStr = valStr.Substring(0, 50) + "...";
+                            Log.LogInfo($"[Analyze]   {p.Name}: {valStr}");
                         }
                         catch { }
                     }
                     
-                    DeepScan(playerSearchReport, 0, new List<string>());
+                    // Listar TODOS os campos
+                    var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                    Log.LogInfo($"[Analyze] {fields.Length} campos:");
                     
-                    Log.LogInfo($"[Explore] Total extraído: {_tableData.Count} linhas");
-                    
-                    // Se não encontrou linhas, mostrar estrutura
-                    if (_tableData.Count == 0)
+                    foreach (var f in fields.Take(20))
                     {
-                        Log.LogInfo("[Explore] Extraindo TODOS os textos...");
-                        _tableData.Clear();
-                        
-                        void ExtractAllText(VisualElement el, int depth)
+                        try
                         {
-                            if (el == null || depth > 20) return;
-                            
-                            try
+                            var val = f.GetValue(playerSearchReport);
+                            var valStr = val?.ToString() ?? "null";
+                            if (valStr.Length > 50) valStr = valStr.Substring(0, 50) + "...";
+                            Log.LogInfo($"[Analyze]   {f.Name}: {valStr}");
+                        }
+                        catch { }
+                    }
+                    
+                    // Explorar filhos recursivamente
+                    void ExploreChildren(VisualElement el, int depth)
+                    {
+                        if (el == null || depth > 10) return;
+                        
+                        var prefix = new string(' ', depth * 2);
+                        var elType = el.GetType().Name;
+                        var elName = el.name ?? "(sem nome)";
+                        
+                        Log.LogInfo($"[Child] {prefix}{elType} ({elName}) children={el.childCount}");
+                        
+                        // Se tem poucos filhos, mostrar propriedades
+                        if (el.childCount > 0 && el.childCount <= 5 && depth < 5)
+                        {
+                            var elProps = el.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                            foreach (var p in elProps)
                             {
-                                var type = el.GetType();
-                                var textProp = type.GetProperty("text", BindingFlags.Public | BindingFlags.Instance);
-                                
-                                if (textProp != null)
+                                if (p.Name == "text" || p.Name == "value" || p.Name == "name" || p.Name.Contains("Data"))
                                 {
-                                    var text = textProp.GetValue(el)?.ToString() ?? "";
-                                    if (!string.IsNullOrWhiteSpace(text) && text.Length < 100)
+                                    try
                                     {
-                                        var prefix = new string(' ', depth * 2);
-                                        Log.LogInfo($"[TXT] {prefix}{text.Trim()}");
+                                        var v = p.GetValue(el);
+                                        Log.LogInfo($"[Child] {prefix}  {p.Name}: {v}");
                                     }
-                                }
-                                
-                                for (int i = 0; i < el.childCount && i < 200; i++)
-                                {
-                                    ExtractAllText(el.ElementAt(i), depth + 1);
+                                    catch { }
                                 }
                             }
-                            catch { }
                         }
                         
-                        ExtractAllText(playerSearchReport, 0);
+                        for (int i = 0; i < el.childCount && i < 50; i++)
+                        {
+                            try { ExploreChildren(el.ElementAt(i), depth + 1); } catch { }
+                        }
                     }
+                    
+                    ExploreChildren(playerSearchReport, 0);
                 }
             }
-            catch (Exception ex) { Log.LogError($"[Explore] {ex.Message}"); }
+            catch (Exception ex) { Log.LogError($"[Analyze] {ex.Message}"); }
         }
         
-        private static void Export()
+        private static void ListElementTypes()
         {
             try
             {
-                if (_tableData == null || _tableData.Count == 0)
+                var docs = UnityEngine.Object.FindObjectsOfType<UIDocument>();
+                var typeCounts = new Dictionary<string, int>();
+                
+                foreach (var doc in docs)
                 {
-                    Log.LogWarning("[Export] Nenhuma tabela. Aperte F9 primeiro.");
+                    void CountTypes(VisualElement el, int depth)
+                    {
+                        if (el == null || depth > 15) return;
+                        
+                        var typeName = el.GetType().Name;
+                        if (!typeCounts.ContainsKey(typeName)) typeCounts[typeName] = 0;
+                        typeCounts[typeName]++;
+                        
+                        for (int i = 0; i < el.childCount && i < 100; i++)
+                        {
+                            try { CountTypes(el.ElementAt(i), depth + 1); } catch { }
+                        }
+                    }
+                    
+                    CountTypes(doc.rootVisualElement, 0);
+                }
+                
+                Log.LogInfo("[Types] Tipos de elementos:");
+                foreach (var kvp in typeCounts.OrderByDescending(x => x.Value).Take(30))
+                {
+                    Log.LogInfo($"[Types]   {kvp.Key}: {kvp.Value}");
+                }
+            }
+            catch (Exception ex) { Log.LogError($"[Types] {ex.Message}"); }
+        }
+        
+        private static void ExportFromBindings()
+        {
+            try
+            {
+                if (_bindingsInstance == null)
+                {
+                    Log.LogWarning("[Export] Bindings não capturado");
                     return;
                 }
                 
-                int maxCols = _tableData.Max(r => r.Length);
+                var type = _bindingsInstance.GetType();
+                var mDataProp = type.GetProperty("m_data", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                var mDataField = type.GetField("m_data", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
                 
-                var csv = new System.Text.StringBuilder();
+                object mData = null;
+                if (mDataProp != null) mData = mDataProp.GetValue(_bindingsInstance);
+                else if (mDataField != null) mData = mDataField.GetValue(_bindingsInstance);
                 
-                foreach (var row in _tableData)
+                if (mData == null) { Log.LogWarning("[Export] m_data null"); return; }
+                
+                var listType = mData.GetType();
+                var countProp = listType.GetProperty("Count");
+                var indexer = listType.GetProperty("Item");
+                
+                if (countProp == null || indexer == null) { Log.LogWarning("[Export] Sem Count/Indexer"); return; }
+                
+                int total = (int)countProp.GetValue(mData);
+                Log.LogInfo($"[Export] {total} itens no Bindings");
+                
+                // Buscar itens com "interest" (indica que estão sendo usados na tela atual)
+                var activeItems = new List<int>();
+                
+                for (int i = 0; i < total; i++)
                 {
-                    var values = row.Select(v => v.Replace(";", ",").Replace("\n", " ").Replace("\r", "")).ToList();
-                    while (values.Count < maxCols) values.Add("");
-                    csv.AppendLine(string.Join(";", values));
+                    try
+                    {
+                        var item = indexer.GetValue(mData, new object[] { i });
+                        if (item == null) continue;
+                        
+                        var interestProp = item.GetType().GetProperty("interest", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                        if (interestProp == null) continue;
+                        
+                        var interest = interestProp.GetValue(item);
+                        if (interest != null)
+                        {
+                            // interest é uma lista - se tem itens, está ativo
+                            var interestType = interest.GetType();
+                            var countMethod = interestType.GetProperty("Count");
+                            if (countMethod != null)
+                            {
+                                int count = (int)countMethod.GetValue(interest);
+                                if (count > 0) activeItems.Add(i);
+                            }
+                        }
+                    }
+                    catch { }
                 }
                 
-                string path = System.IO.Path.Combine(BepInEx.Paths.PluginPath, $"FM26_Players_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
-                System.IO.File.WriteAllText(path, csv.ToString());
+                Log.LogInfo($"[Export] {activeItems.Count} itens com interest (ativos na tela)");
                 
-                Log.LogInfo($"[Export] ✅ {_tableData.Count} linhas -> {path}");
+                // Mostrar primeiros 10 itens ativos
+                foreach (var idx in activeItems.Take(10))
+                {
+                    try
+                    {
+                        var item = indexer.GetValue(mData, new object[] { idx });
+                        var mValueProp = item.GetType().GetProperty("m_value", BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+                        if (mValueProp == null) continue;
+                        
+                        var mValue = mValueProp.GetValue(item);
+                        if (mValue == null) continue;
+                        
+                        // AsString
+                        var asStringMethod = mValue.GetType().GetMethod("AsString");
+                        if (asStringMethod != null)
+                        {
+                            var str = asStringMethod.Invoke(mValue, null)?.ToString() ?? "";
+                            Log.LogInfo($"[Export]   [{idx}]: {str}");
+                        }
+                    }
+                    catch { }
+                }
             }
             catch (Exception ex) { Log.LogError($"[Export] {ex.Message}"); }
         }
