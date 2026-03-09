@@ -1,0 +1,101 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "BepInEx.IL2CPP.MSBuild >= 2.1.0-rc.1",
+      "BepInEx.Unity.IL2CPP >= 6.0.0-be.738"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Raphael\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "E:\\Steam\\steamapps\\common\\Football Manager 26\\fm26-scene-dump\\FM26SceneDump.csproj",
+      "projectName": "FM26SceneDump",
+      "projectPath": "E:\\Steam\\steamapps\\common\\Football Manager 26\\fm26-scene-dump\\FM26SceneDump.csproj",
+      "packagesPath": "C:\\Users\\Raphael\\.nuget\\packages\\",
+      "outputPath": "E:\\Steam\\steamapps\\common\\Football Manager 26\\fm26-scene-dump\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Raphael\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "dependencies": {
+          "BepInEx.IL2CPP.MSBuild": {
+            "include": "Build",
+            "target": "Package",
+            "version": "[2.1.0-rc.1, )"
+          },
+          "BepInEx.Unity.IL2CPP": {
+            "include": "Compile",
+            "target": "Package",
+            "version": "[6.0.0-be.738, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.428\\RuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1101",
+      "level": "Error",
+      "message": "Não é possível encontrar o pacote BepInEx.Unity.IL2CPP. Não existe nenhum pacote com esta ID nas origens: nuget.org",
+      "libraryId": "BepInEx.Unity.IL2CPP",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1101",
+      "level": "Error",
+      "message": "Não é possível encontrar o pacote BepInEx.IL2CPP.MSBuild. Não existe nenhum pacote com esta ID nas origens: nuget.org",
+      "libraryId": "BepInEx.IL2CPP.MSBuild",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}

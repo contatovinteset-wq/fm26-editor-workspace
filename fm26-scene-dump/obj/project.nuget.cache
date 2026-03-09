@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "dgSpecHash": "MH2CBCjBHe+sTHz207tdSS/uAsoJRj+xf4vVWymG8YmoAdomN3G5VA8GmSDtJ6MpY5xFP/LDQ5kKKDzVxOJVSg==",
+  "success": false,
+  "projectFilePath": "E:\\Steam\\steamapps\\common\\Football Manager 26\\fm26-scene-dump\\FM26SceneDump.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1101",
+      "level": "Error",
+      "message": "Não é possível encontrar o pacote BepInEx.Unity.IL2CPP. Não existe nenhum pacote com esta ID nas origens: nuget.org",
+      "libraryId": "BepInEx.Unity.IL2CPP",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1101",
+      "level": "Error",
+      "message": "Não é possível encontrar o pacote BepInEx.IL2CPP.MSBuild. Não existe nenhum pacote com esta ID nas origens: nuget.org",
+      "libraryId": "BepInEx.IL2CPP.MSBuild",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}

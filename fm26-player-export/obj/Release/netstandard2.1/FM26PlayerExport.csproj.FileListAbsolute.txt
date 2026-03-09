@@ -1,0 +1,5 @@
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\obj\Release\netstandard2.1\FM26PlayerExport.csproj.AssemblyReference.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\obj\Release\netstandard2.1\FM26PlayerExport.GeneratedMSBuildEditorConfig.editorconfig
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\obj\Release\netstandard2.1\FM26PlayerExport.AssemblyInfoInputs.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\obj\Release\netstandard2.1\FM26PlayerExport.AssemblyInfo.cs
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\obj\Release\netstandard2.1\FM26PlayerExport.csproj.CoreCompileInputs.cache
