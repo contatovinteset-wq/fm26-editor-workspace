@@ -95,6 +95,52 @@ namespace FM26PlayerExport
             Plugin.Log.LogInfo($"[FM26Export] Total PanelManager documents: {_uiDocuments.Count}");
         }
         
+        // Método auxiliar para encontrar filho por nome (evita ambiguidade do Q())
+        private VisualElement FindChildByName(VisualElement parent, string name)
+        {
+            if (parent == null) return null;
+            
+            foreach (var child in parent.Children())
+            {
+                if (child.name == name)
+                    return child;
+            }
+            return null;
+        }
+        
+        // Método auxiliar para encontrar Toggle em um elemento
+        private Toggle FindToggle(VisualElement element)
+        {
+            if (element == null) return null;
+            
+            // Verificar se o próprio elemento é um Toggle
+            if (element is Toggle toggle)
+                return toggle;
+            
+            // Buscar nos filhos
+            foreach (var child in element.Children())
+            {
+                var found = FindToggle(child);
+                if (found != null)
+                    return found;
+            }
+            return null;
+        }
+        
+        // Método auxiliar para coletar todos os Labels
+        private void CollectLabels(VisualElement element, List<Label> labels)
+        {
+            if (element == null) return;
+            
+            if (element is Label label)
+                labels.Add(label);
+            
+            foreach (var child in element.Children())
+            {
+                CollectLabels(child, labels);
+            }
+        }
+        
         private void ExportPlayers()
         {
             try
@@ -118,16 +164,26 @@ namespace FM26PlayerExport
                     
                     Plugin.Log.LogInfo($"[FM26Export] Processando root: {root.name}");
                     
-                    // PASSO 1: Localizar tabela
-                    var tables = root.Q(name: "tables");
+                    // PASSO 1: Localizar tabela - iterar manualmente
+                    var tables = FindChildByName(root, "tables");
                     if (tables == null)
                     {
                         Plugin.Log.LogWarning("[FM26Export] 'tables' não encontrado");
+                        
+                        // Debug: listar filhos diretos do root
+                        Plugin.Log.LogInfo("[FM26Export] Filhos do root:");
+                        int count = 0;
+                        foreach (var child in root.Children())
+                        {
+                            count++;
+                            Plugin.Log.LogInfo($"[FM26Export]   [{count}] {child.name}");
+                            if (count >= 30) break;
+                        }
                         continue;
                     }
                     Plugin.Log.LogInfo($"[FM26Export] ✓ 'tables' encontrado");
                     
-                    var tableContainer = tables.Q(name: "search-table-remapper");
+                    var tableContainer = FindChildByName(tables, "search-table-remapper");
                     if (tableContainer == null)
                     {
                         Plugin.Log.LogWarning("[FM26Export] 'search-table-remapper' não encontrado");
@@ -138,13 +194,12 @@ namespace FM26PlayerExport
                         foreach (var child in tables.Children())
                         {
                             childCount++;
-                            Plugin.Log.LogInfo($"[FM26Export]   [{childCount}] {child.name} (type: {child.GetType().Name})");
+                            Plugin.Log.LogInfo($"[FM26Export]   [{childCount}] {child.name}");
                             if (childCount >= 20) break;
                         }
                         continue;
                     }
                     
-                    // PASSO 1 CONCLUÍDO
                     Plugin.Log.LogInfo($"[FM26Export] ✓ 'search-table-remapper' encontrado");
                     
                     // Contar filhos
@@ -166,7 +221,7 @@ namespace FM26PlayerExport
                         // Verificar Toggle
                         try
                         {
-                            var toggle = row.Q<Toggle>();
+                            var toggle = FindToggle(row);
                             if (toggle != null && toggle.value)
                             {
                                 isSelected = true;
@@ -212,12 +267,14 @@ namespace FM26PlayerExport
                     var headers = new List<string>();
                     try
                     {
-                        var headerSection = root.Q(name: "PersonSearchTableTopSection");
+                        var headerSection = FindChildByName(root, "PersonSearchTableTopSection");
                         if (headerSection != null)
                         {
                             Plugin.Log.LogInfo("[FM26Export] ✓ 'PersonSearchTableTopSection' encontrado");
                             
-                            var headerLabels = headerSection.Query<Label>().Build().ToList();
+                            var headerLabels = new List<Label>();
+                            CollectLabels(headerSection, headerLabels);
+                            
                             Plugin.Log.LogInfo($"[FM26Export] {headerLabels.Count} labels no header");
                             
                             foreach (var label in headerLabels)
@@ -259,7 +316,9 @@ namespace FM26PlayerExport
                         {
                             var values = new List<string>();
                             
-                            var labels = row.Query<Label>().Build().ToList();
+                            var labels = new List<Label>();
+                            CollectLabels(row, labels);
+                            
                             foreach (var label in labels)
                             {
                                 var text = label.text?.Trim() ?? "";
