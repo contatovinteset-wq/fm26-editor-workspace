@@ -52,14 +52,12 @@ namespace FM26PlayerExport
             
             if (Keyboard.current == null) return;
             
-            // F8 - Re-escanear
             if (Keyboard.current.f8Key.wasPressedThisFrame)
             {
                 Plugin.Log.LogInfo("[FM26Export] >>> F8 - Re-escaneando UIDocuments...");
                 ScanUIDocuments();
             }
             
-            // Ctrl+P - Exportar
             bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
             bool p = Keyboard.current.pKey.wasPressedThisFrame;
             
@@ -95,50 +93,15 @@ namespace FM26PlayerExport
             Plugin.Log.LogInfo($"[FM26Export] Total PanelManager documents: {_uiDocuments.Count}");
         }
         
-        // Método auxiliar para encontrar filho por nome (evita ambiguidade do Q())
-        private VisualElement FindChildByName(VisualElement parent, string name)
+        // Helper para evitar ambiguidade IL2CPP
+        private VisualElement QSafe(VisualElement parent, string name)
         {
-            if (parent == null) return null;
-            
-            foreach (var child in parent.Children())
-            {
-                if (child.name == name)
-                    return child;
-            }
-            return null;
+            return parent.Q(name, (string)null);
         }
         
-        // Método auxiliar para encontrar Toggle em um elemento
-        private Toggle FindToggle(VisualElement element)
+        private UQueryBuilder<T> QuerySafe<T>(VisualElement parent) where T : VisualElement
         {
-            if (element == null) return null;
-            
-            // Verificar se o próprio elemento é um Toggle
-            if (element is Toggle toggle)
-                return toggle;
-            
-            // Buscar nos filhos
-            foreach (var child in element.Children())
-            {
-                var found = FindToggle(child);
-                if (found != null)
-                    return found;
-            }
-            return null;
-        }
-        
-        // Método auxiliar para coletar todos os Labels
-        private void CollectLabels(VisualElement element, List<Label> labels)
-        {
-            if (element == null) return;
-            
-            if (element is Label label)
-                labels.Add(label);
-            
-            foreach (var child in element.Children())
-            {
-                CollectLabels(child, labels);
-            }
+            return parent.Query<T>(null, (string)null);
         }
         
         private void ExportPlayers()
@@ -164,37 +127,26 @@ namespace FM26PlayerExport
                     
                     Plugin.Log.LogInfo($"[FM26Export] Processando root: {root.name}");
                     
-                    // PASSO 1: Localizar tabela - iterar manualmente
-                    var tables = FindChildByName(root, "tables");
+                    // PASSO 1: Localizar tabela
+                    var tables = QSafe(root, "tables");
                     if (tables == null)
                     {
                         Plugin.Log.LogWarning("[FM26Export] 'tables' não encontrado");
-                        
-                        // Debug: listar filhos diretos do root
-                        Plugin.Log.LogInfo("[FM26Export] Filhos do root:");
-                        int count = 0;
-                        foreach (var child in root.Children())
-                        {
-                            count++;
-                            Plugin.Log.LogInfo($"[FM26Export]   [{count}] {child.name}");
-                            if (count >= 30) break;
-                        }
                         continue;
                     }
                     Plugin.Log.LogInfo($"[FM26Export] ✓ 'tables' encontrado");
                     
-                    var tableContainer = FindChildByName(tables, "search-table-remapper");
+                    var tableContainer = QSafe(tables, "search-table-remapper");
                     if (tableContainer == null)
                     {
                         Plugin.Log.LogWarning("[FM26Export] 'search-table-remapper' não encontrado");
                         
-                        // Listar filhos de tables para debug
                         Plugin.Log.LogInfo("[FM26Export] Filhos de 'tables':");
                         int childCount = 0;
                         foreach (var child in tables.Children())
                         {
                             childCount++;
-                            Plugin.Log.LogInfo($"[FM26Export]   [{childCount}] {child.name}");
+                            Plugin.Log.LogInfo($"[FM26Export]   [{childCount}] {child.name} (type: {child.GetType().Name})");
                             if (childCount >= 20) break;
                         }
                         continue;
@@ -218,10 +170,14 @@ namespace FM26PlayerExport
                     {
                         bool isSelected = false;
                         
-                        // Verificar Toggle
                         try
                         {
-                            var toggle = FindToggle(row);
+                            var toggle = QSafe(row, "") as Toggle;
+                            if (toggle == null)
+                            {
+                                var toggles = QuerySafe<Toggle>(row).Build().ToList();
+                                if (toggles.Count > 0) toggle = toggles[0];
+                            }
                             if (toggle != null && toggle.value)
                             {
                                 isSelected = true;
@@ -230,7 +186,6 @@ namespace FM26PlayerExport
                         }
                         catch { }
                         
-                        // Verificar classes CSS
                         if (!isSelected)
                         {
                             try
@@ -253,7 +208,6 @@ namespace FM26PlayerExport
                     Plugin.Log.LogInfo($"[FM26Export] Linhas com Toggle marcado: {toggleSelected}");
                     Plugin.Log.LogInfo($"[FM26Export] Linhas com classe 'selected': {classSelected}");
                     
-                    // Se nenhuma selecionada, pegar todas
                     if (selectedRows.Count == 0)
                     {
                         Plugin.Log.LogInfo("[FM26Export] Nenhuma linha selecionada - exportando TODAS");
@@ -267,14 +221,12 @@ namespace FM26PlayerExport
                     var headers = new List<string>();
                     try
                     {
-                        var headerSection = FindChildByName(root, "PersonSearchTableTopSection");
+                        var headerSection = QSafe(root, "PersonSearchTableTopSection");
                         if (headerSection != null)
                         {
                             Plugin.Log.LogInfo("[FM26Export] ✓ 'PersonSearchTableTopSection' encontrado");
                             
-                            var headerLabels = new List<Label>();
-                            CollectLabels(headerSection, headerLabels);
-                            
+                            var headerLabels = QuerySafe<Label>(headerSection).Build().ToList();
                             Plugin.Log.LogInfo($"[FM26Export] {headerLabels.Count} labels no header");
                             
                             foreach (var label in headerLabels)
@@ -296,7 +248,6 @@ namespace FM26PlayerExport
                         Plugin.Log.LogError($"[FM26Export] Erro ao ler header: {ex.Message}");
                     }
                     
-                    // Se não achou header, usar genérico
                     if (headers.Count == 0)
                     {
                         headers.Add("Dados");
@@ -304,11 +255,8 @@ namespace FM26PlayerExport
                     
                     // PASSO 4: Montar CSV
                     var csv = new StringBuilder();
-                    
-                    // Header
                     csv.AppendLine(string.Join(";", headers));
                     
-                    // Linhas
                     int exportedCount = 0;
                     foreach (var row in selectedRows)
                     {
@@ -316,9 +264,7 @@ namespace FM26PlayerExport
                         {
                             var values = new List<string>();
                             
-                            var labels = new List<Label>();
-                            CollectLabels(row, labels);
-                            
+                            var labels = QuerySafe<Label>(row).Build().ToList();
                             foreach (var label in labels)
                             {
                                 var text = label.text?.Trim() ?? "";
@@ -336,14 +282,13 @@ namespace FM26PlayerExport
                         }
                         catch { }
                         
-                        if (exportedCount >= 10000) break; // Limite de segurança
+                        if (exportedCount >= 10000) break;
                     }
                     
                     // PASSO 5: Salvar CSV
                     string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     string fm26Path = Path.Combine(docsPath, "Sports Interactive", "Football Manager 2026");
                     
-                    // Criar diretório se não existir
                     if (!Directory.Exists(fm26Path))
                     {
                         Directory.CreateDirectory(fm26Path);
@@ -358,7 +303,7 @@ namespace FM26PlayerExport
                     Plugin.Log.LogInfo($"[FM26Export] ✅ Exportado {exportedCount} jogadores");
                     Plugin.Log.LogInfo($"[FM26Export] 📁 Arquivo: {fullPath}");
                     
-                    return; // Sucesso - sair do loop
+                    return;
                 }
             }
             catch (Exception ex)
@@ -372,10 +317,8 @@ namespace FM26PlayerExport
         {
             if (string.IsNullOrEmpty(value)) return "";
             
-            // Remover quebras de linha
             value = value.Replace("\r", " ").Replace("\n", " ");
             
-            // Se tem ponto-e-vírgula ou aspas, envolver em aspas
             if (value.Contains(";") || value.Contains("\""))
             {
                 value = "\"" + value.Replace("\"", "\"\"") + "\"";
