@@ -9,11 +9,10 @@ using BepInEx.Logging;
 using HarmonyLib;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.59.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.60.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -22,8 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.59.0");
-            Log.LogInfo("Offsets do dump.cs aplicados!");
+            Log.LogInfo("FM26 Ctrl+P Export v2.60.0");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -49,12 +47,6 @@ namespace FM26CtrlPExport
         private static int _frameCount = 0;
         private static bool _initialized = false;
         private static List<Dictionary<string, string>> _exportData = null;
-        
-        // Offsets do dump.cs
-        // Bindings.m_data: 0x70
-        // Bindings.Data.key: 0x10
-        // Bindings.Data.interest: 0x18
-        // Bindings.Data.m_value: 0x30
         
         public static void OnUpdate(object __instance)
         {
@@ -109,76 +101,58 @@ namespace FM26CtrlPExport
                 
                 var bindingsType = _bindingsInstance.GetType();
                 
-                // m_data está no offset 0x70
-                // Mas vamos usar reflexão para ser mais seguro
-                var mDataField = bindingsType.GetField("m_data", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (mDataField == null)
+                // Tentar propriedade DataSet primeiro
+                var dataSetProp = bindingsType.GetProperty("DataSet");
+                object dataSet = null;
+                
+                if (dataSetProp != null)
                 {
-                    // Tentar via propriedade DataSet
-                    var dataSetProp = bindingsType.GetProperty("DataSet");
-                    if (dataSetProp != null)
+                    dataSet = dataSetProp.GetValue(_bindingsInstance);
+                }
+                
+                // Se não, tentar campo m_data
+                if (dataSet == null)
+                {
+                    var mDataField = bindingsType.GetField("m_data", BindingFlags.NonPublic | BindingFlags.Instance);
+                    if (mDataField != null)
                     {
-                        var dataSet = dataSetProp.GetValue(_bindingsInstance);
-                        Log.LogInfo($"[Export] DataSet: {dataSet?.GetType().Name}");
-                        ProcessDataSet(dataSet);
-                        return;
+                        dataSet = mDataField.GetValue(_bindingsInstance);
                     }
-                    
-                    Log.LogWarning("[Export] m_data não encontrado");
+                }
+                
+                if (dataSet == null)
+                {
+                    Log.LogWarning("[Export] DataSet/m_data não encontrado");
                     return;
                 }
                 
-                var mData = mDataField.GetValue(_bindingsInstance);
-                Log.LogInfo($"[Export] m_data tipo: {mData?.GetType().Name}");
-                ProcessDataSet(mData);
-            }
-            catch (Exception ex) { Log.LogError($"[Export] {ex.Message}"); }
-        }
-        
-        private static void ProcessDataSet(object dataSet)
-        {
-            try
-            {
-                if (dataSet == null) { Log.LogWarning("[Process] dataSet null"); return; }
+                Log.LogInfo($"[Export] DataSet tipo: {dataSet.GetType().Name}");
                 
-                var listType = dataSet.GetType();
-                
-                // List<T> tem Count e Item indexer
-                var countProp = listType.GetProperty("Count");
-                var indexerProp = listType.GetProperty("Item");
-                
-                if (countProp == null || indexerProp == null)
+                // Usar IEnumerable para iterar (funciona com IReadOnlyList, List, etc)
+                if (!(dataSet is IEnumerable enumerable))
                 {
-                    Log.LogWarning($"[Process] Não é lista: {listType.Name}");
-                    
-                    // Tentar como IEnumerable
-                    if (dataSet is IEnumerable enumerable)
-                    {
-                        int count = 0;
-                        foreach (var item in enumerable) count++;
-                        Log.LogInfo($"[Process] IEnumerable com {count} itens");
-                    }
+                    Log.LogWarning("[Export] DataSet não é IEnumerable");
                     return;
                 }
                 
-                int total = (int)countProp.GetValue(dataSet);
-                Log.LogInfo($"[Process] {total} itens no DataSet");
-                
-                // Agrupar dados por tipo de TypedValue
                 var typeGroups = new Dictionary<string, int>();
                 var activeItems = new List<object>();
                 var valuesByType = new Dictionary<string, List<string>>();
+                int total = 0;
+                int withInterest = 0;
                 
-                for (int i = 0; i < Math.Min(total, 5000); i++)
+                foreach (var item in enumerable)
                 {
+                    total++;
+                    if (total > 5000) break;
+                    
                     try
                     {
-                        var item = indexerProp.GetValue(dataSet, new object[] { i });
                         if (item == null) continue;
                         
                         var itemType = item.GetType();
                         
-                        // interest está em 0x18
+                        // interest está em 0x18 - campo público
                         var interestField = itemType.GetField("interest", BindingFlags.Public | BindingFlags.Instance);
                         if (interestField == null) continue;
                         
@@ -186,22 +160,21 @@ namespace FM26CtrlPExport
                         if (interest == null) continue;
                         
                         // Verificar se tem interesse (ativo na UI)
-                        var interestCountProp = interest.GetType().GetProperty("Count");
+                        var interestType = interest.GetType();
+                        var interestCountProp = interestType.GetProperty("Count");
                         if (interestCountProp == null) continue;
                         
                         int interestCount = (int)interestCountProp.GetValue(interest);
                         if (interestCount == 0) continue;
                         
-                        // Item ativo! Extrair valor
+                        withInterest++;
+                        
+                        // m_value está em 0x30 - campo privado
                         var mValueField = itemType.GetField("m_value", BindingFlags.NonPublic | BindingFlags.Instance);
                         if (mValueField == null) continue;
                         
                         var mValue = mValueField.GetValue(item);
                         if (mValue == null) continue;
-                        
-                        // key está em 0x10
-                        var keyField = itemType.GetField("key", BindingFlags.Public | BindingFlags.Instance);
-                        var keyValue = keyField?.GetValue(item);
                         
                         // AsString()
                         var asStringMethod = mValue.GetType().GetMethod("AsString");
@@ -221,40 +194,39 @@ namespace FM26CtrlPExport
                         
                         if (!valuesByType.ContainsKey(shortType)) valuesByType[shortType] = new List<string>();
                         
-                        // Limitar valores por tipo
-                        if (valuesByType[shortType].Count < 100)
+                        if (valuesByType[shortType].Count < 50)
                         {
                             valuesByType[shortType].Add(valueStr);
                         }
                         
-                        activeItems.Add(item);
+                        if (activeItems.Count < 2000)
+                        {
+                            activeItems.Add(item);
+                        }
                     }
                     catch { }
                 }
                 
-                Log.LogInfo($"[Process] {activeItems.Count} itens ATIVOS (com interest)");
-                Log.LogInfo("[Process] Tipos encontrados:");
-                foreach (var kvp in typeGroups.OrderByDescending(x => x.Value).Take(20))
+                Log.LogInfo($"[Export] {total} itens totais");
+                Log.LogInfo($"[Export] {withInterest} itens ATIVOS (com interest > 0)");
+                Log.LogInfo("[Export] Tipos encontrados:");
+                foreach (var kvp in typeGroups.OrderByDescending(x => x.Value).Take(15))
                 {
-                    Log.LogInfo($"[Process]   {kvp.Key}: {kvp.Value}");
+                    Log.LogInfo($"[Export]   {kvp.Key}: {kvp.Value}");
                 }
                 
                 // Mostrar exemplos de valores
-                Log.LogInfo("[Process] Exemplos de valores:");
+                Log.LogInfo("[Export] Exemplos de valores:");
                 foreach (var kvp in valuesByType.Take(10))
                 {
                     var exemplos = string.Join(" | ", kvp.Value.Take(5));
-                    Log.LogInfo($"[Process]   {kvp.Key}: {exemplos}");
+                    Log.LogInfo($"[Export]   {kvp.Key}: {exemplos}");
                 }
                 
-                // Salvar para exportação
+                // Preparar para exportação
                 _exportData = new List<Dictionary<string, string>>();
                 
-                // Agrupar por índice de interesse (tentativa de formar linhas)
-                // Cada item com interest indica uma ligação UI - podemos tentar agrupar
-                // Por ora, vamos exportar tudo como lista de tipos/valores
-                
-                foreach (var item in activeItems.Take(1000))
+                foreach (var item in activeItems)
                 {
                     try
                     {
@@ -285,9 +257,9 @@ namespace FM26CtrlPExport
                     catch { }
                 }
                 
-                Log.LogInfo($"[Process] {_exportData.Count} itens preparados para exportação");
+                Log.LogInfo($"[Export] {_exportData.Count} itens preparados para CSV");
             }
-            catch (Exception ex) { Log.LogError($"[Process] {ex.Message}"); }
+            catch (Exception ex) { Log.LogError($"[Export] {ex.Message}"); }
         }
         
         private static void Diagnose()
@@ -345,9 +317,6 @@ namespace FM26CtrlPExport
                     Log.LogWarning("[CSV] Nenhum dado. Aperte F9 primeiro.");
                     return;
                 }
-                
-                // Agrupar por tipo
-                var byType = _exportData.GroupBy(x => x.GetValueOrDefault("Type", "unknown")).ToList();
                 
                 var csv = new System.Text.StringBuilder();
                 csv.AppendLine("Type;Value;Key");
