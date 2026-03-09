@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 
 namespace FM26CtrlPExport
 {
-    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.60.0")]
+    [BepInPlugin("com.koda.fm26.ctrlp", "FM26 Ctrl+P Export", "2.61.0")]
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
@@ -21,7 +21,7 @@ namespace FM26CtrlPExport
         {
             Log = base.Log;
             Log.LogInfo("========================================");
-            Log.LogInfo("FM26 Ctrl+P Export v2.60.0");
+            Log.LogInfo("FM26 Ctrl+P Export v2.61.0");
             Log.LogInfo("========================================");
             
             var harmony = new Harmony("com.koda.fm26.ctrlp");
@@ -101,65 +101,233 @@ namespace FM26CtrlPExport
                 
                 var bindingsType = _bindingsInstance.GetType();
                 
-                // Tentar propriedade DataSet primeiro
-                var dataSetProp = bindingsType.GetProperty("DataSet");
-                object dataSet = null;
-                
-                if (dataSetProp != null)
+                // Acessar m_data diretamente (campo privado em 0x70)
+                var mDataField = bindingsType.GetField("m_data", BindingFlags.NonPublic | BindingFlags.Instance);
+                if (mDataField == null)
                 {
-                    dataSet = dataSetProp.GetValue(_bindingsInstance);
+                    Log.LogWarning("[Export] m_data field não encontrado");
+                    
+                    // Listar todos os campos para debug
+                    var allFields = bindingsType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+                    Log.LogInfo($"[Export] Campos privados disponíveis:");
+                    foreach (var f in allFields)
+                    {
+                        Log.LogInfo($"[Export]   {f.Name}: {f.FieldType.Name}");
+                    }
+                    return;
                 }
                 
-                // Se não, tentar campo m_data
-                if (dataSet == null)
+                var mData = mDataField.GetValue(_bindingsInstance);
+                if (mData == null)
                 {
-                    var mDataField = bindingsType.GetField("m_data", BindingFlags.NonPublic | BindingFlags.Instance);
-                    if (mDataField != null)
+                    Log.LogWarning("[Export] m_data é null");
+                    return;
+                }
+                
+                var listType = mData.GetType();
+                Log.LogInfo($"[Export] m_data tipo: {listType.FullName}");
+                
+                // List<T> tem Count e Item indexer
+                var countProp = listType.GetProperty("Count");
+                var indexerProp = listType.GetProperty("Item");
+                
+                if (countProp == null || indexerProp == null)
+                {
+                    Log.LogWarning($"[Export] Count/Indexer não encontrados em {listType.Name}");
+                    
+                    // Tentar via GetEnumerator
+                    var getEnumeratorMethod = listType.GetMethod("GetEnumerator");
+                    if (getEnumeratorMethod != null)
                     {
-                        dataSet = mDataField.GetValue(_bindingsInstance);
+                        Log.LogInfo("[Export] Tentando via GetEnumerator...");
+                        try
+                        {
+                            var enumerator = getEnumeratorMethod.Invoke(mData, null);
+                            if (enumerator != null)
+                            {
+                                ProcessViaEnumerator(enumerator);
+                                return;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.LogError($"[Export] GetEnumerator falhou: {ex.Message}");
+                        }
+                    }
+                    return;
+                }
+                
+                int total = (int)countProp.GetValue(mData);
+                Log.LogInfo($"[Export] {total} itens no m_data");
+                
+                ProcessViaIndexer(mData, indexerProp, total);
+            }
+            catch (Exception ex) 
+            { 
+                Log.LogError($"[Export] {ex.Message}");
+                Log.LogError($"[Export] Stack: {ex.StackTrace}");
+            }
+        }
+        
+        private static void ProcessViaIndexer(object list, PropertyInfo indexer, int total)
+        {
+            var typeGroups = new Dictionary<string, int>();
+            var activeItems = new List<object>();
+            var valuesByType = new Dictionary<string, List<string>>();
+            int withInterest = 0;
+            
+            for (int i = 0; i < Math.Min(total, 5000); i++)
+            {
+                try
+                {
+                    var item = indexer.GetValue(list, new object[] { i });
+                    if (item == null) continue;
+                    
+                    var itemType = item.GetType();
+                    
+                    // interest está em 0x18 - campo público
+                    var interestField = itemType.GetField("interest", BindingFlags.Public | BindingFlags.Instance);
+                    if (interestField == null) continue;
+                    
+                    var interest = interestField.GetValue(item);
+                    if (interest == null) continue;
+                    
+                    // Verificar se tem interesse (ativo na UI)
+                    var interestType = interest.GetType();
+                    var interestCountProp = interestType.GetProperty("Count");
+                    if (interestCountProp == null) continue;
+                    
+                    int interestCount = (int)interestCountProp.GetValue(interest);
+                    if (interestCount == 0) continue;
+                    
+                    withInterest++;
+                    
+                    // m_value está em 0x30 - campo privado
+                    var mValueField = itemType.GetField("m_value", BindingFlags.NonPublic | BindingFlags.Instance);
+                    if (mValueField == null) continue;
+                    
+                    var mValue = mValueField.GetValue(item);
+                    if (mValue == null) continue;
+                    
+                    // AsString()
+                    var asStringMethod = mValue.GetType().GetMethod("AsString");
+                    if (asStringMethod == null) continue;
+                    
+                    var valueStr = asStringMethod.Invoke(mValue, null)?.ToString() ?? "";
+                    
+                    // DataType
+                    var dataTypeProp = mValue.GetType().GetProperty("DataType");
+                    var dataType = dataTypeProp?.GetValue(mValue)?.ToString() ?? "unknown";
+                    
+                    // Simplificar tipo
+                    var shortType = dataType.Split('.').Last().Split('+').First();
+                    
+                    if (!typeGroups.ContainsKey(shortType)) typeGroups[shortType] = 0;
+                    typeGroups[shortType]++;
+                    
+                    if (!valuesByType.ContainsKey(shortType)) valuesByType[shortType] = new List<string>();
+                    
+                    if (valuesByType[shortType].Count < 50)
+                    {
+                        valuesByType[shortType].Add(valueStr);
+                    }
+                    
+                    if (activeItems.Count < 2000)
+                    {
+                        activeItems.Add(item);
                     }
                 }
-                
-                if (dataSet == null)
+                catch { }
+            }
+            
+            Log.LogInfo($"[Export] {withInterest} itens ATIVOS (com interest > 0)");
+            Log.LogInfo("[Export] Tipos encontrados:");
+            foreach (var kvp in typeGroups.OrderByDescending(x => x.Value).Take(15))
+            {
+                Log.LogInfo($"[Export]   {kvp.Key}: {kvp.Value}");
+            }
+            
+            // Mostrar exemplos de valores
+            Log.LogInfo("[Export] Exemplos de valores:");
+            foreach (var kvp in valuesByType.Take(10))
+            {
+                var exemplos = string.Join(" | ", kvp.Value.Take(5));
+                Log.LogInfo($"[Export]   {kvp.Key}: {exemplos}");
+            }
+            
+            // Preparar para exportação
+            _exportData = new List<Dictionary<string, string>>();
+            
+            foreach (var item in activeItems)
+            {
+                try
                 {
-                    Log.LogWarning("[Export] DataSet/m_data não encontrado");
+                    var row = new Dictionary<string, string>();
+                    
+                    var mValueField = item.GetType().GetField("m_value", BindingFlags.NonPublic | BindingFlags.Instance);
+                    var keyField = item.GetType().GetField("key", BindingFlags.Public | BindingFlags.Instance);
+                    
+                    var mValue = mValueField?.GetValue(item);
+                    var key = keyField?.GetValue(item);
+                    
+                    if (mValue != null)
+                    {
+                        var dataTypeProp = mValue.GetType().GetProperty("DataType");
+                        var dataType = dataTypeProp?.GetValue(mValue)?.ToString() ?? "";
+                        var shortType = dataType.Split('.').Last().Split('+').First();
+                        
+                        var asStringMethod = mValue.GetType().GetMethod("AsString");
+                        var valueStr = asStringMethod?.Invoke(mValue, null)?.ToString() ?? "";
+                        
+                        row["Type"] = shortType;
+                        row["Value"] = valueStr;
+                        row["Key"] = key?.ToString() ?? "";
+                        
+                        _exportData.Add(row);
+                    }
+                }
+                catch { }
+            }
+            
+            Log.LogInfo($"[Export] {_exportData.Count} itens preparados para CSV");
+        }
+        
+        private static void ProcessViaEnumerator(object enumerator)
+        {
+            try
+            {
+                var enumType = enumerator.GetType();
+                var moveNextMethod = enumType.GetMethod("MoveNext");
+                var currentProp = enumType.GetProperty("Current");
+                
+                if (moveNextMethod == null || currentProp == null)
+                {
+                    Log.LogWarning("[Export] Enumerator sem MoveNext/Current");
                     return;
                 }
                 
-                Log.LogInfo($"[Export] DataSet tipo: {dataSet.GetType().Name}");
-                
-                // Usar IEnumerable para iterar (funciona com IReadOnlyList, List, etc)
-                if (!(dataSet is IEnumerable enumerable))
-                {
-                    Log.LogWarning("[Export] DataSet não é IEnumerable");
-                    return;
-                }
-                
-                var typeGroups = new Dictionary<string, int>();
-                var activeItems = new List<object>();
-                var valuesByType = new Dictionary<string, List<string>>();
                 int total = 0;
                 int withInterest = 0;
+                var typeGroups = new Dictionary<string, int>();
                 
-                foreach (var item in enumerable)
+                while ((bool)moveNextMethod.Invoke(enumerator, null))
                 {
                     total++;
                     if (total > 5000) break;
                     
                     try
                     {
+                        var item = currentProp.GetValue(enumerator);
                         if (item == null) continue;
                         
                         var itemType = item.GetType();
                         
-                        // interest está em 0x18 - campo público
                         var interestField = itemType.GetField("interest", BindingFlags.Public | BindingFlags.Instance);
                         if (interestField == null) continue;
                         
                         var interest = interestField.GetValue(item);
                         if (interest == null) continue;
                         
-                        // Verificar se tem interesse (ativo na UI)
                         var interestType = interest.GetType();
                         var interestCountProp = interestType.GetProperty("Count");
                         if (interestCountProp == null) continue;
@@ -169,97 +337,34 @@ namespace FM26CtrlPExport
                         
                         withInterest++;
                         
-                        // m_value está em 0x30 - campo privado
                         var mValueField = itemType.GetField("m_value", BindingFlags.NonPublic | BindingFlags.Instance);
                         if (mValueField == null) continue;
                         
                         var mValue = mValueField.GetValue(item);
                         if (mValue == null) continue;
                         
-                        // AsString()
-                        var asStringMethod = mValue.GetType().GetMethod("AsString");
-                        if (asStringMethod == null) continue;
-                        
-                        var valueStr = asStringMethod.Invoke(mValue, null)?.ToString() ?? "";
-                        
-                        // DataType
                         var dataTypeProp = mValue.GetType().GetProperty("DataType");
                         var dataType = dataTypeProp?.GetValue(mValue)?.ToString() ?? "unknown";
-                        
-                        // Simplificar tipo
                         var shortType = dataType.Split('.').Last().Split('+').First();
                         
                         if (!typeGroups.ContainsKey(shortType)) typeGroups[shortType] = 0;
                         typeGroups[shortType]++;
-                        
-                        if (!valuesByType.ContainsKey(shortType)) valuesByType[shortType] = new List<string>();
-                        
-                        if (valuesByType[shortType].Count < 50)
-                        {
-                            valuesByType[shortType].Add(valueStr);
-                        }
-                        
-                        if (activeItems.Count < 2000)
-                        {
-                            activeItems.Add(item);
-                        }
                     }
                     catch { }
                 }
                 
-                Log.LogInfo($"[Export] {total} itens totais");
-                Log.LogInfo($"[Export] {withInterest} itens ATIVOS (com interest > 0)");
+                Log.LogInfo($"[Export] {total} itens via Enumerator");
+                Log.LogInfo($"[Export] {withInterest} itens ATIVOS");
                 Log.LogInfo("[Export] Tipos encontrados:");
                 foreach (var kvp in typeGroups.OrderByDescending(x => x.Value).Take(15))
                 {
                     Log.LogInfo($"[Export]   {kvp.Key}: {kvp.Value}");
                 }
-                
-                // Mostrar exemplos de valores
-                Log.LogInfo("[Export] Exemplos de valores:");
-                foreach (var kvp in valuesByType.Take(10))
-                {
-                    var exemplos = string.Join(" | ", kvp.Value.Take(5));
-                    Log.LogInfo($"[Export]   {kvp.Key}: {exemplos}");
-                }
-                
-                // Preparar para exportação
-                _exportData = new List<Dictionary<string, string>>();
-                
-                foreach (var item in activeItems)
-                {
-                    try
-                    {
-                        var row = new Dictionary<string, string>();
-                        
-                        var mValueField = item.GetType().GetField("m_value", BindingFlags.NonPublic | BindingFlags.Instance);
-                        var keyField = item.GetType().GetField("key", BindingFlags.Public | BindingFlags.Instance);
-                        
-                        var mValue = mValueField?.GetValue(item);
-                        var key = keyField?.GetValue(item);
-                        
-                        if (mValue != null)
-                        {
-                            var dataTypeProp = mValue.GetType().GetProperty("DataType");
-                            var dataType = dataTypeProp?.GetValue(mValue)?.ToString() ?? "";
-                            var shortType = dataType.Split('.').Last().Split('+').First();
-                            
-                            var asStringMethod = mValue.GetType().GetMethod("AsString");
-                            var valueStr = asStringMethod?.Invoke(mValue, null)?.ToString() ?? "";
-                            
-                            row["Type"] = shortType;
-                            row["Value"] = valueStr;
-                            row["Key"] = key?.ToString() ?? "";
-                            
-                            _exportData.Add(row);
-                        }
-                    }
-                    catch { }
-                }
-                
-                Log.LogInfo($"[Export] {_exportData.Count} itens preparados para CSV");
             }
-            catch (Exception ex) { Log.LogError($"[Export] {ex.Message}"); }
+            catch (Exception ex)
+            {
+                Log.LogError($"[Export] Enumerator error: {ex.Message}");
+            }
         }
         
         private static void Diagnose()
@@ -286,21 +391,6 @@ namespace FM26CtrlPExport
                         var val = f.GetValue(_bindingsInstance);
                         var valType = val?.GetType().Name ?? "null";
                         Log.LogInfo($"[Diag]   {f.Name} ({valType})");
-                    }
-                    catch { }
-                }
-                
-                // Listar propriedades
-                var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                Log.LogInfo($"[Diag] {props.Length} propriedades:");
-                
-                foreach (var p in props.Take(20))
-                {
-                    try
-                    {
-                        var val = p.GetValue(_bindingsInstance);
-                        var valType = val?.GetType().Name ?? "null";
-                        Log.LogInfo($"[Diag]   {p.Name} ({valType})");
                     }
                     catch { }
                 }
