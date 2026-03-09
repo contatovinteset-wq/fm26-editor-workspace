@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM26 Player Export - Infográfico</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        h1 { 
+            text-align: center; 
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            color: #00ff88;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 50px;
+            font-size: 1em;
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .section-num {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            flex-shrink: 0;
+        }
+        .section-title {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        .section-content {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            padding: 25px;
+            margin-left: 65px;
+            border-left: 3px solid;
+        }
+        
+        /* Colors per section */
+        .problema .section-num { background: #ff6b6b; color: #fff; }
+        .problema .section-title { color: #ff6b6b; }
+        .problema .section-content { border-color: #ff6b6b; }
+        
+        .hipotese .section-num { background: #ffa502; color: #fff; }
+        .hipotese .section-title { color: #ffa502; }
+        .hipotese .section-content { border-color: #ffa502; }
+        
+        .alternativa .section-num { background: #3498db; color: #fff; }
+        .alternativa .section-title { color: #3498db; }
+        .alternativa .section-content { border-color: #3498db; }
+        
+        .proposta .section-num { background: #9b59b6; color: #fff; }
+        .proposta .section-title { color: #9b59b6; }
+        .proposta .section-content { border-color: #9b59b6; }
+        
+        .resultado .section-num { background: #00ff88; color: #1a1a2e; }
+        .resultado .section-title { color: #00ff88; }
+        .resultado .section-content { border-color: #00ff88; }
+        
+        .conclusao .section-num { background: #00d9ff; color: #1a1a2e; }
+        .conclusao .section-title { color: #00d9ff; }
+        .conclusao .section-content { border-color: #00d9ff; background: rgba(0,217,255,0.05); }
+        
+        /* Content styling */
+        .section-content p { margin-bottom: 12px; }
+        .section-content p:last-child { margin-bottom: 0; }
+        .section-content ul { margin-left: 20px; margin-top: 10px; }
+        .section-content li { margin-bottom: 8px; }
+        code {
+            background: rgba(255,255,255,0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #00ff88;
+        }
+        .highlight { color: #00ff88; font-weight: bold; }
+        .warning { color: #ffa502; }
+        .error { color: #ff6b6b; }
+        
+        /* Flow diagram */
+        .flow-box {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+            font-family: monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+        }
+        .flow-box .arrow { color: #00ff88; }
+        .flow-box .comment { color: #666; }
+        
+        /* Hotkeys */
+        .hotkeys {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .hotkey {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .hotkey kbd {
+            display: block;
+            font-size: 1.2em;
+            color: #00ff88;
+            font-weight: bold;
+        }
+        .hotkey span {
+            font-size: 0.85em;
+            color: #888;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #555;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐺 FM26 Player Export</h1>
+        <p class="subtitle">Como exportar jogadores do Football Manager 26 para CSV</p>
+        
+        <!-- 1. PROBLEMA -->
+        <div class="section problema">
+            <div class="section-header">
+                <div class="section-num">1</div>
+                <div class="section-title">Problema</div>
+            </div>
+            <div class="section-content">
+                <p>O Football Manager 26 não possui uma função nativa para exportar dados de jogadores para CSV.</p>
+                <p class="error">O jogador precisa copiar os dados manualmente, o que é:</p>
+                <ul>
+                    <li><span class="error">Lento</span> — uma linha por vez</li>
+                    <li><span class="error">Impraticável</span> — para centenas de jogadores</li>
+                    <li><span class="error">Propenso a erros</span> — dados incompletos ou incorretos</li>
+                </ul>
+                <p>Necessidade: exportar <span class="highlight">todos os jogadores selecionados</span> de uma vez, em formato estruturado.</p>
+            </div>
+        </div>
+        
+        <!-- 2. HIPÓTESE -->
+        <div class="section hipotese">
+            <div class="section-header">
+                <div class="section-num">2</div>
+                <div class="section-title">Hipótese</div>
+            </div>
+            <div class="section-content">
+                <p>O FM26 é construído em <span class="highlight">Unity</span> com <span class="highlight">UI Toolkit</span> para interface.</p>
+                <p>Os dados exibidos na tabela de jogadores estão acessíveis via:</p>
+                <ul>
+                    <li><code>VisualElement</code> — estrutura da UI</li>
+                    <li><code>Label</code> / <code>TextElement</code> — textos visíveis</li>
+                    <li><code>ScrollView</code> — container com scroll</li>
+                </ul>
+                <p class="warning">Desafio: a tabela é virtualizada — só existem elementos visíveis na tela.</p>
+            </div>
+        </div>
+        
+        <!-- 3. ALTERNATIVA DE SOLUÇÃO -->
+        <div class="section alternativa">
+            <div class="section-header">
+                <div class="section-num">3</div>
+                <div class="section-title">Alternativa de Solução</div>
+            </div>
+            <div class="section-content">
+                <p>Criar um plugin <span class="highlight">BepInEx IL2CPP</span> que:</p>
+                <ul>
+                    <li>Acessa a UI do jogo em tempo real</li>
+                    <li>Navega pela árvore de <code>VisualElement</code></li>
+                    <li>Extrai texto de cada célula da tabela</li>
+                    <li>Simula scroll para capturar linhas virtualizadas</li>
+                    <li>Salva os dados em CSV</li>
+                </ul>
+                <div class="flow-box">
+                    UI Unity → <span class="arrow">→</span> Encontra tabela → <span class="arrow">→</span> Captura linhas<br>
+                    <span class="comment">     ↑</span><span class="arrow">→</span> Scroll → <span class="arrow">→</span> Captura mais → <span class="arrow">→</span> CSV
+                </div>
+            </div>
+        </div>
+        
+        <!-- 4. PROPOSTA -->
+        <div class="section proposta">
+            <div class="section-header">
+                <div class="section-num">4</div>
+                <div class="section-title">Proposta</div>
+            </div>
+            <div class="section-content">
+                <p><strong>FM26PlayerExport</strong> — Plugin BepInEx com as seguintes funcionalidades:</p>
+                
+                <p style="margin-top: 15px;"><strong>Hotkeys:</strong></p>
+                <div class="hotkeys">
+                    <div class="hotkey">
+                        <kbd>Ctrl+P</kbd>
+                        <span>Iniciar exportação</span>
+                    </div>
+                    <div class="hotkey">
+                        <kbd>F8</kbd>
+                        <span>Re-escanear UI</span>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 15px;"><strong>Fluxo de captura:</strong></p>
+                <ul>
+                    <li>Localiza <code>playertable</code> na árvore UI</li>
+                    <li>Extrai cabeçalhos de <code>column-headers</code></li>
+                    <li>Detecta linhas com classe <code>virtualised-list__item--selected</code></li>
+                    <li>Extrai texto de cada célula (incluindo estrelas/ratings)</li>
+                    <li>Scrolla automaticamente para capturar mais linhas</li>
+                    <li>Deduplica por hash do conteúdo completo</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>Proteções:</strong></p>
+                <ul>
+                    <li>Limite de 5000 linhas por export</li>
+                    <li>Para após 3 passos sem novos dados (stalled)</li>
+                    <li>Máximo de 500 tentativas de scroll</li>
+                    <li>Try-catch em todas as operações</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 5. RESULTADO -->
+        <div class="section resultado">
+            <div class="section-header">
+                <div class="section-num">5</div>
+                <div class="section-title">Resultado</div>
+            </div>
+            <div class="section-content">
+                <p><span class="highlight">✅ Plugin funcional e testado</span></p>
+                
+                <p style="margin-top: 15px;"><strong>Arquivo gerado:</strong></p>
+                <div class="flow-box">
+                    Documents\Sports Interactive\Football Manager 2026\player_export_20260309_175500.csv
+                </div>
+                
+                <p style="margin-top: 15px;"><strong>Formato do CSV:</strong></p>
+                <div class="flow-box">
+                    Nome;Clube;Valor;Rating;Posição<br>
+                    João Silva;Flamengo;€5M;4,5;Atacante<br>
+                    Carlos Santos;Palmeiras;€3M;3,0;Meio-campo
+                </div>
+                
+                <p style="margin-top: 15px;"><strong>Funcionalidades implementadas:</strong></p>
+                <ul>
+                    <li>✅ Captura de linhas selecionadas</li>
+                    <li>✅ Leitura de estrelas/ratings via classes CSS</li>
+                    <li>✅ Deduplicação robusta</li>
+                    <li>✅ Scroll automático para lista virtualizada</li>
+                    <li>✅ Proteção contra loops infinitos</li>
+                    <li>✅ Compatível com atualizações do jogo</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 6. CONCLUSÃO -->
+        <div class="section conclusao">
+            <div class="section-header">
+                <div class="section-num">6</div>
+                <div class="section-title">Conclusão</div>
+            </div>
+            <div class="section-content">
+                <p>O <span class="highlight">FM26PlayerExport</span> resolve o problema de exportação de dados do Football Manager 26 de forma eficiente e confiável.</p>
+                
+                <p style="margin-top: 15px;"><strong>Pontos-chave:</strong></p>
+                <ul>
+                    <li>Usa APIs públicas do Unity — <span class="highlight">não quebra com atualizações</span></li>
+                    <li>Aborda a virtualização com scroll automático</li>
+                    <li>Trata casos especiais (estrelas, células compostas)</li>
+                    <li>Protege contra erros e loops infinitos</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>Resultado prático:</strong></p>
+                <p>Com um simples <code>Ctrl+P</code>, o jogador exporta centenas de registros em segundos, diretamente para CSV, pronto para análise em Excel ou outras ferramentas.</p>
+                
+                <p style="margin-top: 15px; color: #00d9ff; font-weight: bold;">🏆 Problema resolvido.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>FM26 Player Export v1.0.0 | BepInEx IL2CPP Plugin</p>
+            <p style="margin-top: 5px;">https://github.com/contatovinteset-wq/fm26-editor-workspace</p>
+        </div>
+    </div>
+</body>
+</html>
