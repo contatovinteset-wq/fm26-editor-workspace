@@ -15,220 +15,296 @@ namespace FM26PlayerExport
     public class Plugin : BasePlugin
     {
         internal static new ManualLogSource Log;
+        
         public override void Load()
         {
             Log = base.Log;
-            Log.LogInfo("[FM26Export] Carregado! Ctrl+P = exportar | F8 = re-escanear");
+            Log.LogInfo("[FM26Export] Plugin carregado!");
+            Log.LogInfo("[FM26Export] F8 = Re-escanear UIDocuments");
+            Log.LogInfo("[FM26Export] Ctrl+P = Exportar jogadores para CSV");
+            
             AddComponent<ExportBehaviour>();
         }
     }
-
+    
     public class ExportBehaviour : MonoBehaviour
     {
-        private List<UIDocument> _docs = new List<UIDocument>();
-        private int _frame = 0;
-        private bool _ready = false;
-
+        private List<UIDocument> _uiDocuments = new List<UIDocument>();
+        private bool _initialized = false;
+        private int _frameCount = 0;
+        
         public ExportBehaviour(IntPtr ptr) : base(ptr) { }
-
+        
+        private void Start()
+        {
+            Plugin.Log.LogInfo("[FM26Export] Behaviour iniciado");
+        }
+        
         private void Update()
         {
-            _frame++;
-            if (!_ready && _frame > 300) { _ready = true; Scan(); }
+            _frameCount++;
+            
+            if (!_initialized && _frameCount > 300)
+            {
+                _initialized = true;
+                ScanUIDocuments();
+            }
+            
             if (Keyboard.current == null) return;
-            if (Keyboard.current.f8Key.wasPressedThisFrame) Scan();
+            
+            if (Keyboard.current.f8Key.wasPressedThisFrame)
+            {
+                Plugin.Log.LogInfo("[FM26Export] >>> F8 - Re-escaneando UIDocuments...");
+                ScanUIDocuments();
+            }
+            
             bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
-            if (ctrl && Keyboard.current.pKey.wasPressedThisFrame) Export();
-        }
-
-        // ── Helpers (sem Q()/Query<T>()) ──
-
-        private static VisualElement FindByName(VisualElement el, string name)
-        {
-            if (el == null) return null;
-            if (el.name == name) return el;
-            for (int i = 0; i < el.childCount; i++)
+            bool p = Keyboard.current.pKey.wasPressedThisFrame;
+            
+            if (ctrl && p)
             {
-                var r = FindByName(el.ElementAt(i), name);
-                if (r != null) return r;
+                Plugin.Log.LogInfo("[FM26Export] >>> Ctrl+P - Iniciando exportação...");
+                ExportPlayers();
             }
-            return null;
         }
-
-        private static void CollectLabels(VisualElement el, List<string> result, int depth = 0)
+        
+        private void ScanUIDocuments()
         {
-            if (el == null || depth > 15) return;
-            if (el is Label lbl)
+            _uiDocuments.Clear();
+            
+            var allDocs = FindObjectsOfType<UIDocument>();
+            Plugin.Log.LogInfo($"[FM26Export] Encontrados {allDocs.Length} UIDocuments");
+            
+            foreach (var doc in allDocs)
             {
-                try
+                if (doc.rootVisualElement != null)
                 {
-                    var t = lbl.text?.Trim() ?? string.Empty;
-                    if (t.Length > 0) result.Add(t);
+                    var rootName = doc.rootVisualElement.name;
+                    Plugin.Log.LogInfo($"[FM26Export]   - {rootName}");
+                    
+                    if (rootName == "PanelManager-container")
+                    {
+                        _uiDocuments.Add(doc);
+                        Plugin.Log.LogInfo($"[FM26Export]   ✓ PanelManager encontrado!");
+                    }
                 }
-                catch { }
-                return;
             }
-            for (int i = 0; i < el.childCount; i++)
-                CollectLabels(el.ElementAt(i), result, depth + 1);
+            
+            Plugin.Log.LogInfo($"[FM26Export] Total PanelManager documents: {_uiDocuments.Count}");
         }
-
-        // ─────────────────────────────────
-
-        private void Scan()
+        
+        private VisualElement QSafe(VisualElement parent, string name)
         {
-            _docs.Clear();
-            var all = FindObjectsOfType<UIDocument>();
-            Plugin.Log.LogInfo($"[FM26Export] {all.Length} UIDocuments");
-            foreach (var doc in all)
-                if (doc.rootVisualElement != null && doc.rootVisualElement.name == "PanelManager-container")
-                    _docs.Add(doc);
-            Plugin.Log.LogInfo($"[FM26Export] PanelManagers: {_docs.Count}");
+            return parent.Q(name, (string)null);
         }
-
-        private void Export()
+        
+        private UQueryBuilder<T> QuerySafe<T>(VisualElement parent) where T : VisualElement
+        {
+            return parent.Query<T>(null, (string)null);
+        }
+        
+        private void ExportPlayers()
         {
             try
             {
-                if (_docs.Count == 0) Scan();
-                if (_docs.Count == 0)
+                if (_uiDocuments.Count == 0)
                 {
-                    Plugin.Log.LogError("[FM26Export] Sem UIDocument. Abra a Player Database e aperte F8.");
-                    return;
+                    Plugin.Log.LogWarning("[FM26Export] Nenhum UIDocument escaneado. Aperte F8 primeiro.");
+                    ScanUIDocuments();
+                    
+                    if (_uiDocuments.Count == 0)
+                    {
+                        Plugin.Log.LogError("[FM26Export] Ainda sem UIDocuments. Abra a tela de jogadores primeiro.");
+                        return;
+                    }
                 }
-
-                foreach (var doc in _docs)
+                
+                foreach (var doc in _uiDocuments)
                 {
                     var root = doc.rootVisualElement;
                     if (root == null) continue;
-
-                    // Caminho confirmado pelo dump:
-                    // playertable > child[1] > child[0] > View (virtualised-list__view) > linhas
-                    var playertable = FindByName(root, "playertable");
-                    if (playertable == null)
+                    
+                    Plugin.Log.LogInfo($"[FM26Export] Processando root: {root.name}");
+                    
+                    var tables = QSafe(root, "tables");
+                    if (tables == null)
                     {
-                        Plugin.Log.LogWarning("[FM26Export] 'playertable' nao encontrado");
+                        Plugin.Log.LogWarning("[FM26Export] 'tables' não encontrado");
                         continue;
                     }
-                    Plugin.Log.LogInfo($"[FM26Export] 'playertable' encontrado, filhos: {playertable.childCount}");
-
-                    // child[1] = container sem nome com o scroll virtualizado
-                    if (playertable.childCount < 2)
+                    Plugin.Log.LogInfo($"[FM26Export] ✓ 'tables' encontrado");
+                    
+                    var tableContainer = QSafe(tables, "search-table-remapper");
+                    if (tableContainer == null)
                     {
-                        Plugin.Log.LogWarning($"[FM26Export] playertable tem apenas {playertable.childCount} filhos");
-                        continue;
-                    }
-                    var scrollContainer = playertable.ElementAt(1);
-
-                    // child[0] do scrollContainer = o scroll view virtualizado
-                    if (scrollContainer.childCount < 1) continue;
-                    var scrollView = scrollContainer.ElementAt(0);
-
-                    // Dentro do scrollView, procura 'View' (virtualised-list__view)
-                    var view = FindByName(scrollView, "View");
-                    if (view == null)
-                    {
-                        Plugin.Log.LogWarning("[FM26Export] 'View' nao encontrado dentro do scroll");
-                        continue;
-                    }
-                    Plugin.Log.LogInfo($"[FM26Export] 'View' encontrado, {view.childCount} linhas visiveis");
-
-                    // Headers: column-headers > panes > Labels
-                    var headers = new List<string>();
-                    var colHeaders = FindByName(playertable, "column-headers");
-                    if (colHeaders != null)
-                    {
-                        for (int i = 0; i < colHeaders.childCount; i++)
+                        Plugin.Log.LogWarning("[FM26Export] 'search-table-remapper' não encontrado");
+                        
+                        Plugin.Log.LogInfo("[FM26Export] Filhos de 'tables':");
+                        int childCount = 0;
+                        foreach (var child in tables.Children())
                         {
-                            var pane = colHeaders.ElementAt(i);
-                            var cellLabels = new List<string>();
-                            CollectLabels(pane, cellLabels);
-                            headers.Add(cellLabels.Count > 0 ? Esc(cellLabels[0]) : $"Col{i}");
+                            childCount++;
+                            Plugin.Log.LogInfo($"[FM26Export]   [{childCount}] {child.name} (type: {child.GetType().Name})");
+                            if (childCount >= 20) break;
                         }
-                        Plugin.Log.LogInfo($"[FM26Export] {headers.Count} colunas no header");
+                        continue;
                     }
-                    else
-                    {
-                        Plugin.Log.LogWarning("[FM26Export] 'column-headers' nao encontrado - usando genericos");
-                    }
-                    if (headers.Count == 0) headers.Add("Dados");
-
-                    // Linhas: filtrar por classe virtualised-list__item--selected
+                    
+                    Plugin.Log.LogInfo($"[FM26Export] ✓ 'search-table-remapper' encontrado");
+                    
+                    int rowCount = 0;
+                    foreach (var _ in tableContainer.Children())
+                        rowCount++;
+                    
+                    Plugin.Log.LogInfo($"[FM26Export] 'search-table-remapper' tem {rowCount} filhos");
+                    
                     var selectedRows = new List<VisualElement>();
-                    int totalRows = 0;
-
-                    for (int i = 0; i < view.childCount; i++)
+                    int toggleSelected = 0;
+                    int classSelected = 0;
+                    
+                    foreach (var row in tableContainer.Children())
                     {
-                        var row = view.ElementAt(i);
-                        totalRows++;
-                        bool sel = false;
-                        try { sel = row.ClassListContains("virtualised-list__item--selected"); } catch { }
-                        if (sel) selectedRows.Add(row);
+                        bool isSelected = false;
+                        
+                        try
+                        {
+                            var toggles = QuerySafe<Toggle>(row).Build().ToList();
+                            if (toggles.Count > 0 && toggles[0].value)
+                            {
+                                isSelected = true;
+                                toggleSelected++;
+                            }
+                        }
+                        catch { }
+                        
+                        if (!isSelected)
+                        {
+                            try
+                            {
+                                if (row.ClassListContains("selected") || row.ClassListContains("checked"))
+                                {
+                                    isSelected = true;
+                                    classSelected++;
+                                }
+                            }
+                            catch { }
+                        }
+                        
+                        if (isSelected)
+                        {
+                            selectedRows.Add(row);
+                        }
                     }
-
-                    Plugin.Log.LogInfo($"[FM26Export] Linhas visiveis: {totalRows} | Selecionadas: {selectedRows.Count}");
-
+                    
+                    Plugin.Log.LogInfo($"[FM26Export] Linhas com Toggle marcado: {toggleSelected}");
+                    Plugin.Log.LogInfo($"[FM26Export] Linhas com classe 'selected': {classSelected}");
+                    
                     if (selectedRows.Count == 0)
                     {
-                        Plugin.Log.LogInfo("[FM26Export] Nenhuma selecionada - exportando TODAS visiveis");
-                        for (int i = 0; i < view.childCount; i++)
-                            selectedRows.Add(view.ElementAt(i));
+                        Plugin.Log.LogInfo("[FM26Export] Nenhuma linha selecionada - exportando TODAS");
+                        foreach (var row in tableContainer.Children())
+                        {
+                            selectedRows.Add(row);
+                        }
                     }
-
-                    // Montar CSV
-                    // Estrutura da linha: row > child[0] (cell-selector) > N filhos (streamed-table__cell) > Labels
+                    
+                    var headers = new List<string>();
+                    try
+                    {
+                        var headerSection = QSafe(root, "PersonSearchTableTopSection");
+                        if (headerSection != null)
+                        {
+                            Plugin.Log.LogInfo("[FM26Export] ✓ 'PersonSearchTableTopSection' encontrado");
+                            
+                            var headerLabels = QuerySafe<Label>(headerSection).Build().ToList();
+                            Plugin.Log.LogInfo($"[FM26Export] {headerLabels.Count} labels no header");
+                            
+                            foreach (var label in headerLabels)
+                            {
+                                var text = label.text?.Trim() ?? "";
+                                if (!string.IsNullOrEmpty(text))
+                                {
+                                    headers.Add(EscapeCSV(text));
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Plugin.Log.LogError($"[FM26Export] Erro ao ler header: {ex.Message}");
+                    }
+                    
+                    if (headers.Count == 0)
+                    {
+                        headers.Add("Dados");
+                    }
+                    
                     var csv = new StringBuilder();
                     csv.AppendLine(string.Join(";", headers));
-
-                    int count = 0;
+                    
+                    int exportedCount = 0;
                     foreach (var row in selectedRows)
                     {
                         try
                         {
-                            if (row.childCount == 0) continue;
-                            var cellSelector = row.ElementAt(0); // streamed-table-cell-selector
-                            var vals = new List<string>();
-
-                            for (int c = 0; c < cellSelector.childCount; c++)
+                            var values = new List<string>();
+                            
+                            var labels = QuerySafe<Label>(row).Build().ToList();
+                            foreach (var label in labels)
                             {
-                                var cell = cellSelector.ElementAt(c); // streamed-table__cell
-                                var cellLabels = new List<string>();
-                                CollectLabels(cell, cellLabels);
-                                vals.Add(cellLabels.Count > 0 ? Esc(cellLabels[0]) : string.Empty);
+                                var text = label.text?.Trim() ?? "";
+                                if (!string.IsNullOrEmpty(text))
+                                {
+                                    values.Add(EscapeCSV(text));
+                                }
                             }
-
-                            if (vals.Count > 0)
+                            
+                            if (values.Count > 0)
                             {
-                                csv.AppendLine(string.Join(";", vals));
-                                count++;
+                                csv.AppendLine(string.Join(";", values));
+                                exportedCount++;
                             }
                         }
                         catch { }
-                        if (count >= 10000) break;
+                        
+                        if (exportedCount >= 10000) break;
                     }
-
-                    string path = Path.Combine(
-                        Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                        "Sports Interactive", "Football Manager 2026");
-                    if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-                    string file = Path.Combine(path, $"player_export_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
-                    File.WriteAllText(file, csv.ToString(), Encoding.UTF8);
-                    Plugin.Log.LogInfo($"[FM26Export] {count} jogadores exportados -> {file}");
+                    
+                    string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    string fm26Path = Path.Combine(docsPath, "Sports Interactive", "Football Manager 2026");
+                    
+                    if (!Directory.Exists(fm26Path))
+                    {
+                        Directory.CreateDirectory(fm26Path);
+                    }
+                    
+                    string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    string filename = $"player_export_{timestamp}.csv";
+                    string fullPath = Path.Combine(fm26Path, filename);
+                    
+                    File.WriteAllText(fullPath, csv.ToString(), Encoding.UTF8);
+                    
+                    Plugin.Log.LogInfo($"[FM26Export] ✅ Exportado {exportedCount} jogadores");
+                    Plugin.Log.LogInfo($"[FM26Export] 📁 Arquivo: {fullPath}");
+                    
                     return;
                 }
             }
             catch (Exception ex)
             {
-                Plugin.Log.LogError($"[FM26Export] ERRO: {ex.Message}\n{ex.StackTrace}");
+                Plugin.Log.LogError($"[FM26Export] ERRO: {ex.Message}");
             }
         }
-
-        private static string Esc(string v)
+        
+        private string EscapeCSV(string value)
         {
-            if (string.IsNullOrEmpty(v)) return string.Empty;
-            v = v.Replace("\r", " ").Replace("\n", " ");
-            string q = new string(new char[]{ (char)34 });
-            if (v.Contains(";") || v.Contains(q)) v = q + v.Replace(q, q + q) + q;
-            return v;
+            if (string.IsNullOrEmpty(value)) return "";
+            value = value.Replace("\r", " ").Replace("\n", " ");
+            if (value.Contains(";") || value.Contains("\""))
+            {
+                value = "\"" + value.Replace("\"", "\"\"") + "\"";
+            }
+            return value;
         }
     }
 }
