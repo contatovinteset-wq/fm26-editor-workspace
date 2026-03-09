@@ -93,7 +93,6 @@ namespace FM26PlayerExport
             Plugin.Log.LogInfo($"[FM26Export] Total PanelManager documents: {_uiDocuments.Count}");
         }
         
-        // Helper para evitar ambiguidade IL2CPP
         private VisualElement QSafe(VisualElement parent, string name)
         {
             return parent.Q(name, (string)null);
@@ -127,7 +126,6 @@ namespace FM26PlayerExport
                     
                     Plugin.Log.LogInfo($"[FM26Export] Processando root: {root.name}");
                     
-                    // PASSO 1: Localizar tabela
                     var tables = QSafe(root, "tables");
                     if (tables == null)
                     {
@@ -154,14 +152,12 @@ namespace FM26PlayerExport
                     
                     Plugin.Log.LogInfo($"[FM26Export] ✓ 'search-table-remapper' encontrado");
                     
-                    // Contar filhos
                     int rowCount = 0;
                     foreach (var _ in tableContainer.Children())
                         rowCount++;
                     
                     Plugin.Log.LogInfo($"[FM26Export] 'search-table-remapper' tem {rowCount} filhos");
                     
-                    // PASSO 2: Ler linhas
                     var selectedRows = new List<VisualElement>();
                     int toggleSelected = 0;
                     int classSelected = 0;
@@ -172,13 +168,8 @@ namespace FM26PlayerExport
                         
                         try
                         {
-                            var toggle = QSafe(row, "") as Toggle;
-                            if (toggle == null)
-                            {
-                                var toggles = QuerySafe<Toggle>(row).Build().ToList();
-                                if (toggles.Count > 0) toggle = toggles[0];
-                            }
-                            if (toggle != null && toggle.value)
+                            var toggles = QuerySafe<Toggle>(row).Build().ToList();
+                            if (toggles.Count > 0 && toggles[0].value)
                             {
                                 isSelected = true;
                                 toggleSelected++;
@@ -217,7 +208,6 @@ namespace FM26PlayerExport
                         }
                     }
                     
-                    // PASSO 3: Ler cabeçalho
                     var headers = new List<string>();
                     try
                     {
@@ -238,10 +228,6 @@ namespace FM26PlayerExport
                                 }
                             }
                         }
-                        else
-                        {
-                            Plugin.Log.LogWarning("[FM26Export] 'PersonSearchTableTopSection' não encontrado");
-                        }
                     }
                     catch (Exception ex)
                     {
@@ -253,7 +239,6 @@ namespace FM26PlayerExport
                         headers.Add("Dados");
                     }
                     
-                    // PASSO 4: Montar CSV
                     var csv = new StringBuilder();
                     csv.AppendLine(string.Join(";", headers));
                     
@@ -285,7 +270,6 @@ namespace FM26PlayerExport
                         if (exportedCount >= 10000) break;
                     }
                     
-                    // PASSO 5: Salvar CSV
                     string docsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     string fm26Path = Path.Combine(docsPath, "Sports Interactive", "Football Manager 2026");
                     
@@ -309,21 +293,17 @@ namespace FM26PlayerExport
             catch (Exception ex)
             {
                 Plugin.Log.LogError($"[FM26Export] ERRO: {ex.Message}");
-                Plugin.Log.LogError($"[FM26Export] Stack: {ex.StackTrace}");
             }
         }
         
         private string EscapeCSV(string value)
         {
             if (string.IsNullOrEmpty(value)) return "";
-            
             value = value.Replace("\r", " ").Replace("\n", " ");
-            
             if (value.Contains(";") || value.Contains("\""))
             {
                 value = "\"" + value.Replace("\"", "\"\"") + "\"";
             }
-            
             return value;
         }
     }
