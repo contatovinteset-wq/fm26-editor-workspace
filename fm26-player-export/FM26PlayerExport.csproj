@@ -1,47 +1,49 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-    <LangVersion>latest</LangVersion>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
 
-  <!-- Tenta localizar o FM26 automaticamente -->
   <PropertyGroup>
-    <FM26Path Condition="Exists('E:\Steam\steamapps\common\Football Manager 26')">E:\Steam\steamapps\common\Football Manager 26</FM26Path>
-    <FM26Path Condition="Exists('C:\Program Files (x86)\Steam\steamapps\common\Football Manager 26')">C:\Program Files (x86)\Steam\steamapps\common\Football Manager 26</FM26Path>
-    <FM26Path Condition="Exists('$(HOME)\.steam\steam\steamapps\common\Football Manager 26')">$(HOME)\.steam\steam\steamapps\common\Football Manager 26</FM26Path>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>FM26PlayerExport</AssemblyName>
+    <Version>1.0.0</Version>
+    <OutputType>Library</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>MSB3277</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="BepInEx.Core">
-      <HintPath>$(FM26Path)\BepInEx\core\BepInEx.Core.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\BepInEx.Core.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="BepInEx.Unity.IL2CPP">
-      <HintPath>$(FM26Path)\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Il2CppInterop.Runtime">
-      <HintPath>$(FM26Path)\BepInEx\interop\Il2CppInterop.Runtime.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>$(FM26Path)\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(FM26Path)\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule">
-      <HintPath>$(FM26Path)\BepInEx\interop\UnityEngine.UIElementsModule.dll</HintPath>
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\UnityEngine.UIElementsModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <Reference Include="UnityEngine.InputSystemModule">
-      <HintPath>$(FM26Path)\BepInEx\interop\UnityEngine.InputSystemModule.dll</HintPath>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\Unity.InputSystem.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
+
 </Project>
