@@ -26,22 +26,26 @@ namespace FM26PlayerExport
 
     public class ExportBehaviour : MonoBehaviour
     {
-        private List<UIDocument> _docs = new List<UIDocument>();
-        private int _frame = 0;
-        private bool _ready = false;
+        // ── Configurações de performance ──────────────────────
+        private const int WAIT_FRAMES    = 4;    // frames aguardados após cada scroll
+        private const int MAX_SCROLL     = 500;  // segurança contra loop infinito
+        private const int MAX_ROWS       = 5000; // limite de linhas por export
+        private const int ZERO_STEPS_MAX = 3;    // passos consecutivos sem captura antes de parar
 
-        // Estado da captura por scroll
+        private List<UIDocument> _docs    = new List<UIDocument>();
+        private int  _frame   = 0;
+        private bool _ready   = false;
         private bool _capturing = false;
-        private int _captureWait = 0;
-        private ScrollView _captureScrollView;
+        private int  _captureWait = 0;
+        private ScrollView    _captureScrollView;
         private VisualElement _captureView;
-        private List<string> _captureHeaders;
+        private List<string>  _captureHeaders;
         private List<List<string>> _capturedRows;
-        private HashSet<string> _seenKeys;
+        private HashSet<string>    _seenKeys;
         private float _lastScrollY;
-        private int _scrollAttempts;
-        private const int MAX_SCROLL_ATTEMPTS = 300;
-        private const int WAIT_FRAMES = 3;
+        private int   _scrollAttempts;
+        private int   _zeroSteps;
+        private bool  _diagLogged;
 
         public ExportBehaviour(IntPtr ptr) : base(ptr) { }
 
@@ -50,8 +54,7 @@ namespace FM26PlayerExport
             _frame++;
             if (!_ready && _frame > 300) { _ready = true; Scan(); }
             if (Keyboard.current == null) return;
-            if (Keyboard.current.f8Key.wasPressedThisFrame) Scan();
-
+            if (Keyboard.current.f8Key.wasPressedThisFrame) { Scan(); _diagLogged = false; }
             if (!_capturing)
             {
                 bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
@@ -59,78 +62,134 @@ namespace FM26PlayerExport
             }
             else
             {
-                // Aguardar frames para o virtualised-list atualizar após o scroll
                 if (_captureWait > 0) { _captureWait--; return; }
                 CaptureStep();
             }
         }
 
-        // ── Helpers ──────────────────────────────────────────────
-
-        private static VisualElement FindByName(VisualElement el, string name)
-        {
-            if (el == null) return null;
-            if (el.name == name) return el;
-            for (int i = 0; i < el.childCount; i++)
-            {
-                var r = FindByName(el.ElementAt(i), name);
-                if (r != null) return r;
-            }
-            return null;
-        }
+        // ── Leitura de texto ──────────────────────────────────
 
         private static string GetText(VisualElement el)
         {
             if (el == null) return null;
+            try { var te = el.TryCast<TextElement>(); if (te != null && !string.IsNullOrWhiteSpace(te.text)) return StripHtml(te.text.Trim()); } catch { }
+            try { var lb = el.TryCast<Label>();       if (lb != null && !string.IsNullOrWhiteSpace(lb.text)) return StripHtml(lb.text.Trim()); } catch { }
+            try { var tip = el.tooltip;               if (!string.IsNullOrWhiteSpace(tip)) return StripHtml(tip.Trim()); } catch { }
+            return null;
+        }
+
+        private static string StripHtml(string s)
+            => string.IsNullOrEmpty(s) ? s : Regex.Replace(s, "<[^>]+>", string.Empty).Trim();
+
+        private static string CollectFirstText(VisualElement el, int d = 0)
+        {
+            if (el == null || d > 20) return null;
+            var t = GetText(el);
+            if (t != null) return t;
+            for (int i = 0; i < el.childCount; i++) { var r = CollectFirstText(el.ElementAt(i), d+1); if (r != null) return r; }
+            return null;
+        }
+
+        private static void CollectAllTexts(VisualElement el, List<string> out_, int d = 0)
+        {
+            if (el == null || d > 20) return;
+            var t = GetText(el); if (t != null) out_.Add(t);
+            for (int i = 0; i < el.childCount; i++) CollectAllTexts(el.ElementAt(i), out_, d+1);
+        }
+
+        // ── Estrelas ─────────────────────────────────────────
+        // Conta estrelas preenchidas/metade/vazias pelo nome das classes CSS
+        private static string TryReadStars(VisualElement cell)
+        {
+            int filled = 0, half = 0, total = 0;
+            CountStars(cell, ref filled, ref half, ref total, 0);
+            if (total == 0) return null;
+            float val = filled + half * 0.5f;
+            // Retorna vazio se todas as estrelas estão vazias (sem rating atribuído)
+            if (val <= 0) return string.Empty;
+            return val.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture).Replace(".", ",");
+        }
+
+        private static void CountStars(VisualElement el, ref int filled, ref int half, ref int total, int d)
+        {
+            if (el == null || d > 12) return;
             try
             {
-                var te = el.TryCast<TextElement>();
-                if (te != null)
+                bool isStar = false, isFilled = false, isHalf = false;
+                for (int c = 0; c < el.classList.Count; c++)
                 {
-                    var t = te.text;
-                    if (!string.IsNullOrWhiteSpace(t)) return StripHtml(t.Trim());
+                    string cls = el.classList[c].ToLower();
+                    if (cls.Contains("star") || cls.Contains("ability") || cls.Contains("rating")) isStar = true;
+                    if (cls.Contains("filled") || cls.Contains("active") || cls.Contains("full") || cls.Contains("on")) isFilled = true;
+                    if (cls.Contains("half")) isHalf = true;
+                }
+                if (isStar && el.childCount == 0) // folha = 1 estrela
+                {
+                    total++;
+                    if (isHalf)   half++;
+                    else if (isFilled) filled++;
                 }
             }
             catch { }
-            return null;
+            for (int i = 0; i < el.childCount; i++) CountStars(el.ElementAt(i), ref filled, ref half, ref total, d+1);
         }
 
-        // Remove tags HTML: <color=#fff>Texto</color> → Texto
-        private static string StripHtml(string s)
+        // ── Diagnóstico ───────────────────────────────────────
+        private static string DiagCell(VisualElement el, int d = 0)
         {
-            if (string.IsNullOrEmpty(s)) return s;
-            return Regex.Replace(s, "<[^>]+>", string.Empty).Trim();
+            if (el == null || d > 6) return string.Empty;
+            var clsSb = new StringBuilder();
+            try { for (int c = 0; c < el.classList.Count; c++) { if (c>0) clsSb.Append(','); clsSb.Append(el.classList[c]); } } catch { }
+            string t = GetText(el) ?? string.Empty;
+            var sb = new StringBuilder();
+            sb.Append($"{new string('-',d)}{el.GetType().Name}[cls={clsSb},ch={el.childCount},txt={t}] ");
+            for (int i = 0; i < el.childCount; i++) sb.Append(DiagCell(el.ElementAt(i), d+1));
+            return sb.ToString();
         }
 
-        private static string CollectFirstText(VisualElement el, int depth = 0)
-        {
-            if (el == null || depth > 15) return null;
-            var t = GetText(el);
-            if (t != null) return t;
-            for (int i = 0; i < el.childCount; i++)
-            {
-                var r = CollectFirstText(el.ElementAt(i), depth + 1);
-                if (r != null) return r;
-            }
-            return null;
-        }
-
-        // Lê os valores de uma linha (pula a primeira célula = checkbox)
-        private static List<string> ReadRow(VisualElement row)
+        // ── Leitura de linha ──────────────────────────────────
+        private static List<string> ReadRow(VisualElement row, bool diag)
         {
             var vals = new List<string>();
             if (row == null || row.childCount == 0) return vals;
-            var cellSelector = row.ElementAt(0);
-            // Começa em 1 para pular a coluna de checkbox
-            for (int c = 1; c < cellSelector.childCount; c++)
+            var sel = row.ElementAt(0);
+            for (int c = 1; c < sel.childCount; c++) // c=1 pula checkbox
             {
-                var txt = CollectFirstText(cellSelector.ElementAt(c));
-                vals.Add(txt ?? string.Empty);
+                var cell = sel.ElementAt(c);
+                string val;
+
+                if (c == 1) // célula do jogador: pega texto mais longo
+                {
+                    var txts = new List<string>();
+                    CollectAllTexts(cell, txts);
+                    if (diag) Plugin.Log.LogInfo($"[FM26Export] Cel[1] DIAG: {DiagCell(cell)}");
+                    val = string.Empty;
+                    foreach (var tx in txts) if (tx.Length > val.Length) val = tx;
+                }
+                else
+                {
+                    val = CollectFirstText(cell) ?? string.Empty;
+                    // Se vazio, tenta ler como estrelas
+                    if (string.IsNullOrEmpty(val))
+                    {
+                        var stars = TryReadStars(cell);
+                        if (stars != null) val = stars;
+                    }
+                }
+                vals.Add(val);
             }
             return vals;
         }
 
-        // ─────────────────────────────────────────────────────────
+        // ── Chave de deduplicação (hash do conteúdo completo da linha) ──
+        private static string RowKey(List<string> vals)
+        {
+            if (vals == null || vals.Count == 0) return string.Empty;
+            // Usa todas as colunas para evitar falsos positivos em jogadores com mesmo nome/clube
+            return string.Join("|", vals);
+        }
+
+        // ── Scan / Capture ────────────────────────────────────
 
         private void Scan()
         {
@@ -138,7 +197,7 @@ namespace FM26PlayerExport
             var all = FindObjectsOfType<UIDocument>();
             Plugin.Log.LogInfo($"[FM26Export] {all.Length} UIDocuments");
             foreach (var doc in all)
-                if (doc.rootVisualElement != null && doc.rootVisualElement.name == "PanelManager-container")
+                if (doc.rootVisualElement?.name == "PanelManager-container")
                     _docs.Add(doc);
             Plugin.Log.LogInfo($"[FM26Export] PanelManagers: {_docs.Count}");
         }
@@ -148,69 +207,54 @@ namespace FM26PlayerExport
             try
             {
                 if (_docs.Count == 0) Scan();
-                if (_docs.Count == 0)
-                {
-                    Plugin.Log.LogError("[FM26Export] Sem UIDocument. Abra a Player Database e aperte F8.");
-                    return;
-                }
+                if (_docs.Count == 0) { Plugin.Log.LogError("[FM26Export] Sem UIDocument."); return; }
 
                 VisualElement root = null;
-                foreach (var doc in _docs)
-                    if (doc.rootVisualElement != null) { root = doc.rootVisualElement; break; }
+                foreach (var doc in _docs) if (doc.rootVisualElement != null) { root = doc.rootVisualElement; break; }
                 if (root == null) return;
 
-                var playertable = FindByName(root, "playertable");
-                if (playertable == null) { Plugin.Log.LogWarning("[FM26Export] 'playertable' nao encontrado"); return; }
+                var pt = FindByName(root, "playertable");
+                if (pt == null) { Plugin.Log.LogWarning("[FM26Export] playertable nao encontrado"); return; }
+                if (pt.childCount < 2) return;
+                var svEl = pt.ElementAt(1).childCount > 0 ? pt.ElementAt(1).ElementAt(0) : null;
+                if (svEl == null) return;
 
-                if (playertable.childCount < 2) return;
-                var scrollContainer = playertable.ElementAt(1);
-                if (scrollContainer.childCount < 1) return;
-
-                var scrollViewEl = scrollContainer.ElementAt(0);
-                _captureScrollView = scrollViewEl.TryCast<ScrollView>();
+                _captureScrollView = svEl.TryCast<ScrollView>();
                 if (_captureScrollView == null) { Plugin.Log.LogWarning("[FM26Export] ScrollView nao encontrado"); return; }
 
                 _captureView = FindByName(_captureScrollView, "View");
-                if (_captureView == null) { Plugin.Log.LogWarning("[FM26Export] 'View' nao encontrado"); return; }
+                if (_captureView == null) { Plugin.Log.LogWarning("[FM26Export] View nao encontrada"); return; }
 
-                // Headers: pular coluna 0 (checkbox)
                 _captureHeaders = new List<string>();
-                var colHeaders = FindByName(playertable, "column-headers");
-                if (colHeaders != null)
-                {
-                    for (int i = 1; i < colHeaders.childCount; i++) // i=1 pula checkbox
+                var ch = FindByName(pt, "column-headers");
+                if (ch != null)
+                    for (int i = 1; i < ch.childCount; i++)
                     {
-                        var txt = CollectFirstText(colHeaders.ElementAt(i));
+                        var txt = CollectFirstText(ch.ElementAt(i));
                         _captureHeaders.Add(txt != null ? Esc(txt) : $"Col{i}");
                     }
-                }
                 if (_captureHeaders.Count == 0) _captureHeaders.Add("Dados");
-                Plugin.Log.LogInfo($"[FM26Export] Headers: {string.Join(" | ", _captureHeaders)}");
+                Plugin.Log.LogInfo($"[FM26Export] Headers ({_captureHeaders.Count}): {string.Join(" | ", _captureHeaders)}");
 
-                // Inicializar estado
-                _capturedRows = new List<List<string>>();
-                _seenKeys = new HashSet<string>();
+                _capturedRows   = new List<List<string>>();
+                _seenKeys       = new HashSet<string>();
                 _scrollAttempts = 0;
-                _lastScrollY = -1f;
-
-                // Scroll para o topo
+                _zeroSteps      = 0;
+                _lastScrollY    = -1f;
+                _diagLogged     = false;
                 _captureScrollView.scrollOffset = Vector2.zero;
                 _captureWait = WAIT_FRAMES;
                 _capturing = true;
-                Plugin.Log.LogInfo("[FM26Export] Captura iniciada - percorrendo lista...");
+                Plugin.Log.LogInfo("[FM26Export] Captura iniciada...");
             }
-            catch (Exception ex)
-            {
-                Plugin.Log.LogError($"[FM26Export] Erro ao iniciar captura: {ex.Message}");
-            }
+            catch (Exception ex) { Plugin.Log.LogError($"[FM26Export] Erro StartCapture: {ex.Message}"); }
         }
 
         private void CaptureStep()
         {
             try
             {
-                // Capturar linhas selecionadas visíveis agora
-                int newThisStep = 0;
+                int newCount = 0;
                 for (int i = 0; i < _captureView.childCount; i++)
                 {
                     var row = _captureView.ElementAt(i);
@@ -218,44 +262,47 @@ namespace FM26PlayerExport
                     try { sel = row.ClassListContains("virtualised-list__item--selected"); } catch { }
                     if (!sel) continue;
 
-                    var vals = ReadRow(row);
+                    bool dodiag = !_diagLogged && _scrollAttempts == 0 && newCount == 0;
+                    var vals = ReadRow(row, dodiag);
+                    if (dodiag) _diagLogged = true;
                     if (vals.Count == 0) continue;
 
-                    // Chave única: join das primeiras 3 colunas não vazias
-                    string key = string.Join("|", vals.GetRange(0, Math.Min(3, vals.Count)));
+                    string key = RowKey(vals);
                     if (string.IsNullOrEmpty(key) || _seenKeys.Contains(key)) continue;
-
                     _seenKeys.Add(key);
                     _capturedRows.Add(vals);
-                    newThisStep++;
+                    newCount++;
+
+                    if (_capturedRows.Count >= MAX_ROWS)
+                    {
+                        Plugin.Log.LogWarning($"[FM26Export] Limite de {MAX_ROWS} linhas atingido — finalizando.");
+                        FinishCapture(); return;
+                    }
                 }
 
                 float currentY = _captureScrollView.scrollOffset.y;
                 _scrollAttempts++;
-
                 bool atBottom = Math.Abs(currentY - _lastScrollY) < 0.5f && _lastScrollY >= 0;
-                bool limitHit = _scrollAttempts >= MAX_SCROLL_ATTEMPTS;
 
-                Plugin.Log.LogInfo($"[FM26Export] Step {_scrollAttempts}: +{newThisStep} novos, total={_capturedRows.Count}, scrollY={currentY:F0}, atBottom={atBottom}");
+                // Contador de passos sem novidades (proteção contra loop)
+                if (newCount == 0) _zeroSteps++; else _zeroSteps = 0;
+                bool stalled = _zeroSteps >= ZERO_STEPS_MAX;
 
-                if (atBottom || limitHit)
+                Plugin.Log.LogInfo($"[FM26Export] Step {_scrollAttempts}: +{newCount} | total={_capturedRows.Count} | scrollY={currentY:F0} | fim={atBottom} | stall={_zeroSteps}/{ZERO_STEPS_MAX}");
+
+                if (atBottom || _scrollAttempts >= MAX_SCROLL || stalled)
                 {
-                    FinishCapture();
-                    return;
+                    if (stalled && !atBottom) Plugin.Log.LogWarning("[FM26Export] Parado por falta de novos dados.");
+                    FinishCapture(); return;
                 }
 
-                // Scroll para baixo uma página
                 _lastScrollY = currentY;
-                float pageHeight = _captureScrollView.layout.height;
-                if (pageHeight <= 0) pageHeight = 600f; // fallback
-                _captureScrollView.scrollOffset = new Vector2(0, currentY + pageHeight);
+                float ph = _captureScrollView.layout.height;
+                if (ph <= 0) ph = 600f;
+                _captureScrollView.scrollOffset = new Vector2(0, currentY + ph);
                 _captureWait = WAIT_FRAMES;
             }
-            catch (Exception ex)
-            {
-                Plugin.Log.LogError($"[FM26Export] Erro no CaptureStep: {ex.Message}");
-                _capturing = false;
-            }
+            catch (Exception ex) { Plugin.Log.LogError($"[FM26Export] Erro CaptureStep: {ex.Message}"); _capturing = false; }
         }
 
         private void FinishCapture()
@@ -263,29 +310,29 @@ namespace FM26PlayerExport
             _capturing = false;
             try
             {
-                if (_capturedRows.Count == 0)
-                {
-                    Plugin.Log.LogWarning("[FM26Export] Nenhum dado capturado.");
-                    return;
-                }
-
+                if (_capturedRows.Count == 0) { Plugin.Log.LogWarning("[FM26Export] Nenhum dado."); return; }
                 var csv = new StringBuilder();
                 csv.AppendLine(string.Join(";", _captureHeaders));
-                foreach (var row in _capturedRows)
-                    csv.AppendLine(string.Join(";", row.ConvertAll(Esc)));
-
+                foreach (var row in _capturedRows) csv.AppendLine(string.Join(";", row.ConvertAll(Esc)));
                 string path = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                     "Sports Interactive", "Football Manager 2026");
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                 string file = Path.Combine(path, $"player_export_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
                 File.WriteAllText(file, csv.ToString(), Encoding.UTF8);
-                Plugin.Log.LogInfo($"[FM26Export] {_capturedRows.Count} jogadores exportados -> {file}");
+                Plugin.Log.LogInfo($"[FM26Export] ✅ {_capturedRows.Count} jogadores exportados -> {file}");
             }
-            catch (Exception ex)
-            {
-                Plugin.Log.LogError($"[FM26Export] Erro ao salvar: {ex.Message}");
-            }
+            catch (Exception ex) { Plugin.Log.LogError($"[FM26Export] Erro FinishCapture: {ex.Message}"); }
+        }
+
+        // ── Utilitários ───────────────────────────────────────
+
+        private static VisualElement FindByName(VisualElement el, string name)
+        {
+            if (el == null) return null;
+            if (el.name == name) return el;
+            for (int i = 0; i < el.childCount; i++) { var r = FindByName(el.ElementAt(i), name); if (r != null) return r; }
+            return null;
         }
 
         private static string Esc(string v)

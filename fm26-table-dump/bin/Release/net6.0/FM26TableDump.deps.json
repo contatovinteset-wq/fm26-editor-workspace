@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "FM26TableDump/1.0.0": {
+      "FM26TableDump/1.1.0": {
         "runtime": {
           "FM26TableDump.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "FM26TableDump/1.0.0": {
+    "FM26TableDump/1.1.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
