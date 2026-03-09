@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FM26 Player Export - Infográfico</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { 
+            text-align: center; 
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+        
+        /* Hotkeys Section */
+        .hotkeys {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .hotkey-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 25px 40px;
+            text-align: center;
+        }
+        .hotkey-card kbd {
+            display: block;
+            font-size: 2em;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+        .hotkey-card span {
+            color: #aaa;
+            font-size: 0.9em;
+        }
+        
+        /* Flow Diagram */
+        .flow-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        .flow-title {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: #00d9ff;
+        }
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .step-num {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #1a1a2e;
+            flex-shrink: 0;
+        }
+        .step-content {
+            background: rgba(255,255,255,0.05);
+            padding: 15px 20px;
+            border-radius: 10px;
+            flex-grow: 1;
+        }
+        .step-content strong { color: #00ff88; }
+        
+        /* Loop Section */
+        .loop-section {
+            background: linear-gradient(135deg, rgba(0,217,255,0.1), rgba(0,255,136,0.1));
+            border: 2px solid rgba(0,255,136,0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        .loop-title {
+            text-align: center;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #00ff88;
+        }
+        .loop-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .loop-box {
+            background: rgba(0,0,0,0.3);
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .loop-arrow {
+            font-size: 2em;
+            color: #00ff88;
+        }
+        
+        /* Structure */
+        .structure-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 768px) {
+            .structure-section { grid-template-columns: 1fr; }
+        }
+        .tree-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+        }
+        .tree-title {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #00d9ff;
+        }
+        .tree {
+            font-family: monospace;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+        .tree-item { color: #888; }
+        .tree-highlight { color: #00ff88; }
+        .tree-label { color: #ff9f43; }
+        
+        /* Output Section */
+        .output-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 25px;
+        }
+        .output-title {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #00d9ff;
+        }
+        .output-path {
+            background: rgba(0,255,136,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+        .output-example {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+        }
+        .output-example .header { color: #00d9ff; }
+        .output-example .data { color: #aaa; }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐺 FM26 Player Export</h1>
+        <p class="subtitle">Exporte jogadores selecionados para CSV com um simples atalho</p>
+        
+        <!-- Hotkeys -->
+        <div class="hotkeys">
+            <div class="hotkey-card">
+                <kbd>Ctrl+P</kbd>
+                <span>Iniciar exportação</span>
+            </div>
+            <div class="hotkey-card">
+                <kbd>F8</kbd>
+                <span>Re-escanear UI</span>
+            </div>
+        </div>
+        
+        <!-- Flow Steps -->
+        <div class="flow-section">
+            <h2 class="flow-title">📊 Fluxo de Execução</h2>
+            <div class="flow-steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <strong>Localiza</strong> o elemento <code>playertable</code> na UI
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <strong>Extrai headers</strong> de <code>column-headers</code> (pula coluna 0 = checkbox)
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <strong>Inicia scroll</strong> do ScrollView para capturar linhas virtualizadas
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <strong>Salva CSV</strong> em Documents/Sports Interactive/Football Manager 2026/
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loop Diagram -->
+        <div class="loop-section">
+            <h2 class="loop-title">🔄 Loop de Captura</h2>
+            <div class="loop-diagram">
+                <div class="loop-box">
+                    <strong>Captura</strong><br>
+                    <small>linhas selecionadas</small>
+                </div>
+                <div class="loop-arrow">→</div>
+                <div class="loop-box">
+                    <strong>Deduplica</strong><br>
+                    <small>por chave única</small>
+                </div>
+                <div class="loop-arrow">→</div>
+                <div class="loop-box">
+                    <strong>Scroll</strong><br>
+                    <small>+1 página</small>
+                </div>
+                <div class="loop-arrow">→</div>
+                <div class="loop-box">
+                    <strong>Wait</strong><br>
+                    <small>3 frames</small>
+                </div>
+                <div class="loop-arrow">↺</div>
+            </div>
+            <p style="text-align: center; margin-top: 20px; color: #888;">
+                Repete até chegar no fim ou 300 tentativas
+            </p>
+        </div>
+        
+        <!-- Structure -->
+        <div class="structure-section">
+            <div class="tree-card">
+                <h3 class="tree-title">🌳 Estrutura da UI</h3>
+                <div class="tree">
+                    <span class="tree-item">PanelManager-container</span><br>
+                    └── <span class="tree-highlight">playertable</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;├── <span class="tree-label">column-headers</span> ← Cabeçalhos<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;└── [scroll-container]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="tree-highlight">ScrollView</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="tree-label">View</span> ← Linhas<br>
+                </div>
+            </div>
+            
+            <div class="tree-card">
+                <h3 class="tree-title">📄 Estrutura da Linha</h3>
+                <div class="tree">
+                    <span class="tree-item">row</span><br>
+                    └── <span class="tree-highlight">[0] cell-selector</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;├── [0] <span style="color:#ff6b6b">Checkbox</span> ← Ignorado<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;├── [1] <span class="tree-label">Nome</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;├── [2] <span class="tree-label">Clube</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;├── [3] <span class="tree-label">Valor</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;└── ... <span class="tree-item">demais colunas</span><br>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Output -->
+        <div class="output-section">
+            <h3 class="output-title">📁 Arquivo de Saída</h3>
+            <div class="output-path">
+                Documents\Sports Interactive\Football Manager 2026\player_export_20260309_165000.csv
+            </div>
+            <div class="output-example">
+                <span class="header">Nome;Clube;Valor;Nacionalidade;Posição</span><br>
+                <span class="data">João Silva;Flamengo;€5M;Brasil;Atacante</span><br>
+                <span class="data">Carlos Santos;Palmeiras;€3M;Brasil;Meio-campo</span><br>
+                <span class="data">...</span>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>FM26 Player Export v1.0.0 | BepInEx IL2CPP Plugin</p>
+            <p style="margin-top: 10px;">Compatível com FM26 versão 26.1.3+</p>
+        </div>
+    </div>
+</body>
+</html>
