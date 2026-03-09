@@ -11,14 +11,14 @@ Plugin BepInEx IL2CPP para exportar jogadores selecionados da tela "Player Datab
 | **Ctrl+P** | Inicia captura e exportação |
 | **F8** | Re-escaneia UIDocuments |
 
-## Configurações de Performance
+## Configurações (constantes)
 
-| Constante | Valor | Descrição |
-|-----------|-------|-----------|
-| `WAIT_FRAMES` | 4 | Frames aguardados após cada scroll |
-| `MAX_SCROLL` | 500 | Máximo de tentativas de scroll |
-| `MAX_ROWS` | 5000 | Limite de linhas por export |
-| `ZERO_STEPS_MAX` | 3 | Passos sem captura antes de parar |
+```csharp
+WAIT_FRAMES    = 4;    // frames aguardados após cada scroll
+MAX_SCROLL     = 500;  // segurança contra loop infinito
+MAX_ROWS       = 5000; // limite de linhas por export
+ZERO_STEPS_MAX = 3;    // passos sem captura antes de parar
+```
 
 ## Como Funciona
 
@@ -41,7 +41,11 @@ A tabela do FM26 é **virtualizada** - só renderiza linhas visíveis. O plugin:
 2. Captura dados das linhas visíveis
 3. **Scrola automaticamente** para baixo
 4. Aguarda 4 frames para a UI atualizar
-5. Repete até: chegar no fim, 500 tentativas, ou 3 passos sem novos dados
+5. Repete até:
+   - Chegar no fim da lista
+   - 500 tentativas de scroll
+   - 3 passos consecutivos sem novos dados
+   - 5000 linhas capturadas
 
 ### 3. Estrutura de uma Linha
 
@@ -49,36 +53,44 @@ A tabela do FM26 é **virtualizada** - só renderiza linhas visíveis. O plugin:
 row (VisualElement)
 └── [0] cell-selector
     ├── [0] Checkbox ← Ignorado (coluna 0)
-    ├── [1] Nome     ← Capturado
-    ├── [2] Clube    ← Capturado
-    ├── [3] Valor    ← Capturado
-    └── ...          ← Demais colunas
+    ├── [1] Nome/Clube ← Texto mais longo capturado
+    ├── [2] Coluna    ← Texto ou estrelas
+    ├── [3] Coluna    ← Texto ou estrelas
+    └── ...           ← Demais colunas
 ```
 
-### 4. Extração de Texto
+### 4. Extração de Dados
 
-Múltiplas estratégias para capturar dados:
+#### Texto
+- Usa `TryCast<TextElement>()` e `TryCast<Label>()`
+- Remove tags HTML: `<color=#fff>Texto</color>` → `Texto`
+- Fallback: usa `tooltip` se texto vazio
 
-| Método | O que faz |
-|--------|-----------|
-| `GetText()` | Tenta TextElement → Label → tooltip |
-| `CollectFirstText()` | Primeiro texto encontrado (recursivo) |
-| `CollectAllTexts()` | Todos os textos de um elemento |
-| `TryReadStars()` | Conta estrelas preenchidas/metade via CSS |
+#### Estrelas (Ratings)
+- Conta estrelas pelas classes CSS:
+  - `star`, `ability`, `rating` → identificador
+  - `filled`, `active`, `full`, `on` → preenchida
+  - `half` → meia estrela
+- Retorna valor decimal: `3,5` para 3 estrelas e meia
+- Ignora se todas vazias (sem rating atribuído)
 
 #### Célula do Jogador (coluna 1)
-- Coleta **todos os textos** da célula
-- Seleciona o **mais longo** (resolve nomes com imagens/flags)
-
-#### Ratings em Estrelas
-- Analisa classes CSS: `star`, `ability`, `rating`, `filled`, `half`
-- Converte para valor numérico: 3.5 estrelas → "3,5"
+- Coleta TODOS os textos da célula
+- Seleciona o **mais longo** (nome + clube juntos)
 
 ### 5. Deduplicação
 
-- Usa **hash do conteúdo completo da linha** (todas as colunas)
-- Evita duplicados durante o scroll
-- Mais robusto que usar só as primeiras 3 colunas
+- Chave = hash de **TODAS as colunas** da linha
+- Evita falsos positivos em jogadores com mesmo nome/clube
+
+### 6. Proteções
+
+| Proteção | Valor | Ação |
+|----------|-------|------|
+| Loop infinito | 500 scrolls | Para captura |
+| Limite de linhas | 5000 | Para captura |
+| Stalled | 3 passos sem novos dados | Para captura |
+| Profundidade recursão | 20 níveis | Ignora além |
 
 ## Arquivo de Saída
 
@@ -86,8 +98,8 @@ Múltiplas estratégias para capturar dados:
 
 **Formato:**
 ```csv
-Nome;Clube;Valor;...
-João Silva;Flamengo;€5M;...
+Nome;Clube;Valor;Rating;...
+João Silva;Flamengo;€5M;4,5;...
 ```
 
 ## Fluxo de Execução
@@ -113,25 +125,31 @@ João Silva;Flamengo;€5M;...
 └────────┬────────┘
          ▼
     ┌────────────┐
-    │ LOOP       │◄──────────┐
-    └─────┬──────┘           │
-          ▼                  │
-    ┌────────────┐           │
-    │ Captura    │           │
-    │ selecionad │           │
-    └─────┬──────┘           │
-          ▼                  │
-    ┌────────────┐           │
-    │ Scroll     │           │
-    │ +1 página  │           │
-    └─────┬──────┘           │
-          ▼                  │
-    ┌────────────┐           │
-    │ Wait 3     │           │
-    │ frames     │───────────┘
-    └─────┬──────┘  (não chegou no fim)
+    │ LOOP       │◄──────────────┐
+    └─────┬──────┘               │
+          ▼                      │
+    ┌────────────┐               │
+    │ Captura    │               │
+    │ selecionad │               │
+    │ + estrelas │               │
+    └─────┬──────┘               │
+          ▼                      │
+    ┌────────────┐               │
+    │ Deduplica  │               │
+    │ (hash full)│               │
+    └─────┬──────┘               │
+          ▼                      │
+    ┌────────────┐               │
+    │ Scroll     │               │
+    │ +1 página  │               │
+    └─────┬──────┘               │
+          ▼                      │
+    ┌────────────┐               │
+    │ Wait 4     │               │
+    │ frames     │───────────────┘
+    └─────┬──────┘  (continua)
           │
-          ▼ (fim ou 300 tentativas)
+          ▼ (fim/stall/limite)
     ┌────────────┐
     │ Salva CSV  │
     └────────────┘
@@ -142,15 +160,16 @@ João Silva;Flamengo;€5M;...
 | Classe | Significado |
 |--------|-------------|
 | `virtualised-list__item--selected` | Linha selecionada pelo usuário |
+| `star`, `ability`, `rating` | Elemento de estrela |
+| `filled`, `active`, `full`, `on` | Estrela preenchida |
+| `half` | Meia estrela |
 
 ## Tratamento de Erros
 
 - Try-catch em todas as operações de UI
-- Limite de 500 tentativas de scroll
+- Limite de profundidade 20 em recursões
 - Limite de 5000 linhas por export
-- **Proteção contra stall**: para se 3 passos consecutivos sem novos dados
-- Strip de tags HTML para texto limpo
-- Diagnóstico detalhado no primeiro passo (se `_diagLogged = false`)
+- Proteção contra stalled (3 passos sem novos dados)
 
 ## Dependências
 
