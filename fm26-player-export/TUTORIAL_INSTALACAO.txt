@@ -1,0 +1,125 @@
+
+╔══════════════════════════════════════════════════════════════════╗
+║          TUTORIAL DE INSTALAÇÃO — FM26 Player Export             ║
+║          (Explicado para quem nunca instalou um mod)             ║
+╚══════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+O QUE VOCÊ VAI PRECISAR (tudo gratuito):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Football Manager 26 instalado via Steam
+2. BepInEx 6 (uma ferramenta que permite instalar mods no FM26)
+3. O arquivo do plugin: FM26PlayerExport.dll (está na pasta "plugin" deste download)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PASSO 1 — ENCONTRAR A PASTA DO FOOTBALL MANAGER 26
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Abra o Steam
+2. Clique com o botão DIREITO em "Football Manager 26" na biblioteca
+3. Clique em "Propriedades"
+4. Clique na aba "Arquivos Locais"
+5. Clique em "Procurar..."
+   → Uma janela do Explorer vai abrir mostrando a pasta do jogo
+   → DEIXA ESSA JANELA ABERTA, você vai precisar dela em breve
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PASSO 2 — INSTALAR O BEPINEX (se ainda não tiver)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  SE VOCÊ JÁ USA OUTROS MODS NO FM26, provavelmente o BepInEx
+    já está instalado. Verifique: existe uma pasta "BepInEx" 
+    dentro da pasta do jogo? Se sim, PULE PARA O PASSO 3.
+
+1. Acesse: https://github.com/BepInEx/BepInEx/releases
+2. Baixe o arquivo: BepInEx_win_x64_6.0.0-be.XXX.zip
+   (procure a versão mais recente para Windows 64-bit)
+3. Abra o arquivo .zip baixado
+4. COPIE TODO O CONTEÚDO do .zip para dentro da pasta do FM26
+   (a mesma pasta que você abriu no Passo 1)
+5. Inicie o Football Manager 26 UMA VEZ e feche logo depois
+   → Isso gera os arquivos de configuração do BepInEx
+   → Você vai ver uma janela preta (normal!) aparecer e fechar
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PASSO 3 — INSTALAR O PLUGIN FM26 PLAYER EXPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Na pasta do FM26, abra a pasta:  BepInEx → plugins
+2. Crie uma nova pasta chamada:  FM26PlayerExport
+   (clique com botão direito → Novo → Pasta)
+3. Copie o arquivo FM26PlayerExport.dll para dentro dessa pasta
+
+A estrutura final deve ser:
+  📁 Football Manager 26
+     📁 BepInEx
+        📁 plugins
+           📁 FM26PlayerExport
+              📄 FM26PlayerExport.dll   ← o arquivo do plugin aqui
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PASSO 4 — TESTAR SE FUNCIONOU
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Abra o Football Manager 26
+2. Vá em: Pesquisar Jogadores (Player Database)
+3. Selecione alguns jogadores clicando neles
+4. Pressione CTRL + P no teclado
+
+✅  Se funcionou: um arquivo .csv vai aparecer automaticamente em:
+    Meus Documentos → Sports Interactive → Football Manager 2026
+
+❌  Se não funcionou: veja a seção "Solução de Problemas" abaixo
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+COMO ABRIR O ARQUIVO CSV
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+O arquivo gerado tem o nome:  player_export_DATA_HORA.csv
+
+Para abrir no Excel:
+1. Abra o Excel
+2. Clique em "Dados" no menu superior
+3. Clique em "De Texto/CSV"
+4. Selecione o arquivo gerado
+5. Certifique-se de selecionar o separador como PONTO E VÍRGULA (;)
+6. Clique em Carregar
+
+Para abrir no Google Planilhas:
+1. Acesse sheets.google.com
+2. Arraste o arquivo .csv direto para a página
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SOLUÇÃO DE PROBLEMAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PROBLEMA: Ctrl+P não faz nada
+SOLUÇÃO:  Pressione F8 dentro do jogo para o plugin re-escanear a tela.
+          Certifique-se de estar na tela de Pesquisa de Jogadores.
+
+PROBLEMA: O arquivo CSV está vazio
+SOLUÇÃO:  Certifique-se de SELECIONAR os jogadores antes de pressionar
+          Ctrl+P. Clique nos jogadores para selecioná-los (ficam
+          destacados com uma cor diferente).
+
+PROBLEMA: Não encontro a pasta BepInEx
+SOLUÇÃO:  O BepInEx não foi instalado. Repita o Passo 2.
+
+PROBLEMA: O FM26 não abre mais / ficou com erro
+SOLUÇÃO:  Vá na pasta do FM26 → BepInEx → plugins → FM26PlayerExport
+          e apague o arquivo FM26PlayerExport.dll. O jogo voltará ao normal.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PRECISA DE AJUDA?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Canal YouTube: vintesetFM
+(deixe um comentário no vídeo do tutorial)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+DESINSTALAR O PLUGIN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Basta apagar a pasta:
+  Football Manager 26 → BepInEx → plugins → FM26PlayerExport

@@ -8,47 +8,48 @@
     <Version>1.0.0</Version>
     <OutputType>Library</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- ⬇ ALTERE AQUI se o seu FM26 estiver em outro caminho -->
+    <FM26Path>E:\Steam\steamapps\common\Football Manager 26</FM26Path>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="BepInEx.Core">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\BepInEx.Core.dll</HintPath>
+      <HintPath>$(FM26Path)\BepInEx\core\BepInEx.Core.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="BepInEx.Unity.IL2CPP">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
+      <HintPath>$(FM26Path)\BepInEx\core\BepInEx.Unity.IL2CPP.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Il2CppInterop.Runtime">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
+      <HintPath>$(FM26Path)\BepInEx\core\Il2CppInterop.Runtime.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="0Harmony">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>$(FM26Path)\BepInEx\core\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>$(FM26Path)\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(FM26Path)\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\UnityEngine.UIElementsModule.dll</HintPath>
+      <HintPath>$(FM26Path)\BepInEx\interop\UnityEngine.UIElementsModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Unity.InputSystem">
-      <HintPath>E:\Steam\steamapps\common\Football Manager 26\BepInEx\interop\Unity.InputSystem.dll</HintPath>
+      <HintPath>$(FM26Path)\BepInEx\interop\Unity.InputSystem.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
 
-  <!-- Copia o DLL para plugins após cada build -->
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if not exist &quot;E:\Steam\steamapps\common\Football Manager 26\BepInEx\plugins\FM26PlayerExport\&quot; mkdir &quot;E:\Steam\steamapps\common\Football Manager 26\BepInEx\plugins\FM26PlayerExport\&quot;" />
-    <Exec Command="xcopy /Y /I &quot;$(TargetPath)&quot; &quot;E:\Steam\steamapps\common\Football Manager 26\BepInEx\plugins\FM26PlayerExport\&quot;" />
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="Exists('$(FM26Path)\BepInEx\plugins')">
+    <MakeDir Directories="$(FM26Path)\BepInEx\plugins\FM26PlayerExport" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(FM26Path)\BepInEx\plugins\FM26PlayerExport" />
   </Target>
 
 </Project>
