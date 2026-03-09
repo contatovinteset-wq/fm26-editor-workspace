@@ -242,21 +242,62 @@ namespace FM26PlayerExport
                     var csv = new StringBuilder();
                     csv.AppendLine(string.Join(";", headers));
                     
+                    // DEBUG: Mostrar estrutura da primeira linha
+                    bool debugFirstRow = true;
+                    
                     int exportedCount = 0;
                     foreach (var row in selectedRows)
                     {
                         try
                         {
+                            if (debugFirstRow)
+                            {
+                                debugFirstRow = false;
+                                Plugin.Log.LogInfo($"[FM26Export] === DEBUG PRIMEIRA LINHA ===");
+                                Plugin.Log.LogInfo($"[FM26Export] Linha name: {row.name}");
+                                Plugin.Log.LogInfo($"[FM26Export] Linha tipo: {row.GetType().FullName}");
+                                
+                                // Listar filhos diretos
+                                int childIdx = 0;
+                                foreach (var child in row.Children())
+                                {
+                                    childIdx++;
+                                    Plugin.Log.LogInfo($"[FM26Export]   Filho[{childIdx}]: name='{child.name}' tipo={child.GetType().Name}");
+                                    
+                                    // Listar netos (primeiros 5)
+                                    int grandIdx = 0;
+                                    foreach (var grand in child.Children())
+                                    {
+                                        grandIdx++;
+                                        Plugin.Log.LogInfo($"[FM26Export]     Neto[{grandIdx}]: name='{grand.name}' tipo={grand.GetType().Name}");
+                                        if (grandIdx >= 5) break;
+                                    }
+                                    
+                                    if (childIdx >= 10) break;
+                                }
+                            }
+                            
                             var values = new List<string>();
                             
+                            // Tentar Labels diretos
                             var labels = QuerySafe<Label>(row).Build().ToList();
+                            Plugin.Log.LogInfo($"[FM26Export] Labels encontrados na linha: {labels.Count}");
+                            
                             foreach (var label in labels)
                             {
                                 var text = label.text?.Trim() ?? "";
+                                Plugin.Log.LogInfo($"[FM26Export]   Label text: '{text}'");
                                 if (!string.IsNullOrEmpty(text))
                                 {
                                     values.Add(EscapeCSV(text));
                                 }
+                            }
+                            
+                            // Se não encontrou labels, tentar pegar texto de outros elementos
+                            if (values.Count == 0)
+                            {
+                                Plugin.Log.LogInfo("[FM26Export] Tentando extrair texto de filhos...");
+                                ExtractTextFromElement(row, values, 0);
                             }
                             
                             if (values.Count > 0)
@@ -265,7 +306,10 @@ namespace FM26PlayerExport
                                 exportedCount++;
                             }
                         }
-                        catch { }
+                        catch (Exception ex)
+                        {
+                            Plugin.Log.LogError($"[FM26Export] Erro na linha: {ex.Message}");
+                        }
                         
                         if (exportedCount >= 10000) break;
                     }
@@ -305,6 +349,46 @@ namespace FM26PlayerExport
                 value = "\"" + value.Replace("\"", "\"\"") + "\"";
             }
             return value;
+        }
+        
+        private void ExtractTextFromElement(VisualElement element, List<string> values, int depth)
+        {
+            if (depth > 5) return; // Limite de profundidade
+            
+            try
+            {
+                // Se é um Label, pegar texto
+                if (element is Label label)
+                {
+                    var text = label.text?.Trim() ?? "";
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        values.Add(EscapeCSV(text));
+                    }
+                    return;
+                }
+                
+                // Se é um TextField, pegar value
+                if (element is TextField textField)
+                {
+                    var text = textField.value?.Trim() ?? "";
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        values.Add(EscapeCSV(text));
+                    }
+                    return;
+                }
+                
+                // Recursivamente processar filhos
+                int childCount = 0;
+                foreach (var child in element.Children())
+                {
+                    childCount++;
+                    ExtractTextFromElement(child, values, depth + 1);
+                    if (childCount >= 50) break; // Limite de filhos
+                }
+            }
+            catch { }
         }
     }
 }
