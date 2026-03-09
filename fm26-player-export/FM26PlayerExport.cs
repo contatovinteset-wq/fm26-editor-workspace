@@ -95,58 +95,6 @@ namespace FM26PlayerExport
             Plugin.Log.LogInfo($"[FM26Export] Total PanelManager documents: {_uiDocuments.Count}");
         }
         
-        // Método auxiliar para evitar ambiguidade
-        private VisualElement FindElement(VisualElement parent, string name)
-        {
-            foreach (var child in parent.Children())
-            {
-                if (child.name == name)
-                    return child;
-            }
-            return null;
-        }
-        
-        // Método auxiliar para encontrar Labels
-        private List<Label> FindLabels(VisualElement parent)
-        {
-            var labels = new List<Label>();
-            FindLabelsRecursive(parent, labels);
-            return labels;
-        }
-        
-        private void FindLabelsRecursive(VisualElement element, List<Label> labels)
-        {
-            if (element is Label label)
-            {
-                labels.Add(label);
-            }
-            
-            foreach (var child in element.Children())
-            {
-                FindLabelsRecursive(child, labels);
-            }
-        }
-        
-        // Método auxiliar para encontrar Toggle
-        private Toggle FindToggle(VisualElement parent)
-        {
-            return FindToggleRecursive(parent);
-        }
-        
-        private Toggle FindToggleRecursive(VisualElement element)
-        {
-            if (element is Toggle toggle)
-                return toggle;
-            
-            foreach (var child in element.Children())
-            {
-                var found = FindToggleRecursive(child);
-                if (found != null)
-                    return found;
-            }
-            return null;
-        }
-        
         private void ExportPlayers()
         {
             try
@@ -171,7 +119,7 @@ namespace FM26PlayerExport
                     Plugin.Log.LogInfo($"[FM26Export] Processando root: {root.name}");
                     
                     // PASSO 1: Localizar tabela
-                    var tables = FindElement(root, "tables");
+                    var tables = root.Q(name: "tables");
                     if (tables == null)
                     {
                         Plugin.Log.LogWarning("[FM26Export] 'tables' não encontrado");
@@ -179,7 +127,7 @@ namespace FM26PlayerExport
                     }
                     Plugin.Log.LogInfo($"[FM26Export] ✓ 'tables' encontrado");
                     
-                    var tableContainer = FindElement(tables, "search-table-remapper");
+                    var tableContainer = tables.Q(name: "search-table-remapper");
                     if (tableContainer == null)
                     {
                         Plugin.Log.LogWarning("[FM26Export] 'search-table-remapper' não encontrado");
@@ -218,7 +166,7 @@ namespace FM26PlayerExport
                         // Verificar Toggle
                         try
                         {
-                            var toggle = FindToggle(row);
+                            var toggle = row.Q<Toggle>();
                             if (toggle != null && toggle.value)
                             {
                                 isSelected = true;
@@ -264,12 +212,12 @@ namespace FM26PlayerExport
                     var headers = new List<string>();
                     try
                     {
-                        var headerSection = FindElement(root, "PersonSearchTableTopSection");
+                        var headerSection = root.Q(name: "PersonSearchTableTopSection");
                         if (headerSection != null)
                         {
                             Plugin.Log.LogInfo("[FM26Export] ✓ 'PersonSearchTableTopSection' encontrado");
                             
-                            var headerLabels = FindLabels(headerSection);
+                            var headerLabels = headerSection.Query<Label>().Build().ToList();
                             Plugin.Log.LogInfo($"[FM26Export] {headerLabels.Count} labels no header");
                             
                             foreach (var label in headerLabels)
@@ -311,7 +259,7 @@ namespace FM26PlayerExport
                         {
                             var values = new List<string>();
                             
-                            var labels = FindLabels(row);
+                            var labels = row.Query<Label>().Build().ToList();
                             foreach (var label in labels)
                             {
                                 var text = label.text?.Trim() ?? "";
