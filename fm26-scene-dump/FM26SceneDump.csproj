@@ -6,6 +6,7 @@
     <Version>1.0.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
+    <DefineConstants>$(DefineConstants);IL2CPP</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,21 +14,18 @@
     <PackageReference Include="BepInEx.IL2CPP.MSBuild" Version="2.1.0-rc.1" IncludeAssets="build" />
   </ItemGroup>
 
+  <!-- Referências do Unity - o MSBuild do BepInEx resolve automaticamente -->
   <ItemGroup>
-    <Reference Include="Il2CppInterop.Runtime">
-      <HintPath>$(BepInExCorePath)\Il2CppInterop.Runtime.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Il2Cppmscorlib">
-      <HintPath>$(BepInExCorePath)\Il2Cppmscorlib.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(BepInExCorePath)\UnityEngine.CoreModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule">
-      <HintPath>$(BepInExCorePath)\UnityEngine.UIElementsModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
       <Private>false</Private>
     </Reference>
   </ItemGroup>
