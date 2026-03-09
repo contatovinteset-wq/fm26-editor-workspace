@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" width="900" height="650">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0f3460"/>
+      <stop offset="100%" style="stop-color:#1a508b"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#155724"/>
+      <stop offset="100%" style="stop-color:#28a745"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4a1259"/>
+      <stop offset="100%" style="stop-color:#7b2cbf"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="900" height="650" fill="url(#bgGrad)"/>
+  
+  <!-- Title -->
+  <text x="450" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#fff">FM26 Player Export - Como Funciona</text>
+  
+  <!-- Section 1: UI Structure -->
+  <g transform="translate(30, 70)">
+    <rect width="260" height="180" rx="10" fill="url(#blueGrad)" opacity="0.9"/>
+    <text x="130" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">1. Estrutura da UI</text>
+    
+    <!-- Tree structure -->
+    <g transform="translate(20, 45)" font-family="monospace" font-size="11" fill="#a0d2db">
+      <text x="0" y="0">PanelManager-container</text>
+      <text x="20" y="20">└── playertable</text>
+      <text x="40" y="40" fill="#ffd93d">├── column-headers</text>
+      <text x="60" y="55" font-size="10" fill="#6bcb77">│   (Nome, Clube, Valor...)</text>
+      <text x="40" y="75" fill="#ffd93d">└── [scroll-container]</text>
+      <text x="60" y="90">└── ScrollView</text>
+      <text x="80" y="105" fill="#ff6b6b">└── View</text>
+      <text x="100" y="120" font-size="10" fill="#6bcb77">(linhas virtuais)</text>
+    </g>
+  </g>
+  
+  <!-- Section 2: Capture Process -->
+  <g transform="translate(310, 70)">
+    <rect width="280" height="180" rx="10" fill="url(#greenGrad)" opacity="0.9"/>
+    <text x="140" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">2. Captura por Scroll</text>
+    
+    <!-- Process steps -->
+    <g transform="translate(15, 45)" font-family="Arial, sans-serif" font-size="11" fill="#d4edda">
+      <circle cx="10" cy="5" r="8" fill="#28a745"/>
+      <text x="25" y="9" fill="#fff">Detecta linhas selecionadas</text>
+      
+      <circle cx="10" cy="30" r="8" fill="#28a745"/>
+      <text x="25" y="34" fill="#fff">Captura dados visíveis</text>
+      
+      <circle cx="10" cy="55" r="8" fill="#ffc107"/>
+      <text x="25" y="59" fill="#fff">Scrola 1 página para baixo</text>
+      
+      <circle cx="10" cy="80" r="8" fill="#17a2b8"/>
+      <text x="25" y="84" fill="#fff">Aguarda 3 frames (UI atualiza)</text>
+      
+      <circle cx="10" cy="105" r="8" fill="#6c757d"/>
+      <text x="25" y="109" fill="#fff">Repete até fim (max 300x)</text>
+    </g>
+  </g>
+  
+  <!-- Section 3: Data Extraction -->
+  <g transform="translate(610, 70)">
+    <rect width="260" height="180" rx="10" fill="url(#purpleGrad)" opacity="0.9"/>
+    <text x="130" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">3. Extração de Dados</text>
+    
+    <!-- Row structure -->
+    <g transform="translate(20, 45)" font-family="Arial, sans-serif" font-size="10">
+      <text x="0" y="0" fill="#e0aaff">Estrutura de cada linha:</text>
+      
+      <rect x="0" y="15" width="30" height="20" rx="3" fill="#ff6b6b"/>
+      <text x="5" y="29" fill="#fff" font-size="9">☐</text>
+      <text x="40" y="29" fill="#ff6b6b">[0] Checkbox → ignorado</text>
+      
+      <rect x="0" y="40" width="60" height="20" rx="3" fill="#4cc9f0"/>
+      <text x="10" y="54" fill="#fff">Nome</text>
+      <text x="70" y="54" fill="#4cc9f0">[1] ✓ capturado</text>
+      
+      <rect x="0" y="65" width="60" height="20" rx="3" fill="#4cc9f0"/>
+      <text x="10" y="79" fill="#fff">Clube</text>
+      <text x="70" y="79" fill="#4cc9f0">[2] ✓ capturado</text>
+      
+      <rect x="0" y="90" width="60" height="20" rx="3" fill="#4cc9f0"/>
+      <text x="10" y="104" fill="#fff">Valor</text>
+      <text x="70" y="104" fill="#4cc9f0">[3] ✓ capturado</text>
+      
+      <text x="0" y="125" fill="#e0aaff">Usa TryCast&lt;TextElement&gt;()</text>
+    </g>
+  </g>
+  
+  <!-- Main Flow Diagram -->
+  <g transform="translate(30, 280)">
+    <rect width="840" height="250" rx="10" fill="#0d1b2a" stroke="#1b263b" stroke-width="2"/>
+    <text x="420" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#fff">Fluxo de Execução</text>
+    
+    <!-- Start -->
+    <rect x="30" y="50" width="100" height="40" rx="20" fill="#28a745"/>
+    <text x="80" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#fff">Ctrl+P</text>
+    
+    <!-- Arrow -->
+    <path d="M130 70 L160 70" stroke="#fff" stroke-width="2" marker-end="url(#arrow)"/>
+    
+    <!-- Step 2 -->
+    <rect x="160" y="50" width="120" height="40" rx="5" fill="#0f3460"/>
+    <text x="220" y="67" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#fff">Localiza</text>
+    <text x="220" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4cc9f0">"playertable"</text>
+    
+    <!-- Arrow -->
+    <path d="M280 70 L310 70" stroke="#fff" stroke-width="2"/>
+    
+    <!-- Step 3 -->
+    <rect x="310" y="50" width="120" height="40" rx="5" fill="#0f3460"/>
+    <text x="370" y="67" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#fff">Lê Headers</text>
+    <text x="370" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4cc9f0">(pula col 0)</text>
+    
+    <!-- Arrow -->
+    <path d="M430 70 L460 70" stroke="#fff" stroke-width="2"/>
+    
+    <!-- Loop Start -->
+    <rect x="460" y="40" width="150" height="60" rx="5" fill="#155724" stroke="#28a745" stroke-width="2"/>
+    <text x="535" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#fff">LOOP</text>
+    <text x="535" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#d4edda">Captura linhas</text>
+    <text x="535" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#d4edda">Scroll + Wait</text>
+    
+    <!-- Arrow to decision -->
+    <path d="M610 70 L650 70" stroke="#fff" stroke-width="2"/>
+    
+    <!-- Decision -->
+    <polygon points="700,70 750,40 800,70 750,100" fill="#ffc107"/>
+    <text x="750" y="67" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#000">Fim ou</text>
+    <text x="750" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#000">300x?</text>
+    
+    <!-- Loop back arrow -->
+    <path d="M750 100 L750 130 L535 130 L535 100" stroke="#ffc107" stroke-width="2" fill="none" marker-end="url(#arrowYellow)"/>
+    <text x="640" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ffc107">Não → continua</text>
+    
+    <!-- Yes arrow to save -->
+    <path d="M800 70 L820 70 L820 180 L760 180" stroke="#28a745" stroke-width="2"/>
+    <text x="830" y="130" font-family="Arial, sans-serif" font-size="10" fill="#28a745">Sim</text>
+    
+    <!-- End -->
+    <rect x="620" y="160" width="140" height="50" rx="5" fill="#7b2cbf"/>
+    <text x="690" y="182" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#fff">Salva CSV</text>
+    <text x="690" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#e0aaff">Documents/FM26/</text>
+    
+    <!-- Output details -->
+    <g transform="translate(30, 200)">
+      <text font-family="Arial, sans-serif" font-size="11" fill="#6bcb77">✓ Deduplicação por chave única (primeiras 3 colunas)</text>
+      <text y="20" font-family="Arial, sans-serif" font-size="11" fill="#6bcb77">✓ Remove tags HTML automaticamente</text>
+      <text y="40" font-family="Arial, sans-serif" font-size="11" fill="#6bcb77">✓ Escape de caracteres especiais</text>
+    </g>
+  </g>
+  
+  <!-- Footer -->
+  <text x="450" y="560" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6c757d">Classe CSS usada: virtualised-list__item--selected</text>
+  <text x="450" y="580" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6c757d">Máximo de tentativas: 300 scrolls | Espera: 3 frames por scroll</text>
+  
+  <!-- Hotkeys legend -->
+  <g transform="translate(30, 600)">
+    <rect width="180" height="40" rx="5" fill="#1b263b"/>
+    <text x="90" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#fff">Hotkeys</text>
+    <text x="90" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4cc9f0">Ctrl+P = Exportar | F8 = Re-escanear</text>
+  </g>
+  
+  <!-- Tech stack -->
+  <g transform="translate(230, 600)">
+    <rect width="200" height="40" rx="5" fill="#1b263b"/>
+    <text x="100" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#fff">Stack</text>
+    <text x="100" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6bcb77">BepInEx IL2CPP • Unity UI Toolkit</text>
+  </g>
+  
+  <!-- Output path -->
+  <g transform="translate(450, 600)">
+    <rect width="300" height="40" rx="5" fill="#1b263b"/>
+    <text x="150" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#fff">Saída</text>
+    <text x="150" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#ffd93d">Documents/Sports Interactive/Football Manager 2026/</text>
+  </g>
+  
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#fff"/>
+    </marker>
+    <marker id="arrowYellow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#ffc107"/>
+    </marker>
+  </defs>
+</svg>
