@@ -1,0 +1,384 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 11998
+  },
+  "m_Name": "SIButtonStyles",
+  "m_ImportedWithErrors": 0,
+  "m_ImportedWithWarnings": 0,
+  "m_Rules": [
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 4,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 5,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 0
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "margin",
+          "m_Line": 6,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 2
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-font-definition",
+          "m_Line": 7,
+          "m_Values": [
+            {
+              "m_ValueType": 6,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 8,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "cursor",
+          "m_Line": 9,
+          "m_Values": [
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 0
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 2
+            },
+            {
+              "m_ValueType": 10,
+              "valueIndex": 1
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 2
+            },
+            {
+              "m_ValueType": 8,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 10,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "overflow",
+          "m_Line": 11,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "flex",
+          "m_Line": 12,
+          "m_Values": [
+            {
+              "m_ValueType": 2,
+              "valueIndex": 3
+            },
+            {
+              "m_ValueType": 2,
+              "valueIndex": 4
+            },
+            {
+              "m_ValueType": 1,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 3
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 16,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 15
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "margin",
+          "m_Line": 20,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 4
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "padding",
+          "m_Line": 21,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 6
+            },
+            {
+              "m_ValueType": 3,
+              "valueIndex": 7
+            }
+          ]
+        }
+      ],
+      "line": 19
+    },
+    {
+      "m_Properties": [
+        {
+          "m_Name": "background-color",
+          "m_Line": 25,
+          "m_Values": [
+            {
+              "m_ValueType": 4,
+              "valueIndex": 2
+            }
+          ]
+        }
+      ],
+      "line": 24
+    }
+  ],
+  "m_ComplexSelectors": [
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sibutton",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 0
+    },
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sibutton-background-colour",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 1
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sibutton",
+              "m_Type": 3
+            },
+            {
+              "m_Value": "small-padding",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 2
+    },
+    {
+      "m_Specificity": 21,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "sibutton",
+              "m_Type": 3
+            },
+            {
+              "m_Value": "is_active",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 3
+    }
+  ],
+  "floats": [
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0
+  ],
+  "dimensions": [
+    {
+      "unit": 1,
+      "value": 8.0
+    },
+    {
+      "unit": 1,
+      "value": 12.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 4.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    },
+    {
+      "unit": 1,
+      "value": 2.0
+    }
+  ],
+  "colors": [
+    {
+      "r": 1.0,
+      "g": 0.95686274766922,
+      "b": 0.95686274766922,
+      "a": 0.08235294371843338
+    },
+    {
+      "r": 1.0,
+      "g": 0.95686274766922,
+      "b": 0.95686274766922,
+      "a": 0.08235294371843338
+    },
+    {
+      "r": 0.1921568661928177,
+      "g": 0.364705890417099,
+      "b": 0.7647058963775635,
+      "a": 1.0
+    }
+  ],
+  "strings": [
+    "middle-center",
+    "--cursor-clickable-1x-url",
+    "--cursor-clickable-1x-hotspot-x",
+    "--cursor-clickable-1x-hotspot-y",
+    "nowrap",
+    "hidden"
+  ],
+  "assets": [
+    {
+      "m_FileID": 3,
+      "m_PathID": 5636211117028388537
+    }
+  ],
+  "imports": [
+    {
+      "styleSheet": {
+        "m_FileID": 5,
+        "m_PathID": -820025129605260392
+      },
+      "mediaQueries": []
+    }
+  ],
+  "m_FlattenedImportedStyleSheets": [
+    {
+      "m_FileID": 5,
+      "m_PathID": -820025129605260392
+    }
+  ],
+  "m_ContentHash": 1559485380,
+  "scalableImages": []
+}

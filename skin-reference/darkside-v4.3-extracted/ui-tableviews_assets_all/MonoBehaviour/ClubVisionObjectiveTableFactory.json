@@ -1,0 +1,370 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 4923226484593632650
+  },
+  "m_Name": "ClubVisionObjectiveTableFactory",
+  "m_parameters": [
+    {
+      "m_serialisedType": 0,
+      "name": "binding",
+      "type": {
+        "id": 1668706162
+      },
+      "isOptional": 0
+    }
+  ],
+  "m_emitIndexBinding": 1,
+  "m_contextMenuBindingPath": {
+    "m_path": ""
+  },
+  "m_rowData": [
+    {
+      "m_id": "objective",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 31631
+      },
+      "m_translationArgs": [],
+      "m_hintID": {
+        "GameID": 0
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.VisionObjectiveName"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 0,
+      "m_defaultWidth": 400.0,
+      "m_minimumWidth": 200.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "clubvision",
+          "to": {
+            "m_path": "binding"
+          },
+          "type": {
+            "id": 1668706162
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "clubvision",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 1668706162
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "89d4f03bf661b9a48bf2ff1844c56bdd",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "m_id": "importance",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 31632
+      },
+      "m_translationArgs": [],
+      "m_hintID": {
+        "GameID": 0
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.VisionObjectiveImportance"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 0,
+      "m_defaultWidth": 120.0,
+      "m_minimumWidth": 120.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "VisionObjectiveImportance",
+          "to": {
+            "m_path": "binding.VisionObjectiveImportance"
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "VisionObjectiveImportance",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "0763beb0a49e142468e9783b87345849",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "m_id": "judgement",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 31633
+      },
+      "m_translationArgs": [],
+      "m_hintID": {
+        "GameID": 0
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.VisionObjectiveProgress"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 0,
+      "m_defaultWidth": 160.0,
+      "m_minimumWidth": 153.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "clubvision",
+          "to": {
+            "m_path": "binding"
+          },
+          "type": {
+            "id": 1668706162
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "clubvision",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 1668706162
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "fa22dc6f63197d3408be8c71cba770ad",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "m_id": "objective-small",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 34560
+      },
+      "m_translationArgs": [],
+      "m_hintID": {
+        "GameID": 0
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.VisionObjectiveName"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 0,
+      "m_defaultWidth": 400.0,
+      "m_minimumWidth": 200.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "clubvision",
+          "to": {
+            "m_path": "binding"
+          },
+          "type": {
+            "id": 1668706162
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "clubvision",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 1668706162
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "90ea0efde94df4a4192a9166168479ef",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "m_id": "objective-line",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 34561
+      },
+      "m_translationArgs": [],
+      "m_hintID": {
+        "GameID": 0
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.VisionObjectiveName"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 0,
+      "m_defaultWidth": 400.0,
+      "m_minimumWidth": 200.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "clubvision",
+          "to": {
+            "m_path": "binding"
+          },
+          "type": {
+            "id": 1668706162
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "clubvision",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 1668706162
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "634f5507e6308b94ca304f9d9f40d22a",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ],
+  "m_allowFooter": 0,
+  "m_footerParameters": []
+}

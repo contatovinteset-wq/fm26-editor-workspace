@@ -1,0 +1,185 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 4923226484593632650
+  },
+  "m_Name": "TransferClausesTableFactory",
+  "m_parameters": [
+    {
+      "m_serialisedType": 1111845498,
+      "name": "binding",
+      "type": {
+        "id": 1111845498
+      },
+      "isOptional": 0
+    },
+    {
+      "m_serialisedType": 0,
+      "name": "club",
+      "type": {
+        "id": 1145176067
+      },
+      "isOptional": 0
+    }
+  ],
+  "m_emitIndexBinding": 1,
+  "m_contextMenuBindingPath": {
+    "m_path": "binding.Person"
+  },
+  "m_rowData": [
+    {
+      "m_id": "inf",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 3165
+      },
+      "m_translationArgs": [],
+      "m_hintID": {
+        "GameID": -1
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.person.name"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 0,
+      "m_defaultWidth": 40.0,
+      "m_minimumWidth": 40.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": "binding.person.name"
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "275b95704dc858346bf8acb33d0dd6ac",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "m_id": "name",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 28924
+      },
+      "m_translationArgs": [
+        {
+          "Binding": {
+            "m_path": "club.MainTeam"
+          },
+          "Index": "1",
+          "m_format": {
+            "Value": ""
+          },
+          "AddEmbeddedData": 0
+        }
+      ],
+      "m_hintID": {
+        "GameID": -1
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.person.name"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 1,
+      "m_defaultWidth": 250.0,
+      "m_minimumWidth": 250.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": "binding"
+          },
+          "type": {
+            "id": 1111845498
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 1111845498
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "aeed09782df477943b724dfcd37c16d5",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ],
+  "m_allowFooter": 0,
+  "m_footerParameters": []
+}

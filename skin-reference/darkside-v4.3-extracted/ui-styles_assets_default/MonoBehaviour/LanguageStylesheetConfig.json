@@ -1,0 +1,32 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 2,
+    "m_PathID": -8692846100613290713
+  },
+  "m_Name": "LanguageStylesheetConfig",
+  "m_stylesheetData": [
+    {
+      "StyleSheetRef": {
+        "m_AssetGUID": "65ae6672d3d4c6344b40f131229e1788",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "LoadIfRTL": 0,
+      "LoadIfLTR": 1
+    },
+    {
+      "StyleSheetRef": {
+        "m_AssetGUID": "2c0f651b7204eb549825af9647d50be3",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "LoadIfRTL": 1,
+      "LoadIfLTR": 0
+    }
+  ]
+}

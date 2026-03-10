@@ -1,0 +1,74 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "CompetitionManagerMovementCardIncomingTable",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 0
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "team",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 236.0,
+          "m_minWidthOverride": 236.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 8551
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "incoming-manager",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 270.0,
+          "m_minWidthOverride": 270.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 8556
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "date-joined",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 110.0,
+          "m_minWidthOverride": 110.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 8555
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "LatestScoresLiveTableView",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 0
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "position",
+        "m_columnMetadata": {
+          "m_required": 1,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 55.0,
+          "m_minWidthOverride": 55.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 25836
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "team",
+        "m_columnMetadata": {
+          "m_required": 1,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 135.0,
+          "m_minWidthOverride": 135.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 25837
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "games-played",
+        "m_columnMetadata": {
+          "m_required": 1,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 45.0,
+          "m_minWidthOverride": 45.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 25838
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "points",
+        "m_columnMetadata": {
+          "m_required": 1,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 55.0,
+          "m_minWidthOverride": 55.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 25839
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}
