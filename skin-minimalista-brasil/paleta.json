@@ -1,0 +1,47 @@
+{
+  "nome": "Minimalista Brasil",
+  "descricao": "Skin FM26 elegante com identidade brasileira - cinza escuro, azul e amarelo",
+  "paleta": {
+    "base_cinza_escuro": {
+      "hex": "#1A1A1F",
+      "rgb": [26, 26, 31],
+      "uso": "Backgrounds principais, areas escuras"
+    },
+    "cinza_medio": {
+      "hex": "#2D2D35",
+      "rgb": [45, 45, 53],
+      "uso": "Bordas, separadores, cards"
+    },
+    "cinza_claro": {
+      "hex": "#404048",
+      "rgb": [64, 64, 72],
+      "uso": "Elementos de interface, hover"
+    },
+    "azul_principal": {
+      "hex": "#0066CC",
+      "rgb": [0, 102, 204],
+      "uso": "Acentos primarios, botoes importantes"
+    },
+    "azul_claro": {
+      "hex": "#3399FF",
+      "rgb": [51, 153, 255],
+      "uso": "Highlights, elementos ativos"
+    },
+    "amarelo_ouro": {
+      "hex": "#FFD700",
+      "rgb": [255, 215, 0],
+      "uso": "Acentos secundarios, estrelas, destaques"
+    },
+    "amarelo_claro": {
+      "hex": "#FFE44D",
+      "rgb": [255, 228, 77],
+      "uso": "Botoes call-to-action, notificacoes"
+    }
+  },
+  "regras": {
+    "backgrounds": "Substituir tons escuros por cinza escuro (#1A1A1F)",
+    "overlays": "Aplicar gradiente sutil azul/amarelo em areas de destaque",
+    "botoes": "Primarios em azul (#0066CC), secundarios em amarelo (#FFD700)",
+    "texto": "Branco em fundos escuros, cinza claro em areas claras"
+  }
+}
