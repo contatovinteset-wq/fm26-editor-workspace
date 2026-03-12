@@ -1,0 +1,193 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 6927148995291191234
+  },
+  "m_Name": "TacticTeamSelectionTableViewCollectionBothInMatch",
+  "m_customViewDisplayName": {
+    "GameID": 11422
+  },
+  "m_customViewNamePrefix": {
+    "GameID": 11180
+  },
+  "m_tableViewSettings": [
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 1428359789134252476
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    }
+  ],
+  "m_contextMenuData": [
+    {
+      "name": "Pkd IP",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 26877
+      },
+      "PropertyValue": "ip-position",
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Pkd OOP",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 26878
+      },
+      "PropertyValue": "oop-position",
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "Tactic Ability",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 27562
+      },
+      "PropertyValue": "tactic-ability",
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 27563
+      },
+      "PropertyValue": "player-instructions",
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 26879
+      },
+      "PropertyValue": "name",
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 27564
+      },
+      "PropertyValue": "inf",
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 26855
+      },
+      "PropertyValue": "condition",
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 31929
+      },
+      "PropertyValue": "body-language",
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 31928
+      },
+      "PropertyValue": "performance",
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 31927
+      },
+      "PropertyValue": "goals",
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 26880
+      },
+      "PropertyValue": "average-rating",
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    }
+  ]
+}

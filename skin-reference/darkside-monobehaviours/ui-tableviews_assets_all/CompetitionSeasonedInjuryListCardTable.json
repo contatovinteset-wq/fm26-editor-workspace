@@ -1,0 +1,106 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "CompetitionSeasonedInjuryListCardTable",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 0
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "player",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 246.0,
+          "m_minWidthOverride": 246.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 8755
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "club",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 246.0,
+          "m_minWidthOverride": 246.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 8757
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "seasonedinjury",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 246.0,
+          "m_minWidthOverride": 246.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 8762
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "date-placed",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 96.0,
+          "m_minWidthOverride": 96.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 8759
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "eligable-registration",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 1,
+          "m_widthOverride": 108.0,
+          "m_minWidthOverride": 108.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 8760
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}

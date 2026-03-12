@@ -1,0 +1,142 @@
+/*
+ * Minimalista Brasil - FM26 Skin
+ * Paleta: Cinza Escuro + Azul + Amarelo
+ * Para usar no FM Skin Builder
+ */
+
+:root {
+  /* ========================================
+   * BACKGROUND - Cinza Escuro (Base)
+   * ======================================== */
+  --background-primary: #1A1A1F;
+  --background-secondary: #2D2D35;
+  --background-tertiary: #404048;
+  --background-elevated: #35353D;
+  --background-overlay: rgba(26, 26, 31, 0.95);
+  
+  /* ========================================
+   * PRIMARY - Azul (Acentos Principais)
+   * ======================================== */
+  --primary: #0066CC;
+  --primary-hover: #0077E6;
+  --primary-active: #0052A3;
+  --primary-light: #3399FF;
+  --primary-dark: #004C99;
+  
+  /* ========================================
+   * ACCENT - Amarelo (Destaques)
+   * ======================================== */
+  --accent: #FFD700;
+  --accent-hover: #FFE44D;
+  --accent-active: #CCB000;
+  --accent-light: #FFEAA0;
+  --accent-dark: #B39700;
+  
+  /* ========================================
+   * TEXT - Cores de Texto
+   * ======================================== */
+  --text-primary: #FFFFFF;
+  --text-secondary: #B0B0B8;
+  --text-muted: #6B6B75;
+  --text-disabled: #4A4A52;
+  
+  /* ========================================
+   * BORDERS
+   * ======================================== */
+  --border-color: #3A3A42;
+  --border-light: #50505A;
+  --border-focus: #0066CC;
+  
+  /* ========================================
+   * STATUS COLORS
+   * ======================================== */
+  --success: #27AE60;
+  --warning: #F39C12;
+  --error: #E74C3C;
+  --info: #3498DB;
+  
+  /* ========================================
+   * BUTTON COLORS
+   * ======================================== */
+  --button-primary-bg: #0066CC;
+  --button-primary-text: #FFFFFF;
+  --button-primary-hover: #0077E6;
+  
+  --button-secondary-bg: #2D2D35;
+  --button-secondary-text: #FFFFFF;
+  --button-secondary-hover: #404048;
+  
+  --button-accent-bg: #FFD700;
+  --button-accent-text: #1A1A1F;
+  --button-accent-hover: #FFE44D;
+  
+  /* ========================================
+   * PANEL COLORS
+   * ======================================== */
+  --panel-bg: #1A1A1F;
+  --panel-header: #2D2D35;
+  --panel-border: #3A3A42;
+  
+  /* ========================================
+   * TABLE COLORS
+   * ======================================== */
+  --table-header-bg: #2D2D35;
+  --table-row-even: #222228;
+  --table-row-odd: #1A1A1F;
+  --table-row-hover: #2D2D35;
+  --table-border: #3A3A42;
+  
+  /* ========================================
+   * INPUT COLORS
+   * ======================================== */
+  --input-bg: #222228;
+  --input-border: #3A3A42;
+  --input-focus: #0066CC;
+  --input-placeholder: #6B6B75;
+  
+  /* ========================================
+   * SCROLLBAR
+   * ======================================== */
+  --scrollbar-track: #1A1A1F;
+  --scrollbar-thumb: #3A3A42;
+  --scrollbar-thumb-hover: #50505A;
+  
+  /* ========================================
+   * GRADIENTS (opcional)
+   * ======================================== */
+  --gradient-primary: linear-gradient(135deg, #0066CC 0%, #3399FF 100%);
+  --gradient-accent: linear-gradient(135deg, #FFD700 0%, #FFE44D 100%);
+  --gradient-dark: linear-gradient(180deg, #1A1A1F 0%, #2D2D35 100%);
+}
+
+/* ========================================
+ * OVERRIDES ESPECÍFICOS (se necessário)
+ * ======================================== */
+
+/* Exemplo: Forçar cor de fundo em painéis */
+.unity-panel {
+  background-color: var(--background-primary);
+}
+
+/* Exemplo: Estilo de botões primários */
+.unity-button--primary {
+  background-color: var(--primary);
+  color: var(--text-primary);
+}
+
+.unity-button--primary:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Exemplo: Tabelas */
+.unity-table__header {
+  background-color: var(--table-header-bg);
+}
+
+.unity-table__row:nth-child(even) {
+  background-color: var(--table-row-even);
+}
+
+.unity-table__row:hover {
+  background-color: var(--table-row-hover);
+}

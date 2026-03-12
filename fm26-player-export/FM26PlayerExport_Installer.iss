@@ -1,11 +1,7 @@
-
-; ═══════════════════════════════════════════════════════════════
-;  FM26 Player Export — Instalador Automático
-;  Criado com Inno Setup 6 (https://jrsoftware.org/isinfo.php)
-; ═══════════════════════════════════════════════════════════════
+; Instalador FM26 Player Export v1.0.1
 
 #define AppName      "FM26 Player Export"
-#define AppVersion   "1.0.0"
+#define AppVersion   "1.0.1"
 #define AppPublisher "vintesetFM"
 #define AppURL       "https://youtube.com/@vintesetFM"
 
@@ -24,55 +20,31 @@ SolidCompression=yes
 WizardStyle=modern
 DisableProgramGroupPage=yes
 CreateAppDir=no
+PrivilegesRequired=admin
+PrivilegesRequiredOverridesAllowed=dialog
 
 [Languages]
 Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
-; ── Arquivos a instalar ────────────────────────────────────────
-
 [Files]
 
-; BepInEx Core (só instala se ainda NÃO existir)
-Source: "build\winhttp.dll"; \
-    DestDir: "{app}"; \
-    Flags: uninsneveruninstall; \
-    Check: not BepInExAlreadyInstalled
-
-Source: "build\doorstop_config.ini"; \
-    DestDir: "{app}"; \
-    Flags: uninsneveruninstall; \
-    Check: not BepInExAlreadyInstalled
-
-Source: "build\BepInEx\*"; \
-    DestDir: "{app}\BepInEx"; \
-    Flags: recursesubdirs createallsubdirs uninsneveruninstall; \
-    Check: not BepInExAlreadyInstalled
-
-; Plugin FM26PlayerExport
-Source: "build\plugin\FM26PlayerExport.dll"; \
-    DestDir: "{app}\BepInEx\plugins\FM26PlayerExport"; \
-    Flags: ignoreversion
-
-; Tutorial
-Source: "TUTORIAL_INSTALACAO.txt"; \
-    DestDir: "{app}\BepInEx\plugins\FM26PlayerExport"; \
-    Flags: ignoreversion
-
-; ── Desinstalação (NÃO remove BepInEx) ───────────────────────
+Source: "build\winhttp.dll"; DestDir: "{app}"; Flags: uninsneveruninstall; Check: not BepInExAlreadyInstalled
+Source: "build\doorstop_config.ini"; DestDir: "{app}"; Flags: uninsneveruninstall; Check: not BepInExAlreadyInstalled
+Source: "build\BepInEx\*"; DestDir: "{app}\BepInEx"; Flags: recursesubdirs createallsubdirs uninsneveruninstall; Check: not BepInExAlreadyInstalled
+Source: "build\plugin\FM26PlayerExport.dll"; DestDir: "{app}\BepInEx\plugins\FM26PlayerExport"; Flags: ignoreversion
+Source: "TUTORIAL_INSTALACAO.txt"; DestDir: "{app}\BepInEx\plugins\FM26PlayerExport"; Flags: ignoreversion
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\BepInEx\plugins\FM26PlayerExport"
 
-; ── Após instalar: abrir tutorial ────────────────────────────
-
 [Run]
-Filename: "notepad.exe"; \
-    Parameters: "{app}\BepInEx\plugins\FM26PlayerExport\TUTORIAL_INSTALACAO.txt"; \
-    Description: "Abrir tutorial de uso"; \
-    Flags: postinstall skipifsilent nowait
 
-; ── Código Pascal para detectar FM26 via Steam ───────────────
+; Adiciona excecao no Windows Defender automaticamente
+Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command ""Add-MpPreference -ExclusionPath '{app}' -ErrorAction SilentlyContinue"""; Flags: runhidden waituntilterminated; StatusMsg: "Configurando excecao no Windows Defender..."
+
+; Abre tutorial
+Filename: "notepad.exe"; Parameters: "{app}\BepInEx\plugins\FM26PlayerExport\TUTORIAL_INSTALACAO.txt"; Description: "Abrir tutorial de uso"; Flags: postinstall skipifsilent nowait
 
 [Code]
 
@@ -167,6 +139,25 @@ begin
                 mbConfirmation, MB_YESNO) = IDNO then
         Result := False;
     end;
+  end;
+end;
+
+function PrepareToInstall(var NeedsRestart: Boolean): String;
+begin
+  Result := '';
+  if not BepInExAlreadyInstalled() then
+  begin
+    MsgBox(
+      'IMPORTANTE - LEIA ANTES DE CONTINUAR' + #13#10 + #13#10 +
+      'O BepInEx sera instalado pela primeira vez.' + #13#10 + #13#10 +
+      'Na PRIMEIRA vez que voce abrir o FM26 apos a instalacao:' + #13#10 + #13#10 +
+      '1. Uma tela preta (console) vai aparecer automaticamente' + #13#10 +
+      '2. Aguarde de 2 a 5 minutos enquanto os arquivos sao gerados' + #13#10 +
+      '3. O jogo vai abrir normalmente em seguida' + #13#10 + #13#10 +
+      'NAO feche a tela preta! Isso e normal e acontece apenas uma vez.' + #13#10 + #13#10 +
+      'Se a tela preta NAO aparecer, veja o tutorial para instrucoes' + #13#10 +
+      'de como adicionar excecao no antivirus.',
+      mbInformation, MB_OK);
   end;
 end;
 

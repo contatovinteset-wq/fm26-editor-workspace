@@ -1,0 +1,250 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "DebugTransfersTable",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 0
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "team",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "person",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "otherteam",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "currentcash",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "guaranteedcash",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "potentialcash",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "loanoptionalfuturefee",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "loanbuybackfee",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "loanmandatoryfuturefee",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "loanconditionalfuturefee",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "intermediaryfee",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "isworkexperienceloan",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "ishighprofilesigning",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "ispanicbuy",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 0.0,
+          "m_minWidthOverride": 0.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}

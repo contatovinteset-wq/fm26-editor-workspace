@@ -12,6 +12,7 @@ O QUE VOCÊ VAI PRECISAR (tudo gratuito):
 2. BepInEx 6 (uma ferramenta que permite instalar mods no FM26)
 3. O arquivo do plugin: FM26PlayerExport.dll (está na pasta "plugin" deste download)
 
+SE VOCE UTILIZOU O INSTALADOR PULE PARA O PASSO 4
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 PASSO 1 — ENCONTRAR A PASTA DO FOOTBALL MANAGER 26
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -115,7 +116,7 @@ PRECISA DE AJUDA?
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Canal YouTube: vintesetFM
-(deixe um comentário no vídeo do tutorial)
+Canal Twitch: vinteset
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 DESINSTALAR O PLUGIN

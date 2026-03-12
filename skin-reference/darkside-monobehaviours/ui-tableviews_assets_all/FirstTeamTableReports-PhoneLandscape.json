@@ -1,0 +1,90 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "FirstTeamTableReports-PhoneLandscape",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 31490
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "name",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 177.0,
+          "m_minWidthOverride": 177.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 31491
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "assistant-opinion-player-style",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 83.0,
+          "m_minWidthOverride": 83.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 31492
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "assistant-opinion-best-position",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 100.0,
+          "m_minWidthOverride": 100.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 31494
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "assistant-opinion-best-role",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 177.0,
+          "m_minWidthOverride": 177.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 31493
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}

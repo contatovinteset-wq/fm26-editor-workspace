@@ -1,0 +1,370 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 4923226484593632650
+  },
+  "m_Name": "DebugTeamAnalysisPlayerRequiredScoreTableFactory",
+  "m_parameters": [
+    {
+      "m_serialisedType": 0,
+      "name": "binding",
+      "type": {
+        "id": 912611950
+      },
+      "isOptional": 0
+    }
+  ],
+  "m_emitIndexBinding": 1,
+  "m_contextMenuBindingPath": {
+    "m_path": ""
+  },
+  "m_rowData": [
+    {
+      "m_id": "Club",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 29245
+      },
+      "m_translationArgs": [],
+      "m_hintID": {
+        "GameID": 29246
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.Club"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 0,
+      "m_defaultWidth": 300.0,
+      "m_minimumWidth": 100.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "club",
+          "to": {
+            "m_path": "binding.Club"
+          },
+          "type": {
+            "id": 1145176067
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "club",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 1145176067
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "b8a6a1eef46c5b54e9ea63d77d2b3db4",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "m_id": "ClubReputation",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 36703
+      },
+      "m_translationArgs": [],
+      "m_hintID": {
+        "GameID": -1
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.Reputation"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 0,
+      "m_defaultWidth": 300.0,
+      "m_minimumWidth": 300.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": "binding.Reputation"
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "275b95704dc858346bf8acb33d0dd6ac",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "m_id": "RequiredScore",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 36700
+      },
+      "m_translationArgs": [],
+      "m_hintID": {
+        "GameID": -1
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.ShortlistRequiredScoreForPlayers"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 0,
+      "m_defaultWidth": 300.0,
+      "m_minimumWidth": 300.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": "binding.ShortlistRequiredScoreForPlayers"
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "275b95704dc858346bf8acb33d0dd6ac",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "m_id": "ReqScoreToRepRatio",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 36701
+      },
+      "m_translationArgs": [],
+      "m_hintID": {
+        "GameID": 0
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.ShortlistPlayerRequiredScoreToClubReputationRatio"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 0,
+      "m_defaultWidth": 300.0,
+      "m_minimumWidth": 300.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": "binding.ShortlistPlayerRequiredScoreToClubReputationRatio"
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "0c1c2243328797e429d9fdf243ceca1d",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    },
+    {
+      "m_id": "RequiredScoreType",
+      "m_headerLabelBinding": {
+        "m_path": ""
+      },
+      "m_hintLabelBinding": {
+        "m_path": ""
+      },
+      "m_translationID": {
+        "GameID": 36702
+      },
+      "m_translationArgs": [],
+      "m_hintID": {
+        "GameID": 0
+      },
+      "m_hintArgs": [],
+      "m_sortBinding": {
+        "m_path": "binding.DebugRequiredScoreTypeString"
+      },
+      "m_sortBindingPlugin": 0,
+      "m_sortAscending": 0,
+      "m_defaultWidth": 300.0,
+      "m_minimumWidth": 300.0,
+      "m_allowWidthAutoResizing": 1,
+      "m_autoSizeCellPadding": 0.0,
+      "m_cellClass": "",
+      "m_valueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": "binding.DebugRequiredScoreTypeString"
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_headerValueBindings": [],
+      "m_enableFooter": 0,
+      "m_footerValueBindings": [
+        {
+          "m_serialisedType": 0,
+          "from": "binding",
+          "to": {
+            "m_path": ""
+          },
+          "type": {
+            "id": 0
+          }
+        }
+      ],
+      "m_uxmlRef": {
+        "m_AssetGUID": "275b95704dc858346bf8acb33d0dd6ac",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_headerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      },
+      "m_footerUxmlRef": {
+        "m_AssetGUID": "",
+        "m_SubObjectName": "",
+        "m_SubObjectType": ""
+      }
+    }
+  ],
+  "m_allowFooter": 0,
+  "m_footerParameters": []
+}

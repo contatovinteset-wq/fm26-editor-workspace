@@ -1,0 +1,138 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "FirstTeamTableAttributesMentalDefensive-PhoneLandscape",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 34612
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "position-dropdown",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 84.0,
+          "m_minWidthOverride": 84.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34602
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "inf-team",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 38.0,
+          "m_minWidthOverride": 38.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34603
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "name",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 245.0,
+          "m_minWidthOverride": 245.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34604
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "attribute-positioning",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 24.0,
+          "m_minWidthOverride": 24.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34606
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "attribute-anticipation",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 24.0,
+          "m_minWidthOverride": 24.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34607
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "attribute-concentration",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 24.0,
+          "m_minWidthOverride": 24.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34608
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "attribute-bravery",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 24.0,
+          "m_minWidthOverride": 24.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34609
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}

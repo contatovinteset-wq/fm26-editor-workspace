@@ -1,0 +1,191 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 6927148995291191234
+  },
+  "m_Name": "NationClubCoefficientsTableViewSettingsCollection",
+  "m_customViewDisplayName": {
+    "GameID": 0
+  },
+  "m_customViewNamePrefix": {
+    "GameID": 0
+  },
+  "m_tableViewSettings": [
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": -1
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 3548643171990954366
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": -1
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -6158670080125946955
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": -1
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 670613457339868474
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": -1
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 9035898689333967189
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": -1
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 2663178843104519066
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": -1
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -4629707559830556168
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": -1
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -3125793502918545275
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": -1
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": 1372443672380140557
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": -1
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -3532859773588733460
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": -1
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -4289956266600796990
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    }
+  ],
+  "m_contextMenuData": []
+}

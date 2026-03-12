@@ -1,0 +1,138 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "MatchSquadTableStatsDefensive-PhoneLandscape",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 30966
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "position-dropdown",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 84.0,
+          "m_minWidthOverride": 84.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "inf-team",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 38.0,
+          "m_minWidthOverride": 38.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "name",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 230.0,
+          "m_minWidthOverride": 230.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "chalkboard-stats-tackle-completion-ratio",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 30.0,
+          "m_minWidthOverride": 30.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "chalkboard-stats-headers-won-per90",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 50.0,
+          "m_minWidthOverride": 50.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "chalkboard-stats-interceptions-per90",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 50.0,
+          "m_minWidthOverride": 50.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "stats-clean-sheets",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 30.0,
+          "m_minWidthOverride": 30.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}

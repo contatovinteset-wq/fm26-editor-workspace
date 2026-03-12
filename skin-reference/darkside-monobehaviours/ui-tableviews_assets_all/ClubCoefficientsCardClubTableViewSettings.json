@@ -1,0 +1,170 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "ClubCoefficientsCardClubTableViewSettings",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 0
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "pos-5",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 60.0,
+          "m_minWidthOverride": 60.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "club",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 160.0,
+          "m_minWidthOverride": 100.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef4",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 60.0,
+          "m_minWidthOverride": 51.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef3",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 60.0,
+          "m_minWidthOverride": 51.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef2",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 60.0,
+          "m_minWidthOverride": 51.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef1",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 60.0,
+          "m_minWidthOverride": 51.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef0",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 60.0,
+          "m_minWidthOverride": 51.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "total-5-this",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 85.0,
+          "m_minWidthOverride": 51.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "total-5-next",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 85.0,
+          "m_minWidthOverride": 51.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}

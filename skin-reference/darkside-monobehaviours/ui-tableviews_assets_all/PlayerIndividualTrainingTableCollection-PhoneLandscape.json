@@ -1,0 +1,89 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 6927148995291191234
+  },
+  "m_Name": "PlayerIndividualTrainingTableCollection-PhoneLandscape",
+  "m_customViewDisplayName": {
+    "GameID": 0
+  },
+  "m_customViewNamePrefix": {
+    "GameID": 0
+  },
+  "m_tableViewSettings": [
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -4797747712030007769
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -1998433547703372146
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -8911774355975227022
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    },
+    {
+      "name": "",
+      "ChildList": [],
+      "Disable": 0,
+      "AddSpacerBefore": 0,
+      "DisplayValue": {
+        "GameID": 0
+      },
+      "PropertyValue": {
+        "m_FileID": 0,
+        "m_PathID": -5879464064453129409
+      },
+      "Requirement": {
+        "m_FileID": 0,
+        "m_PathID": 0
+      }
+    }
+  ],
+  "m_contextMenuData": []
+}

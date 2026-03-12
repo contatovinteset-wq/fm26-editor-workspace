@@ -1,0 +1,154 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "FirstTeamTableAttributesGoalkeeping-PhoneLandscape",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 34631
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "position-dropdown",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 84.0,
+          "m_minWidthOverride": 84.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34632
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "inf-team",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 38.0,
+          "m_minWidthOverride": 38.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34633
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "name",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 216.0,
+          "m_minWidthOverride": 216.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34634
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "attribute-command-of-area",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 28.0,
+          "m_minWidthOverride": 28.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34635
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "attribute-handling",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 28.0,
+          "m_minWidthOverride": 28.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34636
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "attribute-kicking",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 28.0,
+          "m_minWidthOverride": 28.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34637
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "attribute-one-on-ones",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 28.0,
+          "m_minWidthOverride": 28.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34638
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "attribute-reflexes",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 28.0,
+          "m_minWidthOverride": 28.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 34639
+          },
+          "m_applicableBreakpoints": 16,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}

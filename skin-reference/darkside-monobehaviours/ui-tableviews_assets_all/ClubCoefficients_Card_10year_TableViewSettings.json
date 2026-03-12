@@ -1,0 +1,266 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "ClubCoefficients_Card_10year_TableViewSettings",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 0
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "pos-10",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 40.0,
+          "m_minWidthOverride": 40.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "club",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 119.0,
+          "m_minWidthOverride": 100.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "nation-short",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 77.0,
+          "m_minWidthOverride": 77.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef9",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 58.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef8",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 58.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef7",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 58.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef6",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 58.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef5",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 58.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef4",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 58.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef3",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 58.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef2",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 58.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef1",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 58.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "coef0",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 58.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "title",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 51.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "total-10",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 58.0,
+          "m_minWidthOverride": 51.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 0
+          },
+          "m_applicableBreakpoints": -1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}

@@ -1,0 +1,12 @@
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\bin\Release\net6.0\FM26PlayerExport.deps.json
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\bin\Release\net6.0\FM26PlayerExport.dll
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\bin\Release\net6.0\FM26PlayerExport.pdb
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\obj\Release\net6.0\FM26PlayerExport-net6.csproj.AssemblyReference.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\obj\Release\net6.0\FM26PlayerExport-net6.GeneratedMSBuildEditorConfig.editorconfig
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\obj\Release\net6.0\FM26PlayerExport-net6.AssemblyInfoInputs.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\obj\Release\net6.0\FM26PlayerExport-net6.AssemblyInfo.cs
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\obj\Release\net6.0\FM26PlayerExport-net6.csproj.CoreCompileInputs.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\obj\Release\net6.0\FM26PlayerExport.dll
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\obj\Release\net6.0\refint\FM26PlayerExport.dll
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\obj\Release\net6.0\FM26PlayerExport.pdb
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-export\FM26PlayerExport-v2\obj\Release\net6.0\ref\FM26PlayerExport.dll

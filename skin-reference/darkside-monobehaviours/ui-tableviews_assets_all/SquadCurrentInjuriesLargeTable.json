@@ -1,0 +1,202 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "SquadCurrentInjuriesLargeTable",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 0
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "portrait-name-playingtime",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 384.0,
+          "m_minWidthOverride": 384.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 16846
+          },
+          "m_applicableBreakpoints": 30,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "name-playingtime",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 128.0,
+          "m_minWidthOverride": 128.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 36129
+          },
+          "m_applicableBreakpoints": 1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "injury-detailed",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 280.0,
+          "m_minWidthOverride": 280.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 16850
+          },
+          "m_applicableBreakpoints": 30,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "injury-detailed-no-image",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 170.0,
+          "m_minWidthOverride": 170.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 16849
+          },
+          "m_applicableBreakpoints": 1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "injury-severity",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 140.0,
+          "m_minWidthOverride": 140.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 16856
+          },
+          "m_applicableBreakpoints": 30,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "injury-severity-small",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 94.0,
+          "m_minWidthOverride": 94.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 23861
+          },
+          "m_applicableBreakpoints": 1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "Injury-treatment",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 120.0,
+          "m_minWidthOverride": 120.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 16853
+          },
+          "m_applicableBreakpoints": 30,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "Injury-treatment-small",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 100.0,
+          "m_minWidthOverride": 100.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 23863
+          },
+          "m_applicableBreakpoints": 1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "injury-duration",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 130.0,
+          "m_minWidthOverride": 130.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 16857
+          },
+          "m_applicableBreakpoints": 30,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "injury-duration-small",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 96.0,
+          "m_minWidthOverride": 96.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 23864
+          },
+          "m_applicableBreakpoints": 1,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "injury-target-return-fixture",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 180.0,
+          "m_minWidthOverride": 180.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 16858
+          },
+          "m_applicableBreakpoints": 30,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}

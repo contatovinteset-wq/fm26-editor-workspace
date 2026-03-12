@@ -1,0 +1,61 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\fm26-editor-workspace-main\\fm26-editor-workspace\\fm26-player-export\\FM26PlayerExport-v2\\FM26PlayerExport-v2.csproj": {}
+  },
+  "projects": {
+    "E:\\fm26-editor-workspace-main\\fm26-editor-workspace\\fm26-player-export\\FM26PlayerExport-v2\\FM26PlayerExport-v2.csproj": {
+      "version": "2.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\fm26-editor-workspace-main\\fm26-editor-workspace\\fm26-player-export\\FM26PlayerExport-v2\\FM26PlayerExport-v2.csproj",
+        "projectName": "FM26PlayerExport",
+        "projectPath": "E:\\fm26-editor-workspace-main\\fm26-editor-workspace\\fm26-player-export\\FM26PlayerExport-v2\\FM26PlayerExport-v2.csproj",
+        "packagesPath": "C:\\Users\\Raphael\\.nuget\\packages\\",
+        "outputPath": "E:\\fm26-editor-workspace-main\\fm26-editor-workspace\\fm26-player-export\\FM26PlayerExport-v2\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Raphael\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.428\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

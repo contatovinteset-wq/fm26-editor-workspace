@@ -1,0 +1,44 @@
+{
+  "ui-styles_assets_default.bundle": {
+    "UXML": 0,
+    "USS": 0,
+    "Texture": 0,
+    "Font": 0,
+    "Other": 0
+  },
+  "ui-styles_assets_match.bundle": {
+    "UXML": 0,
+    "USS": 0,
+    "Texture": 0,
+    "Font": 0,
+    "Other": 0
+  },
+  "ui-tableviews_assets_all.bundle": {
+    "UXML": 0,
+    "USS": 0,
+    "Texture": 0,
+    "Font": 0,
+    "Other": 0
+  },
+  "ui-widgets_assets_all.bundle": {
+    "UXML": 0,
+    "USS": 0,
+    "Texture": 1,
+    "Font": 0,
+    "Other": 0
+  },
+  "ui-tiles_assets_all.bundle": {
+    "UXML": 0,
+    "USS": 0,
+    "Texture": 0,
+    "Font": 0,
+    "Other": 0
+  },
+  "ui-tileslayouts_assets_all.bundle": {
+    "UXML": 0,
+    "USS": 0,
+    "Texture": 0,
+    "Font": 0,
+    "Other": 0
+  }
+}

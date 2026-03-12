@@ -1,0 +1,168 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": 11998
+  },
+  "m_Name": "SIImageStyles",
+  "m_ImportedWithErrors": 0,
+  "m_ImportedWithWarnings": 0,
+  "m_Rules": [
+    {
+      "m_Properties": [
+        {
+          "m_Name": "width",
+          "m_Line": 4,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "height",
+          "m_Line": 5,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 1
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-left",
+          "m_Line": 6,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 2
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-right",
+          "m_Line": 7,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 3
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-top",
+          "m_Line": 8,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 4
+            }
+          ]
+        },
+        {
+          "m_Name": "padding-bottom",
+          "m_Line": 9,
+          "m_Values": [
+            {
+              "m_ValueType": 3,
+              "valueIndex": 5
+            }
+          ]
+        },
+        {
+          "m_Name": "white-space",
+          "m_Line": 10,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 0
+            }
+          ]
+        },
+        {
+          "m_Name": "-unity-text-align",
+          "m_Line": 11,
+          "m_Values": [
+            {
+              "m_ValueType": 7,
+              "valueIndex": 1
+            }
+          ]
+        }
+      ],
+      "line": 3
+    }
+  ],
+  "m_ComplexSelectors": [
+    {
+      "m_Specificity": 11,
+      "m_Selectors": [
+        {
+          "m_Parts": [
+            {
+              "m_Value": "siimage",
+              "m_Type": 3
+            }
+          ],
+          "m_PreviousRelationship": 0
+        }
+      ],
+      "ruleIndex": 0
+    }
+  ],
+  "floats": [],
+  "dimensions": [
+    {
+      "unit": 1,
+      "value": 20.0
+    },
+    {
+      "unit": 1,
+      "value": 20.0
+    },
+    {
+      "unit": 1,
+      "value": 5.0
+    },
+    {
+      "unit": 1,
+      "value": 5.0
+    },
+    {
+      "unit": 1,
+      "value": 5.0
+    },
+    {
+      "unit": 1,
+      "value": 5.0
+    }
+  ],
+  "colors": [],
+  "strings": [
+    "nowrap",
+    "middle-left"
+  ],
+  "assets": [],
+  "imports": [
+    {
+      "styleSheet": {
+        "m_FileID": 5,
+        "m_PathID": -820025129605260392
+      },
+      "mediaQueries": []
+    }
+  ],
+  "m_FlattenedImportedStyleSheets": [
+    {
+      "m_FileID": 5,
+      "m_PathID": -820025129605260392
+    }
+  ],
+  "m_ContentHash": 370927184,
+  "scalableImages": []
+}

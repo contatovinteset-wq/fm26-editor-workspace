@@ -1,0 +1,154 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 1,
+    "m_PathID": -4547854135319439084
+  },
+  "m_Name": "CompetitionWaiverListCardTable",
+  "m_tableView": {
+    "m_viewName": {
+      "GameID": 0
+    },
+    "m_requirements": [],
+    "m_optionalConfigCondition": {
+      "m_path": ""
+    },
+    "m_tableConfig": [
+      {
+        "m_columnID": "team",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 208.0,
+          "m_minWidthOverride": 208.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 9899
+          },
+          "m_applicableBreakpoints": 0,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "in-amount",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 40.0,
+          "m_minWidthOverride": 40.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 9901
+          },
+          "m_applicableBreakpoints": 0,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "out-amount",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 40.0,
+          "m_minWidthOverride": 40.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 9904
+          },
+          "m_applicableBreakpoints": 0,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "biggest-signing",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 208.0,
+          "m_minWidthOverride": 208.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 9907
+          },
+          "m_applicableBreakpoints": 0,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "biggest-sale",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 208.0,
+          "m_minWidthOverride": 208.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 9909
+          },
+          "m_applicableBreakpoints": 0,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "spent",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 80.0,
+          "m_minWidthOverride": 80.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 9911
+          },
+          "m_applicableBreakpoints": 0,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "recieved",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 80.0,
+          "m_minWidthOverride": 80.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 32193
+          },
+          "m_applicableBreakpoints": 0,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      },
+      {
+        "m_columnID": "net",
+        "m_columnMetadata": {
+          "m_required": 0,
+          "m_sortingDisabled": 0,
+          "m_widthOverride": 80.0,
+          "m_minWidthOverride": 80.0,
+          "m_titleTranslationIdOverride": {
+            "GameID": 9875
+          },
+          "m_applicableBreakpoints": 0,
+          "m_optionalConfigCondition": {
+            "m_path": ""
+          }
+        }
+      }
+    ],
+    "m_overwriteFooterSettings": 0,
+    "m_footerParameters": [],
+    "m_footerColumns": []
+  }
+}

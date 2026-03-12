@@ -1,0 +1,30 @@
+{
+  "name": "Minimalista Brasil",
+  "short_name": "minbr",
+  "version": "0.1.0",
+  "author": "Vinteset & Koda",
+  "description": "Skin elegante para Football Manager 2026 com identidade brasileira - Cinza escuro, azul e amarelo",
+  "compatible_version": "26.0.0",
+  "skin_type": "backgrounds",
+  "colours": {
+    "primary": "#0066CC",
+    "secondary": "#FFD700",
+    "background": "#1A1A1F",
+    "text": "#FFFFFF",
+    "accent": "#3399FF"
+  },
+  "files": {
+    "backgrounds": "backgrounds-convertidos/Texture2D"
+  },
+  "changelog": [
+    {
+      "version": "0.1.0",
+      "date": "2026-03-11",
+      "changes": [
+        "Versão inicial alpha",
+        "70 backgrounds convertidos",
+        "Paleta Minimalista Brasil aplicada"
+      ]
+    }
+  ]
+}
