@@ -174,26 +174,45 @@ namespace FM26TacticsDump
             
             try
             {
-                // Método 1: ClickEvent
-                var clickEvent = ClickEvent.GetPooled();
-                clickEvent.target = element;
-                element.SendEvent(clickEvent);
-            }
-            catch (Exception ex)
-            {
-                TacticsDumpPlugin.Log.LogInfo($"[TD] ClickEvent falhou: {ex.Message}");
-                
-                try
+                // Usar reflexão para invocar clickable
+                var clickableProp = element.GetType().GetProperty("clickable");
+                if (clickableProp != null)
                 {
-                    // Método 2: Invoke manipulation
-                    var clickable = element.GetType().GetProperty("clickable")?.GetValue(element);
+                    var clickable = clickableProp.GetValue(element);
                     if (clickable != null)
                     {
                         var invokeMethod = clickable.GetType().GetMethod("Invoke");
-                        invokeMethod?.Invoke(clickable, new object[] { element, null });
+                        if (invokeMethod != null)
+                        {
+                            invokeMethod.Invoke(clickable, new object[] { element, null });
+                            TacticsDumpPlugin.Log.LogInfo("[TD] Clique simulado via clickable.Invoke");
+                            return;
+                        }
                     }
                 }
-                catch { }
+                
+                // Fallback: SendEvent via reflexão
+                var sendEventMethod = element.GetType().GetMethod("SendEvent", BindingFlags.Public | BindingFlags.Instance);
+                if (sendEventMethod != null)
+                {
+                    var getPooledMethod = typeof(ClickEvent).GetMethod("GetPooled", BindingFlags.Public | BindingFlags.Static);
+                    if (getPooledMethod != null)
+                    {
+                        var evt = getPooledMethod.Invoke(null, new object[0]);
+                        if (evt != null)
+                        {
+                            sendEventMethod.Invoke(element, new object[] { evt });
+                            TacticsDumpPlugin.Log.LogInfo("[TD] Clique simulado via SendEvent");
+                            return;
+                        }
+                    }
+                }
+                
+                TacticsDumpPlugin.Log.LogWarning("[TD] Não consegui simular clique");
+            }
+            catch (Exception ex)
+            {
+                TacticsDumpPlugin.Log.LogError($"[TD] Erro ao simular clique: {ex.Message}");
             }
         }
 
