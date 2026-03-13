@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -14,14 +13,14 @@ using UnityEngine.UIElements;
 
 namespace FM26TacticsDump
 {
-    [BepInPlugin("com.vintesetfm.tactics_dump", "FM26 Tactics Dump", "2.0.0")]
+    [BepInPlugin("com.vintesetfm.tactics_dump", "FM26 Tactics Dump", "2.1.0")]
     public class TacticsDumpPlugin : BasePlugin
     {
         internal static new ManualLogSource Log;
         public override void Load()
         {
             Log = base.Log;
-            Log.LogInfo("FM26 Tactics Dump v2.0.0");
+            Log.LogInfo("FM26 Tactics Dump v2.1.0");
             Log.LogInfo("F10 = Dump taticas (ambas abas) | F11 = Diag profundo");
             AddComponent<TacticsDumpBehaviour>();
         }
@@ -32,12 +31,27 @@ namespace FM26TacticsDump
         public TacticsDumpBehaviour(IntPtr ptr) : base(ptr) { }
 
         private List<UIDocument> _docs = new List<UIDocument>();
+        private int _frameCounter = 0;
+        private bool _dumpInProgress = false;
+        private int _dumpPhase = 0;
+        private List<TileData> _pendingTiles = new List<TileData>();
+        private string _pendingPossession = "";
+        private VisualElement _pendingTargetButton;
+        private bool _wasIPActive;
 
         private void Update()
         {
             if (Keyboard.current == null) return;
+            
+            // Processar fases do dump
+            if (_dumpInProgress)
+            {
+                ProcessDumpPhase();
+                return;
+            }
+            
             if (Keyboard.current.f10Key.wasPressedThisFrame) 
-                StartCoroutine(DumpTacticsAsync());
+                StartDump();
             if (Keyboard.current.f11Key.wasPressedThisFrame) 
                 DiagDeep();
         }
@@ -52,9 +66,9 @@ namespace FM26TacticsDump
             return _docs.Count > 0 ? _docs[0].rootVisualElement : null;
         }
 
-        // ── F10: Dump completo com scroll e ambas abas ───────────────────
+        // ── F10: Dump com multi-frame ─────────────────────────────────────
         [HideFromIl2Cpp]
-        private IEnumerator DumpTacticsAsync()
+        private void StartDump()
         {
             TacticsDumpPlugin.Log.LogInfo("[TD] Iniciando dump completo...");
             
@@ -62,70 +76,129 @@ namespace FM26TacticsDump
             if (root == null) 
             {
                 TacticsDumpPlugin.Log.LogWarning("[TD] Sem PanelManager");
-                yield break;
+                return;
             }
 
             var planner = FindByName(root, "TacticalPlannerTool");
             if (planner == null)
             {
                 TacticsDumpPlugin.Log.LogWarning("[TD] TacticalPlannerTool não encontrado. Abra Taticas > Instrucoes a Equipa.");
-                yield break;
+                return;
             }
 
-            var allTiles = new List<TileData>();
-            string currentPossession = "";
-
-            // Detectar aba ativa atual
+            _pendingTiles.Clear();
+            _dumpPhase = 1;
+            _dumpInProgress = true;
+            _frameCounter = 0;
+            
+            // Detectar aba ativa
             var ipButton = FindByName(planner, "IP");
-            bool isIPActive = HasClass(ipButton, "buttongroup__button--active");
-            currentPossession = isIPActive ? "ComPosse" : "SemPosse";
+            _wasIPActive = HasClass(ipButton, "buttongroup__button--active");
+            _pendingPossession = _wasIPActive ? "ComPosse" : "SemPosse";
             
-            TacticsDumpPlugin.Log.LogInfo($"[TD] Aba ativa: {currentPossession}");
-
-            // Capturar aba atual
-            yield return StartCoroutine(CaptureCurrentTab(planner, allTiles, currentPossession));
-
-            // Trocar para outra aba e capturar
-            string otherPossession = isIPActive ? "SemPosse" : "ComPosse";
-            var targetButton = isIPActive ? FindByName(planner, "OOP") : FindByName(planner, "IP");
-            
-            if (targetButton != null)
-            {
-                TacticsDumpPlugin.Log.LogInfo($"[TD] Trocando para aba {otherPossession}...");
-                
-                // Simular clique
-                using (var evt = NavigationSubmitEvent.GetPooled())
-                {
-                    evt.target = targetButton;
-                    targetButton.SendEvent(evt);
-                }
-                
-                // Aguardar renderização
-                yield return new WaitForSeconds(0.5f);
-                
-                yield return StartCoroutine(CaptureCurrentTab(planner, allTiles, otherPossession));
-                
-                // Voltar para aba original
-                using (var evt = NavigationSubmitEvent.GetPooled())
-                {
-                    evt.target = ipButton;
-                    ipButton.SendEvent(evt);
-                }
-            }
-
-            if (allTiles.Count == 0)
-            {
-                TacticsDumpPlugin.Log.LogWarning("[TD] Nenhum tile capturado. Possível problema de timing.");
-                yield break;
-            }
-
-            // Salvar JSON
-            SaveFile(BuildJson(allTiles), "tactics_dump");
-            TacticsDumpPlugin.Log.LogInfo($"[TD] Dump completo: {allTiles.Count} tiles capturados");
+            TacticsDumpPlugin.Log.LogInfo($"[TD] Fase 1: Capturando {_pendingPossession}...");
         }
 
         [HideFromIl2Cpp]
-        private IEnumerator CaptureCurrentTab(VisualElement planner, List<TileData> allTiles, string possession)
+        private void ProcessDumpPhase()
+        {
+            _frameCounter++;
+            
+            switch (_dumpPhase)
+            {
+                case 1: // Capturar primeira aba
+                    if (_frameCounter >= 2)
+                    {
+                        var root = GetRoot();
+                        var planner = FindByName(root, "TacticalPlannerTool");
+                        CaptureCurrentTab(planner, _pendingTiles, _pendingPossession);
+                        
+                        // Preparar para trocar aba
+                        _pendingTargetButton = _wasIPActive ? FindByName(planner, "OOP") : FindByName(planner, "IP");
+                        
+                        if (_pendingTargetButton != null)
+                        {
+                            _dumpPhase = 2;
+                            _frameCounter = 0;
+                            _pendingPossession = _wasIPActive ? "SemPosse" : "ComPosse";
+                            
+                            // Simular clique
+                            SimulateClick(_pendingTargetButton);
+                            TacticsDumpPlugin.Log.LogInfo($"[TD] Fase 2: Trocando para {_pendingPossession}...");
+                        }
+                        else
+                        {
+                            // Sem troca de aba, finalizar
+                            FinishDump();
+                        }
+                    }
+                    break;
+                    
+                case 2: // Aguardar troca de aba
+                    if (_frameCounter >= 30) // ~0.5s
+                    {
+                        var root = GetRoot();
+                        var planner = FindByName(root, "TacticalPlannerTool");
+                        CaptureCurrentTab(planner, _pendingTiles, _pendingPossession);
+                        
+                        // Voltar para aba original
+                        var originalButton = _wasIPActive ? FindByName(planner, "IP") : FindByName(planner, "OOP");
+                        if (originalButton != null)
+                            SimulateClick(originalButton);
+                        
+                        FinishDump();
+                    }
+                    break;
+            }
+        }
+
+        [HideFromIl2Cpp]
+        private void FinishDump()
+        {
+            _dumpInProgress = false;
+            
+            if (_pendingTiles.Count == 0)
+            {
+                TacticsDumpPlugin.Log.LogWarning("[TD] Nenhum tile capturado.");
+                return;
+            }
+
+            SaveFile(BuildJson(_pendingTiles), "tactics_dump");
+            TacticsDumpPlugin.Log.LogInfo($"[TD] Dump completo: {_pendingTiles.Count} tiles capturados");
+        }
+
+        [HideFromIl2Cpp]
+        private void SimulateClick(VisualElement element)
+        {
+            if (element == null) return;
+            
+            try
+            {
+                // Método 1: ClickEvent
+                var clickEvent = ClickEvent.GetPooled();
+                clickEvent.target = element;
+                element.SendEvent(clickEvent);
+            }
+            catch (Exception ex)
+            {
+                TacticsDumpPlugin.Log.LogInfo($"[TD] ClickEvent falhou: {ex.Message}");
+                
+                try
+                {
+                    // Método 2: Invoke manipulation
+                    var clickable = element.GetType().GetProperty("clickable")?.GetValue(element);
+                    if (clickable != null)
+                    {
+                        var invokeMethod = clickable.GetType().GetMethod("Invoke");
+                        invokeMethod?.Invoke(clickable, new object[] { element, null });
+                    }
+                }
+                catch { }
+            }
+        }
+
+        [HideFromIl2Cpp]
+        private void CaptureCurrentTab(VisualElement planner, List<TileData> tiles, string possession)
         {
             var glecs = new List<VisualElement>();
             FindAllByName(planner, "GridLayoutElementContent", glecs, 0);
@@ -135,61 +208,7 @@ namespace FM26TacticsDump
             foreach (var glec in glecs)
             {
                 if (!IsInstructionGlec(glec)) continue;
-
-                // Capturar tiles visíveis
-                yield return StartCoroutine(CaptureTilesFromGlec(glec, allTiles, possession));
-            }
-        }
-
-        [HideFromIl2Cpp]
-        private IEnumerator CaptureTilesFromGlec(VisualElement glec, List<TileData> allTiles, string possession)
-        {
-            // Encontrar ScrollView pai
-            var scrollView = FindParentScrollView(glec);
-            
-            if (scrollView != null)
-            {
-                // Scroll para o topo
-                scrollView.scrollOffset = new Vector2(0, 0);
-                yield return new WaitForSeconds(0.1f);
-                
-                // Capturar tiles visíveis no topo
-                ExtractTilesFromGlec(glec, allTiles, possession);
-                
-                // Scroll gradual para capturar todos
-                float scrollStep = 200f;
-                float maxScroll = 5000f;
-                float currentScroll = 0f;
-                int previousCount = allTiles.Count;
-                int noNewTilesCount = 0;
-                
-                while (currentScroll < maxScroll && noNewTilesCount < 3)
-                {
-                    currentScroll += scrollStep;
-                    scrollView.scrollOffset = new Vector2(0, currentScroll);
-                    yield return new WaitForSeconds(0.05f);
-                    
-                    int countBefore = allTiles.Count;
-                    ExtractTilesFromGlec(glec, allTiles, possession);
-                    
-                    if (allTiles.Count == previousCount)
-                    {
-                        noNewTilesCount++;
-                    }
-                    else
-                    {
-                        noNewTilesCount = 0;
-                        previousCount = allTiles.Count;
-                    }
-                }
-                
-                // Voltar scroll para início
-                scrollView.scrollOffset = new Vector2(0, 0);
-            }
-            else
-            {
-                // Sem ScrollView, capturar direto
-                ExtractTilesFromGlec(glec, allTiles, possession);
+                ExtractTilesFromGlec(glec, tiles, possession);
             }
         }
 
@@ -204,17 +223,12 @@ namespace FM26TacticsDump
                 var siTile = glec[i];
                 if (!HasClass(siTile, "si-tile")) continue;
 
-                // Nome do tile
                 string tileName = siTile.childCount > 0 ? siTile[0].name : $"Tile{i}";
                 
-                // Filtrar "Body" (painel principal)
                 if (tileName == "Body") continue;
-                
-                // Dedup
                 if (existingNames.Contains(tileName)) continue;
                 existingNames.Add(tileName);
 
-                // Valor selecionado
                 string selectedValue = GetSelectedValue(siTile);
                 
                 if (!string.IsNullOrEmpty(selectedValue))
@@ -234,7 +248,6 @@ namespace FM26TacticsDump
         [HideFromIl2Cpp]
         private string GetSelectedValue(VisualElement siTile)
         {
-            // Procurar elemento com classe "name" dentro do tile
             var nameEl = FindByNameClass(siTile, "name", 0, 10);
             if (nameEl != null)
             {
@@ -242,7 +255,6 @@ namespace FM26TacticsDump
                 if (!string.IsNullOrEmpty(txt)) return txt;
             }
             
-            // Fallback: procurar primeiro texto
             var texts = new List<string>();
             CollectTextsDeep(siTile, texts, 0, 20);
             return texts.Count > 0 ? texts[0] : null;
@@ -270,28 +282,6 @@ namespace FM26TacticsDump
             return null;
         }
 
-        [HideFromIl2Cpp]
-        private ScrollView FindParentScrollView(VisualElement el)
-        {
-            var current = el.parent;
-            int maxDepth = 20;
-            int depth = 0;
-            
-            while (current != null && depth < maxDepth)
-            {
-                if (current is ScrollView sv) return sv;
-                // Checar pela classe também
-                if (HasClass(current, "unity-scroll-view") || HasClass(current, "siscrollview"))
-                {
-                    try { return current as ScrollView; } catch { }
-                }
-                current = current.parent;
-                depth++;
-            }
-            
-            return null;
-        }
-
         // ── F11: Diagnóstico ───────────────────────────────────────────────
         [HideFromIl2Cpp]
         private void DiagDeep()
@@ -306,7 +296,7 @@ namespace FM26TacticsDump
             FindAllByName(planner, "GridLayoutElementContent", glecs, 0);
 
             var sb = new StringBuilder();
-            sb.AppendLine($"# TacticsDump Diag v2.0.0 - {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            sb.AppendLine($"# TacticsDump Diag v2.1.0 - {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
             sb.AppendLine($"# GLECs: {glecs.Count}");
             sb.AppendLine();
 
@@ -337,7 +327,6 @@ namespace FM26TacticsDump
                 if (child.childCount > 0)
                 {
                     string name = child[0].name ?? "";
-                    // Nomes conhecidos de instruções
                     if (name == "PassingDirectness" || name == "Tempo" || name == "TimeWasting" ||
                         name == "AttackingTransition" || name == "TeamWidth" || name == "StoppageStrategy" ||
                         name == "CreativeFreedom" || name == "Pressing" || name == "PressureIntensity" ||
@@ -371,11 +360,8 @@ namespace FM26TacticsDump
         {
             if (el == null) return null;
             
-            // 1. Label
             try { var l = el.TryCast<Label>(); if (l?.text?.Length > 0) return l.text.Trim(); } catch { }
-            // 2. TextElement
             try { var te = el.TryCast<TextElement>(); if (te?.text?.Length > 0) return te.text.Trim(); } catch { }
-            // 3. Reflection
             try
             {
                 var prop = el.GetType().GetProperty("text", BindingFlags.Public | BindingFlags.Instance);
