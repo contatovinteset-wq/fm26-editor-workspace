@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using BepInEx;
 using BepInEx.Unity.IL2CPP;
+using BepInEx.Unity.IL2CPP.Utils.Collections;
 using BepInEx.Logging;
 using Il2CppInterop.Runtime.Attributes;
 using UnityEngine;
@@ -13,15 +15,15 @@ using UnityEngine.UIElements;
 
 namespace FM26TacticsDump
 {
-    [BepInPlugin("com.vintesetfm.tactics_dump", "FM26 Tactics Dump", "2.1.0")]
+    [BepInPlugin("com.vintesetfm.tactics_dump", "FM26 Tactics Dump", "2.1.6")]
     public class TacticsDumpPlugin : BasePlugin
     {
         internal static new ManualLogSource Log;
         public override void Load()
         {
             Log = base.Log;
-            Log.LogInfo("FM26 Tactics Dump v2.1.0");
-            Log.LogInfo("F10 = Dump taticas (ambas abas) | F11 = Diag profundo");
+            Log.LogInfo("FM26 Tactics Dump v2.1.6");
+            Log.LogInfo("ABRA O MODAL de Instrucoes e pressione F10");
             AddComponent<TacticsDumpBehaviour>();
         }
     }
@@ -30,416 +32,343 @@ namespace FM26TacticsDump
     {
         public TacticsDumpBehaviour(IntPtr ptr) : base(ptr) { }
 
-        private List<UIDocument> _docs = new List<UIDocument>();
-        private int _frameCounter = 0;
-        private bool _dumpInProgress = false;
-        private int _dumpPhase = 0;
-        private List<TileData> _pendingTiles = new List<TileData>();
-        private string _pendingPossession = "";
-        private VisualElement _pendingTargetButton;
-        private bool _wasIPActive;
+        private static readonly HashSet<string> IgnoredNames = new HashSet<string>
+            { "Body", "Placeholder", "GridElementControls" };
+
+        private readonly List<UIDocument> _docs = new List<UIDocument>();
 
         private void Update()
         {
             if (Keyboard.current == null) return;
-            
-            // Processar fases do dump
-            if (_dumpInProgress)
-            {
-                ProcessDumpPhase();
-                return;
-            }
-            
-            if (Keyboard.current.f10Key.wasPressedThisFrame) 
-                StartDump();
-            if (Keyboard.current.f11Key.wasPressedThisFrame) 
-                DiagDeep();
+            if (Keyboard.current.f10Key.wasPressedThisFrame)
+                StartCoroutine(DumpTacticsAsync().WrapToIl2Cpp());
         }
 
         [HideFromIl2Cpp]
         private VisualElement GetRoot()
         {
             _docs.Clear();
-            foreach (var doc in FindObjectsOfType<UIDocument>())
-                if (doc.rootVisualElement?.name == "PanelManager-container")
-                    _docs.Add(doc);
+            try { foreach (var d in FindObjectsOfType<UIDocument>())
+                      if (d.rootVisualElement?.name == "PanelManager-container") _docs.Add(d); }
+            catch { }
             return _docs.Count > 0 ? _docs[0].rootVisualElement : null;
         }
 
-        // ── F10: Dump com multi-frame ─────────────────────────────────────
+        // ── F10 ──────────────────────────────────────────────────────────
         [HideFromIl2Cpp]
-        private void StartDump()
+        private IEnumerator DumpTacticsAsync()
         {
-            TacticsDumpPlugin.Log.LogInfo("[TD] Iniciando dump completo...");
-            
-            var root = GetRoot();
-            if (root == null) 
+            TacticsDumpPlugin.Log.LogInfo("[TD] v2.1.6 iniciando...");
+
+            // Busca o root COMPLETO do PanelManager (inclui Overlay onde fica o modal)
+            VisualElement root = null;
+            try { root = GetRoot(); } catch { }
+            if (root == null) { TacticsDumpPlugin.Log.LogWarning("[TD] PanelManager nao encontrado."); yield break; }
+
+            // Busca ScrollViews no root INTEIRO — nao apenas no TacticalPlannerTool
+            var scrollViews = new List<VisualElement>();
+            try { FindAllScrollViews(root, scrollViews, 0); } catch { }
+            TacticsDumpPlugin.Log.LogInfo($"[TD] {scrollViews.Count} ScrollView(s) no PanelManager inteiro");
+
+            var allTiles = new List<TileData>();
+            var globalSeen = new HashSet<string>();
+
+            foreach (var sv in scrollViews)
             {
-                TacticsDumpPlugin.Log.LogWarning("[TD] Sem PanelManager");
-                return;
+                // Loga qual layer este ScrollView pertence
+                string parentChain = GetAncestorChain(sv, 5);
+                int siTileCount = CountDescendantsWithClass(sv, "si-tile", 0, 8);
+                TacticsDumpPlugin.Log.LogInfo($"[TD] SV: si-tiles={siTileCount} | chain=[{parentChain}]");
+
+                if (siTileCount == 0) continue;
+
+                yield return StartCoroutine(ScrollAndCapture(sv, allTiles, globalSeen).WrapToIl2Cpp());
             }
 
-            var planner = FindByName(root, "TacticalPlannerTool");
-            if (planner == null)
-            {
-                TacticsDumpPlugin.Log.LogWarning("[TD] TacticalPlannerTool não encontrado. Abra Taticas > Instrucoes a Equipa.");
-                return;
-            }
+            // Captura estatica de si-tiles fora de ScrollViews
+            try { CaptureStaticSiTiles(root, allTiles, globalSeen); } catch { }
 
-            _pendingTiles.Clear();
-            _dumpPhase = 1;
-            _dumpInProgress = true;
-            _frameCounter = 0;
-            
-            // Detectar aba ativa
-            var ipButton = FindByName(planner, "IP");
-            _wasIPActive = HasClass(ipButton, "buttongroup__button--active");
-            _pendingPossession = _wasIPActive ? "ComPosse" : "SemPosse";
-            
-            TacticsDumpPlugin.Log.LogInfo($"[TD] Fase 1: Capturando {_pendingPossession}...");
-        }
-
-        [HideFromIl2Cpp]
-        private void ProcessDumpPhase()
-        {
-            _frameCounter++;
-            
-            switch (_dumpPhase)
-            {
-                case 1: // Capturar primeira aba
-                    if (_frameCounter >= 2)
-                    {
-                        var root = GetRoot();
-                        var planner = FindByName(root, "TacticalPlannerTool");
-                        CaptureCurrentTab(planner, _pendingTiles, _pendingPossession);
-                        
-                        // Preparar para trocar aba
-                        _pendingTargetButton = _wasIPActive ? FindByName(planner, "OOP") : FindByName(planner, "IP");
-                        
-                        if (_pendingTargetButton != null)
-                        {
-                            _dumpPhase = 2;
-                            _frameCounter = 0;
-                            _pendingPossession = _wasIPActive ? "SemPosse" : "ComPosse";
-                            
-                            // Simular clique
-                            SimulateClick(_pendingTargetButton);
-                            TacticsDumpPlugin.Log.LogInfo($"[TD] Fase 2: Trocando para {_pendingPossession}...");
-                        }
-                        else
-                        {
-                            // Sem troca de aba, finalizar
-                            FinishDump();
-                        }
-                    }
-                    break;
-                    
-                case 2: // Aguardar troca de aba
-                    if (_frameCounter >= 30) // ~0.5s
-                    {
-                        var root = GetRoot();
-                        var planner = FindByName(root, "TacticalPlannerTool");
-                        CaptureCurrentTab(planner, _pendingTiles, _pendingPossession);
-                        
-                        // Voltar para aba original
-                        var originalButton = _wasIPActive ? FindByName(planner, "IP") : FindByName(planner, "OOP");
-                        if (originalButton != null)
-                            SimulateClick(originalButton);
-                        
-                        FinishDump();
-                    }
-                    break;
-            }
-        }
-
-        [HideFromIl2Cpp]
-        private void FinishDump()
-        {
-            _dumpInProgress = false;
-            
-            if (_pendingTiles.Count == 0)
+            if (allTiles.Count == 0)
             {
                 TacticsDumpPlugin.Log.LogWarning("[TD] Nenhum tile capturado.");
-                return;
+                TacticsDumpPlugin.Log.LogWarning("[TD] Abra o modal de Instrucoes a Equipa antes de pressionar F10!");
+                yield break;
             }
 
-            SaveFile(BuildJson(_pendingTiles), "tactics_dump");
-            TacticsDumpPlugin.Log.LogInfo($"[TD] Dump completo: {_pendingTiles.Count} tiles capturados");
+            int ip = 0, oop = 0, gen = 0;
+            foreach (var t in allTiles)
+            { if (t.Possession == "ComPosse") ip++; else if (t.Possession == "SemPosse") oop++; else gen++; }
+            TacticsDumpPlugin.Log.LogInfo($"[TD] Total: {allTiles.Count} tiles | ComPosse={ip} SemPosse={oop} Geral={gen}");
+
+            string label = ip > 0 && oop > 0 ? "Ambas" : ip > 0 ? "ComPosse" : oop > 0 ? "SemPosse" : "Geral";
+            try { SaveFile(BuildJson(allTiles), $"tactics_dump_{label}"); }
+            catch (Exception ex) { TacticsDumpPlugin.Log.LogError($"[TD] Erro ao salvar: {ex.Message}"); }
+        }
+
+        // ── ScrollView: scroll completo ───────────────────────────────────
+        [HideFromIl2Cpp]
+        private IEnumerator ScrollAndCapture(VisualElement svEl, List<TileData> allTiles, HashSet<string> globalSeen)
+        {
+            ScrollView sv = null;
+            try { sv = new ScrollView(svEl.Pointer); } catch { yield break; }
+
+            float contentH = 10000f;
+            try { var cc = sv.contentContainer; if (cc != null) contentH = Math.Max(cc.layout.height, 300f); } catch { }
+            TacticsDumpPlugin.Log.LogInfo($"[TD] Varrendo ScrollView contentH={contentH:0}");
+
+            try { sv.scrollOffset = new Vector2(0, 0); } catch { yield break; }
+            yield return new WaitForSeconds(0.2f);
+
+            float step = 180f, pos = 0f, lastActual = -1f;
+            int stuckCount = 0;
+
+            while (pos <= contentH + step)
+            {
+                try { CaptureSiTilesUnder(svEl, allTiles, globalSeen); } catch { }
+
+                pos += step;
+                try { sv.scrollOffset = new Vector2(0, pos); } catch { break; }
+                yield return new WaitForSeconds(0.07f);
+
+                float actual = 0f;
+                try { actual = sv.scrollOffset.y; } catch { }
+                if (pos > step * 2 && Math.Abs(actual - lastActual) < 5f)
+                { stuckCount++; if (stuckCount >= 3) break; }
+                else stuckCount = 0;
+                lastActual = actual;
+            }
+
+            try { CaptureSiTilesUnder(svEl, allTiles, globalSeen); } catch { }
+            try { sv.scrollOffset = new Vector2(0, 0); } catch { }
+            TacticsDumpPlugin.Log.LogInfo($"[TD] ScrollView concluido. Total tiles ate agora: {allTiles.Count}");
+        }
+
+        // ── Captura si-tiles visiveis ─────────────────────────────────────
+        [HideFromIl2Cpp]
+        private void CaptureSiTilesUnder(VisualElement root, List<TileData> allTiles, HashSet<string> globalSeen)
+        {
+            var tiles = new List<VisualElement>();
+            try { FindAllByClass(root, "si-tile", tiles, 0, 60); } catch { return; }
+
+            foreach (var siTile in tiles)
+            {
+                try
+                {
+                    string tileName = siTile.childCount > 0 ? siTile[0].name : "";
+                    if (string.IsNullOrEmpty(tileName) || IgnoredNames.Contains(tileName)) continue;
+
+                    string possession = DeterminePossession(siTile);
+                    string key = $"{tileName}|{possession}";
+                    if (globalSeen.Contains(key)) continue;
+                    globalSeen.Add(key);
+
+                    string val = GetSelectedValue(siTile);
+                    if (!string.IsNullOrEmpty(val))
+                    {
+                        allTiles.Add(new TileData { Name = tileName, Value = val, Possession = possession });
+                        TacticsDumpPlugin.Log.LogInfo($"[TD] + {tileName} = {val} [{possession}]");
+                    }
+                    else
+                    {
+                        string chain = GetAncestorChain(siTile, 5);
+                        TacticsDumpPlugin.Log.LogInfo($"[TD] ? {tileName} sem valor | {chain}");
+                    }
+                }
+                catch { }
+            }
+        }
+
+        // ── Captura si-tiles fora de ScrollViews ──────────────────────────
+        [HideFromIl2Cpp]
+        private void CaptureStaticSiTiles(VisualElement root, List<TileData> allTiles, HashSet<string> globalSeen)
+        {
+            var tiles = new List<VisualElement>();
+            try { FindAllByClass(root, "si-tile", tiles, 0, 80); } catch { return; }
+            int added = 0;
+            foreach (var siTile in tiles)
+            {
+                try
+                {
+                    if (HasAncestorWithScrollView(siTile)) continue;
+                    string tileName = siTile.childCount > 0 ? siTile[0].name : "";
+                    if (string.IsNullOrEmpty(tileName) || IgnoredNames.Contains(tileName)) continue;
+                    string possession = DeterminePossession(siTile);
+                    string key = $"{tileName}|{possession}";
+                    if (globalSeen.Contains(key)) continue;
+                    globalSeen.Add(key);
+                    string val = GetSelectedValue(siTile);
+                    if (!string.IsNullOrEmpty(val))
+                    { allTiles.Add(new TileData { Name = tileName, Value = val, Possession = possession }); added++; }
+                }
+                catch { }
+            }
+            if (added > 0) TacticsDumpPlugin.Log.LogInfo($"[TD] {added} tile(s) estaticos capturados");
+        }
+
+        // ── Posse por ancestor chain ──────────────────────────────────────
+        [HideFromIl2Cpp]
+        private string DeterminePossession(VisualElement el)
+        {
+            var cur = el.parent; int d = 0;
+            while (cur != null && d < 60)
+            {
+                try
+                {
+                    string n = (cur.name ?? "").ToLower();
+                    if (n == "ip-tiles" || n.Contains("in-possession") || n.Contains("inpossession")
+                        || n == "ip_tiles" || n == "compossedebola") return "ComPosse";
+                    if (n == "oop-tiles" || n.Contains("out-of-possession") || n.Contains("outofpossession")
+                        || n == "oop_tiles" || n == "sempossedabola") return "SemPosse";
+                }
+                catch { }
+                cur = cur.parent; d++;
+            }
+            return "Geral";
         }
 
         [HideFromIl2Cpp]
-        private void SimulateClick(VisualElement element)
+        private string GetAncestorChain(VisualElement el, int max)
         {
-            if (element == null) return;
-            
+            var names = new List<string>();
+            var cur = el.parent; int d = 0;
+            while (cur != null && d < max)
+            {
+                try { string n = cur.name; if (!string.IsNullOrEmpty(n)) names.Add(n); } catch { }
+                cur = cur.parent; d++;
+            }
+            return string.Join(" > ", names);
+        }
+
+        [HideFromIl2Cpp]
+        private bool HasAncestorWithScrollView(VisualElement el)
+        {
+            var cur = el.parent; int d = 0;
+            while (cur != null && d < 30)
+            {
+                try { if (HasClass(cur, "unity-scroll-view") || HasClass(cur, "siscrollview")) return true; } catch { }
+                cur = cur.parent; d++;
+            }
+            return false;
+        }
+
+        [HideFromIl2Cpp]
+        private int CountDescendantsWithClass(VisualElement root, string cls, int depth, int maxDepth)
+        {
+            if (root == null || depth > maxDepth) return 0;
+            int count = 0;
+            try { if (HasClass(root, cls)) count++; } catch { }
+            for (int i = 0; i < root.childCount; i++)
+                try { count += CountDescendantsWithClass(root[i], cls, depth + 1, maxDepth); } catch { }
+            return count;
+        }
+
+        // ── Encontra ScrollViews ──────────────────────────────────────────
+        [HideFromIl2Cpp]
+        private void FindAllScrollViews(VisualElement root, List<VisualElement> res, int depth)
+        {
+            if (root == null || depth > 70) return;
             try
             {
-                // Usar reflexão para invocar clickable
-                var clickableProp = element.GetType().GetProperty("clickable");
-                if (clickableProp != null)
-                {
-                    var clickable = clickableProp.GetValue(element);
-                    if (clickable != null)
-                    {
-                        var invokeMethod = clickable.GetType().GetMethod("Invoke");
-                        if (invokeMethod != null)
-                        {
-                            invokeMethod.Invoke(clickable, new object[] { element, null });
-                            TacticsDumpPlugin.Log.LogInfo("[TD] Clique simulado via clickable.Invoke");
-                            return;
-                        }
-                    }
-                }
-                
-                // Fallback: SendEvent via reflexão
-                var sendEventMethod = element.GetType().GetMethod("SendEvent", BindingFlags.Public | BindingFlags.Instance);
-                if (sendEventMethod != null)
-                {
-                    var getPooledMethod = typeof(ClickEvent).GetMethod("GetPooled", BindingFlags.Public | BindingFlags.Static);
-                    if (getPooledMethod != null)
-                    {
-                        var evt = getPooledMethod.Invoke(null, new object[0]);
-                        if (evt != null)
-                        {
-                            sendEventMethod.Invoke(element, new object[] { evt });
-                            TacticsDumpPlugin.Log.LogInfo("[TD] Clique simulado via SendEvent");
-                            return;
-                        }
-                    }
-                }
-                
-                TacticsDumpPlugin.Log.LogWarning("[TD] Não consegui simular clique");
+                if (HasClass(root, "unity-scroll-view") || HasClass(root, "siscrollview"))
+                { res.Add(root); return; }
             }
-            catch (Exception ex)
-            {
-                TacticsDumpPlugin.Log.LogError($"[TD] Erro ao simular clique: {ex.Message}");
-            }
+            catch { }
+            for (int i = 0; i < root.childCount; i++)
+                try { FindAllScrollViews(root[i], res, depth + 1); } catch { }
         }
 
-        [HideFromIl2Cpp]
-        private void CaptureCurrentTab(VisualElement planner, List<TileData> tiles, string possession)
-        {
-            var glecs = new List<VisualElement>();
-            FindAllByName(planner, "GridLayoutElementContent", glecs, 0);
-            
-            TacticsDumpPlugin.Log.LogInfo($"[TD] {glecs.Count} GLECs encontrados na aba {possession}");
-
-            foreach (var glec in glecs)
-            {
-                if (!IsInstructionGlec(glec)) continue;
-                ExtractTilesFromGlec(glec, tiles, possession);
-            }
-        }
-
-        [HideFromIl2Cpp]
-        private void ExtractTilesFromGlec(VisualElement glec, List<TileData> allTiles, string possession)
-        {
-            var existingNames = new HashSet<string>();
-            foreach (var t in allTiles) existingNames.Add(t.Name);
-
-            for (int i = 0; i < glec.childCount; i++)
-            {
-                var siTile = glec[i];
-                if (!HasClass(siTile, "si-tile")) continue;
-
-                string tileName = siTile.childCount > 0 ? siTile[0].name : $"Tile{i}";
-                
-                if (tileName == "Body") continue;
-                if (existingNames.Contains(tileName)) continue;
-                existingNames.Add(tileName);
-
-                string selectedValue = GetSelectedValue(siTile);
-                
-                if (!string.IsNullOrEmpty(selectedValue))
-                {
-                    allTiles.Add(new TileData 
-                    { 
-                        Name = tileName, 
-                        Value = selectedValue,
-                        Possession = possession
-                    });
-                    
-                    TacticsDumpPlugin.Log.LogInfo($"[TD] + {tileName} = {selectedValue} [{possession}]");
-                }
-            }
-        }
-
+        // ── Extração de valor ─────────────────────────────────────────────
         [HideFromIl2Cpp]
         private string GetSelectedValue(VisualElement siTile)
         {
-            var nameEl = FindByNameClass(siTile, "name", 0, 10);
-            if (nameEl != null)
-            {
-                string txt = TryGetText(nameEl);
-                if (!string.IsNullOrEmpty(txt)) return txt;
-            }
-            
-            var texts = new List<string>();
-            CollectTextsDeep(siTile, texts, 0, 20);
-            return texts.Count > 0 ? texts[0] : null;
-        }
-
-        [HideFromIl2Cpp]
-        private VisualElement FindByNameClass(VisualElement root, string className, int depth, int maxDepth)
-        {
-            if (root == null || depth > maxDepth) return null;
-            
-            try
-            {
-                for (int c = 0; c < root.classList.Count; c++)
-                {
-                    if (root.classList[c] == className) return root;
-                }
-            } catch { }
-            
-            for (int i = 0; i < root.childCount; i++)
-            {
-                var found = FindByNameClass(root[i], className, depth + 1, maxDepth);
-                if (found != null) return found;
-            }
-            
+            try { var n = FindByClass(siTile, "name", 0, 15); if (n != null) { string t = TryGetText(n); if (!string.IsNullOrEmpty(t)) return t; } } catch { }
+            try { string s = FindFirstSitext(siTile); if (!string.IsNullOrEmpty(s)) return s; } catch { }
+            try { string ic = GetValueFromIconClass(siTile); if (!string.IsNullOrEmpty(ic)) return ic; } catch { }
             return null;
         }
 
-        // ── F11: Diagnóstico ───────────────────────────────────────────────
         [HideFromIl2Cpp]
-        private void DiagDeep()
+        private string FindFirstSitext(VisualElement root)
         {
-            var root = GetRoot();
-            if (root == null) return;
-
-            var planner = FindByName(root, "TacticalPlannerTool");
-            if (planner == null) { TacticsDumpPlugin.Log.LogWarning("[TD] Abra Taticas > Instrucoes a Equipa"); return; }
-
-            var glecs = new List<VisualElement>();
-            FindAllByName(planner, "GridLayoutElementContent", glecs, 0);
-
-            var sb = new StringBuilder();
-            sb.AppendLine($"# TacticsDump Diag v2.1.0 - {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-            sb.AppendLine($"# GLECs: {glecs.Count}");
-            sb.AppendLine();
-
-            for (int g = 0; g < glecs.Count; g++)
-            {
-                var glec = glecs[g];
-                bool isInstruction = IsInstructionGlec(glec);
-                sb.AppendLine($"=== GLEC[{g}] ch={glec.childCount} isInstruction={isInstruction} ===");
-                DumpDeep(glec, sb, 0, 30);
-                sb.AppendLine();
-            }
-
-            SaveFile(sb.ToString(), "tactics_diag", ".txt");
-            TacticsDumpPlugin.Log.LogInfo($"[TD] Diag salvo: {glecs.Count} GLECs");
+            if (root == null) return null;
+            try { if (HasClass(root, "sitext")) { string t = TryGetText(root); if (!string.IsNullOrEmpty(t)) return t; } } catch { }
+            for (int i = 0; i < root.childCount; i++)
+                try { string r = FindFirstSitext(root[i]); if (!string.IsNullOrEmpty(r)) return r; } catch { }
+            return null;
         }
 
-        // ── Identifica GLEC de instrucao ───────────────────────────────────
         [HideFromIl2Cpp]
-        private bool IsInstructionGlec(VisualElement glec)
+        private string GetValueFromIconClass(VisualElement siTile)
         {
-            if (glec.childCount == 0) return false;
-            
-            for (int i = 0; i < Math.Min(glec.childCount, 5); i++)
+            VisualElement icon = null;
+            try { icon = FindByName(siTile, "Icon"); } catch { }
+            if (icon == null) return null;
+            try
             {
-                var child = glec[i];
-                if (!HasClass(child, "si-tile")) continue;
-                
-                if (child.childCount > 0)
+                for (int c = 0; c < icon.classList.Count; c++)
                 {
-                    string name = child[0].name ?? "";
-                    if (name == "PassingDirectness" || name == "Tempo" || name == "TimeWasting" ||
-                        name == "AttackingTransition" || name == "TeamWidth" || name == "StoppageStrategy" ||
-                        name == "CreativeFreedom" || name == "Pressing" || name == "PressureIntensity" ||
-                        name == "DefensiveLine" || name == "LineOfEngagement" || name == "DefensiveWidth" ||
-                        name == "TackleIntensity" || name == "OffsideTrap" || name == "PreventShortGKDist" ||
-                        name == "PressingType" || name.Contains("Tile"))
-                    {
-                        return true;
-                    }
+                    string cls = icon.classList[c];
+                    if (!cls.StartsWith("tactic_icons-")) continue;
+                    int vi = cls.LastIndexOf("-var-");
+                    if (vi >= 0) { string r = cls.Substring(vi + 5).Trim('-'); if (!string.IsNullOrEmpty(r) && r != "null") return r; }
+                    int ti = cls.LastIndexOf("-type-");
+                    if (ti >= 0) { string r = cls.Substring(ti + 6).Trim('-'); if (!string.IsNullOrEmpty(r)) return r; }
                 }
             }
-            return false;
-        }
-
-        // ── Helpers ─────────────────────────────────────────────────────────
-        [HideFromIl2Cpp]
-        private bool HasClass(VisualElement el, string cls)
-        {
-            if (el == null) return false;
-            try 
-            { 
-                for (int c = 0; c < el.classList.Count; c++) 
-                    if (el.classList[c] == cls || el.classList[c].Contains(cls)) return true; 
-            }
             catch { }
-            return false;
+            return null;
         }
 
         [HideFromIl2Cpp]
         private string TryGetText(VisualElement el)
         {
             if (el == null) return null;
-            
-            try { var l = el.TryCast<Label>(); if (l?.text?.Length > 0) return l.text.Trim(); } catch { }
-            try { var te = el.TryCast<TextElement>(); if (te?.text?.Length > 0) return te.text.Trim(); } catch { }
-            try
-            {
-                var prop = el.GetType().GetProperty("text", BindingFlags.Public | BindingFlags.Instance);
-                if (prop != null)
-                {
-                    string v = prop.GetValue(el) as string;
-                    if (!string.IsNullOrWhiteSpace(v)) return v.Trim();
-                }
-            } catch { }
+            try { var l = new Label(el.Pointer); if (l?.text?.Length > 0) return l.text.Trim(); } catch { }
+            try { var te = new TextElement(el.Pointer); if (te?.text?.Length > 0) return te.text.Trim(); } catch { }
+            try { var p = el.GetType().GetProperty("text", BindingFlags.Public | BindingFlags.Instance);
+                  if (p != null) { string v = p.GetValue(el) as string; if (!string.IsNullOrWhiteSpace(v)) return v.Trim(); } } catch { }
+            return null;
+        }
+
+        // ── Helpers ───────────────────────────────────────────────────────
+        [HideFromIl2Cpp]
+        private bool HasClass(VisualElement el, string cls)
+        {
+            if (el == null) return false;
+            try { for (int c = 0; c < el.classList.Count; c++) if (el.classList[c].Contains(cls)) return true; } catch { }
+            return false;
+        }
+
+        [HideFromIl2Cpp]
+        private VisualElement FindByClass(VisualElement root, string cls, int depth, int maxDepth)
+        {
+            if (root == null || depth > maxDepth) return null;
+            try { for (int c = 0; c < root.classList.Count; c++) if (root.classList[c] == cls) return root; } catch { }
+            for (int i = 0; i < root.childCount; i++)
+                try { var f = FindByClass(root[i], cls, depth + 1, maxDepth); if (f != null) return f; } catch { }
             return null;
         }
 
         [HideFromIl2Cpp]
-        private void CollectTextsDeep(VisualElement el, List<string> result, int depth, int maxDepth)
+        private void FindAllByClass(VisualElement root, string cls, List<VisualElement> res, int depth, int maxDepth)
         {
-            if (el == null || depth > maxDepth) return;
-            string t = TryGetText(el);
-            if (!string.IsNullOrEmpty(t) && !result.Contains(t))
-                result.Add(t);
-            for (int i = 0; i < el.childCount; i++)
-                CollectTextsDeep(el[i], result, depth + 1, maxDepth);
+            if (root == null || depth > maxDepth) return;
+            try { if (HasClass(root, cls)) res.Add(root); } catch { }
+            for (int i = 0; i < root.childCount; i++)
+                try { FindAllByClass(root[i], cls, res, depth + 1, maxDepth); } catch { }
         }
 
         [HideFromIl2Cpp]
         private VisualElement FindByName(VisualElement root, string name)
         {
             if (root == null) return null;
-            if (root.name == name) return root;
-            for (int i = 0; i < root.childCount; i++) 
-            { 
-                var r = FindByName(root[i], name); 
-                if (r != null) return r; 
-            }
+            try { if (root.name == name) return root; } catch { return null; }
+            for (int i = 0; i < root.childCount; i++)
+                try { var r = FindByName(root[i], name); if (r != null) return r; } catch { }
             return null;
         }
 
-        [HideFromIl2Cpp]
-        private void FindAllByName(VisualElement root, string name, List<VisualElement> res, int depth)
-        {
-            if (root == null || depth > 60) return;
-            if (root.name == name) res.Add(root);
-            for (int i = 0; i < root.childCount; i++) 
-                FindAllByName(root[i], name, res, depth + 1);
-        }
-
-        [HideFromIl2Cpp]
-        private void DumpDeep(VisualElement el, StringBuilder sb, int depth, int maxDepth)
-        {
-            if (el == null || depth > maxDepth) return;
-            var classes = new List<string>();
-            try { for (int c = 0; c < el.classList.Count; c++) classes.Add(el.classList[c]); } catch { }
-            string txt = TryGetText(el);
-            string txtStr = !string.IsNullOrEmpty(txt) ? $" \"{Trunc(txt, 60)}\"" : "";
-            string cls = classes.Count > 0 ? $" [{string.Join(", ", classes)}]" : "";
-            sb.AppendLine($"{new string(' ', depth * 2)}{el.GetType().Name} name={el.name}{cls}{txtStr}  ch={el.childCount}");
-            for (int i = 0; i < el.childCount; i++) DumpDeep(el[i], sb, depth + 1, maxDepth);
-        }
-
-        // ── JSON / Save ─────────────────────────────────────────────────────
+        // ── JSON / Save ───────────────────────────────────────────────────
         [HideFromIl2Cpp]
         private string BuildJson(List<TileData> tiles)
         {
@@ -447,39 +376,28 @@ namespace FM26TacticsDump
             sb.AppendLine("{");
             sb.AppendLine($"  \"timestamp\": \"{DateTime.Now:yyyy-MM-ddTHH:mm:ss}\",");
             sb.AppendLine("  \"tiles\": [");
-            
             for (int i = 0; i < tiles.Count; i++)
             {
                 var t = tiles[i];
-                sb.AppendLine($"    {{ \"name\": {JS(t.Name)}, \"value\": {JS(t.Value)}, \"possession\": {JS(t.Possession)} }}{(i < tiles.Count - 1 ? "," : "")}");
+                string comma = i < tiles.Count - 1 ? "," : "";
+                sb.AppendLine($"    {{ \"name\": {JS(t.Name)}, \"value\": {JS(t.Value)}, \"possession\": {JS(t.Possession)} }}{comma}");
             }
-            
-            sb.AppendLine("  ]");
-            sb.AppendLine("}");
+            sb.AppendLine("  ]"); sb.AppendLine("}");
             return sb.ToString();
         }
 
         [HideFromIl2Cpp]
-        private void SaveFile(string content, string prefix, string ext = ".json")
+        private void SaveFile(string content, string prefix)
         {
-            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "Sports Interactive", "Football Manager 2026");
-            Directory.CreateDirectory(dir);
-            string path = Path.Combine(dir, $"{prefix}_{DateTime.Now:yyyyMMdd_HHmmss}{ext}");
+            string dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string path = Path.Combine(dir, $"{prefix}_{DateTime.Now:yyyyMMdd_HHmmss}.json");
             File.WriteAllText(path, content, Encoding.UTF8);
             TacticsDumpPlugin.Log.LogInfo($"[TD] Salvo: {path}");
         }
 
         private static string JS(string s)
             => s == null ? "null" : "\"" + s.Replace("\\","\\\\").Replace("\"","\\\"").Replace("\n","\\n").Replace("\r","\\r") + "\"";
-        private static string Trunc(string s, int max)
-            => string.IsNullOrEmpty(s) ? "" : s.Length <= max ? s : s.Substring(0, max) + "...";
 
-        public class TileData 
-        { 
-            public string Name; 
-            public string Value; 
-            public string Possession;
-        }
+        public class TileData { public string Name; public string Value; public string Possession; }
     }
 }
