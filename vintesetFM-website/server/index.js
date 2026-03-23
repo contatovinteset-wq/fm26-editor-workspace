@@ -4,6 +4,11 @@ import cookieParser from 'cookie-parser';
 import passport from './config/passport.js';
 import { getTwitchChannelData } from './services/twitchService.js';
 import { getYoutubeLatestVideo } from './services/youtubeService.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 import authRoutes from './routes/auth.js';
 import forumRoutes from './routes/forum.js';
@@ -46,6 +51,14 @@ app.get('/api/youtube/latest', async (req, res) => {
     res.status(500).json({ error: 'Erro ao buscar dados do YouTube.', details: error.message });
   }
 });
+
+// Servir frontend compilado em ambiente de Produção
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/index.html'));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`[VintesetFM Backend] Servidor rodando na porta ${PORT}`);
