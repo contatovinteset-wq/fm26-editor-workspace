@@ -1,0 +1,61 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\fm26-editor-workspace-main\\fm26-editor-workspace\\fm26-player-profile-diag\\FM26PlayerProfileDiag.csproj": {}
+  },
+  "projects": {
+    "E:\\fm26-editor-workspace-main\\fm26-editor-workspace\\fm26-player-profile-diag\\FM26PlayerProfileDiag.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\fm26-editor-workspace-main\\fm26-editor-workspace\\fm26-player-profile-diag\\FM26PlayerProfileDiag.csproj",
+        "projectName": "FM26PlayerProfileDiag",
+        "projectPath": "E:\\fm26-editor-workspace-main\\fm26-editor-workspace\\fm26-player-profile-diag\\FM26PlayerProfileDiag.csproj",
+        "packagesPath": "C:\\Users\\Raphael\\.nuget\\packages\\",
+        "outputPath": "E:\\fm26-editor-workspace-main\\fm26-editor-workspace\\fm26-player-profile-diag\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Raphael\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.428\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

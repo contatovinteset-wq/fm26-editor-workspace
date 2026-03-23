@@ -127,7 +127,7 @@ const Home = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
                 <Link to="/telecurso" className="w-full sm:w-auto px-8 py-3.5 bg-accent text-black font-black uppercase tracking-wide rounded-xl hover:bg-accentHover hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,215,0,0.3)] text-center">
-                  Acessar Telecurso
+                  Aprenda a JOGAR o FM26
                 </Link>
                 <a href="#comunidade" onClick={(e) => {
                   e.preventDefault();

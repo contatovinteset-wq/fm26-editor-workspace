@@ -1,0 +1,12 @@
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\obj\Release\net6.0\FM26PlayerProfileDiag.csproj.AssemblyReference.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\obj\Release\net6.0\FM26PlayerProfileDiag.GeneratedMSBuildEditorConfig.editorconfig
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\obj\Release\net6.0\FM26PlayerProfileDiag.AssemblyInfoInputs.cache
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\obj\Release\net6.0\FM26PlayerProfileDiag.AssemblyInfo.cs
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\obj\Release\net6.0\FM26PlayerProfileDiag.csproj.CoreCompileInputs.cache
+e:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\bin\Release\net6.0\FM26PlayerProfileDiag.deps.json
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\bin\Release\net6.0\FM26PlayerProfileDiag.dll
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\bin\Release\net6.0\FM26PlayerProfileDiag.pdb
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\obj\Release\net6.0\FM26PlayerProfileDiag.dll
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\obj\Release\net6.0\refint\FM26PlayerProfileDiag.dll
+E:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\obj\Release\net6.0\FM26PlayerProfileDiag.pdb
+e:\fm26-editor-workspace-main\fm26-editor-workspace\fm26-player-profile-diag\obj\Release\net6.0\ref\FM26PlayerProfileDiag.dll

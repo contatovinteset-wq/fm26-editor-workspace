@@ -3,6 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import indexData from '../data/index.json';
+
+const getYTId = (url) => {
+  if (!url) return null;
+  const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
+  return match && match[2].length === 11 ? match[2] : null;
+};
+
 const newsItems = [
   {
     id: 1,
@@ -15,10 +23,10 @@ const newsItems = [
   {
     id: 2,
     tag: "TELECURSO",
-    title: "A Arte do Moneyball",
-    description: "Aprenda a encontrar os jogadores mais desvalorizados do FM usando métricas avançadas baseadas nos números.",
+    title: "Aprenda a jogar FM26 de um jeito fácil",
+    description: "Assista às nossas masterclasses em vídeo geradas pela comunidade e domine as táticas do jogo.",
     link: "/telecurso",
-    image: "https://images.unsplash.com/photo-1518605368461-1ee7e53a56cf?q=80&w=1200&auto=format&fit=crop"
+    image: "mosaic"
   },
   {
     id: 3,
@@ -40,6 +48,9 @@ export const NewsCarousel = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // Pegar os 8 primeiros videos para o mosaico
+  const mosaicVideos = indexData.filter(i => i.tipo === 'video' && i.uploadedYoutubeUrl).slice(0, 8);
+
   return (
     <div className="w-full mb-12 relative rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(255,215,0,0.1)] border border-white/10 glass-card">
       <div className="absolute top-4 left-4 z-30 flex items-center gap-2 bg-accent/90 text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
@@ -60,11 +71,25 @@ export const NewsCarousel = () => {
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-bgDark via-bgDark/80 to-transparent"></div>
             <div className="absolute inset-0 z-10 bg-gradient-to-r from-bgDark via-bgDark/40 to-transparent"></div>
             
-            <img 
-              src={newsItems[currentIndex].image} 
-              alt={newsItems[currentIndex].title}
-              className="w-full h-full object-cover filter brightness-75 grayscale-[30%]"
-            />
+            {newsItems[currentIndex].image === "mosaic" ? (
+              <div className="absolute inset-0 grid grid-cols-4 grid-rows-2 gap-0 filter brightness-50 grayscale hover:grayscale-0 transition-all duration-700">
+                {mosaicVideos.map((item, idx) => (
+                  <div key={idx} className="w-full h-full relative overflow-hidden border border-white/5">
+                    <img 
+                      src={`https://i.ytimg.com/vi/${getYTId(item.uploadedYoutubeUrl)}/hqdefault.jpg`} 
+                      className="w-full h-full object-cover opacity-80"
+                      alt=""
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <img 
+                src={newsItems[currentIndex].image} 
+                alt={newsItems[currentIndex].title}
+                className="w-full h-full object-cover filter brightness-75 grayscale-[30%]"
+              />
+            )}
 
             {/* Conteúdo Textual */}
             <div className="absolute inset-0 z-20 flex flex-col justify-end p-6 sm:p-8 max-w-3xl">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Pages from './pages/Pages';
 import ErrorBoundary from './ErrorBoundary';
@@ -12,9 +12,17 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Pages.Home />} />
             <Route path="telecurso" element={<Pages.Telecurso />} />
-            <Route path="ferramentas" element={<Pages.Ferramentas />} />
-            <Route path="mods" element={<Pages.Mods />} />
-            <Route path="videos" element={<Pages.Videos />} />
+            <Route path="downloads" element={<Pages.Downloads />} />
+            <Route path="downloads/:id" element={<Pages.Topico />} />
+            <Route path="login" element={<Pages.Login />} />
+            <Route path="cadastro" element={<Pages.Cadastro />} />
+            <Route path="minhaconta" element={<Pages.MinhaConta />} />
+            <Route path="reidamesa" element={<Pages.ReiDaMesa />} />
+            <Route path="reidamesa/escalar" element={<Pages.Escalacao />} />
+            <Route path="reidamesa/ranking" element={<Pages.Ranking />} />
+            <Route path="reidamesa/perfil" element={<Pages.PerfilManager />} />
+            <Route path="ferramentas" element={<Navigate to="/downloads" replace />} />
+            <Route path="mods" element={<Navigate to="/downloads" replace />} />
           </Route>
         </Routes>
       </BrowserRouter>

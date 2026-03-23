@@ -1,0 +1,15 @@
+{
+  "players": [
+    { "id": 1, "name": "Léo Ortiz", "position": "DEF", "avgPts": 5.4 },
+    { "id": 2, "name": "Fabricio Bruno", "position": "DEF", "avgPts": 4.2 },
+    { "id": 3, "name": "Matias Viña", "position": "DEF", "avgPts": 6.1 },
+    { "id": 4, "name": "De Arrascaeta", "position": "MEI", "avgPts": 7.5 },
+    { "id": 5, "name": "Gerson", "position": "MEI", "avgPts": 5.8 },
+    { "id": 6, "name": "Pulgar", "position": "MEI", "avgPts": 4.9 },
+    { "id": 7, "name": "Nico De La Cruz", "position": "MEI", "avgPts": 6.3 },
+    { "id": 8, "name": "Pedro", "position": "ATA", "avgPts": 8.2 },
+    { "id": 9, "name": "Everton Cebolinha", "position": "ATA", "avgPts": 7.1 },
+    { "id": 10, "name": "Luiz Araújo", "position": "ATA", "avgPts": 5.5 },
+    { "id": 11, "name": "Bruno Henrique", "position": "ATA", "avgPts": 6.0 }
+  ]
+}

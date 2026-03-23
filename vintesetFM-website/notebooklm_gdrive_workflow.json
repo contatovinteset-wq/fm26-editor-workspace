@@ -1,0 +1,139 @@
+{
+  "name": "NotebookLM to Google Drive Automator",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "notebooklm-to-gdrive",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "893c834a-9fb8-41ac-a01c-6dcb4bf7f0e7",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.body.videoUrl }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Cookie",
+              "value": "={{ $json.body.cookie }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "e44d5cfd-d55a-45c5-bf63-83a3038ce02b",
+      "name": "Fetch NotebookLM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        420,
+        300
+      ],
+      "notesInFlow": true,
+      "notes": "Baixa o Áudio/Vídeo usando a URL e Cookie"
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "driveId": {
+          "__rl": true,
+          "value": "1E_YlKE-lC1LSL-ZvPNc5nN9-iS71kZ75",
+          "mode": "id"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1E_YlKE-lC1LSL-ZvPNc5nN9-iS71kZ75",
+          "mode": "id"
+        },
+        "name": "={{ $('Webhook').item.json.body.fileName }}.mp4",
+        "fileContent": "data",
+        "options": {}
+      },
+      "id": "c71e220a-f080-4965-8b9a-4fdf8a0c201d",
+      "name": "Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        640,
+        300
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "",
+          "name": "Google Drive account"
+        }
+      },
+      "notesInFlow": true,
+      "notes": "Faz o Upload na pasta 1E_...Z75"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"driveId\": \"{{ $json.id }}\"\n}",
+        "options": {}
+      },
+      "id": "f581e23a-c8d1-419b-a01c-2e6b8c9d1234",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        860,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Fetch NotebookLM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch NotebookLM": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {}
+}
