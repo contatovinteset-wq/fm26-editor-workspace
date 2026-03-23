@@ -55,7 +55,7 @@ app.get('/api/youtube/latest', async (req, res) => {
 // Servir frontend compilado em ambiente de Produção
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../dist')));
-  app.get('*', (req, res) => {
+  app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/index.html'));
   });
 }
