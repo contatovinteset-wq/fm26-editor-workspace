@@ -2,21 +2,20 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Crown, HelpCircle, Trophy, BarChart3, Users, Clock, ArrowRight, Settings, UploadCloud, Lock, Unlock, AlertTriangle, ShieldAlert, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import EmConstrucao from '../components/EmConstrucao';
 
 const ReiDaMesa = () => {
+  if (import.meta.env.PROD) {
+    return <EmConstrucao />;
+  }
+
   // Simulando Auth State (Dono vs Viewers)
   const [isLoggedAsOwner, setIsLoggedAsOwner] = useState(false);
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [isMarketOpen, setIsMarketOpen] = useState(true);
 
   // Mocks
-  const ranking = [
-    { position: 1, name: "Vinteseter1", lastRound: 85.5, total: 432.1 },
-    { position: 2, name: "ManagerBrabo", lastRound: 72.0, total: 410.5 },
-    { position: 3, name: "TaticoMaster", lastRound: 91.2, total: 395.0 },
-    { position: 4, name: "Gegenpresser", lastRound: 60.5, total: 388.9 },
-    { position: 5, name: "Cruyffista", lastRound: 45.0, total: 380.2 },
-  ];
+  const ranking = [];
 
   const pontuacaoRules = [
     { label: "Gol", pts: "+8.0", color: "text-green-500", bg: "bg-green-500/10", border: "border-green-500/20" },

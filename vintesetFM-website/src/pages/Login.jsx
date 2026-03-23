@@ -48,12 +48,12 @@ const Login = () => {
            </div>
 
            <div className="flex flex-col gap-3">
-             <button className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-black font-bold py-3.5 px-4 rounded-xl transition-all shadow-lg hover:shadow-white/10">
+             <a href="/api/auth/google" className="w-full flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-black font-bold py-3.5 px-4 rounded-xl transition-all shadow-lg hover:shadow-white/10">
                <GoogleIconSVG size={20} /> Entrar com Google
-             </button>
-             <button className="w-full flex items-center justify-center gap-3 bg-[#9146FF] hover:bg-[#772CE8] text-white font-bold py-3.5 px-4 rounded-xl transition-all shadow-lg hover:shadow-[#9146FF]/20">
+             </a>
+             <a href="/api/auth/twitch" className="w-full flex items-center justify-center gap-3 bg-[#9146FF] hover:bg-[#772CE8] text-white font-bold py-3.5 px-4 rounded-xl transition-all shadow-lg hover:shadow-[#9146FF]/20">
                <Twitch size={20} /> Entrar com Twitch
-             </button>
+             </a>
            </div>
 
            <div className="flex items-center gap-4 my-8">

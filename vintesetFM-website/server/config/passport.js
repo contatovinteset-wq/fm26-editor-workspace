@@ -55,7 +55,7 @@ passport.use(
     {
       clientID: process.env.TWITCH_CLIENT_ID || 'placeholder',
       clientSecret: process.env.TWITCH_CLIENT_SECRET || 'placeholder',
-      callbackURL: 'http://localhost:3000/api/auth/twitch/callback',
+      callbackURL: process.env.NODE_ENV === 'production' ? 'https://vintesetfm.cloud/api/auth/twitch/callback' : '/api/auth/twitch/callback',
       scope: 'user_read',
     },
     async (accessToken, refreshToken, profile, done) => {

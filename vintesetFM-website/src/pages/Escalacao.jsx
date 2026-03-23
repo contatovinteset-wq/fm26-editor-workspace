@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Users, Search, AlertCircle, Save, X, Info } from 'lucide-react';
+import { Users, AlertTriangle, Shield, TrendingUp, DollarSign, Search, Filter, ArrowRight, Save, Crown, X } from 'lucide-react';
+import { Link, Navigate } from 'react-router-dom';
 import mockData from '../data/reiDaMesaMocks.json';
-import { Link } from 'react-router-dom';
 
 const Escalacao = () => {
+  if (import.meta.env.PROD) {
+    return <Navigate to="/reidamesa" replace />;
+  }
+
+  // ==== ESTADOS ====
+  const [formation, setFormation] = useState('4-4-2');
+  const [budget, setBudget] = useState(100.0); // 'DEF', 'MEI', 'ATA', 'BANCO', 'BAGRE'
   const [activeSlot, setActiveSlot] = useState(null); // 'DEF', 'MEI', 'ATA', 'BANCO', 'BAGRE'
   const [searchTerm, setSearchTerm] = useState('');
   const [squad, setSquad] = useState({

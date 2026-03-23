@@ -32,7 +32,7 @@ router.get(
   (req, res) => {
     const token = generateToken(req.user);
     setJWTCookie(res, token);
-    res.redirect('/minha-conta');
+    res.redirect('/minhaconta');
   }
 );
 
@@ -47,7 +47,7 @@ router.get(
   (req, res) => {
     const token = generateToken(req.user);
     setJWTCookie(res, token);
-    res.redirect('/minha-conta');
+    res.redirect('/minhaconta');
   }
 );
 

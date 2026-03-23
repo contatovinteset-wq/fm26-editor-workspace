@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Search, ChevronLeft, ChevronRight, Crown, Medal, User } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Trophy, Crown, ArrowUp, ArrowDown, Minus, Search, Filter, Star, Clock } from 'lucide-react';
+import { Link, Navigate } from 'react-router-dom';
 
 const Ranking = () => {
+  if (import.meta.env.PROD) {
+    return <Navigate to="/reidamesa" replace />;
+  }
+
   const [activeTab, setActiveTab] = useState('GERAL'); // 'GERAL' ou 'LIVE'
-  const [searchTerm, setSearchTerm] = useState('');
+  const [search, setSearch] = useState('');
 
   // 30 mocks simples para demonstrar rolagem e busca
   const mockRankingGeral = Array.from({ length: 30 }, (_, i) => ({
