@@ -1,13 +1,31 @@
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import passport from './config/passport.js';
 import { getTwitchChannelData } from './services/twitchService.js';
 import { getYoutubeLatestVideo } from './services/youtubeService.js';
+
+import authRoutes from './routes/auth.js';
+import forumRoutes from './routes/forum.js';
+import reiDaMesaRoutes from './routes/reidamesa.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+// Configuração CORS dinâmica para Cookies JWT
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' ? 'https://seu_dominio.com' : 'http://localhost:5173',
+  credentials: true,
+}));
+
 app.use(express.json());
+app.use(cookieParser());
+app.use(passport.initialize());
+
+// Rotas MVC
+app.use('/api/auth', authRoutes);
+app.use('/api/forum', forumRoutes);
+app.use('/api/reidamesa', reiDaMesaRoutes);
 
 // Rota Twitch
 app.get('/api/twitch/channel', async (req, res) => {

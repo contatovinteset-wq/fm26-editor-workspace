@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(uuid())
+  email          String?   @unique
+  name           String?
+  avatar         String?
+  twitchId       String?   @unique
+  googleId       String?   @unique
+  role           String    @default("USER") // ADMIN, MODERATOR, USER
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  topics         Topic[]
+  comments       Comment[]
+  squads         Squad[]
+}
+
+model Topic {
+  id          String    @id @default(uuid())
+  title       String
+  content     String    @db.Text
+  category    String
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  comments    Comment[]
+}
+
+model Comment {
+  id          String    @id @default(uuid())
+  content     String    @db.Text
+  topicId     String
+  topic       Topic     @relation(fields: [topicId], references: [id])
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Squad {
+  id          String    @id @default(uuid())
+  userId      String    @unique
+  user        User      @relation(fields: [userId], references: [id])
+  defensorId  Int?
+  meioId      Int?
+  ataqueId    Int?
+  bancoId     Int?
+  bagreId     Int?
+  roundScore  Int       @default(0)
+  totalScore  Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
