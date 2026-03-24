@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID || 'placeholder',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'placeholder',
-      callbackURL: '/api/auth/google/callback',
+      callbackURL: process.env.NODE_ENV === 'production' ? 'https://vintesetfm.cloud/api/auth/google/callback' : '/api/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {

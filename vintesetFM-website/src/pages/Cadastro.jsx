@@ -48,12 +48,12 @@ const Cadastro = () => {
            </div>
 
            <div className="flex flex-col sm:flex-row gap-3">
-             <button className="flex-1 flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-black font-bold py-3 px-4 rounded-xl transition-all shadow-lg hover:shadow-white/10">
+             <a href="/api/auth/google" className="flex-1 flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-black font-bold py-3 px-4 rounded-xl transition-all shadow-lg hover:shadow-white/10">
                <GoogleIconSVG size={18} /> Google
-             </button>
-             <button className="flex-1 flex items-center justify-center gap-2 bg-[#9146FF] hover:bg-[#772CE8] text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg hover:shadow-[#9146FF]/20">
+             </a>
+             <a href="/api/auth/twitch" className="flex-1 flex items-center justify-center gap-2 bg-[#9146FF] hover:bg-[#772CE8] text-white font-bold py-3 px-4 rounded-xl transition-all shadow-lg hover:shadow-[#9146FF]/20">
                <Twitch size={18} /> Twitch
-             </button>
+             </a>
            </div>
 
            <div className="flex items-center gap-4 my-6">
