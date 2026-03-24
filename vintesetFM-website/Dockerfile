@@ -10,7 +10,7 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # Instala as libs
-RUN npm install
+RUN npm install --include=dev
 
 # Gerar o cliente Prisma
 RUN npx prisma generate
