@@ -7,7 +7,7 @@ const router = express.Router();
 const generateToken = (user) => {
   // Use a secret do .env, se não houver usa fallback provisório
   const secret = process.env.JWT_SECRET || 'fallback_secret';
-  return jwt.sign({ id: user.id, role: user.role, name: user.name, avatar: user.avatar }, secret, {
+  return jwt.sign({ id: user.id, roles: user.roles, name: user.name, avatar: user.avatar }, secret, {
     expiresIn: '7d',
   });
 };

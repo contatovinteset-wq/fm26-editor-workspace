@@ -4,12 +4,14 @@ import Layout from './components/Layout';
 import Pages from './pages/Pages';
 import ErrorBoundary from './ErrorBoundary';
 import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
     <ErrorBoundary>
-      <BrowserRouter>
-        <Routes>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Pages.Home />} />
             <Route path="telecurso" element={<Pages.Telecurso />} />
@@ -32,6 +34,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </AuthProvider>
     </ErrorBoundary>
   );
 }

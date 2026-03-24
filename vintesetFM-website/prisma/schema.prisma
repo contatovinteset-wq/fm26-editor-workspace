@@ -14,7 +14,7 @@ model User {
   avatar         String?
   twitchId       String?   @unique
   googleId       String?   @unique
-  role           String    @default("USER") // ADMIN, MODERATOR, USER
+  roles          Json      @default("[\"USER\"]") // 'OWNER', 'ADMIN_DOWNLOADS', 'ADMIN_GERACAO', 'USER'
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 
