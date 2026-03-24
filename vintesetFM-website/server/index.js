@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 import passport from './config/passport.js';
 import { getTwitchChannelData } from './services/twitchService.js';
 import { getYoutubeLatestVideo } from './services/youtubeService.js';
@@ -13,9 +14,17 @@ const __dirname = path.dirname(__filename);
 import authRoutes from './routes/auth.js';
 import forumRoutes from './routes/forum.js';
 import reiDaMesaRoutes from './routes/reidamesa.js';
+import adminRoutes from './routes/admin.js';
+import userRoutes from './routes/users.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Configuração de Headers de Segurança (Fase 4 - Security Audit)
+app.use(helmet({
+  contentSecurityPolicy: false, // Desativado no modo cru (opcionalmente pode ser customizado depois para aceitar scripts do Vite)
+  crossOriginResourcePolicy: { policy: "cross-origin" } // Permite carregar recursos externos (Twitch, YT avatars)
+}));
 
 // Configuração CORS dinâmica para Cookies JWT
 app.use(cors({
@@ -29,8 +38,10 @@ app.use(passport.initialize());
 
 // Rotas MVC
 app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/forum', forumRoutes);
 app.use('/api/reidamesa', reiDaMesaRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Rota Twitch
 app.get('/api/twitch/channel', async (req, res) => {

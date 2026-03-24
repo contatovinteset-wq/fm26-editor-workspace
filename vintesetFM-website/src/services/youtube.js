@@ -1,21 +1,15 @@
 import axios from 'axios';
 
-// URL de desenvolvimento ou produção
-const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+// URL de desenvolvimento ou produção (rotas relativas na prod)
+const API_URL = import.meta.env.PROD ? '' : (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000');
 
 const localApi = axios.create({
   baseURL: API_URL
 });
 
-// Fallback ultra-seguro garantindo contexto do vintesetFM
+// Fallback ultra-seguro garantindo contexto do vintesetFM (Mocks desativados a pedido do usuário)
 export const getFallbackVideo = () => {
-  return {
-    id: "aX9-JXXO3W8", // Placeholder atualizado para canal correto
-    title: "Extraindo Jogadores Escondidos do FM26: O Guia Definitivo",
-    thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop", // generic FM
-    publishedAt: new Date().toISOString(),
-    duration: "14:32"
-  };
+  return null;
 };
 
 export const getLatestNonLiveVideo = async () => {

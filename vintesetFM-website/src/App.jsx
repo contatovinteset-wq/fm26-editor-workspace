@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import Pages from './pages/Pages';
 import ErrorBoundary from './ErrorBoundary';
 import ProtectedRoute from './components/ProtectedRoute';
+import RequireRole from './components/RequireRole';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route path="reidamesa/escalar" element={<Pages.Escalacao />} />
               <Route path="reidamesa/ranking" element={<Pages.Ranking />} />
               <Route path="reidamesa/perfil" element={<Pages.PerfilManager />} />
+              <Route path="admin" element={<Pages.AdminPanel />} />
             </Route>
 
             <Route path="ferramentas" element={<Navigate to="/downloads" replace />} />

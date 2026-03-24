@@ -1,23 +1,17 @@
 // src/services/twitch.js
 import axios from 'axios';
 
-// URL de desenvolvimento ou produção da sua própria API
-const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+// URL de desenvolvimento ou produção (usar rota relativa em Produção)
+const API_URL = import.meta.env.PROD ? '' : (import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000');
 
 const localApi = axios.create({
   baseURL: API_URL
 });
 
-const MOCK_LIVE_DATA = {
-  isLive: true,
-  data: {
-    user_name: "vinteset",
-    title: "LANÇAMENTO OVERHAUL FM26 + 10h de Gameplay 🔴 AO VIVO",
-    viewer_count: 1450,
-    thumbnail_url: "https://static-cdn.jtvnw.net/previews-ttv/live_user_vinteset-{width}x{height}.jpg",
-    game_name: "Football Manager 2026",
-    type: "live"
-  }
+const OFFLINE_FALLBACK = {
+  isLive: false,
+  data: null,
+  lastVod: null
 };
 
 /**
@@ -29,7 +23,7 @@ export const checkChannelLive = async () => {
     return response.data;
   } catch (error) {
     console.error("=== ERRO AO CONECTAR COM BACKEND (TWITCH) ===", error.message);
-    // Em caso de API inteira fora do ar, não quebramos o site, voltamos MOCK de segurança ou offline puro
-    return MOCK_LIVE_DATA; 
+    // Em caso de API inteira fora do ar, retornamos offline para não mostrar Mocks falsos vazando
+    return OFFLINE_FALLBACK; 
   }
 };

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Home, MonitorPlay, Twitter, Youtube, Twitch, DownloadCloud, Crown } from 'lucide-react';
+import { Home, MonitorPlay, Twitter, Youtube, Twitch, DownloadCloud, Crown, Settings, LogOut } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const DiscordIconSVG = ({ size = 24, className = "" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 127.14 96.36" className={`fill-current ${className}`}>
@@ -10,6 +10,10 @@ const DiscordIconSVG = ({ size = 24, className = "" }) => (
 
 const Navbar = () => {
   const location = useLocation();
+  const { user } = useAuth();
+
+  const isOwner = user?.roles?.includes('OWNER');
+  const isAdmin = user?.roles?.includes('ADMIN');
 
   const navLinks = [
     { name: 'Início', path: '/', icon: Home },
@@ -61,20 +65,28 @@ const Navbar = () => {
 
           {/* Auth & Social Icons */}
           <div className="hidden lg:flex items-center gap-4">
-             {/* Botoes de Visita */}
-             <div className="flex items-center gap-3 mr-2 border-r border-white/10 pr-4">
-                <Link to="/login" className="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors">Entrar</Link>
-                <Link to="/cadastro" className="bg-accent hover:bg-accentHover text-black px-4 py-1.5 rounded-lg font-black uppercase text-xs tracking-wider transition-all">Criar Conta</Link>
-             </div>
+             {/* Botoes de Visita ou Conta */}
+             {!user ? (
+               <div className="flex items-center gap-3 mr-2 border-r border-white/10 pr-4">
+                  <Link to="/login" className="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors">Entrar</Link>
+                  <Link to="/cadastro" className="bg-accent hover:bg-accentHover text-black px-4 py-1.5 rounded-lg font-black uppercase text-xs tracking-wider transition-all">Criar Conta</Link>
+               </div>
+             ) : (
+               <div className="flex items-center gap-3 mr-2 border-r border-white/10 pr-4">
+                  {(isOwner || isAdmin) && (
+                    <Link to="/admin" className="flex items-center gap-2 bg-accent/10 border border-accent/30 text-accent hover:bg-accent/20 px-4 py-1.5 rounded-lg font-black uppercase text-[10px] tracking-widest transition-all">
+                      <Settings size={14} /> Admin
+                    </Link>
+                  )}
+                  <Link to="/minhaconta" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-full font-bold uppercase text-xs transition-colors group">
+                    <div className="w-6 h-6 bg-accent/20 rounded-full border border-accent/40 flex items-center justify-center overflow-hidden">
+                      {user.avatar ? <img src={user.avatar} alt="" className="w-full h-full object-cover" /> : <span className="text-[10px] text-accent">{(user.nickname || 'M')?.charAt(0)}</span>}
+                    </div>
+                    <span className="max-w-[100px] truncate group-hover:text-accent transition-colors">{user.nickname || 'Manager'}</span>
+                  </Link>
+               </div>
+             )}
              
-             {/* Mock de Conta Logada (comentado para o futuro)
-             <div className="flex items-center gap-3 mr-2 border-r border-white/10 pr-4">
-                <Link to="/minhaconta" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-full font-bold uppercase text-xs transition-colors">
-                  <div className="w-5 h-5 bg-accent rounded-full border border-black"></div>
-                  Painel
-                </Link>
-             </div>
-             */}
             <a href="https://discord.gg/Z5XMk427vy" target="_blank" rel="noreferrer" className="p-2 text-gray-400 hover:text-[#5865F2] hover:bg-[#5865F2]/10 rounded-full transition-colors">
               <DiscordIconSVG size={20} />
             </a>

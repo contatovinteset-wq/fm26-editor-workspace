@@ -1,13 +1,21 @@
 import express from 'express';
 import passport from '../config/passport.js';
 import jwt from 'jsonwebtoken';
+import { PrismaClient } from '@prisma/client';
+import rateLimit from 'express-rate-limit';
 
+const prisma = new PrismaClient();
 const router = express.Router();
 
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 20, // Limita cada IP a 20 requisições de login por janela
+  message: 'Excesso de tentativas de login, tente novamente mais tarde.'
+});
+
 const generateToken = (user) => {
-  // Use a secret do .env, se não houver usa fallback provisório
   const secret = process.env.JWT_SECRET || 'fallback_secret';
-  return jwt.sign({ id: user.id, roles: user.roles, name: user.name, avatar: user.avatar }, secret, {
+  return jwt.sign({ id: user.id, roles: user.roles }, secret, {
     expiresIn: '7d',
   });
 };
@@ -24,7 +32,7 @@ const setJWTCookie = (res, token) => {
 // ==========================================
 // GOOGLE OAUTH
 // ==========================================
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google', loginLimiter, passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 router.get(
   '/google/callback',
@@ -32,14 +40,21 @@ router.get(
   (req, res) => {
     const token = generateToken(req.user);
     setJWTCookie(res, token);
-    res.redirect('/minhaconta');
+    const clientUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5173';
+    
+    // Se não tiver nickname, manda definir um
+    if (!req.user.nickname) {
+      return res.redirect(`${clientUrl}/minhaconta?onboarding=true`);
+    }
+    
+    res.redirect(`${clientUrl}/minhaconta`);
   }
 );
 
 // ==========================================
 // TWITCH OAUTH
 // ==========================================
-router.get('/twitch', passport.authenticate('twitch'));
+router.get('/twitch', loginLimiter, passport.authenticate('twitch'));
 
 router.get(
   '/twitch/callback',
@@ -47,7 +62,13 @@ router.get(
   (req, res) => {
     const token = generateToken(req.user);
     setJWTCookie(res, token);
-    res.redirect('/minhaconta');
+    const clientUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5173';
+    
+    if (!req.user.nickname) {
+      return res.redirect(`${clientUrl}/minhaconta?onboarding=true`);
+    }
+    
+    res.redirect(`${clientUrl}/minhaconta`);
   }
 );
 
@@ -59,14 +80,22 @@ router.get('/logout', (req, res) => {
   res.json({ success: true, message: 'Deslogado com sucesso' });
 });
 
-router.get('/me', (req, res) => {
+router.get('/me', async (req, res) => {
   const token = req.cookies?.jwt;
   if (!token) return res.status(401).json({ user: null });
 
   try {
     const secret = process.env.JWT_SECRET || 'fallback_secret';
     const decoded = jwt.verify(token, secret);
-    res.json({ user: decoded }); 
+    
+    // Buscar dados atualizados do banco
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.id }
+    });
+
+    if (!user) return res.status(401).json({ user: null });
+
+    res.json({ user }); 
   } catch (err) {
     res.status(401).json({ user: null });
   }

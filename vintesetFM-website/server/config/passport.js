@@ -35,6 +35,7 @@ passport.use(
               data: {
                 googleId: profile.id,
                 name: profile.displayName,
+                nickname: null, // Forçar onboarding para Google
                 email: email,
                 avatar: profile.photos?.[0]?.value,
               },
@@ -72,13 +73,17 @@ passport.use(
           if (user) {
             user = await prisma.user.update({
               where: { id: user.id },
-              data: { twitchId: profile.id },
+              data: { 
+                twitchId: profile.id,
+                nickname: profile.display_name || profile.login 
+              },
             });
           } else {
              user = await prisma.user.create({
               data: {
                 twitchId: profile.id,
                 name: profile.display_name || profile.login,
+                nickname: profile.display_name || profile.login, // Twitch já tem nick
                 email: email,
                 avatar: profile.profile_image_url,
               },

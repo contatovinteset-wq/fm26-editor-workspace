@@ -11,7 +11,10 @@ model User {
   id             String    @id @default(uuid())
   email          String?   @unique
   name           String?
-  avatar         String?
+  nickname           String?   @unique
+  nickname_defined   Boolean   @default(false)
+  lastNicknameChange DateTime? // Mantido meta para admins
+  avatar             String?
   twitchId       String?   @unique
   googleId       String?   @unique
   roles          Json      @default("[\"USER\"]") // 'OWNER', 'ADMIN_DOWNLOADS', 'ADMIN_GERACAO', 'USER'
@@ -21,6 +24,7 @@ model User {
   topics         Topic[]
   comments       Comment[]
   squads         Squad[]
+  auditLogs      AuditLog[] @relation("UserAuditLogs")
 }
 
 model Topic {
@@ -60,4 +64,19 @@ model Squad {
   totalScore  Int       @default(0)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+// 🛡️ Tabela de Auditoria de Segurança
+model AuditLog {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation("UserAuditLogs", fields: [userId], references: [id])
+  targetId    String?  // ID do recurso afetado (outro usuário, post, etc)
+  action      String   // Ex: 'SET_NICKNAME', 'BAN_USER', 'APPROVE_DOWNLOAD'
+  details     Json?    // Dados adicionais (JSON)
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
 }

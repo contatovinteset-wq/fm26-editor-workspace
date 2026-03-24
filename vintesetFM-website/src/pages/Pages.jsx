@@ -9,6 +9,7 @@ import Login from './Login';
 import Cadastro from './Cadastro';
 import Topico from './Topico';
 import MinhaConta from './MinhaConta';
+import AdminPanel from './AdminPanel';
 
 const Pages = {
   Home,
@@ -21,7 +22,8 @@ const Pages = {
   Login: () => <Login />,
   Cadastro: () => <Cadastro />,
   Topico: () => <Topico />,
-  MinhaConta: () => <MinhaConta />
+  MinhaConta: () => <MinhaConta />,
+  AdminPanel: () => <AdminPanel />
 };
 
 export default Pages;
