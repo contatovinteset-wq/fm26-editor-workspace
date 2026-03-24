@@ -1,19 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, Activity, TrendingUp, Award, Calendar, ChevronDown, ChevronUp, Trophy } from 'lucide-react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const PerfilManager = () => {
-  if (import.meta.env.PROD) {
-    return <Navigate to="/reidamesa" replace />;
-  }
-
-  // Histórico Mock
-  const historico = [
-    { rodada: 12, data: "19/03/2026", total: "+45.2", titulo: "A Grande Retranca", titulares: ["Léo Ortiz (5.5)", "De Arrascaeta (0.0)", "Pedro (12.5)"], banco: "Gerson (27.2)" },
-    { rodada: 11, data: "18/03/2026", total: "+12.0", titulo: "Dia de Chuva", titulares: ["Fabricio Bruno (4.0)", "Pulgar (3.0)", "Bruno Henrique (5.0)"], banco: "Luiz Araújo (0.0)" },
-    { rodada: 10, data: "15/03/2026", total: "+81.8", titulo: "Mito do Domingo", titulares: ["Ayrton Lucas (15.5)", "Gerson (10.0)", "Pedro (50.3)"], banco: "De Arrascaeta (6.0)" },
-  ];
+  const historico = [];
 
   const [expandedRound, setExpandedRound] = useState(12);
 

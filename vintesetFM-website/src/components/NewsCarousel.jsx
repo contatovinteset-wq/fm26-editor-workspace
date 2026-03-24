@@ -13,28 +13,12 @@ const getYTId = (url) => {
 
 const newsItems = [
   {
-    id: 1,
-    tag: "NOVA FERRAMENTA",
-    title: "FM26 Player Export V4",
-    description: "Extraia CP e CA dos jogadores ocultos com extrema facilidade, burlando o Scout da Match Engine.",
-    link: "/ferramentas",
-    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop"
-  },
-  {
     id: 2,
     tag: "TELECURSO",
     title: "Aprenda a jogar FM26 de um jeito fácil",
     description: "Assista às nossas masterclasses em vídeo geradas pela comunidade e domine as táticas do jogo.",
     link: "/telecurso",
     image: "mosaic"
-  },
-  {
-    id: 3,
-    tag: "ATUALIZAÇÃO",
-    title: "Database Brasil 2026",
-    description: "Os elencos completos da Série A até a D, com status corrigidos e potêncial em dia baseados na vintesetFM.",
-    link: "/mods",
-    image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1200&auto=format&fit=crop"
   }
 ];
 

@@ -4,29 +4,21 @@ import { Download, Share2, Heart, MessageSquare, ArrowLeft, Tag, Calendar, User,
 import { Link, useParams, Navigate } from 'react-router-dom';
 
 const Topico = () => {
-  if (import.meta.env.PROD) {
-    return <Navigate to="/downloads" replace />;
+  const { id } = useParams();
+  
+  const topic = null; // Backend pendente
+
+  if (!topic) {
+    return (
+      <div className="w-full min-h-screen bg-bgDark text-white pt-24 pb-16 flex flex-col items-center justify-center">
+         <h1 className="text-3xl font-black mb-4">Tópico não encontrado</h1>
+         <p className="text-gray-400 mb-8">Nenhum dado real recebido ou tópico inexistente.</p>
+         <Link to="/downloads" className="px-6 py-2 bg-accent hover:bg-accentHover transition-colors text-black font-bold uppercase tracking-wider rounded-xl">
+           Voltar aos Downloads
+         </Link>
+      </div>
+    );
   }
-  
-  const { id } = useParams(); // simulando ler o ID da rota
-  
-  // Tópico Mock (na vida real faria fetch pelo ID)
-  const mockTopico = {
-    id: id || "t123",
-    title: "Tática Vinteset Invencível 4-3-3 (Versão Final 2026)",
-    category: "Táticas",
-    author: "Vinteset",
-    date: "10 Mar 2026",
-    likes: 42,
-    downloads: 1337,
-    content: `Fala galera da comunidade!\n\nHoje estou trazendo a versão final da tática que usamos para ganhar a Champions League com o Wrexham no último save da Live. O segredo dessa tática é a intensidade insana dos Box-to-Box na ligação com os pontas invertidos.\n\nInstruções:\n1. Coloque sempre alas atacando.\n2. Mantenha os zagueiros concentrados no combate físico.\n3. Treine resistência, pois cansa muito o time.\n\n**Baixe abaixo o arquivo .fmf e desfrute de muito Gegenpress no seu save!** Qualquer dúvida, mandem nos comentários.`,
-    size: "24.5 KB",
-    image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1200", // soccer tactic generic image
-    comments: [
-      { id: 1, author: "GegenManager", text: "Testei aqui no meu save com o Vasco da Gama e finalmente saí do sufoco! Muito obrigado Vinteset!", time: "2 dias atrás" },
-      { id: 2, author: "TaticoMaster", text: "Funciona bem com zagueiros lentos nas extremidades ou seria melhor adaptar os alas?", time: "Ontem" },
-    ]
-  };
 
   return (
     <div className="w-full min-h-screen bg-bgDark text-white pt-24 pb-16">

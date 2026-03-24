@@ -8,11 +8,10 @@ import {
   Palette,
   Database
 } from 'lucide-react';
-import forumMocksRaw from '../data/forumMocks.json';
 import TopicCard from '../components/forum/TopicCard';
 import CreateTopicModal from '../components/forum/CreateTopicModal';
 
-const forumMocks = import.meta.env.PROD ? [] : forumMocksRaw;
+const forumMocks = [];
 
 const CATEGORIES = [
   { id: 'all', label: 'Todos', icon: DownloadCloud },

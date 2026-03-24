@@ -4,32 +4,15 @@ import { Trophy, Crown, ArrowUp, ArrowDown, Minus, Search, Filter, Star, Clock }
 import { Link, Navigate } from 'react-router-dom';
 
 const Ranking = () => {
-  if (import.meta.env.PROD) {
-    return <Navigate to="/reidamesa" replace />;
-  }
-
-  const [activeTab, setActiveTab] = useState('GERAL'); // 'GERAL' ou 'LIVE'
+  const [activeTab, setActiveTab] = useState('GERAL');
   const [search, setSearch] = useState('');
 
-  // 30 mocks simples para demonstrar rolagem e busca
-  const mockRankingGeral = Array.from({ length: 30 }, (_, i) => ({
-    position: i + 1,
-    name: `Manager${i + 1}`,
-    score: (500 - (i * 12) + (Math.random() * 10)).toFixed(1),
-    isReiDaMesa: i === 0 || i === 4,
-    hasCarroDoOvo: i % 7 === 0
-  }));
+  // Tabelas de ranking reais (inicialmente vazias antes do backend)
+  const rankingGeral = [];
+  const rankingLive = [];
 
-  const mockRankingLive = Array.from({ length: 30 }, (_, i) => ({
-    position: i + 1,
-    name: `Manager${(i * 3) % 30 + 1}`,
-    score: (120 - (i * 2.5) + (Math.random() * 5)).toFixed(1),
-    isReiDaMesa: i === 2,
-    hasCarroDoOvo: i === 0 || i === 8
-  }));
-
-  const dataToUse = activeTab === 'GERAL' ? mockRankingGeral : mockRankingLive;
-  const filteredData = dataToUse.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const dataToUse = activeTab === 'GERAL' ? rankingGeral : rankingLive;
+  const filteredData = dataToUse.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <div className="w-full min-h-screen bg-bgDark text-white pt-24 pb-16">
@@ -148,7 +131,7 @@ const Ranking = () => {
                  {filteredData.length === 0 && (
                     <tr>
                       <td colSpan={3} className="px-8 py-12 text-center text-gray-500">
-                        Nenhum manager encontrado no ranking.
+                        Nenhum manager encontrado no ranking no momento.
                       </td>
                     </tr>
                  )}
@@ -156,7 +139,7 @@ const Ranking = () => {
              </table>
            </div>
 
-           {/* Paginação Mock */}
+           {/* Paginação */}
            <div className="p-4 border-t border-white/10 flex justify-between items-center bg-black/30">
               <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">Mostrando {filteredData.length} resultados</span>
               <div className="flex gap-2">

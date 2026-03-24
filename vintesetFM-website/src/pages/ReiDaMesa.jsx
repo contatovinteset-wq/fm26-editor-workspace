@@ -5,16 +5,10 @@ import { Link } from 'react-router-dom';
 import EmConstrucao from '../components/EmConstrucao';
 
 const ReiDaMesa = () => {
-  if (import.meta.env.PROD) {
-    return <EmConstrucao />;
-  }
-
-  // Simulando Auth State (Dono vs Viewers)
   const [isLoggedAsOwner, setIsLoggedAsOwner] = useState(false);
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [isMarketOpen, setIsMarketOpen] = useState(true);
 
-  // Mocks
   const ranking = [];
 
   const pontuacaoRules = [
@@ -38,17 +32,6 @@ const ReiDaMesa = () => {
       
       {/* MOCK LOGIN & ADMIN PANEL TOGGLE (Canto Superior Direito) */}
       <div className="fixed top-24 right-4 sm:right-8 z-50 flex flex-col items-end gap-3">
-        {/* Mock auth state toggle */}
-        <button 
-          onClick={() => {
-            const newState = !isLoggedAsOwner;
-            setIsLoggedAsOwner(newState);
-            if (!newState) setIsAdminPanelOpen(false); // Fecha o painel se deslogar
-          }}
-          className="text-[10px] font-mono text-gray-500 hover:text-white underline bg-black/50 px-2 py-1 rounded"
-        >
-          [Dev Mock] Login as Owner: {isLoggedAsOwner ? 'ON' : 'OFF'}
-        </button>
 
         {/* Botão Admin (Só aparece se for Dono) */}
         <AnimatePresence>
