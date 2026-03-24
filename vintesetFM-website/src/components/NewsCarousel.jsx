@@ -26,6 +26,7 @@ export const NewsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
+    if (newsItems.length <= 1) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % newsItems.length);
     }, 6000);
@@ -119,17 +120,19 @@ export const NewsCarousel = () => {
       </div>
 
       {/* Indicadores do Carousel */}
-      <div className="absolute bottom-4 right-4 z-30 flex gap-2">
-        {newsItems.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrentIndex(idx)}
-            className={`transition-all duration-300 h-1.5 rounded-full ${
-              idx === currentIndex ? 'w-8 bg-accent' : 'w-4 bg-white/30 hover:bg-white/50'
-            }`}
-          />
-        ))}
-      </div>
+      {newsItems.length > 1 && (
+        <div className="absolute bottom-4 right-4 z-30 flex gap-2">
+          {newsItems.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentIndex(idx)}
+              className={`transition-all duration-300 h-1.5 rounded-full ${
+                idx === currentIndex ? 'w-8 bg-accent' : 'w-4 bg-white/30 hover:bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Activity, TrendingUp, Award, Calendar, ChevronDown, ChevronUp, Trophy } from 'lucide-react';
+import { User, Activity, TrendingUp, Award, Calendar, ChevronDown, ChevronUp, Trophy, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const PerfilManager = () => {
+  const { user } = useAuth();
+  const isOwner = user?.roles?.includes('OWNER');
   const historico = [];
 
   const [expandedRound, setExpandedRound] = useState(12);
@@ -36,16 +39,16 @@ const PerfilManager = () => {
               <div className="w-32 h-32 rounded-full border-4 border-accent bg-black p-1 relative shadow-2xl">
                  <img src="https://i.pravatar.cc/300?img=11" alt="Manager Profile" className="w-full h-full rounded-full object-cover" />
                  <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-accent text-black text-[10px] font-black uppercase px-4 py-1.5 rounded-full border-2 border-black flex items-center gap-1 shadow-md w-max">
-                   <Crown size={14} /> Rei da Mesa
+                   {isOwner ? <><Crown size={14} /> Owner</> : <><User size={14} /> Membro</>}
                  </div>
               </div>
            </div>
 
            <div className="z-10 flex-1">
               <h2 className="text-4xl font-black uppercase tracking-tighter mb-2 flex items-center justify-center md:justify-start gap-3">
-                Manager Vinteseter
+                Manager {user?.nickname || 'Vinteseter'}
               </h2>
-              <p className="text-gray-400 mb-6 font-mono text-sm">Membro desde Março de 2026 • Equipe "Os Imbatíveis"</p>
+              <p className="text-gray-400 mb-6 font-mono text-sm">Membro Oficial • Equipe "Os Imbatíveis"</p>
 
               {/* Sala de Troféus do Usuário */}
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">

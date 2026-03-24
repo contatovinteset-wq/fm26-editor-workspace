@@ -19,7 +19,7 @@ export const getYoutubeLatestVideo = async () => {
         channelId: YOUTUBE_CHANNEL_ID,
         part: 'snippet',
         order: 'date',
-        maxResults: 6, // Margem garantida pedida p/ order: date
+        maxResults: 50, // Aumentado para 50 para garantir vídeos reais mesmo após dezenas de lives
         type: 'video'
       }
     });
