@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { User, Activity, TrendingUp, Award, Calendar, ChevronDown, ChevronUp, Trophy } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 const PerfilManager = () => {
+  if (import.meta.env.PROD) {
+    return <Navigate to="/reidamesa" replace />;
+  }
+
   // Histórico Mock
   const historico = [
     { rodada: 12, data: "19/03/2026", total: "+45.2", titulo: "A Grande Retranca", titulares: ["Léo Ortiz (5.5)", "De Arrascaeta (0.0)", "Pedro (12.5)"], banco: "Gerson (27.2)" },

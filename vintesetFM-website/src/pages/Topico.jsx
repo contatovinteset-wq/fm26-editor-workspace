@@ -1,9 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Download, Share2, Heart, MessageSquare, ArrowLeft, Tag, Calendar, User, CheckCircle2 } from 'lucide-react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, Navigate } from 'react-router-dom';
 
 const Topico = () => {
+  if (import.meta.env.PROD) {
+    return <Navigate to="/downloads" replace />;
+  }
+  
   const { id } = useParams(); // simulando ler o ID da rota
   
   // Tópico Mock (na vida real faria fetch pelo ID)
