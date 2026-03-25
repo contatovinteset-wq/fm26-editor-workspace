@@ -10,11 +10,11 @@ const localApi = axios.create({
 // Fallback ultra-seguro garantindo contexto do vintesetFM (Evita estado Carregando... se a API falhar)
 export const getFallbackVideo = () => {
   return {
-    id: 'PfRsDFNLFOc',
-    title: '01 Guia do Avançado Ataca Espaços no FM26',
-    thumbnail: 'https://i.ytimg.com/vi/PfRsDFNLFOc/hqdefault.jpg',
-    publishedAt: new Date().toISOString(),
-    duration: '10:00'
+    "id": "tLCXL8jSksU",
+    "title": "CTRL+P de Volta no FM26! Tutorial FM26PlayerExport | Exportar Dados CSV | Moneyball",
+    "thumbnail": "https://i.ytimg.com/vi/tLCXL8jSksU/hqdefault.jpg",
+    "publishedAt": "2026-03-11T22:18:58Z",
+    "duration": "20:48"
   };
 };
 
