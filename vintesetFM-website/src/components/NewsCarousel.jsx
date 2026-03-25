@@ -23,19 +23,8 @@ const defaultNews = [
   }
 ];
 
-export const NewsCarousel = ({ youtubeVideo }) => {
-  const newsItems = youtubeVideo ? [
-    {
-      id: youtubeVideo.id,
-      tag: "NOVO VÍDEO",
-      title: youtubeVideo.title,
-      description: "Confira o último vídeo do canal vintesetFM e não perca nenhuma novidade!",
-      link: `https://youtube.com/watch?v=${youtubeVideo.id}`,
-      image: youtubeVideo.thumbnail,
-      isExternal: true
-    },
-    ...defaultNews
-  ] : defaultNews;
+export const NewsCarousel = () => {
+  const newsItems = defaultNews;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -51,9 +40,6 @@ export const NewsCarousel = ({ youtubeVideo }) => {
 
   return (
     <div className="w-full mb-12 relative rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(255,215,0,0.1)] border border-white/10 glass-card">
-      <div className="absolute top-4 left-4 z-30 flex items-center gap-2 bg-accent/90 text-black px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
-        <Sparkles size={14} /> Destaques da Base
-      </div>
 
       <div className="relative h-[250px] sm:h-[300px] w-full bg-black">
         <AnimatePresence mode="wait">
