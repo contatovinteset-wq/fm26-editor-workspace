@@ -7,9 +7,15 @@ const localApi = axios.create({
   baseURL: API_URL
 });
 
-// Fallback ultra-seguro garantindo contexto do vintesetFM (Mocks desativados a pedido do usuário)
+// Fallback ultra-seguro garantindo contexto do vintesetFM (Evita estado Carregando... se a API falhar)
 export const getFallbackVideo = () => {
-  return null;
+  return {
+    id: 'PfRsDFNLFOc',
+    title: '01 Guia do Avançado Ataca Espaços no FM26',
+    thumbnail: 'https://i.ytimg.com/vi/PfRsDFNLFOc/hqdefault.jpg',
+    publishedAt: new Date().toISOString(),
+    duration: '10:00'
+  };
 };
 
 export const getLatestNonLiveVideo = async () => {
