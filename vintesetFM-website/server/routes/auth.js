@@ -102,21 +102,4 @@ router.get('/me', async (req, res) => {
   }
 });
 
-// ==========================================
-// TEMPORÁRIO: SETUP OWNER
-// ==========================================
-router.get('/make-me-owner', async (req, res) => {
-  try {
-    const user = await prisma.user.update({
-      where: { nickname: 'vinteset' },
-      data: { roles: ['OWNER'] }
-    });
-    console.log("Usuário vinteset promovido a OWNER com sucesso.");
-    res.json({ success: true, message: "Usuário promovido a OWNER!", user });
-  } catch (error) {
-    console.error("Erro ao promover a owner", error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
 export default router;
