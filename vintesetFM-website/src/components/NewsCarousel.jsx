@@ -11,18 +11,31 @@ const getYTId = (url) => {
   return match && match[2].length === 11 ? match[2] : null;
 };
 
-const newsItems = [
+const defaultNews = [
   {
     id: 2,
     tag: "TELECURSO",
     title: "Aprenda a jogar FM26 de um jeito fácil",
     description: "Assista às nossas masterclasses em vídeo geradas pela comunidade e domine as táticas do jogo.",
     link: "/telecurso",
-    image: "mosaic"
+    image: "mosaic",
+    isExternal: false
   }
 ];
 
-export const NewsCarousel = () => {
+export const NewsCarousel = ({ youtubeVideo }) => {
+  const newsItems = youtubeVideo ? [
+    {
+      id: youtubeVideo.id,
+      tag: "NOVO VÍDEO",
+      title: youtubeVideo.title,
+      description: "Confira o último vídeo do canal vintesetFM e não perca nenhuma novidade!",
+      link: `https://youtube.com/watch?v=${youtubeVideo.id}`,
+      image: youtubeVideo.thumbnail,
+      isExternal: true
+    },
+    ...defaultNews
+  ] : defaultNews;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -110,9 +123,15 @@ export const NewsCarousel = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
               >
-                <Link to={newsItems[currentIndex].link} className="inline-flex items-center gap-2 bg-white/10 hover:bg-accent text-white hover:text-black border border-white/20 hover:border-transparent transition-all duration-300 px-5 py-2.5 rounded-lg text-sm font-bold shadow-lg group">
-                  Saber mais <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
+                {newsItems[currentIndex].isExternal ? (
+                  <a href={newsItems[currentIndex].link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-white/10 hover:bg-accent text-white hover:text-black border border-white/20 hover:border-transparent transition-all duration-300 px-5 py-2.5 rounded-lg text-sm font-bold shadow-lg group">
+                    Saber mais <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </a>
+                ) : (
+                  <Link to={newsItems[currentIndex].link} className="inline-flex items-center gap-2 bg-white/10 hover:bg-accent text-white hover:text-black border border-white/20 hover:border-transparent transition-all duration-300 px-5 py-2.5 rounded-lg text-sm font-bold shadow-lg group">
+                    Saber mais <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                )}
               </motion.div>
             </div>
           </motion.div>

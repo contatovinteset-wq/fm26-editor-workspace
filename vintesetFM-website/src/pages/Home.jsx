@@ -90,7 +90,7 @@ const Home = () => {
             </motion.div>
           </div>
 
-          <NewsCarousel />
+          <NewsCarousel youtubeVideo={youtubeVideo} />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Column: Título e Texto Principal */}
