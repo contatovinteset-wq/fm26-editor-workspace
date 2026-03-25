@@ -18,4 +18,19 @@ router.get('/ranking', async (req, res) => {
   }
 });
 
+// STATUS DO MERCADO (In-memory por enquanto, reseta ao reiniciar o servidor)
+let isMarketOpen = true;
+
+router.get('/status', (req, res) => {
+  res.json({ isOpen: isMarketOpen });
+});
+
+router.post('/status', (req, res) => {
+  // TODO: Adicionar middleware de autenticação (requireRoles) depois
+  if (typeof req.body.isOpen === 'boolean') {
+    isMarketOpen = req.body.isOpen;
+  }
+  res.json({ isOpen: isMarketOpen });
+});
+
 export default router;

@@ -3,11 +3,47 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Crown, HelpCircle, Trophy, BarChart3, Users, Clock, ArrowRight, Settings, UploadCloud, Lock, Unlock, AlertTriangle, ShieldAlert, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import EmConstrucao from '../components/EmConstrucao';
+import { useAuth } from '../context/AuthContext';
 
 const ReiDaMesa = () => {
-  const [isLoggedAsOwner, setIsLoggedAsOwner] = useState(false);
+  const { user } = useAuth();
+  const isOwner = user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN');
+
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [isMarketOpen, setIsMarketOpen] = useState(true);
+  const [isUploading, setIsUploading] = useState(false);
+  
+  React.useEffect(() => {
+    fetch('/api/reidamesa/status')
+      .then(res => res.json())
+      .then(data => setIsMarketOpen(data.isOpen))
+      .catch(console.error);
+  }, []);
+
+  const toggleMarket = async (newStatus) => {
+    try {
+      const res = await fetch('/api/reidamesa/status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ isOpen: newStatus })
+      });
+      const data = await res.json();
+      setIsMarketOpen(data.isOpen);
+    } catch(err) {
+      console.error(err);
+    }
+  };
+
+  const handleFakeUpload = (e) => {
+     if(e.target.files.length > 0) {
+        setIsUploading(true);
+        setTimeout(() => {
+          setIsUploading(false);
+          alert('Upload computado com sucesso (Funcionalidade visual).');
+        }, 1500);
+     }
+  };
 
   const ranking = [];
 
@@ -35,7 +71,7 @@ const ReiDaMesa = () => {
 
         {/* Botão Admin (Só aparece se for Dono) */}
         <AnimatePresence>
-          {isLoggedAsOwner && (
+          {isOwner && (
             <motion.button 
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -76,11 +112,11 @@ const ReiDaMesa = () => {
                       <p className="text-gray-400 text-sm mb-6">Controle se os viewers podem montar o esquadrão ou não (durante a partida, o mercado fecha).</p>
                     </div>
                     {isMarketOpen ? (
-                      <button onClick={() => setIsMarketOpen(false)} className="w-full flex justify-center items-center gap-2 bg-red-500/20 hover:bg-red-500/30 text-red-500 border border-red-500/50 py-3 rounded-lg font-bold uppercase transition-all">
+                      <button onClick={() => toggleMarket(false)} className="w-full flex justify-center items-center gap-2 bg-red-500/20 hover:bg-red-500/30 text-red-500 border border-red-500/50 py-3 rounded-lg font-bold uppercase transition-all">
                         <Lock size={18} /> Fechar Mercado
                       </button>
                     ) : (
-                      <button onClick={() => setIsMarketOpen(true)} className="w-full flex justify-center items-center gap-2 bg-green-500/20 hover:bg-green-500/30 text-green-500 border border-green-500/50 py-3 rounded-lg font-bold uppercase transition-all">
+                      <button onClick={() => toggleMarket(true)} className="w-full flex justify-center items-center gap-2 bg-green-500/20 hover:bg-green-500/30 text-green-500 border border-green-500/50 py-3 rounded-lg font-bold uppercase transition-all">
                         <Unlock size={18} /> Abrir Mercado
                       </button>
                     )}
@@ -96,9 +132,9 @@ const ReiDaMesa = () => {
                       <label className="flex flex-col items-center justify-center w-full h-24 border-2 border-primary/30 border-dashed rounded-lg cursor-pointer bg-primary/5 hover:bg-primary/10 transition-colors">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                           <UploadCloud className="w-6 h-6 mb-2 text-primary" />
-                          <p className="text-xs text-gray-400"><span className="font-bold text-white">Clique para enviar</span> ou arraste o .html</p>
+                          <p className="text-xs text-gray-400"><span className="font-bold text-white">{isUploading ? 'Processando...' : 'Clique para enviar'}</span> ou arraste o .html</p>
                         </div>
-                        <input type="file" className="hidden" accept=".html" />
+                        <input type="file" className="hidden" accept=".html" onChange={handleFakeUpload} />
                       </label>
                     </div>
                  </div>
@@ -113,9 +149,9 @@ const ReiDaMesa = () => {
                       <label className="flex flex-col items-center justify-center w-full h-24 border-2 border-primary/30 border-dashed rounded-lg cursor-pointer bg-primary/5 hover:bg-primary/10 transition-colors">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                           <BarChart3 className="w-6 h-6 mb-2 text-primary" />
-                          <p className="text-xs text-gray-400"><span className="font-bold text-white">Clique para enviar</span> html de estatísticas</p>
+                          <p className="text-xs text-gray-400"><span className="font-bold text-white">{isUploading ? 'Processando HTML...' : 'Clique para enviar'}</span> html de estatísticas</p>
                         </div>
-                        <input type="file" className="hidden" accept=".html" />
+                        <input type="file" className="hidden" accept=".html" onChange={handleFakeUpload} />
                       </label>
                     </div>
                  </div>

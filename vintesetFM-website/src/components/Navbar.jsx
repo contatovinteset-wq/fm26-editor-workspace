@@ -1,6 +1,8 @@
-import { Home, MonitorPlay, Twitter, Youtube, Twitch, DownloadCloud, Crown, Settings, LogOut } from 'lucide-react';
+import { useState } from 'react';
+import { Home, MonitorPlay, Twitter, Youtube, Twitch, DownloadCloud, Crown, Settings, LogOut, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const DiscordIconSVG = ({ size = 24, className = "" }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 127.14 96.36" className={`fill-current ${className}`}>
@@ -10,7 +12,11 @@ const DiscordIconSVG = ({ size = 24, className = "" }) => (
 
 const Navbar = () => {
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Close mobile menu when route changes
+  useState(() => setIsMobileMenuOpen(false), [location]);
 
   const isOwner = user?.roles?.includes('OWNER');
   const isAdmin = user?.roles?.includes('ADMIN');
@@ -23,25 +29,35 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 glass border-b border-white/5 bg-bgDark/80">
+    <nav className="fixed top-0 w-full z-50 glass border-b border-white/5 bg-bgDark/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           
           {/* Logo Section */}
           <div className="flex items-center gap-3">
-            <Link to="/" className="flex flex-col items-center justify-center group relative h-full"> 
+            <Link to="/" className="flex flex-col items-center justify-center group relative h-full shrink-0"> 
               <div className="relative group-hover:scale-105 transition-transform flex items-center justify-center">
                 <img 
                   src="/vinteset_escudo.png" 
                   alt="vintesetFM Logo" 
-                  className="h-14 md:h-16 w-auto object-contain drop-shadow-[0_0_15px_rgba(59,91,219,0.3)] mt-1"
+                  className="h-12 sm:h-14 md:h-16 w-auto object-contain drop-shadow-[0_0_15px_rgba(59,91,219,0.3)] mt-1"
                 />
               </div>
             </Link>
           </div>
 
-          {/* Navigation */}
-          <div className="hidden md:flex space-x-1">
+          {/* Hamburger Menu Toggle */}
+          <div className="md:hidden flex items-center">
+             <button 
+               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+               className="p-2 text-gray-400 hover:text-white transition-colors"
+             >
+               {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+             </button>
+          </div>
+
+          {/* Navigation - Desktop */}
+          <div className="hidden md:flex space-x-1 flex-1 justify-center px-4">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive = location.pathname === link.path;
@@ -50,7 +66,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                  className={`flex items-center gap-2 px-3 lg:px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
                     isActive 
                       ? 'bg-primary/20 text-white shadow-inner border border-primary/30' 
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -63,46 +79,132 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* Auth & Social Icons */}
-          <div className="hidden lg:flex items-center gap-4">
-             {/* Botoes de Visita ou Conta */}
+          {/* Auth & Social Icons - Desktop */}
+          <div className="hidden md:flex items-center gap-2 lg:gap-4 shrink-0">
              {!user ? (
-               <div className="flex items-center gap-3 mr-2 border-r border-white/10 pr-4">
+               <div className="flex items-center gap-2 lg:gap-3 mr-1 lg:mr-2 border-r border-white/10 pr-2 lg:pr-4">
                   <Link to="/login" className="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors">Entrar</Link>
-                  <Link to="/cadastro" className="bg-accent hover:bg-accentHover text-black px-4 py-1.5 rounded-lg font-black uppercase text-xs tracking-wider transition-all">Criar Conta</Link>
+                  <Link to="/cadastro" className="bg-accent hover:bg-accentHover text-black px-3 lg:px-4 py-1.5 rounded-lg font-black uppercase text-[10px] lg:text-xs tracking-wider transition-all">Criar Conta</Link>
                </div>
              ) : (
-               <div className="flex items-center gap-3 mr-2 border-r border-white/10 pr-4">
+               <div className="flex items-center gap-2 lg:gap-3 mr-1 lg:mr-2 border-r border-white/10 pr-2 lg:pr-4">
                   {(isOwner || isAdmin) && (
-                    <Link to="/admin" className="flex items-center gap-2 bg-accent/10 border border-accent/30 text-accent hover:bg-accent/20 px-4 py-1.5 rounded-lg font-black uppercase text-[10px] tracking-widest transition-all">
+                    <Link to="/admin" className="hidden lg:flex items-center gap-2 bg-accent/10 border border-accent/30 text-accent hover:bg-accent/20 px-3 py-1.5 rounded-lg font-black uppercase text-[10px] tracking-widest transition-all">
                       <Settings size={14} /> Admin
                     </Link>
                   )}
-                  <Link to="/minhaconta" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-full font-bold uppercase text-xs transition-colors group">
+                  <Link to="/minhaconta" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-2 lg:px-3 py-1.5 rounded-full font-bold uppercase text-[10px] lg:text-xs transition-colors group">
                     <div className="w-6 h-6 bg-accent/20 rounded-full border border-accent/40 flex items-center justify-center overflow-hidden">
                       {user.avatar ? <img src={user.avatar} alt="" className="w-full h-full object-cover" /> : <span className="text-[10px] text-accent">{(user.nickname || 'M')?.charAt(0)}</span>}
                     </div>
-                    <span className="max-w-[100px] truncate group-hover:text-accent transition-colors">{user.nickname || 'Manager'}</span>
+                    <span className="max-w-[80px] lg:max-w-[100px] truncate group-hover:text-accent transition-colors">{user.nickname || 'Manager'}</span>
                   </Link>
                </div>
              )}
              
-            <a href="https://discord.gg/Z5XMk427vy" target="_blank" rel="noreferrer" className="p-2 text-gray-400 hover:text-[#5865F2] hover:bg-[#5865F2]/10 rounded-full transition-colors">
-              <DiscordIconSVG size={20} />
-            </a>
-            <a href="https://twitch.tv/vinteset" target="_blank" rel="noreferrer" className="p-2 text-gray-400 hover:text-[#9146FF] hover:bg-[#9146FF]/10 rounded-full transition-colors">
-              <Twitch size={20} />
-            </a>
-            <a href="https://youtube.com/@vintesetFM" target="_blank" rel="noreferrer" className="p-2 text-gray-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 rounded-full transition-colors">
-              <Youtube size={20} />
-            </a>
-            <a href="https://x.com/vintesetFM" target="_blank" rel="noreferrer" className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-colors">
-              <Twitter size={20} />
-            </a>
+            <div className="hidden lg:flex items-center gap-1">
+              <a href="https://discord.gg/Z5XMk427vy" target="_blank" rel="noreferrer" className="p-2 text-gray-400 hover:text-[#5865F2] hover:bg-[#5865F2]/10 rounded-full transition-colors">
+                <DiscordIconSVG size={18} />
+              </a>
+              <a href="https://twitch.tv/vinteset" target="_blank" rel="noreferrer" className="p-2 text-gray-400 hover:text-[#9146FF] hover:bg-[#9146FF]/10 rounded-full transition-colors">
+                <Twitch size={18} />
+              </a>
+              <a href="https://youtube.com/@vintesetFM" target="_blank" rel="noreferrer" className="p-2 text-gray-400 hover:text-[#FF0000] hover:bg-[#FF0000]/10 rounded-full transition-colors">
+                <Youtube size={18} />
+              </a>
+              <a href="https://x.com/vintesetFM" target="_blank" rel="noreferrer" className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-colors">
+                <Twitter size={18} />
+              </a>
+            </div>
           </div>
 
         </div>
       </div>
+
+      {/* Mobile Drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-t border-white/10 bg-bgDark/95 backdrop-blur-xl overflow-hidden"
+          >
+            <div className="px-4 py-6 space-y-6">
+              
+              {/* Mobile Profile / Auth */}
+              <div className="mb-4 pb-4 border-b border-white/5">
+                {user ? (
+                  <div className="flex flex-col gap-4">
+                    <Link to="/minhaconta" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-accent/20 rounded-full border-2 border-accent/40 flex items-center justify-center overflow-hidden">
+                        {user.avatar ? <img src={user.avatar} alt="" className="w-full h-full object-cover" /> : <span className="text-xs text-accent">{(user.nickname || 'M')?.charAt(0)}</span>}
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-sm font-bold truncate text-white">{user.nickname || 'Manager'}</div>
+                        <div className="text-[10px] text-accent uppercase tracking-wider font-bold">Ver Perfil</div>
+                      </div>
+                    </Link>
+                    
+                    <div className="grid grid-cols-2 gap-2 mt-2">
+                       {(isOwner || isAdmin) && (
+                         <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-center gap-2 bg-accent/10 border border-accent/30 text-accent hover:bg-accent/20 px-3 py-2 rounded-lg font-black uppercase text-[10px] tracking-widest transition-all">
+                           <Settings size={14} /> Admin
+                         </Link>
+                       )}
+                       <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="flex items-center justify-center gap-2 bg-red-500/10 border border-red-500/30 text-red-500 hover:bg-red-500/20 px-3 py-2 rounded-lg font-black uppercase text-[10px] tracking-widest transition-all">
+                         <LogOut size={14} /> Sair
+                       </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-3">
+                    <Link to="/cadastro" onClick={() => setIsMobileMenuOpen(false)} className="bg-accent hover:bg-accentHover text-black px-4 py-3 text-center rounded-xl font-black uppercase text-xs tracking-wider transition-all">
+                      Criar Conta
+                    </Link>
+                    <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="bg-white/5 border border-white/10 text-white px-4 py-3 text-center rounded-xl font-bold uppercase text-xs tracking-wider hover:bg-white/10 transition-colors">
+                      Entrar
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile Navigation Links */}
+              <div className="flex flex-col gap-2">
+                {navLinks.map((link) => {
+                  const Icon = link.icon;
+                  const isActive = location.pathname === link.path;
+                  
+                  return (
+                    <Link
+                      key={link.name}
+                      to={link.path}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`flex items-center gap-4 px-4 py-3 rounded-xl font-bold transition-all ${
+                        isActive 
+                          ? 'bg-primary/20 text-accent border border-primary/30' 
+                          : 'text-gray-300 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      <Icon size={20} className={isActive ? "text-accent" : "opacity-70"} />
+                      {link.name}
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* Mobile Socials */}
+              <div className="pt-4 mt-2 border-t border-white/5 flex items-center justify-center gap-6">
+                <a href="https://discord.gg/Z5XMk427vy" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#5865F2] transition-colors"><DiscordIconSVG size={24} /></a>
+                <a href="https://twitch.tv/vinteset" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#9146FF] transition-colors"><Twitch size={24} /></a>
+                <a href="https://youtube.com/@vintesetFM" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#FF0000] transition-colors"><Youtube size={24} /></a>
+                <a href="https://x.com/vintesetFM" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors"><Twitter size={24} /></a>
+              </div>
+
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

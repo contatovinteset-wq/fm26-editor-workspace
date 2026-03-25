@@ -18,6 +18,7 @@ model User {
   twitchId       String?   @unique
   googleId       String?   @unique
   roles          Json      @default("[\"USER\"]") // 'OWNER', 'ADMIN_DOWNLOADS', 'ADMIN_GERACAO', 'USER'
+  lastActiveAt   DateTime?
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 

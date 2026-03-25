@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async () => {
     try {
-      const res = await fetch('/api/auth/me');
+      const res = await fetch('/api/auth/me', { credentials: 'include' });
       if (res.ok) {
         const data = await res.json();
         setUser(data.user || null);
@@ -23,12 +23,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const logout = async () => {
+    try {
+      await fetch('/api/auth/logout', { credentials: 'include' });
+      setUser(null);
+    } catch (err) {
+      console.error('Falha no logout:', err);
+    }
+  };
+
   useEffect(() => {
     fetchUser();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, fetchUser }}>
+    <AuthContext.Provider value={{ user, isLoading, fetchUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

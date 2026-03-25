@@ -47,7 +47,7 @@ const AdminPanel = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch('/api/admin/users');
+      const res = await fetch('/api/admin/users', { credentials: 'include' });
       if (res.ok) {
         const data = await res.json();
         setUsers(data.users || []);
@@ -88,6 +88,7 @@ const AdminPanel = () => {
       const res = await fetch(`/api/admin/users/${editingUser.id}/roles`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ roles: editRoles }),
       });
 

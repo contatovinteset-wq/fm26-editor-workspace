@@ -88,9 +88,10 @@ router.get('/me', async (req, res) => {
     const secret = process.env.JWT_SECRET || 'fallback_secret';
     const decoded = jwt.verify(token, secret);
     
-    // Buscar dados atualizados do banco
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.id }
+    // Buscar dados atualizados e setar lastActiveAt
+    const user = await prisma.user.update({
+      where: { id: decoded.id },
+      data: { lastActiveAt: new Date() }
     });
 
     if (!user) return res.status(401).json({ user: null });

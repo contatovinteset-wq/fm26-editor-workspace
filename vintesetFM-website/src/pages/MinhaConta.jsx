@@ -13,7 +13,7 @@ const DEFAULT_AVATARS = [
 ];
 
 const MinhaConta = () => {
-  const { user, fetchUser } = useAuth();
+  const { user, fetchUser, logout } = useAuth();
   const [searchParams] = useSearchParams();
   const isOnboarding = searchParams.get('onboarding') === 'true';
   
@@ -47,6 +47,7 @@ const MinhaConta = () => {
       const res = await fetch('/api/users/profile', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ nickname, avatar: selectedAvatar })
       });
 
@@ -116,7 +117,10 @@ const MinhaConta = () => {
              </div>
 
              {/* Deslogar */}
-             <button className="w-full flex items-center justify-center gap-2 px-6 py-3 border border-red-500/20 bg-red-500/10 text-red-500 hover:bg-red-500/20 rounded-xl font-bold uppercase tracking-widest text-xs transition-colors">
+             <button 
+               onClick={logout}
+               className="w-full flex items-center justify-center gap-2 px-6 py-3 border border-red-500/20 bg-red-500/10 text-red-500 hover:bg-red-500/20 rounded-xl font-bold uppercase tracking-widest text-xs transition-colors"
+             >
                <LogOut size={16} /> Sair da Conta
              </button>
           </div>
