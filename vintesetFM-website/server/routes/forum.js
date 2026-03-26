@@ -9,7 +9,7 @@ import { requireAuth } from '../middleware/roles.js';
 router.get('/', async (req, res) => {
   try {
     const topics = await prisma.topic.findMany({
-      include: { author: { select: { nickname: true, avatar: true, roles: true } }, _count: { select: { comments: true } } },
+      include: { author: { select: { nickname: true, avatar: true, roles: true } }, _count: { select: { comments: true, likes: true } } },
       orderBy: { createdAt: 'desc' },
     });
     res.json(topics);
@@ -48,6 +48,7 @@ router.get('/:id', async (req, res) => {
       where: { id: req.params.id },
       include: { 
         author: { select: { nickname: true, avatar: true, roles: true } },
+        _count: { select: { likes: true } },
         comments: { 
           include: { author: { select: { nickname: true, avatar: true } } },
           orderBy: { createdAt: 'asc' }
@@ -81,6 +82,34 @@ router.delete('/:id', requireAuth, async (req, res) => {
   } catch (error) {
     console.error('[ERRO] Falha ao excluir tópico:', error);
     res.status(500).json({ error: 'Erro interno ao excluir tópico.' });
+  }
+});
+
+// Curtir / Descurtir Tópico
+router.post('/:id/like', requireAuth, async (req, res) => {
+  try {
+    const topicId = req.params.id;
+    const userId = req.user.id;
+
+    const topic = await prisma.topic.findUnique({ where: { id: topicId } });
+    if (!topic) return res.status(404).json({ error: 'Tópico não encontrado.' });
+
+    const existingLike = await prisma.topicLike.findUnique({
+      where: { topicId_userId: { topicId, userId } }
+    });
+
+    if (existingLike) {
+      await prisma.topicLike.delete({ where: { id: existingLike.id } });
+      const currentCount = await prisma.topicLike.count({ where: { topicId } });
+      return res.json({ liked: false, likesCount: currentCount });
+    } else {
+      await prisma.topicLike.create({ data: { topicId, userId } });
+      const currentCount = await prisma.topicLike.count({ where: { topicId } });
+      return res.json({ liked: true, likesCount: currentCount });
+    }
+  } catch (error) {
+    console.error('[ERRO] Falha ao curtir/descurtir:', error);
+    res.status(500).json({ error: 'Erro interno na curtida.' });
   }
 });
 

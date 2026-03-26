@@ -12,6 +12,22 @@ const Topico = () => {
   
   const [topic, setTopic] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [likesCount, setLikesCount] = useState(0);
+
+  const renderTextWithLinks = (text) => {
+    if (!text) return null;
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.split(urlRegex).map((part, i) => {
+      if (part.match(urlRegex)) {
+        return (
+          <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline underline-offset-2 break-all">
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  };
 
   useEffect(() => {
     const fetchTopic = async () => {
@@ -20,6 +36,7 @@ const Topico = () => {
         if (!res.ok) throw new Error('Falha ao buscar tópico');
         const data = await res.json();
         setTopic(data);
+        setLikesCount(data._count?.likes || 0);
       } catch (err) {
         console.error(err);
       } finally {
@@ -43,6 +60,29 @@ const Topico = () => {
       
       toast.success('Tópico excluído com sucesso!');
       navigate('/downloads');
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  const handleLike = async () => {
+    if (!user) {
+      toast.error("Você precisa estar logado para curtir.");
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/forum/${id}/like`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (!res.ok) throw new Error('Erro ao registrar curtida');
+      
+      const data = await res.json();
+      setLikesCount(data.likesCount);
+      toast.success(data.liked ? "Tópico curtido!" : "Curtida removida.");
     } catch (err) {
       toast.error(err.message);
     }
@@ -113,7 +153,9 @@ const Topico = () => {
                 {topic.author?.roles?.includes('OWNER') && <CheckCircle2 size={14} className="text-blue-400" />}
               </div>
               <span className="flex items-center gap-2"><Calendar size={16} /> {new Date(topic.createdAt).toLocaleDateString('pt-BR')}</span>
-              <span className="flex items-center gap-2 text-red-400"><Heart size={16} /> {topic.likes || 0} curtidas</span>
+              <button onClick={handleLike} className="flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors bg-red-400/10 px-3 py-1 rounded-lg">
+                <Heart size={16} /> {likesCount} curtidas
+              </button>
            </div>
         </div>
 
@@ -121,7 +163,7 @@ const Topico = () => {
         <div className="bg-black/40 border-x border-white/10 border-b border-white/5 rounded-b-3xl p-8 shadow-2xl mb-12 relative">
            
            <div className="prose prose-invert max-w-none mb-12 whitespace-pre-line text-gray-300 leading-relaxed text-lg break-words">
-             {topic.content}
+             {renderTextWithLinks(topic.content)}
            </div>
 
            {/* Call to Action Principal - Se o Link foi colocado na formatação */}

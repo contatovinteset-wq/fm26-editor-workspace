@@ -55,7 +55,7 @@ const TopicCard = ({ topic, index, categoryLabel }) => {
       <div className="flex md:flex-col items-center justify-center gap-4 md:gap-2 min-w-[120px] bg-black/40 md:bg-transparent p-3 md:p-0 rounded-lg w-full md:w-auto mt-4 md:mt-0">
         <div className="flex items-center gap-2 text-gray-300">
            <ThumbsUp size={16} className="text-accent" /> 
-           <span className="font-bold text-lg">{topic.likes || 0}</span>
+           <span className="font-bold text-lg">{topic._count?.likes || 0}</span>
         </div>
         <div className="flex items-center gap-2 text-gray-500 text-sm">
            <MessageSquare size={14} /> {topic._count?.comments || 0} comentários

@@ -26,6 +26,7 @@ model User {
   comments       Comment[]
   squads         Squad[]
   auditLogs      AuditLog[] @relation("UserAuditLogs")
+  likes          TopicLike[]
 }
 
 model Topic {
@@ -39,6 +40,7 @@ model Topic {
   updatedAt   DateTime  @updatedAt
 
   comments    Comment[]
+  likes       TopicLike[]
 }
 
 model Comment {
@@ -80,4 +82,16 @@ model AuditLog {
 
   @@index([userId])
   @@index([action])
+}
+
+model TopicLike {
+  id        String   @id @default(uuid())
+  topicId   String
+  userId    String
+  createdAt DateTime @default(now())
+
+  topic     Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([topicId, userId])
 }
