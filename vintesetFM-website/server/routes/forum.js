@@ -9,7 +9,7 @@ import { requireAuth } from '../middleware/roles.js';
 router.get('/', async (req, res) => {
   try {
     const topics = await prisma.topic.findMany({
-      include: { author: { select: { name: true, avatar: true, role: true } }, _count: { select: { comments: true } } },
+      include: { author: { select: { name: true, avatar: true, roles: true } }, _count: { select: { comments: true } } },
       orderBy: { createdAt: 'desc' },
     });
     res.json(topics);

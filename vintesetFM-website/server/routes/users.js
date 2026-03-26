@@ -17,7 +17,8 @@ router.patch('/profile', requireAuth, async (req, res) => {
     const currentUser = await prisma.user.findUnique({ where: { id: userId } });
     if (!currentUser) return res.status(404).json({ error: 'Usuário não encontrado' });
 
-    const hasNicknamePermission = can(req.user, 'change_nickname');
+    // Avaliar permissões usando os níveis atualizados do banco (evita JWT stale)
+    const hasNicknamePermission = can(currentUser, 'change_nickname');
 
     // Validar nickname (apenas letras, números e underscores, 3-15 chars)
     if (nickname && nickname !== currentUser.nickname) {
