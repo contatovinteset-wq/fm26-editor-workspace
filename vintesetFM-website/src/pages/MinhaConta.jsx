@@ -32,7 +32,7 @@ const MinhaConta = () => {
   const hasNicknamePermission = can(user, 'change_nickname');
   
   // Nickname irreversível após definido, a menos que seja ADMIN+
-  const isNicknameLocked = user.nickname_defined && !hasNicknamePermission;
+  const isNicknameLocked = !!user.nickname && !hasNicknamePermission;
   
   // Conta configurada: possui algum método de autenticação persistido
   const isAccountConfigured = !!(user.email || user.googleId || user.twitchId);

@@ -11,7 +11,7 @@ import {
 import TopicCard from '../components/forum/TopicCard';
 import CreateTopicModal from '../components/forum/CreateTopicModal';
 
-const forumMocks = [];
+// forumMocks removido pois a API será consumida
 
 const CATEGORIES = [
   { id: 'all', label: 'Todos', icon: DownloadCloud },
@@ -24,12 +24,27 @@ const Downloads = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [topics, setTopics] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  React.useEffect(() => {
+    fetch('/api/forum')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) setTopics(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Erro ao buscar tópicos:', err);
+        setLoading(false);
+      });
+  }, []);
 
   // Filtro de Busca e Aba
-  const filteredTopics = forumMocks.filter(topic => {
+  const filteredTopics = topics.filter(topic => {
     const matchesTab = activeTab === 'all' || topic.category === activeTab;
     const matchesSearch = topic.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          topic.description.toLowerCase().includes(searchQuery.toLowerCase());
+                          topic.content?.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesTab && matchesSearch;
   });
 
@@ -94,7 +109,11 @@ const Downloads = () => {
 
       {/* Tópicos (Estilo Fórum) */}
       <div className="flex flex-col gap-4">
-        {filteredTopics.length > 0 ? (
+        {loading ? (
+          <div className="text-center py-20 text-gray-500 font-bold uppercase tracking-widest animate-pulse">
+            Carregando Tópicos...
+          </div>
+        ) : filteredTopics.length > 0 ? (
           filteredTopics.map((topic, index) => {
             const categoryLabel = CATEGORIES.find(c => c.id === topic.category)?.label || topic.category;
             return (

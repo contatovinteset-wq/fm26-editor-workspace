@@ -22,7 +22,7 @@ router.patch('/profile', requireAuth, async (req, res) => {
     // Validar nickname (apenas letras, números e underscores, 3-15 chars)
     if (nickname && nickname !== currentUser.nickname) {
       // Regra de Trava Irreversível de Nickname
-      if (currentUser.nickname_defined && !hasNicknamePermission) {
+      if (currentUser.nickname && !hasNicknamePermission) {
          return res.status(403).json({ 
            error: 'Segurança: Seu nickname já foi definido definitivamente e não pode ser alterado.' 
          });
