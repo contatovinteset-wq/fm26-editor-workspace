@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 const router = express.Router();
 const prisma = new PrismaClient();
-import { isAuthenticated } from '../middleware/auth.js';
+import { requireAuth } from '../middleware/roles.js';
 
 // Listar Tópicos
 router.get('/', async (req, res) => {
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 });
 
 // Criar Tópico
-router.post('/', isAuthenticated, async (req, res) => {
+router.post('/', requireAuth, async (req, res) => {
   try {
     const { title, content, category, externalLink } = req.body;
     
