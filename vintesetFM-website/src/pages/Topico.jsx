@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Share2, Heart, MessageSquare, ArrowLeft, Tag, Calendar, User, CheckCircle2, Trash2, ExternalLink } from 'lucide-react';
+import { Download, Share2, Heart, MessageSquare, ArrowLeft, Tag, Calendar, User, CheckCircle2, Trash2, ExternalLink, Check } from 'lucide-react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-hot-toast';
@@ -15,6 +15,7 @@ const Topico = () => {
   const [likesCount, setLikesCount] = useState(0);
   const [commentContent, setCommentContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   const renderTextWithLinks = (text) => {
     if (!text) return null;
@@ -129,6 +130,8 @@ const Topico = () => {
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
     toast.success('Link copiado para a área de transferência!');
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
   };
 
   const handleDeleteComment = async (commentId) => {
@@ -256,8 +259,18 @@ const Topico = () => {
                </div>
                
                <div className="flex gap-3 w-full sm:w-auto">
-                 <button onClick={handleShare} className="flex-1 sm:flex-none border border-white/10 hover:bg-white/5 p-4 rounded-xl text-gray-400 hover:text-white transition-colors flex items-center justify-center">
-                   <Share2 size={20} />
+                 <button onClick={handleShare} className="flex-1 sm:flex-none border border-white/10 hover:bg-white/5 px-6 py-4 sm:p-4 rounded-xl text-gray-400 hover:text-white transition-colors flex items-center justify-center gap-2 font-bold uppercase text-xs tracking-widest">
+                   {isCopied ? (
+                     <>
+                       <Check size={20} className="text-green-400" />
+                       <span className="text-green-400">Copiado</span>
+                     </>
+                   ) : (
+                     <>
+                        <Share2 size={20} />
+                        <span className="sm:hidden">Compartilhar</span>
+                     </>
+                   )}
                  </button>
                </div>
              </div>
@@ -302,11 +315,11 @@ const Topico = () => {
                  const canDeleteComment = user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN') || user?.roles?.includes('ADMIN_DOWNLOADS') || comment.authorId === user?.id;
 
                  return (
-                   <div key={comment.id} className="bg-black/50 border border-white/5 rounded-2xl p-6 flex flex-col sm:flex-row gap-4 hover:border-white/10 transition-colors relative group">
+                   <div key={comment.id} className="bg-black/50 border border-white/5 rounded-2xl p-6 flex flex-col sm:flex-row gap-4 hover:border-white/10 transition-colors relative">
                       {canDeleteComment && (
                         <button 
                           onClick={() => handleDeleteComment(comment.id)} 
-                          className="absolute top-4 right-4 text-red-500/50 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                          className="absolute top-4 right-4 text-red-500/40 hover:text-red-500 transition-colors"
                           title="Excluir comentário"
                         >
                           <Trash2 size={16} />
