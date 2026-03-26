@@ -1,8 +1,11 @@
 import jwt from 'jsonwebtoken';
 import { hasPermission, hasRole as checkRole } from '../config/permissions.js';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 /**
- * Helper: extrai e parseia as roles do token JWT.
+ * Helper: extrai e parseia as roles do token/banco.
  */
 function extractRoles(decoded) {
   let roles = decoded.roles || [];
@@ -13,7 +16,7 @@ function extractRoles(decoded) {
 }
 
 /**
- * Helper: decodifica o JWT do cookie e popula req.user.
+ * Helper: decodifica o JWT apenas para extrair o ID assinado.
  */
 function decodeToken(req) {
   const token = req.cookies?.jwt;
@@ -21,20 +24,33 @@ function decodeToken(req) {
 
   const secret = process.env.JWT_SECRET || 'fallback_secret';
   const decoded = jwt.verify(token, secret);
-  decoded.roles = extractRoles(decoded);
+  return decoded;
+}
+
+/**
+ * Super Helper: Busca o usuário real do banco para evitar 
+ * que um Token vencido ou cacheado impeça o acesso caso as Roles tenham mudado!
+ */
+async function getFreshUser(req) {
+  const decoded = decodeToken(req);
+  if (!decoded) return null;
+
+  const freshUser = await prisma.user.findUnique({ where: { id: decoded.id } });
+  if (!freshUser) return null;
+
+  decoded.roles = extractRoles({ roles: freshUser.roles });
+  decoded.nickname = freshUser.nickname;
   return decoded;
 }
 
 /**
  * Middleware que exige que o usuário possua pelo menos uma das roles listadas.
  * OWNER sempre tem passe livre (bypass automático via hasRole).
- *
- * Uso: requireRoles(['ADMIN', 'MODERATOR'])
  */
 export const requireRoles = (requiredRoles = []) => {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     try {
-      const decoded = decodeToken(req);
+      const decoded = await getFreshUser(req);
       if (!decoded) return res.status(401).json({ error: 'Não autorizado. Faça login.' });
 
       if (requiredRoles.length > 0 && !checkRole(decoded.roles, requiredRoles)) {
@@ -51,14 +67,12 @@ export const requireRoles = (requiredRoles = []) => {
 
 /**
  * Middleware que exige uma permissão granular baseada na hierarquia.
- * Consulta o PERMISSIONS map do permissions.js.
- *
- * Uso: requirePermission('downloads:create')
+ * Consulta o PERMISSIONS map atualizado sempre do Banco de Dados.
  */
 export const requirePermission = (permission) => {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     try {
-      const decoded = decodeToken(req);
+      const decoded = await getFreshUser(req);
       if (!decoded) return res.status(401).json({ error: 'Não autorizado. Faça login.' });
 
       if (!hasPermission(decoded.roles, permission)) {
@@ -74,11 +88,11 @@ export const requirePermission = (permission) => {
 };
 
 /**
- * Middleware simples que só exige autenticação (qualquer role).
+ * Middleware simples que só exige autenticação viva no Banco.
  */
-export const requireAuth = (req, res, next) => {
+export const requireAuth = async (req, res, next) => {
   try {
-    const decoded = decodeToken(req);
+    const decoded = await getFreshUser(req);
     if (!decoded) return res.status(401).json({ error: 'Não autorizado. Faça login.' });
     req.user = decoded;
     next();

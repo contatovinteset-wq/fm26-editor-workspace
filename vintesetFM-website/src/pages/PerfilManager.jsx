@@ -36,13 +36,15 @@ const PerfilManager = () => {
            
            {/* Avatar com Destaque de Role */}
            <div className="relative z-10 shrink-0">
-              <div className={`w-32 h-32 rounded-full border-4 bg-black p-1 relative shadow-2xl flex items-center justify-center overflow-hidden ${isOwner ? 'border-amber-500' : 'border-blue-500'}`}>
-                 {user?.avatar ? (
-                   <img src={user.avatar} alt="Manager Profile" className="w-full h-full rounded-full object-cover" />
-                 ) : (
-                   <span className={`text-5xl font-black ${isOwner ? 'text-amber-500' : 'text-blue-500'}`}>{(user?.nickname || 'V')[0].toUpperCase()}</span>
-                 )}
-                 <div className={`absolute -bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase px-4 py-1.5 rounded-full border-2 border-black flex items-center gap-1 shadow-md w-max ${isOwner ? 'bg-amber-500 text-black' : 'bg-blue-500 text-white'}`}>
+              <div className={`w-32 h-32 rounded-full border-4 bg-black p-1 relative shadow-2xl flex items-center justify-center ${isOwner ? 'border-amber-500' : 'border-blue-500'}`}>
+                 <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
+                   {user?.avatar ? (
+                     <img src={user.avatar} alt="Manager Profile" className="w-full h-full object-cover" />
+                   ) : (
+                     <span className={`text-5xl font-black ${isOwner ? 'text-amber-500' : 'text-blue-500'}`}>{(user?.nickname || 'V')[0].toUpperCase()}</span>
+                   )}
+                 </div>
+                 <div className={`absolute -bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase px-4 py-1.5 rounded-full border-2 border-black flex items-center gap-1 shadow-md w-max z-20 ${isOwner ? 'bg-amber-500 text-black' : 'bg-blue-500 text-white'}`}>
                    {isOwner ? <><Crown size={14} /> Owner</> : <><User size={14} /> Membro</>}
                  </div>
               </div>
