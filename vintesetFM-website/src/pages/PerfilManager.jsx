@@ -34,25 +34,24 @@ const PerfilManager = () => {
         <div className="bg-gray-900 border border-accent/30 rounded-3xl p-8 mb-12 shadow-[0_0_30px_rgba(255,215,0,0.1)] relative overflow-hidden flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
            <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent pointer-events-none"></div>
            
-           {/* Avatar com Destaque Rei da Mesa */}
+           {/* Avatar com Destaque de Role */}
            <div className="relative z-10 shrink-0">
-              <div className="w-32 h-32 rounded-full border-4 border-accent bg-black p-1 relative shadow-2xl flex items-center justify-center overflow-hidden">
+              <div className={`w-32 h-32 rounded-full border-4 bg-black p-1 relative shadow-2xl flex items-center justify-center overflow-hidden ${isOwner ? 'border-amber-500' : 'border-blue-500'}`}>
                  {user?.avatar ? (
                    <img src={user.avatar} alt="Manager Profile" className="w-full h-full rounded-full object-cover" />
                  ) : (
-                   <span className="text-5xl font-black text-accent">{(user?.nickname || 'V')[0].toUpperCase()}</span>
+                   <span className={`text-5xl font-black ${isOwner ? 'text-amber-500' : 'text-blue-500'}`}>{(user?.nickname || 'V')[0].toUpperCase()}</span>
                  )}
-                 <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-accent text-black text-[10px] font-black uppercase px-4 py-1.5 rounded-full border-2 border-black flex items-center gap-1 shadow-md w-max">
+                 <div className={`absolute -bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase px-4 py-1.5 rounded-full border-2 border-black flex items-center gap-1 shadow-md w-max ${isOwner ? 'bg-amber-500 text-black' : 'bg-blue-500 text-white'}`}>
                    {isOwner ? <><Crown size={14} /> Owner</> : <><User size={14} /> Membro</>}
                  </div>
               </div>
            </div>
 
-           <div className="z-10 flex-1">
-              <h2 className="text-4xl font-black uppercase tracking-tighter mb-2 flex items-center justify-center md:justify-start gap-3">
+           <div className="z-10 flex-1 mt-4 md:mt-0">
+              <h2 className="text-4xl font-black uppercase tracking-tighter mb-6 flex items-center justify-center md:justify-start gap-3">
                 Manager {user?.nickname || 'Vinteseter'}
               </h2>
-              <p className="text-gray-400 mb-6 font-mono text-sm">Membro Oficial da VintesetFM</p>
 
               {/* Sala de Troféus Ocultada até o Engine do Campeonato Módulo Rei da Mesa Ficar Pronto */}
               <div className="opacity-40 text-xs text-gray-500 uppercase font-black tracking-widest border border-dashed border-gray-700 p-4 rounded-xl inline-block">

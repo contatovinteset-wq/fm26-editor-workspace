@@ -5,10 +5,10 @@ import { Shield, Users, Crown, ChevronDown, Check, X, Search, AlertTriangle } fr
 import { getAllRoles, hasPermission, ROLES } from '../config/permissions';
 
 const ROLE_COLORS = {
-  OWNER: { bg: 'bg-amber-500/20', text: 'text-amber-400', border: 'border-amber-500/50' },
-  ADMIN: { bg: 'bg-red-500/20', text: 'text-red-400', border: 'border-red-500/50' },
-  MODERATOR: { bg: 'bg-blue-500/20', text: 'text-blue-400', border: 'border-blue-500/50' },
-  USER: { bg: 'bg-gray-500/20', text: 'text-gray-400', border: 'border-gray-500/50' },
+  OWNER: { bg: 'bg-amber-500/20', text: 'text-amber-500', border: 'border-amber-500/50' },
+  ADMIN: { bg: 'bg-red-500/20', text: 'text-red-500', border: 'border-red-500/50' },
+  MODERATOR: { bg: 'bg-emerald-500/20', text: 'text-emerald-500', border: 'border-emerald-500/50' },
+  USER: { bg: 'bg-blue-500/20', text: 'text-blue-500', border: 'border-blue-500/50' },
 };
 
 const RoleBadge = ({ role, small = false }) => {
@@ -48,12 +48,16 @@ const AdminPanel = () => {
   const fetchUsers = async () => {
     try {
       const res = await fetch('/api/admin/users', { credentials: 'include' });
+      const data = await res.json();
       if (res.ok) {
-        const data = await res.json();
         setUsers(data.users || []);
+      } else {
+        console.error('API Error:', data.error);
+        if (users.length === 0) setMessage({ type: 'error', text: data.error || 'A API retornou um erro interno e não enviou a lista de usuários. O Schema de Banco de Dados está sincronizado em produção?' });
       }
     } catch (err) {
       console.error('Erro ao buscar usuários:', err);
+      setMessage({ type: 'error', text: 'Sua conexão falhou ou a API colapsou (Erro 500).' });
     } finally {
       setLoadingUsers(false);
     }
@@ -123,7 +127,7 @@ const AdminPanel = () => {
   }
 
   return (
-    <div className="w-full min-h-screen bg-bgDark py-12 px-4 sm:px-6 lg:px-8">
+    <div className="w-full min-h-screen bg-bgDark pt-24 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div
@@ -175,7 +179,7 @@ const AdminPanel = () => {
                 className={`p-4 rounded-xl border ${colors.border} ${colors.bg} backdrop-blur-sm`}
               >
                 <div className={`text-2xl font-black ${colors.text}`}>{count}</div>
-                <div className="text-sm text-gray-400 font-medium uppercase tracking-wider">{name}s</div>
+                <div className="text-sm text-gray-400 font-medium uppercase tracking-wider">{name === 'USER' ? 'Membros' : name + 's'}</div>
               </motion.div>
             );
           })}
