@@ -21,7 +21,7 @@ const TopicCard = ({ topic, index, categoryLabel }) => {
            )}
         </div>
         <span className="text-[10px] font-bold uppercase tracking-widest text-accent mt-2 text-center break-all w-full px-1">
-          {topic.author?.nickname || topic.author?.name || 'Manager'}
+          {topic.author?.nickname || 'Usuario'}
         </span>
       </div>
 
@@ -47,7 +47,7 @@ const TopicCard = ({ topic, index, categoryLabel }) => {
 
         {/* Mobile Author Info */}
         <div className="flex md:hidden items-center gap-2 mt-4 text-xs font-bold text-gray-400 uppercase tracking-widest">
-          <User size={14} className="text-accent" /> {topic.author?.nickname || topic.author?.name || 'Manager'}
+          <User size={14} className="text-accent" /> {topic.author?.nickname || 'Usuario'}
         </div>
       </div>
 

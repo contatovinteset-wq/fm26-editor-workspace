@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, AlertTriangle, Shield, TrendingUp, DollarSign, Search, Filter, ArrowRight, Save, Crown, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import mockData from '../data/reiDaMesaMocks.json';
 
 const Escalacao = () => {
   // ==== ESTADOS ====
@@ -18,7 +19,7 @@ const Escalacao = () => {
   });
   const [isSaved, setIsSaved] = useState(false);
 
-  const players = [];
+  const players = mockData.players || [];
 
   // Filtra mercado baseado no slot ativo
   const filteredPlayers = players.filter(p => {
