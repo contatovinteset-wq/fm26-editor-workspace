@@ -10,6 +10,7 @@ import Cadastro from './Cadastro';
 import Topico from './Topico';
 import MinhaConta from './MinhaConta';
 import AdminPanel from './AdminPanel';
+import ModeratorPanel from './ModeratorPanel';
 
 const Pages = {
   Home,
@@ -23,7 +24,8 @@ const Pages = {
   Cadastro: () => <Cadastro />,
   Topico: () => <Topico />,
   MinhaConta: () => <MinhaConta />,
-  AdminPanel: () => <AdminPanel />
+  AdminPanel: () => <AdminPanel />,
+  ModeratorPanel: () => <ModeratorPanel />
 };
 
 export default Pages;

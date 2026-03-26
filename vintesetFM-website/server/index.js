@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 
 import authRoutes from './routes/auth.js';
 import forumRoutes from './routes/forum.js';
+import moderationRoutes from './routes/moderation.js';
 import reiDaMesaRoutes from './routes/reidamesa.js';
 import adminRoutes from './routes/admin.js';
 import userRoutes from './routes/users.js';
@@ -40,6 +41,7 @@ app.use(passport.initialize());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/forum', forumRoutes);
+app.use('/api/moderation', moderationRoutes);
 app.use('/api/reidamesa', reiDaMesaRoutes);
 app.use('/api/admin', adminRoutes);
 

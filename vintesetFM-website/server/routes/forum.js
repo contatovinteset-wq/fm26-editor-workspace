@@ -1,14 +1,43 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
+import jwt from 'jsonwebtoken';
+import { requireAuth } from '../middleware/roles.js';
+import { judgeTopic } from '../services/aiModerator.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
-import { requireAuth } from '../middleware/roles.js';
 
-// Listar Tópicos
+// Helper JWT passivo para saber quem é o leitor sem barrá-lo
+function getOptionalUser(req) {
+  const token = req.cookies?.jwt;
+  if (!token) return null;
+  try {
+     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback_secret');
+     return decoded; // Retorna { id, roles: [...] }
+  } catch(e) { return null; }
+}
+
+// Listar Tópicos (Apenas APPROVED, a menos que o Autor seja o Leitor ou o Leitor seja Admin/Staff)
 router.get('/', async (req, res) => {
   try {
+    const user = getOptionalUser(req);
+    const userId = user?.id;
+    let whereClause = { status: 'APPROVED' };
+
+    // Se estiver logado, ele vê os próprios tópicos PENDING/REJECTED tbm
+    if (userId) {
+       whereClause = {
+         OR: [
+           { status: 'APPROVED' },
+           { authorId: userId }
+         ]
+       };
+    }
+
+    // Nota: Mods/Admins verão a fila de pendentes em outra Rota (/api/moderation)
+    
     const topics = await prisma.topic.findMany({
+      where: whereClause,
       include: { author: { select: { nickname: true, avatar: true, roles: true } }, _count: { select: { comments: true, likes: true } } },
       orderBy: { createdAt: 'desc' },
     });
@@ -23,14 +52,32 @@ router.post('/', requireAuth, async (req, res) => {
   try {
     const { title, content, category, externalLink } = req.body;
     
-    // content = Descrição
     const fullContent = externalLink ? `${content}\n\nLink: ${externalLink}` : content;
+
+    let initialStatus = 'PENDING';
+    let modReason = 'Aguardando validação da Vinteset AI.';
+
+    // Bypasses pra chefia (Role Bypass Protection)
+    const userRoles = req.user.roles || [];
+    const isVIP = userRoles.includes('OWNER') || userRoles.includes('ADMIN') || userRoles.includes('MODERATOR');
+
+    if (isVIP) {
+       initialStatus = 'APPROVED';
+       modReason = 'Equipe Oficial - Bypass Direto';
+    } else {
+       // Auto-Moderador Age Aqui!
+       const aiDecision = await judgeTopic(title, fullContent);
+       initialStatus = aiDecision.status; // 'APPROVED', 'PENDING' ou 'REJECTED'
+       modReason = aiDecision.reason;
+    }
 
     const newTopic = await prisma.topic.create({
       data: {
         title,
         content: fullContent,
         category,
+        status: initialStatus,
+        moderationReason: modReason,
         authorId: req.user.id
       }
     });
@@ -56,6 +103,19 @@ router.get('/:id', async (req, res) => {
       }
     });
     if (!topic) return res.status(404).json({ error: 'Tópico não encontrado.' });
+
+    // Proteção Anti-Abuso e Vazamento de Links Diretos para Threads Pendentes/Rejeitadas
+    if (topic.status !== 'APPROVED') {
+       const user = getOptionalUser(req);
+       const isAuthor = user && user.id === topic.authorId;
+       const isStaff = user && user.roles && (user.roles.includes('OWNER') || user.roles.includes('ADMIN') || user.roles.includes('MODERATOR') || user.roles.includes('ADMIN_DOWNLOADS'));
+       
+       if (!isAuthor && !isStaff) {
+          // Enganar atacantes devolvendo 404 seria ideal, mas pra UX melhor dar 403 pra não bugar a cabeça do cara
+          return res.status(403).json({ error: 'Acesso Negado. Este tópico encontra-se retido na moderação ou foi reprovado.' });
+       }
+    }
+
     res.json(topic);
   } catch (error) {
     res.status(500).json({ error: 'Erro ao buscar dados do tópico.' });

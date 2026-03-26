@@ -31,6 +31,7 @@ function App() {
               <Route path="reidamesa/ranking" element={<Pages.Ranking />} />
               <Route path="reidamesa/perfil" element={<Pages.PerfilManager />} />
               <Route path="admin" element={<Pages.AdminPanel />} />
+              <Route path="moderacao" element={<Pages.ModeratorPanel />} />
             </Route>
 
             <Route path="ferramentas" element={<Navigate to="/downloads" replace />} />

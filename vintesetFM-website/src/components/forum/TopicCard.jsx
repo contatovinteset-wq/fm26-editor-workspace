@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User, ThumbsUp, MessageSquare, Calendar } from 'lucide-react';
+import { User, ThumbsUp, MessageSquare, Calendar, ShieldAlert, XCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-hot-toast';
@@ -50,9 +50,19 @@ const TopicCard = ({ topic, index, categoryLabel }) => {
               🔥 Em Alta
             </span>
           )}
+          {topic.status === 'PENDING' && (
+            <span className="px-2 py-0.5 bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 text-xs font-bold uppercase tracking-wider rounded flex items-center gap-1 ml-auto">
+              <ShieldAlert size={12} /> Em Análise
+            </span>
+          )}
+          {topic.status === 'REJECTED' && (
+            <span className="px-2 py-0.5 bg-red-500/20 text-red-500 border border-red-500/30 text-xs font-bold uppercase tracking-wider rounded flex items-center gap-1 ml-auto">
+              <XCircle size={12} /> Reprovado
+            </span>
+          )}
         </div>
         
-        <h3 onClick={handleAccess} className="text-xl font-black text-white uppercase tracking-tight group-hover:text-accent transition-colors cursor-pointer">
+        <h3 onClick={handleAccess} className={`text-xl font-black uppercase tracking-tight group-hover:text-accent transition-colors cursor-pointer ${topic.status === 'REJECTED' ? 'text-gray-500 line-through' : 'text-white'}`}>
           {topic.title}
         </h3>
         <p className="text-gray-400 text-sm mt-2 line-clamp-2">

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Home, MonitorPlay, Youtube, Twitch, DownloadCloud, Crown, Settings, LogOut, Menu, X } from 'lucide-react';
+import { Home, MonitorPlay, Youtube, Twitch, DownloadCloud, Crown, Settings, LogOut, Menu, X, ShieldAlert } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -25,7 +25,8 @@ const Navbar = () => {
   useState(() => setIsMobileMenuOpen(false), [location]);
 
   const isOwner = user?.roles?.includes('OWNER');
-  const isAdmin = user?.roles?.includes('ADMIN');
+  const isAdmin = user?.roles?.includes('ADMIN') || isOwner;
+  const isModerator = user?.roles?.includes('MODERATOR') || isAdmin;
 
   const navLinks = [
     { name: 'Início', path: '/', icon: Home },
@@ -97,9 +98,14 @@ const Navbar = () => {
                </div>
              ) : (
                <div className="flex items-center gap-2 lg:gap-3 mr-1 lg:mr-2 border-r border-white/10 pr-2 lg:pr-4">
-                  {(isOwner || isAdmin) && (
+                   {(isOwner || isAdmin) && (
                     <Link to="/admin" className="hidden lg:flex items-center gap-2 bg-accent/10 border border-accent/30 text-accent hover:bg-accent/20 px-3 py-1.5 rounded-lg font-black uppercase text-[10px] tracking-widest transition-all">
                       <Settings size={14} /> Admin
+                    </Link>
+                  )}
+                  {isModerator && (
+                    <Link to="/moderacao" className="hidden lg:flex items-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 hover:bg-green-500/20 px-3 py-1.5 rounded-lg font-black uppercase text-[10px] tracking-widest transition-all">
+                      <ShieldAlert size={14} /> Fila
                     </Link>
                   )}
                   <Link to="/minhaconta" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-2 lg:px-3 py-1.5 rounded-full font-bold uppercase text-[10px] lg:text-xs transition-colors group">
@@ -155,13 +161,18 @@ const Navbar = () => {
                       </div>
                     </Link>
                     
-                    <div className="grid grid-cols-2 gap-2 mt-2">
+                     <div className="grid grid-cols-2 gap-2 mt-2">
+                       {isModerator && (
+                         <Link to="/moderacao" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-center gap-2 bg-green-500/10 border border-green-500/30 text-green-400 hover:bg-green-500/20 px-3 py-2 rounded-lg font-black uppercase text-[10px] tracking-widest transition-all">
+                           <ShieldAlert size={14} /> Moderação
+                         </Link>
+                       )}
                        {(isOwner || isAdmin) && (
                          <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-center gap-2 bg-accent/10 border border-accent/30 text-accent hover:bg-accent/20 px-3 py-2 rounded-lg font-black uppercase text-[10px] tracking-widest transition-all">
                            <Settings size={14} /> Admin
                          </Link>
                        )}
-                       <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="flex items-center justify-center gap-2 bg-red-500/10 border border-red-500/30 text-red-500 hover:bg-red-500/20 px-3 py-2 rounded-lg font-black uppercase text-[10px] tracking-widest transition-all">
+                       <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="flex items-center justify-center gap-2 bg-red-500/10 border border-red-500/30 text-red-500 hover:bg-red-500/20 px-3 py-2 rounded-lg font-black uppercase text-[10px] tracking-widest transition-all col-span-2">
                          <LogOut size={14} /> Sair
                        </button>
                     </div>

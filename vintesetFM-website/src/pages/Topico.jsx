@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Share2, Heart, MessageSquare, ArrowLeft, Tag, Calendar, User, CheckCircle2, Trash2, ExternalLink, Check } from 'lucide-react';
+import { Download, Share2, Heart, MessageSquare, ArrowLeft, Tag, Calendar, User, CheckCircle2, Trash2, ExternalLink, Check, ShieldAlert, XCircle } from 'lucide-react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-hot-toast';
@@ -215,6 +215,34 @@ const Topico = () => {
             </button>
           )}
         </div>
+
+        {/* Banners de Moderação */}
+        {topic.status === 'PENDING' && (
+           <div className="bg-yellow-500/10 border border-yellow-500/30 text-yellow-500 p-4 rounded-xl mb-6 flex items-start gap-4 shadow-lg">
+             <ShieldAlert size={24} className="mt-1 flex-shrink-0" />
+             <div>
+               <h4 className="font-bold text-lg uppercase tracking-tight">Post em Análise</h4>
+               <p className="text-sm opacity-80 mt-1">
+                 Este tópico foi retido pela malha-fina e aguarda aprovação de um moderador. Apenas você e a moderação podem visualizá-lo.
+               </p>
+             </div>
+           </div>
+        )}
+
+        {topic.status === 'REJECTED' && (
+           <div className="bg-red-500/10 border border-red-500/30 text-red-500 p-4 rounded-xl mb-6 flex items-start gap-4 shadow-lg">
+             <XCircle size={24} className="mt-1 flex-shrink-0" />
+             <div>
+               <h4 className="font-bold text-lg uppercase tracking-tight">Post Reprovado</h4>
+               <p className="text-sm opacity-80 mt-1 mb-2">
+                 Este conteúdo violou as diretrizes da comunidade ou foi considerado inadequado.
+               </p>
+               <div className="bg-black/40 p-2 rounded border border-red-500/20 inline-block font-mono text-xs">
+                 Razão: {topic.moderationReason}
+               </div>
+             </div>
+           </div>
+        )}
 
         {/* Cabelhaço do Tópico */}
         <div className="bg-gray-900 border border-white/10 rounded-t-3xl p-8 relative overflow-hidden">
