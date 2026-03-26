@@ -1,5 +1,11 @@
 import React from 'react';
-import { Twitter, Youtube, Twitch, MessageCircle } from 'lucide-react';
+import { Youtube, Twitch, MessageCircle } from 'lucide-react';
+
+const XIconSVG = ({ size = 24, className = "" }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 1200 1227" className={`fill-current ${className}`}>
+    <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" />
+  </svg>
+);
 
 const Footer = () => {
   return (
@@ -33,9 +39,8 @@ const Footer = () => {
             <h4 className="text-white font-bold tracking-wide">Plataforma</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li><a href="/telecurso" className="hover:text-white transition-colors">Telecurso</a></li>
-              <li><a href="/ferramentas" className="hover:text-white transition-colors">Ferramentas</a></li>
-              <li><a href="/mods" className="hover:text-white transition-colors">Mods</a></li>
-              <li><a href="/videos" className="hover:text-white transition-colors">Vídeos</a></li>
+              <li><a href="/downloads" className="hover:text-white transition-colors">Downloads</a></li>
+              <li><a href="/reidamesa" className="hover:text-white transition-colors">Rei da Mesa</a></li>
             </ul>
           </div>
 
@@ -43,8 +48,8 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-white font-bold tracking-wide">Comunidade</h4>
             <div className="flex gap-4">
-              <a href="https://x.com/vintesetFM" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter size={24} />
+              <a href="https://x.com/vintesetFM" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors flex items-center justify-center">
+                <XIconSVG size={20} />
               </a>
               <a href="https://twitch.tv/vinteset" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#9146FF] transition-colors">
                 <Twitch size={24} />
@@ -69,10 +74,6 @@ const Footer = () => {
           <p className="text-gray-500 text-xs">
             © 2026 vintesetFM. Todos os direitos reservados.
           </p>
-          <div className="flex gap-4 text-xs text-gray-500">
-            <a href="#" className="hover:text-gray-300">Termos</a>
-            <a href="#" className="hover:text-gray-300">Privacidade</a>
-          </div>
         </div>
       </div>
     </footer>

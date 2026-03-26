@@ -33,6 +33,9 @@ const MinhaConta = () => {
   
   // Nickname irreversível após definido, a menos que seja ADMIN+
   const isNicknameLocked = user.nickname_defined && !hasNicknamePermission;
+  
+  // Conta configurada: possui algum método de autenticação persistido
+  const isAccountConfigured = !!(user.email || user.googleId || user.twitchId);
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -172,19 +175,28 @@ const MinhaConta = () => {
                         <div className="relative">
                           <input 
                             type="text" 
-                            disabled={isTwitchUser || isNicknameLocked}
+                            disabled={isTwitchUser || isNicknameLocked || !isAccountConfigured}
                             value={nickname}
                             onChange={(e) => setNickname(e.target.value)}
-                            className={`w-full bg-black/50 border rounded-xl py-3 px-4 text-sm text-white focus:outline-none transition-colors ${(isTwitchUser || isNicknameLocked) ? 'opacity-50 cursor-not-allowed border-white/5' : (isOnboarding && !nickname ? 'border-accent/50 animate-pulse' : 'border-white/10 focus:border-accent/50')}`}
+                            className={`w-full bg-black/50 border rounded-xl py-3 px-4 text-sm text-white focus:outline-none transition-colors ${
+                              !isAccountConfigured 
+                                ? 'opacity-50 cursor-not-allowed border-red-500/50 bg-red-500/5' 
+                                : (isTwitchUser || isNicknameLocked) ? 'opacity-50 cursor-not-allowed border-white/5' : (isOnboarding && !nickname ? 'border-accent/50 animate-pulse' : 'border-white/10 focus:border-accent/50')
+                            }`}
                             placeholder="Ex: ManagerBrabo"
-                            title={isNicknameLocked ? 'Nickname definitivo habilitado. Não é possível alterar.' : ''}
+                            title={isNicknameLocked ? 'Nickname definitivo habilitado. Não é possível alterar.' : !isAccountConfigured ? 'Configure sua conta primeiro para desbloquear' : ''}
                           />
+                          {!isAccountConfigured && (
+                            <div className="flex items-center gap-1.5 mt-2 text-[10px] text-red-400 font-bold uppercase tracking-wider">
+                              <ShieldCheck size={12} /> Defina seu método de autenticação para desbloquear
+                            </div>
+                          )}
                           {isTwitchUser && (
                             <div className="flex items-center gap-1.5 mt-2 text-[10px] text-purple-400 font-bold uppercase tracking-wider">
                               <Twitch size={12} /> Nickname sincronizado com a Twitch
                             </div>
                           )}
-                          {!isTwitchUser && isNicknameLocked && (
+                          {!isTwitchUser && isNicknameLocked && isAccountConfigured && (
                             <div className="flex items-center gap-1.5 mt-2 text-[10px] text-gray-500 font-bold uppercase tracking-wider">
                               <ShieldCheck size={12} /> Nickname Definitivo (Irreversível)
                             </div>

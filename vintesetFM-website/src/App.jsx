@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import Pages from './pages/Pages';
 import ErrorBoundary from './ErrorBoundary';
 import ProtectedRoute from './components/ProtectedRoute';
+import ScrollToTop from './components/ScrollToTop';
 import RequireRole from './components/RequireRole';
 import { AuthProvider } from './context/AuthContext';
 
@@ -12,6 +13,7 @@ function App() {
     <ErrorBoundary>
       <AuthProvider>
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Pages.Home />} />
