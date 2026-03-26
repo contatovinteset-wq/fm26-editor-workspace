@@ -24,8 +24,41 @@ const defaultNews = [
 ];
 
 export const NewsCarousel = () => {
-  const newsItems = defaultNews;
+  const [newsItems, setNewsItems] = useState(defaultNews);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const fetchHighlights = async () => {
+      try {
+        const res = await fetch('/api/forum');
+        if (res.ok) {
+          const allTopics = await res.json();
+          // Pegar tópicos de ADMIN e OWNER, no máximo 3.
+          const officialTopics = allTopics.filter(t => 
+             t.author?.roles?.includes('OWNER') || 
+             t.author?.roles?.includes('ADMIN') || 
+             t.author?.roles?.includes('ADMIN_DOWNLOADS')
+          ).slice(0, 3);
+
+          const formattedTopics = officialTopics.map(t => ({
+             id: `t_${t.id}`,
+             tag: t.category || "DESTAQUE DA BASE",
+             title: t.title,
+             description: t.content.substring(0, 120) + (t.content.length > 120 ? '...' : ''),
+             link: `/downloads/${t.id}`,
+             // Usar uma capa genérica ou o padrão de esports tático abstrato fixo.
+             image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070",
+             isExternal: false
+          }));
+
+          setNewsItems([...formattedTopics, ...defaultNews]);
+        }
+      } catch (err) {
+        console.error("Erro ao buscar destaques do forum:", err);
+      }
+    };
+    fetchHighlights();
+  }, []);
 
   useEffect(() => {
     if (newsItems.length <= 1) return;
@@ -33,7 +66,7 @@ export const NewsCarousel = () => {
       setCurrentIndex((prev) => (prev + 1) % newsItems.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [newsItems.length]);
 
   // Pegar os 8 primeiros videos para o mosaico
   const mosaicVideos = indexData.filter(i => i.tipo === 'video' && i.uploadedYoutubeUrl).slice(0, 8);
