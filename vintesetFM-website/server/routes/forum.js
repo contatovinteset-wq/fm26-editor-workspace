@@ -145,4 +145,29 @@ router.post('/:id/comment', requireAuth, async (req, res) => {
   }
 });
 
+// Excluir Comentário
+router.delete('/comment/:commentId', requireAuth, async (req, res) => {
+  try {
+    const { commentId } = req.params;
+    const userId = req.user.id;
+    const userRoles = req.user.roles || [];
+
+    const comment = await prisma.comment.findUnique({ where: { id: commentId } });
+    if (!comment) return res.status(404).json({ error: 'Comentário não encontrado.' });
+
+    const isOwnerOrAdmin = userRoles.includes('OWNER') || userRoles.includes('ADMIN') || userRoles.includes('ADMIN_DOWNLOADS');
+    const isAuthor = comment.authorId === userId;
+
+    if (!isOwnerOrAdmin && !isAuthor) {
+      return res.status(403).json({ error: 'Sem permissão para excluir.' });
+    }
+
+    await prisma.comment.delete({ where: { id: commentId } });
+    res.json({ message: 'Comentário excluído com sucesso.' });
+  } catch (error) {
+    console.error('[ERRO] Falha ao excluir comentário:', error);
+    res.status(500).json({ error: 'Erro interno ao excluir comentário.' });
+  }
+});
+
 export default router;

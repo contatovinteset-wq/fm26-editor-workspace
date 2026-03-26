@@ -126,10 +126,53 @@ const Topico = () => {
     }
   };
 
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href);
+    toast.success('Link copiado para a área de transferência!');
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    if (!window.confirm('Deseja excluir este comentário?')) return;
+    try {
+      const res = await fetch(`/api/forum/comment/${commentId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (!res.ok) throw new Error('Erro ao excluir comentário');
+      
+      setTopic(prev => ({
+        ...prev,
+        comments: prev.comments.filter(c => c.id !== commentId)
+      }));
+      toast.success('Comentário excluído!');
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
   if (loading) {
     return (
       <div className="w-full min-h-screen bg-bgDark text-white pt-24 pb-16 flex items-center justify-center">
         <div className="animate-spin w-12 h-12 border-4 border-accent border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="w-full min-h-screen bg-bgDark text-white pt-24 pb-16 flex flex-col items-center justify-center px-4 text-center">
+         <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mb-6">
+           <Download size={40} className="text-accent" />
+         </div>
+         <h1 className="text-3xl md:text-5xl font-black mb-4 uppercase tracking-tighter">Acesso Restrito</h1>
+         <p className="text-gray-400 mb-8 max-w-lg text-lg">
+           Você precisa fazer login na plataforma para visualizar este tópico e baixar os arquivos anexados.
+         </p>
+         <button onClick={() => navigate('/minha-conta')} className="px-8 py-4 bg-accent hover:bg-accentHover transition-colors text-black font-black uppercase tracking-widest rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.3)]">
+           Fazer Login Agora
+         </button>
       </div>
     );
   }
@@ -213,7 +256,7 @@ const Topico = () => {
                </div>
                
                <div className="flex gap-3 w-full sm:w-auto">
-                 <button className="flex-1 sm:flex-none border border-white/10 hover:bg-white/5 p-4 rounded-xl text-gray-400 hover:text-white transition-colors flex items-center justify-center">
+                 <button onClick={handleShare} className="flex-1 sm:flex-none border border-white/10 hover:bg-white/5 p-4 rounded-xl text-gray-400 hover:text-white transition-colors flex items-center justify-center">
                    <Share2 size={20} />
                  </button>
                </div>
@@ -255,20 +298,34 @@ const Topico = () => {
 
            <div className="space-y-4">
              {topic.comments?.length > 0 ? (
-               topic.comments.map(comment => (
-                 <div key={comment.id} className="bg-black/50 border border-white/5 rounded-2xl p-6 flex flex-col sm:flex-row gap-4 hover:border-white/10 transition-colors">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/20 border border-primary/50 flex-shrink-0 flex items-center justify-center font-bold text-primary overflow-hidden">
-                       {comment.author?.avatar ? <img src={comment.author.avatar} alt="Avatar" className="w-full h-full object-cover" /> : <User size={16} />}
-                    </div>
-                    <div className="w-full">
-                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
-                        <span className="font-bold text-white text-sm sm:text-base">{comment.author?.nickname || 'Usuario'}</span>
-                        <span className="text-[10px] sm:text-xs text-gray-500 font-mono tracking-wider">{new Date(comment.createdAt).toLocaleDateString('pt-BR')} às {new Date(comment.createdAt).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}</span>
+               topic.comments.map(comment => {
+                 const canDeleteComment = user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN') || user?.roles?.includes('ADMIN_DOWNLOADS') || comment.authorId === user?.id;
+
+                 return (
+                   <div key={comment.id} className="bg-black/50 border border-white/5 rounded-2xl p-6 flex flex-col sm:flex-row gap-4 hover:border-white/10 transition-colors relative group">
+                      {canDeleteComment && (
+                        <button 
+                          onClick={() => handleDeleteComment(comment.id)} 
+                          className="absolute top-4 right-4 text-red-500/50 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                          title="Excluir comentário"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      )}
+                      
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/20 border border-primary/50 flex-shrink-0 flex items-center justify-center font-bold text-primary overflow-hidden">
+                         {comment.author?.avatar ? <img src={comment.author.avatar} alt="Avatar" className="w-full h-full object-cover" /> : <User size={16} />}
                       </div>
-                      <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap">{comment.content}</p>
-                    </div>
-                 </div>
-               ))
+                      <div className="w-full">
+                        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 pr-8">
+                          <span className="font-bold text-white text-sm sm:text-base">{comment.author?.nickname || 'Usuario'}</span>
+                          <span className="text-[10px] sm:text-xs text-gray-500 font-mono tracking-wider">{new Date(comment.createdAt).toLocaleDateString('pt-BR')} às {new Date(comment.createdAt).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}</span>
+                        </div>
+                        <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap">{comment.content}</p>
+                      </div>
+                   </div>
+                 );
+               })
              ) : (
                <div className="text-center py-10 bg-black/30 rounded-2xl border border-white/5">
                  <MessageSquare size={32} className="mx-auto text-gray-600 mb-3" />
