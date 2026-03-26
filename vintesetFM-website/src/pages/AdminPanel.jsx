@@ -109,6 +109,7 @@ const AdminPanel = () => {
 
   // Filtrar usuários
   const filtered = users.filter(u =>
+    (u.nickname || '').toLowerCase().includes(search.toLowerCase()) ||
     (u.name || '').toLowerCase().includes(search.toLowerCase()) ||
     (u.email || '').toLowerCase().includes(search.toLowerCase())
   );
@@ -226,11 +227,11 @@ const AdminPanel = () => {
                     <img src={u.avatar} alt="" className="w-8 h-8 rounded-full object-cover ring-2 ring-white/10" />
                   ) : (
                     <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-gray-400">
-                      {(u.name || 'U')[0].toUpperCase()}
+                      {(u.nickname || u.name || 'U')[0].toUpperCase()}
                     </div>
                   )}
                   <div className="truncate">
-                    <div className="text-white text-sm font-semibold truncate">{u.name || 'Sem nome'}</div>
+                    <div className="text-white text-sm font-semibold truncate">{u.nickname || u.name || 'Sem nome'}</div>
                     <div className="text-gray-500 text-xs truncate">{u.email || '—'}</div>
                   </div>
                 </div>
@@ -280,11 +281,11 @@ const AdminPanel = () => {
                     <img src={editingUser.avatar} alt="" className="w-12 h-12 rounded-full ring-2 ring-accent/30" />
                   ) : (
                     <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-lg">
-                      {(editingUser.name || 'U')[0].toUpperCase()}
+                      {(editingUser.nickname || editingUser.name || 'U')[0].toUpperCase()}
                     </div>
                   )}
                   <div>
-                    <h3 className="text-white font-bold text-lg">{editingUser.name || 'Sem nome'}</h3>
+                    <h3 className="text-white font-bold text-lg">{editingUser.nickname || editingUser.name || 'Sem nome'}</h3>
                     <p className="text-gray-500 text-sm">{editingUser.email || '—'}</p>
                   </div>
                 </div>

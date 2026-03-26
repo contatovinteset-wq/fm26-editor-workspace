@@ -17,6 +17,7 @@ router.get('/users', requirePermission('admin:view_users'), async (req, res) => 
       select: {
         id: true,
         name: true,
+        nickname: true,
         email: true,
         avatar: true,
         roles: true,
