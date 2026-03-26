@@ -13,11 +13,15 @@ const TopicCard = ({ topic, index, categoryLabel }) => {
     >
       {/* Avatar e Status */}
       <div className="hidden md:flex flex-col items-center justify-center min-w-[80px]">
-        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/60 to-accent/40 border-2 border-white/10 flex items-center justify-center shadow-lg group-hover:border-accent transition-colors">
-           <User size={24} className="text-white" />
+        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/60 to-accent/40 border-2 border-white/10 flex items-center justify-center shadow-lg group-hover:border-accent transition-colors overflow-hidden">
+           {topic.author?.avatar ? (
+             <img src={topic.author.avatar} alt="Avatar" className="w-full h-full object-cover" />
+           ) : (
+             <User size={24} className="text-white" />
+           )}
         </div>
-        <span className="text-[10px] font-bold uppercase tracking-widest text-accent mt-2">
-          {topic.author}
+        <span className="text-[10px] font-bold uppercase tracking-widest text-accent mt-2 text-center break-all w-full px-1">
+          {topic.author?.nickname || topic.author?.name || 'Manager'}
         </span>
       </div>
 
@@ -38,12 +42,12 @@ const TopicCard = ({ topic, index, categoryLabel }) => {
           {topic.title}
         </h3>
         <p className="text-gray-400 text-sm mt-2 line-clamp-2">
-          {topic.description}
+          {topic.content}
         </p>
 
         {/* Mobile Author Info */}
         <div className="flex md:hidden items-center gap-2 mt-4 text-xs font-bold text-gray-400 uppercase tracking-widest">
-          <User size={14} className="text-accent" /> {topic.author}
+          <User size={14} className="text-accent" /> {topic.author?.nickname || topic.author?.name || 'Manager'}
         </div>
       </div>
 
@@ -51,13 +55,13 @@ const TopicCard = ({ topic, index, categoryLabel }) => {
       <div className="flex md:flex-col items-center justify-center gap-4 md:gap-2 min-w-[120px] bg-black/40 md:bg-transparent p-3 md:p-0 rounded-lg w-full md:w-auto mt-4 md:mt-0">
         <div className="flex items-center gap-2 text-gray-300">
            <ThumbsUp size={16} className="text-accent" /> 
-           <span className="font-bold text-lg">{topic.likes}</span>
+           <span className="font-bold text-lg">{topic.likes || 0}</span>
         </div>
         <div className="flex items-center gap-2 text-gray-500 text-sm">
-           <MessageSquare size={14} /> {topic.comments} comentários
+           <MessageSquare size={14} /> {topic._count?.comments || 0} comentários
         </div>
         <div className="flex items-center gap-1.5 text-gray-600 text-xs mt-1 hidden md:flex">
-           <Calendar size={12} /> {topic.date}
+           <Calendar size={12} /> {topic.createdAt ? new Date(topic.createdAt).toLocaleDateString('pt-BR') : topic.date}
         </div>
       </div>
 
