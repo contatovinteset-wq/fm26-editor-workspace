@@ -1,9 +1,23 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { User, ThumbsUp, MessageSquare, Calendar } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { toast } from 'react-hot-toast';
 
 const TopicCard = ({ topic, index, categoryLabel }) => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleAccess = (e) => {
+    e.preventDefault();
+    if (!user) {
+      toast.error("Você precisa de uma conta para acessar os downloads e o fórum.");
+      navigate('/minha-conta');
+    } else {
+      navigate(`/downloads/${topic.id}`);
+    }
+  };
   return (
     <motion.div 
       initial={{ opacity: 0, y: 10 }}
@@ -38,7 +52,7 @@ const TopicCard = ({ topic, index, categoryLabel }) => {
           )}
         </div>
         
-        <h3 className="text-xl font-black text-white uppercase tracking-tight group-hover:text-accent transition-colors cursor-pointer">
+        <h3 onClick={handleAccess} className="text-xl font-black text-white uppercase tracking-tight group-hover:text-accent transition-colors cursor-pointer">
           {topic.title}
         </h3>
         <p className="text-gray-400 text-sm mt-2 line-clamp-2">
@@ -65,11 +79,11 @@ const TopicCard = ({ topic, index, categoryLabel }) => {
         </div>
       </div>
 
-      {/* Ação */}
-      <div className="hidden lg:flex items-center justify-center pl-4 border-l border-white/5 h-full">
-         <Link to={`/downloads/${topic.id}`} className="bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-sm px-6 py-2 rounded-lg transition-colors whitespace-nowrap">
+      {/* Ação (Responsivo: Ocupa toda a linha no celular) */}
+      <div className="flex w-full md:w-auto items-center justify-center mt-4 md:mt-0 md:pl-4 md:border-l border-white/5 h-full">
+         <button onClick={handleAccess} className="w-full md:w-auto bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-sm px-6 py-3 md:py-2 rounded-lg transition-colors whitespace-nowrap block text-center">
            Baixar / Ver
-         </Link>
+         </button>
       </div>
     </motion.div>
   );

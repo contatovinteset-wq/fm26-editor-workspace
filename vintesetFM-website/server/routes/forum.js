@@ -113,4 +113,36 @@ router.post('/:id/like', requireAuth, async (req, res) => {
   }
 });
 
+// Criar Comentário
+router.post('/:id/comment', requireAuth, async (req, res) => {
+  try {
+    const topicId = req.params.id;
+    const { content } = req.body;
+    const authorId = req.user.id;
+
+    if (!content || !content.trim()) {
+      return res.status(400).json({ error: 'O comentário não pode estar vazio.' });
+    }
+
+    const topic = await prisma.topic.findUnique({ where: { id: topicId } });
+    if (!topic) return res.status(404).json({ error: 'Tópico não encontrado.' });
+
+    const comment = await prisma.comment.create({
+      data: {
+        content,
+        topicId,
+        authorId
+      },
+      include: {
+        author: { select: { nickname: true, avatar: true } }
+      }
+    });
+
+    res.status(201).json(comment);
+  } catch (error) {
+    console.error('[ERRO] Falha ao criar comentário:', error);
+    res.status(500).json({ error: 'Erro interno ao publicar comentário.' });
+  }
+});
+
 export default router;

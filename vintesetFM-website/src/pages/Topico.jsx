@@ -13,6 +13,8 @@ const Topico = () => {
   const [topic, setTopic] = useState(null);
   const [loading, setLoading] = useState(true);
   const [likesCount, setLikesCount] = useState(0);
+  const [commentContent, setCommentContent] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const renderTextWithLinks = (text) => {
     if (!text) return null;
@@ -85,6 +87,42 @@ const Topico = () => {
       toast.success(data.liked ? "Tópico curtido!" : "Curtida removida.");
     } catch (err) {
       toast.error(err.message);
+    }
+  };
+
+  const handleComment = async () => {
+    if (!user) {
+      toast.error("Você precisa estar logado para comentar.");
+      return;
+    }
+    if (!commentContent.trim()) {
+      toast.error("O comentário não pode estar vazio.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(`/api/forum/${id}/comment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ content: commentContent })
+      });
+      if (!res.ok) throw new Error('Erro ao publicar comentário');
+      
+      const newComment = await res.json();
+      setTopic(prev => ({
+        ...prev,
+        comments: [...(prev.comments || []), newComment]
+      }));
+      setCommentContent('');
+      toast.success("Comentário publicado!");
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -190,37 +228,53 @@ const Topico = () => {
               <h2 className="text-2xl font-black uppercase tracking-tight">Discussão da Comunidade <span className="text-accent">({topic.comments?.length || 0})</span></h2>
            </div>
 
-           <div className="bg-gray-900 border border-white/10 rounded-2xl p-6 mb-8 flex gap-4 opacity-50 pointer-events-none">
-              <div className="w-10 h-10 rounded-full bg-white/10 flex-shrink-0 flex items-center justify-center font-bold text-gray-500">
-                 <User size={20} />
+           <div className={`bg-gray-900 border border-white/10 rounded-2xl p-6 mb-8 flex flex-col sm:flex-row gap-4 ${!user ? 'opacity-50 pointer-events-none' : ''}`}>
+              <div className="hidden sm:flex w-10 h-10 rounded-full bg-white/10 flex-shrink-0 items-center justify-center font-bold text-gray-500 overflow-hidden">
+                 {user?.avatar ? <img src={user.avatar} alt="Seu Avatar" /> : <User size={20} />}
               </div>
               <div className="w-full">
+                 {!user && <p className="text-red-400 text-xs mb-2 font-bold uppercase">Faça login para comentar</p>}
                  <textarea 
-                   placeholder="Módulo de comentários em construção..." 
-                   className="w-full bg-black/50 border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-accent/50 min-h-[100px] mb-3 transition-colors"
-                   disabled
+                   value={commentContent}
+                   onChange={(e) => setCommentContent(e.target.value)}
+                   placeholder="Adicione à discussão..." 
+                   className="w-full bg-black/50 border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-accent/50 min-h-[100px] mb-3 transition-colors resize-y"
+                   disabled={!user || isSubmitting}
                  ></textarea>
                  <div className="flex justify-end">
-                   <button className="bg-gray-700 text-gray-400 font-bold uppercase tracking-widest text-xs px-6 py-3 rounded-lg shadow-lg cursor-not-allowed">Comentar</button>
+                   <button 
+                     onClick={handleComment} 
+                     disabled={!user || isSubmitting || !commentContent.trim()}
+                     className="bg-accent hover:bg-accentHover text-black font-bold uppercase tracking-widest text-xs px-6 py-3 rounded-lg shadow-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                   >
+                     {isSubmitting ? 'Enviando...' : 'Comentar'}
+                   </button>
                  </div>
               </div>
            </div>
 
            <div className="space-y-4">
-             {topic.comments?.map(comment => (
-               <div key={comment.id} className="bg-black/50 border border-white/5 rounded-2xl p-6 flex gap-4 hover:border-white/10 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 border border-primary/50 flex-shrink-0 flex items-center justify-center font-bold text-primary overflow-hidden">
-                     {comment.author?.avatar ? <img src={comment.author.avatar} alt="Avatar" /> : comment.author?.nickname?.substring(0,2).toUpperCase()}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="font-bold">{comment.author?.nickname || 'Usuario'}</span>
-                      <span className="text-[10px] text-gray-500 font-mono">{new Date(comment.createdAt).toLocaleDateString('pt-BR')}</span>
+             {topic.comments?.length > 0 ? (
+               topic.comments.map(comment => (
+                 <div key={comment.id} className="bg-black/50 border border-white/5 rounded-2xl p-6 flex flex-col sm:flex-row gap-4 hover:border-white/10 transition-colors">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/20 border border-primary/50 flex-shrink-0 flex items-center justify-center font-bold text-primary overflow-hidden">
+                       {comment.author?.avatar ? <img src={comment.author.avatar} alt="Avatar" className="w-full h-full object-cover" /> : <User size={16} />}
                     </div>
-                    <p className="text-gray-300 text-sm leading-relaxed">{comment.content}</p>
-                  </div>
+                    <div className="w-full">
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
+                        <span className="font-bold text-white text-sm sm:text-base">{comment.author?.nickname || 'Usuario'}</span>
+                        <span className="text-[10px] sm:text-xs text-gray-500 font-mono tracking-wider">{new Date(comment.createdAt).toLocaleDateString('pt-BR')} às {new Date(comment.createdAt).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}</span>
+                      </div>
+                      <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap">{comment.content}</p>
+                    </div>
+                 </div>
+               ))
+             ) : (
+               <div className="text-center py-10 bg-black/30 rounded-2xl border border-white/5">
+                 <MessageSquare size={32} className="mx-auto text-gray-600 mb-3" />
+                 <p className="text-gray-400 text-sm font-bold uppercase tracking-widest">Seja o primeiro a comentar</p>
                </div>
-             ))}
+             )}
            </div>
         </div>
 
