@@ -36,6 +36,7 @@ model Topic {
   category    String
   status      String    @default("PENDING") // 'APPROVED', 'PENDING', 'REJECTED'
   moderationReason String? @db.Text
+  views       Int       @default(0)
   authorId    String
   author      User      @relation(fields: [authorId], references: [id])
   createdAt   DateTime  @default(now())

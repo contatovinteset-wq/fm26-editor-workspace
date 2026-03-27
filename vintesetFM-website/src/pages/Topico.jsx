@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Share2, Heart, MessageSquare, ArrowLeft, Tag, Calendar, User, CheckCircle2, Trash2, ExternalLink, Check, ShieldAlert, XCircle } from 'lucide-react';
+import { Download, Share2, Heart, MessageSquare, ArrowLeft, Tag, Calendar, User, CheckCircle2, Trash2, ExternalLink, Check, ShieldAlert, XCircle, Eye } from 'lucide-react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-hot-toast';
@@ -265,6 +265,7 @@ const Topico = () => {
                 {topic.author?.roles?.includes('OWNER') && <CheckCircle2 size={14} className="text-blue-400" />}
               </div>
               <span className="flex items-center gap-2"><Calendar size={16} /> {new Date(topic.createdAt).toLocaleDateString('pt-BR')}</span>
+              <span className="flex items-center gap-2 text-gray-500"><Eye size={16} /> {topic.views || 0} views</span>
               <button onClick={handleLike} className="flex items-center gap-2 text-red-400 hover:text-red-300 transition-colors bg-red-400/10 px-3 py-1 rounded-lg">
                 <Heart size={16} /> {likesCount} curtidas
               </button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { User, ThumbsUp, MessageSquare, Calendar, ShieldAlert, XCircle } from 'lucide-react';
+import { User, ThumbsUp, MessageSquare, Calendar, ShieldAlert, XCircle, Eye } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-hot-toast';
@@ -83,6 +83,9 @@ const TopicCard = ({ topic, index, categoryLabel }) => {
         </div>
         <div className="flex items-center gap-2 text-gray-500 text-sm">
            <MessageSquare size={14} /> {topic._count?.comments || 0} comentários
+        </div>
+        <div className="flex items-center gap-2 text-gray-500 text-sm">
+           <Eye size={14} /> {topic.views || 0} views
         </div>
         <div className="flex items-center gap-1.5 text-gray-600 text-xs mt-1 hidden md:flex">
            <Calendar size={12} /> {topic.createdAt ? new Date(topic.createdAt).toLocaleDateString('pt-BR') : topic.date}

@@ -116,6 +116,15 @@ router.get('/:id', async (req, res) => {
        }
     }
 
+    // Se tiver acesso, incrementamos as views de forma assíncrona/lazy na base
+    await prisma.topic.update({
+       where: { id: req.params.id },
+       data: { views: { increment: 1 } }
+    });
+    
+    // Atualiza obj em memória pro front
+    topic.views = (topic.views || 0) + 1;
+
     res.json(topic);
   } catch (error) {
     res.status(500).json({ error: 'Erro ao buscar dados do tópico.' });
