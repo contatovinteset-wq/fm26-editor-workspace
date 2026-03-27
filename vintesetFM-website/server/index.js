@@ -19,6 +19,7 @@ import adminRoutes from './routes/admin.js';
 import userRoutes from './routes/users.js';
 
 const app = express();
+app.set('trust proxy', 1); // Confia no Proxy (importante para o OAuth no Coolify/Traefik preencher req.protocol e req.hostname corretamente)
 const PORT = process.env.PORT || 3000;
 
 // Configuração de Headers de Segurança (Fase 4 - Security Audit)

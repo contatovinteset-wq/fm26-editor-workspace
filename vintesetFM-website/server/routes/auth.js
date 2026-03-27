@@ -110,7 +110,7 @@ router.get(
   (req, res) => {
     const token = generateToken(req.user);
     setJWTCookie(res, token);
-    const clientUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5173';
+    const clientUrl = (req.hostname === 'localhost' || req.hostname === '127.0.0.1') ? 'http://localhost:5173' : '';
     
     // Se não tiver nickname, manda definir um
     if (!req.user.nickname) {
@@ -132,7 +132,7 @@ router.get(
   (req, res) => {
     const token = generateToken(req.user);
     setJWTCookie(res, token);
-    const clientUrl = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:5173';
+    const clientUrl = (req.hostname === 'localhost' || req.hostname === '127.0.0.1') ? 'http://localhost:5173' : '';
     
     if (!req.user.nickname) {
       return res.redirect(`${clientUrl}/minhaconta?onboarding=true`);
