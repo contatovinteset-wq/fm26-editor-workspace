@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await fetch('/api/auth/logout', { credentials: 'include' });
       setUser(null);
+      window.location.href = '/';
     } catch (err) {
       console.error('Falha no logout:', err);
     }
