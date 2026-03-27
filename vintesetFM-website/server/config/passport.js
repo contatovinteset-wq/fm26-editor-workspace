@@ -57,7 +57,7 @@ passport.use(
       clientID: process.env.TWITCH_CLIENT_ID || 'placeholder',
       clientSecret: process.env.TWITCH_CLIENT_SECRET || 'placeholder',
       callbackURL: process.env.NODE_ENV === 'production' ? 'https://vintesetfm.cloud/api/auth/twitch/callback' : 'http://localhost:3000/api/auth/twitch/callback',
-      scope: 'user_read',
+      scope: 'user:read:email',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -75,23 +75,41 @@ passport.use(
               where: { id: user.id },
               data: { 
                 twitchId: profile.id,
-                nickname: profile.display_name || profile.login 
+                // Não sobrescrevemos o nickname da pessoa caso ela já tenha configurado no onboarding
               },
             });
           } else {
+             // Caso o email não ache ninguem, tenta criar. Porém O NICKNAME PODE ESTAR USO (ex: "Fallen", se alguém criou manualmente).
+             let baseNickname = profile.display_name || profile.login || 'Usuário';
+             let finalNickname = baseNickname;
+             let suffix = 1;
+             let nicknameTaken = true;
+
+             // Checa conflito de Nickname Unique
+             while(nicknameTaken) {
+                const exist = await prisma.user.findUnique({ where: { nickname: finalNickname }});
+                if (exist) {
+                   finalNickname = `${baseNickname}${suffix}`;
+                   suffix++;
+                } else {
+                   nicknameTaken = false;
+                }
+             }
+
              user = await prisma.user.create({
               data: {
                 twitchId: profile.id,
-                name: profile.display_name || profile.login,
-                nickname: profile.display_name || profile.login, // Twitch já tem nick
-                email: email,
-                avatar: profile.profile_image_url,
+                name: profile.display_name || profile.login || 'Twitch User',
+                nickname: finalNickname,
+                email: email || null,
+                avatar: profile.profile_image_url || null,
               },
             });
           }
         }
         return done(null, user);
       } catch (err) {
+        console.error('[Twitch OAuth Error]', err);
         return done(err, null);
       }
     }
