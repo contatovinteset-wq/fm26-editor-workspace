@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Users, Crown, ChevronDown, Check, X, Search, AlertTriangle } from 'lucide-react';
+import { Settings, Users, ShieldCheck, Search, Shield, Save, X, Edit2, ShieldAlert, Crown } from 'lucide-react';
 import { getAllRoles, hasPermission, ROLES } from '../config/permissions';
+import RoleBadge from '../components/RoleBadge';
 
 const ROLE_COLORS = {
   OWNER: { bg: 'bg-amber-500/20', text: 'text-amber-500', border: 'border-amber-500/50' },
@@ -11,16 +12,6 @@ const ROLE_COLORS = {
   USER: { bg: 'bg-blue-500/20', text: 'text-blue-500', border: 'border-blue-500/50' },
 };
 
-const RoleBadge = ({ role, small = false }) => {
-  const colors = ROLE_COLORS[role] || ROLE_COLORS.USER;
-  return (
-    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider border ${colors.bg} ${colors.text} ${colors.border} ${small ? 'text-[10px] px-1.5' : ''}`}>
-      {role === 'OWNER' && <Crown size={10} />}
-      {role === 'ADMIN' && <Shield size={10} />}
-      {role}
-    </span>
-  );
-};
 
 const AdminPanel = () => {
   const { user, isLoading } = useAuth();

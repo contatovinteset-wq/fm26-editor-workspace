@@ -4,6 +4,7 @@ import { User, Settings, FileText, ArrowRight, Save, LogOut, Crown, ShieldCheck,
 import { Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { can } from '../utils/PermissionService';
+import RoleBadge from '../components/RoleBadge';
 
 const DEFAULT_AVATARS = [
   { id: 'manager_classic', path: '/avatars/manager_classic.png?v=3', label: 'Classic' },
@@ -81,17 +82,9 @@ const MinhaConta = () => {
                   <span className="truncate max-w-full text-white tracking-tight">{user.nickname || 'Novo Manager'}</span>
                   {isOwner && <Crown size={18} className="text-accent drop-shadow-[0_0_8px_rgba(255,215,0,0.5)]" />}
                 </h2>
-                
-                {isOwner && (
-                  <span className="inline-block mt-2 px-3 py-1 bg-accent/10 border border-accent/20 text-accent text-[10px] font-black uppercase tracking-widest rounded-full">
-                    Selo de Owner
-                  </span>
-                )}
-                {isAdmin && !isOwner && (
-                  <span className="inline-block mt-2 px-3 py-1 bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black uppercase tracking-widest rounded-full">
-                    Administrador
-                  </span>
-                )}
+                <div className="mt-4 flex justify-center">
+                  <RoleBadge roles={user.roles} />
+                </div>
              </div>
 
              <div className="bg-gray-900 border border-white/10 rounded-2xl overflow-hidden py-2 shadow-xl">

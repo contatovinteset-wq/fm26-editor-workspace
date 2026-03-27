@@ -4,6 +4,7 @@ import { Download, Share2, Heart, MessageSquare, ArrowLeft, Tag, Calendar, User,
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-hot-toast';
+import RoleBadge from '../components/RoleBadge';
 
 const Topico = () => {
   const { id } = useParams();
@@ -262,7 +263,7 @@ const Topico = () => {
                   )}
                 </div>
                 <span className="font-bold">{topic.author?.nickname || 'Usuario'}</span>
-                {topic.author?.roles?.includes('OWNER') && <CheckCircle2 size={14} className="text-blue-400" />}
+                <RoleBadge roles={topic.author?.roles} small />
               </div>
               <span className="flex items-center gap-2"><Calendar size={16} /> {new Date(topic.createdAt).toLocaleDateString('pt-BR')}</span>
               <span className="flex items-center gap-2 text-gray-500"><Eye size={16} /> {topic.views || 0} views</span>
@@ -361,6 +362,7 @@ const Topico = () => {
                       <div className="w-full">
                         <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2 pr-8">
                           <span className="font-bold text-white text-sm sm:text-base">{comment.author?.nickname || 'Usuario'}</span>
+                          <RoleBadge roles={comment.author?.roles} small />
                           <span className="text-[10px] sm:text-xs text-gray-500 font-mono tracking-wider">{new Date(comment.createdAt).toLocaleDateString('pt-BR')} às {new Date(comment.createdAt).toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}</span>
                         </div>
                         <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap">{comment.content}</p>
