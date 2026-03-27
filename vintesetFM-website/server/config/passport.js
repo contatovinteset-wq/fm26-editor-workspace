@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID || 'placeholder',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'placeholder',
-      callbackURL: '/api/auth/google/callback',
+      callbackURL: process.env.NODE_ENV === 'production' ? 'https://vintesetfm.com.br/api/auth/google/callback' : 'http://localhost:3000/api/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -56,7 +56,7 @@ passport.use(
     {
       clientID: process.env.TWITCH_CLIENT_ID || 'placeholder',
       clientSecret: process.env.TWITCH_CLIENT_SECRET || 'placeholder',
-      callbackURL: '/api/auth/twitch/callback',
+      callbackURL: process.env.NODE_ENV === 'production' ? 'https://vintesetfm.com.br/api/auth/twitch/callback' : 'http://localhost:3000/api/auth/twitch/callback',
       scope: 'user_read',
     },
     async (accessToken, refreshToken, profile, done) => {
