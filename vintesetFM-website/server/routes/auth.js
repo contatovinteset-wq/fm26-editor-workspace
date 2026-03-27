@@ -65,7 +65,10 @@ router.post('/register', async (req, res) => {
     const token = generateToken(user);
     setJWTCookie(res, token);
     
-    res.status(201).json({ success: true, user });
+    const userWithoutPassword = { ...user };
+    delete userWithoutPassword.password;
+    
+    res.status(201).json({ success: true, user: userWithoutPassword });
   } catch (error) {
     console.error('[Register Error]', error);
     res.status(500).json({ error: 'Erro interno ao criar a conta.' });
@@ -92,7 +95,10 @@ router.post('/login', loginLimiter, async (req, res) => {
     const token = generateToken(user);
     setJWTCookie(res, token);
 
-    res.json({ success: true, user });
+    const userWithoutPassword = { ...user };
+    delete userWithoutPassword.password;
+
+    res.json({ success: true, user: userWithoutPassword });
   } catch (error) {
     console.error('[Login Error]', error);
     res.status(500).json({ error: 'Erro interno ao fazer login.' });
@@ -166,7 +172,10 @@ router.get('/me', async (req, res) => {
 
     if (!user) return res.status(401).json({ user: null });
 
-    res.json({ user }); 
+    const userWithoutPassword = { ...user };
+    delete userWithoutPassword.password;
+
+    res.json({ user: userWithoutPassword }); 
   } catch (err) {
     res.status(401).json({ user: null });
   }

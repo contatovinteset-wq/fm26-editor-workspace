@@ -13,6 +13,8 @@ const prisma = new PrismaClient();
  */
 router.get('/users', requirePermission('admin:view_users'), async (req, res) => {
   try {
+    const isOwner = req.user.roles.includes('OWNER');
+    
     const users = await prisma.user.findMany({
       select: {
         id: true,
@@ -25,7 +27,27 @@ router.get('/users', requirePermission('admin:view_users'), async (req, res) => 
       },
       orderBy: { createdAt: 'desc' },
     });
-    res.json({ users });
+
+    const maskEmailPartial = (email) => {
+      if (!email) return null;
+      const parts = email.split('@');
+      if (parts.length !== 2) return email;
+      const [name, domain] = parts;
+      if (name.length <= 2) return `***@${domain}`;
+      return `${name[0]}***${name[name.length - 1]}@${domain}`;
+    };
+
+    const secureUsers = users.map(u => {
+      let displayEmail = '[Protegido]';
+      if (isOwner) {
+        displayEmail = maskEmailPartial(u.email);
+      } else if (u.id === req.user.id) {
+        displayEmail = u.email; // O admin pode ver o seu próprio email intacto
+      }
+      return { ...u, email: displayEmail };
+    });
+
+    res.json({ users: secureUsers });
   } catch (error) {
     console.error('[Admin] Erro ao listar usuários:', error);
     res.status(500).json({ error: 'Erro interno ao buscar usuários.' });
