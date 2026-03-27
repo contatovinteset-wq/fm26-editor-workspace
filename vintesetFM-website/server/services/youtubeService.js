@@ -40,10 +40,11 @@ export const getYoutubeLatestVideo = async () => {
       }
     });
 
-    // Filtra os vídeos reais (que NÃO possuem liveStreamingDetails, ou seja, nunca foram lives/estreias)
-    const realVideos = videosRes.data.items.filter(video => 
-      !video.liveStreamingDetails
-    );
+    // Filtra os vídeos reais e VODs de lives já finalizadas (precisam ter actualEndTime)
+    const realVideos = videosRes.data.items.filter(video => {
+      if (!video.liveStreamingDetails) return true;
+      return !!video.liveStreamingDetails.actualEndTime;
+    });
 
     if (realVideos.length === 0) {
        return null;

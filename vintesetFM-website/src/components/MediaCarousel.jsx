@@ -150,9 +150,10 @@ export const MediaCarousel = ({ twitchData, youtubeVideo, loading }) => {
               {isPlayingYoutube ? (
                 <div className="w-full h-full relative bg-bgDark">
                    <iframe
-                      src={`https://www.youtube.com/embed/${youtubeVideo?.id}?autoplay=1`}
+                      src={`https://www.youtube.com/embed/${youtubeVideo?.id}?autoplay=1&origin=https://vintesetfm.com.br`}
                       className="absolute inset-0 w-full h-full border-none"
                       allowFullScreen
+                      referrerPolicy="strict-origin-when-cross-origin"
                     ></iframe>
                 </div>
               ) : (
