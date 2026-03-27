@@ -258,11 +258,12 @@ const Telecurso = () => {
                      <div className="absolute bottom-0 right-0 w-[120px] h-[60px] bg-black z-10 pointer-events-none"></div>
                      <iframe
                        className="w-full h-full object-cover focus:outline-none"
-                       src={`https://www.youtube.com/embed/${getYTId(selectedVideo.videoUrl)}?autoplay=1&rel=0&modestbranding=1&controls=1`}
+                       src={`https://www.youtube.com/embed/${getYTId(selectedVideo.videoUrl)}?autoplay=1&rel=0&modestbranding=1&controls=1&origin=https://vintesetfm.com.br`}
                        title={selectedVideo.title}
                        frameBorder="0"
                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                        allowFullScreen
+                       referrerPolicy="strict-origin-when-cross-origin"
                      ></iframe>
                    </div>
                  ) : (
