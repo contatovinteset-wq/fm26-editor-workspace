@@ -29,7 +29,7 @@ app.use(helmet({
 
 // Configuração CORS dinâmica para Cookies JWT
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? ['https://vintesetfm.cloud', 'https://www.vintesetfm.cloud'] : 'http://localhost:5173',
+  origin: process.env.NODE_ENV === 'production' ? ['https://vintesetfm.com.br', 'https://www.vintesetfm.com.br', 'https://vintesetfm.cloud'] : 'http://localhost:5173',
   credentials: true,
 }));
 

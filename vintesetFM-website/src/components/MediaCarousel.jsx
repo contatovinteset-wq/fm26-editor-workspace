@@ -89,7 +89,7 @@ export const MediaCarousel = ({ twitchData, youtubeVideo, loading }) => {
                 // IFRAME LIVE EMBED - AUTO PLAY WITH MUTE
                 <div className="w-full h-full relative bg-bgDark">
                    <iframe
-                      src={`https://player.twitch.tv/?channel=vinteset&parent=localhost&parent=vintesetfm.com.br&autoplay=true&muted=true`}
+                      src={`https://player.twitch.tv/?channel=vinteset&parent=localhost&parent=vintesetfm.com.br&parent=www.vintesetfm.com.br&parent=vintesetfm.cloud&autoplay=true&muted=true`}
                       className="absolute inset-0 w-full h-full border-none"
                       allowFullScreen
                     ></iframe>
@@ -97,7 +97,7 @@ export const MediaCarousel = ({ twitchData, youtubeVideo, loading }) => {
               ) : isPlayingTwitch ? (
                  <div className="w-full h-full relative bg-bgDark">
                    <iframe
-                      src={`https://player.twitch.tv/?video=${twitchData?.lastVod?.id}&parent=localhost&parent=vintesetfm.com.br&autoplay=true`}
+                      src={`https://player.twitch.tv/?video=${twitchData?.lastVod?.id}&parent=localhost&parent=vintesetfm.com.br&parent=www.vintesetfm.com.br&parent=vintesetfm.cloud&autoplay=true`}
                       className="absolute inset-0 w-full h-full border-none"
                       allowFullScreen
                     ></iframe>

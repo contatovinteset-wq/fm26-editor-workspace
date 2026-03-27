@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { User, Key, Mail, ShieldCheck, Twitch } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const GoogleIconSVG = ({ size = 24, className = "" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className={className}>
@@ -13,6 +14,35 @@ const GoogleIconSVG = ({ size = 24, className = "" }) => (
 );
 
 const Cadastro = () => {
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { fetchUser } = useAuth();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nickname, email, password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro ao registrar.');
+      await fetchUser();
+      navigate('/minhaconta');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="w-full min-h-screen flex bg-bgDark overflow-hidden text-white pt-16">
       
@@ -62,7 +92,13 @@ const Cadastro = () => {
              <div className="h-px bg-white/10 flex-1"></div>
            </div>
 
-           <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+           {error && (
+             <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-3 rounded-xl text-xs font-bold text-center">
+               {error}
+             </div>
+           )}
+
+           <form className="space-y-4" onSubmit={handleRegister}>
               <div>
                 <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Nome de Manager</label>
                 <div className="relative">
@@ -70,6 +106,9 @@ const Cadastro = () => {
                   <input 
                     type="text" 
                     placeholder="Seu Nickname"
+                    value={nickname}
+                    onChange={(e) => setNickname(e.target.value)}
+                    required
                     className="w-full bg-black/50 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-accent/50 transition-colors"
                   />
                 </div>
@@ -82,6 +121,9 @@ const Cadastro = () => {
                   <input 
                     type="email" 
                     placeholder="manager@vinteset.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                     className="w-full bg-black/50 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-accent/50 transition-colors"
                   />
                 </div>
@@ -94,17 +136,22 @@ const Cadastro = () => {
                   <input 
                     type="password" 
                     placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                     className="w-full bg-black/50 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-accent/50 transition-colors"
                   />
                 </div>
               </div>
 
               <motion.button 
+                type="submit"
+                disabled={loading}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-accent hover:bg-accentHover text-black font-black uppercase tracking-widest py-4 rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.2)] flex items-center justify-center gap-2 transition-colors mt-6"
+                className={`w-full bg-accent hover:bg-accentHover text-black font-black uppercase tracking-widest py-4 rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.2)] flex items-center justify-center gap-2 transition-colors mt-6 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                <ShieldCheck size={20} /> Registrar Contrato
+                <ShieldCheck size={20} /> {loading ? 'Aguarde...' : 'Registrar Contrato'}
               </motion.button>
            </form>
 

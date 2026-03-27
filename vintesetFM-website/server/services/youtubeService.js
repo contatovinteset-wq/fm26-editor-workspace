@@ -20,7 +20,8 @@ export const getYoutubeLatestVideo = async () => {
         part: 'snippet',
         order: 'date',
         maxResults: 50, // Aumentado para 50 para garantir vídeos reais mesmo após dezenas de lives
-        type: 'video'
+        type: 'video',
+        videoEmbeddable: 'true'
       }
     });
 

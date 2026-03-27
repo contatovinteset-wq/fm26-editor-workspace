@@ -11,7 +11,8 @@ model User {
   id             String    @id @default(uuid())
   email          String?   @unique
   name           String?
-  nickname           String?   @unique
+  password       String?
+  nickname       String?   @unique
   nickname_defined   Boolean   @default(false)
   lastNicknameChange DateTime? // Mantido meta para admins
   avatar             String?

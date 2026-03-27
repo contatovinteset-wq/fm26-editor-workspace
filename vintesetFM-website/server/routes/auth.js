@@ -3,6 +3,7 @@ import passport from '../config/passport.js';
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
 import rateLimit from 'express-rate-limit';
+import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 const router = express.Router();
@@ -28,6 +29,75 @@ const setJWTCookie = (res, token) => {
     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 dias
   });
 };
+
+// ==========================================
+// LOCAL AUTH (Registro / Login)
+// ==========================================
+
+router.post('/register', async (req, res) => {
+  try {
+    const { email, password, nickname } = req.body;
+    if (!email || !password || !nickname) {
+      return res.status(400).json({ error: 'Preencha todos os campos obrigatórios.' });
+    }
+
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        OR: [{ email }, { nickname }]
+      }
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email ou Nickname já está em uso.' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await prisma.user.create({
+      data: {
+        email,
+        nickname,
+        password: hashedPassword,
+        name: nickname,
+      }
+    });
+
+    const token = generateToken(user);
+    setJWTCookie(res, token);
+    
+    res.status(201).json({ success: true, user });
+  } catch (error) {
+    console.error('[Register Error]', error);
+    res.status(500).json({ error: 'Erro interno ao criar a conta.' });
+  }
+});
+
+router.post('/login', loginLimiter, async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Preencha email e senha.' });
+    }
+
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user || !user.password) {
+      return res.status(401).json({ error: 'Credenciais inválidas.' });
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      return res.status(401).json({ error: 'Credenciais inválidas.' });
+    }
+
+    const token = generateToken(user);
+    setJWTCookie(res, token);
+
+    res.json({ success: true, user });
+  } catch (error) {
+    console.error('[Login Error]', error);
+    res.status(500).json({ error: 'Erro interno ao fazer login.' });
+  }
+});
 
 // ==========================================
 // GOOGLE OAUTH

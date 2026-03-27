@@ -44,8 +44,8 @@ const PerfilManager = () => {
                      <span className={`text-5xl font-black ${isOwner ? 'text-amber-500' : 'text-blue-500'}`}>{(user?.nickname || 'V')[0].toUpperCase()}</span>
                    )}
                  </div>
-                 <div className={`absolute -bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase px-4 py-1.5 rounded-full border-2 border-black flex items-center gap-1 shadow-md w-max z-20 ${isOwner ? 'bg-amber-500 text-black' : 'bg-blue-500 text-white'}`}>
-                   {isOwner ? <><Crown size={14} /> Owner</> : <><User size={14} /> Membro</>}
+                 <div className={`absolute -bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase px-4 py-1.5 rounded-full border-2 border-black flex items-center gap-1 shadow-md w-max z-20 ${isOwner ? 'bg-amber-500 text-black' : (user?.roles?.includes('ADMIN') ? 'bg-blue-500 text-white' : 'bg-gray-700 text-white')}`}>
+                   {isOwner ? <><Crown size={14} /> Owner</> : (user?.roles?.includes('ADMIN') ? <><ShieldAlert size={14} /> Administrador</> : <><User size={14} /> Membro</>)}
                  </div>
               </div>
            </div>

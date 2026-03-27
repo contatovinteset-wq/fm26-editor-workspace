@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Key, Mail, LogIn, Twitch, Activity } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const GoogleIconSVG = ({ size = 24, className = "" }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className={className}>
@@ -13,6 +14,34 @@ const GoogleIconSVG = ({ size = 24, className = "" }) => (
 );
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { fetchUser } = useAuth();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro ao logar.');
+      await fetchUser();
+      navigate('/minhaconta');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="w-full min-h-screen flex bg-bgDark overflow-hidden text-white pt-16">
       
@@ -62,7 +91,13 @@ const Login = () => {
              <div className="h-px bg-white/10 flex-1"></div>
            </div>
 
-           <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+           {error && (
+             <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-3 rounded-xl text-xs font-bold text-center">
+               {error}
+             </div>
+           )}
+
+           <form className="space-y-5" onSubmit={handleLogin}>
               <div>
                 <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">E-mail</label>
                 <div className="relative">
@@ -70,6 +105,9 @@ const Login = () => {
                   <input 
                     type="email" 
                     placeholder="manager@vinteset.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                     className="w-full bg-black/50 border border-white/10 rounded-xl py-3.5 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-accent/50 transition-colors"
                   />
                 </div>
@@ -85,17 +123,22 @@ const Login = () => {
                   <input 
                     type="password" 
                     placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                     className="w-full bg-black/50 border border-white/10 rounded-xl py-3.5 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-accent/50 transition-colors"
                   />
                 </div>
               </div>
 
               <motion.button 
+                type="submit"
+                disabled={loading}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-accent hover:bg-accentHover text-black font-black uppercase tracking-widest py-4 rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.2)] flex items-center justify-center gap-2 transition-colors mt-4"
+                className={`w-full bg-accent hover:bg-accentHover text-black font-black uppercase tracking-widest py-4 rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.2)] flex items-center justify-center gap-2 transition-colors mt-4 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                <LogIn size={20} /> Entrar no Jogo
+                <LogIn size={20} /> {loading ? 'Carregando...' : 'Entrar no Jogo'}
               </motion.button>
            </form>
 
