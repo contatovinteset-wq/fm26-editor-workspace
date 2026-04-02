@@ -11,6 +11,7 @@ import Topico from './Topico';
 import MinhaConta from './MinhaConta';
 import AdminPanel from './AdminPanel';
 import ModeratorPanel from './ModeratorPanel';
+import ReiDaMesaAdmin from './ReiDaMesaAdmin';
 
 const Pages = {
   Home,

@@ -27,6 +27,7 @@ function App() {
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="reidamesa" element={<Pages.ReiDaMesa />} />
+              <Route path="reidamesa/admin" element={<Pages.ReiDaMesaAdmin />} />
               <Route path="reidamesa/escalar" element={<Pages.Escalacao />} />
               <Route path="reidamesa/ranking" element={<Pages.Ranking />} />
               <Route path="reidamesa/perfil" element={<Pages.PerfilManager />} />
