@@ -73,6 +73,26 @@ const ReiDaMesaAdmin = () => {
     }
   };
 
+  const handleDeleteAll = async () => {
+    if (!window.confirm("ATENÇÃO: Você está prestes a excluir TODO o elenco do Banco de Dados. Esta ação é irreversível. Deseja continuar?")) return;
+    
+    try {
+      const res = await fetch('/api/reidamesa/players/all', {
+        method: 'DELETE',
+        credentials: 'include'
+      });
+      if (res.ok) {
+        setAllPlayers([]);
+        alert('Elenco deletado com sucesso!');
+      } else {
+        alert('Erro ao tentar deletar elenco.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Erro inesperado ao deletar elenco.');
+    }
+  };
+
   const handleRoleChange = async (playerId, newRole) => {
     setSavingRows(prev => ({ ...prev, [playerId]: true }));
     try {
@@ -108,7 +128,8 @@ const ReiDaMesaAdmin = () => {
   let orderedKeys = [];
   if (allPlayers.length > 0 && allPlayers[0]?.rawStats) {
     const availableKeys = Object.keys(allPlayers[0].rawStats);
-    orderedKeys = [...new Set([...defaultHeaders, ...availableKeys])].filter(k => availableKeys.includes(k) && k !== 'Inf');
+    // REMOVIDO: O filtro k !== 'Inf' que ocultava a primeira coluna (que estava misturando os nomes dos S-21 no titulo "NOME")
+    orderedKeys = [...new Set([...defaultHeaders, ...availableKeys])].filter(k => availableKeys.includes(k));
   }
 
   return (
@@ -125,6 +146,13 @@ const ReiDaMesaAdmin = () => {
           </div>
 
           <div className="flex flex-row gap-4 items-center">
+             {/* Card ZERO: Deletar Banco */}
+             <div className="bg-red-900/10 border border-red-500/20 px-4 py-3 rounded-xl flex flex-col justify-center min-w-[150px]">
+                <div className="text-xs text-red-400 mb-2 uppercase font-bold text-center">Apagar Dados</div>
+                <button onClick={handleDeleteAll} className="w-full flex justify-center items-center gap-2 bg-red-600 hover:bg-red-500 text-white py-1.5 rounded-lg font-bold text-xs uppercase shadow-lg shadow-red-900/20 transition-all">
+                  Deletar Elenco
+                </button>
+             </div>
              {/* Card 1: Mercado */}
              <div className="bg-black/40 border border-primary/20 px-4 py-3 rounded-xl flex flex-col justify-center min-w-[200px]">
                 <div className="text-xs text-gray-400 mb-2 uppercase font-bold text-center">Mercado</div>

@@ -50,27 +50,21 @@ export async function processPlantelHtml(htmlString) {
     });
   }
 
-  // Desabilita atual elegibilidade (soft-delete) para todos, e vamos reabilitar apenas os que vieram no HTML
-  await prisma.player.updateMany({ data: { eligible: false } });
+  // Deleta TODOS os jogadores antigos para o novo Plantel prevalecer absolutamente
+  await prisma.player.deleteMany({});
 
   let countNew = 0;
-  let countUpdated = 0;
 
   for (const pData of playersToAdd) {
-    const existing = await prisma.player.findUnique({ where: { uidName: pData.uidName } });
-    if (existing) {
-      await prisma.player.update({
-        where: { uidName: pData.uidName },
-        data: { ...pData, eligible: true }
+    if (pData.name) {
+      await prisma.player.create({
+        data: pData
       });
-      countUpdated++;
-    } else {
-      await prisma.player.create({ data: pData });
       countNew++;
     }
   }
 
-  return { success: true, countNew, countUpdated, total: rows.length - 1 };
+  return { message: "Plantel importado com sucesso!", inserted: countNew, total: rows.length - 1 };
 }
 
 export async function processMatchResultHtml(htmlString) {

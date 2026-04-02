@@ -48,6 +48,16 @@ router.get('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req,
   }
 });
 
+// Deleta TODOS os jogadores do painel Admin (Truncate Plantel)
+router.delete('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+  try {
+    await prisma.player.deleteMany({});
+    res.json({ success: true, message: 'Elenco deletado com sucesso!' });
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao deletar jogadores' });
+  }
+});
+
 // Patch da Role do Cartola
 router.patch('/players/:id/role', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
   try {
