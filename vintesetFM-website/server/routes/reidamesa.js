@@ -2,7 +2,7 @@ import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import multer from 'multer';
 import { processPlantelHtml, processMatchResultHtml } from '../services/ReiDaMesaAdminService.js';
-import { requireAuth, requireRoles } from '../middleware/auth.js';
+import { requireAuth, requireRoles } from '../middleware/roles.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
