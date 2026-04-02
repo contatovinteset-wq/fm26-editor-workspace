@@ -10,10 +10,10 @@ const ReiDaMesa = () => {
   const isOwner = user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN');
 
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
-  const [isMarketOpen, setIsMarketOpen] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
   const [ranking, setRanking] = useState([]);
   const [allPlayers, setAllPlayers] = useState([]);
+  const [savingRows, setSavingRows] = useState({});
   
   const loadAllPlayers = async () => {
     try {
@@ -91,6 +91,7 @@ const ReiDaMesa = () => {
   };
 
   const handleRoleChange = async (playerId, newRole) => {
+    setSavingRows(prev => ({ ...prev, [playerId]: true }));
     try {
       const res = await fetch(`/api/reidamesa/players/${playerId}/role`, {
         method: 'PATCH',
@@ -103,6 +104,8 @@ const ReiDaMesa = () => {
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setSavingRows(prev => ({ ...prev, [playerId]: false }));
     }
   };
 
@@ -230,53 +233,95 @@ const ReiDaMesa = () => {
               </div>
 
               {/* Tabela de edição de posição (Admin) */}
-              <div className="mt-8 bg-black/40 border border-primary/20 p-6 rounded-2xl overflow-x-auto">
-                 <h3 className="font-bold text-lg mb-4 flex items-center justify-between">
-                    Gerenciamento de Posições (Cartola)
-                    <span className="text-sm font-normal text-gray-400">Jogadores: {allPlayers.length}</span>
-                 </h3>
-                 <div className="max-h-[400px] overflow-y-auto w-full">
-                    <table className="w-full text-left text-sm text-gray-400 whitespace-nowrap">
-                       <thead className="bg-primary/10 text-primary uppercase text-xs sticky top-0 z-10">
+              <div className="mt-8 bg-[#0b0f19] border border-white/10 p-2 sm:p-6 rounded-2xl overflow-x-auto shadow-2xl">
+                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6">
+                   <div>
+                     <h3 className="font-black text-xl text-white flex items-center gap-2">
+                        Gerenciamento de Posições
+                     </h3>
+                     <p className="text-sm text-gray-400 mt-1">Sincronize a posição in-game com a posição válida no Rei da Mesa.</p>
+                   </div>
+                   <div className="mt-4 sm:mt-0 bg-primary/10 border border-primary/20 px-4 py-2 rounded-lg text-primary font-bold text-sm">
+                     Jogadores Cadastrados: {allPlayers.length}
+                   </div>
+                 </div>
+                 
+                 <div className="w-full overflow-x-auto max-h-[600px] overflow-y-auto custom-scrollbar border border-white/5 rounded-xl">
+                    <table className="w-full text-left font-medium text-sm text-gray-300 whitespace-nowrap">
+                       <thead className="bg-[#131b2a] text-gray-400 uppercase text-[11px] tracking-wider sticky top-0 z-20 shadow-md">
                           <tr>
-                             <th className="px-4 py-3 rounded-tl-lg">Nome / uid</th>
-                             <th className="px-4 py-3">Idade</th>
-                             <th className="px-4 py-3">Cartola Role</th>
-                             {/* Extra Colunas do RawStats, sem pegar a Escolhido ou Jogador pra não poluir. Apenas dinamicamente */}
+                             {/* Iterando as chaves dinâmicas mantendo estritamente a ordem do HTML */}
                              {allPlayers.length > 0 && allPlayers[0]?.rawStats && Object.keys(allPlayers[0].rawStats)
-                                .filter(k => k !== 'Escolhido' && k !== 'Jogador' && k !== 'Idade' && k !== 'Inf' && k !== '')
-                                .map(k => (
-                                 <th key={k} className="px-4 py-3">{k}</th>
-                             ))}
+                                .map((k, index) => {
+                                  // Se for Inf, ignoramos ou formatamos.
+                                  if (k === 'Inf') return null;
+                                  
+                                  // O cabeçalho "Escolhido" é o local de configurar a posição
+                                  if (k === 'Escolhido') {
+                                    return <th key={k} className="px-5 py-4 font-black text-accent sticky left-0 z-30 bg-[#131b2a]">Definir Posição</th>;
+                                  }
+
+                                  // Mantém "Jogador" colado pra facilitar leitura e fixo (Opcional, mas limpo)
+                                  if (k === 'Jogador') {
+                                    return <th key={k} className="px-5 py-4 font-black sticky left-[160px] z-30 bg-[#131b2a] shadow-[4px_0_10px_-5px_rgba(0,0,0,0.5)]">Jogador</th>;
+                                  }
+
+                                  return <th key={k} className="px-5 py-4 font-bold">{k}</th>;
+                                })
+                             }
                           </tr>
                        </thead>
                        <tbody className="divide-y divide-white/5">
-                          {allPlayers.map((p) => (
-                             <tr key={p.id} className="hover:bg-white/5 transition-colors">
-                                <td className="px-4 py-3">
-                                   <div className="font-bold text-white">{p.name}</div>
-                                   <div className="text-xs opacity-50">{p.uidName}</div>
-                                </td>
-                                <td className="px-4 py-3">{p.age || '-'}</td>
-                                <td className="px-4 py-3">
-                                   <select 
-                                     value={p.cartolaRole || ""} 
-                                     onChange={(e) => handleRoleChange(p.id, e.target.value)}
-                                     className="bg-gray-800 border border-white/20 text-white rounded p-1 text-sm outline-none w-32"
-                                   >
-                                      <option value="">-- Posição --</option>
-                                      <option value="DEF">Defensor (DEF)</option>
-                                      <option value="MEI">Meio-Campo (MEI)</option>
-                                      <option value="ATA">Atacante (ATA)</option>
-                                   </select>
-                                </td>
-                                {p.rawStats && Object.keys(p.rawStats)
-                                   .filter(k => k !== 'Escolhido' && k !== 'Jogador' && k !== 'Idade' && k !== 'Inf' && k !== '')
-                                   .map(k => (
-                                      <td key={k} className="px-4 py-3">{p.rawStats[k]}</td>
-                                ))}
+                          {allPlayers.map((p) => {
+                            if (!p.rawStats) return null;
+                            const keys = Object.keys(p.rawStats);
+                            return (
+                             <tr key={p.id} className="hover:bg-white/5 transition-colors group">
+                                {keys.map((k) => {
+                                  if (k === 'Inf') return null;
+
+                                  // Coluna de Posicionamento (Substitui "Escolhido")
+                                  if (k === 'Escolhido') {
+                                    return (
+                                      <td key={k} className="px-5 py-3 sticky left-0 z-10 bg-[#0b0f19] group-hover:bg-[#111726] transition-colors">
+                                        <div className="flex items-center gap-2">
+                                          <select 
+                                            value={p.cartolaRole || ""} 
+                                            onChange={(e) => handleRoleChange(p.id, e.target.value)}
+                                            className="bg-black/50 border border-white/20 hover:border-accent/50 text-white rounded-lg p-2 text-sm outline-none font-bold transition-all min-w-[140px] focus:ring-2 focus:ring-accent/50 focus:border-accent cursor-pointer"
+                                          >
+                                            <option value="" className="text-gray-500">-- Nenhuma --</option>
+                                            <option value="DEF">Defensor  [DEF]</option>
+                                            <option value="MEI">Meio-C.   [MEI]</option>
+                                            <option value="ATA">Atacante  [ATA]</option>
+                                          </select>
+                                          {savingRows[p.id] && (
+                                            <span className="w-4 h-4 rounded-full border-2 border-accent border-t-transparent animate-spin ml-2"></span>
+                                          )}
+                                        </div>
+                                      </td>
+                                    );
+                                  }
+
+                                  // Coluna de Jogador (Nome)
+                                  if (k === 'Jogador') {
+                                    return (
+                                      <td key={k} className="px-5 py-3 sticky left-[160px] z-10 bg-[#0b0f19] group-hover:bg-[#111726] transition-colors shadow-[4px_0_10px_-5px_rgba(0,0,0,0.5)]">
+                                        <div className="font-bold text-white text-base">{p.name}</div>
+                                      </td>
+                                    );
+                                  }
+
+                                  // Outras colunas exatamente no mesmo valor
+                                  return (
+                                    <td key={k} className="px-5 py-3 text-gray-300 font-medium tracking-wide">
+                                      {p.rawStats[k] === '-' ? <span className="opacity-30">-</span> : p.rawStats[k] || <span className="opacity-30">-</span>}
+                                    </td>
+                                  );
+                                })}
                              </tr>
-                          ))}
+                            );
+                          })}
                        </tbody>
                     </table>
                  </div>
@@ -405,7 +450,7 @@ const ReiDaMesa = () => {
         <div className="text-center mb-10">
            <h2 className="text-2xl font-black uppercase tracking-tight flex items-center justify-center gap-3">
               <Star className="text-accent" />
-              Regras de Pontuação (Cartola)
+              Regras de Pontuação (Rei da Mesa)
            </h2>
            <p className="text-gray-400 text-sm mt-3">É assim que seus jogadores vão ganhar ou perder pontos no fim da partida.</p>
         </div>

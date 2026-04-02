@@ -56,9 +56,9 @@ const Escalacao = () => {
     const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
     
     let matchesPosition = true;
-    if (activeSlot === 'DEF') matchesPosition = p.cartolaRole === 'DEF' || p.realPosition?.includes('D (') || p.realPosition === 'GR';
-    if (activeSlot === 'MEI') matchesPosition = p.cartolaRole === 'MEI' || p.realPosition?.includes('M (');
-    if (activeSlot === 'ATA') matchesPosition = p.cartolaRole === 'ATA' || p.realPosition?.includes('PL') || p.realPosition?.includes('MA (');
+    if (activeSlot === 'DEF') matchesPosition = p.cartolaRole === 'DEF';
+    if (activeSlot === 'MEI') matchesPosition = p.cartolaRole === 'MEI';
+    if (activeSlot === 'ATA') matchesPosition = p.cartolaRole === 'ATA';
     // Se bank, pode ser qualquer um
     
     // Nao mostrar jogadores já escalados
@@ -280,7 +280,7 @@ const Escalacao = () => {
                        >
                          <div className="flex items-center gap-4">
                            <div className="w-12 h-12 rounded-full bg-gray-800 border border-white/10 flex items-center justify-center text-xs font-bold font-mono">
-                             {player.cartolaRole || player.realPosition?.split(' ')[0] || '?'}
+                             {player.cartolaRole || '-'}
                            </div>
                            <div>
                              <h4 className="font-bold text-sm text-white group-hover:text-accent transition-colors">{player.name}</h4>
@@ -342,14 +342,14 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
              {horizontal ? (
                <>
                  <div className="flex flex-col">
-                   <span className="text-xs text-accent font-bold">{player.cartolaRole || player.realPosition}</span>
+                   <span className="text-xs text-accent font-bold">{player.cartolaRole || '-'}</span>
                    <span className="font-black text-sm">{player.name}</span>
                  </div>
                  <span className="text-xs bg-white/10 px-2 py-1 rounded">{player.age} anos</span>
                </>
             ) : (
                <>
-                <span className="text-[10px] text-accent font-bold uppercase">{player.cartolaRole || player.realPosition}</span>
+                <span className="text-[10px] text-accent font-bold uppercase">{player.cartolaRole || '-'}</span>
                 <span className="text-xs sm:text-sm font-black uppercase leading-tight">{player.name}</span>
                 <span className="text-[10px] bg-white/10 px-2 rounded-sm mt-1">{player.age} anos</span>
                </>
