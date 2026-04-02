@@ -112,7 +112,27 @@ const Escalacao = () => {
     }
   };
 
-  const isSquadComplete = squad.def && squad.mei && squad.ata && squad.bagre;
+  const handleClearSquad = async () => {
+    setSquad({ def: null, mei: null, ata: null, bagre: null });
+    setIsSaved(false);
+    setActiveSlot(null);
+
+    try {
+      await fetch('/api/reidamesa/squad', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          defensorId: null,
+          meioId: null,
+          ataqueId: null,
+          bagreId: null
+        })
+      });
+    } catch (err) {
+      console.error('Erro ao limpar banco de dados.', err);
+    }
+  };
 
   return (
     <div className="w-full min-h-screen bg-bgDark text-white pt-24 pb-16">
@@ -130,11 +150,7 @@ const Escalacao = () => {
           
           <div className="flex bg-black/50 p-1 rounded-lg border border-white/10 w-full md:w-auto gap-2">
             <button
-               onClick={() => {
-                 setSquad({ def: null, mei: null, ata: null, bagre: null });
-                 setIsSaved(false);
-                 setActiveSlot(null);
-               }}
+               onClick={handleClearSquad}
                className="px-4 py-2 text-sm font-bold uppercase tracking-widest text-red-400 hover:text-white hover:bg-red-500/20 rounded transition-all text-center flex-1 border border-red-500/20"
             >
               Limpar Escalação

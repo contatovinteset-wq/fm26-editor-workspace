@@ -191,6 +191,8 @@ export async function processMatchResultHtml(htmlString) {
 
       scores.push({
         playerId: player.id,
+        playerName: player.name,
+        realPosition: player.realPosition,
         roundId: openRound.id,
         rating: 0, 
         points: Number(points.toFixed(2)),
@@ -264,5 +266,8 @@ export async function processMatchResultHtml(htmlString) {
     });
   }
 
-  return { success: true, scoresProcessados: processados, bagreDaRodadaId: worstPlayerId };
+  // Ordene scores do maior pontuador para o menor para devolver a view
+  scores.sort((a,b) => b.points - a.points);
+  
+  return { success: true, scoresProcessados: processados, bagreDaRodadaId: worstPlayerId, scores };
 }

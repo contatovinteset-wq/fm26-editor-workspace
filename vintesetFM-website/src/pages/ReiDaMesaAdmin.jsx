@@ -11,6 +11,8 @@ const ReiDaMesaAdmin = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [allPlayers, setAllPlayers] = useState([]);
   const [savingRows, setSavingRows] = useState({});
+  const [matchResult, setMatchResult] = useState(null);
+  const [isResultModalOpen, setIsResultModalOpen] = useState(false);
 
   useEffect(() => {
     if (!isOwner) return;
@@ -56,14 +58,17 @@ const ReiDaMesaAdmin = () => {
         });
         const data = await res.json();
         setIsUploading(false);
-        alert(`Upload Concluído! Backend Retornou: ${JSON.stringify(data)}`);
         
         if (type === 'PLANTEL') {
+            alert(`Upload Concluído! Backend Retornou: ${JSON.stringify(data)}`);
             const playersRes = await fetch('/api/reidamesa/players/all', { credentials: 'include' });
             if (playersRes.ok) {
                 const refreshed = await playersRes.json();
                 setAllPlayers(refreshed);
             }
+        } else if (type === 'MATCH') {
+            setMatchResult(data);
+            setIsResultModalOpen(true);
         }
       } catch (err) {
         console.error(err);
@@ -143,6 +148,89 @@ const ReiDaMesaAdmin = () => {
               Painel do Streamer - Rei da Mesa
             </h2>
           </div>
+
+          {/* Modal de Resultados da Partida */}
+          <AnimatePresence>
+            {isResultModalOpen && matchResult && (
+              <motion.div 
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+              >
+                <motion.div 
+                  initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
+                  className="bg-[#0b0f19] border border-white/10 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col"
+                >
+                  <div className="px-6 py-4 border-b border-white/5 bg-[#0e1420] flex justify-between items-center">
+                    <h3 className="font-black text-xl text-white flex items-center gap-2">
+                      <BarChart3 className="text-accent" /> Relatório da Partida Processado
+                    </h3>
+                    <button onClick={() => setIsResultModalOpen(false)} className="text-gray-400 hover:text-white transition-colors bg-white/5 hover:bg-white/10 p-2 rounded-lg">
+                       Fechar
+                    </button>
+                  </div>
+                  
+                  <div className="p-6 overflow-y-auto custom-scrollbar flex-1 text-sm bg-bgDark">
+                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        <div className="bg-primary/10 border border-primary/20 rounded-xl p-4 flex flex-col text-center">
+                           <span className="text-primary text-xs font-bold uppercase tracking-widest mb-1">Jogadores Processados</span>
+                           <span className="text-3xl font-black text-white">{matchResult.scoresProcessados || 0}</span>
+                        </div>
+                        <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex flex-col text-center">
+                           <span className="text-red-500 text-xs font-bold uppercase tracking-widest mb-1">Status da Rodada</span>
+                           <span className="text-lg font-bold text-white mt-2">Pontuações Salvas no BD</span>
+                        </div>
+                     </div>
+
+                     <h4 className="font-black text-white uppercase tracking-wider mb-3">Pontuações Calculadas</h4>
+                     
+                     <div className="w-full overflow-x-auto rounded-xl border border-white/10">
+                        <table className="w-full text-left font-medium text-xs text-gray-300">
+                           <thead className="bg-[#131b2a] text-gray-400 uppercase text-[10px] tracking-wider border-b border-white/10">
+                             <tr>
+                               <th className="px-4 py-3">Jogador</th>
+                               <th className="px-4 py-3 text-center">Min</th>
+                               <th className="px-4 py-3 text-center">Gol/Ass</th>
+                               <th className="px-4 py-3 text-center">xG / xA</th>
+                               <th className="px-4 py-3 text-center">Cartões</th>
+                               <th className="px-4 py-3 text-right">Pts Finais</th>
+                             </tr>
+                           </thead>
+                           <tbody className="divide-y divide-white/5">
+                             {matchResult.scores && matchResult.scores.map(s => {
+                               const isBagre = s.playerId === matchResult.bagreDaRodadaId;
+                               return (
+                                 <tr key={s.playerId} className={`hover:bg-white/5 transition-colors ${isBagre ? 'bg-orange-500/10' : ''}`}>
+                                   <td className="px-4 py-3 font-bold text-white flex items-center gap-2">
+                                     {isBagre && <span className="bg-orange-500 text-black text-[10px] px-1.5 py-0.5 rounded font-black uppercase">Bagre</span>}
+                                     {s.playerName} <span className="text-[10px] text-gray-500">[{s.realPosition}]</span>
+                                   </td>
+                                   <td className="px-4 py-3 text-center">{s.details.minsPlayed || 0}'</td>
+                                   <td className="px-4 py-3 text-center">{s.details.goals} / {s.details.assists}</td>
+                                   <td className="px-4 py-3 text-center">{s.details.xG} / {s.details.xA}</td>
+                                   <td className="px-4 py-3 text-center">
+                                      {s.details.yellowCars > 0 && <span className="inline-block w-3 h-4 bg-yellow-400 rounded-sm mx-0.5"></span>}
+                                      {s.details.redCards > 0 && <span className="inline-block w-3 h-4 bg-red-600 rounded-sm mx-0.5"></span>}
+                                      {s.details.yellowCars === 0 && s.details.redCards === 0 && '-'}
+                                   </td>
+                                   <td className={`px-4 py-3 text-right font-black text-sm ${s.points > 0 ? 'text-green-400' : s.points < 0 ? 'text-red-400' : 'text-gray-400'}`}>
+                                     {s.points > 0 ? '+' : ''}{s.points.toFixed(2)}
+                                   </td>
+                                 </tr>
+                               );
+                             })}
+                             {(!matchResult.scores || matchResult.scores.length === 0) && (
+                               <tr>
+                                  <td colSpan="6" className="px-4 py-8 text-center text-gray-500">Nenhum jogador pontuou nesta partida.</td>
+                               </tr>
+                             )}
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <div className="flex flex-row gap-4 items-center">
              {/* Card 1: Mercado */}
