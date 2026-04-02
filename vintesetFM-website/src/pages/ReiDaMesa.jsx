@@ -41,19 +41,21 @@ const ReiDaMesa = () => {
   // Funções de Admin movidas para ReiDaMesaAdmin.jsx
 
   const pontuacaoRules = [
+    { label: "Jogou +60m", pts: "+1.0", color: "text-green-500", bg: "bg-green-500/10", border: "border-green-500/20" },
     { label: "Gol", pts: "+8.0", color: "text-green-500", bg: "bg-green-500/10", border: "border-green-500/20" },
     { label: "Assistência", pts: "+5.0", color: "text-green-400", bg: "bg-green-400/10", border: "border-green-400/20" },
-    { label: "Defesa de Pênalti (GK)", pts: "+7.0", color: "text-green-500", bg: "bg-green-500/10", border: "border-green-500/20" },
-    { label: "Jogo s/ Sofrer Gol (Def/Gk)", pts: "+5.0", color: "text-blue-400", bg: "bg-blue-400/10", border: "border-blue-400/20" },
-    { label: "Finalização na Trave", pts: "+3.0", color: "text-yellow-400", bg: "bg-yellow-400/10", border: "border-yellow-400/20" },
-    { label: "Finalização Defendida", pts: "+1.2", color: "text-gray-300", bg: "bg-white/5", border: "border-white/10" },
-    { label: "Passe Decisivo", pts: "+1.5", color: "text-gray-300", bg: "bg-white/5", border: "border-white/10" },
-    { label: "Desarme", pts: "+1.0", color: "text-gray-300", bg: "bg-white/5", border: "border-white/10" },
+    { label: "xG e xA (Por Ponto)", pts: "+2.0", color: "text-green-300", bg: "bg-green-300/10", border: "border-green-300/20" },
+    { label: "Chance Criada", pts: "+2.0", color: "text-blue-400", bg: "bg-blue-400/10", border: "border-blue-400/20" },
+    { label: "Passe Decisivo", pts: "+1.0", color: "text-blue-400", bg: "bg-blue-400/10", border: "border-blue-400/20" },
+    { label: "Finta Exito", pts: "+0.5", color: "text-purple-400", bg: "bg-purple-400/10", border: "border-purple-400/20" },
+    { label: "Chute na Trave", pts: "+1.5", color: "text-yellow-400", bg: "bg-yellow-400/10", border: "border-yellow-400/20" },
+    { label: "Desarme Certo", pts: "+2.0", color: "text-teal-400", bg: "bg-teal-400/10", border: "border-teal-400/20" },
+    { label: "Intercepção", pts: "+0.5", color: "text-teal-400", bg: "bg-teal-400/10", border: "border-teal-400/20" },
+    { label: "Defesa (Goleiro)", pts: "+1.5", color: "text-white", bg: "bg-white/5", border: "border-white/10" },
+    { label: "Alívio", pts: "+0.2", color: "text-gray-400", bg: "bg-white/5", border: "border-white/10" },
     { label: "Falta Cometida", pts: "-0.5", color: "text-red-300", bg: "bg-red-300/10", border: "border-red-300/20" },
-    { label: "Cartão Amarelo", pts: "-2.0", color: "text-yellow-500", bg: "bg-yellow-500/10", border: "border-yellow-500/20" },
-    { label: "Cartão Vermelho", pts: "-5.0", color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/20" },
-    { label: "Pênalti Perdido", pts: "-4.0", color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/20" },
-    { label: "Gol Contra", pts: "-3.0", color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/20" },
+    { label: "Cartão Amarelo", pts: "-1.5", color: "text-yellow-500", bg: "bg-yellow-500/10", border: "border-yellow-500/20" },
+    { label: "Cartão Vermelho", pts: "-3.0", color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/20" },
   ];
 
   if (!isOwner) {
