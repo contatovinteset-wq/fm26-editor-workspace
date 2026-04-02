@@ -26,6 +26,7 @@ router.get('/ranking', async (req, res) => {
 router.get('/top-match', async (req, res) => {
   try {
     const lastRound = await prisma.round.findFirst({
+      where: { scores: { some: {} } },
       orderBy: { number: 'desc' },
     });
     if (!lastRound) return res.json({ top3: [], bagre: null });
@@ -104,12 +105,36 @@ router.patch('/players/:id/role', requireRoles(['OWNER', 'ADMIN_GERACAO']), asyn
 // Busca Escalação do Usuário
 router.get('/squad', requireAuth, async (req, res) => {
   try {
+    const lastRound = await prisma.round.findFirst({
+      where: { scores: { some: {} } },
+      orderBy: { number: 'desc' },
+    });
+
+    const includeScores = lastRound ? { where: { roundId: lastRound.id } } : false;
+
     const squad = await prisma.squad.findUnique({
       where: { userId: req.user.id },
       include: {
-        defensor: true, meio: true, ataque: true, bagre: true
+        defensor: { include: { scores: includeScores } },
+        meio: { include: { scores: includeScores } },
+        ataque: { include: { scores: includeScores } },
+        bagre: { include: { scores: includeScores } }
       }
     });
+
+    // Injeta a property matchPoints no root de cada player pra facilitar no Front
+    if (squad) {
+       const mapPoints = (p) => {
+          if (!p) return null;
+          p.matchPoints = p.scores && p.scores.length > 0 ? p.scores[0].points : null;
+          return p;
+       };
+       squad.defensor = mapPoints(squad.defensor);
+       squad.meio = mapPoints(squad.meio);
+       squad.ataque = mapPoints(squad.ataque);
+       squad.bagre = mapPoints(squad.bagre);
+    }
+
     res.json(squad || null);
   } catch (error) {
     res.status(500).json({ error: 'Erro ao buscar esquadrão' });
@@ -158,16 +183,8 @@ router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), as
             });
          }
 
-         // Zera os times e inicia do zero a pontuação DA RODADA pros usuários
-         await prisma.squad.updateMany({
-             data: {
-                defensorId: null,
-                meioId: null,
-                ataqueId: null,
-                bagreId: null,
-                roundScore: 0
-             }
-         });
+         // As escolhas do Squad são mantidas para que o viewer possa ver seus desempenhos,
+         // E também caso ele não escale novamente, mantém os mesmos jogadores na rodada atual.
 
          // Cria a próxima rodada
          const lastRound = await prisma.round.findFirst({ orderBy: { number: 'desc' } });

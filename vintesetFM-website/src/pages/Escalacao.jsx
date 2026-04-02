@@ -13,7 +13,9 @@ const Escalacao = () => {
     def: null,
     mei: null,
     ata: null,
-    bagre: null
+    bagre: null,
+    roundScore: 0,
+    totalScore: 0
   });
   const [isSaved, setIsSaved] = useState(false);
   const [isMarketOpen, setIsMarketOpen] = useState(true);
@@ -42,7 +44,9 @@ const Escalacao = () => {
             def: data.defensor,
             mei: data.meio,
             ata: data.ataque,
-            bagre: data.bagre
+            bagre: data.bagre,
+            roundScore: data.roundScore,
+            totalScore: data.totalScore
           });
           setIsSaved(true);
         }
@@ -143,9 +147,16 @@ const Escalacao = () => {
           <div>
             <h1 className="text-3xl font-black uppercase tracking-tight flex items-center gap-3">
                <Shield className="text-accent" size={32} />
-               Montar Meu Esquadrão
+               Meu Esquadrão
             </h1>
-            <p className="text-gray-400 mt-2">Escolha 1 Defensor/Goleiro, 1 Meia, 1 Atacante e 1 Bagre.</p>
+            <div className="flex items-center gap-4 mt-2">
+               <p className="text-gray-400">1 Defensor/GOL, 1 Meia, 1 Atacante, 1 Bagre.</p>
+               {squad.roundScore !== undefined && squad.roundScore !== 0 && (
+                  <span className="bg-white/10 px-3 py-1 rounded-full text-xs font-bold text-accent border border-white/5">
+                     Última Rodada: {squad.roundScore.toFixed(2)} pts
+                  </span>
+               )}
+            </div>
           </div>
           
           <div className="flex bg-black/50 p-1 rounded-lg border border-white/10 w-full md:w-auto gap-2">
@@ -365,22 +376,34 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
           </div>
           
           <div className={`z-10 flex ${horizontal ? 'flex-row w-full justify-between items-center' : 'flex-col items-center text-center'} gap-1 p-2`}>
-             {horizontal ? (
-               <>
-                 <div className="flex flex-col">
-                   <span className="text-xs text-accent font-bold">{player.cartolaRole || '-'}</span>
-                   <span className="font-black text-sm">{player.name}</span>
-                 </div>
-                 <span className="text-xs bg-white/10 px-2 py-1 rounded">{player.age} anos</span>
-               </>
-            ) : (
-               <>
-                <span className="text-[10px] text-accent font-bold uppercase">{player.cartolaRole || '-'}</span>
-                <span className="text-xs sm:text-sm font-black uppercase leading-tight">{player.name}</span>
-                <span className="text-[10px] bg-white/10 px-2 rounded-sm mt-1">{player.age} anos</span>
-               </>
-            )}
-          </div>
+              {horizontal ? (
+                <>
+                  <div className="flex flex-col">
+                    <span className="text-xs text-accent font-bold">{player.cartolaRole || '-'}</span>
+                    <span className="font-black text-sm">{player.name}</span>
+                  </div>
+                  {player.matchPoints !== undefined && player.matchPoints !== null ? (
+                     <span className={`text-xs px-2 py-1 rounded font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                        {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} pts
+                     </span>
+                  ) : (
+                     <span className="text-xs bg-white/10 px-2 py-1 rounded">{player.age} anos</span>
+                  )}
+                </>
+             ) : (
+                <>
+                 <span className="text-[10px] text-accent font-bold uppercase">{player.cartolaRole || '-'}</span>
+                 <span className="text-xs sm:text-sm font-black uppercase leading-tight">{player.name}</span>
+                 {player.matchPoints !== undefined && player.matchPoints !== null ? (
+                     <span className={`text-[10px] px-2 rounded-sm mt-1 font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                        {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} pts
+                     </span>
+                  ) : (
+                     <span className="text-[10px] bg-white/10 px-2 rounded-sm mt-1">{player.age} anos</span>
+                  )}
+                </>
+             )}
+           </div>
         </div>
       )}
     </div>
