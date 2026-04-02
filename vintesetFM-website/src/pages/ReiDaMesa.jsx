@@ -217,11 +217,11 @@ const ReiDaMesa = () => {
       {/* 3. Rodada Atual e Tabela de Ranking */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10">
          
-         {/* Esquadrão Mock */}
+         {/* Esquadrão */}
          <div className="lg:col-span-6 space-y-6">
             <h2 className="text-2xl font-black uppercase tracking-tight flex items-center gap-2">
                <Users className="text-accent" />
-               Meu Esquadrão (Mock)
+               Meu Esquadrão
             </h2>
             <div className={`w-full border rounded-3xl p-8 flex flex-col items-center justify-center text-center relative overflow-hidden h-96 group transition-colors ${isMarketOpen ? 'bg-green-800/20 border-green-500/30' : 'bg-red-900/10 border-red-500/20'}`}>
                {/* Grass pattern */}
@@ -230,10 +230,10 @@ const ReiDaMesa = () => {
                <div className="z-10 bg-black/60 p-6 rounded-2xl backdrop-blur-md border border-white/10 max-w-sm">
                   <Crown size={48} className={`mx-auto mb-4 ${isMarketOpen ? 'text-accent' : 'text-gray-500'}`} />
                   <h3 className="text-xl font-bold mb-2">{isMarketOpen ? 'Escale Agora' : 'Escalação Bloqueada'}</h3>
-                  <p className="text-sm text-gray-300 mb-6">Em breve o sistema visual de escalação arrastar e soltar estará disponível.</p>
+                  <p className="text-sm text-gray-300 mb-6">Monte seu time para pontuar nesta rodada.</p>
                   {isMarketOpen ? (
                     <Link to="/reidamesa/escalar" className="px-6 py-2 rounded-lg font-bold uppercase text-xs tracking-widest transition-colors w-full border bg-accent/10 hover:bg-accent/20 border-accent/30 text-accent inline-block text-center">
-                      Ir para Formulário
+                      Ir para Escalação
                     </Link>
                   ) : (
                     <button disabled className="px-6 py-2 rounded-lg font-bold uppercase text-xs tracking-widest transition-colors w-full border bg-white/5 border-white/10 text-gray-500 cursor-not-allowed">
@@ -244,7 +244,7 @@ const ReiDaMesa = () => {
             </div>
          </div>
 
-         {/* Ranking Tabela Mock */}
+         {/* Ranking Tabela */}
          <div className="lg:col-span-6 space-y-6">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <h2 className="text-2xl font-black uppercase tracking-tight flex items-center gap-2">
@@ -284,13 +284,11 @@ const ReiDaMesa = () => {
                        <td className="px-4 py-3 text-right font-black text-accent font-mono">{row.total}</td>
                      </tr>
                    ))}
-                   {/* Linha Fictícia "Você" */}
-                   <tr className="hover:bg-white/5 transition-colors">
-                     <td className="px-4 py-3 font-black text-center text-gray-500">...</td>
-                     <td className="px-2 py-3 font-bold text-gray-400">Você</td>
-                     <td className="px-2 py-3 text-center text-gray-500 font-mono">-</td>
-                     <td className="px-4 py-3 text-right font-black text-gray-500 font-mono">0.0</td>
-                   </tr>
+                   {ranking.length === 0 && (
+                     <tr>
+                       <td colSpan={4} className="px-4 py-8 text-center text-gray-500">Nenhum ranking disponível no momento.</td>
+                     </tr>
+                   )}
                  </tbody>
                </table>
             </div>

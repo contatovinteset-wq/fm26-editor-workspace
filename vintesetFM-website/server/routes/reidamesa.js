@@ -12,7 +12,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 router.get('/ranking', async (req, res) => {
   try {
     const squads = await prisma.squad.findMany({
-      include: { user: { select: { name: true, avatar: true, twitchId: true } } },
+      include: { user: { select: { nickname: true, name: true, avatar: true, twitchId: true } } },
       orderBy: { totalScore: 'desc' },
       take: 50,
     });

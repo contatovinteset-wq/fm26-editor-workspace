@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, User, Share2, Award, Trophy, Info, Twitch, Globe, Crown, ShieldAlert } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { User, ShieldAlert, BarChart3, Target, Goal, Sword, Trophy } from 'lucide-react';
 import RoleBadge from '../components/RoleBadge';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -8,9 +8,68 @@ import { useAuth } from '../context/AuthContext';
 const PerfilManager = () => {
   const { user } = useAuth();
   const isOwner = user?.roles?.includes('OWNER');
-  const historico = [];
+  
+  const [squad, setSquad] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const [expandedRound, setExpandedRound] = useState(12);
+  useEffect(() => {
+    fetch('/api/reidamesa/squad', { credentials: 'include' })
+      .then(res => {
+        if (!res.ok) throw new Error('Não foi possível carregar esquadrão');
+        return res.json();
+      })
+      .then(data => {
+        setSquad(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+
+  const getRoleIcon = (role) => {
+    switch (role?.toUpperCase()) {
+      case 'DEF': return <ShieldAlert className="text-blue-400" size={16} />;
+      case 'MEI': return <Target className="text-green-400" size={16} />;
+      case 'ATA': return <Goal className="text-accent" size={16} />;
+      default: return <Sword className="text-gray-400" size={16} />;
+    }
+  };
+
+  const renderPlayerCard = (player, label, isBagre = false) => {
+    if (!player) {
+      return (
+        <div className="bg-black/40 border border-white/5 rounded-xl p-4 flex flex-col items-center justify-center text-center opacity-50 h-full min-h-[140px]">
+          <span className="text-xs uppercase font-bold text-gray-500 mb-2">{label}</span>
+          <span className="text-sm font-bold text-gray-600">Nenhum</span>
+        </div>
+      );
+    }
+    return (
+      <div className={`bg-gradient-to-b ${isBagre ? 'from-red-900/20 to-black/40 border-red-500/30' : 'from-accent/5 to-black/40 border-white/10'} border rounded-xl p-4 flex flex-col relative overflow-hidden h-full min-h-[140px]`}>
+        {isBagre && <div className="absolute top-0 inset-x-0 h-1 bg-red-500"></div>}
+        <div className="flex justify-between items-start mb-4">
+          <span className={`text-xs uppercase font-black ${isBagre ? 'text-red-400' : 'text-gray-400'}`}>{label}</span>
+          <div className="bg-white/5 px-2 py-1 rounded text-xs font-mono font-bold flex items-center gap-1 border border-white/10">
+            {getRoleIcon(player.cartolaRole)} {player.cartolaRole}
+          </div>
+        </div>
+        <div className="mt-auto">
+          <h4 className="font-bold text-lg text-white leading-tight mb-1">{player.name}</h4>
+          <span className="text-xs text-gray-400">{player.realPosition}</span>
+        </div>
+      </div>
+    );
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-bgDark flex justify-center items-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full min-h-screen bg-bgDark text-white pt-24 pb-16">
@@ -36,13 +95,13 @@ const PerfilManager = () => {
            <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent pointer-events-none"></div>
            
            {/* Avatar com Destaque de Role */}
-           <div className="relative z-10 shrink-0">
+           <div className="relative z-10 shrink-0 mx-auto md:mx-0">
               <div className={`w-32 h-32 rounded-full border-4 bg-black p-1 relative shadow-2xl flex items-center justify-center ${isOwner ? 'border-amber-500' : 'border-blue-500'}`}>
                  <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
                    {user?.avatar ? (
                      <img src={user.avatar} alt="Manager Profile" className="w-full h-full object-cover" />
                    ) : (
-                     <span className={`text-5xl font-black ${isOwner ? 'text-amber-500' : 'text-blue-500'}`}>{(user?.nickname || 'V')[0].toUpperCase()}</span>
+                     <span className={`text-5xl font-black ${isOwner ? 'text-amber-500' : 'text-blue-500'}`}>{(user?.nickname || user?.name || 'V')[0].toUpperCase()}</span>
                    )}
                  </div>
                  <RoleBadge roles={user?.roles} absolute />
@@ -51,18 +110,60 @@ const PerfilManager = () => {
 
            <div className="z-10 flex-1 mt-4 md:mt-0">
               <h2 className="text-4xl font-black uppercase tracking-tighter mb-6 flex items-center justify-center md:justify-start gap-3">
-                Manager {user?.nickname || 'Vinteseter'}
+                Manager {user?.nickname || user?.name || user?.twitchId || 'Vinteseter'}
               </h2>
 
-              {/* Sala de Troféus Ocultada até o Engine do Campeonato Módulo Rei da Mesa Ficar Pronto */}
-              <div className="opacity-40 text-xs text-gray-500 uppercase font-black tracking-widest border border-dashed border-gray-700 p-4 rounded-xl inline-block">
-                Sala de Troféus: Aguardando Abertura da Temporada do Rei da Mesa
-              </div>
+              <div className="flex gap-4 mt-4 md:mt-0 justify-center md:justify-start">
+                  <div className="bg-black/50 border border-white/5 rounded-xl px-6 py-4 text-center min-w-[120px]">
+                     <span className="text-xs uppercase font-bold text-gray-500 mb-1 block">Rodada</span>
+                     <span className="text-2xl font-black font-mono text-green-400">+{squad?.roundScore?.toFixed(1) || '0.0'}</span>
+                  </div>
+                  <div className="bg-black/50 border border-white/5 rounded-xl px-6 py-4 text-center min-w-[120px]">
+                     <span className="text-xs uppercase font-bold text-gray-500 mb-1 block">Total</span>
+                     <span className="text-2xl font-black font-mono text-accent">{squad?.totalScore?.toFixed(1) || '0.0'}</span>
+                  </div>
+               </div>
            </div>
         </div>
 
-        {/* Estatísticas Ocultadas Temporariamente */}
-        {/* Histórico Escalações (Accordion) Ocultado Temporariamente */}
+        {/* Scaled Team */}
+        <div className="mb-8">
+           <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-bold uppercase tracking-widest flex items-center gap-2">
+                 <BarChart3 className="text-gray-400" size={20} />
+                 Esquadrão Atual
+              </h3>
+              <Link to="/reidamesa/escalar" className="text-xs font-bold uppercase tracking-widest text-accent hover:text-white transition-colors">
+                Alterar Escalação
+              </Link>
+           </div>
+
+           {!squad ? (
+             <div className="bg-gray-900 border border-white/10 rounded-2xl p-12 text-center">
+               <ShieldAlert className="text-gray-500 mx-auto mb-4" size={48} />
+               <h4 className="text-lg font-bold text-white mb-2">Você ainda não definiu um Esquadrão</h4>
+               <p className="text-gray-400 text-sm mb-6 max-w-md mx-auto">Vá até a tela de escalação e monte seu time titular e escolha seu bagre para começar a pontuar nas lives.</p>
+               <Link to="/reidamesa/escalar" className="inline-block bg-accent text-black px-8 py-3 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-accentHover transition-colors">
+                 Escalar Agora
+               </Link>
+             </div>
+           ) : (
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {renderPlayerCard(squad.defensor, 'Defensor')}
+                {renderPlayerCard(squad.meio, 'Meio Além')}
+                {renderPlayerCard(squad.ataque, 'Atacante')}
+                {renderPlayerCard(squad.bagre, 'O Bagre', true)}
+             </div>
+           )}
+        </div>
+
+        {/* Botão Copiar Link */}
+        <div className="bg-black/30 border border-white/5 rounded-xl p-4 flex flex-col items-center justify-center text-center">
+           <p className="text-sm text-gray-400 mb-4">Em breve você poderá compartilhar seu esquadrão com os amigos no WhatsApp e X (Twitter).</p>
+           <button disabled className="px-6 py-2 bg-white/5 text-gray-500 rounded font-bold uppercase text-xs tracking-widest cursor-not-allowed border border-white/10">
+              Compartilhar Escalação (Breve)
+           </button>
+        </div>
 
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Crown, ArrowUp, ArrowDown, Minus, Search, Filter, Star, Clock } from 'lucide-react';
+import { Trophy, Crown, Medal, User, ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import { Link, Navigate } from 'react-router-dom';
 
 const Ranking = () => {
@@ -8,7 +8,7 @@ const Ranking = () => {
   const [search, setSearch] = useState('');
 
   const [rankingGeral, setRankingGeral] = useState([]);
-  const rankingLive = []; // a ser implementado depois, mock vazio
+  const rankingLive = [];
 
   React.useEffect(() => {
     fetch('/api/reidamesa/ranking')
@@ -16,10 +16,10 @@ const Ranking = () => {
       .then(data => {
          const formatted = data.map((sq, i) => ({
              position: i + 1,
-             name: sq.user?.name || sq.user?.twitchId || 'Desconhecido',
+             name: sq.user?.nickname || sq.user?.name || sq.user?.twitchId || 'Desconhecido',
              score: sq.totalScore || 0,
              isReiDaMesa: i === 0,
-             hasCarroDoOvo: sq.roundScore > 50 // Logica mock para carro do ovo
+             hasCarroDoOvo: sq.roundScore > 50 
          }));
          setRankingGeral(formatted);
       })
@@ -40,28 +40,12 @@ const Ranking = () => {
                <Trophy className="text-accent" size={32} />
                Ranking Oficial
             </h1>
-            <p className="text-gray-400 mt-2">Visão completa dos maiores pontuadores do Cartola Vinteset.</p>
+            <p className="text-gray-400 mt-2">Visão completa dos maiores pontuadores do Rei da Mesa.</p>
           </div>
           
           <Link to="/reidamesa" className="px-6 py-2 bg-black/50 border border-white/10 hover:bg-white/10 text-sm font-bold uppercase tracking-widest text-white rounded transition-all">
             Voltar
           </Link>
-        </div>
-
-        {/* Minha Posição Card Fix */}
-        <div className="bg-gradient-to-r from-accent/20 to-transparent border border-accent/30 rounded-2xl p-6 mb-8 flex items-center justify-between">
-           <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-accent text-black rounded-full flex justify-center items-center font-black text-xl">
-                 24
-              </div>
-              <div>
-                 <h3 className="font-bold text-lg">Sua Posição Atual (Geral)</h3>
-                 <p className="text-gray-300 text-sm">Faltam 12 pontos para entrar no Top 10. Você consegue!</p>
-              </div>
-           </div>
-           <Link to="/reidamesa/perfil" className="px-4 py-2 border border-accent text-accent hover:bg-accent hover:text-black font-bold uppercase tracking-wider text-xs rounded transition-all">
-             Ver Meu Desempenho
-           </Link>
         </div>
 
         {/* Tabelas e Filtros */}
@@ -89,8 +73,8 @@ const Ranking = () => {
                 <input 
                   type="text"
                   placeholder="Buscar manager..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
                   className="w-full bg-black/50 border border-white/10 rounded-lg py-2 pl-9 pr-4 text-sm text-white focus:outline-none focus:border-accent/50"
                 />
               </div>
