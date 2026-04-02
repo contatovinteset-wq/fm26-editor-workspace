@@ -87,17 +87,16 @@ model Squad {
 // 👑 Tabelas do Rei da Mesa (Cartola)
 
 model Player {
-  id           String   @id @default(uuid())
-  uidName      String   @unique // Nome Único/ID para casar com o CSV de match stats
+  id           String        @id @default(uuid())
+  uidName      String        @unique
   name         String
+  realPosition String?
+  cartolaRole  String?       @default("") // Ex: "DEF", "MEI", "ATA", ""
   age          Int?
   height       String?
-  realPosition String?
-  cartolaRole  String?  // 'DEF', 'MEI', 'ATA' - Vazio se aguardar aprovação do adm
-  attributes   Json?    // Objeto contendo os stats base do plantel exportado
-  eligible     Boolean  @default(true) // Falso caso saia do time na atualização
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  price        Float         @default(5.0)
+  eligible     Boolean       @default(true)
+  rawStats     Json?
   
   squadsDef    Squad[]  @relation("SquadDefensor")
   squadsMei    Squad[]  @relation("SquadMeio")

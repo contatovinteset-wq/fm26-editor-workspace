@@ -13,8 +13,24 @@ const ReiDaMesa = () => {
   const [isMarketOpen, setIsMarketOpen] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
   const [ranking, setRanking] = useState([]);
+  const [allPlayers, setAllPlayers] = useState([]);
   
+  const loadAllPlayers = async () => {
+    try {
+      const res = await fetch('/api/reidamesa/players/all', { credentials: 'include' });
+      if (res.ok) {
+        const data = await res.json();
+        setAllPlayers(data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   React.useEffect(() => {
+    if (isOwner) {
+       loadAllPlayers();
+    }
     fetch('/api/reidamesa/status')
       .then(res => res.json())
       .then(data => setIsMarketOpen(data.isOpen))
@@ -65,12 +81,29 @@ const ReiDaMesa = () => {
            const data = await res.json();
            setIsUploading(false);
            alert(`Upload Concluído! Backend Retornou: ${JSON.stringify(data)}`);
+           if (type === 'PLANTEL') loadAllPlayers();
         } catch (err) {
            console.error(err);
            setIsUploading(false);
            alert('Ocorreu um erro no upload');
         }
      }
+  };
+
+  const handleRoleChange = async (playerId, newRole) => {
+    try {
+      const res = await fetch(`/api/reidamesa/players/${playerId}/role`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ cartolaRole: newRole })
+      });
+      if (res.ok) {
+        setAllPlayers(prev => prev.map(p => p.id === playerId ? { ...p, cartolaRole: newRole } : p));
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const pontuacaoRules = [
@@ -195,6 +228,60 @@ const ReiDaMesa = () => {
                     </div>
                  </div>
               </div>
+
+              {/* Tabela de edição de posição (Admin) */}
+              <div className="mt-8 bg-black/40 border border-primary/20 p-6 rounded-2xl overflow-x-auto">
+                 <h3 className="font-bold text-lg mb-4 flex items-center justify-between">
+                    Gerenciamento de Posições (Cartola)
+                    <span className="text-sm font-normal text-gray-400">Jogadores: {allPlayers.length}</span>
+                 </h3>
+                 <div className="max-h-[400px] overflow-y-auto w-full">
+                    <table className="w-full text-left text-sm text-gray-400 whitespace-nowrap">
+                       <thead className="bg-primary/10 text-primary uppercase text-xs sticky top-0 z-10">
+                          <tr>
+                             <th className="px-4 py-3 rounded-tl-lg">Nome / uid</th>
+                             <th className="px-4 py-3">Idade</th>
+                             <th className="px-4 py-3">Cartola Role</th>
+                             {/* Extra Colunas do RawStats, sem pegar a Escolhido ou Jogador pra não poluir. Apenas dinamicamente */}
+                             {allPlayers.length > 0 && allPlayers[0]?.rawStats && Object.keys(allPlayers[0].rawStats)
+                                .filter(k => k !== 'Escolhido' && k !== 'Jogador' && k !== 'Idade' && k !== 'Inf' && k !== '')
+                                .map(k => (
+                                 <th key={k} className="px-4 py-3">{k}</th>
+                             ))}
+                          </tr>
+                       </thead>
+                       <tbody className="divide-y divide-white/5">
+                          {allPlayers.map((p) => (
+                             <tr key={p.id} className="hover:bg-white/5 transition-colors">
+                                <td className="px-4 py-3">
+                                   <div className="font-bold text-white">{p.name}</div>
+                                   <div className="text-xs opacity-50">{p.uidName}</div>
+                                </td>
+                                <td className="px-4 py-3">{p.age || '-'}</td>
+                                <td className="px-4 py-3">
+                                   <select 
+                                     value={p.cartolaRole || ""} 
+                                     onChange={(e) => handleRoleChange(p.id, e.target.value)}
+                                     className="bg-gray-800 border border-white/20 text-white rounded p-1 text-sm outline-none w-32"
+                                   >
+                                      <option value="">-- Posição --</option>
+                                      <option value="DEF">Defensor (DEF)</option>
+                                      <option value="MEI">Meio-Campo (MEI)</option>
+                                      <option value="ATA">Atacante (ATA)</option>
+                                   </select>
+                                </td>
+                                {p.rawStats && Object.keys(p.rawStats)
+                                   .filter(k => k !== 'Escolhido' && k !== 'Jogador' && k !== 'Idade' && k !== 'Inf' && k !== '')
+                                   .map(k => (
+                                      <td key={k} className="px-4 py-3">{p.rawStats[k]}</td>
+                                ))}
+                             </tr>
+                          ))}
+                       </tbody>
+                    </table>
+                 </div>
+              </div>
+
             </div>
           </motion.section>
         )}

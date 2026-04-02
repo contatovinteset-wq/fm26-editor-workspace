@@ -32,13 +32,44 @@ router.get('/players', async (req, res) => {
   }
 });
 
+// Busca TODOS os jogadores para o painel Admin (inclui inativos e stats)
+router.get('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+  try {
+    const players = await prisma.player.findMany();
+    // parse rawStats
+    const parsed = players.map(p => ({
+       ...p,
+       rawStats: p.rawStats ? (typeof p.rawStats === 'string' ? JSON.parse(p.rawStats) : p.rawStats) : {}
+    }));
+    res.json(parsed);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao buscar todos os jogadores' });
+  }
+});
+
+// Patch da Role do Cartola
+router.patch('/players/:id/role', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { cartolaRole } = req.body;
+    await prisma.player.update({
+      where: { id },
+      data: { cartolaRole }
+    });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao assinalar role' });
+  }
+});
+
 // Busca Escalação do Usuário
 router.get('/squad', requireAuth, async (req, res) => {
   try {
     const squad = await prisma.squad.findUnique({
       where: { userId: req.user.id },
       include: {
-        defensor: true, meio: true, ataque: true, banco: true, bagre: true
+        defensor: true, meio: true, ataque: true, bagre: true
       }
     });
     res.json(squad || null);
@@ -51,12 +82,13 @@ router.get('/squad', requireAuth, async (req, res) => {
 router.post('/squad', requireAuth, async (req, res) => {
   try {
     if (!isMarketOpen) return res.status(403).json({ error: 'Mercado Fechado' });
-    const { defensorId, meioId, ataqueId, bancoId, bagreId } = req.body;
+    const { defensorId, meioId, ataqueId, bagreId } = req.body;
     
+    // Deixamos bancoId gravado caso haja DB velho, mas sempre null agora
     const squad = await prisma.squad.upsert({
       where: { userId: req.user.id },
-      update: { defensorId, meioId, ataqueId, bancoId, bagreId },
-      create: { userId: req.user.id, defensorId, meioId, ataqueId, bancoId, bagreId }
+      update: { defensorId, meioId, ataqueId, bancoId: null, bagreId },
+      create: { userId: req.user.id, defensorId, meioId, ataqueId, bancoId: null, bagreId }
     });
     res.json(squad);
   } catch (error) {

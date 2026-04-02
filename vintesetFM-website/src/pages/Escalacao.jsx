@@ -6,14 +6,13 @@ import { Link } from 'react-router-dom';
 const Escalacao = () => {
   // ==== ESTADOS ====
   const [formation, setFormation] = useState('4-4-2');
-  const [budget, setBudget] = useState(100.0); // 'DEF', 'MEI', 'ATA', 'BANCO', 'BAGRE'
-  const [activeSlot, setActiveSlot] = useState(null); // 'DEF', 'MEI', 'ATA', 'BANCO', 'BAGRE'
+  const [budget, setBudget] = useState(100.0);
+  const [activeSlot, setActiveSlot] = useState(null); // 'DEF', 'MEI', 'ATA', 'BAGRE'
   const [searchTerm, setSearchTerm] = useState('');
   const [squad, setSquad] = useState({
     def: null,
     mei: null,
     ata: null,
-    bench: null,
     bagre: null
   });
   const [isSaved, setIsSaved] = useState(false);
@@ -43,7 +42,6 @@ const Escalacao = () => {
             def: data.defensor,
             mei: data.meio,
             ata: data.ataque,
-            bench: data.banco,
             bagre: data.bagre
           });
           setIsSaved(true);
@@ -64,7 +62,7 @@ const Escalacao = () => {
     // Se bank, pode ser qualquer um
     
     // Nao mostrar jogadores já escalados
-    const isAlreadyPicked = (squad.def?.id === p.id || squad.mei?.id === p.id || squad.ata?.id === p.id || squad.bench?.id === p.id || squad.bagre?.id === p.id);
+    const isAlreadyPicked = (squad.def?.id === p.id || squad.mei?.id === p.id || squad.ata?.id === p.id || squad.bagre?.id === p.id);
     
     return matchesSearch && matchesPosition && !isAlreadyPicked;
   });
@@ -75,14 +73,12 @@ const Escalacao = () => {
     if (activeSlot === 'DEF') setSquad({ ...squad, def: player });
     if (activeSlot === 'MEI') setSquad({ ...squad, mei: player });
     if (activeSlot === 'ATA') setSquad({ ...squad, ata: player });
-    if (activeSlot === 'BANCO') setSquad({ ...squad, bench: player });
     if (activeSlot === 'BAGRE') setSquad({ ...squad, bagre: player });
 
     // Avança automático para o próximo slot vazio ou fecha o mercado
     if (activeSlot === 'DEF' && !squad.mei) setActiveSlot('MEI');
     else if (activeSlot === 'MEI' && !squad.ata) setActiveSlot('ATA');
-    else if (activeSlot === 'ATA' && !squad.bench) setActiveSlot('BANCO');
-    else if (activeSlot === 'BANCO' && !squad.bagre) setActiveSlot('BAGRE');
+    else if (activeSlot === 'ATA' && !squad.bagre) setActiveSlot('BAGRE');
     else setActiveSlot(null);
   };
 
@@ -97,7 +93,6 @@ const Escalacao = () => {
       defensorId: squad.def?.id,
       meioId: squad.mei?.id,
       ataqueId: squad.ata?.id,
-      bancoId: squad.bench?.id,
       bagreId: squad.bagre?.id
     };
     try {
@@ -117,7 +112,7 @@ const Escalacao = () => {
     }
   };
 
-  const isSquadComplete = squad.def && squad.mei && squad.ata && squad.bench && squad.bagre;
+  const isSquadComplete = squad.def && squad.mei && squad.ata && squad.bagre;
 
   return (
     <div className="w-full min-h-screen bg-bgDark text-white pt-24 pb-16">
@@ -130,7 +125,7 @@ const Escalacao = () => {
                <Shield className="text-accent" size={32} />
                Montar Meu Esquadrão
             </h1>
-            <p className="text-gray-400 mt-2">Escolha 1 Defensor/Goleiro, 1 Meia, 1 Atacante, 1 Reserva e 1 Bagre.</p>
+            <p className="text-gray-400 mt-2">Escolha 1 Defensor/Goleiro, 1 Meia, 1 Atacante e 1 Bagre.</p>
           </div>
           
           <div className="flex bg-black/50 p-1 rounded-lg border border-white/10 w-full md:w-auto">
@@ -192,26 +187,9 @@ const Escalacao = () => {
                  </div>
               </div>
 
-              {/* RESERVAS E BAGRE */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                 {/* RESERVA / BÔNUS */}
-                 <div className="bg-gray-900 border border-white/10 rounded-2xl p-4 flex items-center gap-4 justify-center w-full">
-                    <div className="w-12 h-12 rounded-xl border border-dashed border-accent/50 bg-accent/5 flex shrink-0 items-center justify-center -rotate-6">
-                       <span className="text-sm font-black text-accent/50">RES</span>
-                    </div>
-                    <SlotPlayer 
-                      label="Bônus (Reserva)" 
-                      type="BANCO" 
-                      player={squad.bench} 
-                      isActive={activeSlot === 'BANCO'} 
-                      onClick={() => setActiveSlot('BANCO')}
-                      onRemove={() => handleRemovePlayer('bench')}
-                      horizontal
-                    />
-                 </div>
-
-                 {/* O BAGRE */}
-                 <div className="bg-gray-900 border border-white/10 rounded-2xl p-4 flex items-center gap-4 justify-center w-full">
+              {/* O BAGRE */}
+              <div className="grid grid-cols-1 gap-4 w-full">
+                 <div className="bg-gray-900 border border-white/10 rounded-2xl p-4 flex items-center gap-4 justify-center w-full max-w-sm mx-auto">
                     <div className="w-12 h-12 rounded-xl border border-dashed border-orange-500/50 bg-orange-500/10 flex shrink-0 items-center justify-center rotate-6 overflow-hidden">
                        <img src="/bagre-emote.png" alt="Bagre Emote" className="w-10 h-10 object-contain scale-125 filter drop-shadow-md" />
                     </div>

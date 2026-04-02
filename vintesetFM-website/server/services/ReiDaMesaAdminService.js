@@ -8,20 +8,36 @@ export async function processPlantelHtml(htmlString) {
   const rows = $('table tr').toArray();
   const playersToAdd = [];
 
+  const headers = [];
+  $(rows[0]).find('th').each((_, th) => {
+    headers.push($(th).text().trim());
+  });
+
+  const nameIndex = headers.findIndex(h => h === 'Jogador');
+  const posIndex = headers.findIndex(h => h === 'Escolhido' || h === 'Posição');
+  const ageIndex = headers.findIndex(h => h === 'Idade');
+  const heightIndex = headers.findIndex(h => h === 'Altura');
+
   for (let i = 1; i < rows.length; i++) { // pula o header
     const cols = $(rows[i]).find('td');
     if (cols.length === 0) continue;
 
-    // A extração dependerá das colunas exatas do HTML. Supondo genericamente:
-    // 0: Nome, 1: Posição, 2: Idade, 3: Altura
-    const name = $(cols[0]).text().trim();
+    const name = nameIndex >= 0 ? $(cols[nameIndex]).text().trim() : '';
     if (!name) continue;
 
-    const realPosition = $(cols[1]).text().trim();
-    const ageText = $(cols[2]).text().trim();
-    const heightText = $(cols[3]).text().trim();
+    const realPosition = posIndex >= 0 ? $(cols[posIndex]).text().trim() : '';
+    const ageText = ageIndex >= 0 ? $(cols[ageIndex]).text().trim() : '';
+    const heightText = heightIndex >= 0 ? $(cols[heightIndex]).text().trim() : '';
 
     const uidName = `${name}-${ageText}`.replace(/\s+/g, '-').toLowerCase();
+
+    // Monta o rawStats cruzando keys do header
+    const rawStats = {};
+    cols.each((j, td) => {
+      if (headers[j]) {
+        rawStats[headers[j]] = $(td).text().trim();
+      }
+    });
 
     playersToAdd.push({
       uidName,
@@ -30,6 +46,7 @@ export async function processPlantelHtml(htmlString) {
       age: parseInt(ageText) || null,
       height: heightText,
       eligible: true,
+      rawStats
     });
   }
 
@@ -133,7 +150,7 @@ export async function processMatchResultHtml(htmlString) {
     roundScore += await calcPts(sq.defensorId);
     roundScore += await calcPts(sq.meioId);
     roundScore += await calcPts(sq.ataqueId);
-    // banco geralmente nao pontua a menos que alguem n jogue, ignorando logica complexa agora
+    
     // bagre score invertido
     const bagrePts = await calcPts(sq.bagreId);
     // ex: se o bagre for negativo, manager ganha positivo.
