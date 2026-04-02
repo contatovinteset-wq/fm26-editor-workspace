@@ -12,11 +12,25 @@ const ReiDaMesa = () => {
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [isMarketOpen, setIsMarketOpen] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
+  const [ranking, setRanking] = useState([]);
   
   React.useEffect(() => {
     fetch('/api/reidamesa/status')
       .then(res => res.json())
       .then(data => setIsMarketOpen(data.isOpen))
+      .catch(console.error);
+
+    fetch('/api/reidamesa/ranking')
+      .then(res => res.json())
+      .then(data => {
+         const formatted = data.slice(0,5).map((sq, i) => ({
+             position: i + 1,
+             name: sq.user?.name || sq.user?.twitchId || 'Desconhecido',
+             lastRound: sq.roundScore || 0,
+             total: sq.totalScore || 0
+         }));
+         setRanking(formatted);
+      })
       .catch(console.error);
   }, []);
 
@@ -35,17 +49,29 @@ const ReiDaMesa = () => {
     }
   };
 
-  const handleFakeUpload = (e) => {
+  const handleUpload = async (e, type) => {
      if(e.target.files.length > 0) {
         setIsUploading(true);
-        setTimeout(() => {
-          setIsUploading(false);
-          alert('Upload computado com sucesso (Funcionalidade visual).');
-        }, 1500);
+        const formData = new FormData();
+        formData.append('file', e.target.files[0]);
+
+        const endpoint = type === 'PLANTEL' ? '/api/reidamesa/upload-plantel' : '/api/reidamesa/upload-match';
+        try {
+           const res = await fetch(endpoint, {
+             method: 'POST',
+             body: formData,
+             credentials: 'include'
+           });
+           const data = await res.json();
+           setIsUploading(false);
+           alert(`Upload Concluído! Backend Retornou: ${JSON.stringify(data)}`);
+        } catch (err) {
+           console.error(err);
+           setIsUploading(false);
+           alert('Ocorreu um erro no upload');
+        }
      }
   };
-
-  const ranking = [];
 
   const pontuacaoRules = [
     { label: "Gol", pts: "+8.0", color: "text-green-500", bg: "bg-green-500/10", border: "border-green-500/20" },
@@ -147,7 +173,7 @@ const ReiDaMesa = () => {
                           <UploadCloud className="w-6 h-6 mb-2 text-primary" />
                           <p className="text-xs text-gray-400"><span className="font-bold text-white">{isUploading ? 'Processando...' : 'Clique para enviar'}</span> ou arraste o .html</p>
                         </div>
-                        <input type="file" className="hidden" accept=".html" onChange={handleFakeUpload} />
+                        <input type="file" className="hidden" accept=".html" onChange={(e) => handleUpload(e, 'PLANTEL')} />
                       </label>
                     </div>
                  </div>
@@ -164,7 +190,7 @@ const ReiDaMesa = () => {
                           <BarChart3 className="w-6 h-6 mb-2 text-primary" />
                           <p className="text-xs text-gray-400"><span className="font-bold text-white">{isUploading ? 'Processando HTML...' : 'Clique para enviar'}</span> html de estatísticas</p>
                         </div>
-                        <input type="file" className="hidden" accept=".html" onChange={handleFakeUpload} />
+                        <input type="file" className="hidden" accept=".html" onChange={(e) => handleUpload(e, 'MATCH')} />
                       </label>
                     </div>
                  </div>

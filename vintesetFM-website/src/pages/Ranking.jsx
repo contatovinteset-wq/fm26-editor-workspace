@@ -7,9 +7,24 @@ const Ranking = () => {
   const [activeTab, setActiveTab] = useState('GERAL');
   const [search, setSearch] = useState('');
 
-  // Tabelas de ranking reais (inicialmente vazias antes do backend)
-  const rankingGeral = [];
-  const rankingLive = [];
+  const [rankingGeral, setRankingGeral] = useState([]);
+  const rankingLive = []; // a ser implementado depois, mock vazio
+
+  React.useEffect(() => {
+    fetch('/api/reidamesa/ranking')
+      .then(res => res.json())
+      .then(data => {
+         const formatted = data.map((sq, i) => ({
+             position: i + 1,
+             name: sq.user?.name || sq.user?.twitchId || 'Desconhecido',
+             score: sq.totalScore || 0,
+             isReiDaMesa: i === 0,
+             hasCarroDoOvo: sq.roundScore > 50 // Logica mock para carro do ovo
+         }));
+         setRankingGeral(formatted);
+      })
+      .catch(console.error);
+  }, []);
 
   const dataToUse = activeTab === 'GERAL' ? rankingGeral : rankingLive;
   const filteredData = dataToUse.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));

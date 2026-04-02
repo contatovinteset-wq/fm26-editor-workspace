@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, AlertTriangle, Shield, TrendingUp, DollarSign, Search, Filter, ArrowRight, Save, Crown, X } from 'lucide-react';
+import { Users, AlertTriangle, Shield, TrendingUp, DollarSign, Search, Filter, ArrowRight, Save, Crown, X, Info, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import mockData from '../data/reiDaMesaMocks.json';
 
 const Escalacao = () => {
   // ==== ESTADOS ====
@@ -18,8 +17,40 @@ const Escalacao = () => {
     bagre: null
   });
   const [isSaved, setIsSaved] = useState(false);
+  const [isMarketOpen, setIsMarketOpen] = useState(true);
+  const [players, setPlayers] = useState([]);
 
-  const players = mockData.players || [];
+  // Fetch init do backend
+  useEffect(() => {
+    // Busca status do mercado
+    fetch('/api/reidamesa/status')
+      .then(res => res.json())
+      .then(data => setIsMarketOpen(data.isOpen))
+      .catch(console.error);
+
+    // Busca jogadores do pool
+    fetch('/api/reidamesa/players')
+      .then(res => res.json())
+      .then(data => setPlayers(data))
+      .catch(console.error);
+
+    // Busca esquadrão salvo
+    fetch('/api/reidamesa/squad', { credentials: 'include' })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.defensor) {
+          setSquad({
+            def: data.defensor,
+            mei: data.meio,
+            ata: data.ataque,
+            bench: data.banco,
+            bagre: data.bagre
+          });
+          setIsSaved(true);
+        }
+      })
+      .catch(console.error);
+  }, []);
 
   // Filtra mercado baseado no slot ativo
   const filteredPlayers = players.filter(p => {
@@ -27,9 +58,9 @@ const Escalacao = () => {
     const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
     
     let matchesPosition = true;
-    if (activeSlot === 'DEF') matchesPosition = p.position === 'DEF';
-    if (activeSlot === 'MEI') matchesPosition = p.position === 'MEI';
-    if (activeSlot === 'ATA') matchesPosition = p.position === 'ATA';
+    if (activeSlot === 'DEF') matchesPosition = p.cartolaRole === 'DEF' || p.realPosition?.includes('D (') || p.realPosition === 'GR';
+    if (activeSlot === 'MEI') matchesPosition = p.cartolaRole === 'MEI' || p.realPosition?.includes('M (');
+    if (activeSlot === 'ATA') matchesPosition = p.cartolaRole === 'ATA' || p.realPosition?.includes('PL') || p.realPosition?.includes('MA (');
     // Se bank, pode ser qualquer um
     
     // Nao mostrar jogadores já escalados
@@ -59,6 +90,31 @@ const Escalacao = () => {
     setSquad({ ...squad, [slot]: null });
     setActiveSlot(slot.toUpperCase());
     setIsSaved(false);
+  };
+
+  const saveSquadToBackend = async () => {
+    const payload = {
+      defensorId: squad.def?.id,
+      meioId: squad.mei?.id,
+      ataqueId: squad.ata?.id,
+      bancoId: squad.bench?.id,
+      bagreId: squad.bagre?.id
+    };
+    try {
+      const res = await fetch('/api/reidamesa/squad', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) {
+        setIsSaved(true);
+      } else {
+        alert('Erro ao salvar. Verifique se o mercado está aberto.');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const isSquadComplete = squad.def && squad.mei && squad.ata && squad.bench && squad.bagre;
@@ -175,8 +231,8 @@ const Escalacao = () => {
               <motion.button 
                 initial={false}
                 animate={isSaved ? { scale: [1, 1.05, 1], transition: { duration: 0.3 } } : {}}
-                disabled={!isSquadComplete || isSaved}
-                onClick={() => setIsSaved(true)}
+                disabled={!isSquadComplete || isSaved || !isMarketOpen}
+                onClick={saveSquadToBackend}
                 className={`w-full py-4 rounded-xl flex items-center justify-center gap-2 font-black uppercase tracking-wider transition-all shadow-xl ${
                   isSaved 
                    ? 'bg-green-500 text-black shadow-[0_0_20px_rgba(34,197,94,0.4)]' 
@@ -246,11 +302,11 @@ const Escalacao = () => {
                        >
                          <div className="flex items-center gap-4">
                            <div className="w-12 h-12 rounded-full bg-gray-800 border border-white/10 flex items-center justify-center text-xs font-bold font-mono">
-                             {player.position}
+                             {player.cartolaRole || player.realPosition?.split(' ')[0] || '?'}
                            </div>
                            <div>
                              <h4 className="font-bold text-sm text-white group-hover:text-accent transition-colors">{player.name}</h4>
-                             <p className="text-xs text-gray-400 font-mono">Média: {player.avgPts.toFixed(1)} pts</p>
+                             <p className="text-xs text-gray-400 font-mono">Idade: {player.age}</p>
                            </div>
                          </div>
                          <button className="w-8 h-8 rounded-full bg-accent text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -305,19 +361,19 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
           </div>
           
           <div className={`z-10 flex ${horizontal ? 'flex-row w-full justify-between items-center' : 'flex-col items-center text-center'} gap-1 p-2`}>
-            {horizontal ? (
+             {horizontal ? (
                <>
                  <div className="flex flex-col">
-                   <span className="text-xs text-accent font-bold">{player.position}</span>
+                   <span className="text-xs text-accent font-bold">{player.cartolaRole || player.realPosition}</span>
                    <span className="font-black text-sm">{player.name}</span>
                  </div>
-                 <span className="text-xs bg-white/10 px-2 py-1 rounded">{player.avgPts} Média</span>
+                 <span className="text-xs bg-white/10 px-2 py-1 rounded">{player.age} anos</span>
                </>
             ) : (
                <>
-                <span className="text-[10px] text-accent font-bold uppercase">{player.position}</span>
+                <span className="text-[10px] text-accent font-bold uppercase">{player.cartolaRole || player.realPosition}</span>
                 <span className="text-xs sm:text-sm font-black uppercase leading-tight">{player.name}</span>
-                <span className="text-[10px] bg-white/10 px-2 rounded-sm mt-1">{player.avgPts} avg</span>
+                <span className="text-[10px] bg-white/10 px-2 rounded-sm mt-1">{player.age} anos</span>
                </>
             )}
           </div>

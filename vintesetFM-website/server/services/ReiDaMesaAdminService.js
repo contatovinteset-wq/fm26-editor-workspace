@@ -1,0 +1,152 @@
+import * as cheerio from 'cheerio';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+export async function processPlantelHtml(htmlString) {
+  const $ = cheerio.load(htmlString);
+  const rows = $('table tr').toArray();
+  const playersToAdd = [];
+
+  for (let i = 1; i < rows.length; i++) { // pula o header
+    const cols = $(rows[i]).find('td');
+    if (cols.length === 0) continue;
+
+    // A extração dependerá das colunas exatas do HTML. Supondo genericamente:
+    // 0: Nome, 1: Posição, 2: Idade, 3: Altura
+    const name = $(cols[0]).text().trim();
+    if (!name) continue;
+
+    const realPosition = $(cols[1]).text().trim();
+    const ageText = $(cols[2]).text().trim();
+    const heightText = $(cols[3]).text().trim();
+
+    const uidName = `${name}-${ageText}`.replace(/\s+/g, '-').toLowerCase();
+
+    playersToAdd.push({
+      uidName,
+      name,
+      realPosition,
+      age: parseInt(ageText) || null,
+      height: heightText,
+      eligible: true,
+    });
+  }
+
+  // Desabilita atual elegibilidade (soft-delete) para todos, e vamos reabilitar apenas os que vieram no HTML
+  await prisma.player.updateMany({ data: { eligible: false } });
+
+  let countNew = 0;
+  let countUpdated = 0;
+
+  for (const pData of playersToAdd) {
+    const existing = await prisma.player.findUnique({ where: { uidName: pData.uidName } });
+    if (existing) {
+      await prisma.player.update({
+        where: { uidName: pData.uidName },
+        data: { ...pData, eligible: true }
+      });
+      countUpdated++;
+    } else {
+      await prisma.player.create({ data: pData });
+      countNew++;
+    }
+  }
+
+  return { success: true, countNew, countUpdated, total: rows.length - 1 };
+}
+
+export async function processMatchResultHtml(htmlString) {
+  const $ = cheerio.load(htmlString);
+  const rows = $('table tr').toArray();
+  const scores = [];
+
+  // Pega a rodada aberta
+  const openRound = await prisma.round.findFirst({ where: { isOpen: true } });
+  if (!openRound) {
+    throw new Error('Nenhuma rodada aberta no momento.');
+  }
+
+  for (let i = 1; i < rows.length; i++) {
+    const cols = $(rows[i]).find('td');
+    if (cols.length === 0) continue;
+
+    const name = $(cols[0]).text().trim();
+    const ageText = $(cols[1]).text().trim(); // Assumindo idade na pos 1
+    const uidName = `${name}-${ageText}`.replace(/\s+/g, '-').toLowerCase();
+
+    // Supondo estrutura de Match: Gols = 2, Ast = 3, CA = 4, CV = 5, Desarmes = 6, Nota = 7
+    const goals = parseInt($(cols[2]).text().trim()) || 0;
+    const assists = parseInt($(cols[3]).text().trim()) || 0;
+    const yellowCards = parseInt($(cols[4]).text().trim()) || 0;
+    const redCards = parseInt($(cols[5]).text().trim()) || 0;
+    const rating = parseFloat($(cols[7]).text().trim().replace(',', '.')) || 0;
+
+    // Lógica do Cartola Mockada (- Goals: +8.0)
+    let points = 0;
+    points += goals * 8.0;
+    points += assists * 5.0;
+    points -= yellowCards * 2.0;
+    points -= redCards * 5.0;
+    points += rating > 7.0 ? 3.0 : 0; // bonus por rating
+    
+    // Procura o jogador
+    const player = await prisma.player.findUnique({ where: { uidName } });
+    if (player) {
+      scores.push({
+        playerId: player.id,
+        roundId: openRound.id,
+        rating,
+        points,
+        details: { goals, assists, yellowCards, redCards }
+      });
+    }
+  }
+
+  // Salva no banco as pontuações e atualiza Squads
+  let processados = 0;
+  for (const s of scores) {
+    await prisma.playerScore.upsert({
+      where: { playerId_roundId: { playerId: s.playerId, roundId: s.roundId } },
+      update: { points: s.points, rating: s.rating, details: s.details },
+      create: { playerId: s.playerId, roundId: s.roundId, points: s.points, rating: s.rating, details: s.details }
+    });
+    processados++;
+  }
+
+  // Recalcular totais para o Squad ativo deste round
+  // 1. Pegar todos os squads atuais
+  const squads = await prisma.squad.findMany({});
+  
+  for (const sq of squads) {
+    let roundScore = 0;
+    
+    // Busca as pontuações da rodada atual para cada membro
+    const calcPts = async (pid) => {
+      if (!pid) return 0;
+      const ps = await prisma.playerScore.findUnique({
+        where: { playerId_roundId: { playerId: pid, roundId: openRound.id } }
+      });
+      return ps ? ps.points : 0;
+    };
+
+    roundScore += await calcPts(sq.defensorId);
+    roundScore += await calcPts(sq.meioId);
+    roundScore += await calcPts(sq.ataqueId);
+    // banco geralmente nao pontua a menos que alguem n jogue, ignorando logica complexa agora
+    // bagre score invertido
+    const bagrePts = await calcPts(sq.bagreId);
+    // ex: se o bagre for negativo, manager ganha positivo.
+    roundScore += (bagrePts < 0 ? Math.abs(bagrePts) * 2 : -bagrePts);
+
+    await prisma.squad.update({
+      where: { id: sq.id },
+      data: {
+        roundScore: roundScore,
+        totalScore: { increment: roundScore }
+      }
+    });
+  }
+
+  return { success: true, scoresProcessados: processados };
+}

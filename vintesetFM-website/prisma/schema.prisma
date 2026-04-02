@@ -62,15 +62,80 @@ model Squad {
   id          String    @id @default(uuid())
   userId      String    @unique
   user        User      @relation(fields: [userId], references: [id])
-  defensorId  Int?
-  meioId      Int?
-  ataqueId    Int?
-  bancoId     Int?
-  bagreId     Int?
-  roundScore  Int       @default(0)
-  totalScore  Int       @default(0)
+  
+  defensorId  String?
+  defensor    Player?   @relation("SquadDefensor", fields: [defensorId], references: [id])
+  
+  meioId      String?
+  meio        Player?   @relation("SquadMeio", fields: [meioId], references: [id])
+  
+  ataqueId    String?
+  ataque      Player?   @relation("SquadAtaque", fields: [ataqueId], references: [id])
+  
+  bancoId     String?
+  banco       Player?   @relation("SquadBanco", fields: [bancoId], references: [id])
+  
+  bagreId     String?
+  bagre       Player?   @relation("SquadBagre", fields: [bagreId], references: [id])
+  
+  roundScore  Float     @default(0.0)
+  totalScore  Float     @default(0.0)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+// 👑 Tabelas do Rei da Mesa (Cartola)
+
+model Player {
+  id           String   @id @default(uuid())
+  uidName      String   @unique // Nome Único/ID para casar com o CSV de match stats
+  name         String
+  age          Int?
+  height       String?
+  realPosition String?
+  cartolaRole  String?  // 'DEF', 'MEI', 'ATA' - Vazio se aguardar aprovação do adm
+  attributes   Json?    // Objeto contendo os stats base do plantel exportado
+  eligible     Boolean  @default(true) // Falso caso saia do time na atualização
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  squadsDef    Squad[]  @relation("SquadDefensor")
+  squadsMei    Squad[]  @relation("SquadMeio")
+  squadsAta    Squad[]  @relation("SquadAtaque")
+  squadsBanco  Squad[]  @relation("SquadBanco")
+  squadsBagre  Squad[]  @relation("SquadBagre")
+
+  scores       PlayerScore[]
+  bagreOfRound Round[]  @relation("RoundBagre")
+}
+
+model Round {
+  id          String   @id @default(uuid())
+  number      Int      @unique
+  isOpen      Boolean  @default(false)
+  isFinished  Boolean  @default(false)
+  
+  bagreId     String?  // Id do pior jogador da rodada computado no admin
+  bagre       Player?  @relation("RoundBagre", fields: [bagreId], references: [id])
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  scores      PlayerScore[]
+}
+
+model PlayerScore {
+  id          String   @id @default(uuid())
+  playerId    String
+  roundId     String
+  player      Player   @relation(fields: [playerId], references: [id])
+  round       Round    @relation(fields: [roundId], references: [id])
+  
+  rating      Float    @default(0.0) // Nota do match stats FM
+  points      Float    @default(0.0) // Pontuação algébrica final de Cartola
+  details     Json?    // Salva por quais estatísticas o cara pontuou (Gols: 1, Cartoes: 0)
+
+  @@unique([playerId, roundId])
 }
 
 // 🛡️ Tabela de Auditoria de Segurança
