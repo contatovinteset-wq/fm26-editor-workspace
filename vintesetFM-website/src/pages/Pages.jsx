@@ -26,7 +26,8 @@ const Pages = {
   Topico: () => <Topico />,
   MinhaConta: () => <MinhaConta />,
   AdminPanel: () => <AdminPanel />,
-  ModeratorPanel: () => <ModeratorPanel />
+  ModeratorPanel: () => <ModeratorPanel />,
+  ReiDaMesaAdmin: () => <ReiDaMesaAdmin />,
 };
 
 export default Pages;
