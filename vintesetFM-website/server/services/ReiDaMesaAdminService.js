@@ -78,61 +78,160 @@ export async function processMatchResultHtml(htmlString) {
     throw new Error('Nenhuma rodada aberta no momento.');
   }
 
-  for (let i = 1; i < rows.length; i++) {
-    const cols = $(rows[i]).find('td');
-    if (cols.length === 0) continue;
+  // Identificar quais arrays de colunas pertecem a qual "Tabela" processada
+  // O FM gera várias table <table> na mesma página.
+  let currentCategory = '';
+  // Vamos juntar tudo num DICIONÁRIO de jogador
+  const playerStatsMap = {};
 
-    const name = $(cols[0]).text().trim();
-    const ageText = $(cols[1]).text().trim(); // Assumindo idade na pos 1
-    const uidName = `${name}-${ageText}`.replace(/\s+/g, '-').toLowerCase();
+  const tables = $('table');
+  tables.each((tableIndex, table) => {
+    const prevH3 = $(table).prevAll('h3').first().text().trim();
+    const headers = [];
+    $(table).find('th').each((_, th) => headers.push($(th).text().trim()));
 
-    // Supondo estrutura de Match: Gols = 2, Ast = 3, CA = 4, CV = 5, Desarmes = 6, Nota = 7
-    const goals = parseInt($(cols[2]).text().trim()) || 0;
-    const assists = parseInt($(cols[3]).text().trim()) || 0;
-    const yellowCards = parseInt($(cols[4]).text().trim()) || 0;
-    const redCards = parseInt($(cols[5]).text().trim()) || 0;
-    const rating = parseFloat($(cols[7]).text().trim().replace(',', '.')) || 0;
+    const trs = $(table).find('tr');
+    trs.each((i, tr) => {
+      if (i === 0) return; // headers
+      const cols = $(tr).find('td');
+      if (cols.length === 0) return;
 
-    // Lógica do Cartola Mockada (- Goals: +8.0)
-    let points = 0;
-    points += goals * 8.0;
-    points += assists * 5.0;
-    points -= yellowCards * 2.0;
-    points -= redCards * 5.0;
-    points += rating > 7.0 ? 3.0 : 0; // bonus por rating
-    
-    // Procura o jogador
-    const player = await prisma.player.findUnique({ where: { uidName } });
+      const name = $(cols[2]).text().trim(); // A Coluna 2 é NOME em todas as tabelas
+      if (!name) return;
+
+      if (!playerStatsMap[name]) playerStatsMap[name] = {};
+      const pmap = playerStatsMap[name];
+
+      // Busca por min e amarelos/vermelhos em Min (coluna 1)
+      if (!pmap.MinText) pmap.MinText = $(cols[1]).text().trim();
+
+      // Mapeia todas as celulas da row para seus headers
+      headers.forEach((h, idx) => {
+        pmap[h] = $(cols[idx]).text().trim();
+      });
+    });
+  });
+
+  // Iterar no Mapa Unificado de stats extraídos
+  for (const name of Object.keys(playerStatsMap)) {
+    const stats = playerStatsMap[name];
+
+    // Busca jogador no DB
+    const playerArray = await prisma.player.findMany({ where: { name: name } });
+    const player = playerArray.length > 0 ? playerArray[0] : null;
+
     if (player) {
+      // Regras de Cálculos
+      // 'Golos'
+      const goals = parseInt(stats['Golos']) || 0;
+      const assists = parseInt(stats['Assist.']) || 0;
+      const xgText = (stats['xG'] || '').replace(',', '.');
+      const xG = parseFloat(xgText) || 0.0;
+      const xaText = (stats['xA'] || '').replace(',', '.');
+      const xA = parseFloat(xaText) || 0.0;
+
+      const chancesCriadas = parseInt(stats['Oportunidades Flagrantes']) || 0;
+      const passesDecisivos = parseInt(stats['Passes Decisivos']) || 0;
+      const dribles = parseInt(stats['Fintas']) || 0;
+      const bateuBarra = parseInt(stats['Remate - Bateu na Barra']) || 0;
+
+      const desarmes = parseInt(stats['Desarmes Decisivos']) || 0;
+      const intercep = parseInt(stats['Intercepções Feitas']) || 0;
+      const alivios = parseInt(stats['Alívios']) || 0;
+      const faltasCom = parseInt(stats['Faltas Cometidas']) || 0;
+
+      const defSeguras = parseInt(stats['Defesas Seguras']) || 0;
+      const defPonta = parseInt(stats['Defesas com Ponta dos Dedos']) || 0;
+      const defDesvio = parseInt(stats['Defesas Desviadas']) || 0;
+      const sofridos = parseInt(stats['Remates Sofridos']) || 0; // Se isso é total de chutes ao gol? Para o goleiro se ele sofre gol, geralmente não aparece aí direto, mas usaremos a soma das defesas como base de bônus
+
+      // Calcula os cartões da coluna Min
+      let yellowCars = 0;
+      let redCards = 0;
+      let minsPlayed = 0;
+
+      const minText = stats['MinText'] || '';
+      
+      let points = 0;
+      
+      // Pontuação Frouxa do Minutos:
+      if (minText.includes('90')) minsPlayed = 90;
+      else if (minText.includes('Sai')) minsPlayed = parseInt(minText) || 60;
+      else if (minText.includes('Entra')) minsPlayed = 90 - (parseInt(minText) || 60);
+
+      if (minsPlayed >= 60) points += 1.0;
+      else if (minsPlayed > 0) points += 0.5;
+
+      if (minText.toLowerCase().includes('ama') || minText.toLowerCase().includes('amarelo')) {
+        yellowCars = 1;
+        points -= 1.5;
+      }
+      if (minText.toLowerCase().includes('ver') || minText.toLowerCase().includes('vermelho')) {
+        redCards = 1;
+        points -= 3.0;
+      }
+
+      points += (goals * 8.0);
+      points += (assists * 5.0);
+      points += (xG * 2.0);
+      points += (xA * 2.0);
+      points += (chancesCriadas * 2.0);
+      points += (passesDecisivos * 1.0);
+      points += (dribles * 0.5);
+      points += (bateuBarra * 1.5);
+
+      points += (desarmes * 2.0);
+      points += (intercep * 0.5);
+      points += (alivios * 0.2);
+      points -= (faltasCom * 0.5); // Desconta faltas feitas!
+
+      const defesasGoleiro = defSeguras + defPonta + defDesvio;
+      points += (defesasGoleiro * 1.5);
+      // Faltaria descontos a gols sofridos baseados num dado mais preciso.
+
       scores.push({
         playerId: player.id,
         roundId: openRound.id,
-        rating,
-        points,
-        details: { goals, assists, yellowCards, redCards }
+        rating: 0, 
+        points: Number(points.toFixed(2)),
+        details: { goals, assists, xG, xA, yellowCars, redCards, minsPlayed }
       });
     }
   }
 
-  // Salva no banco as pontuações e atualiza Squads
+  // Pós processamento e encontrar "O BAGRE DA PARTIDA"
   let processados = 0;
+  let worstPlayerId = null;
+  let minPoints = 9999;
+
   for (const s of scores) {
+    // Determina o bagre (o que jogou e pontuou menos, ignora não-escalados ou banco? 
+    // Só ignora se não entrou (minsPlayed === 0)
+    if (s.details.minsPlayed > 0 && s.points < minPoints) {
+      minPoints = s.points;
+      worstPlayerId = s.playerId;
+    }
+
     await prisma.playerScore.upsert({
       where: { playerId_roundId: { playerId: s.playerId, roundId: s.roundId } },
-      update: { points: s.points, rating: s.rating, details: s.details },
-      create: { playerId: s.playerId, roundId: s.roundId, points: s.points, rating: s.rating, details: s.details }
+      update: { points: s.points, details: s.details },
+      create: { playerId: s.playerId, roundId: s.roundId, points: s.points, details: s.details }
     });
     processados++;
   }
 
-  // Recalcular totais para o Squad ativo deste round
-  // 1. Pegar todos os squads atuais
+  // Update logic para Round
+  await prisma.round.update({
+    where: { id: openRound.id },
+    data: { bagreId: worstPlayerId }
+  });
+
+  // Atualizar pontuação total de usuários
   const squads = await prisma.squad.findMany({});
   
   for (const sq of squads) {
     let roundScore = 0;
     
-    // Busca as pontuações da rodada atual para cada membro
     const calcPts = async (pid) => {
       if (!pid) return 0;
       const ps = await prisma.playerScore.findUnique({
@@ -144,20 +243,26 @@ export async function processMatchResultHtml(htmlString) {
     roundScore += await calcPts(sq.defensorId);
     roundScore += await calcPts(sq.meioId);
     roundScore += await calcPts(sq.ataqueId);
-    
-    // bagre score invertido
-    const bagrePts = await calcPts(sq.bagreId);
-    // ex: se o bagre for negativo, manager ganha positivo.
-    roundScore += (bagrePts < 0 ? Math.abs(bagrePts) * 2 : -bagrePts);
+
+    // Lógica nova do Bônus do Bagre:
+    // Se o bagre escolhido pelo viewer for == worstPlayerId, Ganha 5pts.
+    // Senão, Perde 5pts.
+    if (sq.bagreId) {
+      if (sq.bagreId === worstPlayerId) {
+        roundScore += 5.0; // BINGO Do bagre!
+      } else {
+        roundScore -= 5.0; // Errou o bagre, punido com as leis dos Deuses do FM.
+      }
+    }
 
     await prisma.squad.update({
       where: { id: sq.id },
       data: {
-        roundScore: roundScore,
-        totalScore: { increment: roundScore }
+        roundScore: Number(roundScore.toFixed(2)),
+        totalScore: { increment: Number(roundScore.toFixed(2)) }
       }
     });
   }
 
-  return { success: true, scoresProcessados: processados };
+  return { success: true, scoresProcessados: processados, bagreDaRodadaId: worstPlayerId };
 }

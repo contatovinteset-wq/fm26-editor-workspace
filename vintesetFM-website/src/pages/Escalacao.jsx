@@ -128,8 +128,18 @@ const Escalacao = () => {
             <p className="text-gray-400 mt-2">Escolha 1 Defensor/Goleiro, 1 Meia, 1 Atacante e 1 Bagre.</p>
           </div>
           
-          <div className="flex bg-black/50 p-1 rounded-lg border border-white/10 w-full md:w-auto">
-            <Link to="/reidamesa" className="px-6 py-2 text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 rounded transition-all text-center flex-1">
+          <div className="flex bg-black/50 p-1 rounded-lg border border-white/10 w-full md:w-auto gap-2">
+            <button
+               onClick={() => {
+                 setSquad({ def: null, mei: null, ata: null, bagre: null });
+                 setIsSaved(false);
+                 setActiveSlot(null);
+               }}
+               className="px-4 py-2 text-sm font-bold uppercase tracking-widest text-red-400 hover:text-white hover:bg-red-500/20 rounded transition-all text-center flex-1 border border-red-500/20"
+            >
+              Limpar Escalação
+            </button>
+            <Link to="/reidamesa" className="px-6 py-2 text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 rounded transition-all text-center flex-1 border border-transparent">
               Voltar ao Início
             </Link>
           </div>

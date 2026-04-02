@@ -22,6 +22,34 @@ router.get('/ranking', async (req, res) => {
   }
 });
 
+// Top 3 Jogadores e Bagre da ÚLTIMA rodada fechada
+router.get('/top-match', async (req, res) => {
+  try {
+    const lastRound = await prisma.round.findFirst({
+      orderBy: { number: 'desc' },
+    });
+    if (!lastRound) return res.json({ top3: [], bagre: null });
+
+    const topScores = await prisma.playerScore.findMany({
+      where: { roundId: lastRound.id },
+      orderBy: { points: 'desc' },
+      take: 3,
+      include: { player: true }
+    });
+
+    const bagreInfo = lastRound.bagreId 
+        ? await prisma.player.findUnique({ where: { id: lastRound.bagreId } })
+        : null;
+
+    res.json({
+        top3: topScores.map(score => ({ ...score.player, matchPoints: score.points })),
+        bagre: bagreInfo
+    });
+  } catch(error) {
+    res.status(500).json({ error: 'Erro ao buscar dados do top match' });
+  }
+});
+
 // Busca Jogadores Elegíveis p/ Escalação
 router.get('/players', async (req, res) => {
   try {
@@ -113,14 +141,49 @@ router.get('/status', (req, res) => {
   res.json({ isOpen: isMarketOpen });
 });
 
-router.post('/status', (req, res) => {
-  // TODO: Adicionar middleware de autenticação (requireRoles) depois
-  if (typeof req.body.isOpen === 'boolean') {
-    isMarketOpen = req.body.isOpen;
-  }
-  res.json({ isOpen: isMarketOpen });
-});
+router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+  try {
+    if (typeof req.body.isOpen === 'boolean') {
+      const wasOpen = isMarketOpen;
+      isMarketOpen = req.body.isOpen;
 
+      // Se o mercado for ABERTO agora, assumimos que uma Nova Rodada começou 
+      if (!wasOpen && isMarketOpen) {
+         const currentOpen = await prisma.round.findFirst({ where: { isOpen: true } });
+         if (currentOpen) {
+            // Fecha definitivamente
+            await prisma.round.update({
+               where: { id: currentOpen.id },
+               data: { isOpen: false, isFinished: true }
+            });
+         }
+
+         // Zera os times e inicia do zero a pontuação DA RODADA pros usuários
+         await prisma.squad.updateMany({
+             data: {
+                defensorId: null,
+                meioId: null,
+                ataqueId: null,
+                bagreId: null,
+                roundScore: 0
+             }
+         });
+
+         // Cria a próxima rodada
+         const lastRound = await prisma.round.findFirst({ orderBy: { number: 'desc' } });
+         const nextNumber = lastRound ? lastRound.number + 1 : 1;
+         
+         await prisma.round.create({
+            data: { number: nextNumber, isOpen: true }
+         });
+      }
+    }
+    res.json({ isOpen: isMarketOpen });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao alterar status do mercado', details: error.message });
+  }
+});
 export default router;
 
 // ADMIN ROUTES: UPLOADS 

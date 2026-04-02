@@ -11,6 +11,7 @@ const ReiDaMesa = () => {
 
   const [isMarketOpen, setIsMarketOpen] = useState(true);
   const [ranking, setRanking] = useState([]);
+  const [topMatch, setTopMatch] = useState({ top3: [], bagre: null });
   
   React.useEffect(() => {
     fetch('/api/reidamesa/status')
@@ -23,12 +24,17 @@ const ReiDaMesa = () => {
       .then(data => {
          const formatted = data.slice(0,5).map((sq, i) => ({
              position: i + 1,
-             name: sq.user?.name || sq.user?.twitchId || 'Desconhecido',
+             name: sq.user?.nickname || sq.user?.name || sq.user?.twitchId || 'Desconhecido',
              lastRound: sq.roundScore || 0,
              total: sq.totalScore || 0
          }));
          setRanking(formatted);
       })
+      .catch(console.error);
+
+    fetch('/api/reidamesa/top-match')
+      .then(res => res.json())
+      .then(data => setTopMatch(data))
       .catch(console.error);
   }, []);
 
@@ -213,6 +219,60 @@ const ReiDaMesa = () => {
           ))}
         </div>
       </section>
+
+      {/* Destaques da Última Rodada */}
+      {(topMatch.top3.length > 0 || topMatch.bagre) && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+          <div className="text-center mb-10">
+             <h2 className="text-3xl font-black uppercase tracking-tight flex items-center justify-center gap-3">
+                <Trophy className="text-accent" />
+                Destaques da Última Rodada
+             </h2>
+             <p className="text-gray-400 text-sm mt-3">Os melhores em campo e o Bagre Oficial.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            {/* Top 3 */}
+            <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+              {topMatch.top3.map((player, index) => (
+                <div key={index} className="bg-gradient-to-b from-gray-800 to-gray-900 border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-accent/50 transition-colors flex flex-col items-center">
+                  <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/50 flex items-center justify-center font-black text-accent border border-accent/20 z-10">
+                    {index + 1}
+                  </div>
+                  <div className="w-20 h-20 rounded-full bg-black border-2 border-accent mb-4 flex items-center justify-center overflow-hidden">
+                     <img src="/assets/portraits/default.png" alt="Player" className="w-full h-full object-cover opacity-50" onError={(e) => { e.target.src = 'https://via.placeholder.com/150/111/fff?text=' + player.name.charAt(0) }} />
+                  </div>
+                  <h3 className="font-black text-lg text-center leading-tight mb-1">{player.name}</h3>
+                  <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-4">{player.realPosition}</p>
+                  
+                  <div className="bg-accent/10 border border-accent/20 px-4 py-2 rounded-xl w-full flex justify-between items-center mt-auto">
+                    <span className="text-xs font-bold text-accent uppercase">Pontos</span>
+                    <span className="font-black font-mono text-xl text-white">+{player.matchPoints}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* O Bagre */}
+            {topMatch.bagre && (
+              <div className="lg:col-span-1 bg-gradient-to-b from-red-900/40 to-black border border-red-500/30 rounded-2xl p-6 relative overflow-hidden group hover:border-red-500/60 transition-colors flex flex-col items-center">
+                  <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center font-black text-red-500 border border-red-500/30">
+                    <ShieldAlert size={16} />
+                  </div>
+                  <div className="w-20 h-20 rounded-full bg-black border-2 border-red-500 mb-4 flex items-center justify-center overflow-hidden grayscale">
+                     <img src="/assets/portraits/default.png" alt="Bagre" className="w-full h-full object-cover opacity-50" onError={(e) => { e.target.src = 'https://via.placeholder.com/150/550000/fff?text=' + topMatch.bagre.name.charAt(0) }} />
+                  </div>
+                  <h3 className="font-black text-lg text-center leading-tight text-red-100 mb-1">{topMatch.bagre.name}</h3>
+                  <p className="text-xs text-red-400/80 font-bold uppercase tracking-widest mb-4">O Bagre Oficial</p>
+                  
+                  <div className="bg-red-500/20 border border-red-500/30 px-4 py-2 rounded-xl w-full text-center mt-auto">
+                    <span className="text-xs font-bold text-red-400 uppercase">Pior da Partida</span>
+                  </div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* 3. Rodada Atual e Tabela de Ranking */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10">

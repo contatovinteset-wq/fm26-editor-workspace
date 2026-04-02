@@ -142,17 +142,9 @@ const ReiDaMesaAdmin = () => {
               <ShieldAlert className="text-primary w-8 h-8" />
               Painel do Streamer - Rei da Mesa
             </h2>
-            <p className="text-gray-400 text-sm">Controle as operações em tela cheia (Ultra Wide Suportado).</p>
           </div>
 
           <div className="flex flex-row gap-4 items-center">
-             {/* Card ZERO: Deletar Banco */}
-             <div className="bg-red-900/10 border border-red-500/20 px-4 py-3 rounded-xl flex flex-col justify-center min-w-[150px]">
-                <div className="text-xs text-red-400 mb-2 uppercase font-bold text-center">Apagar Dados</div>
-                <button onClick={handleDeleteAll} className="w-full flex justify-center items-center gap-2 bg-red-600 hover:bg-red-500 text-white py-1.5 rounded-lg font-bold text-xs uppercase shadow-lg shadow-red-900/20 transition-all">
-                  Deletar Elenco
-                </button>
-             </div>
              {/* Card 1: Mercado */}
              <div className="bg-black/40 border border-primary/20 px-4 py-3 rounded-xl flex flex-col justify-center min-w-[200px]">
                 <div className="text-xs text-gray-400 mb-2 uppercase font-bold text-center">Mercado</div>
@@ -192,9 +184,14 @@ const ReiDaMesaAdmin = () => {
         {/* Tabela de edição de posição (Admin) */}
         <div className="bg-[#0b0f19] border border-white/10 rounded-xl overflow-hidden shadow-2xl flex flex-col">
             <div className="px-4 py-3 border-b border-white/5 flex justify-between items-center bg-[#0e1420]">
-              <h3 className="font-bold text-lg text-white flex items-center gap-2">
-                Plantel Carregado
-              </h3>
+              <div className="flex items-center gap-4">
+                <h3 className="font-bold text-lg text-white flex items-center gap-2">
+                  Plantel Carregado
+                </h3>
+                <button onClick={handleDeleteAll} className="bg-red-600/20 hover:bg-red-600/40 text-red-400 border border-red-500/30 px-3 py-1 rounded-md text-[10px] font-bold uppercase transition-all flex items-center gap-1 cursor-pointer">
+                  Zerar / Deletar Elenco Atual
+                </button>
+              </div>
               <div className="bg-primary/10 border border-primary/20 px-3 py-1 rounded-md text-primary font-bold text-xs uppercase tracking-wider">
                 Jogadores: {allPlayers.length}
               </div>
