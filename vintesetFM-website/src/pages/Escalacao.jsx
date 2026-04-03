@@ -186,6 +186,11 @@ const Escalacao = () => {
                  <div className="absolute top-1/2 left-0 w-full h-1 bg-white/20 -translate-y-1/2 pointer-events-none"></div>
                  <div className="absolute top-1/2 left-1/2 w-32 h-32 rounded-full border-4 border-white/20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
 
+                 {/* Tiers/Terços do campo para as posições */}
+                 <div className="absolute top-0 left-0 w-full h-1/3 bg-blue-300/10 pointer-events-none border-b border-white/10"></div>
+                 <div className="absolute top-[33.33%] left-0 w-full h-1/3 bg-yellow-300/10 pointer-events-none"></div>
+                 <div className="absolute top-[2/3] left-0 w-full h-1/3 bg-red-300/10 pointer-events-none border-t border-white/10" style={{top: '66.66%'}}></div>
+
                  {/* Titulares: Flex Layout para as posições */}
                  <div className="flex-1 w-full flex flex-col justify-between py-12 z-10">
                     {/* ATA */}
@@ -384,25 +389,25 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
                     <span className="text-xs text-accent font-bold">{player.cartolaRole || '-'}</span>
                     <span className="font-black text-sm">{player.name}</span>
                   </div>
-                  {player.matchPoints !== undefined && player.matchPoints !== null ? (
-                     <span className={`text-xs px-2 py-1 rounded font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
-                        {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} pts
+                  <div className="flex flex-wrap items-center gap-2 justify-end">
+                     <span className="text-xs bg-white/10 px-1.5 py-0.5 rounded">{player.age || '-'} a</span>
+                     <span className="text-xs bg-accent/20 text-accent font-bold px-1.5 py-0.5 rounded">★ {player.rawStats?.['Classificação'] || 'N/A'}</span>
+                     <span className={`text-xs px-2 py-0.5 rounded font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
+                        {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints || 0).toFixed(2)}
                      </span>
-                  ) : (
-                     <span className="text-xs bg-white/10 px-2 py-1 rounded">{player.age} anos</span>
-                  )}
+                  </div>
                 </>
              ) : (
                 <>
                  <span className="text-[10px] text-accent font-bold uppercase">{player.cartolaRole || '-'}</span>
                  <span className="text-xs sm:text-sm font-black uppercase leading-tight">{player.name}</span>
-                 {player.matchPoints !== undefined && player.matchPoints !== null ? (
-                     <span className={`text-[10px] px-2 rounded-sm mt-1 font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
-                        {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} pts
+                 <div className="flex items-center justify-center gap-1 mt-1 flex-wrap">
+                     <span className="text-[9px] bg-white/10 px-1 rounded-sm">{player.age || '-'}a</span>
+                     <span className="text-[9px] bg-accent/20 text-accent font-bold px-1 rounded-sm">★ {player.rawStats?.['Classificação'] || '0.0'}</span>
+                     <span className={`text-[9px] px-1 rounded-sm font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
+                        {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints || 0).toFixed(2)} pts
                      </span>
-                  ) : (
-                     <span className="text-[10px] bg-white/10 px-2 rounded-sm mt-1">{player.age} anos</span>
-                  )}
+                 </div>
                 </>
              )}
            </div>

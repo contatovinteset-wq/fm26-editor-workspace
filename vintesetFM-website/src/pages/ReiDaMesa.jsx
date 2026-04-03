@@ -12,6 +12,7 @@ const ReiDaMesa = () => {
   const [isMarketOpen, setIsMarketOpen] = useState(true);
   const [ranking, setRanking] = useState([]);
   const [topMatch, setTopMatch] = useState({ top3: [], bagre: null });
+  const [mySquad, setMySquad] = useState(null);
   
   React.useEffect(() => {
     fetch('/api/reidamesa/status')
@@ -35,6 +36,13 @@ const ReiDaMesa = () => {
     fetch('/api/reidamesa/top-match')
       .then(res => res.json())
       .then(data => setTopMatch(data))
+      .catch(console.error);
+
+    fetch('/api/reidamesa/squad')
+      .then(res => res.json())
+      .then(data => {
+         if(data && Object.keys(data).length > 0) setMySquad(data);
+      })
       .catch(console.error);
   }, []);
 
@@ -298,20 +306,44 @@ const ReiDaMesa = () => {
                {/* Grass pattern */}
                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg width=\\'20\\' height=\\'20\\' viewBox=\\'0 0 20 20\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'%2322c55e\\' fill-opacity=\\'1\\' fill-rule=\\'evenodd\\'%3E%3Ccircle cx=\\'3\\' cy=\\'3\\' r=\\'3\\'/%3E%3Ccircle cx=\\'13\\' cy=\\'13\\' r=\\'3\\'/%3E%3C/g%3E%3C/svg%3E')" }}></div>
                
-               <div className="z-10 bg-black/60 p-6 rounded-2xl backdrop-blur-md border border-white/10 max-w-sm">
-                  <Crown size={48} className={`mx-auto mb-4 ${isMarketOpen ? 'text-accent' : 'text-gray-500'}`} />
-                  <h3 className="text-xl font-bold mb-2">{isMarketOpen ? 'Escale Agora' : 'Escalação Bloqueada'}</h3>
-                  <p className="text-sm text-gray-300 mb-6">Monte seu time para pontuar nesta rodada.</p>
-                  {isMarketOpen ? (
-                    <Link to="/reidamesa/escalar" className="px-6 py-2 rounded-lg font-bold uppercase text-xs tracking-widest transition-colors w-full border bg-accent/10 hover:bg-accent/20 border-accent/30 text-accent inline-block text-center">
-                      Ir para Escalação
-                    </Link>
-                  ) : (
-                    <button disabled className="px-6 py-2 rounded-lg font-bold uppercase text-xs tracking-widest transition-colors w-full border bg-white/5 border-white/10 text-gray-500 cursor-not-allowed">
-                      Jogo em Andamento
-                    </button>
-                  )}
-               </div>
+               {(!isMarketOpen && mySquad) ? (
+                  <div className="z-10 w-full flex flex-col h-full justify-between items-center bg-black/40 p-4 rounded-xl backdrop-blur-sm border border-white/10">
+                     <div className="w-full flex justify-between items-center border-b border-white/10 pb-2 mb-2">
+                        <span className="font-bold uppercase text-xs tracking-widest text-gray-400">Pts na Rodada:</span>
+                        <span className="font-black text-xl text-accent">+{mySquad.roundScore?.toFixed(2) || '0.00'}</span>
+                     </div>
+                     <div className="w-full flex flex-col gap-2 flex-1 justify-center">
+                        {[mySquad.ataque, mySquad.meio, mySquad.defensor, mySquad.bagre].map((p, idx) => {
+                           if(!p) return null;
+                           const isBagre = idx === 3;
+                           return (
+                              <div key={p.id} className={`flex items-center justify-between text-left p-2 rounded-lg border ${isBagre ? 'bg-red-900/30 border-red-500/30' : 'bg-white/5 border-white/10'}`}>
+                                 <div className="flex flex-col">
+                                    <span className={`text-[10px] font-bold uppercase ${isBagre ? 'text-red-400' : 'text-gray-400'}`}>{isBagre ? 'Bagre' : p.cartolaRole}</span>
+                                    <span className="text-sm font-black truncate max-w-[150px]">{p.name}</span>
+                                 </div>
+                                 <span className={`font-bold text-sm ${p.matchPoints > 0 ? 'text-green-400' : p.matchPoints < 0 ? 'text-red-400' : 'text-gray-500'}`}>
+                                    {p.matchPoints > 0 ? '+' : ''}{p.matchPoints?.toFixed(2) || '0.00'}
+                                 </span>
+                              </div>
+                           )
+                        })}
+                     </div>
+                     <Link to="/reidamesa/escalar" className="mt-4 px-6 py-2 rounded-lg font-bold uppercase text-xs tracking-widest transition-colors w-full border bg-white/10 hover:bg-white/20 border-white/20 text-white inline-block text-center shadow-lg">
+                        Ver no Campinho
+                     </Link>
+                  </div>
+               ) : (
+                  <div className="z-10 bg-black/60 p-6 rounded-2xl backdrop-blur-md border border-white/10 max-w-sm">
+                     <Crown size={48} className={`mx-auto mb-4 ${isMarketOpen ? 'text-accent' : 'text-gray-500'}`} />
+                     <h3 className="text-xl font-bold mb-2">{isMarketOpen ? 'Escale Agora' : 'Escalação Bloqueada'}</h3>
+                     <p className="text-sm text-gray-300 mb-6">Monte seu time para pontuar nesta rodada.</p>
+                     
+                     <Link to="/reidamesa/escalar" className="px-6 py-2 rounded-lg font-bold uppercase text-xs tracking-widest transition-colors w-full border bg-accent/10 hover:bg-accent/20 border-accent/30 text-accent inline-block text-center">
+                        {isMarketOpen ? 'Ir para Escalação' : 'Ver Meu Time'}
+                     </Link>
+                  </div>
+               )}
             </div>
          </div>
 

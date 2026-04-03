@@ -106,16 +106,24 @@ const PlantelReiDaMesa = () => {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-2 mt-auto pt-4 border-t border-white/5">
-                  <div className="flex items-center gap-2 text-xs text-gray-400">
-                    <User size={14} className="text-gray-500" /> {player.age ? `${player.age} anos` : 'Idade N/A'}
+                <div className="grid grid-cols-2 gap-y-2 gap-x-1 mt-auto pt-4 border-t border-white/5">
+                  <div className="flex items-center gap-2 text-[10px] text-gray-400" title="Idade">
+                    <User size={12} className="text-gray-500" /> {player.age ? `${player.age} anos` : '-'}
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-gray-400">
-                    <Ruler size={14} className="text-gray-500" /> {player.height || 'Alt N/A'}
+                  <div className="flex items-center gap-2 text-[10px] text-gray-400" title="Classificação Média">
+                    <Activity size={12} className="text-accent" /> CM: <span className="text-white font-bold">{player.rawStats?.['Classificação'] || 'N/A'}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-gray-400 col-span-2">
-                    <Activity size={14} className="text-gray-500" /> 
-                    Condição: <span className="text-green-400 font-bold">{player.rawStats?.Condition ? player.rawStats.Condition.replace('%', '') + '%' : 'N/A'}</span>
+                  <div className="flex items-center gap-2 text-[10px] text-gray-400" title="Minutos Jogados">
+                    <span className="font-bold text-gray-500">MIN</span> <span className="text-white">{player.rawStats?.['Minutos'] || '0'}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[10px] text-gray-400" title="Distância Percorrida/90">
+                    <span className="font-bold text-gray-500">DIST</span> <span className="text-white">{player.rawStats?.['Dist/90'] || player.rawStats?.['Distância'] || '0'}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[10px] text-gray-400" title="Gols">
+                    <span className="font-bold text-gray-500">GOL</span> <span className="text-white text-center w-full">{player.rawStats?.['Golos'] || '0'}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[10px] text-gray-400" title="Assistências">
+                    <span className="font-bold text-gray-500">AST</span> <span className="text-white text-center w-full">{player.rawStats?.['Assist.'] || '0'}</span>
                   </div>
                 </div>
               </div>
