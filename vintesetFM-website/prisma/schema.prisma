@@ -77,6 +77,9 @@ model Squad {
   
   bagreId     String?
   bagre       Player?   @relation("SquadBagre", fields: [bagreId], references: [id])
+
+  capitaoId   String?
+  capitao     Player?   @relation("SquadCapitao", fields: [capitaoId], references: [id])
   
   roundScore  Float     @default(0.0)
   totalScore  Float     @default(0.0)
@@ -97,12 +100,14 @@ model Player {
   price        Float         @default(5.0)
   eligible     Boolean       @default(true)
   rawStats     Json?
+  uniqueId     String?
   
   squadsDef    Squad[]  @relation("SquadDefensor")
   squadsMei    Squad[]  @relation("SquadMeio")
   squadsAta    Squad[]  @relation("SquadAtaque")
   squadsBanco  Squad[]  @relation("SquadBanco")
   squadsBagre  Squad[]  @relation("SquadBagre")
+  squadsCapitao Squad[] @relation("SquadCapitao")
 
   scores       PlayerScore[]
   bagreOfRound Round[]  @relation("RoundBagre")

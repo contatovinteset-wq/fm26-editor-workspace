@@ -17,6 +17,7 @@ export async function processPlantelHtml(htmlString) {
   const posIndex = headers.findIndex(h => h === 'Escolhido' || h === 'Posição');
   const ageIndex = headers.findIndex(h => h === 'Idade');
   const heightIndex = headers.findIndex(h => h === 'Altura');
+  const uniqueIdIndex = headers.findIndex(h => h === 'Unique ID' || h === 'UID');
 
   for (let i = 1; i < rows.length; i++) { // pula o header
     const cols = $(rows[i]).find('td');
@@ -28,6 +29,7 @@ export async function processPlantelHtml(htmlString) {
     const realPosition = posIndex >= 0 ? $(cols[posIndex]).text().trim() : '';
     const ageText = ageIndex >= 0 ? $(cols[ageIndex]).text().trim() : '';
     const heightText = heightIndex >= 0 ? $(cols[heightIndex]).text().trim() : '';
+    const uniqueIdText = uniqueIdIndex >= 0 ? $(cols[uniqueIdIndex]).text().trim() : '';
 
     const uidName = `${name}-${ageText}`.replace(/\s+/g, '-').toLowerCase();
 
@@ -46,7 +48,8 @@ export async function processPlantelHtml(htmlString) {
       age: parseInt(ageText) || null,
       height: heightText,
       eligible: true,
-      rawStats
+      rawStats,
+      uniqueId: uniqueIdText || null
     });
   }
 
@@ -196,7 +199,10 @@ export async function processMatchResultHtml(htmlString) {
         roundId: openRound.id,
         rating: 0, 
         points: Number(points.toFixed(2)),
-        details: { goals, assists, xG, xA, yellowCars, redCards, minsPlayed }
+        details: { 
+          goals, assists, xG, xA, yellowCars, redCards, minsPlayed,
+          chancesCriadas, passesDecisivos, dribles, desarmes, defesasGoleiro
+        }
       });
     }
   }
@@ -207,9 +213,8 @@ export async function processMatchResultHtml(htmlString) {
   let minPoints = 9999;
 
   for (const s of scores) {
-    // Determina o bagre (o que jogou e pontuou menos, ignora não-escalados ou banco? 
-    // Só ignora se não entrou (minsPlayed === 0)
-    if (s.details.minsPlayed > 0 && s.points < minPoints) {
+    // Só elege como bagre o cara que jogou 45 mins ou mais
+    if (s.details.minsPlayed >= 45 && s.points < minPoints) {
       minPoints = s.points;
       worstPlayerId = s.playerId;
     }

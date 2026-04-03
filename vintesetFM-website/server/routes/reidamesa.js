@@ -267,6 +267,57 @@ router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), as
     res.status(500).json({ error: 'Erro ao alterar status do mercado', details: error.message });
   }
 });
+
+// Busca últimas 5 rodadas
+router.get('/rounds', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+  try {
+    const rounds = await prisma.round.findMany({
+      orderBy: { number: 'desc' },
+      take: 5
+    });
+    res.json(rounds);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao buscar rodadas' });
+  }
+});
+
+// Anular Rodada
+router.delete('/round/:id', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const round = await prisma.round.findUnique({ where: { id } });
+    if (!round) return res.status(404).json({ error: 'Rodada não encontrada' });
+
+    await prisma.$transaction(async (tx) => {
+      const squads = await tx.squad.findMany();
+      for (const sq of squads) {
+        if (sq.roundScore !== 0) {
+          await tx.squad.update({
+            where: { id: sq.id },
+            data: {
+              totalScore: { decrement: sq.roundScore },
+              roundScore: 0
+            }
+          });
+        }
+      }
+
+      await tx.playerScore.deleteMany({ where: { roundId: id } });
+
+      await tx.round.update({
+        where: { id },
+        data: { bagreId: null }
+      });
+    });
+
+    res.json({ success: true, message: 'Rodada anulada com sucesso!' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao anular rodada' });
+  }
+});
+
 export default router;
 
 // ADMIN ROUTES: UPLOADS 

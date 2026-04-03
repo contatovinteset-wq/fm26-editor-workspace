@@ -3,6 +3,54 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Users, AlertTriangle, Shield, TrendingUp, DollarSign, Search, Filter, ArrowRight, Save, Crown, X, Info, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const PlayerImage = ({ uniqueId, name, fallbackText, className }) => {
+  const [error, setError] = useState(false);
+  
+  if (!uniqueId || error) {
+    return (
+      <div className={`flex items-center justify-center font-mono font-bold bg-gray-800 text-gray-400 ${className}`}>
+        {fallbackText}
+      </div>
+    );
+  }
+  
+  return (
+    <img 
+      src={`https://sortitoutsi.b-cdn.net/uploads/face/face_${uniqueId}.png`} 
+      alt={name} 
+      className={`object-cover ${className}`} 
+      onError={() => setError(true)} 
+    />
+  );
+};
+
+const ScoreTooltip = ({ details }) => {
+  if (!details) return null;
+  // Parse se for string, caso contrário assume que é o objeto parseado do backend
+  let parsed = details;
+  if (typeof details === 'string') {
+    try { parsed = JSON.parse(details); } catch (e) { parsed = {}; }
+  }
+  
+  return (
+    <div className="absolute z-50 bottom-full mb-2 left-1/2 -translate-x-1/2 w-48 bg-gray-900 border border-white/20 p-3 rounded-xl shadow-2xl opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity text-left">
+      <div className="text-accent font-bold text-xs uppercase mb-2 border-b border-white/10 pb-1">Detalhes (x{parsed.multiplier || 1})</div>
+      <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-[10px] text-gray-300">
+        <div>Minutos: <span className="text-white font-bold">{parsed.minutes || 0}'</span></div>
+        <div>Gol: <span className="text-white font-bold">{parsed.goals || 0}</span></div>
+        <div>Ast: <span className="text-white font-bold">{parsed.assists || 0}</span></div>
+        <div>Ama: <span className="text-white font-bold">{parsed.yel || 0}</span></div>
+        <div>Ver: <span className="text-white font-bold">{parsed.red || 0}</span></div>
+        <div>Pas.Dec: <span className="text-white font-bold">{parsed.keyPasses || 0}</span></div>
+        <div>Desar: <span className="text-white font-bold">{parsed.tackles || 0}</span></div>
+      </div>
+      <div className="mt-2 text-right border-t border-white/10 pt-1">
+        <span className="text-xs font-black text-white">{parsed.total ? parsed.total.toFixed(2) : '0.00'} pts</span>
+      </div>
+    </div>
+  );
+};
+
 const Escalacao = () => {
   // ==== ESTADOS ====
   const [formation, setFormation] = useState('4-4-2');
@@ -154,9 +202,11 @@ const Escalacao = () => {
             <div className="flex items-center gap-4 mt-2">
                <p className="text-gray-400">1 Defensor/GOL, 1 Meia, 1 Atacante, 1 Bagre.</p>
                {squad.roundScore !== undefined && squad.roundScore !== 0 && (
-                  <span className="bg-white/10 px-3 py-1 rounded-full text-xs font-bold text-accent border border-white/5">
-                     Última Rodada: {squad.roundScore.toFixed(2)} pts
-                  </span>
+                  <div className="relative group">
+                    <span className="bg-white/10 px-3 py-1 rounded-full text-xs font-bold text-accent border border-white/5 cursor-help">
+                       Última Rodada: {squad.roundScore.toFixed(2)} pts
+                    </span>
+                  </div>
                )}
             </div>
           </div>
@@ -332,9 +382,12 @@ const Escalacao = () => {
                          className="flex items-center justify-between bg-black/40 border border-white/5 p-4 rounded-xl hover:bg-white/5 hover:border-accent/30 transition-all cursor-pointer group"
                        >
                          <div className="flex items-center gap-4">
-                           <div className="w-12 h-12 rounded-full bg-gray-800 border border-white/10 flex items-center justify-center text-xs font-bold font-mono">
-                             {player.cartolaRole || '-'}
-                           </div>
+                           <PlayerImage 
+                             uniqueId={player.uniqueId} 
+                             name={player.name} 
+                             fallbackText={player.cartolaRole || '-'} 
+                             className="w-12 h-12 rounded-full border border-white/10 overflow-hidden flex-shrink-0"
+                           />
                             <div>
                               <h4 className="font-bold text-sm text-white group-hover:text-accent transition-colors">{player.name}</h4>
                               <div className="flex items-center gap-2">
@@ -399,22 +452,38 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
              </button>
           )}
           
-          <div className={`flex items-center justify-center text-accent/20 absolute inset-0 pt-2 ${horizontal ? 'hidden' : ''}`}>
-             <Shield size={64} strokeWidth={1} />
+          <div className={`flex items-center justify-center text-accent/20 absolute inset-0 pt-2 opacity-50 overflow-hidden rounded-full ${horizontal ? 'hidden' : ''}`}>
+             <PlayerImage 
+               uniqueId={player.uniqueId} 
+               name={player.name} 
+               fallbackText={<Shield size={64} strokeWidth={1} />}
+               className="w-full h-full object-cover"
+             />
           </div>
           
           <div className={`z-10 flex ${horizontal ? 'flex-row w-full justify-between items-center' : 'flex-col items-center text-center'} gap-1 p-2`}>
               {horizontal ? (
                 <>
-                  <div className="flex flex-col">
-                    <span className="text-xs text-accent font-bold">{player.cartolaRole || '-'}</span>
-                    <span className="font-black text-sm">{player.name}</span>
+                  <div className="flex items-center gap-3">
+                    <PlayerImage 
+                      uniqueId={player.uniqueId} 
+                      name={player.name} 
+                      fallbackText={player.cartolaRole || '-'} 
+                      className="w-10 h-10 rounded-full border border-white/10 overflow-hidden flex-shrink-0 bg-gray-800"
+                    />
+                    <div className="flex flex-col">
+                      <span className="text-xs text-accent font-bold">{player.cartolaRole || '-'}</span>
+                      <span className="font-black text-sm">{player.name}</span>
+                    </div>
                   </div>
                   <div className="flex flex-wrap items-center gap-2 justify-end">
                      {player.matchPoints !== null && player.matchPoints !== undefined && (
-                       <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
-                          Atual: {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} pts
-                       </span>
+                       <div className="relative group/score">
+                         <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold cursor-help ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
+                            Atual: {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} pts
+                         </span>
+                         {player.details && <ScoreTooltip details={player.details} />}
+                       </div>
                      )}
                      <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${player.lastMatchPoints > 0 ? 'bg-blue-500/20 text-blue-400' : player.lastMatchPoints < 0 ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-700 text-gray-300'}`}>
                         Última: {player.lastMatchPoints > 0 ? '+' : ''}{Number(player.lastMatchPoints || 0).toFixed(2)} pts
@@ -427,9 +496,12 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
                  <span className="text-xs sm:text-sm font-black uppercase leading-tight">{player.name}</span>
                  <div className="flex items-center justify-center gap-1 mt-1 flex-wrap">
                      {player.matchPoints !== null && player.matchPoints !== undefined && (
-                       <span className={`text-[9px] px-1 rounded-sm font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
-                          At: {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)}
-                       </span>
+                       <div className="relative group/score">
+                         <span className={`text-[9px] px-1 rounded-sm font-bold cursor-help ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
+                            At: {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)}
+                         </span>
+                         {player.details && <ScoreTooltip details={player.details} />}
+                       </div>
                      )}
                      <span className={`text-[9px] px-1 rounded-sm font-bold ${player.lastMatchPoints > 0 ? 'bg-blue-500/20 text-blue-400' : player.lastMatchPoints < 0 ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-700 text-gray-300'}`}>
                         Ul: {player.lastMatchPoints > 0 ? '+' : ''}{Number(player.lastMatchPoints || 0).toFixed(2)}

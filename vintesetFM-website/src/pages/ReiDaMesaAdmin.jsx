@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldAlert, BarChart3, UploadCloud, Lock, Unlock } from 'lucide-react';
+import { ShieldAlert, BarChart3, UploadCloud, Lock, Unlock, Trash2, Eye } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -13,6 +13,9 @@ const ReiDaMesaAdmin = () => {
   const [savingRows, setSavingRows] = useState({});
   const [matchResult, setMatchResult] = useState(null);
   const [isResultModalOpen, setIsResultModalOpen] = useState(false);
+  const [rounds, setRounds] = useState([]);
+  const [selectedRound, setSelectedRound] = useState('');
+  const [isAnularModalOpen, setIsAnularModalOpen] = useState(false);
 
   useEffect(() => {
     if (!isOwner) return;
@@ -25,6 +28,14 @@ const ReiDaMesaAdmin = () => {
     fetch('/api/reidamesa/status')
       .then(res => res.json())
       .then(data => setIsMarketOpen(data.isOpen))
+      .catch(console.error);
+
+    fetch('/api/reidamesa/rounds', { credentials: 'include' })
+      .then(res => res.json())
+      .then(data => {
+         setRounds(Array.isArray(data) ? data : []);
+         if(Array.isArray(data) && data.length > 0) setSelectedRound(data[0].id);
+      })
       .catch(console.error);
   }, [isOwner]);
 
@@ -95,6 +106,36 @@ const ReiDaMesaAdmin = () => {
     } catch (err) {
       console.error(err);
       alert('Erro inesperado ao deletar elenco.');
+    }
+  };
+
+  const handleOpenAnularModal = () => {
+    fetch('/api/reidamesa/rounds', { credentials: 'include' })
+      .then(res => res.json())
+      .then(data => {
+         setRounds(Array.isArray(data) ? data : []);
+         if(Array.isArray(data) && data.length > 0) setSelectedRound(data[0].id);
+         setIsAnularModalOpen(true);
+      });
+  };
+
+  const handleConfirmAnular = async () => {
+    if(!selectedRound) return;
+    try {
+      const res = await fetch(`/api/reidamesa/round/${selectedRound}`, {
+        method: 'DELETE',
+        credentials: 'include'
+      });
+      if(res.ok) {
+        setIsAnularModalOpen(false);
+        alert('Rodada anulada com sucesso! O Ranking Geral foi reprocessado.');
+        setMatchResult(null); // limpa exibicao passada se houver
+      } else {
+        alert('Erro ao anular rodada.');
+      }
+    } catch(err) {
+      console.error(err);
+      alert('Erro inesperado ao anular rodada.');
     }
   };
 
@@ -232,7 +273,45 @@ const ReiDaMesaAdmin = () => {
             )}
           </AnimatePresence>
 
-          <div className="flex flex-row gap-4 items-center">
+          {/* Modal Anular Rodada */}
+          <AnimatePresence>
+            {isAnularModalOpen && (
+              <motion.div 
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+              >
+                <div className="bg-[#0b0f19] border border-white/10 rounded-2xl w-full max-w-sm p-6 flex flex-col shadow-2xl relative">
+                   <h3 className="text-xl font-black text-red-500 mb-4 flex items-center gap-2">
+                     <Trash2 /> Anular Rodada
+                   </h3>
+                   <p className="text-sm text-gray-300 mb-4">
+                     Escolha a rodada que deseja cancelar. O ranking geral das carteiras será recalculado subtraindo os pontos dessa rodada.
+                   </p>
+                   <select 
+                      className="bg-black/60 border border-white/20 text-white p-2 rounded-lg mb-6 w-full font-bold outline-none cursor-pointer"
+                      value={selectedRound}
+                      onChange={(e) => setSelectedRound(e.target.value)}
+                   >
+                      {rounds.map(r => (
+                        <option key={r.id} value={r.id}>Rodada #{r.number} {r.isFinished ? '(Fechada)' : '(Aberta)'}</option>
+                      ))}
+                      {rounds.length === 0 && <option value="">Nenhuma rodada encontrada</option>}
+                   </select>
+
+                   <div className="flex gap-4">
+                     <button onClick={() => setIsAnularModalOpen(false)} className="flex-1 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white font-bold transition-colors">
+                       Pular
+                     </button>
+                     <button onClick={handleConfirmAnular} className="flex-1 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-black transition-colors" disabled={!selectedRound}>
+                       ANULAR!
+                     </button>
+                   </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="flex flex-row flex-wrap gap-4 items-center">
              {/* Card 1: Mercado */}
              <div className="bg-black/40 border border-primary/20 px-4 py-3 rounded-xl flex flex-col justify-center min-w-[200px]">
                 <div className="text-xs text-gray-400 mb-2 uppercase font-bold text-center">Mercado</div>
@@ -265,6 +344,18 @@ const ReiDaMesaAdmin = () => {
                   <span className="text-xs font-bold text-white uppercase">{isUploading ? '...' : 'Enviar'}</span>
                   <input type="file" className="hidden" accept=".html" onChange={(e) => handleUpload(e, 'MATCH')} />
                 </label>
+             </div>
+
+             {/* Botoes de Controle da Sessao */}
+             <div className="flex flex-col gap-2 ml-auto">
+               {matchResult && (
+                 <button onClick={() => setIsResultModalOpen(true)} className="flex items-center justify-center w-full gap-2 bg-accent/20 hover:bg-accent/40 text-accent border border-accent/30 px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all shadow-[0_0_15px_rgba(33,150,243,0.3)]">
+                   <Eye size={16} /> Ver Último Upload
+                 </button>
+               )}
+               <button onClick={handleOpenAnularModal} className="flex items-center justify-center w-full gap-2 bg-white/5 hover:bg-white/10 text-gray-400 border border-white/10 px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all">
+                 <Trash2 size={16} /> Anular Rodada
+               </button>
              </div>
           </div>
         </div>
