@@ -35,17 +35,20 @@ const ScoreDetailModal = ({ player, onClose }) => {
   if (!parsed) parsed = {};
 
   const rows = [
-    { label: 'Minutos jogados', value: (parsed.minutes || 0) + "'" },
+    { label: 'Minutos jogados', value: parsed.minsPlayed ? parsed.minsPlayed + "'" : "0'" },
     { label: 'Gols marcados', value: parsed.goals || 0 },
     { label: 'Assistências', value: parsed.assists || 0 },
-    { label: 'Cartão Amarelo', value: parsed.yel || 0 },
-    { label: 'Cartão Vermelho', value: parsed.red || 0 },
-    { label: 'Passes Decisivos', value: parsed.keyPasses || 0 },
-    { label: 'Desarmes', value: parsed.tackles || 0 },
-    { label: 'Defesas (GK)', value: parsed.saves || 0 },
-    { label: 'Penalidade Bagre', value: parsed.bagre || 0 },
+    { label: 'Gols Esperados (xG)', value: parsed.xG ? Number(parsed.xG).toFixed(2) : 0 },
+    { label: 'Assist. Esperadas (xA)', value: parsed.xA ? Number(parsed.xA).toFixed(2) : 0 },
+    { label: 'Oport. Flagrantes', value: parsed.chancesCriadas || 0 },
+    { label: 'Passes Decisivos', value: parsed.passesDecisivos || parsed.keyPasses || 0 },
+    { label: 'Fintas/Dribles', value: parsed.dribles || 0 },
+    { label: 'Desarmes', value: parsed.desarmes || parsed.tackles || 0 },
+    { label: 'Defesas (Goleiro)', value: parsed.defesasGoleiro || parsed.saves || 0 },
+    { label: 'Cartão Amarelo', value: parsed.yellowCars || parsed.yellowCards || parsed.yel || 0 },
+    { label: 'Cartão Vermelho', value: parsed.redCards || parsed.red || 0 },
     { label: 'Multiplicador (Capitão)', value: parsed.multiplier > 1 ? 'x' + parsed.multiplier : null },
-  ].filter(r => r.value !== null && r.value !== 0 && r.value !== "0'");
+  ].filter(r => r.value !== null && r.value !== 0 && r.value !== "0'" && r.value !== '0.00');
 
   return (
     <div
