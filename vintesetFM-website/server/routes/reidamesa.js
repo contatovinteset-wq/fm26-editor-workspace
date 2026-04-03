@@ -136,7 +136,6 @@ router.patch('/players/:id/role', requireRoles(['OWNER', 'ADMIN_GERACAO']), asyn
 router.get('/squad', requireAuth, async (req, res) => {
   try {
     const lastRound = await prisma.round.findFirst({
-      where: { scores: { some: {} } },
       orderBy: { number: 'desc' },
     });
 
@@ -222,6 +221,10 @@ router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), as
          
          await prisma.round.create({
             data: { number: nextNumber, isOpen: true }
+         });
+
+         await prisma.squad.updateMany({
+            data: { roundScore: 0 }
          });
       }
     }
