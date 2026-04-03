@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ShieldAlert, BarChart3, UploadCloud, Lock, Unlock } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
-
+import { motion, AnimatePresence } from 'framer-motion';
 const ReiDaMesaAdmin = () => {
   const { user } = useAuth();
   const isOwner = user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN_GERACAO') || user?.roles?.includes('ADMIN');
