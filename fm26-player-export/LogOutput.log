@@ -1,0 +1,320 @@
+[Message: Preloader] BepInEx 6.0.0-be.738 - fm (06/11/2025 15:15:42)
+[Message: Preloader] Built from commit af0cba71fb69324aa4dfd651422bfa020309ce15
+[Info   :   BepInEx] System platform: Windows 10 64-bit
+[Info   :   BepInEx] Process bitness: 64-bit (x64)
+[Info   :   BepInEx] Running under Unity 6000.0.52f1
+[Info   :   BepInEx] Runtime version: 6.0.7
+[Info   :   BepInEx] Runtime information: .NET 6.0.7
+[Info   : Preloader] 0 patcher plugins loaded
+[Info   : Preloader] 0 assemblies discovered
+[Message:AssemblyPatcher] Executing 0 patch(es)
+[Message:   BepInEx] Chainloader initialized
+[Debug  : Preloader] Runtime invoke pointer: 0x7FFA4A0DBEE0
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A0DBEE0 to 0x7FFA74443264
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A0E0000
+[Debug  :DobbyDetour] Original: 7FFA4A0DBEE0, Trampoline: 7FFA0A0E0000, diff: 3FFFBEE0
+[Debug  : Preloader] Runtime invoke patched
+[Debug  :Il2CppInterop] il2cpp_image_get_class: 0x7FFA4A0DBAA0
+[Debug  :Il2CppInterop] Image::GetType: 0x7FFA4A0C88B0
+[Debug  :Il2CppInterop] imageGetTypeXrefs.Length: 2
+[Debug  :Il2CppInterop] getTypeInfoFromHandle: 7FFA4A0886C0
+[Debug  :Il2CppInterop] MetadataCache::GetTypeInfoFromTypeDefinitionIndex found: 0x7FFA4A07BC40
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A07BC40 to 0x7FFA744432A4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A0E0020
+[Debug  :DobbyDetour] Original: 7FFA4A07BC40, Trampoline: 7FFA0A0E0020, diff: 3FF9BC20
+[Debug  :Il2CppInterop] Class::GetDefaultFieldValue found: 0x7FFA4A07A610
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A07A610 to 0x7FFA744432E4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A0E0040
+[Debug  :DobbyDetour] Original: 7FFA4A07A610, Trampoline: 7FFA0A0E0040, diff: 3FF9A5D0
+[Warning:Il2CppInterop] Class::Init signatures have been exhausted, using a substitute!
+[Debug  :Il2CppInterop] Picked mono_class_instance_size as a Class::Init substitute
+[Debug  :Il2CppInterop] Class::Init: 0x7FFA4A0DC6F0
+[Debug  :Il2CppInterop] il2cpp_class_from_il2cpp_type: 0x7FFA4A06C120
+[Debug  :Il2CppInterop] Class::FromIl2CppType found: 0x7FFA4A0854A0
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A0854A0 to 0x7FFA74443324
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A0E0060
+[Debug  :DobbyDetour] Original: 7FFA4A0854A0, Trampoline: 7FFA0A0E0060, diff: 3FFA5440
+[Debug  :Il2CppInterop] il2cpp_class_from_name: 0x7FFA4A0DB390
+[Debug  :Il2CppInterop] Class::FromName found: 0x7FFA4A085A00
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A085A00 to 0x7FFA74443364
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A0E0080
+[Debug  :DobbyDetour] Original: 7FFA4A085A00, Trampoline: 7FFA0A0E0080, diff: 3FFA5980
+[Debug  :Il2CppInterop] GarbageCollector::RunFinalizer found: 0x7FFA4A0B9A50
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A0B9A50 to 0x7FFA744433A4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A0E00A0
+[Debug  :DobbyDetour] Original: 7FFA4A0B9A50, Trampoline: 7FFA0A0E00A0, diff: 3FFD99B0
+[Info   :Il2CppInterop] Registered mono type Il2CppInterop.Runtime.DelegateSupport+Il2CppToMonoDelegateReference in il2cpp domain
+[Debug  :     Unity] Test call after applying unity logging hook
+[Debug  :InteropManager] Preloaded 159 interop assemblies in 107ms
+[Debug  :   BepInEx] Examining 'E:\Steam\steamapps\common\Football Manager 26\BepInEx\plugins\FM26PlayerExport\FM26PlayerExport.dll'
+[Info   :   BepInEx] 11 plugins to load
+[Info   :   BepInEx] Loading [Ball Inject 1.0.0]
+[Info   :Ball Inject] Ball Inject v1.0.0 initializing...
+[Info   :Ball Inject] Plugin folder: E:\Steam\steamapps\common\Football Manager 26\BepInEx\plugins\BallInject
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator LoadBundleCoroutine(Int32, FM.Graphics.Props.BallLocator) on type BallInject.BallInjectBehaviour has unsupported return type System.Collections.IEnumerator
+[Info   :Il2CppInterop] Registered mono type BallInject.BallInjectBehaviour in il2cpp domain
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A1AE3A0 to 0x7FFA744437E4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A1B0000
+[Debug  :DobbyDetour] Original: 7FFA4A1AE3A0, Trampoline: 7FFA0A1B0000, diff: 3FFFE3A0
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A1AE030 to 0x7FFA74443824
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A1B0020
+[Debug  :DobbyDetour] Original: 7FFA4A1AE030, Trampoline: 7FFA0A1B0020, diff: 3FFFE010
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A1ADFB0 to 0x7FFA74443864
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A1B0040
+[Debug  :DobbyDetour] Original: 7FFA4A1ADFB0, Trampoline: 7FFA0A1B0040, diff: 3FFFDF70
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A1ADF30 to 0x7FFA744438A4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A1B0060
+[Debug  :DobbyDetour] Original: 7FFA4A1ADF30, Trampoline: 7FFA0A1B0060, diff: 3FFFDED0
+[Info   :Ball Inject] Ball Inject loaded successfully!
+[Info   :   BepInEx] Loading [Stadium Injection 1.4.0]
+[Info   :Stadium Injection] Configuration loaded successfully
+[Info   :Stadium Injection] 
+[Info   :Stadium Injection] ═══════════════════════════════════════════════════
+[Info   :Stadium Injection] HOW TO FIND STADIUM IDs:
+[Info   :Stadium Injection] 1. Play a match with any team
+[Info   :Stadium Injection] 2. Check the log for 'Stadium ID: XXXXX'
+[Info   :Stadium Injection] 3. Use that ID in your config file
+[Info   :Stadium Injection] Example config:
+[Info   :Stadium Injection]   Mappings = 12345:old_trafford.bundle,67890:camp_nou.bundle
+[Info   :Stadium Injection] ═══════════════════════════════════════════════════
+[Info   :Stadium Injection] 
+[Info   :Stadium Injection] ═══════════════════════════════════════════════════
+[Info   :Stadium Injection]   Stadium Injection v1.4.0
+[Info   :Stadium Injection]   Enabled: True
+[Info   :Stadium Injection]   Replace All: False
+[Info   :Stadium Injection]   Random Selection: False
+[Info   :Stadium Injection]   Default Bundle: DortmundV2.bundle
+[Info   :Stadium Injection] ═══════════════════════════════════════════════════
+[Info   :Stadium Injection] Using scene-based detection (no Harmony patches on StadiumBuilder)
+[Info   :Il2CppInterop] Registered mono type StadiumInjection.SceneLoadHandler in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type StadiumInjection.GoalReconfigureHandler in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type StadiumInjection.LightmapLoaderBehaviour in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type StadiumInjection.PresetLightingEnforcer in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type StadiumInjection.WeatherEnforcer in il2cpp domain
+[Info   :Stadium Injection] SceneLoadHandler, GoalReconfigureHandler, LightmapLoaderBehaviour, PresetLightingEnforcer, WeatherEnforcer registered with IL2CPP
+[Info   :Stadium Injection] Scene load handler registered!
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A1AFC20 to 0x7FFA763207A4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A1B0080
+[Debug  :DobbyDetour] Original: 7FFA4A1AFC20, Trampoline: 7FFA0A1B0080, diff: 3FFFFBA0
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A278110 to 0x7FFA763207E4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A280000
+[Debug  :DobbyDetour] Original: 7FFA4A278110, Trampoline: 7FFA0A280000, diff: 3FFF8110
+[Info   :Stadium Injection] Harmony patches applied: GoalNetGenerator.Generate, Match3DAnimation.Initialise (pitch dimensions)
+[Info   :   BepInEx] Loading [Lighting Inject 1.0.0]
+[Info   :Lighting Inject] LightingInject v1.0.0 loading...
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator LoadLightingBundleCoroutine() on type LightingInject.LightingInjectPlugin+LightingController has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method System.Collections.IEnumerator LoadSkyboxMaterials(UnityEngine.AssetBundle) on type LightingInject.LightingInjectPlugin+LightingController has unsupported return type System.Collections.IEnumerator
+[Warning:Il2CppInterop] Method System.Collections.Generic.List`1[UnityEngine.GameObject] GetAllRootGameObjects() on type LightingInject.LightingInjectPlugin+LightingController has unsupported return type System.Collections.Generic.List`1[UnityEngine.GameObject]
+[Info   :Il2CppInterop] Registered mono type LightingInject.LightingInjectPlugin+LightingController in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type LightingInject.LightingInjectPlugin+LightTransitionController in il2cpp domain
+[Warning:Il2CppInterop] Method UnityEngine.Material SelectSkyboxBySeverity(System.Collections.Generic.SortedList`2[System.Int32,UnityEngine.Material], System.String) on type LightingInject.LightingInjectPlugin+SkyboxController has unsupported parameter System.Collections.Generic.SortedList`2[System.Int32,UnityEngine.Material] variants of type System.Collections.Generic.SortedList`2[System.Int32,UnityEngine.Material]
+[Info   :Il2CppInterop] Registered mono type LightingInject.LightingInjectPlugin+SkyboxController in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type LightingInject.LightingInjectPlugin+LightingToggleController in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type LightingInject.LightingInjectPlugin+SkyboxDebugMenu in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type LightingInject.LightingInjectPlugin+NewgenLightProtector in il2cpp domain
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A23B360 to 0x7FFA76321FE4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A280020
+[Debug  :DobbyDetour] Original: 7FFA4A23B360, Trampoline: 7FFA0A280020, diff: 3FFBB340
+[Info   :Lighting Inject] LightingInject loaded successfully!
+[Info   :Lighting Inject]   EnableLightingControl: True
+[Info   :Lighting Inject]   DisablePresetLighting: True
+[Info   :Lighting Inject]   DisableNewgenLights: False
+[Info   :Lighting Inject]   DisableLightShadowsControllers: True
+[Info   :Lighting Inject]   DisableFloodlightLocators: True
+[Info   :Lighting Inject]   DisableReflectionProbes: False
+[Info   :Lighting Inject]   EnableDynamicLighting: False
+[Info   :Lighting Inject]   LightTransitionDuration: 0s
+[Info   :Lighting Inject]   ToggleLightingKey: F11
+[Info   :   BepInEx] Loading [Standalone Seat Renderer 1.0.0]
+[Info   :Standalone Seat Renderer] Configuration loaded successfully
+[Info   :Standalone Seat Renderer] ═══════════════════════════════════════════════════
+[Info   :Standalone Seat Renderer]   Standalone Seat Renderer v1.0.0
+[Info   :Standalone Seat Renderer]   Enabled: True
+[Info   :Standalone Seat Renderer]   Seat Bundle: Bleacher.bundle
+[Info   :Standalone Seat Renderer] ═══════════════════════════════════════════════════
+[Info   :Il2CppInterop] Registered mono type SeatInject.SeatInjectPlugin+SeatSceneHandler in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type SeatInject.SeatInjectPlugin+SeatRenderHook in il2cpp domain
+[Info   :Standalone Seat Renderer] Scene handlers registered with IL2CPP
+[Info   :Standalone Seat Renderer] Scene load handler registered!
+[Info   :   BepInEx] Loading [Weather Overhaul 1.0.0]
+[Info   :Weather Overhaul] Weather Overhaul v1.0.0 loading...
+[Info   :Il2CppInterop] Registered mono type WeatherOverhaul.WeatherController in il2cpp domain
+[Info   :Il2CppInterop] Registered mono type WeatherOverhaul.RainMakerController in il2cpp domain
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A1A07F0 to 0x7FFA76322B64
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A1B00A0
+[Debug  :DobbyDetour] Original: 7FFA4A1A07F0, Trampoline: 7FFA0A1B00A0, diff: 3FFF0750
+[Info   :Weather Overhaul] Weather Overhaul loaded successfully!
+[Info   :Weather Overhaul]   DisableFMWeather: True
+[Info   :Weather Overhaul]   EnableCustomRain: True
+[Info   :Weather Overhaul]   EnableCustomSnow: True
+[Info   :   BepInEx] Loading [CrowdInjectV2 2.0.0]
+[Info   :CrowdInjectV2] ===========================================
+[Info   :CrowdInjectV2] CrowdInjectV2 v2.0.0 - Loading
+[Info   :CrowdInjectV2] ===========================================
+[Info   :CrowdInjectV2] [Config] MaxDrawCalls: 10, MaxRenderDistance: 500
+[Info   :CrowdInjectV2] [Config] LOD: enabled=False, LOD0=200m, LOD1=100m
+[Info   :Il2CppInterop] Registered mono type CrowdInjectV2.CrowdUpdateHook in il2cpp domain
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A21B630 to 0x7FFA76322CA4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A280040
+[Debug  :DobbyDetour] Original: 7FFA4A21B630, Trampoline: 7FFA0A280040, diff: 3FF9B5F0
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A2399A0 to 0x7FFA76322CE4
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A280060
+[Debug  :DobbyDetour] Original: 7FFA4A2399A0, Trampoline: 7FFA0A280060, diff: 3FFB9940
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A23B360 to 0x7FFA76322D24
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A280080
+[Debug  :DobbyDetour] Original: 7FFA4A23B360, Trampoline: 7FFA0A280080, diff: 3FFBB2E0
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4A1DAE90 to 0x7FFA76322D64
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0A2800A0
+[Debug  :DobbyDetour] Original: 7FFA4A1DAE90, Trampoline: 7FFA0A2800A0, diff: 3FF5ADF0
+[Info   :CrowdInjectV2] [CrowdInjectV2] Harmony patches applied successfully
+[Info   :CrowdInjectV2] CrowdInjectV2 loaded successfully
+[Info   :   BepInEx] Loading [FM26 Player Export 5.0.0]
+[Info   :FM26 Player Export] [FM26Export v5] Carregado! Atalhos: [F9 ou Ctrl+P] = exportar | [F8] = re-escanear
+[Info   :Il2CppInterop] Registered mono type FM26PlayerExport.ExportBehaviour in il2cpp domain
+[Info   :   BepInEx] Loading [FM26 Scene Dump 1.0.0]
+[Info   :FM26 Scene Dump] [FM26Dump] Plugin carregado!
+[Info   :FM26 Scene Dump] [FM26Dump] F6 = Dump da cena para scene_dump.txt
+[Warning:Il2CppInterop] Method Void DumpVisualElement(UnityEngine.UIElements.VisualElement, System.Text.StringBuilder, Int32) on type FM26SceneDump.SceneDumpBehaviour has unsupported parameter System.Text.StringBuilder sb of type System.Text.StringBuilder
+[Warning:Il2CppInterop] Method Void DumpListView(UnityEngine.UIElements.VisualElement, System.Text.StringBuilder, Int32) on type FM26SceneDump.SceneDumpBehaviour has unsupported parameter System.Text.StringBuilder sb of type System.Text.StringBuilder
+[Warning:Il2CppInterop] Method Void DumpObjectFields(System.Object, System.Text.StringBuilder, Int32) on type FM26SceneDump.SceneDumpBehaviour has unsupported parameter System.Object obj of type System.Object
+[Warning:Il2CppInterop] Method System.String FormatValue(System.Object) on type FM26SceneDump.SceneDumpBehaviour has unsupported parameter System.Object val of type System.Object
+[Info   :Il2CppInterop] Registered mono type FM26SceneDump.SceneDumpBehaviour in il2cpp domain
+[Info   :   BepInEx] Loading [FM26 Table Dump 1.0.0]
+[Info   :FM26 Table Dump] [TableDump] F7 = Dump da sub-arvore de search-table-remapper
+[Info   :Il2CppInterop] Registered mono type FM26TableDump.DumpBehaviour in il2cpp domain
+[Info   :   BepInEx] Loading [FM26 Player Profile Diagnostic 3.0.0]
+[Info   :FM26 Player Profile Diagnostic] ============================================
+[Info   :FM26 Player Profile Diagnostic] FM26 Player Profile Diagnostic v3.0.0
+[Info   :FM26 Player Profile Diagnostic] ============================================
+[Info   :FM26 Player Profile Diagnostic] [F11] = Dump IL2CPP Bindings + UIElement DataSource scan
+[Info   :FM26 Player Profile Diagnostic] [F10] = Dump apenas UIElements / dataSource
+[Info   :FM26 Player Profile Diagnostic] [F8]  = Re-escanear UIDocuments
+[Debug  :DobbyDetour] Preparing detour from 0x7FFA4B398020 to 0x7FFA76323324
+[Debug  :DobbyDetour] Prepared detour; Trampoline: 0x7FFA0B3A0000
+[Debug  :DobbyDetour] Original: 7FFA4B398020, Trampoline: 7FFA0B3A0000, diff: 3FFF8020
+[Info   :FM26 Player Profile Diagnostic] [PPD] Hook no Bindings.Update ativo!
+[Info   :Il2CppInterop] Registered mono type FM26PlayerProfileDiag.DiagBehaviour in il2cpp domain
+[Info   :   BepInEx] Loading [FM26 Tactics Dump 2.1.6]
+[Info   :FM26 Tactics Dump] FM26 Tactics Dump v2.1.6
+[Info   :FM26 Tactics Dump] ABRA O MODAL de Instrucoes e pressione F10
+[Info   :Il2CppInterop] Registered mono type FM26TacticsDump.TacticsDumpBehaviour in il2cpp domain
+[Message:   BepInEx] Chainloader startup complete
+[Debug  : Preloader] Runtime invoke unpatched
+[Info   :Stadium Injection] Scene loaded: BootToInit
+[Info   :Lighting Inject] [Lighting] Scene loaded: BootToInit
+[Info   :Standalone Seat Renderer] [SeatInject] Scene loaded: BootToInit
+[Info   :Weather Overhaul] [Weather] Scene loaded: BootToInit
+[Info   :CrowdInjectV2] [CrowdInjectV2] Scene loaded: BootToInit
+[Message:     Unity] RenderGraph is now enabled.
+[Info   :FM26 Player Profile Diagnostic] [PPD] UIDocuments escaneados: 0
+[Info   :Stadium Injection] Scene loaded: InitScene
+[Info   :Lighting Inject] [Lighting] Scene loaded: InitScene
+[Info   :Standalone Seat Renderer] [SeatInject] Scene loaded: InitScene
+[Info   :Weather Overhaul] [Weather] Scene loaded: InitScene
+[Info   :CrowdInjectV2] [CrowdInjectV2] Scene loaded: InitScene
+[Warning:     Unity] Backtrace native integration status: Cannot initialize Crashpad client
+[Warning:     Unity] No Theme Style Sheet set to PanelSettings DimmingLayerSettings, UI will not render properly
+[Message:     Unity] Initialising plugin - game_plugin Mar 25 2026 17:59:17 FINAL
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:35.1251258-03:00","LogLevel":"Information","Category":"Default","Message":"GAME_PLUGIN::initialise() called (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\apps\\game\\plugin\\generic\\game_plugin_impl.cpp:1528\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\apps\\game\\plugin\\generic\\game_plugin_impl.cpp:1528\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:35.1413495-03:00","LogLevel":"Information","Category":"default","Message":"Football Manager 26 plugin version: 26.3.0\u002B2283239 (fm26-rel-prod) (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\apps\\game\\plugin\\generic\\game_plugin_impl.cpp:798\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\apps\\game\\plugin\\generic\\game_plugin_impl.cpp:798\u003C/link\u003E\u003C/color\u003E)"}
+[Info   :FM26 Player Profile Diagnostic] [PPD] Bindings capturado! Ptr=0x1D21181EB40
+[Message:     Unity] Resolution changed: 1920x1080
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:35.453034-03:00","LogLevel":"Information","Category":"default","Message":"Loading translation data... (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sicore\\generic\\translation\\sitranslation.cpp:520\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sicore\\generic\\translation\\sitranslation.cpp:520\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:35.5062308-03:00","LogLevel":"Information","Category":"default","Message":"...Loading translation data took 51ms (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sicore\\generic\\translation\\sitranslation.cpp:538\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sicore\\generic\\translation\\sitranslation.cpp:538\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:35.7280364-03:00","LogLevel":"Information","Category":"MULTIPLAYER_CHANNEL","Message":"Created NETWORKING_PLAYFAB (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:72\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:72\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:37.841306-03:00","LogLevel":"Information","Category":"USER_ACCOUNT_PLAYFAB_CHANNEL","Message":"Attempt login - primary dis = 2 (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sidistribution\\services\\distribution\\playfab\\user_account_playfab.cpp:331\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sidistribution\\services\\distribution\\playfab\\user_account_playfab.cpp:331\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:37.841861-03:00","LogLevel":"Information","Category":"USER_ACCOUNT_PLAYFAB_CHANNEL","Message":"Attempt App Ticket Request (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sidistribution\\services\\distribution\\playfab\\user_account_playfab.cpp:343\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sidistribution\\services\\distribution\\playfab\\user_account_playfab.cpp:343\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:46.9233624-03:00","LogLevel":"Information","Category":"USER_ACCOUNT_PLAYFAB_CHANNEL","Message":"Encrypted App Ticket recieved, status = true (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sidistribution\\services\\distribution\\playfab\\user_account_playfab.cpp:358\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sidistribution\\services\\distribution\\playfab\\user_account_playfab.cpp:358\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:46.9249814-03:00","LogLevel":"Information","Category":"USER_ACCOUNT_PLAYFAB_CHANNEL","Message":"handle playfab_login_response (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sidistribution\\services\\distribution\\playfab\\user_account_playfab.cpp:531\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sidistribution\\services\\distribution\\playfab\\user_account_playfab.cpp:531\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:46.9254889-03:00","LogLevel":"Information","Category":"USER_ACCOUNT_PLAYFAB_CHANNEL","Message":"login succeeded, token = {\n    \u0022Id\u0022: \u00225A6FC48E8070835C\u0022,\n    \u0022Type\u0022: \u0022title_player_account\u0022,\n    \u0022TypeString\u0022: \u0022title_player_account\u0022\n} id = 5A6FC48E8070835C type = title_player_account (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sidistribution\\services\\distribution\\playfab\\user_account_playfab.cpp:565\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\sidistribution\\services\\distribution\\playfab\\user_account_playfab.cpp:565\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:46.9264833-03:00","LogLevel":"Information","Category":"MULTIPLAYER_CHANNEL","Message":"Setting up NETWORKING_PLAYFAB (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:99\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:99\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:46.9269908-03:00","LogLevel":"Information","Category":"MULTIPLAYER_CHANNEL","Message":"Creating local party user for user 5A6FC48E8070835C hash = 15227098446526033257 (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:121\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:121\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:46.9279859-03:00","LogLevel":"Information","Category":"MULTIPLAYER_CHANNEL","Message":"NETWORKING_PLAYFAB Initialised and ready to use (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:133\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:133\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:20:46.9279859-03:00","LogLevel":"Information","Category":"MULTIPLAYER_CHANNEL","Message":"Unhandled PartyStateChange: 0 (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:341\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:341\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] Football Manager 26 version: 26.3.0.2283924
+[Info   :Stadium Injection] Scene loaded: LoadingTransition
+[Info   :Lighting Inject] [Lighting] Scene loaded: LoadingTransition
+[Info   :Standalone Seat Renderer] [SeatInject] Scene loaded: LoadingTransition
+[Info   :Weather Overhaul] [Weather] Scene loaded: LoadingTransition
+[Info   :CrowdInjectV2] [CrowdInjectV2] Scene loaded: LoadingTransition
+[Info   :Stadium Injection] Scene loaded: IntroScene
+[Info   :Lighting Inject] [Lighting] Scene loaded: IntroScene
+[Info   :Standalone Seat Renderer] [SeatInject] Scene loaded: IntroScene
+[Info   :Weather Overhaul] [Weather] Scene loaded: IntroScene
+[Info   :CrowdInjectV2] [CrowdInjectV2] Scene loaded: IntroScene
+[Info   :Ball Inject] [BallManager] Loading ball for competition: 14 (winter: False)
+[Info   :Stadium Injection] Scene loaded: ChangingRoomStandard
+[Info   :Stadium Injection] Stadium scene detected - creating handler
+[Info   :Lighting Inject] [Lighting] Scene loaded: ChangingRoomStandard
+[Info   :Standalone Seat Renderer] [SeatInject] Scene loaded: ChangingRoomStandard
+[Info   :Weather Overhaul] [Weather] Scene loaded: ChangingRoomStandard
+[Info   :CrowdInjectV2] [CrowdInjectV2] Scene loaded: ChangingRoomStandard
+[Info   :Il2CppInterop] Registered mono type BepInEx.Unity.IL2CPP.Utils.Collections.Il2CppManagedEnumerator in il2cpp domain
+[Info   :Ball Inject] Starting async bundle load: E:\Steam\steamapps\common\Football Manager 26\BepInEx\plugins\BallInject\balls\14 - League Two\ball.bundle
+[Info   :Ball Inject] Loaded ball bundle for competition 14
+[Info   :Ball Inject] Loaded ball prefab: ball
+[Warning:Stadium Injection] Timeout waiting for StadiumBuilder - cleaning up
+[Message:     Unity] {"Timestamp":"2026-04-01T13:21:02.2014387-03:00","LogLevel":"Information","Category":"MULTIPLAYER_CHANNEL","Message":"Leaving Playfab Party Network (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:267\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\networking\\playfab\\networking_playfab.cpp:267\u003C/link\u003E\u003C/color\u003E)"}
+[Message:     Unity] {"Timestamp":"2026-04-01T13:21:02.2034306-03:00","LogLevel":"Information","Category":"MULTIPLAYER_CHANNEL","Message":"Request leave current lobby (\u003Ccolor=#3B8FE1\u003E\u003Clink=\u0022plugin-link://C:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\multiplayer\\playfab\\lobby_manager_playfab.cpp:615\u003EC:\\TeamCity\\work\\d85b1bb5a16ae7d8\\shared\\libraries\\si\\core\\simultiplayer\\services\\multiplayer\\playfab\\lobby_manager_playfab.cpp:615\u003C/link\u003E\u003C/color\u003E)"}
+[Info   :Stadium Injection] Scene loaded: LoadingTransition
+[Info   :Lighting Inject] [Lighting] Scene loaded: LoadingTransition
+[Info   :Standalone Seat Renderer] [SeatInject] Scene loaded: LoadingTransition
+[Info   :Weather Overhaul] [Weather] Scene loaded: LoadingTransition
+[Info   :CrowdInjectV2] [CrowdInjectV2] Scene loaded: LoadingTransition
+[Info   :Stadium Injection] Scene loaded: GameWorld
+[Info   :Lighting Inject] [Lighting] Scene loaded: GameWorld
+[Info   :Standalone Seat Renderer] [SeatInject] Scene loaded: GameWorld
+[Info   :Weather Overhaul] [Weather] Scene loaded: GameWorld
+[Info   :CrowdInjectV2] [CrowdInjectV2] Scene loaded: GameWorld
+[Info   :FM26 Player Export] [FM26Export] Iniciando exportação via atalho: F9
+[Info   :FM26 Player Export] [FM26Export] Teams frame raw text: 'MFC Exeter'
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Macro automática iniciada! Abas encontradas: 6/6.
+[Info   :FM26 Player Export] [FM26Export] Usando handler: MatchStatsExportHandler
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Estatísticas Principais [1/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Passe [2/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Ofensivo [3/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Defensivo [4/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Guarda-Redes [5/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Bolas Paradas [6/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Dossiê gravado: (6/6) abas lidas, 108 linhas exportadas.
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Arquivo salvo em: C:\Users\Raphael\Documents\Sports Interactive\Football Manager 26\FM26PlayerExport by vinteset\Exports HTML\match_stats_MFC vs Exeter_20260401_132130.html
+[Info   :FM26 Player Export] [FM26Export] Iniciando exportação via atalho: F9
+[Info   :FM26 Player Export] [FM26Export] Teams frame raw text: 'MFC EXE'
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Macro automática iniciada! Abas encontradas: 6/6.
+[Info   :FM26 Player Export] [FM26Export] Usando handler: MatchStatsExportHandler
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Key Statistics [1/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Passing [2/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Attacking [3/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Defending [4/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Goalkeeping [5/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Set Pieces [6/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Dossiê gravado: (6/6) abas lidas, 108 linhas exportadas.
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Arquivo salvo em: C:\Users\Raphael\Documents\Sports Interactive\Football Manager 26\FM26PlayerExport by vinteset\Exports HTML\match_stats_MFC vs EXE_20260401_132152.html
+[Info   :FM26 Player Export] [FM26Export] Iniciando exportação via atalho: F9
+[Info   :FM26 Player Export] [FM26Export] Teams frame raw text: 'MFC Exeter'
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Macro automática iniciada! Abas encontradas: 6/6.
+[Info   :FM26 Player Export] [FM26Export] Usando handler: MatchStatsExportHandler
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Estadísticas clave [1/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Pases [2/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Ataque [3/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Defensa [4/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Portería [5/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Balón parado [6/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Dossiê gravado: (6/6) abas lidas, 108 linhas exportadas.
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Arquivo salvo em: C:\Users\Raphael\Documents\Sports Interactive\Football Manager 26\FM26PlayerExport by vinteset\Exports HTML\match_stats_MFC vs Exeter_20260401_132212.html
+[Info   :FM26 Player Export] [FM26Export] Iniciando exportação via atalho: F9
+[Info   :FM26 Player Export] [FM26Export] Teams frame raw text: 'Gillin MFC'
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Macro automática iniciada! Abas encontradas: 6/6.
+[Info   :FM26 Player Export] [FM26Export] Usando handler: MatchStatsExportHandler
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Estatísticas Principais [1/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Passe [2/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Ofensivo [3/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Defensivo [4/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Guarda-Redes [5/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Lidas 18 linhas de Bolas Paradas [6/6]
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Dossiê gravado: (6/6) abas lidas, 108 linhas exportadas.
+[Info   :FM26 Player Export] [FM26Export.MatchStats] Arquivo salvo em: C:\Users\Raphael\Documents\Sports Interactive\Football Manager 26\FM26PlayerExport by vinteset\Exports HTML\match_stats_Gillin vs MFC_20260401_132238.html
+[Message:     Unity] Shutting down plugin - game_plugin Mar 25 2026 17:59:17 FINAL
+[Error  :     Unity] NullReferenceException: Object reference not set to an instance of an object.
+[Warning:     Unity] AssetBundle.Unload was called while the asset bundle had an async load operation in progress. The main thread will wait for the async load operation to complete.
+[Warning:     Unity] Unloading the last loaded scene Assets/Scenes/Production/GameWorld.unity(build index: -1), is not supported. Please use SceneManager.LoadScene()/EditorSceneManager.OpenScene() to switch to another scene.

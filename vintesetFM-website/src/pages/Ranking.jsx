@@ -135,7 +135,7 @@ const Ranking = () => {
                      </td>
                      <td className="px-8 py-4 text-right">
                         <span className={`bg-black/30 px-3 py-1 rounded font-mono font-bold border border-white/5 ${row.score > 0 ? 'text-green-500' : row.score < 0 ? 'text-red-500' : 'text-blue-400'}`}>
-                          {row.score}
+                          {row.score > 0 ? '+' : ''}{Number(row.score).toFixed(2)}
                         </span>
                      </td>
                    </motion.tr>

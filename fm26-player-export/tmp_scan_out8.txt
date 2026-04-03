@@ -1,0 +1,21 @@
+dump_1.txt:1093 (Match) -> [Info   :FM26 Player Export] [FM26Export.MatchStats] Iniciando automação de 6 abas...
+dump_1.txt:1094 (Match) -> [Info   :FM26 Player Export] [FM26Export] Usando handler: MatchStatsExportHandler
+dump_1.txt:1095 (Match) -> [Info   :FM26 Player Export] [FM26Export.MatchStats] Clicando na aba: KeyStatistics
+dump_2.txt:872 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                         VisualElement 'MatchStatsStandAlone'
+dump_2.txt:1099 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Passing'
+dump_2.txt:1105 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Goalkeeping'
+dump_3.txt:872 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                         VisualElement 'MatchStatsStandAlone'
+dump_3.txt:1099 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Passing'
+dump_3.txt:1105 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Goalkeeping'
+dump_4.txt:872 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                         VisualElement 'MatchStatsStandAlone'
+dump_4.txt:1099 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Passing'
+dump_4.txt:1105 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Goalkeeping'
+dump_5.txt:872 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                         VisualElement 'MatchStatsStandAlone'
+dump_5.txt:1099 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Passing'
+dump_5.txt:1105 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Goalkeeping'
+dump_6.txt:872 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                         VisualElement 'MatchStatsStandAlone'
+dump_6.txt:1099 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Passing'
+dump_6.txt:1105 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Goalkeeping'
+dump_7.txt:872 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                         VisualElement 'MatchStatsStandAlone'
+dump_7.txt:1099 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Passing'
+dump_7.txt:1105 (Match) -> [Info   :FM26 Scene Dump] [FM26Dump]                                               VisualElement 'Goalkeeping'

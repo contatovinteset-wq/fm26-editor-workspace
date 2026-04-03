@@ -174,7 +174,8 @@ router.get('/squad', requireAuth, async (req, res) => {
         defensor: { include: { scores: { where: { roundId: { in: roundIds } } } } },
         meio: { include: { scores: { where: { roundId: { in: roundIds } } } } },
         ataque: { include: { scores: { where: { roundId: { in: roundIds } } } } },
-        bagre: { include: { scores: { where: { roundId: { in: roundIds } } } } }
+        bagre: { include: { scores: { where: { roundId: { in: roundIds } } } } },
+        capitao: { include: { scores: { where: { roundId: { in: roundIds } } } } }
       }
     });
 
@@ -195,6 +196,7 @@ router.get('/squad', requireAuth, async (req, res) => {
        squad.meio = mapPoints(squad.meio);
        squad.ataque = mapPoints(squad.ataque);
        squad.bagre = mapPoints(squad.bagre);
+       squad.capitao = mapPoints(squad.capitao);
     }
 
     res.json(squad || null);
@@ -207,13 +209,12 @@ router.get('/squad', requireAuth, async (req, res) => {
 router.post('/squad', requireAuth, async (req, res) => {
   try {
     if (!isMarketOpen) return res.status(403).json({ error: 'Mercado Fechado' });
-    const { defensorId, meioId, ataqueId, bagreId } = req.body;
+    const { defensorId, meioId, ataqueId, bagreId, capitaoId } = req.body;
     
-    // Deixamos bancoId gravado caso haja DB velho, mas sempre null agora
     const squad = await prisma.squad.upsert({
       where: { userId: req.user.id },
-      update: { defensorId, meioId, ataqueId, bancoId: null, bagreId },
-      create: { userId: req.user.id, defensorId, meioId, ataqueId, bancoId: null, bagreId }
+      update: { defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId },
+      create: { userId: req.user.id, defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId }
     });
     res.json(squad);
   } catch (error) {
