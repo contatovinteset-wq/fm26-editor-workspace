@@ -133,9 +133,11 @@ const PerfilManager = () => {
                  <BarChart3 className="text-gray-400" size={20} />
                  Esquadrão Atual
               </h3>
-              <Link to="/reidamesa/escalar" className="text-xs font-bold uppercase tracking-widest text-accent hover:text-white transition-colors">
-                Alterar Escalação
-              </Link>
+              {isOwner && (
+                 <Link to="/reidamesa/escalar" className="text-xs font-bold uppercase tracking-widest text-accent hover:text-white transition-colors">
+                   Alterar Escalação
+                 </Link>
+              )}
            </div>
 
            {!squad ? (
@@ -143,9 +145,15 @@ const PerfilManager = () => {
                <ShieldAlert className="text-gray-500 mx-auto mb-4" size={48} />
                <h4 className="text-lg font-bold text-white mb-2">Você ainda não definiu um Esquadrão</h4>
                <p className="text-gray-400 text-sm mb-6 max-w-md mx-auto">Vá até a tela de escalação e monte seu time titular e escolha seu bagre para começar a pontuar nas lives.</p>
-               <Link to="/reidamesa/escalar" className="inline-block bg-accent text-black px-8 py-3 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-accentHover transition-colors">
-                 Escalar Agora
-               </Link>
+               {isOwner ? (
+                 <Link to="/reidamesa/escalar" className="inline-block bg-accent text-black px-8 py-3 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-accentHover transition-colors">
+                   Escalar Agora
+                 </Link>
+               ) : (
+                 <span className="inline-block bg-gray-800 text-gray-500 px-8 py-3 rounded-xl font-bold uppercase text-xs tracking-widest cursor-not-allowed">
+                   Aguarde o Lançamento
+                 </span>
+               )}
              </div>
            ) : (
              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
