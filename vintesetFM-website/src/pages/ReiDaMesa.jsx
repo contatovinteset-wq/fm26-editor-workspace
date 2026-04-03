@@ -66,18 +66,6 @@ const ReiDaMesa = () => {
     { label: "Cartão Vermelho", pts: "-3.0", color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/20" },
   ];
 
-  if (!isOwner) {
-    return (
-      <div className="w-full min-h-screen bg-bgDark flex flex-col items-center justify-center p-4 text-center">
-        <Lock className="text-gray-500 mb-6 w-20 h-20 opacity-50" />
-        <h1 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-4">Acesso Restrito</h1>
-        <p className="text-gray-400 max-w-md mb-8">O módulo Rei da Mesa encontra-se fechado. Apenas o Owner pode gerenciar e testar as telas enquanto o jogo oficial não estreia e seus sistemas visuais de pontuação não entram no ar.</p>
-        <Link to="/" className="bg-accent hover:bg-accentHover text-black px-8 py-3 rounded-xl font-bold uppercase text-sm transition-all focus:ring-2 focus:ring-accent/50 outline-none flex items-center justify-center gap-2">
-          Voltar ao Início
-        </Link>
-      </div>
-    );
-  }
 
   return (
     <div className="w-full min-h-screen bg-bgDark text-white pt-24 pb-16 overflow-hidden relative">
