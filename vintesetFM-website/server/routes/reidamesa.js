@@ -105,7 +105,7 @@ router.get('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req,
 });
 
 // Endpoint Temporário/Administrativo para Resetar Scores Manuais
-router.post('/squads/reset-points', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+router.post('/squads/reset-points', async (req, res) => {
   try {
     const updated = await prisma.squad.updateMany({
       data: {
