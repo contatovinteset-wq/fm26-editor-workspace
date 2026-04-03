@@ -21,6 +21,8 @@ const Escalacao = () => {
   const [isMarketOpen, setIsMarketOpen] = useState(true);
   const [players, setPlayers] = useState([]);
 
+  const isSquadComplete = squad.def && squad.mei && squad.ata && squad.bagre;
+
   // Fetch init do backend
   useEffect(() => {
     // Busca status do mercado

@@ -80,9 +80,39 @@ router.get('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req,
 // Deleta TODOS os jogadores do painel Admin (Truncate Plantel)
 router.delete('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
   try {
+    // 1. Desvincula todos os jogadores dos elencos ativos para evitar erros de FK
+    await prisma.squad.updateMany({
+      data: {
+        defensorId: null,
+        meioId: null,
+        ataqueId: null,
+        bagreId: null,
+        bancoId: null
+      }
+    });
+
+    // 2. Desvincula o 'Bagre' das rodadas passadas
+    await prisma.round.updateMany({
+      data: { bagreId: null }
+    });
+
+    // 3. Deleta todas as pontuações registradas de jogadores
+    await prisma.playerScore.deleteMany({});
+
+    // 4. (Opcional, mas seguro) Zera a pontuação dos squads caso resete o jogo pro começo
+    await prisma.squad.updateMany({
+      data: {
+        roundScore: 0,
+        totalScore: 0
+      }
+    });
+
+    // 5. Deleta todos os Jogadores do banco (O FK não vai estourar mais)
     await prisma.player.deleteMany({});
+
     res.json({ success: true, message: 'Elenco deletado com sucesso!' });
   } catch (error) {
+    console.error("Erro ao deletar o plantel:", error);
     res.status(500).json({ error: 'Erro ao deletar jogadores' });
   }
 });

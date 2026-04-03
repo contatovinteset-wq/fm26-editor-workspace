@@ -132,12 +132,12 @@ const ReiDaMesa = () => {
                <Crown size={20} /> Montar Meu Esquadrão
             </Link>
           ) : (
-            <button 
-             disabled
-             className="flex items-center justify-center gap-2 font-black uppercase tracking-wide px-8 py-4 rounded-xl transition-all duration-300 w-full sm:w-auto bg-gray-800 text-gray-500 cursor-not-allowed border border-white/10 shadow-none"
+            <Link 
+             to="/reidamesa/escalar"
+             className="flex items-center justify-center gap-2 font-black uppercase tracking-wide px-8 py-4 rounded-xl transition-all duration-300 w-full sm:w-auto bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white border border-white/10 shadow-none"
             >
-               <AlertTriangle size={20} /> Escalação Indisponível (Jogo em Andamento)
-            </button>
+               <AlertTriangle size={20} /> Ver Meu Esquadrão (Mercado Fechado)
+            </Link>
           )}
         </motion.div>
         
@@ -172,7 +172,7 @@ const ReiDaMesa = () => {
                   <Users size={32} className="text-accent" />
                 </div>
                 <h3 className="font-bold text-lg mb-2">1. Escale o Time</h3>
-                <p className="text-gray-400 text-sm">Escolha 3 titulares (incluindo o Goleiro na Defesa), 1 reserva e 1 bagre antes de rolar a bola.</p>
+                <p className="text-gray-400 text-sm">Escolha 3 titulares (incluindo o Goleiro na Defesa) e 1 bagre antes de rolar a bola.</p>
              </div>
              
              <div className="hidden md:flex items-center justify-center opacity-30 text-white">
