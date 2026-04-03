@@ -356,6 +356,19 @@ const ReiDaMesaAdmin = () => {
                <button onClick={handleOpenAnularModal} className="flex items-center justify-center w-full gap-2 bg-white/5 hover:bg-white/10 text-gray-400 border border-white/10 px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all">
                  <Trash2 size={16} /> Anular Rodada
                </button>
+               <button 
+                 onClick={async () => {
+                   if(!window.confirm('CERTEZA ABSOLUTA? Vai deletar TODOS os Históricos de Jogadores e Zerar Pontuação Total dos usuários! O elenco será mantido. Use isso SÓ antes da 1ª Rodada!')) return;
+                   try {
+                     const res = await fetch('/api/reidamesa/squads/reset-points', { method: 'POST', credentials: 'include' });
+                     const text = await res.json();
+                     alert(text.message || 'Reset realizado');
+                   } catch(e) { console.error(e); }
+                 }} 
+                 className="flex items-center justify-center w-full gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 border border-red-500/20 px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all mt-2"
+               >
+                 <ShieldAlert size={16} /> Iniciar Nova Temp. (Resetar Histórico)
+               </button>
              </div>
           </div>
         </div>
