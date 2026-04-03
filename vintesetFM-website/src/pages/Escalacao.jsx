@@ -77,7 +77,7 @@ const ScoreDetailModal = ({ player, onClose }) => {
             <X size={16} />
           </button>
         </div>
-        <div className="divide-y divide-white/5">
+        <div className="divide-y divide-white/5 max-h-[300px] overflow-y-auto pr-2">
           {rows.length === 0 ? (
             <p className="text-sm text-gray-500 py-4 text-center">Nenhum dado de pontuação disponível.</p>
           ) : rows.map(r => (
