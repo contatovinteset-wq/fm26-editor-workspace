@@ -5,6 +5,7 @@ import ReiDaMesa from './ReiDaMesa';
 import Escalacao from './Escalacao';
 import Ranking from './Ranking';
 import PerfilManager from './PerfilManager';
+import PlantelReiDaMesa from './PlantelReiDaMesa';
 import Login from './Login';
 import Cadastro from './Cadastro';
 import Topico from './Topico';
@@ -21,6 +22,7 @@ const Pages = {
   Escalacao: () => <Escalacao />,
   Ranking: () => <Ranking />,
   PerfilManager: () => <PerfilManager />,
+  PlantelReiDaMesa: () => <PlantelReiDaMesa />,
   Login: () => <Login />,
   Cadastro: () => <Cadastro />,
   Topico: () => <Topico />,

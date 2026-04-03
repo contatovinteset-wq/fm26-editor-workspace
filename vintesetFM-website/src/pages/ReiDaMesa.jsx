@@ -124,21 +124,30 @@ const ReiDaMesa = () => {
             O Fantasy Game exclusivo da nossa comunidade. Escolha 3 titulares do meu save, um bônus do banco de reservas e aposte em quem será o Bagre da partida! Torça durante as lives e suba nos rankings com base no desempenho real dos jogadores no Football Manager!
           </p>
           
-          {isMarketOpen ? (
+          <div className="flex flex-col sm:flex-row gap-4">
+            {isMarketOpen ? (
+              <Link 
+               to="/reidamesa/escalar"
+               className="flex items-center justify-center gap-2 font-black uppercase tracking-wide px-8 py-4 rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.3)] transition-all duration-300 w-full sm:w-auto bg-accent hover:bg-accentHover text-black hover:scale-105"
+              >
+                 <Crown size={20} /> Montar Meu Esquadrão
+              </Link>
+            ) : (
+              <Link 
+               to="/reidamesa/escalar"
+               className="flex items-center justify-center gap-2 font-black uppercase tracking-wide px-8 py-4 rounded-xl transition-all duration-300 w-full sm:w-auto bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white border border-white/10 shadow-none"
+              >
+                 <AlertTriangle size={20} /> Meu Esquadrão (Mercado Fechado)
+              </Link>
+            )}
+
             <Link 
-             to="/reidamesa/escalar"
-             className="flex items-center justify-center gap-2 font-black uppercase tracking-wide px-8 py-4 rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.3)] transition-all duration-300 w-full sm:w-auto bg-accent hover:bg-accentHover text-black hover:scale-105"
+             to="/reidamesa/plantel"
+             className="flex items-center justify-center gap-2 font-black uppercase tracking-wide px-8 py-4 rounded-xl transition-all duration-300 w-full sm:w-auto bg-black/50 text-gray-300 hover:bg-white/10 border border-white/10"
             >
-               <Crown size={20} /> Montar Meu Esquadrão
+               <Users size={20} /> Estudar Plantel
             </Link>
-          ) : (
-            <Link 
-             to="/reidamesa/escalar"
-             className="flex items-center justify-center gap-2 font-black uppercase tracking-wide px-8 py-4 rounded-xl transition-all duration-300 w-full sm:w-auto bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white border border-white/10 shadow-none"
-            >
-               <AlertTriangle size={20} /> Ver Meu Esquadrão (Mercado Fechado)
-            </Link>
-          )}
+          </div>
         </motion.div>
         
         <motion.div 

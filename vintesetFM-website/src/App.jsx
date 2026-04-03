@@ -29,6 +29,7 @@ function App() {
               <Route path="reidamesa" element={<Pages.ReiDaMesa />} />
               <Route path="reidamesa/admin" element={<Pages.ReiDaMesaAdmin />} />
               <Route path="reidamesa/escalar" element={<Pages.Escalacao />} />
+              <Route path="reidamesa/plantel" element={<Pages.PlantelReiDaMesa />} />
               <Route path="reidamesa/ranking" element={<Pages.Ranking />} />
               <Route path="reidamesa/perfil" element={<Pages.PerfilManager />} />
               <Route path="admin" element={<Pages.AdminPanel />} />
