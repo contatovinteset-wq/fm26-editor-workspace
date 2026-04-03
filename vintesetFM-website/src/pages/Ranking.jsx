@@ -8,20 +8,32 @@ const Ranking = () => {
   const [search, setSearch] = useState('');
 
   const [rankingGeral, setRankingGeral] = useState([]);
-  const rankingLive = [];
+  const [rankingLive, setRankingLive] = useState([]);
 
   React.useEffect(() => {
     fetch('/api/reidamesa/ranking')
       .then(res => res.json())
       .then(data => {
-         const formatted = data.map((sq, i) => ({
+         const formattedGeral = data.map((sq, i) => ({
              position: i + 1,
              name: sq.user?.nickname || sq.user?.name || sq.user?.twitchId || 'Desconhecido',
              score: sq.totalScore || 0,
              isReiDaMesa: i === 0,
              hasCarroDoOvo: sq.roundScore > 50 
          }));
-         setRankingGeral(formatted);
+         setRankingGeral(formattedGeral);
+
+         const formattedLive = [...data]
+           .sort((a,b) => (b.roundScore || 0) - (a.roundScore || 0))
+           .map((sq, i) => ({
+             position: i + 1,
+             name: sq.user?.nickname || sq.user?.name || sq.user?.twitchId || 'Desconhecido',
+             score: sq.roundScore || 0,
+             isReiDaMesa: false,
+             hasCarroDoOvo: false 
+         }));
+         
+         setRankingLive(formattedLive);
       })
       .catch(console.error);
   }, []);
@@ -121,8 +133,8 @@ const Ranking = () => {
                        </div>
                      </td>
                      <td className="px-8 py-4 text-right">
-                        <span className="bg-black/30 px-3 py-1 rounded font-mono font-bold text-accent border border-white/5">
-                          {row.score}
+                        <span className={`bg-black/30 px-3 py-1 rounded font-mono font-bold border border-white/5 ${row.score > 0 ? 'text-green-500' : row.score < 0 ? 'text-red-500' : 'text-blue-400'}`}>
+                          {row.score > 0 ? '+' : ''}{row.score}
                         </span>
                      </td>
                    </motion.tr>

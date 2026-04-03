@@ -391,8 +391,12 @@ const ReiDaMesa = () => {
                           row.position === 3 ? <span className="text-[#CD7F32]">3</span> : row.position}
                        </td>
                        <td className="px-2 py-3 font-bold text-white">{row.name}</td>
-                       <td className="px-2 py-3 text-center text-green-400 font-mono">+{row.lastRound}</td>
-                       <td className="px-4 py-3 text-right font-black text-accent font-mono">{row.total}</td>
+                       <td className={`px-2 py-3 text-center font-mono font-bold ${row.lastRound > 0 ? 'text-green-500' : row.lastRound < 0 ? 'text-red-500' : 'text-blue-400'}`}>
+                         {row.lastRound > 0 ? '+' : ''}{row.lastRound}
+                       </td>
+                       <td className={`px-4 py-3 text-right font-black font-mono ${row.total > 0 ? 'text-green-500' : row.total < 0 ? 'text-red-500' : 'text-blue-400'}`}>
+                         {row.total > 0 ? '+' : ''}{row.total}
+                       </td>
                      </tr>
                    ))}
                    {ranking.length === 0 && (

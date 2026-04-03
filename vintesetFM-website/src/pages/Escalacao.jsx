@@ -164,7 +164,12 @@ const Escalacao = () => {
           <div className="flex bg-black/50 p-1 rounded-lg border border-white/10 w-full md:w-auto gap-2">
             <button
                onClick={handleClearSquad}
-               className="px-4 py-2 text-sm font-bold uppercase tracking-widest text-red-400 hover:text-white hover:bg-red-500/20 rounded transition-all text-center flex-1 border border-red-500/20"
+               disabled={!isMarketOpen}
+               className={`px-4 py-2 text-sm font-bold uppercase tracking-widest rounded transition-all text-center flex-1 border ${
+                 isMarketOpen 
+                   ? 'text-red-400 hover:text-white hover:bg-red-500/20 border-red-500/20' 
+                   : 'text-gray-600 bg-black/50 border-gray-800 cursor-not-allowed opacity-50'
+               }`}
             >
               Limpar Escalação
             </button>
