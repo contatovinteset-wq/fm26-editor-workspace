@@ -47,17 +47,27 @@ const PerfilManager = () => {
       );
     }
     return (
-      <div className={`bg-gradient-to-b ${isBagre ? 'from-red-900/20 to-black/40 border-red-500/30' : 'from-accent/5 to-black/40 border-white/10'} border rounded-xl p-4 flex flex-col relative overflow-hidden h-full min-h-[140px]`}>
-        {isBagre && <div className="absolute top-0 inset-x-0 h-1 bg-red-500"></div>}
-        <div className="flex justify-between items-start mb-4">
+      <div className={`bg-gradient-to-b ${isBagre ? 'from-red-900/20 to-black/40 border-red-500/30' : 'from-accent/5 to-black/40 border-white/10'} border rounded-xl p-4 flex flex-col relative overflow-hidden h-full min-h-[140px] group`}>
+        {isBagre && <div className="absolute top-0 inset-x-0 h-1 bg-red-500 z-20"></div>}
+        <div className="flex justify-between items-start mb-4 relative z-20">
           <span className={`text-xs uppercase font-black ${isBagre ? 'text-red-400' : 'text-gray-400'}`}>{label}</span>
-          <div className="bg-white/5 px-2 py-1 rounded text-xs font-mono font-bold flex items-center gap-1 border border-white/10">
+          <div className="bg-black/50 px-2 py-1 rounded text-xs font-mono font-bold flex items-center gap-1 border border-white/10 backdrop-blur-sm">
             {getRoleIcon(player.cartolaRole)} {player.cartolaRole}
           </div>
         </div>
-        <div className="mt-auto">
-          <h4 className="font-bold text-lg text-white leading-tight mb-1">{player.name}</h4>
-          <span className="text-xs text-gray-400">{player.realPosition}</span>
+        <div className="mt-auto relative z-20 max-w-[70%]">
+          <h4 className="font-bold text-lg text-white leading-tight mb-1 drop-shadow-md">{player.name}</h4>
+          <span className="text-xs font-bold text-gray-300 drop-shadow-md">{player.realPosition}</span>
+        </div>
+        
+        {/* Foto do Jogador */}
+        <div className="absolute -bottom-2 -right-4 w-28 h-28 opacity-40 mix-blend-luminosity group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-300 z-10">
+          <img 
+            src={`https://sortitoutsi.b-cdn.net/uploads/face/face_${player.uniqueId}.png`} 
+            alt={player.name} 
+            className="w-full h-full object-contain object-bottom pointer-events-none" 
+            onError={(e) => { e.target.src = `https://via.placeholder.com/150/111/fff?text=${player.name.charAt(0)}` }}
+          />
         </div>
       </div>
     );

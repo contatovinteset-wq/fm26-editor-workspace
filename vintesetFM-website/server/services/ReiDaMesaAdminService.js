@@ -90,7 +90,18 @@ export async function processPlantelHtml(htmlString) {
     });
   }
 
-  return { message: "Plantel importado via Upsert com sucesso!", inserted: countUpdated, total: rows.length - 1 };
+  // REGRA EXTRAÍDA DA MENSAGEM: Quando um novo elenco é subido, as escolhas dos squads são resetadas
+  await prisma.squad.updateMany({
+    data: {
+      defensorId: null,
+      meioId: null,
+      ataqueId: null,
+      bagreId: null,
+      capitaoId: null
+    }
+  });
+
+  return { message: "Plantel importado com sucesso! Os elencos da rodada foram resetados.", inserted: countUpdated, total: rows.length - 1 };
 }
 
 export async function processMatchResultHtml(htmlString) {
