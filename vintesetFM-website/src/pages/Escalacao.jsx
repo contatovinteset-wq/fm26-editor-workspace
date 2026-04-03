@@ -339,8 +339,13 @@ const Escalacao = () => {
                               <h4 className="font-bold text-sm text-white group-hover:text-accent transition-colors">{player.name}</h4>
                               <div className="flex items-center gap-2">
                                 <p className="text-xs text-gray-400 font-mono">Idade: {player.age}</p>
-                                <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
-                                  {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints || 0).toFixed(2)} pts
+                                {player.matchPoints !== null && player.matchPoints !== undefined && (
+                                  <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
+                                    Atual: {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} pts
+                                  </span>
+                                )}
+                                <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${player.lastMatchPoints > 0 ? 'bg-blue-500/20 text-blue-400' : player.lastMatchPoints < 0 ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-700 text-gray-300'}`}>
+                                  Última: {player.lastMatchPoints > 0 ? '+' : ''}{Number(player.lastMatchPoints || 0).toFixed(2)} pts
                                 </span>
                               </div>
                             </div>
@@ -406,8 +411,13 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
                     <span className="font-black text-sm">{player.name}</span>
                   </div>
                   <div className="flex flex-wrap items-center gap-2 justify-end">
-                     <span className={`text-xs px-2 py-0.5 rounded font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
-                        {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints || 0).toFixed(2)} pts
+                     {player.matchPoints !== null && player.matchPoints !== undefined && (
+                       <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
+                          Atual: {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} pts
+                       </span>
+                     )}
+                     <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${player.lastMatchPoints > 0 ? 'bg-blue-500/20 text-blue-400' : player.lastMatchPoints < 0 ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-700 text-gray-300'}`}>
+                        Última: {player.lastMatchPoints > 0 ? '+' : ''}{Number(player.lastMatchPoints || 0).toFixed(2)} pts
                      </span>
                   </div>
                 </>
@@ -416,8 +426,13 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
                  <span className="text-[10px] text-accent font-bold uppercase">{player.cartolaRole || '-'}</span>
                  <span className="text-xs sm:text-sm font-black uppercase leading-tight">{player.name}</span>
                  <div className="flex items-center justify-center gap-1 mt-1 flex-wrap">
-                     <span className={`text-[9px] px-1 rounded-sm font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
-                        {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints || 0).toFixed(2)} pts
+                     {player.matchPoints !== null && player.matchPoints !== undefined && (
+                       <span className={`text-[9px] px-1 rounded-sm font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
+                          At: {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)}
+                       </span>
+                     )}
+                     <span className={`text-[9px] px-1 rounded-sm font-bold ${player.lastMatchPoints > 0 ? 'bg-blue-500/20 text-blue-400' : player.lastMatchPoints < 0 ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-700 text-gray-300'}`}>
+                        Ul: {player.lastMatchPoints > 0 ? '+' : ''}{Number(player.lastMatchPoints || 0).toFixed(2)}
                      </span>
                  </div>
                 </>

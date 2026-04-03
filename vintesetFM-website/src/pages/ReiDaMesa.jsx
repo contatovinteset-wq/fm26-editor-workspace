@@ -326,16 +326,23 @@ const ReiDaMesa = () => {
                                  </div>
                                  {isBagre ? (
                                     (p.matchPoints !== null && p.matchPoints !== undefined) ? (
-                                       <span className={`font-bold text-sm px-2 py-1 rounded bg-black/50 ${topMatch?.bagre?.id === p.id ? 'text-green-400 border border-green-500/50' : 'text-red-400 border border-red-500/50'}`}>
-                                         {topMatch?.bagre?.id === p.id ? '5.00' : '-5.00'} pts bônus
+                                       <span className={`font-bold text-xs sm:text-sm px-2 py-1 rounded bg-black/50 ${topMatch?.bagre?.id === p.id ? 'text-green-400 border border-green-500/50' : 'text-red-400 border border-red-500/50'}`}>
+                                         {topMatch?.bagre?.id === p.id ? '5.00' : '-5.00'} pts
                                        </span>
                                     ) : (
-                                       <span className="font-bold text-sm text-gray-500">0.00</span>
+                                       <span className="font-bold text-[10px] text-gray-500">Última: {p.lastMatchPoints?.toFixed(2) || '0.00'}</span>
                                     )
                                  ) : (
-                                    <span className={`font-bold text-sm ${p.matchPoints > 0 ? 'text-green-400' : p.matchPoints < 0 ? 'text-red-400' : 'text-gray-500'}`}>
-                                       {p.matchPoints?.toFixed(2) || '0.00'}
-                                    </span>
+                                    <div className="flex flex-col items-end">
+                                      {(p.matchPoints !== null && p.matchPoints !== undefined) && (
+                                        <span className={`font-bold text-sm ${p.matchPoints > 0 ? 'text-green-400' : p.matchPoints < 0 ? 'text-red-400' : 'text-gray-500'}`}>
+                                           At: {p.matchPoints > 0 ? '+' : ''}{p.matchPoints?.toFixed(2) || '0.00'}
+                                        </span>
+                                      )}
+                                      <span className={`text-[10px] font-bold ${p.lastMatchPoints > 0 ? 'text-blue-400/80' : p.lastMatchPoints < 0 ? 'text-orange-400/80' : 'text-gray-600'}`}>
+                                         Ul: {p.lastMatchPoints > 0 ? '+' : ''}{p.lastMatchPoints?.toFixed(2) || '0.00'}
+                                      </span>
+                                    </div>
                                  )}
                               </div>
                            )

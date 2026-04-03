@@ -32,11 +32,8 @@ const Navbar = () => {
     { name: 'Início', path: '/', icon: Home },
     { name: 'Telecurso 27', path: '/telecurso', icon: MonitorPlay },
     { name: 'Downloads', path: '/downloads', icon: DownloadCloud },
+    { name: 'Rei Da Mesa', path: '/reidamesa', icon: Crown },
   ];
-
-  if (isOwner) {
-    navLinks.push({ name: 'Rei Da Mesa', path: '/reidamesa', icon: Crown });
-  }
 
   return (
     <nav className="fixed top-0 w-full z-50 glass border-b border-white/5 bg-bgDark/90 backdrop-blur-md">

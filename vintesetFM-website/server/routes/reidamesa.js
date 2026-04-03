@@ -54,8 +54,34 @@ router.get('/top-match', async (req, res) => {
 // Busca Jogadores Elegíveis p/ Escalação
 router.get('/players', async (req, res) => {
   try {
-    const players = await prisma.player.findMany({ where: { eligible: true } });
-    res.json(players);
+    const rounds = await prisma.round.findMany({
+      orderBy: { number: 'desc' },
+      take: 2
+    });
+    
+    const roundIds = rounds.map(r => r.id);
+
+    const players = await prisma.player.findMany({ 
+       where: { eligible: true },
+       include: { scores: { where: { roundId: { in: roundIds } } } }
+    });
+
+    const currentRoundId = rounds[0]?.id;
+    const prevRoundId = rounds[1]?.id;
+
+    const mappedPlayers = players.map(p => {
+       const currentScore = p.scores?.find(s => s.roundId === currentRoundId);
+       const prevScore = p.scores?.find(s => s.roundId === prevRoundId);
+       
+       const { scores, ...playerData } = p;
+       return { 
+          ...playerData, 
+          matchPoints: currentScore ? currentScore.points : null,
+          lastMatchPoints: prevScore ? prevScore.points : 0 
+       };
+    });
+
+    res.json(mappedPlayers);
   } catch (error) {
     res.status(500).json({ error: 'Erro ao buscar jogadores' });
   }
@@ -135,27 +161,34 @@ router.patch('/players/:id/role', requireRoles(['OWNER', 'ADMIN_GERACAO']), asyn
 // Busca Escalação do Usuário
 router.get('/squad', requireAuth, async (req, res) => {
   try {
-    const lastRound = await prisma.round.findFirst({
+    const rounds = await prisma.round.findMany({
       orderBy: { number: 'desc' },
+      take: 2
     });
 
-    const includeScores = lastRound ? { where: { roundId: lastRound.id } } : false;
+    const roundIds = rounds.map(r => r.id);
 
     const squad = await prisma.squad.findUnique({
       where: { userId: req.user.id },
       include: {
-        defensor: { include: { scores: includeScores } },
-        meio: { include: { scores: includeScores } },
-        ataque: { include: { scores: includeScores } },
-        bagre: { include: { scores: includeScores } }
+        defensor: { include: { scores: { where: { roundId: { in: roundIds } } } } },
+        meio: { include: { scores: { where: { roundId: { in: roundIds } } } } },
+        ataque: { include: { scores: { where: { roundId: { in: roundIds } } } } },
+        bagre: { include: { scores: { where: { roundId: { in: roundIds } } } } }
       }
     });
 
-    // Injeta a property matchPoints no root de cada player pra facilitar no Front
+    const currentRoundId = rounds[0]?.id;
+    const prevRoundId = rounds[1]?.id;
+
     if (squad) {
        const mapPoints = (p) => {
           if (!p) return null;
-          p.matchPoints = p.scores && p.scores.length > 0 ? p.scores[0].points : null;
+          const currentScore = p.scores?.find(s => s.roundId === currentRoundId);
+          const prevScore = p.scores?.find(s => s.roundId === prevRoundId);
+
+          p.matchPoints = currentScore ? currentScore.points : null;
+          p.lastMatchPoints = prevScore ? prevScore.points : 0;
           return p;
        };
        squad.defensor = mapPoints(squad.defensor);
