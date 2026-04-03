@@ -94,7 +94,7 @@ const PlantelReiDaMesa = () => {
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-full bg-black border border-white/20 flex items-center justify-center overflow-hidden">
-                      <img src="/assets/portraits/default.png" alt="" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" onError={(e) => { e.target.src = `https://via.placeholder.com/150/111/fff?text=${player.name.charAt(0)}` }} />
+                      <img src={`https://sortitoutsi.b-cdn.net/uploads/face/face_${player.uniqueId}.png`} alt={player.name} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" onError={(e) => { e.target.src = `https://via.placeholder.com/150/111/fff?text=${player.name.charAt(0)}` }} />
                     </div>
                     <div>
                       <h3 className="font-bold text-white text-sm leading-tight truncate max-w-[120px]" title={player.name}>{player.name}</h3>

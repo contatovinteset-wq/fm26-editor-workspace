@@ -479,86 +479,99 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
           </span>
           {!horizontal && <span className="text-[10px] text-white/40 absolute bottom-3">{label}</span>}
         </motion.button>
-      ) : (
+      ) : horizontal ? (
         <div className={`
-          relative flex flex-col items-center justify-center border transition-all rounded-full bg-black shadow-xl
+          relative flex items-center justify-between border transition-all bg-black shadow-xl
           ${isCapitao ? 'border-accent shadow-[0_0_16px_rgba(255,215,0,0.5)]' : 'border-accent/50'}
-          ${horizontal ? 'w-full max-w-[300px] h-16 px-4 rounded-xl flex-row gap-4' : 'w-24 h-24 sm:w-28 sm:h-28'}
+          w-full max-w-[300px] h-16 px-4 rounded-xl flex-row gap-4
         `}>
-          {/* Badge de Capitão */}
-          {isCapitao && !horizontal && (
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-black text-[9px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 z-20">
-              <Crown size={9} /> CAP
-            </div>
-          )}
-
           {isMarketOpen && (
             <button
               onClick={onRemove}
-              className={`absolute ${horizontal ? 'right-2' : '-top-2 -right-2'} w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white border-2 border-black opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all z-20`}
+              className="absolute right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white border-2 border-black opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all z-20"
             >
               <X size={12} />
             </button>
           )}
 
-          {/* Foto de fundo */}
-          {!horizontal && (
-            <div className="flex items-center justify-center text-accent/20 absolute inset-0 pt-2 opacity-50 overflow-hidden rounded-full">
+          <div className="z-10 flex flex-row w-full justify-between items-center gap-1 p-2">
+            <div className="flex items-center gap-3">
               <PlayerImage
                 uniqueId={player.uniqueId}
                 name={player.name}
-                fallbackText={<Shield size={64} strokeWidth={1} />}
-                className="w-full h-full object-cover"
+                fallbackText={player.cartolaRole || '-'}
+                className="w-10 h-10 rounded-full border border-white/10 overflow-hidden flex-shrink-0 bg-gray-800"
               />
+              <div className="flex flex-col">
+                <span className="text-xs text-accent font-bold">{player.cartolaRole || '-'}</span>
+                <span className="font-black text-sm">{player.name}</span>
+              </div>
             </div>
-          )}
+            <div className="flex flex-wrap items-center gap-2 justify-end">
+              {player.matchPoints !== null && player.matchPoints !== undefined && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); onScoreClick && onScoreClick(); }}
+                  className={`text-[10px] px-1.5 py-0.5 rounded font-bold hover:opacity-80 transition-opacity ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
+                  Atual: {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} pts 🔍
+                </button>
+              )}
+              <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${player.lastMatchPoints > 0 ? 'bg-blue-500/20 text-blue-400' : player.lastMatchPoints < 0 ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-700 text-gray-300'}`}>
+                Última: {player.lastMatchPoints > 0 ? '+' : ''}{Number(player.lastMatchPoints || 0).toFixed(2)} pts
+              </span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center relative w-[120px]">
+          {/* Círculo do Jogador */}
+          <div className={`
+            relative flex items-center justify-center border-2 transition-all rounded-full bg-black shadow-xl overflow-visible z-10
+            ${isCapitao ? 'border-accent shadow-[0_0_16px_rgba(255,215,0,0.5)]' : 'border-accent/50'}
+            w-20 h-20 sm:w-24 sm:h-24
+          `}>
+             {/* Badge de Capitão */}
+             {isCapitao && (
+               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-black text-[9px] font-black px-2 py-0.5 rounded-full flex items-center gap-1 z-20 shadow-md">
+                 <Crown size={9} /> CAP
+               </div>
+             )}
 
-          <div className={`z-10 flex ${horizontal ? 'flex-row w-full justify-between items-center' : 'flex-col items-center text-center'} gap-1 p-2`}>
-            {horizontal ? (
-              <>
-                <div className="flex items-center gap-3">
-                  <PlayerImage
-                    uniqueId={player.uniqueId}
-                    name={player.name}
-                    fallbackText={player.cartolaRole || '-'}
-                    className="w-10 h-10 rounded-full border border-white/10 overflow-hidden flex-shrink-0 bg-gray-800"
-                  />
-                  <div className="flex flex-col">
-                    <span className="text-xs text-accent font-bold">{player.cartolaRole || '-'}</span>
-                    <span className="font-black text-sm">{player.name}</span>
-                  </div>
-                </div>
-                <div className="flex flex-wrap items-center gap-2 justify-end">
-                  {player.matchPoints !== null && player.matchPoints !== undefined && (
-                    <button
-                      onClick={(e) => { e.stopPropagation(); onScoreClick && onScoreClick(); }}
-                      className={`text-[10px] px-1.5 py-0.5 rounded font-bold hover:opacity-80 transition-opacity ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
-                      Atual: {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} pts 🔍
-                    </button>
-                  )}
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${player.lastMatchPoints > 0 ? 'bg-blue-500/20 text-blue-400' : player.lastMatchPoints < 0 ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-700 text-gray-300'}`}>
-                    Última: {player.lastMatchPoints > 0 ? '+' : ''}{Number(player.lastMatchPoints || 0).toFixed(2)} pts
-                  </span>
-                </div>
-              </>
-            ) : (
-              <>
-                <span className="text-[10px] text-accent font-bold uppercase">{player.cartolaRole || '-'}</span>
-                <span className="text-xs sm:text-sm font-black uppercase leading-tight">{player.name}</span>
-                <div className="flex items-center justify-center gap-1 mt-1 flex-wrap">
-                  {player.matchPoints !== null && player.matchPoints !== undefined && (
-                    <button
-                      onClick={(e) => { e.stopPropagation(); onScoreClick && onScoreClick(); }}
-                      className={`text-[9px] px-1 rounded-sm font-bold hover:opacity-80 transition-opacity ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
-                      {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} 🔍
-                    </button>
-                  )}
-                  <span className={`text-[9px] px-1 rounded-sm font-bold ${player.lastMatchPoints > 0 ? 'bg-blue-500/20 text-blue-400' : player.lastMatchPoints < 0 ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-700 text-gray-300'}`}>
-                    Ul: {player.lastMatchPoints > 0 ? '+' : ''}{Number(player.lastMatchPoints || 0).toFixed(2)}
-                  </span>
-                </div>
-              </>
-            )}
+             {isMarketOpen && (
+               <button
+                 onClick={onRemove}
+                 className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white border-2 border-black opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all z-20"
+               >
+                 <X size={12} />
+               </button>
+             )}
+
+             <div className="absolute inset-0 overflow-hidden rounded-full flex items-center justify-center bg-gray-900 border-[3px] border-black">
+               <PlayerImage
+                 uniqueId={player.uniqueId}
+                 name={player.name}
+                 fallbackText={<Shield size={40} strokeWidth={1} className="text-gray-600" />}
+                 className="w-full h-full object-cover opacity-90"
+               />
+             </div>
+          </div>
+
+          {/* Plaquinha de Informação em baixo */}
+          <div className="bg-gray-900/90 backdrop-blur-sm border border-white/10 rounded-lg px-2 py-1 mt-[-10px] z-20 flex flex-col items-center text-center shadow-lg w-full max-w-[140px]">
+             <span className="text-[10px] text-accent font-bold uppercase tracking-widest">{player.cartolaRole || '-'}</span>
+             <span className="text-[11px] sm:text-xs font-black uppercase leading-tight truncate w-full" title={player.name}>{player.name}</span>
+             
+             <div className="flex items-center justify-center gap-1 mt-1 flex-wrap w-full">
+               {player.matchPoints !== null && player.matchPoints !== undefined && (
+                 <button
+                   onClick={(e) => { e.stopPropagation(); onScoreClick && onScoreClick(); }}
+                   className={`text-[9px] px-1 rounded-sm font-bold shadow-sm hover:opacity-80 transition-opacity whitespace-nowrap ${player.matchPoints > 0 ? 'bg-green-500 text-black' : player.matchPoints < 0 ? 'bg-red-500 text-white' : 'bg-gray-700 text-white'}`}>
+                   {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} 🔍
+                 </button>
+               )}
+               <span className={`text-[9px] px-1 rounded-sm font-bold shadow-sm whitespace-nowrap ${player.lastMatchPoints > 0 ? 'bg-blue-600/80 text-white' : player.lastMatchPoints < 0 ? 'bg-orange-600/80 text-white' : 'bg-gray-800 text-gray-300'}`}>
+                 Ul: {player.lastMatchPoints > 0 ? '+' : ''}{Number(player.lastMatchPoints || 0).toFixed(2)}
+               </span>
+             </div>
           </div>
         </div>
       )}

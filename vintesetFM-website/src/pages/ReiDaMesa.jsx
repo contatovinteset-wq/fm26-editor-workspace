@@ -247,7 +247,7 @@ const ReiDaMesa = () => {
                     {index + 1}
                   </div>
                   <div className="w-20 h-20 rounded-full bg-black border-2 border-accent mb-4 flex items-center justify-center overflow-hidden">
-                     <img src="/assets/portraits/default.png" alt="Player" className="w-full h-full object-cover opacity-50" onError={(e) => { e.target.src = 'https://via.placeholder.com/150/111/fff?text=' + player.name.charAt(0) }} />
+                     <img src={`https://sortitoutsi.b-cdn.net/uploads/face/face_${player.uniqueId}.png`} alt={player.name} className="w-full h-full object-cover opacity-50" onError={(e) => { e.target.src = 'https://via.placeholder.com/150/111/fff?text=' + player.name.charAt(0) }} />
                   </div>
                   <h3 className="font-black text-lg text-center leading-tight mb-1">{player.name}</h3>
                   <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-4">{player.realPosition}</p>
@@ -267,7 +267,7 @@ const ReiDaMesa = () => {
                     <ShieldAlert size={16} />
                   </div>
                   <div className="w-20 h-20 rounded-full bg-black border-2 border-red-500 mb-4 flex items-center justify-center overflow-hidden grayscale">
-                     <img src="/assets/portraits/default.png" alt="Bagre" className="w-full h-full object-cover opacity-50" onError={(e) => { e.target.src = 'https://via.placeholder.com/150/550000/fff?text=' + topMatch.bagre.name.charAt(0) }} />
+                     <img src={`https://sortitoutsi.b-cdn.net/uploads/face/face_${topMatch.bagre.uniqueId}.png`} alt={topMatch.bagre.name} className="w-full h-full object-cover opacity-50" onError={(e) => { e.target.src = 'https://via.placeholder.com/150/550000/fff?text=' + topMatch.bagre.name.charAt(0) }} />
                   </div>
                   <h3 className="font-black text-lg text-center leading-tight text-red-100 mb-1">{topMatch.bagre.name}</h3>
                   <p className="text-xs text-red-400/80 font-bold uppercase tracking-widest mb-4">O Bagre Oficial</p>
