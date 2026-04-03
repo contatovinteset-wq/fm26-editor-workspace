@@ -194,40 +194,43 @@ const Escalacao = () => {
                  {/* Titulares: Flex Layout para as posições */}
                  <div className="flex-1 w-full flex flex-col justify-between py-12 z-10">
                     {/* ATA */}
-                    <div className="w-full flex justify-center">
-                       <SlotPlayer 
-                         label="Atacante" 
-                         type="ATA" 
-                         player={squad.ata} 
-                         isActive={activeSlot === 'ATA'} 
-                         onClick={() => setActiveSlot('ATA')}
-                         onRemove={() => handleRemovePlayer('ata')}
-                       />
-                    </div>
+                     <div className="w-full flex justify-center">
+                        <SlotPlayer 
+                          label="Atacante" 
+                          type="ATA" 
+                          player={squad.ata} 
+                          isActive={activeSlot === 'ATA'} 
+                          onClick={() => setActiveSlot('ATA')}
+                          onRemove={() => handleRemovePlayer('ata')}
+                          isMarketOpen={isMarketOpen}
+                        />
+                     </div>
                     
                     {/* MEI */}
-                    <div className="w-full flex justify-center mt-[-2rem]">
-                       <SlotPlayer 
-                         label="Meio-Campo" 
-                         type="MEI" 
-                         player={squad.mei} 
-                         isActive={activeSlot === 'MEI'} 
-                         onClick={() => setActiveSlot('MEI')}
-                         onRemove={() => handleRemovePlayer('mei')}
-                       />
-                    </div>
+                     <div className="w-full flex justify-center mt-[-2rem]">
+                        <SlotPlayer 
+                          label="Meio-Campo" 
+                          type="MEI" 
+                          player={squad.mei} 
+                          isActive={activeSlot === 'MEI'} 
+                          onClick={() => setActiveSlot('MEI')}
+                          onRemove={() => handleRemovePlayer('mei')}
+                          isMarketOpen={isMarketOpen}
+                        />
+                     </div>
 
                     {/* DEF */}
-                    <div className="w-full flex justify-center mt-[-2rem]">
-                       <SlotPlayer 
-                         label="Defensor / GOL" 
-                         type="DEF" 
-                         player={squad.def} 
-                         isActive={activeSlot === 'DEF'} 
-                         onClick={() => setActiveSlot('DEF')}
-                         onRemove={() => handleRemovePlayer('def')}
-                       />
-                    </div>
+                     <div className="w-full flex justify-center mt-[-2rem]">
+                        <SlotPlayer 
+                          label="Defensor / GOL" 
+                          type="DEF" 
+                          player={squad.def} 
+                          isActive={activeSlot === 'DEF'} 
+                          onClick={() => setActiveSlot('DEF')}
+                          onRemove={() => handleRemovePlayer('def')}
+                          isMarketOpen={isMarketOpen}
+                        />
+                     </div>
                  </div>
               </div>
 
@@ -245,6 +248,7 @@ const Escalacao = () => {
                       onClick={() => setActiveSlot('BAGRE')}
                       onRemove={() => handleRemovePlayer('bagre')}
                       horizontal
+                      isMarketOpen={isMarketOpen}
                     />
                  </div>
               </div>
@@ -275,7 +279,7 @@ const Escalacao = () => {
                 {/* Cabeçalho do Mercado */}
                 <div className="flex items-center justify-between mb-6 z-10">
                   <h3 className="font-black text-xl uppercase flex items-center gap-2">
-                    <Users className="text-accent" /> Mercado Livre
+                    <Users className="text-accent" /> Escolha do Plantel
                   </h3>
                   {activeSlot && (
                     <span className="bg-accent/20 text-accent text-xs font-bold px-3 py-1 rounded border border-accent/30">
@@ -326,11 +330,16 @@ const Escalacao = () => {
                            <div className="w-12 h-12 rounded-full bg-gray-800 border border-white/10 flex items-center justify-center text-xs font-bold font-mono">
                              {player.cartolaRole || '-'}
                            </div>
-                           <div>
-                             <h4 className="font-bold text-sm text-white group-hover:text-accent transition-colors">{player.name}</h4>
-                             <p className="text-xs text-gray-400 font-mono">Idade: {player.age}</p>
-                           </div>
-                         </div>
+                            <div>
+                              <h4 className="font-bold text-sm text-white group-hover:text-accent transition-colors">{player.name}</h4>
+                              <div className="flex items-center gap-2">
+                                <p className="text-xs text-gray-400 font-mono">Idade: {player.age}</p>
+                                <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
+                                  {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints || 0).toFixed(2)} pts
+                                </span>
+                              </div>
+                            </div>
+                          </div>
                          <button className="w-8 h-8 rounded-full bg-accent text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                            +
                          </button>
@@ -348,7 +357,7 @@ const Escalacao = () => {
 };
 
 // Subcomponente de Slot no Campo
-const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizontal = false }) => {
+const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizontal = false, isMarketOpen = true }) => {
   return (
     <div className={`relative flex ${horizontal ? 'flex-row items-center justify-between w-full' : 'flex-col items-center justify-center'} gap-2 group`}>
       {!player ? (
@@ -367,16 +376,18 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
         </motion.button>
       ) : (
         // Carta de Jogador Preenchida
-        <div className={`
+          <div className={`
           relative flex flex-col items-center justify-center border transition-all rounded-full bg-black shadow-xl
           ${horizontal ? 'w-full max-w-[300px] h-16 px-4 rounded-xl border-accent/50 flex-row gap-4' : 'w-24 h-24 sm:w-28 sm:h-28 border-accent/50'}
         `}>
-          <button 
-            onClick={onRemove}
-            className={`absolute ${horizontal ? 'right-2' : '-top-2 -right-2'} w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white border-2 border-black opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all z-20`}
-          >
-            <X size={12} />
-          </button>
+          {isMarketOpen && (
+             <button 
+               onClick={onRemove}
+               className={`absolute ${horizontal ? 'right-2' : '-top-2 -right-2'} w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white border-2 border-black opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all z-20`}
+             >
+               <X size={12} />
+             </button>
+          )}
           
           <div className={`flex items-center justify-center text-accent/20 absolute inset-0 pt-2 ${horizontal ? 'hidden' : ''}`}>
              <Shield size={64} strokeWidth={1} />
@@ -390,10 +401,8 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
                     <span className="font-black text-sm">{player.name}</span>
                   </div>
                   <div className="flex flex-wrap items-center gap-2 justify-end">
-                     <span className="text-xs bg-white/10 px-1.5 py-0.5 rounded">{player.age || '-'} a</span>
-                     <span className="text-xs bg-accent/20 text-accent font-bold px-1.5 py-0.5 rounded">★ {player.rawStats?.['Classificação'] || 'N/A'}</span>
                      <span className={`text-xs px-2 py-0.5 rounded font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
-                        {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints || 0).toFixed(2)}
+                        {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints || 0).toFixed(2)} pts
                      </span>
                   </div>
                 </>
@@ -402,8 +411,6 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
                  <span className="text-[10px] text-accent font-bold uppercase">{player.cartolaRole || '-'}</span>
                  <span className="text-xs sm:text-sm font-black uppercase leading-tight">{player.name}</span>
                  <div className="flex items-center justify-center gap-1 mt-1 flex-wrap">
-                     <span className="text-[9px] bg-white/10 px-1 rounded-sm">{player.age || '-'}a</span>
-                     <span className="text-[9px] bg-accent/20 text-accent font-bold px-1 rounded-sm">★ {player.rawStats?.['Classificação'] || '0.0'}</span>
                      <span className={`text-[9px] px-1 rounded-sm font-bold ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
                         {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints || 0).toFixed(2)} pts
                      </span>

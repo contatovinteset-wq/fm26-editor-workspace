@@ -129,7 +129,7 @@ const ReiDaMesa = () => {
             </span>
           </h1>
           <p className="text-lg text-gray-400 mb-8 max-w-xl leading-relaxed">
-            O Fantasy Game exclusivo da nossa comunidade. Escolha 3 titulares do meu save, um bônus do banco de reservas e aposte em quem será o Bagre da partida! Torça durante as lives e suba nos rankings com base no desempenho real dos jogadores no Football Manager!
+            O Fantasy Game exclusivo da nossa comunidade. Escolha 3 titulares do meu save e aposte em quem será o Bagre da partida! Torça durante as lives e suba nos rankings com base no desempenho real dos jogadores no Football Manager!
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">
@@ -310,7 +310,9 @@ const ReiDaMesa = () => {
                   <div className="z-10 w-full flex flex-col h-full justify-between items-center bg-black/40 p-4 rounded-xl backdrop-blur-sm border border-white/10">
                      <div className="w-full flex justify-between items-center border-b border-white/10 pb-2 mb-2">
                         <span className="font-bold uppercase text-xs tracking-widest text-gray-400">Pts na Rodada:</span>
-                        <span className="font-black text-xl text-accent">+{mySquad.roundScore?.toFixed(2) || '0.00'}</span>
+                        <span className={`font-black text-xl ${(mySquad.roundScore || 0) >= 0 ? 'text-accent' : 'text-red-500'}`}>
+                           {(mySquad.roundScore || 0) > 0 ? '+' : ''}{mySquad.roundScore?.toFixed(2) || '0.00'}
+                        </span>
                      </div>
                      <div className="w-full flex flex-col gap-2 flex-1 justify-center">
                         {[mySquad.ataque, mySquad.meio, mySquad.defensor, mySquad.bagre].map((p, idx) => {
@@ -322,9 +324,15 @@ const ReiDaMesa = () => {
                                     <span className={`text-[10px] font-bold uppercase ${isBagre ? 'text-red-400' : 'text-gray-400'}`}>{isBagre ? 'Bagre' : p.cartolaRole}</span>
                                     <span className="text-sm font-black truncate max-w-[150px]">{p.name}</span>
                                  </div>
-                                 <span className={`font-bold text-sm ${p.matchPoints > 0 ? 'text-green-400' : p.matchPoints < 0 ? 'text-red-400' : 'text-gray-500'}`}>
-                                    {p.matchPoints > 0 ? '+' : ''}{p.matchPoints?.toFixed(2) || '0.00'}
-                                 </span>
+                                 {isBagre ? (
+                                    <span className={`font-bold text-sm px-2 py-1 rounded bg-black/50 ${topMatch?.bagre?.id === p.id ? 'text-green-400 border border-green-500/50' : 'text-red-400 border border-red-500/50'}`}>
+                                      {topMatch?.bagre?.id === p.id ? '+5.00' : '-5.00'} pts bônus
+                                    </span>
+                                 ) : (
+                                    <span className={`font-bold text-sm ${p.matchPoints > 0 ? 'text-green-400' : p.matchPoints < 0 ? 'text-red-400' : 'text-gray-500'}`}>
+                                       {p.matchPoints > 0 ? '+' : ''}{p.matchPoints?.toFixed(2) || '0.00'}
+                                    </span>
+                                 )}
                               </div>
                            )
                         })}
