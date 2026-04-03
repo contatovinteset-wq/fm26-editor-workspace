@@ -53,21 +53,44 @@ export async function processPlantelHtml(htmlString) {
     });
   }
 
-  // Deleta TODOS os jogadores antigos para o novo Plantel prevalecer absolutamente
-  await prisma.player.deleteMany({});
-
-  let countNew = 0;
+  // Alterado para UPSERT em vez de deleteMany() para preservar Foreign Keys (Squads, PlayerScore)
+  let countUpdated = 0;
+  const incomingUids = [];
 
   for (const pData of playersToAdd) {
     if (pData.name) {
-      await prisma.player.create({
-        data: pData
+      incomingUids.push(pData.uidName);
+      await prisma.player.upsert({
+        where: { uidName: pData.uidName },
+        update: {
+          name: pData.name,
+          realPosition: pData.realPosition,
+          age: pData.age,
+          height: pData.height,
+          rawStats: pData.rawStats,
+          uniqueId: pData.uniqueId
+          // Não alteramos cartolaRole para respeitar as atribuições do admin!
+        },
+        create: pData
       });
-      countNew++;
+      countUpdated++;
     }
   }
 
-  return { message: "Plantel importado com sucesso!", inserted: countNew, total: rows.length - 1 };
+  // Define como inativo no mercado (eligible: false) quem não veio no HTML novo
+  if (incomingUids.length > 0) {
+    await prisma.player.updateMany({
+      where: { uidName: { notIn: incomingUids } },
+      data: { eligible: false }
+    });
+    // Garante que todos que vieram estejam ativos
+    await prisma.player.updateMany({
+      where: { uidName: { in: incomingUids } },
+      data: { eligible: true }
+    });
+  }
+
+  return { message: "Plantel importado via Upsert com sucesso!", inserted: countUpdated, total: rows.length - 1 };
 }
 
 export async function processMatchResultHtml(htmlString) {
