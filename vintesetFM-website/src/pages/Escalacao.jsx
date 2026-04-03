@@ -35,19 +35,23 @@ const ScoreDetailModal = ({ player, onClose }) => {
   if (!parsed) parsed = {};
 
   const rows = [
-    { label: 'Minutos jogados', value: parsed.minsPlayed ? parsed.minsPlayed + "'" : "0'" },
-    { label: 'Gols marcados', value: parsed.goals || 0 },
-    { label: 'Assistências', value: parsed.assists || 0 },
-    { label: 'Gols Esperados (xG)', value: parsed.xG ? Number(parsed.xG).toFixed(2) : 0 },
-    { label: 'Assist. Esperadas (xA)', value: parsed.xA ? Number(parsed.xA).toFixed(2) : 0 },
-    { label: 'Oport. Flagrantes', value: parsed.chancesCriadas || 0 },
-    { label: 'Passes Decisivos', value: parsed.passesDecisivos || parsed.keyPasses || 0 },
-    { label: 'Fintas/Dribles', value: parsed.dribles || 0 },
-    { label: 'Desarmes', value: parsed.desarmes || parsed.tackles || 0 },
-    { label: 'Defesas (Goleiro)', value: parsed.defesasGoleiro || parsed.saves || 0 },
-    { label: 'Cartão Amarelo', value: parsed.yellowCars || parsed.yellowCards || parsed.yel || 0 },
-    { label: 'Cartão Vermelho', value: parsed.redCards || parsed.red || 0 },
-    { label: 'Multiplicador (Capitão)', value: parsed.multiplier > 1 ? 'x' + parsed.multiplier : null },
+    { label: 'Minutos jogados', value: parsed.minsPlayed ? parsed.minsPlayed + "'" : "0'", points: (parsed.minsPlayed >= 60 ? 1.0 : (parsed.minsPlayed > 0 ? 0.5 : 0)) },
+    { label: 'Gols marcados', value: parsed.goals || 0, points: (parsed.goals || 0) * 8.0 },
+    { label: 'Assistências', value: parsed.assists || 0, points: (parsed.assists || 0) * 5.0 },
+    { label: 'Gols Esperados (xG)', value: parsed.xG ? Number(parsed.xG).toFixed(2) : 0, points: (parsed.xG || 0) * 2.0 },
+    { label: 'Assist. Esperadas (xA)', value: parsed.xA ? Number(parsed.xA).toFixed(2) : 0, points: (parsed.xA || 0) * 2.0 },
+    { label: 'Oport. Flagrantes', value: parsed.chancesCriadas || 0, points: (parsed.chancesCriadas || 0) * 2.0 },
+    { label: 'Passes Decisivos', value: parsed.passesDecisivos || parsed.keyPasses || 0, points: (parsed.passesDecisivos || parsed.keyPasses || 0) * 1.0 },
+    { label: 'Fintas/Dribles', value: parsed.dribles || 0, points: (parsed.dribles || 0) * 0.5 },
+    { label: 'Bateu na Barra', value: parsed.bateuBarra || 0, points: (parsed.bateuBarra || 0) * 1.5 },
+    { label: 'Desarmes', value: parsed.desarmes || parsed.tackles || 0, points: (parsed.desarmes || parsed.tackles || 0) * 2.0 },
+    { label: 'Intercepções', value: parsed.intercep || 0, points: (parsed.intercep || 0) * 0.5 },
+    { label: 'Alívios', value: parsed.alivios || 0, points: (parsed.alivios || 0) * 0.2 },
+    { label: 'Faltas Cometidas', value: parsed.faltasCom || 0, points: (parsed.faltasCom || 0) * -0.5 },
+    { label: 'Defesas (Goleiro)', value: parsed.defesasGoleiro || parsed.saves || 0, points: (parsed.defesasGoleiro || parsed.saves || 0) * 1.5 },
+    { label: 'Cartão Amarelo', value: parsed.yellowCars || parsed.yellowCards || parsed.yel || 0, points: (parsed.yellowCars || parsed.yellowCards || parsed.yel || 0) * -1.5 },
+    { label: 'Cartão Vermelho', value: parsed.redCards || parsed.red || 0, points: (parsed.redCards || parsed.red || 0) * -3.0 },
+    { label: 'Multiplicador (Capitão)', value: parsed.multiplier > 1 ? 'x' + parsed.multiplier : null, points: 0 },
   ].filter(r => r.value !== null && r.value !== 0 && r.value !== "0'" && r.value !== '0.00');
 
   return (
@@ -79,7 +83,14 @@ const ScoreDetailModal = ({ player, onClose }) => {
           ) : rows.map(r => (
             <div key={r.label} className="flex justify-between items-center py-2.5 text-sm">
               <span className="text-gray-400">{r.label}</span>
-              <span className="font-bold text-white">{r.value}</span>
+              <div className="flex items-center gap-3">
+                <span className="font-bold text-white">{r.value}</span>
+                {r.points !== undefined && r.points !== 0 && (
+                  <span className={`text-[10px] px-2 py-0.5 rounded font-black ${r.points > 0 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-500'}`}>
+                    {r.points > 0 ? '+' : ''}{r.points.toFixed(2)} pts
+                  </span>
+                )}
+              </div>
             </div>
           ))}
         </div>

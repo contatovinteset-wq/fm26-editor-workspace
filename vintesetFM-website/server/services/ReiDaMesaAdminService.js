@@ -235,7 +235,8 @@ export async function processMatchResultHtml(htmlString) {
         points: Number(points.toFixed(2)),
         details: { 
           goals, assists, xG, xA, yellowCars, redCards, minsPlayed,
-          chancesCriadas, passesDecisivos, dribles, desarmes, defesasGoleiro
+          chancesCriadas, passesDecisivos, dribles, desarmes, defesasGoleiro,
+          bateuBarra, intercep, alivios, faltasCom
         }
       });
     }
