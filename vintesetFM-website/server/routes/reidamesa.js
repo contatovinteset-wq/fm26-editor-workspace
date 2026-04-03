@@ -77,6 +77,7 @@ router.get('/players', async (req, res) => {
        return { 
           ...playerData, 
           matchPoints: currentScore ? currentScore.points : null,
+          details: currentScore ? currentScore.details : null,
           lastMatchPoints: prevScore ? prevScore.points : 0 
        };
     });
@@ -189,6 +190,7 @@ router.get('/squad', requireAuth, async (req, res) => {
           const prevScore = p.scores?.find(s => s.roundId === prevRoundId);
 
           p.matchPoints = currentScore ? currentScore.points : null;
+          p.details = currentScore ? currentScore.details : null;
           p.lastMatchPoints = prevScore ? prevScore.points : 0;
           return p;
        };
