@@ -29,8 +29,9 @@ const Ranking = () => {
              position: i + 1,
              name: sq.user?.nickname || sq.user?.name || sq.user?.twitchId || 'Desconhecido',
              score: sq.roundScore || 0,
-             isReiDaMesa: false,
-             hasCarroDoOvo: false 
+             // The overall winner is always the first item in the original 'data' array
+             isReiDaMesa: data.length > 0 && sq.id === data[0].id,
+             hasCarroDoOvo: sq.roundScore > 50 
          }));
          
          setRankingLive(formattedLive);
