@@ -104,6 +104,22 @@ router.get('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req,
   }
 });
 
+// Endpoint Temporário/Administrativo para Resetar Scores Manuais
+router.post('/squads/reset-points', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+  try {
+    const updated = await prisma.squad.updateMany({
+      data: {
+        roundScore: 0,
+        totalScore: 0
+      }
+    });
+    res.json({ success: true, message: `Pontuações de ${updated.count} esquadrões resetadas para 0.` });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao resetar pontuações', details: error.message });
+  }
+});
+
 // Deleta TODOS os jogadores do painel Admin (Truncate Plantel)
 router.delete('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
   try {
