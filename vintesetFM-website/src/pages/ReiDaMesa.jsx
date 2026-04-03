@@ -311,7 +311,7 @@ const ReiDaMesa = () => {
                      <div className="w-full flex justify-between items-center border-b border-white/10 pb-2 mb-2">
                         <span className="font-bold uppercase text-xs tracking-widest text-gray-400">Pts na Rodada:</span>
                         <span className={`font-black text-xl ${(mySquad.roundScore || 0) >= 0 ? 'text-accent' : 'text-red-500'}`}>
-                           {(mySquad.roundScore || 0) > 0 ? '+' : ''}{mySquad.roundScore?.toFixed(2) || '0.00'}
+                           {mySquad.roundScore?.toFixed(2) || '0.00'}
                         </span>
                      </div>
                      <div className="w-full flex flex-col gap-2 flex-1 justify-center">
@@ -326,11 +326,11 @@ const ReiDaMesa = () => {
                                  </div>
                                  {isBagre ? (
                                     <span className={`font-bold text-sm px-2 py-1 rounded bg-black/50 ${topMatch?.bagre?.id === p.id ? 'text-green-400 border border-green-500/50' : 'text-red-400 border border-red-500/50'}`}>
-                                      {topMatch?.bagre?.id === p.id ? '+5.00' : '-5.00'} pts bônus
+                                      {topMatch?.bagre?.id === p.id ? '5.00' : '-5.00'} pts bônus
                                     </span>
                                  ) : (
                                     <span className={`font-bold text-sm ${p.matchPoints > 0 ? 'text-green-400' : p.matchPoints < 0 ? 'text-red-400' : 'text-gray-500'}`}>
-                                       {p.matchPoints > 0 ? '+' : ''}{p.matchPoints?.toFixed(2) || '0.00'}
+                                       {p.matchPoints?.toFixed(2) || '0.00'}
                                     </span>
                                  )}
                               </div>
@@ -392,10 +392,10 @@ const ReiDaMesa = () => {
                        </td>
                        <td className="px-2 py-3 font-bold text-white">{row.name}</td>
                        <td className={`px-2 py-3 text-center font-mono font-bold ${row.lastRound > 0 ? 'text-green-500' : row.lastRound < 0 ? 'text-red-500' : 'text-blue-400'}`}>
-                         {row.lastRound > 0 ? '+' : ''}{row.lastRound}
+                         {row.lastRound}
                        </td>
                        <td className={`px-4 py-3 text-right font-black font-mono ${row.total > 0 ? 'text-green-500' : row.total < 0 ? 'text-red-500' : 'text-blue-400'}`}>
-                         {row.total > 0 ? '+' : ''}{row.total}
+                         {row.total}
                        </td>
                      </tr>
                    ))}

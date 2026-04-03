@@ -116,7 +116,7 @@ const PerfilManager = () => {
               <div className="flex gap-4 mt-4 md:mt-0 justify-center md:justify-start">
                   <div className="bg-black/50 border border-white/5 rounded-xl px-6 py-4 text-center min-w-[120px]">
                      <span className="text-xs uppercase font-bold text-gray-500 mb-1 block">Rodada</span>
-                     <span className="text-2xl font-black font-mono text-green-400">+{squad?.roundScore?.toFixed(1) || '0.0'}</span>
+                     <span className={`text-2xl font-black font-mono ${(squad?.roundScore || 0) >= 0 ? 'text-green-400' : 'text-red-500'}`}>{squad?.roundScore?.toFixed(1) || '0.0'}</span>
                   </div>
                   <div className="bg-black/50 border border-white/5 rounded-xl px-6 py-4 text-center min-w-[120px]">
                      <span className="text-xs uppercase font-bold text-gray-500 mb-1 block">Total</span>
