@@ -104,16 +104,17 @@ router.get('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req,
   }
 });
 
-// Endpoint Temporário/Administrativo para Resetar Scores Manuais
+// Endpoint Temporário/Administrativo para Resetar Scores Manuais e Início de Temporada
 router.post('/squads/reset-points', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
   try {
+    const deletedScores = await prisma.playerScore.deleteMany({});
     const updated = await prisma.squad.updateMany({
       data: {
         roundScore: 0,
         totalScore: 0
       }
     });
-    res.json({ success: true, message: `Pontuações de ${updated.count} esquadrões resetadas para 0.` });
+    res.json({ success: true, message: `Histórico apagado (${deletedScores.count} scores). Pontuações de ${updated.count} esquadrões resetadas para 0.` });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erro ao resetar pontuações', details: error.message });
