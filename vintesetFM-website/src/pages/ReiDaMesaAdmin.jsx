@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldAlert, BarChart3, UploadCloud, Lock, Unlock, Trash2, Eye } from 'lucide-react';
+import { ShieldAlert, BarChart3, UploadCloud, Lock, Unlock, Trash2, Eye, Copy, CheckCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -19,6 +19,14 @@ const ReiDaMesaAdmin = () => {
   const [rounds, setRounds] = useState([]);
   const [selectedRound, setSelectedRound] = useState('');
   const [isAnularModalOpen, setIsAnularModalOpen] = useState(false);
+  const [copiedOverlay, setCopiedOverlay] = useState(false);
+
+  const copyOverlayLink = () => {
+    const url = window.location.origin + '/reidamesa/overlay';
+    navigator.clipboard.writeText(url);
+    setCopiedOverlay(true);
+    setTimeout(() => setCopiedOverlay(false), 3000);
+  };
 
   useEffect(() => {
     if (!isOwner) return;
@@ -187,10 +195,21 @@ const ReiDaMesaAdmin = () => {
         
         <div className="flex flex-col xl:flex-row gap-6 mb-6">
           <div className="flex-1">
-            <h2 className="text-3xl font-black uppercase tracking-tight flex items-center gap-3 mb-2">
-              <ShieldAlert className="text-primary w-8 h-8" />
-              Painel do Streamer - Rei da Mesa
-            </h2>
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
+              <h2 className="text-3xl font-black uppercase tracking-tight flex items-center gap-3">
+                <ShieldAlert className="text-primary w-8 h-8" />
+                Painel do Streamer - Rei da Mesa
+              </h2>
+              
+              <button 
+                onClick={copyOverlayLink}
+                className="flex items-center gap-2 bg-purple-600/20 hover:bg-purple-600/40 text-purple-400 border border-purple-500/30 px-4 py-2 rounded-lg font-bold uppercase tracking-wider transition-colors"
+                title="Copiar link do OBS"
+              >
+                 {copiedOverlay ? <CheckCircle className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+                 {copiedOverlay ? 'Copiado!' : 'URL Overlay do OBS'}
+              </button>
+            </div>
           </div>
 
           {/* Modal de Preview (Cartões Manuais) */}
