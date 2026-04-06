@@ -104,7 +104,7 @@ export async function processPlantelHtml(htmlString) {
   return { message: "Plantel importado com sucesso! Os elencos da rodada foram resetados.", inserted: countUpdated, total: rows.length - 1 };
 }
 
-export async function processMatchResultHtml(htmlString) {
+export async function previewMatchResultHtml(htmlString) {
   const $ = cheerio.load(htmlString);
   const rows = $('table tr').toArray();
   const scores = [];
@@ -242,22 +242,58 @@ export async function processMatchResultHtml(htmlString) {
     }
   }
 
-  // Pós processamento e encontrar "O BAGRE DA PARTIDA"
+  scores.sort((a,b) => b.points - a.points);
+  
+  return { success: true, scores };
+}
+
+export async function processMatchResultFinal(scoresFromFrontend) {
+  const openRound = await prisma.round.findFirst({ where: { isOpen: true } });
+  if (!openRound) {
+    throw new Error('Nenhuma rodada aberta no momento.');
+  }
+
   let processados = 0;
   let worstPlayerId = null;
   let minPoints = 9999;
+  
+  const finalScores = [];
 
-  for (const s of scores) {
-    // Só elege como bagre o cara que jogou 45 mins ou mais
+  for (const s of scoresFromFrontend) {
+    let points = 0;
+    
+    if (s.details.minsPlayed >= 60) points += 1.0;
+    else if (s.details.minsPlayed > 0) points += 0.5;
+
+    points -= (s.details.yellowCars * 1.5);
+    points -= (s.details.redCards * 3.0);
+
+    points += (s.details.goals * 8.0);
+    points += (s.details.assists * 5.0);
+    points += (s.details.xG * 2.0);
+    points += (s.details.xA * 2.0);
+    points += (s.details.chancesCriadas * 2.0);
+    points += (s.details.passesDecisivos * 1.0);
+    points += (s.details.dribles * 0.5);
+    points += (s.details.bateuBarra * 1.5);
+    points += (s.details.desarmes * 2.0);
+    points += (s.details.intercep * 0.5);
+    points += (s.details.alivios * 0.2);
+    points -= (s.details.faltasCom * 0.5);
+    points += (s.details.defesasGoleiro * 1.5);
+
+    s.points = Number(points.toFixed(2));
+    finalScores.push(s);
+
     if (s.details.minsPlayed >= 45 && s.points < minPoints) {
       minPoints = s.points;
       worstPlayerId = s.playerId;
     }
 
     await prisma.playerScore.upsert({
-      where: { playerId_roundId: { playerId: s.playerId, roundId: s.roundId } },
+      where: { playerId_roundId: { playerId: s.playerId, roundId: openRound.id } },
       update: { points: s.points, details: s.details },
-      create: { playerId: s.playerId, roundId: s.roundId, points: s.points, details: s.details }
+      create: { playerId: s.playerId, roundId: openRound.id, points: s.points, details: s.details }
     });
     processados++;
   }
@@ -306,8 +342,7 @@ export async function processMatchResultHtml(htmlString) {
     });
   }
 
-  // Ordene scores do maior pontuador para o menor para devolver a view
-  scores.sort((a,b) => b.points - a.points);
+  finalScores.sort((a,b) => b.points - a.points);
   
-  return { success: true, scoresProcessados: processados, bagreDaRodadaId: worstPlayerId, scores };
+  return { success: true, scoresProcessados: processados, bagreDaRodadaId: worstPlayerId, scores: finalScores };
 }

@@ -13,6 +13,9 @@ const ReiDaMesaAdmin = () => {
   const [savingRows, setSavingRows] = useState({});
   const [matchResult, setMatchResult] = useState(null);
   const [isResultModalOpen, setIsResultModalOpen] = useState(false);
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
+  const [matchPreview, setMatchPreview] = useState(null);
+  const [isProcessingFinal, setIsProcessingFinal] = useState(false);
   const [rounds, setRounds] = useState([]);
   const [selectedRound, setSelectedRound] = useState('');
   const [isAnularModalOpen, setIsAnularModalOpen] = useState(false);
@@ -78,8 +81,8 @@ const ReiDaMesaAdmin = () => {
                 setAllPlayers(refreshed);
             }
         } else if (type === 'MATCH') {
-            setMatchResult(data);
-            setIsResultModalOpen(true);
+            setMatchPreview(data.scores || []);
+            setIsPreviewModalOpen(true);
         }
       } catch (err) {
         console.error(err);
@@ -189,6 +192,121 @@ const ReiDaMesaAdmin = () => {
               Painel do Streamer - Rei da Mesa
             </h2>
           </div>
+
+          {/* Modal de Preview (Cartões Manuais) */}
+          <AnimatePresence>
+            {isPreviewModalOpen && matchPreview && (
+              <motion.div 
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+              >
+                <motion.div 
+                  initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
+                  className="bg-[#0b0f19] border border-white/10 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col"
+                >
+                  <div className="px-6 py-4 border-b border-yellow-500/20 bg-[#161208] flex justify-between items-center">
+                    <h3 className="font-black text-xl text-yellow-500 flex items-center gap-2">
+                      <ShieldAlert className="text-yellow-500" /> Pré-Visualização e Punições
+                    </h3>
+                    <button onClick={() => setIsPreviewModalOpen(false)} className="text-gray-400 hover:text-white transition-colors bg-white/5 hover:bg-white/10 p-2 rounded-lg">
+                       Fechar
+                    </button>
+                  </div>
+                  
+                  <div className="p-6 overflow-y-auto custom-scrollbar flex-1 text-sm bg-bgDark">
+                     <p className="text-gray-300 mb-4 font-medium">Revisão de cartões. Caso o jogador tenha recebido cartões que não saíram na coluna Min devido a substituição ou erro do FM, adicione aqui (Ex: Amarelo: 2, Vermelho: 1).</p>
+                     
+                     <div className="w-full overflow-x-auto rounded-xl border border-white/10">
+                        <table className="w-full text-left font-medium text-xs text-gray-300">
+                           <thead className="bg-[#131b2a] text-gray-400 uppercase text-[10px] tracking-wider border-b border-white/10">
+                             <tr>
+                               <th className="px-4 py-3">Jogador</th>
+                               <th className="px-4 py-3 text-center">Minutos</th>
+                               <th className="px-4 py-3 text-center">Gol / Ass</th>
+                               <th className="px-4 py-3 text-center">Cartões Amarelos</th>
+                               <th className="px-4 py-3 text-center">Cartões Vermelhos</th>
+                             </tr>
+                           </thead>
+                           <tbody className="divide-y divide-white/5">
+                             {matchPreview.map((s, index) => (
+                               <tr key={s.playerId} className="hover:bg-white/5 transition-colors">
+                                 <td className="px-4 py-3 font-bold text-white flex items-center gap-2">
+                                   {s.playerName} <span className="text-[10px] text-gray-500">[{s.realPosition}]</span>
+                                 </td>
+                                 <td className="px-4 py-3 text-center">{s.details.minsPlayed || 0}'</td>
+                                 <td className="px-4 py-3 text-center">{s.details.goals} / {s.details.assists}</td>
+                                 <td className="px-4 py-3 text-center">
+                                   <input 
+                                     type="number" 
+                                     min="0" 
+                                     value={s.details.yellowCars || 0} 
+                                     onChange={(e) => {
+                                       const newPreview = [...matchPreview];
+                                       newPreview[index].details.yellowCars = parseInt(e.target.value) || 0;
+                                       setMatchPreview(newPreview);
+                                     }}
+                                     className="w-16 bg-black/60 border border-yellow-500/30 text-white rounded p-1 text-center outline-none focus:border-yellow-500"
+                                   />
+                                 </td>
+                                 <td className="px-4 py-3 text-center">
+                                   <input 
+                                     type="number" 
+                                     min="0" 
+                                     value={s.details.redCards || 0} 
+                                     onChange={(e) => {
+                                       const newPreview = [...matchPreview];
+                                       newPreview[index].details.redCards = parseInt(e.target.value) || 0;
+                                       setMatchPreview(newPreview);
+                                     }}
+                                     className="w-16 bg-black/60 border border-red-500/30 text-white rounded p-1 text-center outline-none focus:border-red-500"
+                                   />
+                                 </td>
+                               </tr>
+                             ))}
+                             {matchPreview.length === 0 && (
+                               <tr><td colSpan="5" className="px-4 py-8 text-center text-gray-500">Nenhum jogador para processar.</td></tr>
+                             )}
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+
+                  <div className="p-4 bg-[#0e1420] border-t border-white/5 flex justify-end">
+                     <button 
+                       onClick={async () => {
+                         setIsProcessingFinal(true);
+                         try {
+                           const res = await fetch('/api/reidamesa/process-match-final', {
+                             method: 'POST',
+                             headers: { 'Content-Type': 'application/json' },
+                             credentials: 'include',
+                             body: JSON.stringify({ scores: matchPreview })
+                           });
+                           const finalData = await res.json();
+                           setIsProcessingFinal(false);
+                           setIsPreviewModalOpen(false);
+                           if (res.ok) {
+                             setMatchResult(finalData);
+                             setIsResultModalOpen(true);
+                           } else {
+                             alert('Erro ao processar a partida: ' + (finalData.error || 'Erro desconhecido.'));
+                           }
+                         } catch (e) {
+                           console.error(e);
+                           setIsProcessingFinal(false);
+                           alert('Erro na requisição. Veja o console.');
+                         }
+                       }} 
+                       disabled={isProcessingFinal || matchPreview.length === 0}
+                       className="bg-green-600 hover:bg-green-500 text-white font-black uppercase tracking-wider px-6 py-2.5 rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50"
+                     >
+                       {isProcessingFinal ? 'Processando...' : 'Confirmar e Processar Rodada'}
+                     </button>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Modal de Resultados da Partida */}
           <AnimatePresence>

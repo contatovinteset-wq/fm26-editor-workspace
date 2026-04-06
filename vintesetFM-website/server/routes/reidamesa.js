@@ -1,7 +1,7 @@
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import multer from 'multer';
-import { processPlantelHtml, processMatchResultHtml } from '../services/ReiDaMesaAdminService.js';
+import { processPlantelHtml, previewMatchResultHtml, processMatchResultFinal } from '../services/ReiDaMesaAdminService.js';
 import { requireAuth, requireRoles } from '../middleware/roles.js';
 
 const router = express.Router();
@@ -357,7 +357,21 @@ router.post('/upload-match', requireAuth, requireRoles('OWNER', 'ADMIN_GERACAO')
   try {
     if (!req.file) return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
     const htmlString = req.file.buffer.toString('utf-8');
-    const result = await processMatchResultHtml(htmlString);
+    const result = await previewMatchResultHtml(htmlString);
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.post('/process-match-final', requireAuth, requireRoles('OWNER', 'ADMIN_GERACAO'), async (req, res) => {
+  try {
+    const { scores } = req.body;
+    if (!scores || !Array.isArray(scores)) {
+      return res.status(400).json({ error: 'Array de scores inválido.' });
+    }
+    const result = await processMatchResultFinal(scores);
     res.json(result);
   } catch (error) {
     console.error(error);
