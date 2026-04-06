@@ -338,6 +338,88 @@ router.delete('/round/:id', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']
   }
 });
 
+// ---- CRAQUE DO JOGO (Votação) ----
+router.get('/craque/status', requireAuth, async (req, res) => {
+  try {
+    const currentRound = await prisma.round.findFirst({ where: { isOpen: true } });
+    if (!currentRound) return res.json({ mode: 'CLOSED' });
+
+    // Mercado aberto = jogo não começou
+    if (isMarketOpen) return res.json({ mode: 'CLOSED' });
+
+    // Jogadores elegíveis para voto no front (usaremos os que não são bagre etc., ou todos ativos do html)
+    // Se a rodada já tem bagreId, significa que a partida acabou e já foi processada.
+    if (currentRound.bagreId) {
+      return res.json({ mode: 'RESULTS', roundId: currentRound.id });
+    }
+
+    const userVote = await prisma.craqueVote.findUnique({
+      where: { userId_roundId: { userId: req.user.id, roundId: currentRound.id } },
+      include: { player: true }
+    });
+
+    res.json({ mode: 'VOTING', roundId: currentRound.id, userVote: userVote ? userVote.player : null });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao buscar status do craque' });
+  }
+});
+
+router.post('/craque/vote', requireAuth, async (req, res) => {
+  try {
+    const { playerId } = req.body;
+    const currentRound = await prisma.round.findFirst({ where: { isOpen: true } });
+    
+    if (!currentRound || isMarketOpen || currentRound.bagreId) {
+       return res.status(403).json({ error: 'Votação não permitida neste momento.' });
+    }
+
+    const vote = await prisma.craqueVote.upsert({
+      where: { userId_roundId: { userId: req.user.id, roundId: currentRound.id } },
+      update: { playerId },
+      create: { userId: req.user.id, roundId: currentRound.id, playerId }
+    });
+
+    res.json({ success: true, vote });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao salvar voto' });
+  }
+});
+
+router.get('/craque/results', async (req, res) => {
+  try {
+    const currentRound = await prisma.round.findFirst({ where: { isOpen: true } });
+    if (!currentRound) return res.json({ top3: [], totalVotes: 0 });
+
+    const votesCount = await prisma.craqueVote.groupBy({
+      by: ['playerId'],
+      where: { roundId: currentRound.id },
+      _count: { playerId: true },
+      orderBy: { _count: { playerId: 'desc' } },
+      take: 3
+    });
+
+    const totalVotes = await prisma.craqueVote.count({
+      where: { roundId: currentRound.id }
+    });
+
+    const top3 = await Promise.all(votesCount.map(async (v) => {
+       const player = await prisma.player.findUnique({ where: { id: v.playerId } });
+       return {
+          ...player,
+          votes: v._count.playerId,
+          percentage: totalVotes > 0 ? Math.round((v._count.playerId / totalVotes) * 100) : 0
+       };
+    }));
+
+    res.json({ top3, totalVotes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao buscar resultados' });
+  }
+});
+
 export default router;
 
 // ADMIN ROUTES: UPLOADS 

@@ -28,6 +28,7 @@ model User {
   squads         Squad[]
   auditLogs      AuditLog[] @relation("UserAuditLogs")
   likes          TopicLike[]
+  craqueVotes    CraqueVote[]
 }
 
 model Topic {
@@ -111,6 +112,7 @@ model Player {
 
   scores       PlayerScore[]
   bagreOfRound Round[]  @relation("RoundBagre")
+  craqueVotes  CraqueVote[]
 }
 
 model Round {
@@ -126,6 +128,7 @@ model Round {
   updatedAt   DateTime @updatedAt
 
   scores      PlayerScore[]
+  craqueVotes CraqueVote[]
 }
 
 model PlayerScore {
@@ -167,4 +170,19 @@ model TopicLike {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([topicId, userId])
+}
+
+model CraqueVote {
+  id        String   @id @default(uuid())
+  userId    String
+  roundId   String
+  playerId  String
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  round     Round    @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, roundId])
 }

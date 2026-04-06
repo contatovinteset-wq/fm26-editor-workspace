@@ -13,6 +13,9 @@ const ReiDaMesa = () => {
   const [ranking, setRanking] = useState([]);
   const [topMatch, setTopMatch] = useState({ top3: [], bagre: null });
   const [mySquad, setMySquad] = useState(null);
+  const [craqueData, setCraqueData] = useState({ mode: 'CLOSED' });
+  const [craqueCandidates, setCraqueCandidates] = useState([]);
+  const [selectedCraque, setSelectedCraque] = useState(null);
   
   React.useEffect(() => {
     fetch('/api/reidamesa/status')
@@ -38,13 +41,61 @@ const ReiDaMesa = () => {
       .then(data => setTopMatch(data))
       .catch(console.error);
 
-    fetch('/api/reidamesa/squad')
+    fetch('/api/reidamesa/squad', {
+       headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    })
       .then(res => res.json())
       .then(data => {
          if(data && Object.keys(data).length > 0) setMySquad(data);
       })
       .catch(console.error);
+
+    // Craque do Chat Status
+    fetch('/api/reidamesa/craque/status', {
+       headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    })
+      .then(res => res.json())
+      .then(data => {
+         setCraqueData(data);
+         if (data.mode === 'VOTING') {
+            setSelectedCraque(data.userVote ? data.userVote.id : null);
+            fetch('/api/reidamesa/players')
+               .then(playersRes => playersRes.json())
+               .then(playersData => {
+                   setCraqueCandidates(playersData);
+               });
+         } else if (data.mode === 'RESULTS') {
+            fetch('/api/reidamesa/craque/results')
+               .then(resultsRes => resultsRes.json())
+               .then(resultsData => {
+                   setCraqueData({ mode: 'RESULTS', top3: resultsData.top3, totalVotes: resultsData.totalVotes });
+               });
+         }
+      })
+      .catch(console.error);
   }, []);
+
+  const handleVoteCraque = async (playerId) => {
+     try {
+         const res = await fetch('/api/reidamesa/craque/vote', {
+             method: 'POST',
+             headers: { 
+                 'Content-Type': 'application/json',
+                 'Authorization': `Bearer ${localStorage.getItem('token')}` 
+             },
+             body: JSON.stringify({ playerId })
+         });
+         const data = await res.json();
+         if (data.success) {
+            setSelectedCraque(playerId);
+         } else {
+            alert(data.error || 'Erro ao votar no craque!');
+         }
+     } catch (err) {
+         console.error(err);
+         alert('Erro ao votar no craque!');
+     }
+  };
 
   // Funções de Admin movidas para ReiDaMesaAdmin.jsx
 
@@ -207,6 +258,98 @@ const ReiDaMesa = () => {
           </div>
         </div>
       </section>
+
+      {/* CRAQUE DO CHAT SECTION */}
+      {craqueData.mode !== 'CLOSED' && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+          <div className="bg-gradient-to-r from-[#2a1744] to-[#120a1f] border border-purple-500/30 rounded-3xl p-6 md:p-10 relative overflow-hidden shadow-[0_0_40px_rgba(139,92,246,0.15)]">
+            {/* Efeitos de Fundo */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/20 blur-[80px] rounded-full pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/10 blur-[80px] rounded-full pointer-events-none"></div>
+
+            <div className="text-center mb-8 relative z-10">
+               <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight flex items-center justify-center gap-3">
+                  <Star className="text-purple-400 animate-pulse" size={36} />
+                  Craque do Chat
+                  <Star className="text-purple-400 animate-pulse" size={36} />
+               </h2>
+               <p className="text-gray-300 mt-3 max-w-2xl mx-auto">
+                 {craqueData.mode === 'VOTING' 
+                   ? "O Mercado fechou e a bola está rolando! Vote em quem você acha que será eleito o Craque da Partida!" 
+                   : "O jogo acabou! Estes foram os jogadores favoritos da galera nesta rodada!"}
+               </p>
+            </div>
+
+            {craqueData.mode === 'VOTING' && (
+               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 relative z-10 max-h-[400px] overflow-y-auto custom-scrollbar p-2">
+                 {craqueCandidates.map(p => (
+                   <div 
+                     key={p.id}
+                     onClick={() => handleVoteCraque(p.id)}
+                     className={`cursor-pointer rounded-xl p-3 border text-center transition-all duration-300 ${
+                       selectedCraque === p.id 
+                         ? 'bg-purple-600/30 border-purple-400 shadow-[0_0_20px_rgba(168,85,247,0.4)] scale-105' 
+                         : 'bg-black/40 border-white/10 hover:border-purple-500/50 hover:bg-purple-900/20'
+                     }`}
+                   >
+                     <div className={`w-16 h-16 mx-auto rounded-full bg-black border-2 flex items-center justify-center overflow-hidden mb-2 ${selectedCraque === p.id ? 'border-purple-400' : 'border-gray-700'}`}>
+                        <img 
+                          src={`https://sortitoutsi.b-cdn.net/uploads/face/face_${p.uniqueId}.png`} 
+                          alt={p.name} 
+                          className="w-full h-full object-cover" 
+                          onError={(e) => { e.target.src = 'https://via.placeholder.com/150/111/fff?text=' + p.name.charAt(0) }} 
+                        />
+                     </div>
+                     <p className="font-bold text-xs sm:text-sm truncate">{p.name}</p>
+                     <p className="text-[10px] text-gray-400 font-bold uppercase">{p.realPosition}</p>
+                     {selectedCraque === p.id && (
+                       <span className="mt-2 inline-block bg-purple-500 text-white text-[10px] font-black uppercase px-2 py-1 rounded">Votado</span>
+                     )}
+                   </div>
+                 ))}
+               </div>
+            )}
+
+            {craqueData.mode === 'RESULTS' && (
+               <div className="flex flex-col md:flex-row justify-center items-end gap-6 md:gap-12 relative z-10 pt-8">
+                 {craqueData.top3?.map((player, index) => {
+                    const isFirst = index === 0;
+                    const height = isFirst ? 'h-48 md:h-56' : index === 1 ? 'h-40 md:h-48' : 'h-32 md:h-40';
+                    const color = isFirst ? 'from-yellow-400/80 to-yellow-600' : index === 1 ? 'from-gray-300/80 to-gray-500' : 'from-orange-400/80 to-orange-700';
+                    const borderColor = isFirst ? 'border-yellow-400' : index === 1 ? 'border-gray-300' : 'border-orange-400';
+                    
+                    return (
+                      <div key={player.id} className="flex flex-col items-center justify-end w-full md:w-48 group">
+                         <h3 className="font-black text-xl text-white text-center truncate w-full mb-1">{player.name}</h3>
+                         <p className="font-bold text-purple-300 text-sm mb-4">{player.percentage}% ({player.votes} votos)</p>
+                         
+                         <div className="relative w-24 h-24 mb-4 z-10">
+                            {isFirst && <Crown size={32} className="absolute -top-6 left-1/2 -translate-x-1/2 text-yellow-500 drop-shadow-lg z-20 animate-bounce" />}
+                            <div className={`w-full h-full rounded-full bg-black border-4 flex items-center justify-center overflow-hidden shadow-2xl ${borderColor}`}>
+                               <img 
+                                 src={`https://sortitoutsi.b-cdn.net/uploads/face/face_${player.uniqueId}.png`} 
+                                 alt={player.name} 
+                                 className="w-full h-full object-cover" 
+                                 onError={(e) => { e.target.src = 'https://via.placeholder.com/150/111/fff?text=' + player.name.charAt(0) }} 
+                               />
+                            </div>
+                         </div>
+                         
+                         <div className={`w-full ${height} bg-gradient-to-t ${color} rounded-t-xl border-x-2 border-t-2 ${borderColor} flex items-end justify-center pb-4 shadow-[0_0_30px_rgba(0,0,0,0.5)]`}>
+                            <span className="font-black text-4xl text-black/50">{index + 1}</span>
+                         </div>
+                      </div>
+                    )
+                 })}
+
+                 {(!craqueData.top3 || craqueData.top3.length === 0) && (
+                    <p className="text-gray-400 text-center w-full">Nenhum voto registrado para a partida.</p>
+                 )}
+               </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Tabela de Pontuação visível */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 bg-gray-900/50 border border-white/5 rounded-3xl p-6 md:p-10">
