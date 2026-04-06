@@ -237,10 +237,13 @@ router.post('/squad', requireAuth, async (req, res) => {
       create: { userId: req.user.id, defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId }
     });
 
-    reiDaMesaEvents.emit('overlay_event', { 
-       type: 'NEW_SQUAD', 
-       user: req.user.nickname || req.user.name || 'Viewer' 
-    });
+    if (!overlayNotifiedUsers.has(req.user.id)) {
+        reiDaMesaEvents.emit('overlay_event', { 
+           type: 'NEW_SQUAD', 
+           user: req.user.nickname || req.user.name || 'Viewer' 
+        });
+        overlayNotifiedUsers.add(req.user.id);
+    }
 
     res.json(squad);
   } catch (error) {
@@ -250,6 +253,7 @@ router.post('/squad', requireAuth, async (req, res) => {
 
 // STATUS DO MERCADO (In-memory por enquanto, reseta ao reiniciar o servidor)
 let isMarketOpen = true;
+const overlayNotifiedUsers = new Set();
 
 router.get('/status', (req, res) => {
   res.json({ isOpen: isMarketOpen });
@@ -263,6 +267,7 @@ router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), as
 
       // Se o mercado for ABERTO agora, assumimos que uma Nova Rodada começou 
       if (!wasOpen && isMarketOpen) {
+         overlayNotifiedUsers.clear(); // Limpa as notificações pro novo overlay da rodada
          const currentOpen = await prisma.round.findFirst({ where: { isOpen: true } });
          if (currentOpen) {
             // Fecha definitivamente
