@@ -13,6 +13,7 @@ import MinhaConta from './MinhaConta';
 import AdminPanel from './AdminPanel';
 import ModeratorPanel from './ModeratorPanel';
 import ReiDaMesaAdmin from './ReiDaMesaAdmin';
+import ReiDaMesaOverlay from './ReiDaMesaOverlay';
 
 const Pages = {
   Home,
@@ -30,6 +31,7 @@ const Pages = {
   AdminPanel: () => <AdminPanel />,
   ModeratorPanel: () => <ModeratorPanel />,
   ReiDaMesaAdmin: () => <ReiDaMesaAdmin />,
+  ReiDaMesaOverlay: () => <ReiDaMesaOverlay />
 };
 
 export default Pages;

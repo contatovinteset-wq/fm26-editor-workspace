@@ -15,6 +15,9 @@ function App() {
         <BrowserRouter>
           <ScrollToTop />
           <Routes>
+          {/* ROTA PURA DO OBS OVERLAY SEM LAYOUT NAVBAR/FOOTER */}
+          <Route path="/reidamesa/overlay" element={<Pages.ReiDaMesaOverlay />} />
+
           <Route path="/" element={<Layout />}>
             <Route index element={<Pages.Home />} />
             <Route path="telecurso" element={<Pages.Telecurso />} />

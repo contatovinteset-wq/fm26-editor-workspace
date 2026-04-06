@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import multer from 'multer';
 import { processPlantelHtml, previewMatchResultHtml, processMatchResultFinal } from '../services/ReiDaMesaAdminService.js';
 import { requireAuth, requireRoles } from '../middleware/roles.js';
+import { reiDaMesaEvents } from '../services/eventBus.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -235,6 +236,12 @@ router.post('/squad', requireAuth, async (req, res) => {
       update: { defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId },
       create: { userId: req.user.id, defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId }
     });
+
+    reiDaMesaEvents.emit('overlay_event', { 
+       type: 'NEW_SQUAD', 
+       user: req.user.nickname || req.user.name || 'Viewer' 
+    });
+
     res.json(squad);
   } catch (error) {
     res.status(500).json({ error: 'Erro ao salvar escalação' });
@@ -418,6 +425,26 @@ router.get('/craque/results', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: 'Erro ao buscar resultados' });
   }
+});
+
+// ---- OBS OVERLAY EVENT STREAM ----
+router.get('/overlay/stream', (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.flushHeaders(); 
+
+  res.write('data: {"type":"CONNECTED"}\\n\\n');
+
+  const sendEvent = (data) => {
+     res.write(`data: ${JSON.stringify(data)}\\n\\n`);
+  };
+
+  reiDaMesaEvents.on('overlay_event', sendEvent);
+
+  req.on('close', () => {
+     reiDaMesaEvents.removeListener('overlay_event', sendEvent);
+  });
 });
 
 export default router;

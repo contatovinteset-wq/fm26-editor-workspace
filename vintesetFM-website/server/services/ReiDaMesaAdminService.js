@@ -1,5 +1,6 @@
 import * as cheerio from 'cheerio';
 import { PrismaClient } from '@prisma/client';
+import { reiDaMesaEvents } from './eventBus.js';
 
 const prisma = new PrismaClient();
 
@@ -340,9 +341,38 @@ export async function processMatchResultFinal(scoresFromFrontend) {
         totalScore: { increment: Number(roundScore.toFixed(2)) }
       }
     });
+
+    sq.roundScoreCalculated = Number(roundScore.toFixed(2));
   }
 
   finalScores.sort((a,b) => b.points - a.points);
+  
+  // Encontrar O campeão e o Craque
+  let roundChampion = null;
+  const sortedSquads = [...squads].sort((a,b) => (b.roundScoreCalculated || 0) - (a.roundScoreCalculated || 0));
+  if (sortedSquads.length > 0 && sortedSquads[0].roundScoreCalculated !== 0) {
+     const ch = await prisma.user.findUnique({ where: { id: sortedSquads[0].userId }});
+     roundChampion = { nickname: ch?.nickname || ch?.name || 'Viewer', score: sortedSquads[0].roundScoreCalculated };
+  }
+
+  const votesCount = await prisma.craqueVote.groupBy({
+      by: ['playerId'],
+      where: { roundId: openRound.id },
+      _count: { playerId: true },
+      orderBy: { _count: { playerId: 'desc' } },
+      take: 1
+  });
+  let craqueChat = null;
+  if (votesCount.length > 0) {
+      const crqPlayer = await prisma.player.findUnique({ where: { id: votesCount[0].playerId }, select: { name: true, realPosition: true } });
+      craqueChat = crqPlayer; // Passa o objeto se achar
+  }
+
+  reiDaMesaEvents.emit('overlay_event', {
+     type: 'ROUND_FINISHED',
+     craque: craqueChat,
+     champion: roundChampion
+  });
   
   return { success: true, scoresProcessados: processados, bagreDaRodadaId: worstPlayerId, scores: finalScores };
 }
