@@ -29,6 +29,9 @@ model User {
   auditLogs      AuditLog[] @relation("UserAuditLogs")
   likes          TopicLike[]
   craqueVotes    CraqueVote[]
+
+  forumTopics    ForumTopic[]
+  forumPosts     ForumPost[]
 }
 
 model Topic {
@@ -185,4 +188,53 @@ model CraqueVote {
   createdAt DateTime @default(now())
 
   @@unique([userId, roundId])
+}
+
+// 💬 Tabelas do Fórum Principal
+model ForumCategory {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  description String?  @db.Text
+  icon        String?
+
+  topics      ForumTopic[]
+}
+
+model ForumTopic {
+  id          String   @id @default(uuid())
+  title       String
+  content     String   @db.Text
+  isPinned    Boolean  @default(false)
+  isClosed    Boolean  @default(false)
+  status      String   @default("PENDING")
+  moderationReason String? @db.Text
+  views       Int      @default(0)
+
+  categoryId  String
+  category    ForumCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  posts       ForumPost[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ForumPost {
+  id          String   @id @default(uuid())
+  content     String   @db.Text
+  status      String   @default("PENDING")
+  moderationReason String? @db.Text
+
+  topicId     String
+  topic       ForumTopic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

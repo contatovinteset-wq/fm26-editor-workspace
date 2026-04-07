@@ -17,24 +17,33 @@ import moderationRoutes from './routes/moderation.js';
 import reiDaMesaRoutes from './routes/reidamesa.js';
 import adminRoutes from './routes/admin.js';
 import userRoutes from './routes/users.js';
+import boardRoutes from './routes/board.js';
+
+import fs from 'fs';
 
 const app = express();
-app.set('trust proxy', 1); // Confia no Proxy (importante para o OAuth no Coolify/Traefik preencher req.protocol e req.hostname corretamente)
+app.set('trust proxy', 1);
+
+// Garante que a pasta de uploads exista
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
 const PORT = process.env.PORT || 3000;
 
-// Configuração de Headers de Segurança (Fase 4 - Security Audit)
 app.use(helmet({
-  contentSecurityPolicy: false, // Desativado no modo cru (opcionalmente pode ser customizado depois para aceitar scripts do Vite)
-  crossOriginResourcePolicy: { policy: "cross-origin" } // Permite carregar recursos externos (Twitch, YT avatars)
+  contentSecurityPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 
-// Configuração CORS dinâmica para Cookies JWT
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' ? ['https://vintesetfm.com.br', 'https://www.vintesetfm.com.br', 'https://vintesetfm.cloud'] : 'http://localhost:5173',
   credentials: true,
 }));
 
-app.use(express.json());
+app.use('/uploads', express.static(uploadsDir));
+app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 app.use(passport.initialize());
 
@@ -45,6 +54,7 @@ app.use('/api/forum', forumRoutes);
 app.use('/api/moderation', moderationRoutes);
 app.use('/api/reidamesa', reiDaMesaRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/board', boardRoutes);
 
 // Rota Twitch
 app.get('/api/twitch/channel', async (req, res) => {

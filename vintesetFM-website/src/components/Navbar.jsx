@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Home, MonitorPlay, Youtube, Twitch, DownloadCloud, Crown, Settings, LogOut, Menu, X, ShieldAlert } from 'lucide-react';
+import { Home, MonitorPlay, Youtube, Twitch, DownloadCloud, Crown, Settings, LogOut, Menu, X, ShieldAlert, MessageSquare } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -31,6 +31,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Início', path: '/', icon: Home },
     { name: 'Telecurso 27', path: '/telecurso', icon: MonitorPlay },
+    { name: 'Fórum', path: '/forum', icon: MessageSquare },
     { name: 'Downloads', path: '/downloads', icon: DownloadCloud },
     { name: 'Rei Da Mesa', path: '/reidamesa', icon: Crown },
   ];

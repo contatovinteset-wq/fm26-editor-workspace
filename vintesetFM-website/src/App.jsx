@@ -23,6 +23,11 @@ function App() {
             <Route path="telecurso" element={<Pages.Telecurso />} />
             <Route path="downloads" element={<Pages.Downloads />} />
             <Route path="downloads/:id" element={<Pages.Topico />} />
+            
+            {/* Rotas do Fórum Novo */}
+            <Route path="forum" element={<Pages.ForumHome />} />
+            <Route path="forum/:slug" element={<Pages.ForumCategory />} />
+            <Route path="forum/t/:id" element={<Pages.ForumThread />} />
             <Route path="login" element={<Pages.Login />} />
             <Route path="cadastro" element={<Pages.Cadastro />} />
             <Route path="minhaconta" element={<Pages.MinhaConta />} />

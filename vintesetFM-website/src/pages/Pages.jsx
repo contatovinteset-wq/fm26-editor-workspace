@@ -14,6 +14,9 @@ import AdminPanel from './AdminPanel';
 import ModeratorPanel from './ModeratorPanel';
 import ReiDaMesaAdmin from './ReiDaMesaAdmin';
 import ReiDaMesaOverlay from './ReiDaMesaOverlay';
+import ForumHome from './forum/ForumHome';
+import ForumCategory from './forum/ForumCategory';
+import ForumThread from './forum/ForumThread';
 
 const Pages = {
   Home,
@@ -31,7 +34,10 @@ const Pages = {
   AdminPanel: () => <AdminPanel />,
   ModeratorPanel: () => <ModeratorPanel />,
   ReiDaMesaAdmin: () => <ReiDaMesaAdmin />,
-  ReiDaMesaOverlay: () => <ReiDaMesaOverlay />
+  ReiDaMesaOverlay: () => <ReiDaMesaOverlay />,
+  ForumHome: () => <ForumHome />,
+  ForumCategory: () => <ForumCategory />,
+  ForumThread: () => <ForumThread />
 };
 
 export default Pages;
