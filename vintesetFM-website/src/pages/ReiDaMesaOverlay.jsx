@@ -11,30 +11,42 @@ const ReiDaMesaOverlay = () => {
         const rootElement = document.getElementById('root');
         if (rootElement) rootElement.style.background = 'transparent';
 
-        const evtSource = new EventSource('/api/reidamesa/overlay/stream');
+        let lastSeenId = 0;
+        let isFetching = false;
 
-        evtSource.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            if (data.type === 'CONNECTED') return;
+        const pollEvents = async () => {
+            if (isFetching) return;
+            isFetching = true;
+            try {
+                const res = await fetch(`/api/reidamesa/overlay/poll?since=${lastSeenId}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.events && data.events.length > 0) {
+                        // Atualiza o lastSeenId para o maior recebido
+                        lastSeenId = Math.max(...data.events.map(e => e.id));
+                        
+                        // Adiciona todos na fila e programa remoção
+                        setEvents(prev => [...prev, ...data.events]);
 
-            // Ao receber um evento novo, cria um ID unico para ele
-            const newEvent = { ...data, id: Date.now() + Math.random() };
-            
-            // Adiciona na fila e programa para remover depois de 10s
-            setEvents(prev => [...prev, newEvent]);
-
-            setTimeout(() => {
-                setEvents(prev => prev.filter(e => e.id !== newEvent.id));
-            }, 10000);
+                        data.events.forEach(newEvent => {
+                            setTimeout(() => {
+                                setEvents(prev => prev.filter(e => e.id !== newEvent.id));
+                            }, 10000);
+                        });
+                    }
+                }
+            } catch (err) {
+                console.error("Erro no polling da overlay:", err);
+            } finally {
+                isFetching = false;
+            }
         };
 
-        evtSource.onerror = (error) => {
-            console.error("EventSource failed:", error);
-            // Ele tenta reconectar sozinho pelo padrao do EventSource
-        };
+        const interval = setInterval(pollEvents, 2000); // 2 segundos de intervalo, super leve
+        pollEvents(); // Faz a primeira chamada imediatamente!
 
         return () => {
-             evtSource.close();
+             clearInterval(interval);
              // Reverte os fundos da tela
              document.body.style.background = '';
              if (rootElement) rootElement.style.background = '';

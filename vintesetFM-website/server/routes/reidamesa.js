@@ -432,31 +432,27 @@ router.get('/craque/results', async (req, res) => {
   }
 });
 
-// ---- OBS OVERLAY EVENT STREAM ----
-router.get('/overlay/stream', (req, res) => {
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
-  res.setHeader('X-Accel-Buffering', 'no'); // ESSENCIAL para o Nginx (Coolify) não segurar o push
-  res.flushHeaders(); 
+// ---- OBS OVERLAY (POLLING FALLBACK) ----
+let overlayEventsHistory = [];
 
-  res.write('data: {"type":"CONNECTED"}\n\n');
+// Limpa histórico antigo para evitar vazamento de memória (mantém últimos 20)
+const pushOverlayEvent = (evt) => {
+   evt.id = Date.now() + Math.random();
+   overlayEventsHistory.push(evt);
+   if (overlayEventsHistory.length > 20) {
+      overlayEventsHistory.shift();
+   }
+};
 
-  const sendEvent = (data) => {
-     res.write(`data: ${JSON.stringify(data)}\n\n`);
-  };
+reiDaMesaEvents.on('overlay_event', (data) => {
+   pushOverlayEvent(data);
+});
 
-  reiDaMesaEvents.on('overlay_event', sendEvent);
-
-  // Heartbeat pro OBS CEF não dropar a conexão
-  const keepAlive = setInterval(() => {
-     res.write(':\n\n'); 
-  }, 20000);
-
-  req.on('close', () => {
-     clearInterval(keepAlive);
-     reiDaMesaEvents.removeListener('overlay_event', sendEvent);
-  });
+// FrontEnd acessa a cada 2s passando o ID do último evento que ele viu
+router.get('/overlay/poll', (req, res) => {
+  const since = parseFloat(req.query.since || 0);
+  const unreadEvents = overlayEventsHistory.filter(e => e.id > since);
+  res.json({ events: unreadEvents });
 });
 
 router.post('/overlay/test', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'ADMIN']), (req, res) => {
