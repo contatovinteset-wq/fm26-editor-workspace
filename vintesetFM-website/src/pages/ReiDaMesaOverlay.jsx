@@ -66,7 +66,7 @@ const ReiDaMesaOverlay = () => {
                                </div>
                                <div className="text-left">
                                    <h2 className="text-3xl font-black text-white uppercase tracking-wider">{evt.user}</h2>
-                                   <p className="text-green-400 text-xl font-bold uppercase tracking-widest mt-1">Acabou de escalar o time!</p>
+                                   <p className="text-green-400 text-xl font-bold uppercase tracking-widest mt-1">Escalou o time!</p>
                                </div>
                            </motion.div>
                        );

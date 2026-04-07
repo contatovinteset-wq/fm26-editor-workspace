@@ -437,12 +437,13 @@ router.get('/overlay/stream', (req, res) => {
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
+  res.setHeader('X-Accel-Buffering', 'no'); // ESSENCIAL para o Nginx (Coolify) não segurar o push
   res.flushHeaders(); 
 
-  res.write('data: {"type":"CONNECTED"}\\n\\n');
+  res.write('data: {"type":"CONNECTED"}\n\n');
 
   const sendEvent = (data) => {
-     res.write(`data: ${JSON.stringify(data)}\\n\\n`);
+     res.write(`data: ${JSON.stringify(data)}\n\n`);
   };
 
   reiDaMesaEvents.on('overlay_event', sendEvent);
