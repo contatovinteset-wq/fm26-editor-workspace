@@ -34,6 +34,8 @@ const ScoreDetailModal = ({ player, onClose }) => {
   }
   if (!parsed) parsed = {};
 
+  const multiplier = player.isCapitao ? 2 : (parsed.multiplier || 1);
+
   const rows = [
     { label: 'Minutos jogados', value: parsed.minsPlayed ? parsed.minsPlayed + "'" : "0'", points: (parsed.minsPlayed >= 60 ? 1.0 : (parsed.minsPlayed > 0 ? 0.5 : 0)) },
     { label: 'Gols marcados', value: parsed.goals || 0, points: (parsed.goals || 0) * 8.0 },
@@ -51,8 +53,9 @@ const ScoreDetailModal = ({ player, onClose }) => {
     { label: 'Defesas (Goleiro)', value: parsed.defesasGoleiro || parsed.saves || 0, points: (parsed.defesasGoleiro || parsed.saves || 0) * 1.5 },
     { label: 'Cartão Amarelo', value: parsed.yellowCars || parsed.yellowCards || parsed.yel || 0, points: (parsed.yellowCars || parsed.yellowCards || parsed.yel || 0) * -1.5 },
     { label: 'Cartão Vermelho', value: parsed.redCards || parsed.red || 0, points: (parsed.redCards || parsed.red || 0) * -3.0 },
-    { label: 'Multiplicador (Capitão)', value: parsed.multiplier > 1 ? 'x' + parsed.multiplier : null, points: 0 },
   ].filter(r => r.value !== null && r.value !== 0 && r.value !== "0'" && r.value !== '0.00');
+
+  const basePoints = parsed.total ? Number(parsed.total) : Number(player.matchPoints || 0);
 
   return (
     <div
@@ -68,7 +71,10 @@ const ScoreDetailModal = ({ player, onClose }) => {
         <div className="flex items-center justify-between mb-4">
           <div>
             <p className="text-xs text-gray-400 uppercase tracking-widest font-bold">Detalhe da Pontuação</p>
-            <h3 className="font-black text-lg text-white">{player.name}</h3>
+            <h3 className="font-black text-lg text-white flex items-center gap-2">
+              {player.isCapitao && <Crown size={18} className="text-accent" />}
+              {player.name}
+            </h3>
           </div>
           <button
             onClick={onClose}
@@ -94,11 +100,28 @@ const ScoreDetailModal = ({ player, onClose }) => {
             </div>
           ))}
         </div>
-        <div className="mt-4 pt-4 border-t border-white/10 flex justify-between items-center">
-          <span className="text-gray-400 text-sm">Total da Rodada</span>
-          <span className="font-black text-2xl text-accent">
-            {parsed.total ? Number(parsed.total).toFixed(2) : Number(player.matchPoints || 0).toFixed(2)} pts
-          </span>
+        <div className="mt-4 pt-4 border-t border-white/10 flex flex-col gap-2">
+          {multiplier > 1 && (
+            <>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400 text-sm">Pontuação Base</span>
+                <span className={`font-bold text-sm ${basePoints > 0 ? 'text-green-500' : basePoints < 0 ? 'text-red-500' : 'text-gray-300'}`}>
+                  {basePoints > 0 ? '+' : ''}{basePoints.toFixed(2)} pts
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400 text-sm">Bônus de Capitão</span>
+                <span className="font-bold text-sm text-accent">Ativo (x2)</span>
+              </div>
+              <div className="border-t border-white/5 my-1" />
+            </>
+          )}
+          <div className="flex justify-between items-center">
+            <span className="text-gray-400 text-sm font-bold">Total da Rodada</span>
+            <span className="font-black text-2xl text-accent">
+              {(basePoints * multiplier).toFixed(2)} pts
+            </span>
+          </div>
         </div>
       </motion.div>
     </div>
@@ -296,21 +319,21 @@ const Escalacao = () => {
                   <SlotPlayer label="Atacante" type="ATA" player={squad.ata} isActive={activeSlot === 'ATA'}
                     onClick={() => setActiveSlot('ATA')} onRemove={() => handleRemovePlayer('ata')}
                     isMarketOpen={isMarketOpen} isCapitao={squad.capitao?.id === squad.ata?.id}
-                    onScoreClick={() => setScoreModalPlayer(squad.ata)} />
+                    onScoreClick={() => setScoreModalPlayer({ ...squad.ata, isCapitao: squad.capitao?.id === squad.ata?.id })} />
                 </div>
                 {/* MEI */}
                 <div className="w-full flex justify-center mt-[-2rem]">
                   <SlotPlayer label="Meio-Campo" type="MEI" player={squad.mei} isActive={activeSlot === 'MEI'}
                     onClick={() => setActiveSlot('MEI')} onRemove={() => handleRemovePlayer('mei')}
                     isMarketOpen={isMarketOpen} isCapitao={squad.capitao?.id === squad.mei?.id}
-                    onScoreClick={() => setScoreModalPlayer(squad.mei)} />
+                    onScoreClick={() => setScoreModalPlayer({ ...squad.mei, isCapitao: squad.capitao?.id === squad.mei?.id })} />
                 </div>
                 {/* DEF */}
                 <div className="w-full flex justify-center mt-[-2rem]">
                   <SlotPlayer label="Defensor / GOL" type="DEF" player={squad.def} isActive={activeSlot === 'DEF'}
                     onClick={() => setActiveSlot('DEF')} onRemove={() => handleRemovePlayer('def')}
                     isMarketOpen={isMarketOpen} isCapitao={squad.capitao?.id === squad.def?.id}
-                    onScoreClick={() => setScoreModalPlayer(squad.def)} />
+                    onScoreClick={() => setScoreModalPlayer({ ...squad.def, isCapitao: squad.capitao?.id === squad.def?.id })} />
                 </div>
               </div>
             </div>
@@ -323,7 +346,7 @@ const Escalacao = () => {
               <SlotPlayer label="O Bagre" type="BAGRE" player={squad.bagre} isActive={activeSlot === 'BAGRE'}
                 onClick={() => setActiveSlot('BAGRE')} onRemove={() => handleRemovePlayer('bagre')}
                 horizontal isMarketOpen={isMarketOpen}
-                onScoreClick={() => setScoreModalPlayer(squad.bagre)} />
+                onScoreClick={() => setScoreModalPlayer({ ...squad.bagre, isCapitao: false })} />
             </div>
 
             {/* ── SELETOR DE CAPITÃO ─────────────────────────── */}
@@ -476,6 +499,10 @@ const Escalacao = () => {
 
 // ─── Sub-componente: Slot no Campo ────────────────────────────────────────
 const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizontal = false, isMarketOpen = true, isCapitao = false, onScoreClick }) => {
+  const displayPoints = player?.matchPoints !== undefined && player?.matchPoints !== null 
+    ? player.matchPoints * (isCapitao ? 2 : 1) 
+    : null;
+
   return (
     <div className={`relative flex ${horizontal ? 'flex-row items-center justify-between w-full' : 'flex-col items-center justify-center'} gap-2 group`}>
       {!player ? (
@@ -522,11 +549,11 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-2 justify-end">
-              {player.matchPoints !== null && player.matchPoints !== undefined && (
+              {displayPoints !== null && (
                 <button
                   onClick={(e) => { e.stopPropagation(); onScoreClick && onScoreClick(); }}
-                  className={`text-[10px] px-1.5 py-0.5 rounded font-bold hover:opacity-80 transition-opacity ${player.matchPoints > 0 ? 'bg-green-500/20 text-green-400' : player.matchPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
-                  Atual: {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} pts 🔍
+                  className={`text-[10px] px-1.5 py-0.5 rounded font-bold hover:opacity-80 transition-opacity ${displayPoints > 0 ? 'bg-green-500/20 text-green-400' : displayPoints < 0 ? 'bg-red-500/20 text-red-400' : 'bg-gray-700 text-gray-300'}`}>
+                  Atual: {displayPoints > 0 ? '+' : ''}{Number(displayPoints).toFixed(2)} pts 🔍
                 </button>
               )}
               <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${player.lastMatchPoints > 0 ? 'bg-blue-500/20 text-blue-400' : player.lastMatchPoints < 0 ? 'bg-orange-500/20 text-orange-400' : 'bg-gray-700 text-gray-300'}`}>
@@ -575,11 +602,11 @@ const SlotPlayer = ({ label, type, player, isActive, onClick, onRemove, horizont
              <span className="text-[11px] sm:text-xs font-black uppercase leading-tight truncate w-full" title={player.name}>{player.name}</span>
              
              <div className="flex items-center justify-center gap-1 mt-1 flex-wrap w-full">
-               {player.matchPoints !== null && player.matchPoints !== undefined && (
+               {displayPoints !== null && (
                  <button
                    onClick={(e) => { e.stopPropagation(); onScoreClick && onScoreClick(); }}
-                   className={`text-[9px] px-1 rounded-sm font-bold shadow-sm hover:opacity-80 transition-opacity whitespace-nowrap ${player.matchPoints > 0 ? 'bg-green-500 text-black' : player.matchPoints < 0 ? 'bg-red-500 text-white' : 'bg-gray-700 text-white'}`}>
-                   {player.matchPoints > 0 ? '+' : ''}{Number(player.matchPoints).toFixed(2)} 🔍
+                   className={`text-[9px] px-1 rounded-sm font-bold shadow-sm hover:opacity-80 transition-opacity whitespace-nowrap ${displayPoints > 0 ? 'bg-green-500 text-black' : displayPoints < 0 ? 'bg-red-500 text-white' : 'bg-gray-700 text-white'}`}>
+                   {displayPoints > 0 ? '+' : ''}{Number(displayPoints).toFixed(2)} 🔍
                  </button>
                )}
                <span className={`text-[9px] px-1 rounded-sm font-bold shadow-sm whitespace-nowrap ${player.lastMatchPoints > 0 ? 'bg-blue-600/80 text-white' : player.lastMatchPoints < 0 ? 'bg-orange-600/80 text-white' : 'bg-gray-800 text-gray-300'}`}>

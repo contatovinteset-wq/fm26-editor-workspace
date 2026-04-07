@@ -22,9 +22,15 @@ const ReiDaMesaOverlay = () => {
                 if (res.ok) {
                     const data = await res.json();
                     if (data.events && data.events.length > 0) {
+                        const previousLastSeen = lastSeenId;
                         // Atualiza o lastSeenId para o maior recebido
                         lastSeenId = Math.max(...data.events.map(e => e.id));
                         
+                        // Se for carregamento inicial (0), não exibe eventos velhos
+                        if (previousLastSeen === 0) {
+                            return;
+                        }
+
                         // Adiciona todos na fila e programa remoção
                         setEvents(prev => [...prev, ...data.events]);
 

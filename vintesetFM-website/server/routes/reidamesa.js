@@ -237,12 +237,17 @@ router.post('/squad', requireAuth, async (req, res) => {
       create: { userId: req.user.id, defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId }
     });
 
-    if (!overlayNotifiedUsers.has(req.user.id)) {
+    const isFullSquad = defensorId && meioId && ataqueId && bagreId && capitaoId;
+
+    if (isFullSquad && !overlayNotifiedUsers.has(req.user.id)) {
         reiDaMesaEvents.emit('overlay_event', { 
            type: 'NEW_SQUAD', 
            user: req.user.nickname || req.user.name || 'Viewer' 
         });
         overlayNotifiedUsers.add(req.user.id);
+    } else if (!isFullSquad && overlayNotifiedUsers.has(req.user.id)) {
+        // Se limpou o time, permite que apareça na overlay quando escalar de novo
+        overlayNotifiedUsers.delete(req.user.id);
     }
 
     res.json(squad);

@@ -534,10 +534,10 @@ const ReiDaMesa = () => {
                        </td>
                        <td className="px-2 py-3 font-bold text-white">{row.name}</td>
                        <td className={`px-2 py-3 text-center font-mono font-bold ${row.lastRound > 0 ? 'text-green-500' : row.lastRound < 0 ? 'text-red-500' : 'text-blue-400'}`}>
-                         {row.lastRound}
+                         {row.lastRound > 0 ? '+' : ''}{(row.lastRound || 0).toFixed(2)}
                        </td>
                        <td className={`px-4 py-3 text-right font-black font-mono ${row.total > 0 ? 'text-green-500' : row.total < 0 ? 'text-red-500' : 'text-blue-400'}`}>
-                         {row.total}
+                         {row.total > 0 ? '+' : ''}{(row.total || 0).toFixed(2)}
                        </td>
                      </tr>
                    ))}
