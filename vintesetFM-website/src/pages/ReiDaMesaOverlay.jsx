@@ -13,6 +13,7 @@ const ReiDaMesaOverlay = () => {
 
         let lastSeenId = 0;
         let isFetching = false;
+        let isFirstPoll = true;
 
         const pollEvents = async () => {
             if (isFetching) return;
@@ -21,13 +22,16 @@ const ReiDaMesaOverlay = () => {
                 const res = await fetch(`/api/reidamesa/overlay/poll?since=${lastSeenId}`);
                 if (res.ok) {
                     const data = await res.json();
+                    
+                    const wasFirstPoll = isFirstPoll;
+                    isFirstPoll = false;
+
                     if (data.events && data.events.length > 0) {
-                        const previousLastSeen = lastSeenId;
                         // Atualiza o lastSeenId para o maior recebido
                         lastSeenId = Math.max(...data.events.map(e => e.id));
                         
-                        // Se for carregamento inicial (0), não exibe eventos velhos
-                        if (previousLastSeen === 0) {
+                        // Se for carregamento inicial, ignora os eventos antigos para não dar spam
+                        if (wasFirstPoll) {
                             return;
                         }
 
