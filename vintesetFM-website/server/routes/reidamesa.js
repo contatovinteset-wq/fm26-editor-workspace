@@ -448,7 +448,13 @@ router.get('/overlay/stream', (req, res) => {
 
   reiDaMesaEvents.on('overlay_event', sendEvent);
 
+  // Heartbeat pro OBS CEF não dropar a conexão
+  const keepAlive = setInterval(() => {
+     res.write(':\n\n'); 
+  }, 20000);
+
   req.on('close', () => {
+     clearInterval(keepAlive);
      reiDaMesaEvents.removeListener('overlay_event', sendEvent);
   });
 });

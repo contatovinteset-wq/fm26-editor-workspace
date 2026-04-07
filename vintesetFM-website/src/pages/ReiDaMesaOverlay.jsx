@@ -59,14 +59,14 @@ const ReiDaMesaOverlay = () => {
                                initial="initial"
                                animate="animate"
                                exit="exit"
-                               className="mb-4 bg-gray-900/90 backdrop-blur-md border border-green-500/50 shadow-[0_0_20px_rgba(34,197,94,0.3)] rounded-2xl p-6 text-center max-w-xl flex items-center gap-6"
+                               className="mb-4 bg-gray-900/90 backdrop-blur-md border border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-2xl p-6 text-center max-w-xl flex items-center gap-6"
                            >
-                               <div className="bg-green-500/20 p-4 rounded-full">
-                                   <User className="w-10 h-10 text-green-400" />
+                               <div className="bg-blue-500/20 p-4 rounded-full">
+                                   <User className="w-10 h-10 text-blue-400" />
                                </div>
                                <div className="text-left">
                                    <h2 className="text-3xl font-black text-white uppercase tracking-wider">{evt.user}</h2>
-                                   <p className="text-green-400 text-xl font-bold uppercase tracking-widest mt-1">Escalou o time!</p>
+                                   <p className="text-blue-400 text-xl font-bold uppercase tracking-widest mt-1">Escalou o time!</p>
                                </div>
                            </motion.div>
                        );
