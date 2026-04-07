@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Settings, Users, ShieldCheck, Search, Shield, Save, X, Edit2, ShieldAlert, Crown } from 'lucide-react';
+import { Settings, Users, ShieldCheck, Search, Shield, Save, X, Edit2, ShieldAlert, Crown, Check, AlertTriangle } from 'lucide-react';
 import { getAllRoles, hasPermission, ROLES } from '../config/permissions';
 import RoleBadge from '../components/RoleBadge';
 
