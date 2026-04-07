@@ -311,17 +311,21 @@ export async function processMatchResultFinal(scoresFromFrontend) {
   for (const sq of squads) {
     let roundScore = 0;
     
-    const calcPts = async (pid) => {
+    const calcPts = async (pid, isCaptain) => {
       if (!pid) return 0;
       const ps = await prisma.playerScore.findUnique({
         where: { playerId_roundId: { playerId: pid, roundId: openRound.id } }
       });
-      return ps ? ps.points : 0;
+      let pts = ps ? ps.points : 0;
+      if (isCaptain) {
+         pts = pts * 2.0;
+      }
+      return pts;
     };
 
-    roundScore += await calcPts(sq.defensorId);
-    roundScore += await calcPts(sq.meioId);
-    roundScore += await calcPts(sq.ataqueId);
+    roundScore += await calcPts(sq.defensorId, sq.defensorId === sq.capitaoId);
+    roundScore += await calcPts(sq.meioId, sq.meioId === sq.capitaoId);
+    roundScore += await calcPts(sq.ataqueId, sq.ataqueId === sq.capitaoId);
 
     // Lógica nova do Bônus do Bagre:
     // Se o bagre escolhido pelo viewer for == worstPlayerId, Ganha 5pts.
