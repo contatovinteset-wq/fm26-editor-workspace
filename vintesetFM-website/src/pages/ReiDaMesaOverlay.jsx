@@ -71,22 +71,22 @@ const ReiDaMesaOverlay = () => {
                {events.map((evt) => {
                    if (evt.type === 'NEW_SQUAD') {
                        return (
-                           <motion.div 
-                               key={evt.id}
-                               variants={slideVariants}
-                               initial="initial"
-                               animate="animate"
-                               exit="exit"
-                               className="mb-4 bg-gray-900/90 backdrop-blur-md border border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.3)] rounded-2xl p-6 text-center max-w-xl flex items-center gap-6"
-                           >
-                               <div className="bg-blue-500/20 p-4 rounded-full">
-                                   <User className="w-10 h-10 text-blue-400" />
-                               </div>
-                               <div className="text-left">
-                                   <h2 className="text-3xl font-black text-white uppercase tracking-wider">{evt.user}</h2>
-                                   <p className="text-blue-400 text-xl font-bold uppercase tracking-widest mt-1">Escalou o time!</p>
-                               </div>
-                           </motion.div>
+                            <motion.div 
+                                key={evt.id}
+                                variants={slideVariants}
+                                initial="initial"
+                                animate="animate"
+                                exit="exit"
+                                className="mb-4 bg-gray-900/90 backdrop-blur-md border border-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.3)] rounded-xl p-4 text-center max-w-sm flex items-center gap-4"
+                            >
+                                <div className="bg-blue-500/20 p-3 rounded-full">
+                                    <User className="w-7 h-7 text-blue-400" />
+                                </div>
+                                <div className="text-left">
+                                    <h2 className="text-xl font-black text-white uppercase tracking-wider">{evt.user}</h2>
+                                    <p className="text-blue-400 text-xs font-bold uppercase tracking-widest mt-1">Escalou o time!</p>
+                                </div>
+                            </motion.div>
                        );
                    }
 
@@ -106,15 +106,15 @@ const ReiDaMesaOverlay = () => {
                                <motion.div 
                                    initial={{ x: -100, opacity: 0 }}
                                    animate={{ x: 0, opacity: 1, transition: { delay: 0.5 } }}
-                                   className="bg-gray-900/95 backdrop-blur-xl border border-purple-500/50 shadow-[0_0_30px_rgba(168,85,247,0.4)] rounded-2xl p-8 flex items-center gap-8 w-full max-w-3xl"
+                                   className="bg-gray-900/95 backdrop-blur-xl border border-purple-500/50 shadow-[0_0_20px_rgba(168,85,247,0.4)] rounded-2xl p-5 flex items-center gap-5 w-full max-w-lg"
                                >
-                                   <div className="bg-purple-500/20 p-5 rounded-full relative overflow-hidden group">
+                                   <div className="bg-purple-500/20 p-3 rounded-full relative overflow-hidden group">
                                        <div className="absolute inset-0 bg-purple-500 blur-xl opacity-20 animate-pulse"></div>
-                                       <Star className="w-14 h-14 text-purple-400 relative z-10" />
+                                       <Star className="w-10 h-10 text-purple-400 relative z-10" />
                                    </div>
                                    <div className="text-left flex-1">
-                                       <p className="text-purple-400 text-lg font-bold uppercase tracking-widest mb-1">Craque do Chat 🌟</p>
-                                       <h2 className="text-5xl font-black text-white uppercase tracking-wider bg-gradient-to-r from-purple-400 to-fuchsia-300 bg-clip-text text-transparent">{evt.craque.name}</h2>
+                                       <p className="text-purple-400 text-sm font-bold uppercase tracking-widest mb-1">Craque do Chat 🌟</p>
+                                       <h2 className="text-3xl font-black text-white uppercase tracking-wider bg-gradient-to-r from-purple-400 to-fuchsia-300 bg-clip-text text-transparent">{evt.craque.name}</h2>
                                    </div>
                                </motion.div>
                                )}
@@ -124,19 +124,19 @@ const ReiDaMesaOverlay = () => {
                                <motion.div 
                                    initial={{ x: 100, opacity: 0 }}
                                    animate={{ x: 0, opacity: 1, transition: { delay: 1.0 } }}
-                                   className="bg-gray-900/95 backdrop-blur-xl border border-yellow-500/50 shadow-[0_0_30px_rgba(234,179,8,0.4)] rounded-2xl p-8 flex items-center gap-8 w-full max-w-3xl"
+                                   className="bg-gray-900/95 backdrop-blur-xl border border-yellow-500/50 shadow-[0_0_20px_rgba(234,179,8,0.4)] rounded-2xl p-5 flex items-center gap-5 w-full max-w-lg"
                                >
-                                   <div className="bg-yellow-500/20 p-5 rounded-full relative overflow-hidden">
+                                   <div className="bg-yellow-500/20 p-3 rounded-full relative overflow-hidden">
                                        <div className="absolute inset-0 bg-yellow-500 blur-xl opacity-20 animate-pulse"></div>
-                                       <Trophy className="w-14 h-14 text-yellow-400 relative z-10" />
+                                       <Trophy className="w-10 h-10 text-yellow-400 relative z-10" />
                                    </div>
                                    <div className="text-left flex-1">
-                                       <p className="text-yellow-400 text-lg font-bold uppercase tracking-widest mb-1">Viewer Campeão da Rodada 🏆</p>
-                                       <h2 className="text-5xl font-black text-white uppercase tracking-wider">{evt.champion.nickname}</h2>
+                                       <p className="text-yellow-400 text-sm font-bold uppercase tracking-widest mb-1">Viewer Campeão da Rodada 🏆</p>
+                                       <h2 className="text-3xl font-black text-white uppercase tracking-wider">{evt.champion.nickname}</h2>
                                    </div>
-                                   <div className="text-right border-l border-white/10 pl-8 ml-4">
-                                       <p className="text-gray-400 uppercase tracking-widest text-sm mb-1">Pontos</p>
-                                       <span className="text-5xl font-black text-green-400">{evt.champion.score}</span>
+                                   <div className="text-right border-l border-white/10 pl-6 ml-3">
+                                       <p className="text-gray-400 uppercase tracking-widest text-[10px] mb-1">Pontos</p>
+                                       <span className="text-3xl font-black text-green-400">{evt.champion.score}</span>
                                    </div>
                                </motion.div>
                                )}
