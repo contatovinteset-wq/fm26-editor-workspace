@@ -434,10 +434,11 @@ router.get('/craque/results', async (req, res) => {
 
 // ---- OBS OVERLAY (POLLING FALLBACK) ----
 let overlayEventsHistory = [];
+let overlayGlobalIdCounter = 1;
 
 // Limpa histórico antigo para evitar vazamento de memória (mantém últimos 20)
 const pushOverlayEvent = (evt) => {
-   evt.id = Date.now() + Math.random();
+   evt.id = overlayGlobalIdCounter++;
    overlayEventsHistory.push(evt);
    if (overlayEventsHistory.length > 20) {
       overlayEventsHistory.shift();
@@ -450,7 +451,7 @@ reiDaMesaEvents.on('overlay_event', (data) => {
 
 // FrontEnd acessa a cada 2s passando o ID do último evento que ele viu
 router.get('/overlay/poll', (req, res) => {
-  const since = parseFloat(req.query.since || 0);
+  const since = parseInt(req.query.since || '0', 10);
   const unreadEvents = overlayEventsHistory.filter(e => e.id > since);
   res.json({ events: unreadEvents });
 });

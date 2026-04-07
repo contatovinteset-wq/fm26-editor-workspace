@@ -190,6 +190,9 @@ export async function previewMatchResultHtml(htmlString) {
 
       const minText = stats['MinText'] || '';
       
+      const classText = (stats['Classificação'] || '').replace(',', '.');
+      const rating = parseFloat(classText) || 0.0;
+      
       let points = 0;
       
       // Pontuação Frouxa do Minutos:
@@ -232,7 +235,7 @@ export async function previewMatchResultHtml(htmlString) {
         playerName: player.name,
         realPosition: player.realPosition,
         roundId: openRound.id,
-        rating: 0, 
+        rating: rating, 
         points: Number(points.toFixed(2)),
         details: { 
           goals, assists, xG, xA, yellowCars, redCards, minsPlayed,
@@ -269,6 +272,11 @@ export async function processMatchResultFinal(scoresFromFrontend) {
     points -= (s.details.yellowCars * 1.5);
     points -= (s.details.redCards * 3.0);
 
+    // Regra severa: Classificação abaixo ou igual a 6.0 perde 5 pontos para torná-lo o Bagre
+    if (s.rating > 0 && s.rating <= 6.0) {
+       points -= 5.0;
+    }
+
     points += (s.details.goals * 8.0);
     points += (s.details.assists * 5.0);
     points += (s.details.xG * 2.0);
@@ -286,7 +294,7 @@ export async function processMatchResultFinal(scoresFromFrontend) {
     s.points = Number(points.toFixed(2));
     finalScores.push(s);
 
-    if (s.details.minsPlayed >= 45 && s.points < minPoints) {
+    if (s.details.minsPlayed >= 25 && s.points < minPoints) {
       minPoints = s.points;
       worstPlayerId = s.playerId;
     }
