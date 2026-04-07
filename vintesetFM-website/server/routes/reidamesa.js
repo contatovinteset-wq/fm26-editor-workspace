@@ -457,6 +457,13 @@ reiDaMesaEvents.on('overlay_event', (data) => {
 // FrontEnd acessa a cada 2s passando o ID do último evento que ele viu
 router.get('/overlay/poll', (req, res) => {
   const since = parseInt(req.query.since || '0', 10);
+  
+  // Se o frontend está cobrando um ID que nem mesmo o backend chegou ainda, 
+  // significa que o servidor foi reiniciado (Ex: pos-deploy) e perdeu a contagem. 
+  if (since >= overlayGlobalIdCounter && overlayGlobalIdCounter === 1) {
+      return res.json({ resetSync: true, events: [] });
+  }
+
   const unreadEvents = overlayEventsHistory.filter(e => e.id > since);
   res.json({ events: unreadEvents });
 });

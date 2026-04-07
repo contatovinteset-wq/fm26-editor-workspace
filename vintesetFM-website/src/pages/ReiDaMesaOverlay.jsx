@@ -23,6 +23,10 @@ const ReiDaMesaOverlay = () => {
                 if (res.ok) {
                     const data = await res.json();
                     
+                    if (data.resetSync) {
+                        lastSeenId = 0;
+                    }
+
                     const wasFirstPoll = isFirstPoll;
                     isFirstPoll = false;
 
