@@ -453,6 +453,14 @@ router.get('/overlay/stream', (req, res) => {
   });
 });
 
+router.post('/overlay/test', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'ADMIN']), (req, res) => {
+  reiDaMesaEvents.emit('overlay_event', { 
+     type: 'NEW_SQUAD', 
+     user: 'Teste da Live' 
+  });
+  res.json({ success: true });
+});
+
 export default router;
 
 // ADMIN ROUTES: UPLOADS 
