@@ -17,6 +17,7 @@ import ReiDaMesaOverlay from './ReiDaMesaOverlay';
 import ForumHome from './forum/ForumHome';
 import ForumCategory from './forum/ForumCategory';
 import ForumThread from './forum/ForumThread';
+import AnaliseDados from './ferramentas/AnaliseDados';
 
 const Pages = {
   Home,
@@ -37,7 +38,8 @@ const Pages = {
   ReiDaMesaOverlay: () => <ReiDaMesaOverlay />,
   ForumHome: () => <ForumHome />,
   ForumCategory: () => <ForumCategory />,
-  ForumThread: () => <ForumThread />
+  ForumThread: () => <ForumThread />,
+  AnaliseDados: () => <AnaliseDados />
 };
 
 export default Pages;

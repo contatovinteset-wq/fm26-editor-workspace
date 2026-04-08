@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Home, MonitorPlay, Youtube, Twitch, DownloadCloud, Crown, Settings, LogOut, Menu, X, ShieldAlert, MessageSquare } from 'lucide-react';
+import { Home, MonitorPlay, Youtube, Twitch, DownloadCloud, Crown, Settings, LogOut, Menu, X, ShieldAlert, MessageSquare, Wrench } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -32,6 +32,7 @@ const Navbar = () => {
     { name: 'Início', path: '/', icon: Home },
     { name: 'Telecurso 27', path: '/telecurso', icon: MonitorPlay },
     { name: 'Fórum', path: '/forum', icon: MessageSquare },
+    { name: 'Ferramentas', path: '/ferramentas/analise-de-dados', icon: Wrench },
     { name: 'Downloads', path: '/downloads', icon: DownloadCloud },
     { name: 'Rei Da Mesa', path: '/reidamesa', icon: Crown },
   ];
@@ -42,7 +43,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           
           {/* Logo Section */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 shrink-0">
             <Link to="/" className="flex flex-col items-center justify-center group relative h-full shrink-0"> 
               <div className="relative group-hover:scale-105 transition-transform flex items-center justify-center">
                 <img 
@@ -74,7 +75,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`flex items-center gap-2 px-3 lg:px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
+                  className={`flex items-center gap-1.5 lg:gap-2 px-2.5 lg:px-4 py-2 rounded-xl text-[13px] lg:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
                     isActive 
                       ? 'bg-primary/20 text-white shadow-inner border border-primary/30' 
                       : 'text-gray-400 hover:text-white hover:bg-white/5'

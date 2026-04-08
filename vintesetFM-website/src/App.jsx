@@ -44,7 +44,10 @@ function App() {
               <Route path="moderacao" element={<Pages.ModeratorPanel />} />
             </Route>
 
-            <Route path="ferramentas" element={<Navigate to="/downloads" replace />} />
+            <Route path="ferramentas">
+               <Route path="analise-de-dados" element={<Pages.AnaliseDados />} />
+            </Route>
+            
             <Route path="mods" element={<Navigate to="/downloads" replace />} />
           </Route>
         </Routes>
