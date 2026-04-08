@@ -343,4 +343,32 @@ router.delete('/posts/:postId', requireAuth, async (req, res) => {
   }
 });
 
+// 11. Editar Post (Resposta)
+router.put('/posts/:postId', requireAuth, async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const { content } = req.body;
+
+    if (!content) return res.status(400).json({ error: 'Conteúdo vazio.' });
+
+    const post = await prisma.forumPost.findUnique({ where: { id: postId } });
+    if (!post) return res.status(404).json({ error: 'Post não encontrado.' });
+
+    const isAuthor = post.authorId === req.user.id;
+    const isAdmin = checkAdminPermission(req.user);
+
+    if (!isAuthor && !isAdmin) return res.status(403).json({ error: 'Sem permissão.' });
+
+    const updated = await prisma.forumPost.update({
+      where: { id: postId },
+      data: { content }
+    });
+
+    res.json(updated);
+  } catch(error) {
+    res.status(500).json({ error: 'Erro ao editar resposta.' });
+  }
+});
+
 export default router;
+
