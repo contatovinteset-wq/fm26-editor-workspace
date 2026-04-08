@@ -95,6 +95,31 @@ router.get('/categories', async (req, res) => {
   }
 });
 
+// 1.5. Criar Nova Categoria (Admin Only)
+router.post('/categories', requireAuth, async (req, res) => {
+  try {
+    if (!checkAdminPermission(req.user)) {
+      return res.status(403).json({ error: 'Apenas administradores podem criar categorias.' });
+    }
+
+    const { name, description, slug, icon } = req.body;
+    if (!name || !slug) {
+      return res.status(400).json({ error: 'Nome e slug são obrigatórios.' });
+    }
+
+    const category = await prisma.forumCategory.create({
+      data: { name, description, slug, icon }
+    });
+
+    res.status(201).json(category);
+  } catch (error) {
+    if (error.code === 'P2002') {
+      return res.status(400).json({ error: 'Já existe uma categoria com este slug.' });
+    }
+    res.status(500).json({ error: 'Erro ao criar categoria.' });
+  }
+});
+
 // 2. Listar Tópicos de uma Categoria Específica
 router.get('/categories/:slug', async (req, res) => {
   try {

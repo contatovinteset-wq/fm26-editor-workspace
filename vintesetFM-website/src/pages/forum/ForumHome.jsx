@@ -1,20 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MessageSquare, Users, Eye, TrendingUp, PlusCircle } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
+import toast from 'react-hot-toast';
 
 const ForumHome = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const isAdmin = user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN');
 
-  useEffect(() => {
+  const fetchCategories = () => {
     fetch('/api/board/categories')
       .then(res => res.json())
       .then(data => {
         setCategories(data);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchCategories();
   }, []);
+
+  const handleCreateCategory = async () => {
+    const name = window.prompt("Nome da categoria (ex: Dúvidas/Suporte):");
+    if (!name) return;
+    
+    // Auto-generate slug simple version
+    const slug = name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    const description = window.prompt("Descrição curta da categoria:");
+    
+    try {
+      const res = await fetch('/api/board/categories', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({ name, slug, description, icon: 'MessageCircle' })
+      });
+      if (res.ok) {
+         toast.success('Categoria criada!');
+         fetchCategories();
+      } else {
+         const err = await res.json();
+         toast.error(err.error || 'Erro ao criar categoria.');
+      }
+    } catch(e) {
+      toast.error('Garante que a nova rota está no ar! Atualize ou faça o deploy.');
+    }
+  };
 
   if (loading) {
     return (
@@ -36,8 +70,18 @@ const ForumHome = () => {
             Participe das discussões, compartilhe táticas e viva o Football Manager.
           </p>
         </div>
-        <div className="text-sm font-bold text-gray-500 uppercase tracking-widest border border-white/10 px-4 py-2 rounded-lg bg-white/5">
-          👉 Selecione uma Categoria abaixo para Postar
+        <div className="flex flex-col gap-3 items-end">
+          <div className="text-sm font-bold text-gray-500 uppercase tracking-widest border border-white/10 px-4 py-2 rounded-lg bg-white/5">
+            👉 Selecione uma Categoria abaixo para Postar
+          </div>
+          {isAdmin && (
+            <button 
+              onClick={handleCreateCategory}
+              className="flex items-center gap-2 px-4 py-2 bg-accent/20 hover:bg-accent/40 text-accent font-black uppercase tracking-widest text-sm rounded-lg transition-colors border border-accent/20"
+            >
+              <PlusCircle size={16} /> Nova Categoria
+            </button>
+          )}
         </div>
       </div>
 
