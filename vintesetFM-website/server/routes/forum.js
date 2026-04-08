@@ -64,11 +64,6 @@ router.post('/', requireAuth, async (req, res) => {
     if (isVIP) {
        initialStatus = 'APPROVED';
        modReason = 'Equipe Oficial - Bypass Direto';
-    } else {
-       // Auto-Moderador Age Aqui!
-       const aiDecision = await judgeTopic(title, fullContent);
-       initialStatus = aiDecision.status; // 'APPROVED', 'PENDING' ou 'REJECTED'
-       modReason = aiDecision.reason;
     }
 
     const newTopic = await prisma.topic.create({
@@ -81,6 +76,26 @@ router.post('/', requireAuth, async (req, res) => {
         authorId: req.user.id
       }
     });
+
+    if (!isVIP) {
+      // Auto-Moderador age em background (assíncrono)! Retira o delay da resposta da web
+      judgeTopic(title, fullContent).then(async (aiDecision) => {
+         try {
+            await prisma.topic.update({
+               where: { id: newTopic.id },
+               data: {
+                  status: aiDecision.status,
+                  moderationReason: aiDecision.reason
+               }
+            });
+         } catch(e) {
+            console.error('[AI_MODERATOR] Erro atualizando banco no background:', e);
+         }
+      }).catch(err => {
+         console.error('[AI_MODERATOR] Erro na execução de background da moderação:', err);
+      });
+    }
+
     res.status(201).json(newTopic);
   } catch (error) {
     console.error('[ERRO] Falha ao criar tópico:', error);
