@@ -54,7 +54,8 @@ export async function processPlantelHtml(htmlString) {
     });
   }
 
-  // Alterado para UPSERT em vez de deleteMany() para preservar Foreign Keys (Squads, PlayerScore)
+  // Alterado para UPSERT do lado da criação para atualizar. 
+  // Na limpeza, excluímos manualmente todos que não vieram, junto com suas FKs.
   let countUpdated = 0;
   const incomingUids = [];
 
@@ -78,31 +79,54 @@ export async function processPlantelHtml(htmlString) {
     }
   }
 
-  // Define como inativo no mercado (eligible: false) quem não veio no HTML novo
-  if (incomingUids.length > 0) {
-    await prisma.player.updateMany({
-      where: { uidName: { notIn: incomingUids } },
-      data: { eligible: false }
-    });
-    // Garante que todos que vieram estejam ativos
-    await prisma.player.updateMany({
-      where: { uidName: { in: incomingUids } },
-      data: { eligible: true }
-    });
-  }
-
   // REGRA EXTRAÍDA DA MENSAGEM: Quando um novo elenco é subido, as escolhas dos squads são resetadas
   await prisma.squad.updateMany({
     data: {
       defensorId: null,
       meioId: null,
       ataqueId: null,
+      bancoId: null,
       bagreId: null,
       capitaoId: null
     }
   });
 
-  return { message: "Plantel importado com sucesso! Os elencos da rodada foram resetados.", inserted: countUpdated, total: rows.length - 1 };
+  // Excluímos quem não veio no HTML novo (Manter apenas os jogadores ativos)
+  if (incomingUids.length > 0) {
+    const playersToDelete = await prisma.player.findMany({
+      where: { uidName: { notIn: incomingUids } },
+      select: { id: true }
+    });
+    
+    if (playersToDelete.length > 0) {
+      const idsToDelete = playersToDelete.map(p => p.id);
+
+      // Limpar tabelas dependentes
+      await prisma.playerScore.deleteMany({
+        where: { playerId: { in: idsToDelete } }
+      });
+      await prisma.craqueVote.deleteMany({
+        where: { playerId: { in: idsToDelete } }
+      });
+      await prisma.round.updateMany({
+        where: { bagreId: { in: idsToDelete } },
+        data: { bagreId: null }
+      });
+
+      // E finalmente excluir o jogador
+      await prisma.player.deleteMany({
+        where: { id: { in: idsToDelete } }
+      });
+    }
+
+    // Garante que todos que vieram estejam ativos (eligible: true)
+    await prisma.player.updateMany({
+      where: { uidName: { in: incomingUids } },
+      data: { eligible: true }
+    });
+  }
+
+  return { message: "Plantel importado com sucesso! Os elencos da rodada foram resetados e os inativos excluídos.", inserted: countUpdated, total: rows.length - 1 };
 }
 
 export async function previewMatchResultHtml(htmlString) {
