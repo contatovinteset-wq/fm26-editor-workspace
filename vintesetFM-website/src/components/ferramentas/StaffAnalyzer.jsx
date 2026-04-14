@@ -12,13 +12,21 @@ const RATING_MAP = {
   'Elite': 20
 };
 
-const TEC_ATTRS = [
-  'Avaliação da Capacidade do Jogador',
-  'Avaliação do Potencial do Jogador',
-  'Conhecimento Táctico',
-  'Análise de Dados',
-  'Avaliação da Capacidade da Equipa Técnica'
-];
+const MAPA_ATRIBUTOS_TECNICOS = {
+  preparadores: [
+    'Treino de Guarda-Redes', 'Físico', 'Bolas Paradas', 'Ofensivo', 
+    'Defensivo', 'Posse', 'Técnico', 'Táctico', 
+    'Avaliação da Capacidade do Jogador', 'Avaliação do Potencial do Jogador', 
+    'Conhecimento Táctico'
+  ],
+  fisioterapeutas: [
+    'Fisioterapia', 'Ciência do Desporto'
+  ],
+  olheiro: [
+    'Avaliação da Capacidade do Jogador', 'Avaliação do Potencial do Jogador',
+    'Conhecimento Táctico', 'Análise de Dados', 'Avaliação da Capacidade da Equipa Técnica'
+  ]
+};
 
 const MENT_ATTRS = [
   'Capacidade Negocial',
@@ -34,6 +42,28 @@ export default function StaffAnalyzer() {
   const [staffData, setStaffData] = useState([]);
   const [viewMode, setViewMode] = useState('cards'); // 'cards' | 'table'
   const [loading, setLoading] = useState(false);
+  const [hasLocalStorage, setHasLocalStorage] = useState(false);
+
+  React.useEffect(() => {
+    if (selectedCategory) {
+      const storedHtml = localStorage.getItem(`vinteset_staff_html_${selectedCategory}`);
+      if (storedHtml) {
+        processHtmlData(storedHtml, selectedCategory, true);
+        setHasLocalStorage(true);
+      } else {
+        setStaffData([]);
+        setHasLocalStorage(false);
+      }
+    }
+  }, [selectedCategory]);
+
+  const clearLocalStorage = () => {
+    if (selectedCategory) {
+      localStorage.removeItem(`vinteset_staff_html_${selectedCategory}`);
+      setStaffData([]);
+      setHasLocalStorage(false);
+    }
+  };
 
   const categories = [
     { id: 'preparadores', label: 'Preparadores (Adjunto)', icon: <Activity className="w-5 h-5"/> },
@@ -49,12 +79,16 @@ export default function StaffAnalyzer() {
     const reader = new FileReader();
     reader.onload = (event) => {
       const htmlText = event.target.result;
-      processHtmlData(htmlText);
+      processHtmlData(htmlText, selectedCategory, false);
+      if (selectedCategory) {
+         localStorage.setItem(`vinteset_staff_html_${selectedCategory}`, htmlText);
+         setHasLocalStorage(true);
+      }
     };
     reader.readAsText(file);
   };
 
-  const processHtmlData = (html) => {
+  const processHtmlData = (html, category, isFromStorage) => {
     try {
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
@@ -63,6 +97,10 @@ export default function StaffAnalyzer() {
 
       const rows = Array.from(table.querySelectorAll('tr'));
       const theaders = Array.from(rows[0].querySelectorAll('th')).map(th => th.innerText.trim());
+      
+      // Validador Anti-Erro (Para não importar time de Moneyball ou HTML incorreto)
+      const isConfigStaff = theaders.includes('Função Preferida') || theaders.includes('Personalidade');
+      if (!isConfigStaff) throw new Error("O arquivo importado não é compatível com Análise de Staff. Certifique-se de exportar a view Correta.");
 
       const data = [];
 
@@ -79,12 +117,12 @@ export default function StaffAnalyzer() {
         const funcPref = (p['Função Preferida'] || '').toLowerCase();
         let passFilter = true;
 
-        if (selectedCategory === 'preparadores') {
-          passFilter = funcPref.includes('preparador') || funcPref.includes('treinador');
-        } else if (selectedCategory === 'fisioterapeutas') {
+        if (category === 'preparadores') {
+          passFilter = funcPref.includes('preparador') || funcPref.includes('treinador') || funcPref.includes('adjunto') || funcPref.includes('guarda-redes');
+        } else if (category === 'fisioterapeutas') {
           passFilter = funcPref.includes('fisioterapeuta') || funcPref.includes('médico') || funcPref.includes('cientista');
-        } else if (selectedCategory === 'olheiro') {
-          passFilter = funcPref.includes('olheiro') || funcPref.includes('recrutamento') || funcPref.includes('diretor técnico');
+        } else if (category === 'olheiro') {
+          passFilter = funcPref.includes('olheiro') || funcPref.includes('recrutamento') || funcPref.includes('diretor técnico') || funcPref.includes('análise');
         }
 
         if(!passFilter) continue;
@@ -93,7 +131,10 @@ export default function StaffAnalyzer() {
         let tecSum = 0; let tecCount = 0;
         let mentSum = 0; let mentCount = 0;
 
-        TEC_ATTRS.forEach(attr => {
+        // Selecionar os atributos técnicos com base na categoria
+        const tecAttrsForCategory = MAPA_ATRIBUTOS_TECNICOS[category] || [];
+
+        tecAttrsForCategory.forEach(attr => {
            if (p[attr] && RATING_MAP[p[attr]]) {
              tecSum += RATING_MAP[p[attr]];
              tecCount++;
@@ -118,9 +159,19 @@ export default function StaffAnalyzer() {
       // Ordenar do melhor para o pior
       data.sort((a,b) => b.overall - a.overall);
 
+      // Lançar erro de incompatibilidade mais sutil para o usuário saber que tá na categoria errada (só joga alert se for upload novo ou storage bugado)
+      if (data.length === 0 && !isFromStorage) {
+         clearLocalStorage();
+         throw new Error("Nenhum membro da staff compatível encontrado neste arquivo para a categoria selecionada.");
+      }
+
       setStaffData(data);
     } catch(err) {
-      alert("Erro ao processar arquivo: " + err.message);
+      if (!isFromStorage) {
+         alert("Erro: " + err.message);
+      } else {
+         clearLocalStorage();
+      }
     } finally {
       setLoading(false);
     }
@@ -185,7 +236,7 @@ export default function StaffAnalyzer() {
          <div className="bg-gradient-to-br from-indigo-900/40 via-bgDark to-accent/10 border border-accent/30 rounded-xl p-5 shadow-2xl relative flex flex-col justify-center order-3 xl:order-3">
             <span className="absolute -top-3 -right-3 bg-accent text-bgDark text-[10px] font-black px-3 py-1 rounded-full shadow-lg border border-accent animate-pulse uppercase tracking-wider">Premium</span>
             <h3 className="text-lg font-extrabold text-white mb-2 decoration-accent flex items-center justify-between">
-               <span><span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-yellow-400 text-xl block">FM26PlayerExport v5</span></span>
+               <span><span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-yellow-400 text-xl block">FM26PlayerExport</span></span>
             </h3>
             <p className="text-xs text-gray-400 mb-4 font-medium">Extraia todas as informações necessárias num clique e hackeie o mercado sendo Membro.</p>
             
@@ -201,7 +252,7 @@ export default function StaffAnalyzer() {
                </a>
                <a href="https://livepix.gg/vinteset/socio-torcedor-27" target="_blank" rel="noreferrer"
                   className="flex-1 h-9 flex items-center justify-center space-x-1.5 bg-[#32BCAD] hover:bg-[#2eaa9c] text-white rounded-lg text-[10px] sm:text-[11px] font-bold shadow-lg transition-transform hover:-translate-y-0.5 border border-[#32BCAD]">
-                 <Banknote className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> <span className="whitespace-nowrap">Pague com Pix</span>
+                 <Banknote className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> <span className="whitespace-nowrap">Sócio Torcedor via LivePix</span>
                </a>
             </div>
          </div>
@@ -227,12 +278,17 @@ export default function StaffAnalyzer() {
                     <span className="flex items-center text-orange-400/90 font-medium bg-orange-400/10 px-2 py-0.5 rounded border border-orange-400/20 shadow-sm">
                       <Info className="w-3 h-3 mr-1" /> Bug da Engine:
                     </span>
-                    <span className="text-gray-400 mt-0.5">O FM26 não exporta o atributo <span className="text-gray-300 font-bold">Adaptabilidade</span>. Retiramos e o ignoramos na matemática analítica para preservar a imparcialidade do rank e não viciar a nota média mental da equipe técnica pra baixo artificialmente.</span>
+                    <span className="text-gray-400 mt-0.5">O FM26 não exporta o atributo <span className="text-gray-300 font-bold">Adaptabilidade</span>. Retiramos da conta se estiver N/A. Dúvidas ou problemas?</span>
                   </div>
                </div>
 
                {staffData.length > 0 && (
                  <div className="flex bg-gray-900 rounded-lg p-1 border border-gray-700 h-9 shrink-0 ml-4">
+                    {hasLocalStorage && (
+                       <button onClick={clearLocalStorage} className="p-1.5 rounded transition max-h-full mr-2 text-red-400 hover:text-red-300 hover:bg-gray-800" title="Apagar Cache e Reimportar">
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                       </button>
+                    )}
                     <button onClick={() => setViewMode('cards')} className={`p-1.5 rounded transition max-h-full ${viewMode === 'cards' ? 'bg-gray-700 text-white shadow' : 'text-gray-500 hover:text-white'}`} title="Cartões Profiler">
                        <LayoutGrid className="w-4 h-4" />
                     </button>
@@ -252,7 +308,7 @@ export default function StaffAnalyzer() {
                     <Upload className="w-8 h-8 text-accent" />
                   </div>
                   <h3 className="text-xl font-bold mb-2">Importar Dados</h3>
-                  <p className="text-gray-400 text-center max-w-sm mb-4">Arraste seu arquivo <span className="text-white font-mono bg-gray-800 px-1 rounded">.html</span> extraído do jogo graças ao FM26PlayerExport V5 aqui dentro.</p>
+                  <p className="text-gray-400 text-center max-w-sm mb-4">Arraste seu arquivo <span className="text-white font-mono bg-gray-800 px-1 rounded">.html</span> extraído do jogo graças ao FM26PlayerExport aqui dentro.</p>
                   <span className="bg-gray-800 text-white text-xs px-4 py-1.5 rounded-full border border-gray-700 font-medium">Ler Arquivo</span>
                   <input type="file" accept=".html,.htm" className="hidden" onChange={handleFileUpload} />
                 </label>
@@ -299,7 +355,7 @@ export default function StaffAnalyzer() {
                              </div>
                              
                              <div className="flex flex-col gap-y-1.5 mt-2 pt-3 border-t border-gray-800/50 text-xs">
-                                 {[...TEC_ATTRS, ...MENT_ATTRS].filter(a => a !== 'Adaptabilidade' && staff[a] && staff[a] !== '-' && staff[a] !== '').slice(0, 6).map(attr => (
+                                 {[...(MAPA_ATRIBUTOS_TECNICOS[selectedCategory] || []), ...MENT_ATTRS].filter(a => a !== 'Adaptabilidade' && staff[a] && staff[a] !== '-' && staff[a] !== '').slice(0, 6).map(attr => (
                                    <div key={attr} className="flex justify-between items-center text-gray-400">
                                      <span className="truncate pr-2" title={attr}>{attr}</span>
                                      <span className="font-medium text-gray-300 bg-gray-800 px-1.5 py-0.5 rounded ml-1 whitespace-nowrap">{RATING_MAP[staff[attr]]}</span>

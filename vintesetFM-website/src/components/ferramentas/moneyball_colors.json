@@ -1,0 +1,529 @@
+{
+  "xA /90": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Gols esperados (xG)": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "xG /90": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "xG (Sem pênaltis)": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "xG (Sem pênaltis) /90": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Assistências Esperadas (xA)": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "xA + xG sem pen": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Jogos como Titular": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Velocidade Média (em km/h)": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "xA + xG /90": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "GPI (Goal Probability Index)": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "xG Conclusion": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Pênaltis batidos": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Pênaltis marcados": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Pênaltis perdidos": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Gols de pen/90": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Chances Criadas em  Bolas Paradas": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Tentativas de  Criar  uma chance em Bola Parada": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "% Aproveitamento das Tentativas de Criar chance em  BP": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Cobranças de falta (Diretas)": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Tentativas/90": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Chances C /90": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Impedimentos": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Impedimentos / 90": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Sprints de alta intensidade": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Sprints de alta intensidade/90": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Fintas": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Fintas/90": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Gols de dentro da áárea": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Gols de fora da áárea": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ],
+  "Gols de Penaltis": [
+    {
+      "type": "percentile",
+      "val": 10,
+      "color": "FFF8696B"
+    },
+    {
+      "type": "percentile",
+      "val": 50,
+      "color": "FFFFEB84"
+    },
+    {
+      "type": "percentile",
+      "val": 90,
+      "color": "FF63BE7B"
+    }
+  ]
+}
