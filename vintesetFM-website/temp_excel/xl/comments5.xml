@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<comments xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><authors><author>Allan Ferracioli</author><author>Usuario</author></authors><commentList><comment ref="AR1" authorId="0"><text><r><rPr><b/><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t>Nota:</t></r><r><rPr><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t xml:space="preserve">
+</t></r><r><rPr><b/><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t>As bolas paradas podem ser:</t></r><r><rPr><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t xml:space="preserve">
+- Laterais
+- Escanteios
+- Faltas (Livres)
+
+Então não se limita apenas a escanteios.
+Por isso podem haver casos de números bem elevados.</t></r></text></comment><comment ref="BU1" authorId="1"><text><r><rPr><b/><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t>GPI:
+O GPI (Goal Probability Index) é uma métrica que avalia a eficácia de um atacante em converter chances de gol e contribuir para o desempenho ofensivo do time. Ele considera tanto a qualidade das oportunidades criadas quanto a eficiência do jogador em transformá-las em gols.
+
+Interpretação:
+Eficiência: A relação entre Gols Marcados e xG mostra se o atacante está convertendo as chances conforme o esperado ou se está superando as expectativas.
+
+Identifica atacantes com alta eficiência e contribuição ofensiva, mesmo que não sejam os que mais marcam gols.
+Ajuda na decisão de contratações, valorizando jogadores com desempenho sólido e consistente.
+
+É um cálculo inspirado e com base nos cálculos utilizados no método "Moneyball".</t></r></text></comment><comment ref="CR1" authorId="0"><text><r><rPr><b/><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t xml:space="preserve">Quando negativos:
+</t></r><r><rPr><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t>A Equipe desperdiçou</t></r><r><rPr><b/><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t xml:space="preserve">
+
+Quando positivos:
+</t></r><r><rPr><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t>A equipe concluiu chances não esperadas.</t></r></text></comment><comment ref="DX1" authorId="1"><text><r><rPr><b/><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t>Ações com Bola:</t></r><r><rPr><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t xml:space="preserve">
+</t></r><r><rPr><b/><sz val="10"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t>Cruzamentos Tentados, Remates tentados, Fintas, Passes decisivos em jogo aberto.</t></r></text></comment><comment ref="EB1" authorId="1"><text><r><rPr><b/><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t>Nota: Nem sempre o melhor jogador é o que tem a melhor %.
+A taxa de cruzamentos pode variar, pois depende de um segundo jogador pra completar a ação. Então não necesseriamente uma baixa % significaria que o jogador em questão erra muito.
+
+Foque em consistência de tentativas e acertos.</t></r></text></comment><comment ref="EC1" authorId="1"><text><r><rPr><b/><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t xml:space="preserve">Nessa lista:
+</t></r><r><rPr><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t>- Remates tentados
+- Fintas feitas
+- Cruzamentos feitos
+- Passes decisivos</t></r><r><rPr><b/><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t xml:space="preserve">
+</t></r><r><rPr><sz val="9"/><color indexed="81"/><rFont val="Segoe UI"/><family val="2"/></rPr><t>- Oportunidades claras de gol</t></r></text></comment></commentList></comments>

@@ -423,7 +423,7 @@ export default function MoneyballAnalyzer() {
                  <Award className="w-5 h-5 text-accent mr-2" /> Moneyball Analítico
                </h3>
                <div className="flex items-center gap-2">
-                 <a href="https://drive.google.com/file/d/MONEYBALL_VIEWS/view" target="_blank" rel="noreferrer"
+                 <a href="https://drive.google.com/file/d/1rxZlZTwY3tYXKKXFNEHF8DbTzO3GuuSs/view?usp=drive_link" target="_blank" rel="noreferrer"
                     className="flex items-center justify-center space-x-1.5 bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white rounded-lg py-1.5 px-3 text-xs font-semibold transition-all shadow-sm">
                     <Download className="w-3 h-3 text-accent" />
                     <span>Baixar Views</span>
@@ -431,7 +431,7 @@ export default function MoneyballAnalyzer() {
                </div>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed pr-4">
-              Baseado na metodologia do Moneyball presente na planilha do AllanFCL, é possivel avaliar os dados dos jogadores obtidos durante as partidas direto no navegador.
+              Baseado na metodologia do Moneyball presente na planilha do <a href="https://www.youtube.com/@AllanFCL" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">AllanFCL</a>, é possivel avaliar os dados dos jogadores obtidos durante as partidas direto no navegador.
             </p>
          </div>
 
@@ -443,7 +443,7 @@ export default function MoneyballAnalyzer() {
             <p className="text-xs text-gray-400 mb-4 font-medium">Extraia os dados instantaneamente usando o nosso plugin gratuito!</p>
             
             <div className="flex flex-row gap-2">
-               <a href="https://www.youtube.com/channel/UCN7QD3RR37kN9_f6Dzs_3jg/join" target="_blank" rel="noreferrer"
+               <a href="https://drive.google.com/file/d/1ZcMZxsr9VG8TAuVD17qSBYlt5KyuqEc-/view?usp=drive_link" target="_blank" rel="noreferrer"
                   className="flex-1 h-9 flex items-center justify-center space-x-1.5 bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-[11px] font-bold shadow-lg transition-transform hover:-translate-y-0.5 border border-gray-700">
                  <Download className="w-3.5 h-3.5 text-green-400" /> <span>Download V4</span>
                </a>

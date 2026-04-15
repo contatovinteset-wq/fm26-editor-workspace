@@ -1,0 +1,315 @@
+  const calc = {};
+  calc['EK'] = n(row['Inf']);
+  calc['EL'] = n(row['Nação']);
+  calc['EM'] = n(row['Jogador']);
+  calc['EN'] = n(row['Idade']);
+  calc['EO'] = n(row['Clube']);
+  calc['EP'] = g(row, 'Altura', 'Altura.1');
+  calc['EQ'] = n(row['Pé Preferido']);
+  calc['ER'] = n(row['Valor Estimado']);
+  calc['ES'] = n(row['Salário']);
+  calc['ET'] = n(row['Expira']);
+  calc['EU'] = n(row['Minutos']);
+  calc['EV'] = n(row['Presenças']);
+  calc['EW'] = n(row['HdJ']);
+  calc['EX'] = g(row, 'Gols', 'Golos', 'Gols DS');
+  calc['EY'] = n(row['Assist.']);
+  calc['EZ'] = n(row['OCG']);
+  calc['FA'] = n(row['Golos DS']);
+  calc['FB'] = n(row['Jogos DS']);
+  calc['FC'] = n(row['Poss Perd/90']);
+  calc['FD'] = g(row, 'xG');
+  calc['FE'] = g(row, 'xA');
+  calc['FF'] = n(row['Faltas Cometidas']);
+  calc['FG'] = n(row['Faltas Contra']);
+  calc['FH'] = n(row['Pas A']);
+  calc['FI'] = n(row['Ps C']);
+  calc['FJ'] = n(row['Passes Ch']);
+  calc['FK'] = n(row['PeP']);
+  calc['FL'] = n(row['Fnt']);
+  calc['FM'] = n(row['Remates']);
+  calc['FN'] = n(row['Rem %']);
+  calc['FO'] = n(row['Cab A']);
+  calc['FP'] = n(row['Cabs']);
+  calc['FQ'] = n(row['Press. tent.']);
+  calc['FR'] = n(row['Press. conc.']);
+  calc['FS'] = n(row['T Desa']);
+  calc['FT'] = n(row['Des C']);
+  calc['FU'] = n(row['Crt']);
+  calc['FV'] = n(row['CT-JA']);
+  calc['FW'] = n(row['CC-JA']);
+  calc['FX'] = n(row['Cr T']);
+  calc['FY'] = n(row['Cr C']);
+  calc['FZ'] = n(row['Golos marcados de fora da área']);
+  calc['GA'] = n(row['Remates de fora da área em cada 90 minutes']);
+  calc['GB'] = n(row['Remates em livres']);
+  calc['GC'] = n(row['Fj']);
+  calc['GD'] = g(row, 'Pens');
+  calc['GE'] = g(row, 'Pens M', 'Pen M');
+  calc['GF'] = n(row['Sprints/90']);
+  calc['GG'] = n(row['Distância']);
+  calc['GH'] = n(row['Classificação']);
+
+  // Formulas
+  calc['C'] = calc['EL']; // NAC
+  calc['D'] = calc['EQ']; // Pé preferido
+  calc['E'] = calc['EO']; // Equipe
+  calc['G'] = IF(calc['ET']="-", "Sem Data Final", calc['ET']); // Data Final do contrato
+  calc['K'] = IFERROR(0,0); // Média de jogos
+  calc['L'] = IFERROR(calc['EU']/90,0); // Jogos completos
+  calc['M'] = IFERROR(IF(ISERROR(FIND("(",calc['EV'])), VALUE(calc['EV']), VALUE(LEFT(calc['EV'],FIND("(",calc['EV'])-2)) + VALUE(MID(calc['EV'],FIND("(",calc['EV'])+1,FIND(")",calc['EV'])-FIND("(",calc['EV'])-1))),0); // Jogos Totais
+  calc['N'] = IFERROR(calc['EU']/calc['M'],0); // Minutos por partida
+  calc['O'] = IFERROR(IF(ISERROR(FIND("(",calc['EV'])), "100%", TEXT(VALUE(LEFT(calc['EV'],FIND("(",calc['EV'])-2)) / (VALUE(LEFT(calc['EV'],FIND("(",calc['EV'])-2)) + VALUE(MID(calc['EV'],FIND("(",calc['EV'])+1,FIND(")",calc['EV'])-FIND("(",calc['EV'])-1))),"0%")),0)*1; // Jogos como Titular
+  calc['P'] = calc['FA']; // Gols na carreira
+  calc['Q'] = IFERROR(calc['FA']/calc['FB'],0); // Média de gols em toda a Carreira
+  calc['R'] = IFERROR(calc['EX']/calc['L'],0); // Média gols / partida
+  calc['S'] = IFERROR((calc['X']+calc['Y'])/calc['L'],0); // Média gols + ass / partida
+  calc['T'] = IFERROR((calc['Y'])/calc['L'],0); // Ass / 90
+  calc['U'] = calc['EW']; // Man of the match
+  calc['V'] = IFERROR(calc['EU']/calc['U'],5000); // Minutos pra ser o homem do jogo
+  calc['W'] = IFERROR(calc['U']/calc['L'],0); // % de vezes que foi eleito o Homem do Jogo
+  calc['X'] = calc['EX']; // Gols
+  calc['Y'] = calc['EY']; // Assist
+  calc['Z'] = IFERROR(calc['X']+calc['Y'],0); // Gols + Ass
+  calc['AC'] = calc['AY']; // Gols de Penaltis
+  calc['AD'] = IFERROR(calc['EX']-calc['GE'],0); // Gols Sem Pênalti
+  calc['AE'] = IFERROR((calc['X']-calc['AC'])/calc['X'],0); // % Gols (sem penalti)
+  calc['AF'] = IFERROR(calc['Y']/calc['Z'],0); // % Ass
+  calc['AG'] = IFERROR((calc['AY']*1)/calc['Z'],0); // % Pênaltis
+  calc['AH'] = IFERROR(calc['X']/calc['L'],0); // Gols /90
+  calc['AI'] = IFERROR(calc['Y']/calc['L'],0); // Assist /90
+  calc['AJ'] = IFERROR((calc['EX']+calc['EY'])/calc['L'],0); // Gols + Assist /90
+  calc['AK'] = IFERROR(calc['AD']/calc['L'],0); // Gols Sem Pênalti /90
+  calc['AL'] = IFERROR(calc['EX']-calc['FZ']-calc['GD'],0); // Gols de dentro da área
+  calc['AM'] = IFERROR(calc['AL']/calc['L'],0); // Gols de dentro da área /90
+  calc['AN'] = calc['FZ']; // Gols de fora da área
+  calc['AO'] = IFERROR(calc['AN']/calc['L'],0); // Gols de fora da área /90
+  calc['AP'] = calc['GA']; // Chutes de fora da área /90
+  calc['AQ'] = IFERROR((calc['AO']*1)/calc['AP'],0); // % Conclusão dos chutes de fora da área
+  calc['AR'] = calc['FX']-calc['FV']; // Tentativas de  Criar  uma chance em Bola Parada
+  calc['AS'] = calc['AR']/calc['L']; // Tentativas/90
+  calc['AT'] = calc['FY']-calc['FW']; // Chances Criadas em  Bolas Paradas
+  calc['AU'] = calc['AT']/calc['L']; // Chances C /90
+  calc['AV'] = IFERROR(calc['AT']/calc['AR'],); // % Aproveitamento das Tentativas de Criar chance em  BP
+  calc['AW'] = calc['GB']; // Cobranças de falta (Diretas)
+  calc['AX'] = calc['GD']; // Pênaltis batidos
+  calc['AY'] = calc['GE']; // Pênaltis marcados
+  calc['AZ'] = IFERROR(calc['GD']-calc['GE'],0); // Pênaltis perdidos
+  calc['BA'] = IFERROR(calc['AY']/calc['L'],0); // Gols de pen/90
+  calc['BB'] = IFERROR((calc['AY']*1)/calc['GD'],0.00001); // % Conversão de pênalti
+  calc['BC'] = calc['FO']; // Cabeceios disputados
+  calc['BD'] = calc['FP']; // Ganhos
+  calc['BE'] = IFERROR(calc['BC']/calc['L'],0); // Cabs Disputados /90
+  calc['BF'] = IFERROR(calc['BD']/calc['L'],0); // Ganhos /90
+  calc['BG'] = IFERROR(calc['FO']-calc['FP'],0); // Perdidos
+  calc['BH'] = IFERROR((calc['BD']*1)/calc['BC'],0); // % Cabs ganhos
+  calc['BI'] = IFERROR(100%-calc['BH'],0); // % Cabs perdidos
+  calc['BJ'] = calc['GC']; // Impedimentos
+  calc['BK'] = IFERROR(calc['GC']/calc['L'],0); // Impedimentos / 90
+  calc['BL'] = calc['FM']; // Finalizações
+  calc['BM'] = IFERROR(calc['BL']/calc['L'],0); // Finalizações /90
+  calc['BN'] = calc['FN']; // Finalizações no Gol
+  calc['BO'] = IFERROR(calc['BN']/calc['L'],0); // Finalizações no gol/90
+  calc['BP'] = IFERROR((calc['FN']*1)/calc['FM'],0); // % Finalizações que foram no gol
+  calc['BQ'] = IFERROR((calc['FM']-calc['GD'])/(calc['EX']-calc['GE']),0); // Finalizações pra um gol
+  calc['BR'] = IFERROR((calc['FN']-calc['GD'])/(calc['EX']-calc['GE']),0); // Finalizações certas pra um gol
+  calc['BS'] = IFERROR((calc['FM']+calc['FO']-calc['GD'])/(calc['EX']-calc['GE']),0); // Finalização ou Cabeceio pra um gol
+  calc['BT'] = IFERROR((calc['EX']-calc['GE'])/(calc['FM']-calc['GD']),0); // Finalizações que se converteram em gols
+  calc['BU'] = IFERROR(((calc['X']-calc['AY'])/calc['CH'])*(calc['AD']/calc['L']),0); // GPI (Goal Probability Index)
+  calc['BV'] = IFERROR(calc['CF']/(calc['L']),0); // xG / Jogo
+  calc['BW'] = IFERROR(calc['EX']/calc['L'],0); // Gols convertidos /90
+  calc['BX'] = IFERROR(calc['BW']-calc['BV'],0); // Over xG / Under xG per 90
+  calc['BY'] = IFERROR(calc['CH']/(calc['FM']-calc['GD']),0); // xG / chute
+  calc['BZ'] = IFERROR(calc['EU']/calc['FM'],0); // Minutos pra tentar uma finalização
+  calc['CA'] = IFERROR(calc['EU']/calc['FN'],0); // Minutos pra acertar uma finalização no gol
+  calc['CB'] = IFERROR(calc['EU']/calc['EX'],calc['L']*90); // Minutos pra MARCAR um gol
+  calc['CC'] = IFERROR(calc['EU']/calc['Z'],300); // Minutos pra PARTICIPAR de um gol
+  calc['CD'] = IFERROR(calc['EX']-calc['CF'],0); // Gols não esperados
+  calc['CE'] = IFERROR((calc['EX']-calc['GE'])-calc['CH'],0); // Gols não esperados SEM PÊNALTI
+  calc['CF'] = SUBSTITUTE(calc['FD'],".","," )*1; // Gols esperados (xG)
+  calc['CG'] = IFERROR(calc['CF']/calc['L'],0); // xG /90
+  calc['CH'] = IFERROR(calc['CF']-(calc['GD']*0.79),0); // xG (Sem pênaltis)
+  calc['CI'] = IFERROR((calc['CH']/calc['L']),0); // xG (Sem pênaltis) /90
+  calc['CJ'] = SUBSTITUTE(calc['FE'],".","," )*1; // Assistências Esperadas (xA)
+  calc['CK'] = IFERROR(calc['CJ']/calc['L'],0); // xA /90
+  calc['CL'] = IFERROR(calc['CJ']+calc['CH'],0); // xA + xG sem pen
+  calc['CM'] = IFERROR(calc['CL']/calc['L'],0); // xA + xG /90
+  calc['CN'] = calc['EX']/(calc['EX']+calc['CF']); // xG Conclusion
+  calc['CO'] = calc['FJ']; // Passes Decisivos
+  calc['CP'] = IFERROR(calc['CO']/calc['L'],0); // Pass D /90
+  calc['CQ'] = calc['CJ']; // xA (assistências esperadas)
+  calc['CR'] = IFERROR(calc['CJ']-calc['EY'],0); // Chances criadas e não aproveitadas pela equipe / 90
+  calc['CS'] = calc['FV']; // Cruzamentos Tentados
+  calc['CT'] = calc['CS']/calc['L']; // Cruzamentos T /90
+  calc['CU'] = calc['FW']; // Cruzamentos Conseguidos
+  calc['CV'] = calc['CU']/calc['L']; // Cruzamentos C/90
+  calc['CW'] = IFERROR(calc['CU']/calc['CS'],0); // Cruzamentos
+  calc['CX'] = calc['FL']; // Fintas
+  calc['CY'] = IFERROR(calc['FL']/calc['L'],0); // Fintas/90
+  calc['CZ'] = IFERROR((((calc['DJ']*1000)/(calc['EU']*60))*3600)/1000,0); // Velocidade Média (em km/h)
+  calc['DA'] = calc['FQ']+calc['FS']+calc['FF']; // Desarme + Pressões Tentadas
+  calc['DB'] = IFERROR(calc['DA']/calc['L'],0); // Des + Pres T /90
+  calc['DC'] = IFERROR(calc['FT']+calc['FR'],0); // Desarme + Pressões Concluídas
+  calc['DD'] = IFERROR(calc['DC']/calc['L'],0); // Des + Pres C /90
+  calc['DE'] = IFERROR((calc['DC']*1)/calc['DA'],); // % Des + Pressões concluídas
+  calc['DF'] = calc['FU']; // Interceptações
+  calc['DG'] = IFERROR(calc['DF']/calc['L'],0); // Int/90
+  calc['DH'] = calc['FG']; // Faltas Sofridas
+  calc['DI'] = IFERROR(calc['DH']/calc['L'],0); // Faltas Sof/90
+  calc['DK'] = IFERROR(calc['DJ']/calc['L'],0); // Dist / 90
+  calc['DL'] = IFERROR((calc['GF']*calc['L']),0); // Sprints de alta intensidade
+  calc['DM'] = calc['GF']; // Sprints de alta intensidade/90
+  calc['DN'] = (calc['FO']+calc['FM']+calc['GC']+calc['FF']+calc['FG']+calc['FL']+calc['FJ']+calc['GD']+calc['CF']); // Lances ofensivos tentados
+  calc['DO'] = IFERROR(calc['DN']/calc['L'],0); // Lances ofensivos / 90
+  calc['DP'] = (calc['FN']+calc['FG']+calc['FL']+calc['FJ']+calc['GE']+calc['EX']+calc['EY']); // Lances ofensivos conseguidos
+  calc['DQ'] = IFERROR(calc['DP']/calc['L'],0); // Lances ofensivos conseguidos / 90
+  calc['DR'] = calc['DS']*calc['L']; // Posse Perdida
+  calc['DS'] = calc['FC']; // Posse Perdida /90
+  calc['DT'] = IFERROR(calc['DP']/calc['DN'],0); // Eficácia ofensiva
+  calc['DU'] = IFERROR(calc['FN']+calc['CJ']+calc['EZ']+calc['FJ']+calc['FZ']+calc['FW']+(calc['EX']*0.5)+(calc['EY']*0.5),0); // Ações que geraram finalizações ao gol
+  calc['DV'] = IFERROR(calc['DU']/calc['L'],0); // Ações que geraram finalizações ao gol /90
+  calc['DW'] = IFERROR((calc['GD']+calc['FO']+calc['FM']+calc['FL']+calc['FH']+calc['FT'])/calc['L'],0); // Participação do jogador a cada 90 minutos
+  calc['DX'] = IFERROR(calc['FV']+calc['FM']+calc['FL']+calc['FJ'],0); // Ações com Bola Tentadas
+  calc['DY'] = calc['DX']/calc['L']; // Ações com Bola T/90
+  calc['DZ'] = IFERROR(calc['FW']+calc['FN']+calc['FL']+calc['FJ'],0); // Ações com Bola (Completadas)
+  calc['EA'] = IFERROR(calc['DZ']/calc['L'],0); // Ações com Bola Comp /90
+  calc['EB'] = IFERROR(calc['DZ']/calc['DX'],0); // % Sucesso de ações com bola
+  calc['EC'] = IFERROR((calc['FL']+calc['FM']+(calc['EZ']-calc['GD'])+calc['FJ']+calc['DA']+calc['FW']),0); // Ações no último terço
+  calc['ED'] = IFERROR(calc['EC']/calc['L'],0); // Ações no último terço / 90
+  calc['EE'] = IFERROR((calc['FM']+calc['EZ']+calc['FJ']),0); // Tentativas de marcar um gol (finalização e oportunidades criadas)
+  calc['EF'] = IFERROR(calc['EE']/calc['L'],0); // Tentativas de marcar um gol  /90
+  calc['EG'] = IFERROR((calc['FM']-calc['FN'])+(calc['FH']-calc['FI']),0); // Posse Desperdiçada
+  calc['EH'] = IFERROR(calc['EG']/calc['L'],0); // Posse Desperdiçada /90
+  calc['EI'] = calc['FC']; // Posse perdida /90
+  calc['EJ'] = IFERROR(VALUE(SUBSTITUTE(calc['GH'], ".", ",")),0); // Nota média
+  calc['EK'] = "Data (e.g. None)"; // Inf
+  calc['EL'] = "Data (e.g. BEN)"; // Nação
+  calc['EM'] = "Data (e.g. Michel Boni)"; // Jogador
+  calc['EN'] = "Data (e.g. 19)"; // Idade
+  calc['EO'] = "Data (e.g. Buffles FC)"; // Clube
+  calc['EP'] = "Data (e.g. 182 cm)"; // Altura
+  calc['EQ'] = "Data (e.g. Pé Direito)"; // Pé Preferido
+  calc['ER'] = "Data (e.g. 20m € - 200m €)"; // Valor Estimado
+  calc['ES'] = "Data (e.g. 1,7m € p/m)"; // Salário
+  calc['GG'] = VALUE(SUBSTITUTE(calc['GG'], " km", "")); // Distância
+
+  return {
+    'Jogador': calc['B'],
+    'NAC': calc['C'],
+    'Pé preferido': calc['D'],
+    'Equipe': calc['E'],
+    'Gols de dentro da área': calc['AA'],
+    'Gols de fora da área': calc['AB'],
+    'Gols de Penaltis': calc['AC'],
+    'Gols Sem Pênalti': calc['AD'],
+    '% Gols (sem penalti)': calc['AE'],
+    '% Ass': calc['AF'],
+    '% Pênaltis': calc['AG'],
+    'Gols /90': calc['AH'],
+    'Assist /90': calc['AI'],
+    'Gols + Assist /90': calc['AJ'],
+    'Gols Sem Pênalti /90': calc['AK'],
+    'Gols de dentro da área': calc['AL'],
+    'Gols de dentro da área /90': calc['AM'],
+    'Gols de fora da área': calc['AN'],
+    'Gols de fora da área /90': calc['AO'],
+    'Chutes de fora da área /90': calc['AP'],
+    '% Conclusão dos chutes de fora da área': calc['AQ'],
+    'Tentativas de  Criar  uma chance em Bola Parada': calc['AR'],
+    'Tentativas/90': calc['AS'],
+    'Chances Criadas em  Bolas Paradas': calc['AT'],
+    'Chances C /90': calc['AU'],
+    '% Aproveitamento das Tentativas de Criar chance em  BP': calc['AV'],
+    'Cobranças de falta (Diretas)': calc['AW'],
+    'Pênaltis batidos': calc['AX'],
+    'Pênaltis marcados': calc['AY'],
+    'Pênaltis perdidos': calc['AZ'],
+    'Gols de pen/90': calc['BA'],
+    '% Conversão de pênalti': calc['BB'],
+    'Cabeceios disputados': calc['BC'],
+    'Ganhos': calc['BD'],
+    'Cabs Disputados /90': calc['BE'],
+    'Ganhos /90': calc['BF'],
+    'Perdidos': calc['BG'],
+    '% Cabs ganhos': calc['BH'],
+    '% Cabs perdidos': calc['BI'],
+    'Impedimentos': calc['BJ'],
+    'Impedimentos / 90': calc['BK'],
+    'Finalizações': calc['BL'],
+    'Finalizações /90': calc['BM'],
+    'Finalizações no Gol': calc['BN'],
+    'Finalizações no gol/90': calc['BO'],
+    '% Finalizações que foram no gol': calc['BP'],
+    'Finalizações pra um gol': calc['BQ'],
+    'Finalizações certas pra um gol': calc['BR'],
+    'Finalização ou Cabeceio pra um gol': calc['BS'],
+    'Finalizações que se converteram em gols': calc['BT'],
+    'GPI (Goal Probability Index)': calc['BU'],
+    'xG / Jogo': calc['BV'],
+    'Gols convertidos /90': calc['BW'],
+    'Over xG / Under xG per 90': calc['BX'],
+    'xG / chute': calc['BY'],
+    'Minutos pra tentar uma finalização': calc['BZ'],
+    'Minutos pra acertar uma finalização no gol': calc['CA'],
+    'Minutos pra MARCAR um gol': calc['CB'],
+    'Minutos pra PARTICIPAR de um gol': calc['CC'],
+    'Gols não esperados': calc['CD'],
+    'Gols não esperados SEM PÊNALTI': calc['CE'],
+    'Gols esperados (xG)': calc['CF'],
+    'xG /90': calc['CG'],
+    'xG (Sem pênaltis)': calc['CH'],
+    'xG (Sem pênaltis) /90': calc['CI'],
+    'Assistências Esperadas (xA)': calc['CJ'],
+    'xA /90': calc['CK'],
+    'xA + xG sem pen': calc['CL'],
+    'xA + xG /90': calc['CM'],
+    'xG Conclusion': calc['CN'],
+    'Passes Decisivos': calc['CO'],
+    'Pass D /90': calc['CP'],
+    'xA (assistências esperadas)': calc['CQ'],
+    'Chances criadas e não aproveitadas pela equipe / 90': calc['CR'],
+    'Cruzamentos Tentados': calc['CS'],
+    'Cruzamentos T /90': calc['CT'],
+    'Cruzamentos Conseguidos': calc['CU'],
+    'Cruzamentos C/90': calc['CV'],
+    'Cruzamentos': calc['CW'],
+    'Fintas': calc['CX'],
+    'Fintas/90': calc['CY'],
+    'Velocidade Média (em km/h)': calc['CZ'],
+    'Desarme + Pressões Tentadas': calc['DA'],
+    'Des + Pres T /90': calc['DB'],
+    'Desarme + Pressões Concluídas': calc['DC'],
+    'Des + Pres C /90': calc['DD'],
+    '% Des + Pressões concluídas': calc['DE'],
+    'Interceptações': calc['DF'],
+    'Int/90': calc['DG'],
+    'Faltas Sofridas': calc['DH'],
+    'Faltas Sof/90': calc['DI'],
+    'Distância': calc['DJ'],
+    'Dist / 90': calc['DK'],
+    'Sprints de alta intensidade': calc['DL'],
+    'Sprints de alta intensidade/90': calc['DM'],
+    'Lances ofensivos tentados': calc['DN'],
+    'Lances ofensivos / 90': calc['DO'],
+    'Lances ofensivos conseguidos': calc['DP'],
+    'Lances ofensivos conseguidos / 90': calc['DQ'],
+    'Posse Perdida': calc['DR'],
+    'Posse Perdida /90': calc['DS'],
+    'Eficácia ofensiva': calc['DT'],
+    'Ações que geraram finalizações ao gol': calc['DU'],
+    'Ações que geraram finalizações ao gol /90': calc['DV'],
+    'Participação do jogador a cada 90 minutos': calc['DW'],
+    'Ações com Bola Tentadas': calc['DX'],
+    'Ações com Bola T/90': calc['DY'],
+    'Ações com Bola (Completadas)': calc['DZ'],
+    'Ações com Bola Comp /90': calc['EA'],
+    '% Sucesso de ações com bola': calc['EB'],
+    'Ações no último terço': calc['EC'],
+    'Ações no último terço / 90': calc['ED'],
+    'Tentativas de marcar um gol (finalização e oportunidades criadas)': calc['EE'],
+    'Tentativas de marcar um gol  /90': calc['EF'],
+    'Posse Desperdiçada': calc['EG'],
+    'Posse Desperdiçada /90': calc['EH'],
+    'Posse perdida /90': calc['EI'],
+    'Nota média': calc['EJ'],
+  };

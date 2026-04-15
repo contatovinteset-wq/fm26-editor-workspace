@@ -1,0 +1,3868 @@
+{
+  "<ConditionalFormatting BF1:BF1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BC1:BE1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DA1:DD1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DB1:DD1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DA1:DA1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DH1:DH1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CE1:CE1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "num",
+          "val": -1e-05,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "num",
+          "val": 0.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AE1:AE1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DW1:DW1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BD1:BE1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DV2:DV1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AG1:AG1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BE1:BE1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BD1:BD1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting ED1:EE1>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting ED1:EE1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BY1:BY1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CD1:CD1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "num",
+          "val": -1e-06,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "num",
+          "val": 0.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DG1:DG1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BC1:BC1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BB1:BB1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AL1:AM1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AL1:AL1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AM1:AM1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AF1:AF1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BV1:BV1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BW1:BX1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BW1:BW1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BX1:BX1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "num",
+          "val": -0.0001,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "num",
+          "val": 0.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CF2:CH1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CI2:CI1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CF2:CF1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CG2:CG1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CH2:CH1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CJ2:CJ1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CK1:CK1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CF1:CF1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CG1:CG1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CH1:CH1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CI1:CI1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CJ1:CJ1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CL1:CL1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting EF1>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting EC1>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting EC1:EC1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting ED1:ED1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting EE1>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting EE1:EE1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DC1>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DB1:DB1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DC1:DC1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DD1:DD1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DU2:DU1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DE1:DE1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting F1:F1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "num",
+          "val": 0.0,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "num",
+          "val": 1.7,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "num",
+          "val": 1.83,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CQ1:CQ1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DU1:DV1>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DU1>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DV1>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BH1:BH1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BI1:BI1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BG1:BG1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting EF1:EF1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting EI1:EI1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting EG1:EG1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting EH1:EH1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DI1:DI1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF5A8AC6"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DJ1:DJ1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFD9E1F2"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    },
+    {
+      "type": "iconSet"
+    }
+  ],
+  "<ConditionalFormatting X1:X1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting Y1:Y1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting Z1:Z1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AD1:AD1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting U1:U1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "Values must be of type <class 'str'>"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting V1:V1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "Values must be of type <class 'str'>"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting W1:W1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "Values must be of type <class 'str'>"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting N1:N1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "num",
+          "val": 75.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "num",
+          "val": 90.0,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting O1:O1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting P1:P1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting Q1:Q1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting R1:R1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting S1:S1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting T1:T1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AN1:AN1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AO1:AO1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AP1:AP1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AQ1>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AQ1:AQ1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting I1:I1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting L1:L1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting M1:M1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting J1:J1048576>": [
+    {
+      "type": "containsText"
+    },
+    {
+      "type": "containsText"
+    }
+  ],
+  "<ConditionalFormatting CZ1:CZ1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "iconSet"
+    }
+  ],
+  "<ConditionalFormatting DK1:DK1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFD9E1F2"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BQ1:BQ1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BO1:BO1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BP1:BP1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting EJ1:EJ1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "num",
+          "val": 6.6,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "num",
+          "val": 6.7,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "num",
+          "val": 7.0,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DN1:DN1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF4B084"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFF08E52"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFEC7328"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DO1:DO1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF4B084"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFF08E52"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFEC7328"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DP1:DP1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DQ1:DQ1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DR1:DR1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DS1:DS1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DT1:DT1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CM1:CM1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFDDEBF7"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CO1:CO1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CP1:CP1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BS1:BS1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BT1:BT1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BU1:BU1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFF5D74"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFA3D9FB"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF61BFF9"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BR1:BR1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BL1:BL1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BM1:BM1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BN1:BN1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CB1:CB1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CC1:CC1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CR1:CR1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "num",
+          "val": -1.0,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "num",
+          "val": 0.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CS1:CS1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF5A8AC6"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CT1:CT1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF5A8AC6"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CU1:CU1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF5A8AC6"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CV1:CV1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF5A8AC6"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CW1:CW1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFCFCFF"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF5A8AC6"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DX1:DX1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "Values must be of type <class 'str'>"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "Values must be of type <class 'str'>"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DY1:DY1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FF9BC2E6"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF2F75B5"
+        }
+      ]
+    },
+    {
+      "type": "iconSet"
+    }
+  ],
+  "<ConditionalFormatting DZ1:DZ1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FF9BC2E6"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF2F75B5"
+        }
+      ]
+    },
+    {
+      "type": "iconSet"
+    }
+  ],
+  "<ConditionalFormatting EA1:EA1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FF9BC2E6"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF2F75B5"
+        }
+      ]
+    },
+    {
+      "type": "iconSet"
+    }
+  ],
+  "<ConditionalFormatting EB1:EB1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "iconSet"
+    }
+  ],
+  "<ConditionalFormatting CN1:CN1048576>": [
+    {
+      "type": "dataBar"
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFDDEBF7"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF00B0F0"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AH1:AH1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AI1:AI1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AJ1:AJ1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AK1:AK1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting BZ1:BZ1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CA1:CA1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting AX1:AX1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting AY1:AY1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting AZ1:AZ1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting BA1:BA1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting AT1:AT1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting AR1:AR1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting AV1:AV1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting AW1:AW1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting AS1:AS1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting AU1:AU1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting BJ1:BJ1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting BK1:BK1048576>": [
+    {
+      "type": "iconSet"
+    },
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting DL1:DL1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting DM1:DM1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting CX1:CX1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting CY1:CY1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting AA1:AA1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting AB1:AB1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting AC1:AC1048576>": [
+    {
+      "type": "dataBar"
+    }
+  ],
+  "<ConditionalFormatting DE1:DF1 DE2:DE130 DE131:DF1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DH1 DH131:DH1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DU131:DU1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DF1 DF131:DF1048576>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DC2:DC130>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DD2:DD130>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting G2:G130>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting H2:H130>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DH2:DH130>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DV2:DV130>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting CF2:CH130>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFFFEF9C"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DG2:DG130>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DU2:DU130>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FF63BE7B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FFF8696B"
+        }
+      ]
+    },
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting DF2:DF130>": [
+    {
+      "type": "colorScale",
+      "colorScale": [
+        {
+          "type": "min",
+          "val": null,
+          "color": "FFF8696B"
+        },
+        {
+          "type": "percentile",
+          "val": 50.0,
+          "color": "FFFFEB84"
+        },
+        {
+          "type": "max",
+          "val": null,
+          "color": "FF63BE7B"
+        }
+      ]
+    }
+  ],
+  "<ConditionalFormatting W2:W130>": [
+    {
+      "type": "iconSet"
+    }
+  ]
+}

@@ -13,7 +13,7 @@ function AnaliseDados() {
           <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-accent to-yellow-400">
             Análise de Dados <span className="text-sm border border-accent/50 px-2 py-1 ml-2 rounded-lg text-accent align-middle">BETA</span>
           </h1>
-          <a href="/forum/topic/850b04c4-e59d-46af-991a-05647de6b1db" target="_blank" rel="noreferrer"
+          <a href="https://vintesetfm.cloud/forum/t/850b04c4-e59d-46af-991a-05647de6b1db" target="_blank" rel="noreferrer"
              className="hidden sm:flex items-center justify-center space-x-1.5 bg-gray-800/80 hover:bg-gray-700/80 border border-yellow-500/30 text-yellow-500 hover:text-yellow-400 rounded-lg py-2 px-4 font-semibold transition-all shadow-sm">
              <Bug className="w-4 h-4" />
              <span>Reportar Bug</span>

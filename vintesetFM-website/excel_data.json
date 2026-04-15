@@ -1,0 +1,2904 @@
+{
+  "columns": [
+    {
+      "col": "A",
+      "index": 1,
+      "name": "None"
+    },
+    {
+      "col": "B",
+      "index": 2,
+      "name": "Jogador"
+    },
+    {
+      "col": "C",
+      "index": 3,
+      "name": "NAC"
+    },
+    {
+      "col": "D",
+      "index": 4,
+      "name": "Pé preferido"
+    },
+    {
+      "col": "E",
+      "index": 5,
+      "name": "Equipe"
+    },
+    {
+      "col": "F",
+      "index": 6,
+      "name": "Altura"
+    },
+    {
+      "col": "G",
+      "index": 7,
+      "name": "Data Final do contrato"
+    },
+    {
+      "col": "H",
+      "index": 8,
+      "name": "Idade"
+    },
+    {
+      "col": "I",
+      "index": 9,
+      "name": "Salário"
+    },
+    {
+      "col": "J",
+      "index": 10,
+      "name": "Valor Estimado"
+    },
+    {
+      "col": "K",
+      "index": 11,
+      "name": "Média de jogos"
+    },
+    {
+      "col": "L",
+      "index": 12,
+      "name": "Jogos completos"
+    },
+    {
+      "col": "M",
+      "index": 13,
+      "name": "Jogos Totais"
+    },
+    {
+      "col": "N",
+      "index": 14,
+      "name": "Minutos por partida"
+    },
+    {
+      "col": "O",
+      "index": 15,
+      "name": "Jogos como Titular"
+    },
+    {
+      "col": "P",
+      "index": 16,
+      "name": "Gols na carreira"
+    },
+    {
+      "col": "Q",
+      "index": 17,
+      "name": "Média de gols em toda a Carreira"
+    },
+    {
+      "col": "R",
+      "index": 18,
+      "name": "Média gols / partida"
+    },
+    {
+      "col": "S",
+      "index": 19,
+      "name": "Média gols + ass / partida"
+    },
+    {
+      "col": "T",
+      "index": 20,
+      "name": "Ass / 90"
+    },
+    {
+      "col": "U",
+      "index": 21,
+      "name": "Man of the match"
+    },
+    {
+      "col": "V",
+      "index": 22,
+      "name": "Minutos pra ser o homem do jogo"
+    },
+    {
+      "col": "W",
+      "index": 23,
+      "name": "% de vezes que foi eleito o Homem do Jogo"
+    },
+    {
+      "col": "X",
+      "index": 24,
+      "name": "Gols"
+    },
+    {
+      "col": "Y",
+      "index": 25,
+      "name": "Assist"
+    },
+    {
+      "col": "Z",
+      "index": 26,
+      "name": "Gols + Ass"
+    },
+    {
+      "col": "AA",
+      "index": 27,
+      "name": "Gols de dentro da área"
+    },
+    {
+      "col": "AB",
+      "index": 28,
+      "name": "Gols de fora da área"
+    },
+    {
+      "col": "AC",
+      "index": 29,
+      "name": "Gols de Penaltis"
+    },
+    {
+      "col": "AD",
+      "index": 30,
+      "name": "Gols Sem Pênalti"
+    },
+    {
+      "col": "AE",
+      "index": 31,
+      "name": "% Gols (sem penalti)"
+    },
+    {
+      "col": "AF",
+      "index": 32,
+      "name": "% Ass"
+    },
+    {
+      "col": "AG",
+      "index": 33,
+      "name": "% Pênaltis"
+    },
+    {
+      "col": "AH",
+      "index": 34,
+      "name": "Gols /90"
+    },
+    {
+      "col": "AI",
+      "index": 35,
+      "name": "Assist /90"
+    },
+    {
+      "col": "AJ",
+      "index": 36,
+      "name": "Gols + Assist /90"
+    },
+    {
+      "col": "AK",
+      "index": 37,
+      "name": "Gols Sem Pênalti /90"
+    },
+    {
+      "col": "AL",
+      "index": 38,
+      "name": "Gols de dentro da área"
+    },
+    {
+      "col": "AM",
+      "index": 39,
+      "name": "Gols de dentro da área /90"
+    },
+    {
+      "col": "AN",
+      "index": 40,
+      "name": "Gols de fora da área"
+    },
+    {
+      "col": "AO",
+      "index": 41,
+      "name": "Gols de fora da área /90"
+    },
+    {
+      "col": "AP",
+      "index": 42,
+      "name": "Chutes de fora da área /90"
+    },
+    {
+      "col": "AQ",
+      "index": 43,
+      "name": "% Conclusão dos chutes de fora da área"
+    },
+    {
+      "col": "AR",
+      "index": 44,
+      "name": "Tentativas de  Criar  uma chance em Bola Parada"
+    },
+    {
+      "col": "AS",
+      "index": 45,
+      "name": "Tentativas/90"
+    },
+    {
+      "col": "AT",
+      "index": 46,
+      "name": "Chances Criadas em  Bolas Paradas"
+    },
+    {
+      "col": "AU",
+      "index": 47,
+      "name": "Chances C /90"
+    },
+    {
+      "col": "AV",
+      "index": 48,
+      "name": "% Aproveitamento das Tentativas de Criar chance em  BP"
+    },
+    {
+      "col": "AW",
+      "index": 49,
+      "name": "Cobranças de falta (Diretas)"
+    },
+    {
+      "col": "AX",
+      "index": 50,
+      "name": "Pênaltis batidos"
+    },
+    {
+      "col": "AY",
+      "index": 51,
+      "name": "Pênaltis marcados"
+    },
+    {
+      "col": "AZ",
+      "index": 52,
+      "name": "Pênaltis perdidos"
+    },
+    {
+      "col": "BA",
+      "index": 53,
+      "name": "Gols de pen/90"
+    },
+    {
+      "col": "BB",
+      "index": 54,
+      "name": "% Conversão de pênalti"
+    },
+    {
+      "col": "BC",
+      "index": 55,
+      "name": "Cabeceios disputados"
+    },
+    {
+      "col": "BD",
+      "index": 56,
+      "name": "Ganhos"
+    },
+    {
+      "col": "BE",
+      "index": 57,
+      "name": "Cabs Disputados /90"
+    },
+    {
+      "col": "BF",
+      "index": 58,
+      "name": "Ganhos /90"
+    },
+    {
+      "col": "BG",
+      "index": 59,
+      "name": "Perdidos"
+    },
+    {
+      "col": "BH",
+      "index": 60,
+      "name": "% Cabs ganhos"
+    },
+    {
+      "col": "BI",
+      "index": 61,
+      "name": "% Cabs perdidos"
+    },
+    {
+      "col": "BJ",
+      "index": 62,
+      "name": "Impedimentos"
+    },
+    {
+      "col": "BK",
+      "index": 63,
+      "name": "Impedimentos / 90"
+    },
+    {
+      "col": "BL",
+      "index": 64,
+      "name": "Finalizações"
+    },
+    {
+      "col": "BM",
+      "index": 65,
+      "name": "Finalizações /90"
+    },
+    {
+      "col": "BN",
+      "index": 66,
+      "name": "Finalizações no Gol"
+    },
+    {
+      "col": "BO",
+      "index": 67,
+      "name": "Finalizações no gol/90"
+    },
+    {
+      "col": "BP",
+      "index": 68,
+      "name": "% Finalizações que foram no gol"
+    },
+    {
+      "col": "BQ",
+      "index": 69,
+      "name": "Finalizações pra um gol"
+    },
+    {
+      "col": "BR",
+      "index": 70,
+      "name": "Finalizações certas pra um gol"
+    },
+    {
+      "col": "BS",
+      "index": 71,
+      "name": "Finalização ou Cabeceio pra um gol"
+    },
+    {
+      "col": "BT",
+      "index": 72,
+      "name": "Finalizações que se converteram em gols"
+    },
+    {
+      "col": "BU",
+      "index": 73,
+      "name": "GPI (Goal Probability Index)"
+    },
+    {
+      "col": "BV",
+      "index": 74,
+      "name": "xG / Jogo"
+    },
+    {
+      "col": "BW",
+      "index": 75,
+      "name": "Gols convertidos /90"
+    },
+    {
+      "col": "BX",
+      "index": 76,
+      "name": "Over xG / Under xG per 90"
+    },
+    {
+      "col": "BY",
+      "index": 77,
+      "name": "xG / chute"
+    },
+    {
+      "col": "BZ",
+      "index": 78,
+      "name": "Minutos pra tentar uma finalização"
+    },
+    {
+      "col": "CA",
+      "index": 79,
+      "name": "Minutos pra acertar uma finalização no gol"
+    },
+    {
+      "col": "CB",
+      "index": 80,
+      "name": "Minutos pra MARCAR um gol"
+    },
+    {
+      "col": "CC",
+      "index": 81,
+      "name": "Minutos pra PARTICIPAR de um gol"
+    },
+    {
+      "col": "CD",
+      "index": 82,
+      "name": "Gols não esperados"
+    },
+    {
+      "col": "CE",
+      "index": 83,
+      "name": "Gols não esperados SEM PÊNALTI"
+    },
+    {
+      "col": "CF",
+      "index": 84,
+      "name": "Gols esperados (xG)"
+    },
+    {
+      "col": "CG",
+      "index": 85,
+      "name": "xG /90"
+    },
+    {
+      "col": "CH",
+      "index": 86,
+      "name": "xG (Sem pênaltis)"
+    },
+    {
+      "col": "CI",
+      "index": 87,
+      "name": "xG (Sem pênaltis) /90"
+    },
+    {
+      "col": "CJ",
+      "index": 88,
+      "name": "Assistências Esperadas (xA)"
+    },
+    {
+      "col": "CK",
+      "index": 89,
+      "name": "xA /90"
+    },
+    {
+      "col": "CL",
+      "index": 90,
+      "name": "xA + xG sem pen"
+    },
+    {
+      "col": "CM",
+      "index": 91,
+      "name": "xA + xG /90"
+    },
+    {
+      "col": "CN",
+      "index": 92,
+      "name": "xG Conclusion"
+    },
+    {
+      "col": "CO",
+      "index": 93,
+      "name": "Passes Decisivos"
+    },
+    {
+      "col": "CP",
+      "index": 94,
+      "name": "Pass D /90"
+    },
+    {
+      "col": "CQ",
+      "index": 95,
+      "name": "xA (assistências esperadas)"
+    },
+    {
+      "col": "CR",
+      "index": 96,
+      "name": "Chances criadas e não aproveitadas pela equipe / 90"
+    },
+    {
+      "col": "CS",
+      "index": 97,
+      "name": "Cruzamentos Tentados"
+    },
+    {
+      "col": "CT",
+      "index": 98,
+      "name": "Cruzamentos T /90"
+    },
+    {
+      "col": "CU",
+      "index": 99,
+      "name": "Cruzamentos Conseguidos"
+    },
+    {
+      "col": "CV",
+      "index": 100,
+      "name": "Cruzamentos C/90"
+    },
+    {
+      "col": "CW",
+      "index": 101,
+      "name": "Cruzamentos"
+    },
+    {
+      "col": "CX",
+      "index": 102,
+      "name": "Fintas"
+    },
+    {
+      "col": "CY",
+      "index": 103,
+      "name": "Fintas/90"
+    },
+    {
+      "col": "CZ",
+      "index": 104,
+      "name": "Velocidade Média (em km/h)"
+    },
+    {
+      "col": "DA",
+      "index": 105,
+      "name": "Desarme + Pressões Tentadas"
+    },
+    {
+      "col": "DB",
+      "index": 106,
+      "name": "Des + Pres T /90"
+    },
+    {
+      "col": "DC",
+      "index": 107,
+      "name": "Desarme + Pressões Concluídas"
+    },
+    {
+      "col": "DD",
+      "index": 108,
+      "name": "Des + Pres C /90"
+    },
+    {
+      "col": "DE",
+      "index": 109,
+      "name": "% Des + Pressões concluídas"
+    },
+    {
+      "col": "DF",
+      "index": 110,
+      "name": "Interceptações"
+    },
+    {
+      "col": "DG",
+      "index": 111,
+      "name": "Int/90"
+    },
+    {
+      "col": "DH",
+      "index": 112,
+      "name": "Faltas Sofridas"
+    },
+    {
+      "col": "DI",
+      "index": 113,
+      "name": "Faltas Sof/90"
+    },
+    {
+      "col": "DJ",
+      "index": 114,
+      "name": "Distância"
+    },
+    {
+      "col": "DK",
+      "index": 115,
+      "name": "Dist / 90"
+    },
+    {
+      "col": "DL",
+      "index": 116,
+      "name": "Sprints de alta intensidade"
+    },
+    {
+      "col": "DM",
+      "index": 117,
+      "name": "Sprints de alta intensidade/90"
+    },
+    {
+      "col": "DN",
+      "index": 118,
+      "name": "Lances ofensivos tentados"
+    },
+    {
+      "col": "DO",
+      "index": 119,
+      "name": "Lances ofensivos / 90"
+    },
+    {
+      "col": "DP",
+      "index": 120,
+      "name": "Lances ofensivos conseguidos"
+    },
+    {
+      "col": "DQ",
+      "index": 121,
+      "name": "Lances ofensivos conseguidos / 90"
+    },
+    {
+      "col": "DR",
+      "index": 122,
+      "name": "Posse Perdida"
+    },
+    {
+      "col": "DS",
+      "index": 123,
+      "name": "Posse Perdida /90"
+    },
+    {
+      "col": "DT",
+      "index": 124,
+      "name": "Eficácia ofensiva"
+    },
+    {
+      "col": "DU",
+      "index": 125,
+      "name": "Ações que geraram finalizações ao gol"
+    },
+    {
+      "col": "DV",
+      "index": 126,
+      "name": "Ações que geraram finalizações ao gol /90"
+    },
+    {
+      "col": "DW",
+      "index": 127,
+      "name": "Participação do jogador a cada 90 minutos"
+    },
+    {
+      "col": "DX",
+      "index": 128,
+      "name": "Ações com Bola Tentadas"
+    },
+    {
+      "col": "DY",
+      "index": 129,
+      "name": "Ações com Bola T/90"
+    },
+    {
+      "col": "DZ",
+      "index": 130,
+      "name": "Ações com Bola (Completadas)"
+    },
+    {
+      "col": "EA",
+      "index": 131,
+      "name": "Ações com Bola Comp /90"
+    },
+    {
+      "col": "EB",
+      "index": 132,
+      "name": "% Sucesso de ações com bola"
+    },
+    {
+      "col": "EC",
+      "index": 133,
+      "name": "Ações no último terço "
+    },
+    {
+      "col": "ED",
+      "index": 134,
+      "name": "Ações no último terço / 90"
+    },
+    {
+      "col": "EE",
+      "index": 135,
+      "name": "Tentativas de marcar um gol (finalização e oportunidades criadas)"
+    },
+    {
+      "col": "EF",
+      "index": 136,
+      "name": "Tentativas de marcar um gol  /90"
+    },
+    {
+      "col": "EG",
+      "index": 137,
+      "name": "Posse Desperdiçada"
+    },
+    {
+      "col": "EH",
+      "index": 138,
+      "name": "Posse Desperdiçada /90"
+    },
+    {
+      "col": "EI",
+      "index": 139,
+      "name": "Posse perdida /90"
+    },
+    {
+      "col": "EJ",
+      "index": 140,
+      "name": "Nota média"
+    },
+    {
+      "col": "EK",
+      "index": 141,
+      "name": "Inf"
+    },
+    {
+      "col": "EL",
+      "index": 142,
+      "name": "Nação"
+    },
+    {
+      "col": "EM",
+      "index": 143,
+      "name": "Jogador"
+    },
+    {
+      "col": "EN",
+      "index": 144,
+      "name": "Idade"
+    },
+    {
+      "col": "EO",
+      "index": 145,
+      "name": "Clube"
+    },
+    {
+      "col": "EP",
+      "index": 146,
+      "name": "Altura"
+    },
+    {
+      "col": "EQ",
+      "index": 147,
+      "name": "Pé Preferido"
+    },
+    {
+      "col": "ER",
+      "index": 148,
+      "name": "Valor Estimado"
+    },
+    {
+      "col": "ES",
+      "index": 149,
+      "name": "Salário"
+    },
+    {
+      "col": "ET",
+      "index": 150,
+      "name": "Expira"
+    },
+    {
+      "col": "EU",
+      "index": 151,
+      "name": "Minutos"
+    },
+    {
+      "col": "EV",
+      "index": 152,
+      "name": "Presenças"
+    },
+    {
+      "col": "EW",
+      "index": 153,
+      "name": "HdJ"
+    },
+    {
+      "col": "EX",
+      "index": 154,
+      "name": "Golos"
+    },
+    {
+      "col": "EY",
+      "index": 155,
+      "name": "Assist."
+    },
+    {
+      "col": "EZ",
+      "index": 156,
+      "name": "OCG"
+    },
+    {
+      "col": "FA",
+      "index": 157,
+      "name": "Golos DS"
+    },
+    {
+      "col": "FB",
+      "index": 158,
+      "name": "Jogos DS"
+    },
+    {
+      "col": "FC",
+      "index": 159,
+      "name": "Poss Perd/90"
+    },
+    {
+      "col": "FD",
+      "index": 160,
+      "name": "xG"
+    },
+    {
+      "col": "FE",
+      "index": 161,
+      "name": "xA"
+    },
+    {
+      "col": "FF",
+      "index": 162,
+      "name": "Faltas Cometidas"
+    },
+    {
+      "col": "FG",
+      "index": 163,
+      "name": "Faltas Contra"
+    },
+    {
+      "col": "FH",
+      "index": 164,
+      "name": "Pas A"
+    },
+    {
+      "col": "FI",
+      "index": 165,
+      "name": "Ps C"
+    },
+    {
+      "col": "FJ",
+      "index": 166,
+      "name": "Passes Ch"
+    },
+    {
+      "col": "FK",
+      "index": 167,
+      "name": "PeP"
+    },
+    {
+      "col": "FL",
+      "index": 168,
+      "name": "Fnt"
+    },
+    {
+      "col": "FM",
+      "index": 169,
+      "name": "Remates"
+    },
+    {
+      "col": "FN",
+      "index": 170,
+      "name": "Rem %"
+    },
+    {
+      "col": "FO",
+      "index": 171,
+      "name": "Cab A"
+    },
+    {
+      "col": "FP",
+      "index": 172,
+      "name": "Cabs"
+    },
+    {
+      "col": "FQ",
+      "index": 173,
+      "name": "Press. tent."
+    },
+    {
+      "col": "FR",
+      "index": 174,
+      "name": "Press. conc."
+    },
+    {
+      "col": "FS",
+      "index": 175,
+      "name": "T Desa"
+    },
+    {
+      "col": "FT",
+      "index": 176,
+      "name": "Des C"
+    },
+    {
+      "col": "FU",
+      "index": 177,
+      "name": "Crt"
+    },
+    {
+      "col": "FV",
+      "index": 178,
+      "name": "CT-JA"
+    },
+    {
+      "col": "FW",
+      "index": 179,
+      "name": "CC-JA"
+    },
+    {
+      "col": "FX",
+      "index": 180,
+      "name": "Cr T"
+    },
+    {
+      "col": "FY",
+      "index": 181,
+      "name": "Cr C"
+    },
+    {
+      "col": "FZ",
+      "index": 182,
+      "name": "Golos marcados de fora da área"
+    },
+    {
+      "col": "GA",
+      "index": 183,
+      "name": "Remates de fora da área em cada 90 minutes"
+    },
+    {
+      "col": "GB",
+      "index": 184,
+      "name": "Remates em livres"
+    },
+    {
+      "col": "GC",
+      "index": 185,
+      "name": "Fj"
+    },
+    {
+      "col": "GD",
+      "index": 186,
+      "name": "Pens"
+    },
+    {
+      "col": "GE",
+      "index": 187,
+      "name": "Pens M"
+    },
+    {
+      "col": "GF",
+      "index": 188,
+      "name": "Sprints/90"
+    },
+    {
+      "col": "GG",
+      "index": 189,
+      "name": "Distância"
+    },
+    {
+      "col": "GH",
+      "index": 190,
+      "name": "Classificação"
+    }
+  ],
+  "formulas": {
+    "A": {
+      "name": "None",
+      "formula": "=ROW()-1 & \"º\""
+    },
+    "B": {
+      "name": "Jogador",
+      "formula": "=EM2"
+    },
+    "C": {
+      "name": "NAC",
+      "formula": "=EL2"
+    },
+    "D": {
+      "name": "Pé preferido",
+      "formula": "=EQ2"
+    },
+    "E": {
+      "name": "Equipe",
+      "formula": "=EO2"
+    },
+    "F": {
+      "name": "Altura",
+      "formula": "=IFERROR(SUBSTITUTE(EP2,\" cm\",\"\")/100,0)"
+    },
+    "G": {
+      "name": "Data Final do contrato",
+      "formula": "=IF(ET2=\"-\", \"Sem Data Final\", ET2)"
+    },
+    "H": {
+      "name": "Idade",
+      "formula": "=EN2"
+    },
+    "I": {
+      "name": "Salário",
+      "formula": "=ES2"
+    },
+    "J": {
+      "name": "Valor Estimado",
+      "formula": "=ER2"
+    },
+    "K": {
+      "name": "Média de jogos",
+      "formula": "=IFERROR(AVERAGE(L:L),0)"
+    },
+    "L": {
+      "name": "Jogos completos",
+      "formula": "=IFERROR(EU2/90,0)"
+    },
+    "M": {
+      "name": "Jogos Totais",
+      "formula": "=IFERROR(IF(ISERROR(FIND(\"(\",EV2)), VALUE(EV2), VALUE(LEFT(EV2,FIND(\"(\",EV2)-2)) + VALUE(MID(EV2,FIND(\"(\",EV2)+1,FIND(\")\",EV2)-FIND(\"(\",EV2)-1))),0)"
+    },
+    "N": {
+      "name": "Minutos por partida",
+      "formula": "=IFERROR(EU2/M2,0)"
+    },
+    "O": {
+      "name": "Jogos como Titular",
+      "formula": "=IFERROR(IF(ISERROR(FIND(\"(\",EV2)), \"100%\", TEXT(VALUE(LEFT(EV2,FIND(\"(\",EV2)-2)) / (VALUE(LEFT(EV2,FIND(\"(\",EV2)-2)) + VALUE(MID(EV2,FIND(\"(\",EV2)+1,FIND(\")\",EV2)-FIND(\"(\",EV2)-1))),\"0%\")),0)*1"
+    },
+    "P": {
+      "name": "Gols na carreira",
+      "formula": "=FA2"
+    },
+    "Q": {
+      "name": "Média de gols em toda a Carreira",
+      "formula": "=IFERROR(FA2/FB2,0)"
+    },
+    "R": {
+      "name": "Média gols / partida",
+      "formula": "=IFERROR(EX2/L2,0)"
+    },
+    "S": {
+      "name": "Média gols + ass / partida",
+      "formula": "=IFERROR((X2+Y2)/L2,0)"
+    },
+    "T": {
+      "name": "Ass / 90",
+      "formula": "=IFERROR((Y2)/L2,0)"
+    },
+    "U": {
+      "name": "Man of the match",
+      "formula": "=EW2"
+    },
+    "V": {
+      "name": "Minutos pra ser o homem do jogo",
+      "formula": "=IFERROR(EU2/U2,5000)"
+    },
+    "W": {
+      "name": "% de vezes que foi eleito o Homem do Jogo",
+      "formula": "=IFERROR(U2/L2,0)"
+    },
+    "X": {
+      "name": "Gols",
+      "formula": "=EX2"
+    },
+    "Y": {
+      "name": "Assist",
+      "formula": "=EY2"
+    },
+    "Z": {
+      "name": "Gols + Ass",
+      "formula": "=IFERROR(X2+Y2,0)"
+    },
+    "AA": {
+      "name": "Gols de dentro da área",
+      "formula": "=EX2-GD2-FZ2"
+    },
+    "AB": {
+      "name": "Gols de fora da área",
+      "formula": "=FZ2"
+    },
+    "AC": {
+      "name": "Gols de Penaltis",
+      "formula": "=AY2"
+    },
+    "AD": {
+      "name": "Gols Sem Pênalti",
+      "formula": "=IFERROR(EX2-GE2,0)"
+    },
+    "AE": {
+      "name": "% Gols (sem penalti)",
+      "formula": "=IFERROR((X2-AC2)/X2,0)"
+    },
+    "AF": {
+      "name": "% Ass",
+      "formula": "=IFERROR(Y2/Z2,0)"
+    },
+    "AG": {
+      "name": "% Pênaltis",
+      "formula": "=IFERROR((AY2*1)/Z2,0)"
+    },
+    "AH": {
+      "name": "Gols /90",
+      "formula": "=IFERROR(X2/L2,0)"
+    },
+    "AI": {
+      "name": "Assist /90",
+      "formula": "=IFERROR(Y2/L2,0)"
+    },
+    "AJ": {
+      "name": "Gols + Assist /90",
+      "formula": "=IFERROR((EX2+EY2)/L2,0)"
+    },
+    "AK": {
+      "name": "Gols Sem Pênalti /90",
+      "formula": "=IFERROR(AD2/L2,0)"
+    },
+    "AL": {
+      "name": "Gols de dentro da área",
+      "formula": "=IFERROR(EX2-FZ2-GD2,0)"
+    },
+    "AM": {
+      "name": "Gols de dentro da área /90",
+      "formula": "=IFERROR(AL2/L2,0)"
+    },
+    "AN": {
+      "name": "Gols de fora da área",
+      "formula": "=FZ2"
+    },
+    "AO": {
+      "name": "Gols de fora da área /90",
+      "formula": "=IFERROR(AN2/L2,0)"
+    },
+    "AP": {
+      "name": "Chutes de fora da área /90",
+      "formula": "=GA2"
+    },
+    "AQ": {
+      "name": "% Conclusão dos chutes de fora da área",
+      "formula": "=IFERROR((AO2*1)/AP2,0)"
+    },
+    "AR": {
+      "name": "Tentativas de  Criar  uma chance em Bola Parada",
+      "formula": "=FX2-FV2"
+    },
+    "AS": {
+      "name": "Tentativas/90",
+      "formula": "=AR2/L2"
+    },
+    "AT": {
+      "name": "Chances Criadas em  Bolas Paradas",
+      "formula": "=FY2-FW2"
+    },
+    "AU": {
+      "name": "Chances C /90",
+      "formula": "=AT2/L2"
+    },
+    "AV": {
+      "name": "% Aproveitamento das Tentativas de Criar chance em  BP",
+      "formula": "=IFERROR(AT2/AR2,)"
+    },
+    "AW": {
+      "name": "Cobranças de falta (Diretas)",
+      "formula": "=GB2"
+    },
+    "AX": {
+      "name": "Pênaltis batidos",
+      "formula": "=GD2"
+    },
+    "AY": {
+      "name": "Pênaltis marcados",
+      "formula": "=GE2"
+    },
+    "AZ": {
+      "name": "Pênaltis perdidos",
+      "formula": "=IFERROR(GD2-GE2,0)"
+    },
+    "BA": {
+      "name": "Gols de pen/90",
+      "formula": "=IFERROR(AY2/L2,0)"
+    },
+    "BB": {
+      "name": "% Conversão de pênalti",
+      "formula": "=IFERROR((AY2*1)/GD2,0.00001)"
+    },
+    "BC": {
+      "name": "Cabeceios disputados",
+      "formula": "=FO2"
+    },
+    "BD": {
+      "name": "Ganhos",
+      "formula": "=FP2"
+    },
+    "BE": {
+      "name": "Cabs Disputados /90",
+      "formula": "=IFERROR(BC2/L2,0)"
+    },
+    "BF": {
+      "name": "Ganhos /90",
+      "formula": "=IFERROR(BD2/L2,0)"
+    },
+    "BG": {
+      "name": "Perdidos",
+      "formula": "=IFERROR(FO2-FP2,0)"
+    },
+    "BH": {
+      "name": "% Cabs ganhos",
+      "formula": "=IFERROR((BD2*1)/BC2,0)"
+    },
+    "BI": {
+      "name": "% Cabs perdidos",
+      "formula": "=IFERROR(100%-BH2,0)"
+    },
+    "BJ": {
+      "name": "Impedimentos",
+      "formula": "=GC2"
+    },
+    "BK": {
+      "name": "Impedimentos / 90",
+      "formula": "=IFERROR(GC2/L2,0)"
+    },
+    "BL": {
+      "name": "Finalizações",
+      "formula": "=FM2"
+    },
+    "BM": {
+      "name": "Finalizações /90",
+      "formula": "=IFERROR(BL2/L2,0)"
+    },
+    "BN": {
+      "name": "Finalizações no Gol",
+      "formula": "=FN2"
+    },
+    "BO": {
+      "name": "Finalizações no gol/90",
+      "formula": "=IFERROR(BN2/L2,0)"
+    },
+    "BP": {
+      "name": "% Finalizações que foram no gol",
+      "formula": "=IFERROR((FN2*1)/FM2,0)"
+    },
+    "BQ": {
+      "name": "Finalizações pra um gol",
+      "formula": "=IFERROR((FM2-GD2)/(EX2-GE2),0)"
+    },
+    "BR": {
+      "name": "Finalizações certas pra um gol",
+      "formula": "=IFERROR((FN2-GD2)/(EX2-GE2),0)"
+    },
+    "BS": {
+      "name": "Finalização ou Cabeceio pra um gol",
+      "formula": "=IFERROR((FM2+FO2-GD2)/(EX2-GE2),0)"
+    },
+    "BT": {
+      "name": "Finalizações que se converteram em gols",
+      "formula": "=IFERROR((EX2-GE2)/(FM2-GD2),0)"
+    },
+    "BU": {
+      "name": "GPI (Goal Probability Index)",
+      "formula": "=IFERROR(((X2-AY2)/CH2)*(AD2/L2),0)"
+    },
+    "BV": {
+      "name": "xG / Jogo",
+      "formula": "=IFERROR(CF2/(L2),0)"
+    },
+    "BW": {
+      "name": "Gols convertidos /90",
+      "formula": "=IFERROR(EX2/L2,0)"
+    },
+    "BX": {
+      "name": "Over xG / Under xG per 90",
+      "formula": "=IFERROR(BW2-BV2,0)"
+    },
+    "BY": {
+      "name": "xG / chute",
+      "formula": "=IFERROR(CH2/(FM2-GD2),0)"
+    },
+    "BZ": {
+      "name": "Minutos pra tentar uma finalização",
+      "formula": "=IFERROR(EU2/FM2,0)"
+    },
+    "CA": {
+      "name": "Minutos pra acertar uma finalização no gol",
+      "formula": "=IFERROR(EU2/FN2,0)"
+    },
+    "CB": {
+      "name": "Minutos pra MARCAR um gol",
+      "formula": "=IFERROR(EU2/EX2,L2*90)"
+    },
+    "CC": {
+      "name": "Minutos pra PARTICIPAR de um gol",
+      "formula": "=IFERROR(EU2/Z2,300)"
+    },
+    "CD": {
+      "name": "Gols não esperados",
+      "formula": "=IFERROR(EX2-CF2,0)"
+    },
+    "CE": {
+      "name": "Gols não esperados SEM PÊNALTI",
+      "formula": "=IFERROR((EX2-GE2)-CH2,0)"
+    },
+    "CF": {
+      "name": "Gols esperados (xG)",
+      "formula": "=SUBSTITUTE(FD2,\".\",\",\" )*1"
+    },
+    "CG": {
+      "name": "xG /90",
+      "formula": "=IFERROR(CF2/L2,0)"
+    },
+    "CH": {
+      "name": "xG (Sem pênaltis)",
+      "formula": "=IFERROR(CF2-(GD2*0.79),0)"
+    },
+    "CI": {
+      "name": "xG (Sem pênaltis) /90",
+      "formula": "=IFERROR((CH2/L2),0)"
+    },
+    "CJ": {
+      "name": "Assistências Esperadas (xA)",
+      "formula": "=SUBSTITUTE(FE2,\".\",\",\" )*1"
+    },
+    "CK": {
+      "name": "xA /90",
+      "formula": "=IFERROR(CJ2/L2,0)"
+    },
+    "CL": {
+      "name": "xA + xG sem pen",
+      "formula": "=IFERROR(CJ2+CH2,0)"
+    },
+    "CM": {
+      "name": "xA + xG /90",
+      "formula": "=IFERROR(CL2/L2,0)"
+    },
+    "CN": {
+      "name": "xG Conclusion",
+      "formula": "=EX2/(EX2+CF2)"
+    },
+    "CO": {
+      "name": "Passes Decisivos",
+      "formula": "=FJ2"
+    },
+    "CP": {
+      "name": "Pass D /90",
+      "formula": "=IFERROR(CO2/L2,0)"
+    },
+    "CQ": {
+      "name": "xA (assistências esperadas)",
+      "formula": "=CJ2"
+    },
+    "CR": {
+      "name": "Chances criadas e não aproveitadas pela equipe / 90",
+      "formula": "=IFERROR(CJ2-EY2,0)"
+    },
+    "CS": {
+      "name": "Cruzamentos Tentados",
+      "formula": "=FV2"
+    },
+    "CT": {
+      "name": "Cruzamentos T /90",
+      "formula": "=CS2/L2"
+    },
+    "CU": {
+      "name": "Cruzamentos Conseguidos",
+      "formula": "=FW2"
+    },
+    "CV": {
+      "name": "Cruzamentos C/90",
+      "formula": "=CU2/L2"
+    },
+    "CW": {
+      "name": "Cruzamentos",
+      "formula": "=IFERROR(CU2/CS2,0)"
+    },
+    "CX": {
+      "name": "Fintas",
+      "formula": "=FL2"
+    },
+    "CY": {
+      "name": "Fintas/90",
+      "formula": "=IFERROR(FL2/L2,0)"
+    },
+    "CZ": {
+      "name": "Velocidade Média (em km/h)",
+      "formula": "=IFERROR((((DJ2*1000)/(EU2*60))*3600)/1000,0)"
+    },
+    "DA": {
+      "name": "Desarme + Pressões Tentadas",
+      "formula": "=FQ2+FS2+FF2"
+    },
+    "DB": {
+      "name": "Des + Pres T /90",
+      "formula": "=IFERROR(DA2/L2,0)"
+    },
+    "DC": {
+      "name": "Desarme + Pressões Concluídas",
+      "formula": "=IFERROR(FT2+FR2,0)"
+    },
+    "DD": {
+      "name": "Des + Pres C /90",
+      "formula": "=IFERROR(DC2/L2,0)"
+    },
+    "DE": {
+      "name": "% Des + Pressões concluídas",
+      "formula": "=IFERROR((DC2*1)/DA2,)"
+    },
+    "DF": {
+      "name": "Interceptações",
+      "formula": "=FU2"
+    },
+    "DG": {
+      "name": "Int/90",
+      "formula": "=IFERROR(DF2/L2,0)"
+    },
+    "DH": {
+      "name": "Faltas Sofridas",
+      "formula": "=FG2"
+    },
+    "DI": {
+      "name": "Faltas Sof/90",
+      "formula": "=IFERROR(DH2/L2,0)"
+    },
+    "DJ": {
+      "name": "Distância",
+      "formula": "=VALUE(SUBSTITUTE(GG2, \" km\", \"\"))"
+    },
+    "DK": {
+      "name": "Dist / 90",
+      "formula": "=IFERROR(DJ2/L2,0)"
+    },
+    "DL": {
+      "name": "Sprints de alta intensidade",
+      "formula": "=IFERROR((GF2*L2),0)"
+    },
+    "DM": {
+      "name": "Sprints de alta intensidade/90",
+      "formula": "=GF2"
+    },
+    "DN": {
+      "name": "Lances ofensivos tentados",
+      "formula": "=(FO2+FM2+GC2+FF2+FG2+FL2+FJ2+GD2+CF2)"
+    },
+    "DO": {
+      "name": "Lances ofensivos / 90",
+      "formula": "=IFERROR(DN2/L2,0)"
+    },
+    "DP": {
+      "name": "Lances ofensivos conseguidos",
+      "formula": "=(FN2+FG2+FL2+FJ2+GE2+EX2+EY2)"
+    },
+    "DQ": {
+      "name": "Lances ofensivos conseguidos / 90",
+      "formula": "=IFERROR(DP2/L2,0)"
+    },
+    "DR": {
+      "name": "Posse Perdida",
+      "formula": "=DS2*L2"
+    },
+    "DS": {
+      "name": "Posse Perdida /90",
+      "formula": "=FC2"
+    },
+    "DT": {
+      "name": "Eficácia ofensiva",
+      "formula": "=IFERROR(DP2/DN2,0)"
+    },
+    "DU": {
+      "name": "Ações que geraram finalizações ao gol",
+      "formula": "=IFERROR(FN2+CJ2+EZ2+FJ2+FZ2+FW2+(EX2*0.5)+(EY2*0.5),0)"
+    },
+    "DV": {
+      "name": "Ações que geraram finalizações ao gol /90",
+      "formula": "=IFERROR(DU2/L2,0)"
+    },
+    "DW": {
+      "name": "Participação do jogador a cada 90 minutos",
+      "formula": "=IFERROR((GD2+FO2+FM2+FL2+FH2+FT2)/L2,0)"
+    },
+    "DX": {
+      "name": "Ações com Bola Tentadas",
+      "formula": "=IFERROR(FV2+FM2+FL2+FJ2,0)"
+    },
+    "DY": {
+      "name": "Ações com Bola T/90",
+      "formula": "=DX2/L2"
+    },
+    "DZ": {
+      "name": "Ações com Bola (Completadas)",
+      "formula": "=IFERROR(FW2+FN2+FL2+FJ2,0)"
+    },
+    "EA": {
+      "name": "Ações com Bola Comp /90",
+      "formula": "=IFERROR(DZ2/L2,0)"
+    },
+    "EB": {
+      "name": "% Sucesso de ações com bola",
+      "formula": "=IFERROR(DZ2/DX2,0)"
+    },
+    "EC": {
+      "name": "Ações no último terço ",
+      "formula": "=IFERROR((FL2+FM2+(EZ2-GD2)+FJ2+DA2+FW2),0)"
+    },
+    "ED": {
+      "name": "Ações no último terço / 90",
+      "formula": "=IFERROR(EC2/L2,0)"
+    },
+    "EE": {
+      "name": "Tentativas de marcar um gol (finalização e oportunidades criadas)",
+      "formula": "=IFERROR((FM2+EZ2+FJ2),0)"
+    },
+    "EF": {
+      "name": "Tentativas de marcar um gol  /90",
+      "formula": "=IFERROR(EE2/L2,0)"
+    },
+    "EG": {
+      "name": "Posse Desperdiçada",
+      "formula": "=IFERROR((FM2-FN2)+(FH2-FI2),0)"
+    },
+    "EH": {
+      "name": "Posse Desperdiçada /90",
+      "formula": "=IFERROR(EG2/L2,0)"
+    },
+    "EI": {
+      "name": "Posse perdida /90",
+      "formula": "=FC2"
+    },
+    "EJ": {
+      "name": "Nota média",
+      "formula": "=IFERROR(VALUE(SUBSTITUTE(GH2, \".\", \",\")),0)"
+    }
+  },
+  "cf_rules": {
+    "<ConditionalFormatting BF1:BF1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BC1:BE1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DA1:DD1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DB1:DD1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DA1:DA1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DH1:DH1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CE1:CE1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AE1:AE1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DW1:DW1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BD1:BE1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DV2:DV1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AG1:AG1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BE1:BE1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BD1:BD1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting ED1:EE1>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting ED1:EE1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BY1:BY1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CD1:CD1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DG1:DG1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BC1:BC1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BB1:BB1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AL1:AM1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AL1:AL1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AM1:AM1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AF1:AF1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BV1:BV1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BW1:BX1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BW1:BW1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BX1:BX1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CF2:CH1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CI2:CI1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CF2:CF1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CG2:CG1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CH2:CH1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CJ2:CJ1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CK1:CK1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CF1:CF1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CG1:CG1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CH1:CH1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CI1:CI1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CJ1:CJ1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CL1:CL1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting EF1>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting EC1>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting EC1:EC1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting ED1:ED1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting EE1>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting EE1:EE1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DC1>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DB1:DB1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DC1:DC1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DD1:DD1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DU2:DU1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DE1:DE1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting F1:F1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CQ1:CQ1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DU1:DV1>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DU1>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DV1>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BH1:BH1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BI1:BI1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BG1:BG1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting EF1:EF1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting EI1:EI1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting EG1:EG1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting EH1:EH1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DI1:DI1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DJ1:DJ1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "iconSet",
+        "iconSet": true
+      }
+    ],
+    "<ConditionalFormatting X1:X1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting Y1:Y1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting Z1:Z1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AD1:AD1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting U1:U1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting V1:V1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting W1:W1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting N1:N1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting O1:O1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting P1:P1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting Q1:Q1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting R1:R1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting S1:S1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting T1:T1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AN1:AN1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AO1:AO1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AP1:AP1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AQ1>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AQ1:AQ1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting I1:I1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting L1:L1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting M1:M1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting J1:J1048576>": [
+      {
+        "type": "containsText"
+      },
+      {
+        "type": "containsText"
+      }
+    ],
+    "<ConditionalFormatting CZ1:CZ1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "iconSet",
+        "iconSet": true
+      }
+    ],
+    "<ConditionalFormatting DK1:DK1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BQ1:BQ1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BO1:BO1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BP1:BP1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting EJ1:EJ1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DN1:DN1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DO1:DO1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DP1:DP1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DQ1:DQ1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DR1:DR1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DS1:DS1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DT1:DT1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CM1:CM1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CO1:CO1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CP1:CP1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BS1:BS1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BT1:BT1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BU1:BU1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BR1:BR1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BL1:BL1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BM1:BM1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BN1:BN1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CB1:CB1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CC1:CC1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CR1:CR1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CS1:CS1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CT1:CT1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CU1:CU1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CV1:CV1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CW1:CW1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DX1:DX1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DY1:DY1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "iconSet",
+        "iconSet": true
+      }
+    ],
+    "<ConditionalFormatting DZ1:DZ1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "iconSet",
+        "iconSet": true
+      }
+    ],
+    "<ConditionalFormatting EA1:EA1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "iconSet",
+        "iconSet": true
+      }
+    ],
+    "<ConditionalFormatting EB1:EB1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "iconSet",
+        "iconSet": true
+      }
+    ],
+    "<ConditionalFormatting CN1:CN1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AH1:AH1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AI1:AI1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AJ1:AJ1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AK1:AK1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting BZ1:BZ1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CA1:CA1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting AX1:AX1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting AY1:AY1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting AZ1:AZ1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting BA1:BA1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting AT1:AT1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting AR1:AR1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting AV1:AV1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting AW1:AW1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting AS1:AS1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting AU1:AU1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting BJ1:BJ1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting BK1:BK1048576>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      },
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting DL1:DL1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting DM1:DM1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting CX1:CX1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting CY1:CY1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting AA1:AA1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting AB1:AB1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting AC1:AC1048576>": [
+      {
+        "type": "dataBar",
+        "dataBar": true
+      }
+    ],
+    "<ConditionalFormatting DE1:DF1 DE2:DE130 DE131:DF1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DH1 DH131:DH1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DU131:DU1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DF1 DF131:DF1048576>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DC2:DC130>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DD2:DD130>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting G2:G130>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting H2:H130>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DH2:DH130>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DV2:DV130>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting CF2:CH130>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DG2:DG130>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DU2:DU130>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      },
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting DF2:DF130>": [
+      {
+        "type": "colorScale",
+        "colorScale": true
+      }
+    ],
+    "<ConditionalFormatting W2:W130>": [
+      {
+        "type": "iconSet",
+        "iconSet": true
+      }
+    ]
+  }
+}

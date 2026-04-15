@@ -1,0 +1,5774 @@
+{
+  "🧤Goleiros": [
+    {
+      "Header": "Jogador",
+      "Formula/Value": "=CP5"
+    },
+    {
+      "Header": "NAC",
+      "Formula/Value": "=CM5"
+    },
+    {
+      "Header": "Pé preferido",
+      "Formula/Value": "=CR5"
+    },
+    {
+      "Header": "Equipe",
+      "Formula/Value": "=CN5"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "=CO5"
+    },
+    {
+      "Header": "Valor estimado",
+      "Formula/Value": "=CQ5"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(CT5,\" cm\",\"\")/100,0)"
+    },
+    {
+      "Header": "Data final de contrato",
+      "Formula/Value": "=IF(CU5=\"-\", \"Sem Data Final\", CU5)"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "=IFERROR(CS5,0)"
+    },
+    {
+      "Header": "Média de jogos",
+      "Formula/Value": "=IFERROR(AVERAGE(L:L),0)"
+    },
+    {
+      "Header": "Jogos completos",
+      "Formula/Value": "=IFERROR(CW5/90,0)"
+    },
+    {
+      "Header": "Man of the match",
+      "Formula/Value": "=CV5"
+    },
+    {
+      "Header": "Minutos pra ser o homem do jogo",
+      "Formula/Value": "=IFERROR((CW5/M5),5400)"
+    },
+    {
+      "Header": "% de vezes que foi eleito o Homem do Jogo",
+      "Formula/Value": "=IFERROR((M5*1)/L5,0)"
+    },
+    {
+      "Header": "Passes Tentados",
+      "Formula/Value": "=DL5"
+    },
+    {
+      "Header": "Passes completados",
+      "Formula/Value": "=DM5"
+    },
+    {
+      "Header": "Passes C / 90",
+      "Formula/Value": "=IFERROR((Q5/L5),0)"
+    },
+    {
+      "Header": "Passes errados",
+      "Formula/Value": "=IFERROR(P5-Q5,0)"
+    },
+    {
+      "Header": "Passes certos - errados",
+      "Formula/Value": "=IFERROR(Q5-S5,0)"
+    },
+    {
+      "Header": "% passes errados",
+      "Formula/Value": "=IFERROR(((P5-Q5)*1)/P5,0)"
+    },
+    {
+      "Header": "% Passes certos",
+      "Formula/Value": "=IFERROR((Q5*1)/P5,0)"
+    },
+    {
+      "Header": "Passes Curtos",
+      "Formula/Value": "=DL5-DJ5"
+    },
+    {
+      "Header": "Passes Curtos /90",
+      "Formula/Value": "=IFERROR(W5/L5,0)"
+    },
+    {
+      "Header": "Passes em progressão",
+      "Formula/Value": "=DJ5"
+    },
+    {
+      "Header": "Pass Progr /90",
+      "Formula/Value": "=Y5/L5"
+    },
+    {
+      "Header": "% Passes em progressão",
+      "Formula/Value": "=IFERROR(Y5/W5,0)"
+    },
+    {
+      "Header": "Passes Decisivos",
+      "Formula/Value": "=DK5"
+    },
+    {
+      "Header": "Pass D/90",
+      "Formula/Value": "=AB5/L5"
+    },
+    {
+      "Header": "Defesas Seguras",
+      "Formula/Value": "=CY5"
+    },
+    {
+      "Header": "Defesas Seguras /90",
+      "Formula/Value": "=IFERROR(AD5/L5,0)"
+    },
+    {
+      "Header": "% Def Seguras",
+      "Formula/Value": "=IFERROR((AD5*1)/AP5,0)"
+    },
+    {
+      "Header": "Defesas Com a Ponta dos Dedos",
+      "Formula/Value": "=CZ5"
+    },
+    {
+      "Header": "Defesas com a ponta dos dedos /90",
+      "Formula/Value": "=IFERROR(AG5/L5,0)"
+    },
+    {
+      "Header": "% Def com a ponta dos dedos",
+      "Formula/Value": "=IFERROR((AG5*1)/AP5,0)"
+    },
+    {
+      "Header": "Defesas Desviadas",
+      "Formula/Value": "=DA5"
+    },
+    {
+      "Header": "Defesas Desviadas /90",
+      "Formula/Value": "=IFERROR(AJ5/R5,0)"
+    },
+    {
+      "Header": "% Def Desviadas",
+      "Formula/Value": "=IFERROR((AJ5*1)/AP5,0)"
+    },
+    {
+      "Header": "% de jogos sem sofrer gol",
+      "Formula/Value": "=IFERROR((AN5*1)/L5,0)"
+    },
+    {
+      "Header": "Clean Sheet",
+      "Formula/Value": "=DE5"
+    },
+    {
+      "Header": "Clean Sheets/90",
+      "Formula/Value": "=IFERROR(AN5/L5,0)"
+    },
+    {
+      "Header": "Defesas totais",
+      "Formula/Value": "=IFERROR(CY5+CZ5+DA5,0)"
+    },
+    {
+      "Header": "Defesas totais / Jogo",
+      "Formula/Value": "=IFERROR(AP5/L5,0)"
+    },
+    {
+      "Header": "Bolas enfrentadas",
+      "Formula/Value": "=IFERROR((CZ5+DA5+CY5+CX5),0)"
+    },
+    {
+      "Header": "Bolas enf /90",
+      "Formula/Value": "=IFERROR(AR5/L5,0)"
+    },
+    {
+      "Header": "Proporção de Defesas vs Chutes",
+      "Formula/Value": "=IFERROR(AP5/AR5,0)"
+    },
+    {
+      "Header": "% Def Dificeis",
+      "Formula/Value": "=IFERROR(((CZ5+DA5+BI5)*1)/(AR5-CY5),0)"
+    },
+    {
+      "Header": "Chances de Sofrer um gol/90",
+      "Formula/Value": "=IFERROR((BN5*1)/AS5,1)"
+    },
+    {
+      "Header": "Índice de Defesas Críticas",
+      "Formula/Value": "=IFERROR((AG5*2+AJ5*1.5+AD5*1)/AR5,0)"
+    },
+    {
+      "Header": "Minutos pra sofrer um gol",
+      "Formula/Value": "=IFERROR(CW5/CX5,0)"
+    },
+    {
+      "Header": "Bolas enfrentadas pra sofrer um gol",
+      "Formula/Value": "=IFERROR((CX5+CY5+CZ5+DA5)/CX5,0)"
+    },
+    {
+      "Header": "Bolas dificeis enfrentadas pra sofrer 1 gol",
+      "Formula/Value": "=IFERROR((CX5+CZ5+DA5)/CX5,0)"
+    },
+    {
+      "Header": "xG Defendidos",
+      "Formula/Value": "=IF(DN5=\"-\",\"Sem Dados\",VALUE(SUBSTITUTE(DN5,\".\",\",\"))\n)"
+    },
+    {
+      "Header": "xG defendidos / 90",
+      "Formula/Value": "=IFERROR(BA5/L5,0)"
+    },
+    {
+      "Header": "xG Defendidos sem pênalti",
+      "Formula/Value": "=IFERROR(BA5-(BI5*0.79),-100)"
+    },
+    {
+      "Header": "xG Defendidos sem pênalti /90",
+      "Formula/Value": "=IFERROR(BC5/L5,0)"
+    },
+    {
+      "Header": "xPG Ratio",
+      "Formula/Value": "=IFERROR(BB5/AO5,BB5)"
+    },
+    {
+      "Header": "Expected Goals Prevented xGP",
+      "Formula/Value": "=IFERROR(BA5/(BA5+CX5),0)"
+    },
+    {
+      "Header": "Pênaltis enfrentados",
+      "Formula/Value": "=DT5"
+    },
+    {
+      "Header": "Pen Enf/90",
+      "Formula/Value": "=BG5/L5"
+    },
+    {
+      "Header": "Pênaltis Defendidos",
+      "Formula/Value": "=DU5"
+    },
+    {
+      "Header": "Pen Def/90",
+      "Formula/Value": "=BI5/L5"
+    },
+    {
+      "Header": "% Pênaltis defendidos",
+      "Formula/Value": "=IFERROR((DU5*1)/DT5,-0.000000000001)"
+    },
+    {
+      "Header": "% Gols Sofridos comparado aos outros goleiros",
+      "Formula/Value": "=IFERROR((CX5*1)/SUM(CX:CX),0)"
+    },
+    {
+      "Header": "Gols Sofridos",
+      "Formula/Value": "=CX5"
+    },
+    {
+      "Header": "Sofridos / jogo",
+      "Formula/Value": "=IFERROR(BM5/L5,0)"
+    },
+    {
+      "Header": "Falhas",
+      "Formula/Value": "=DP5"
+    },
+    {
+      "Header": "Falhas/90",
+      "Formula/Value": "=IFERROR(BO5/L5,0)"
+    },
+    {
+      "Header": "Posse Ganha Total",
+      "Formula/Value": "=IFERROR(BR5*L5,0)"
+    },
+    {
+      "Header": "Posse Ganha /90",
+      "Formula/Value": "=DC5"
+    },
+    {
+      "Header": "Posse Perdida Total",
+      "Formula/Value": "=IFERROR(BT5*L5,0)"
+    },
+    {
+      "Header": "Posse Perdida /90",
+      "Formula/Value": "=DD5"
+    },
+    {
+      "Header": "Tentativas de Saída do gol pra 1v1",
+      "Formula/Value": "=IFERROR((DB5+DQ5+(DS5*2.5)+DF5+DP5),0)"
+    },
+    {
+      "Header": "Tentativas de saída do gol /90",
+      "Formula/Value": "=IFERROR(BU5/L5,0)"
+    },
+    {
+      "Header": "Saídas do gol com sucesso",
+      "Formula/Value": "=IFERROR((DO5+DR5+(DS5*2.5)),0)"
+    },
+    {
+      "Header": "Saídas do gol com sucesso /90",
+      "Formula/Value": "=IFERROR(BW5/L5,0)"
+    },
+    {
+      "Header": "Saídas do gol falhas",
+      "Formula/Value": "=IFERROR((DB5-DO5)+(DQ5-DR5)+(DS5*2.5)+(DF5),0)"
+    },
+    {
+      "Header": "Saídas do gol falhas /90",
+      "Formula/Value": "=IFERROR(BY5/L5,0)"
+    },
+    {
+      "Header": "% De Acerto nas Saídas do gol",
+      "Formula/Value": "=IFERROR((BW5*1)/BU5,0)"
+    },
+    {
+      "Header": "Cartões Amarelos",
+      "Formula/Value": "=DF5"
+    },
+    {
+      "Header": "Cartões Vermelhos",
+      "Formula/Value": "=DG5"
+    },
+    {
+      "Header": "Total cartões",
+      "Formula/Value": "=IFERROR(CB5+CC5,0)"
+    },
+    {
+      "Header": "Faltas Sofridas",
+      "Formula/Value": "=DI5"
+    },
+    {
+      "Header": "Faltas cometidas",
+      "Formula/Value": "=DH5"
+    },
+    {
+      "Header": "Ações tentadas",
+      "Formula/Value": "=IFERROR(CY5+CX5+CZ5+DA5+DT5+DL5+DF5+(DD5*1.33)+(DE5*2)+(DP5*2.5)+DQ5+DB5,0)"
+    },
+    {
+      "Header": "Ações com sucesso",
+      "Formula/Value": "=IFERROR(CY5+CZ5+DA5+DU5+DM5+DR5+DO5,0)"
+    },
+    {
+      "Header": "% Acerto do goleiro",
+      "Formula/Value": "=IFERROR((CH5*1)/CG5,0)"
+    },
+    {
+      "Header": "Soma de todas as bolas enfrentadas",
+      "Formula/Value": "=SUM(AR:AR)"
+    },
+    {
+      "Header": "Nota média",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(DV5, \".\", \",\")),0)"
+    },
+    {
+      "Header": "Inf",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Nação",
+      "Formula/Value": "IDN"
+    },
+    {
+      "Header": "Clube",
+      "Formula/Value": "Cremonese"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "29"
+    },
+    {
+      "Header": "Jogador",
+      "Formula/Value": "Emil Audero"
+    },
+    {
+      "Header": "Valor Estimado",
+      "Formula/Value": "140m € - 1,4M €"
+    },
+    {
+      "Header": "Pé Preferido",
+      "Formula/Value": "Pé Direito"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "140m € p/m"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "192 cm"
+    },
+    {
+      "Header": "Expira",
+      "Formula/Value": "2028-06-30 00:00:00"
+    },
+    {
+      "Header": "HdJ",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Minutos",
+      "Formula/Value": "2070"
+    },
+    {
+      "Header": "Golos Sofridos",
+      "Formula/Value": "25"
+    },
+    {
+      "Header": "Ds",
+      "Formula/Value": "26"
+    },
+    {
+      "Header": "Dft",
+      "Formula/Value": "14"
+    },
+    {
+      "Header": "Dfa",
+      "Formula/Value": "48"
+    },
+    {
+      "Header": "Press. tent.",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Poss Con/90",
+      "Formula/Value": "2.4"
+    },
+    {
+      "Header": "Poss Perd/90",
+      "Formula/Value": "12.6"
+    },
+    {
+      "Header": "Sem golos sofridos",
+      "Formula/Value": "8"
+    },
+    {
+      "Header": "Amr",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Cartões vermelhos",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Faltas Cometidas",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Faltas Contra",
+      "Formula/Value": "14"
+    },
+    {
+      "Header": "PeP",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Passes Ch",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pas A",
+      "Formula/Value": "549"
+    },
+    {
+      "Header": "Ps C",
+      "Formula/Value": "451"
+    },
+    {
+      "Header": "xGD",
+      "Formula/Value": "5"
+    },
+    {
+      "Header": "Press. conc.",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "EPG",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "T Desa",
+      "Formula/Value": "3"
+    },
+    {
+      "Header": "Des C",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Crt D",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pen. Enfrentados",
+      "Formula/Value": "3"
+    },
+    {
+      "Header": "Pen. Defendidos",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Classificação",
+      "Formula/Value": "6.77"
+    }
+  ],
+  "🧱Zagueiros": [
+    {
+      "Header": "Jogador",
+      "Formula/Value": "=EA5"
+    },
+    {
+      "Header": "NAC",
+      "Formula/Value": "=EF5"
+    },
+    {
+      "Header": "Pé preferido",
+      "Formula/Value": "=EG5"
+    },
+    {
+      "Header": "Equipe",
+      "Formula/Value": "=EI5"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(EB5,\" cm\",\"\")/100,0)"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "=EC5"
+    },
+    {
+      "Header": "Valor",
+      "Formula/Value": "=ED5"
+    },
+    {
+      "Header": "Data final de contrato",
+      "Formula/Value": "=IF(EH5=\"-\", \"Sem Data Final\", EH5)"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "=EE5"
+    },
+    {
+      "Header": "Média de jogos",
+      "Formula/Value": "=AVERAGE(L:L)"
+    },
+    {
+      "Header": "Jogos completos",
+      "Formula/Value": "=IFERROR(EJ5/90,0)"
+    },
+    {
+      "Header": "Jogos Totais",
+      "Formula/Value": "=IFERROR(IF(ISERROR(FIND(\"(\",EK5)), VALUE(EK5), VALUE(LEFT(EK5,FIND(\"(\",EK5)-2)) + VALUE(MID(EK5,FIND(\"(\",EK5)+1,FIND(\")\",EK5)-FIND(\"(\",EK5)-1))),0)"
+    },
+    {
+      "Header": "Minutos por partida",
+      "Formula/Value": "=IFERROR(EJ5/M5,0)"
+    },
+    {
+      "Header": "Jogos como Titular",
+      "Formula/Value": "=IFERROR(IF(ISERROR(FIND(\"(\",EK5)), \"100%\", TEXT(VALUE(LEFT(EK5,FIND(\"(\",EK5)-2)) / (VALUE(LEFT(EK5,FIND(\"(\",EK5)-2)) + VALUE(MID(EK5,FIND(\"(\",EK5)+1,FIND(\")\",EK5)-FIND(\"(\",EK5)-1))),\"0%\")),0)*1"
+    },
+    {
+      "Header": "Gols",
+      "Formula/Value": "=EN5"
+    },
+    {
+      "Header": "Assist",
+      "Formula/Value": "=EO5"
+    },
+    {
+      "Header": "Gols+Ast",
+      "Formula/Value": "=IFERROR(EN5+EO5,0)"
+    },
+    {
+      "Header": "Gols / 90",
+      "Formula/Value": "=IFERROR((P5/L5),0)"
+    },
+    {
+      "Header": "Gols + Ast/90",
+      "Formula/Value": "=IFERROR(R5/L5,0)"
+    },
+    {
+      "Header": "Man of the match",
+      "Formula/Value": "=IFERROR(EL5,0)"
+    },
+    {
+      "Header": "Minutos pra ser o homem do jogo",
+      "Formula/Value": "=IFERROR((EJ5/EL5),5400)"
+    },
+    {
+      "Header": "% de vezes que foi eleito o Homem do Jogo",
+      "Formula/Value": "=IFERROR((U5*1)/L5,0)"
+    },
+    {
+      "Header": "Pênaltis batidos",
+      "Formula/Value": "=FO5"
+    },
+    {
+      "Header": "Pênaltis marcados",
+      "Formula/Value": "=FP5"
+    },
+    {
+      "Header": "Pênaltis perdidos",
+      "Formula/Value": "=IFERROR(FO5-FP5,0)"
+    },
+    {
+      "Header": "% Conversão de pênalti",
+      "Formula/Value": "=IFERROR((Y5*1)/X5,0.0000001)"
+    },
+    {
+      "Header": "Erros que geraram gol adversário",
+      "Formula/Value": "=EM5"
+    },
+    {
+      "Header": "Erros que originaram gols /90",
+      "Formula/Value": "=IFERROR(AB5/L5,0)"
+    },
+    {
+      "Header": "Cabeceios Tentados (Total)",
+      "Formula/Value": "=EU5"
+    },
+    {
+      "Header": "Cabeceios Tentados /90",
+      "Formula/Value": "=IFERROR(AD5/L5,0)"
+    },
+    {
+      "Header": "Cabeceios Ganhos (Total)",
+      "Formula/Value": "=IFERROR(ET5,0)"
+    },
+    {
+      "Header": "Cabeceios Ganhos /90",
+      "Formula/Value": "=IFERROR(AF5/L5,0)"
+    },
+    {
+      "Header": "% Cabeceios Ganhos",
+      "Formula/Value": "=IFERROR((AF5*1)/AD5,0)"
+    },
+    {
+      "Header": "Cabeceios Perdidos",
+      "Formula/Value": "=IFERROR(AD5-AF5,0)"
+    },
+    {
+      "Header": "Cabeceios Perdidos /90",
+      "Formula/Value": "=IFERROR(AI5/L5,0)"
+    },
+    {
+      "Header": "% Cabeceios perdidos",
+      "Formula/Value": "=IFERROR((AI5*1)/AD5,0)"
+    },
+    {
+      "Header": "Cabeceios que evitaram jogada ofensiva",
+      "Formula/Value": "=IFERROR((AM5*L5),0)"
+    },
+    {
+      "Header": "Cabs que evitaram jogada ofensiva /90",
+      "Formula/Value": "=IFERROR(EV5,0)"
+    },
+    {
+      "Header": "% dos cabeceios que são ofensivos",
+      "Formula/Value": "=FM5/EU5"
+    },
+    {
+      "Header": "Cabeceios Ofensivos (Tentados)",
+      "Formula/Value": "=IFERROR(FM5-FO5,0)"
+    },
+    {
+      "Header": "Cabeceios ofensivos T /90",
+      "Formula/Value": "=AO5/L5"
+    },
+    {
+      "Header": "Cabeceios Ofensivos que foram no gol",
+      "Formula/Value": "=IFERROR(FN5-FO5,0)"
+    },
+    {
+      "Header": "Cabs Of. que foram no gol /90",
+      "Formula/Value": "=IFERROR(AQ5/L5,0)"
+    },
+    {
+      "Header": "% Cabeceios que foram em direção ao gol",
+      "Formula/Value": "=IFERROR(AQ5/AO5,0)"
+    },
+    {
+      "Header": "xG por Remate ou Cabeceio",
+      "Formula/Value": "=VALUE(SUBSTITUTE(FQ5,\".\",\",\"))/FM5"
+    },
+    {
+      "Header": "xG Esperados SEM PÊNALTI",
+      "Formula/Value": "=SUBSTITUTE(FQ5,\".\",\",\")*1"
+    },
+    {
+      "Header": "Gols não esperados SEM PÊNALTI",
+      "Formula/Value": "=(EN5-FP5)-VALUE(SUBSTITUTE(FQ5,\".\",\",\"))"
+    },
+    {
+      "Header": "Interceptações feitas",
+      "Formula/Value": "=IFERROR(FC5+EY5+EZ5,0)"
+    },
+    {
+      "Header": "Interceptações /90",
+      "Formula/Value": "=IFERROR(AW5/L5,0)"
+    },
+    {
+      "Header": "Remates bloqueados",
+      "Formula/Value": "=EZ5"
+    },
+    {
+      "Header": "Remates bloqueados /90",
+      "Formula/Value": "=IFERROR(AY5/L5,0)"
+    },
+    {
+      "Header": "Rem Bloqueados, Interceptações  e Bloqueios/90",
+      "Formula/Value": "=IFERROR((EZ5+EY5+FC5+FB5)/L5,0)"
+    },
+    {
+      "Header": "Alívios",
+      "Formula/Value": "=FE5"
+    },
+    {
+      "Header": "Alívios /90",
+      "Formula/Value": "=IFERROR(BB5/L5,0)"
+    },
+    {
+      "Header": "Desarmes Tentados",
+      "Formula/Value": "=EW5+FD5"
+    },
+    {
+      "Header": "Desarmes Tentados /90",
+      "Formula/Value": "=IFERROR(BD5/L5,0)"
+    },
+    {
+      "Header": "Desarmes Ganhos",
+      "Formula/Value": "=EX5"
+    },
+    {
+      "Header": "Desarmes Ganhos/90",
+      "Formula/Value": "=IFERROR(BF5/L5,0)"
+    },
+    {
+      "Header": "Dribles sofridos",
+      "Formula/Value": "=EW5-EX5"
+    },
+    {
+      "Header": "Dribles sofridos /90",
+      "Formula/Value": "=IFERROR(BH5/L5,0)"
+    },
+    {
+      "Header": "% Des",
+      "Formula/Value": "=IFERROR((BF5*1)/BD5,0)"
+    },
+    {
+      "Header": "Desarmes Decisivos",
+      "Formula/Value": "=FB5"
+    },
+    {
+      "Header": "Desarmes Decisivos / 90",
+      "Formula/Value": "=IFERROR(BK5/L5,0)"
+    },
+    {
+      "Header": "Movimentos de pressão tentados",
+      "Formula/Value": "=ER5"
+    },
+    {
+      "Header": "Mov Press T/90",
+      "Formula/Value": "=ER5/L5"
+    },
+    {
+      "Header": "Movimentos de pressão ganhos",
+      "Formula/Value": "=ES5"
+    },
+    {
+      "Header": "Mov Press Ganhos /90",
+      "Formula/Value": "=IFERROR(ES5/L5,0)"
+    },
+    {
+      "Header": "% Pressão ganha/90",
+      "Formula/Value": "=IFERROR((BP5*1)/BN5,0)"
+    },
+    {
+      "Header": "Passes Tentados",
+      "Formula/Value": "=FJ5"
+    },
+    {
+      "Header": "Passes Tentados /90",
+      "Formula/Value": "=IFERROR(BR5/L5,0)"
+    },
+    {
+      "Header": "Passes Certos",
+      "Formula/Value": "=FK5"
+    },
+    {
+      "Header": "Passes Certos /90",
+      "Formula/Value": "=IFERROR(BT5/L5,0)"
+    },
+    {
+      "Header": "% Acerto dos passes",
+      "Formula/Value": "=IFERROR((BT5*1)/BR5,0)"
+    },
+    {
+      "Header": "Passes que são curtos",
+      "Formula/Value": "=FJ5-FI5"
+    },
+    {
+      "Header": "Passes curtos certos /90",
+      "Formula/Value": "=FK5/L5"
+    },
+    {
+      "Header": "Passe que são em progressão",
+      "Formula/Value": "=FI5"
+    },
+    {
+      "Header": "Passes em progressão/90",
+      "Formula/Value": "=BY5/L5"
+    },
+    {
+      "Header": "% Passes em progressão em relação aos curtos",
+      "Formula/Value": "=(BY5*1)/BW5"
+    },
+    {
+      "Header": "Passes Errados",
+      "Formula/Value": "=FJ5-FK5"
+    },
+    {
+      "Header": "Passes Errados /90",
+      "Formula/Value": "=CB5/L5"
+    },
+    {
+      "Header": "% Passes errados",
+      "Formula/Value": "=(CB5*1)/FJ5"
+    },
+    {
+      "Header": "Passes Decisivos",
+      "Formula/Value": "=FS5"
+    },
+    {
+      "Header": "Passes Decisivos /90",
+      "Formula/Value": "=IFERROR(CE5/L5,0)"
+    },
+    {
+      "Header": "xA por Passes Decisivos",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(FR5,\".\",\",\"))/FS5,0)"
+    },
+    {
+      "Header": "Tentativa de criar um gol ou jogada ofensiva",
+      "Formula/Value": "=IFERROR(FS5+FL5,0)"
+    },
+    {
+      "Header": "Tentativa de criar um gol ou jogada ofensiva/ 90",
+      "Formula/Value": "=IFERROR(CH5/L5,0)"
+    },
+    {
+      "Header": "Tentativas (Cabs, Desarmes, Pressão)",
+      "Formula/Value": "=((EU5)+(EW5)+(ER5))"
+    },
+    {
+      "Header": "Tentativas Cabs, Des, Pres /90",
+      "Formula/Value": "=CJ5/L5"
+    },
+    {
+      "Header": "Acertos (Cabs, Des, Pres)",
+      "Formula/Value": "=((ET5)+(EX5)+(ES5))"
+    },
+    {
+      "Header": "Acertos/90",
+      "Formula/Value": "=CL5/L5"
+    },
+    {
+      "Header": "Erros",
+      "Formula/Value": "=((EU5-ET5)+(EW5-EX5)+(ER5-ES5))"
+    },
+    {
+      "Header": "Taxa de acerto",
+      "Formula/Value": "=IFERROR(CL5/CJ5,0)"
+    },
+    {
+      "Header": "Bolas interceptadas",
+      "Formula/Value": "=(EY5+EZ5+FC5+FE5+(FB5*0.5))"
+    },
+    {
+      "Header": "Bolas interceptadas /90",
+      "Formula/Value": "=CP5/L5"
+    },
+    {
+      "Header": "Bolas roubadas do adversário",
+      "Formula/Value": "=(ES5+EX5)+(FB5*0.5)"
+    },
+    {
+      "Header": "Bolas roubadas /90",
+      "Formula/Value": "=CR5/L5"
+    },
+    {
+      "Header": "Bolas disputadas com o adversário",
+      "Formula/Value": "=IFERROR(EU5+EW5+EY5+FD5,0)"
+    },
+    {
+      "Header": "Bolas disputadas /90",
+      "Formula/Value": "=CT5/L5"
+    },
+    {
+      "Header": "Bolas disputadas e ganhas do adversário",
+      "Formula/Value": "=IFERROR(ET5+EX5+EY5+FB5,0)"
+    },
+    {
+      "Header": "Bolas disputadas e ganhas /90",
+      "Formula/Value": "=CV5/L5"
+    },
+    {
+      "Header": "% Bolas disputadas e ganhas",
+      "Formula/Value": "=IFERROR((CV5*1)/CT5,0)"
+    },
+    {
+      "Header": "Bolas disputadas e perdidas com o adversário",
+      "Formula/Value": "=IFERROR((EU5-ET5)+(EW5-EX5)+EY5,0)"
+    },
+    {
+      "Header": "Bolas disputadas e perdidas /90",
+      "Formula/Value": "=IFERROR(CY5/L5,0)"
+    },
+    {
+      "Header": "Faltas cometidas",
+      "Formula/Value": "=FD5"
+    },
+    {
+      "Header": "Faltas cometidas/90",
+      "Formula/Value": "=DA5/L5"
+    },
+    {
+      "Header": "% de disputas perdidas",
+      "Formula/Value": "=(CY5*1)/CT5"
+    },
+    {
+      "Header": "Cartões amarelos",
+      "Formula/Value": "=EP5"
+    },
+    {
+      "Header": "Cartões vermelhos",
+      "Formula/Value": "=EQ5"
+    },
+    {
+      "Header": "Cartões recebidos",
+      "Formula/Value": "=DD5+DE5"
+    },
+    {
+      "Header": "Cartões /90",
+      "Formula/Value": "=(DD5+DE5)/L5"
+    },
+    {
+      "Header": "% Faltas que geraram um cartão",
+      "Formula/Value": "=IFERROR(((DD5+DE5)*1)/FD5,0)"
+    },
+    {
+      "Header": "Lances defensivos tentados",
+      "Formula/Value": "=IFERROR((EM5*3)+(EP5*1.33)+(EQ5*2)+EU5+EW5+FC5+FE5+EY5+EZ5+FD5,0)"
+    },
+    {
+      "Header": "Lances DEF tentados / 90",
+      "Formula/Value": "=IFERROR(DI5/L5,0)"
+    },
+    {
+      "Header": "Lances defensivos conseguidos",
+      "Formula/Value": "=IFERROR(ET5+EX5+FC5+FE5+EY5+EZ5+FB5*1.5+(AL5*0.5),0)"
+    },
+    {
+      "Header": "Lances DEF conseguidos / 90",
+      "Formula/Value": "=IFERROR(DK5/L5,0)"
+    },
+    {
+      "Header": "Erros Defensivos",
+      "Formula/Value": "=(EM5*3)+(EP5*1.25)+(EQ5*2)+FD5+CB5"
+    },
+    {
+      "Header": "Erros Defensivos /90",
+      "Formula/Value": "=IFERROR(DM5/L5,0)"
+    },
+    {
+      "Header": "Eficácia defensiva",
+      "Formula/Value": "=IFERROR(DK5/DI5,0)"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "=VALUE(SUBSTITUTE(FF5, \" km\", \"\"))"
+    },
+    {
+      "Header": "Dist / 90",
+      "Formula/Value": "=IFERROR(DP5/L5,0)"
+    },
+    {
+      "Header": "Sprints /90",
+      "Formula/Value": "=FG5"
+    },
+    {
+      "Header": "Fintas",
+      "Formula/Value": "=FH5"
+    },
+    {
+      "Header": "Fintas/90",
+      "Formula/Value": "=IFERROR(DS5/L5,0)"
+    },
+    {
+      "Header": "Posse Desperdiçada",
+      "Formula/Value": "=IFERROR((EU5-ET5)+(FJ5-FK5)+(EW5-EX5)+(FD5),0)"
+    },
+    {
+      "Header": "Posse Desperdiçada /90",
+      "Formula/Value": "=IFERROR((DU5/L5),0)"
+    },
+    {
+      "Header": "Posse perdida",
+      "Formula/Value": "=DX5*L5"
+    },
+    {
+      "Header": "Posse perdida /90",
+      "Formula/Value": "=FA5"
+    },
+    {
+      "Header": "Nota média",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(FU5, \".\", \",\")),0)"
+    },
+    {
+      "Header": "Inf",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Jogador",
+      "Formula/Value": "Ignacio"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "190 cm"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "29"
+    },
+    {
+      "Header": "Valor Estimado",
+      "Formula/Value": "210m € - 2,1M €"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "6,5m € p/m"
+    },
+    {
+      "Header": "Nação",
+      "Formula/Value": "BRA"
+    },
+    {
+      "Header": "Pé Preferido",
+      "Formula/Value": "Pé Direito"
+    },
+    {
+      "Header": "Expira",
+      "Formula/Value": "2028-06-30 00:00:00"
+    },
+    {
+      "Header": "Clube",
+      "Formula/Value": "Fluminense"
+    },
+    {
+      "Header": "Minutos",
+      "Formula/Value": "3666"
+    },
+    {
+      "Header": "Presenças",
+      "Formula/Value": "12 (1)"
+    },
+    {
+      "Header": "HdJ",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "EPG",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Golos",
+      "Formula/Value": "1"
+    },
+    {
+      "Header": "Assist.",
+      "Formula/Value": "1"
+    },
+    {
+      "Header": "Amr",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Cartões vermelhos",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Press. tent.",
+      "Formula/Value": "120"
+    },
+    {
+      "Header": "Press. conc.",
+      "Formula/Value": "35"
+    },
+    {
+      "Header": "Cabs",
+      "Formula/Value": "204"
+    },
+    {
+      "Header": "Cab A",
+      "Formula/Value": "272"
+    },
+    {
+      "Header": "Cab Dec/90",
+      "Formula/Value": "1.6"
+    },
+    {
+      "Header": "T Desa",
+      "Formula/Value": "38"
+    },
+    {
+      "Header": "Des C",
+      "Formula/Value": "30"
+    },
+    {
+      "Header": "Blq",
+      "Formula/Value": "37"
+    },
+    {
+      "Header": "Rems Bloq",
+      "Formula/Value": "28"
+    },
+    {
+      "Header": "Poss Con/90",
+      "Formula/Value": "12.3"
+    },
+    {
+      "Header": "Crt D",
+      "Formula/Value": "6"
+    },
+    {
+      "Header": "Crt",
+      "Formula/Value": "131"
+    },
+    {
+      "Header": "Faltas Cometidas",
+      "Formula/Value": "14"
+    },
+    {
+      "Header": "Alívios",
+      "Formula/Value": "41"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "414,1 km"
+    },
+    {
+      "Header": "Sprints/90",
+      "Formula/Value": "5.6"
+    },
+    {
+      "Header": "Fnt",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "PeP",
+      "Formula/Value": "113"
+    },
+    {
+      "Header": "Pas A",
+      "Formula/Value": "1764"
+    },
+    {
+      "Header": "Ps C",
+      "Formula/Value": "1581"
+    },
+    {
+      "Header": "OCG",
+      "Formula/Value": "1"
+    },
+    {
+      "Header": "Remates",
+      "Formula/Value": "25"
+    },
+    {
+      "Header": "Rem %",
+      "Formula/Value": "10"
+    },
+    {
+      "Header": "Pens",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pens M",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "xG SP",
+      "Formula/Value": "2.59"
+    },
+    {
+      "Header": "xA",
+      "Formula/Value": "0.56"
+    },
+    {
+      "Header": "Passes Ch",
+      "Formula/Value": "13"
+    },
+    {
+      "Header": "Remates em livres",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Classificação",
+      "Formula/Value": "6.96"
+    }
+  ],
+  "🛡️Laterais": [
+    {
+      "Header": "Jogador",
+      "Formula/Value": "=DG5"
+    },
+    {
+      "Header": "NAC",
+      "Formula/Value": "=DL5"
+    },
+    {
+      "Header": "Pé preferido",
+      "Formula/Value": "=DM5"
+    },
+    {
+      "Header": "Equipe",
+      "Formula/Value": "=DO5"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(DH5,\" cm\",\"\")/100,0)"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "=DI5"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "=DK5"
+    },
+    {
+      "Header": "Valor Estimado",
+      "Formula/Value": "=IF(DJ5=\"\", \"Sem valor estimado\",\nIF(DJ5=\"Não está à venda\", \"Não está à venda\",\nIF(LEN(DJ5)-LEN(SUBSTITUTE(DJ5, \"-\", \"\"))=0, DJ5,\nIFERROR(\nAVERAGE(\nVALUE(LEFT(DJ5, SEARCH(\"M\", DJ5)-1)),\nVALUE(MID(DJ5, SEARCH(\"-\", DJ5)+2, SEARCH(\"M\", DJ5, SEARCH(\"-\", DJ5))-SEARCH(\"-\", DJ5)-2))\n) & IF(SEARCH(\"M\", DJ5) > 0, \"M\", \"m\"),\n\"m\"\n)\n)))"
+    },
+    {
+      "Header": "Média de jogos",
+      "Formula/Value": "=IFERROR(AVERAGE(K:K),0)"
+    },
+    {
+      "Header": "Jogos completos",
+      "Formula/Value": "=IFERROR(DP5/90,0)"
+    },
+    {
+      "Header": "Jogos Totais",
+      "Formula/Value": "=IFERROR(IF(ISERROR(FIND(\"(\",DQ5)), VALUE(DQ5), VALUE(LEFT(DQ5,FIND(\"(\",DQ5)-2)) + VALUE(MID(DQ5,FIND(\"(\",DQ5)+1,FIND(\")\",DQ5)-FIND(\"(\",DQ5)-1))),0)"
+    },
+    {
+      "Header": "Minutos por partida",
+      "Formula/Value": "=IFERROR(DP5/L5,0)"
+    },
+    {
+      "Header": "Jogos como Titular",
+      "Formula/Value": "=IFERROR(IF(ISERROR(FIND(\"(\",DQ5)), \"100%\", TEXT(VALUE(LEFT(DQ5,FIND(\"(\",DQ5)-2)) / (VALUE(LEFT(DQ5,FIND(\"(\",DQ5)-2)) + VALUE(MID(DQ5,FIND(\"(\",DQ5)+1,FIND(\")\",DQ5)-FIND(\"(\",DQ5)-1))),\"0%\")),0)*1"
+    },
+    {
+      "Header": "Gols",
+      "Formula/Value": "=DT5"
+    },
+    {
+      "Header": "Assist",
+      "Formula/Value": "=DU5"
+    },
+    {
+      "Header": "Gols+Ass",
+      "Formula/Value": "=IFERROR(O5+P5,0)"
+    },
+    {
+      "Header": "Gols + A/90",
+      "Formula/Value": "=IFERROR(Q5/K5,0)"
+    },
+    {
+      "Header": "Man of the match",
+      "Formula/Value": "=DR5"
+    },
+    {
+      "Header": "% de vezes que foi eleito o Homem do Jogo",
+      "Formula/Value": "=IFERROR((S5*1)/K5,0)"
+    },
+    {
+      "Header": "Gols esperados (xG)",
+      "Formula/Value": "=SUBSTITUTE(EB5,\".\",\",\")*1"
+    },
+    {
+      "Header": "xG /90",
+      "Formula/Value": "=IFERROR((U5/K5),0)"
+    },
+    {
+      "Header": "xG (Sem pênaltis)",
+      "Formula/Value": "=IFERROR((VALUE(SUBSTITUTE(EB5,\".\",\",\"))-(EZ5*0.79)),0)"
+    },
+    {
+      "Header": "xG (Sem pênaltis) /90",
+      "Formula/Value": "=IFERROR(W5/K5,0)"
+    },
+    {
+      "Header": "Assistências Esperadas (xA)",
+      "Formula/Value": "=VALUE(SUBSTITUTE(EA5,\".\",\",\"))"
+    },
+    {
+      "Header": "xA /90",
+      "Formula/Value": "=IFERROR(Y5/K5,0)"
+    },
+    {
+      "Header": "xA + xG (sem pen)",
+      "Formula/Value": "=IFERROR(W5+Y5,0)"
+    },
+    {
+      "Header": "xA + xG /90",
+      "Formula/Value": "=IFERROR(AA5/K5,0)"
+    },
+    {
+      "Header": "Pênaltis batidos",
+      "Formula/Value": "=EZ5"
+    },
+    {
+      "Header": "Pênaltis marcados",
+      "Formula/Value": "=FA5"
+    },
+    {
+      "Header": "Pênaltis perdidos",
+      "Formula/Value": "=IFERROR(AC5-AD5,0)"
+    },
+    {
+      "Header": "% Conversão de pênalti",
+      "Formula/Value": "=IFERROR((AD5*1)/AC5,0.0000001)"
+    },
+    {
+      "Header": "Desarmes Tentados",
+      "Formula/Value": "=EO5+EN5"
+    },
+    {
+      "Header": "Des Tentados / 90",
+      "Formula/Value": "=IFERROR(AG5/K5,0)"
+    },
+    {
+      "Header": "Desarmes ganhos",
+      "Formula/Value": "=EP5"
+    },
+    {
+      "Header": "Desarmes Conseguidos / 90",
+      "Formula/Value": "=IFERROR(AI5/K5,0)"
+    },
+    {
+      "Header": "Dribles Sofridos",
+      "Formula/Value": "=EO5-EP5"
+    },
+    {
+      "Header": "Dribles Sofridos /90",
+      "Formula/Value": "=IFERROR(AK5/K5,0)"
+    },
+    {
+      "Header": "% Des Ganhos",
+      "Formula/Value": "=IFERROR((AI5*1)/AG5,0)"
+    },
+    {
+      "Header": "Faltas cometidas",
+      "Formula/Value": "=EN5"
+    },
+    {
+      "Header": "Faltas cometidas /90",
+      "Formula/Value": "=IFERROR(AN5/K5,0)"
+    },
+    {
+      "Header": "Lances disputados",
+      "Formula/Value": "=IFERROR(EN5+EL5+EO5+ER5,0)"
+    },
+    {
+      "Header": "Lances disputados /90",
+      "Formula/Value": "=IFERROR(AP5/K5,0)"
+    },
+    {
+      "Header": "Lances disputados e ganhos sem falta",
+      "Formula/Value": "=IFERROR(EM5+EP5+EQ5+ER5,0)"
+    },
+    {
+      "Header": "Lances disputados e ganhos sem falta /90",
+      "Formula/Value": "=IFERROR(AR5/K5,0)"
+    },
+    {
+      "Header": "% Lances disputados e ganhos",
+      "Formula/Value": "=IFERROR((AR5*1)/AP5,0)"
+    },
+    {
+      "Header": "Passes Tentados",
+      "Formula/Value": "=EF5"
+    },
+    {
+      "Header": "Passe Tentados/ 90",
+      "Formula/Value": "=IFERROR(AU5/K5,0)"
+    },
+    {
+      "Header": "Passes Completados",
+      "Formula/Value": "=EG5"
+    },
+    {
+      "Header": "Passes completados /90",
+      "Formula/Value": "=AW5/K5"
+    },
+    {
+      "Header": "% Passes Certos",
+      "Formula/Value": "=AW5/AU5"
+    },
+    {
+      "Header": "Passes errados",
+      "Formula/Value": "=IFERROR((EF5-EG5)+(EV5-EW5),0)"
+    },
+    {
+      "Header": "Passes errados / 90",
+      "Formula/Value": "=IFERROR((AZ5/K5),0)"
+    },
+    {
+      "Header": "Um passe errado a cada...",
+      "Formula/Value": "=IFERROR(EF5/(EF5-EG5),0)"
+    },
+    {
+      "Header": "Passes que são curtos",
+      "Formula/Value": "=EF5-EI5"
+    },
+    {
+      "Header": "Passes curtos e certos /90",
+      "Formula/Value": "=IFERROR(BC5/K5,0)"
+    },
+    {
+      "Header": "Passe que são em progressão",
+      "Formula/Value": "=EI5"
+    },
+    {
+      "Header": "Passes em progressão/90",
+      "Formula/Value": "=BE5/K5"
+    },
+    {
+      "Header": "% Passes em progressão em relação aos curtos",
+      "Formula/Value": "=IFERROR(EI5/BC5,0)"
+    },
+    {
+      "Header": "Cruzamentos Tentados",
+      "Formula/Value": "=EV5"
+    },
+    {
+      "Header": "Cruzamentos T/90",
+      "Formula/Value": "=EV5/K5"
+    },
+    {
+      "Header": "Cruzamentos Conseguidos",
+      "Formula/Value": "=EW5"
+    },
+    {
+      "Header": "Cruzamentos C/90",
+      "Formula/Value": "=EW5/K5"
+    },
+    {
+      "Header": "Cruzamentos",
+      "Formula/Value": "=IFERROR((BJ5*1)/BH5,0)"
+    },
+    {
+      "Header": "Passes Decisivos",
+      "Formula/Value": "=EH5"
+    },
+    {
+      "Header": "Pass Decisivos / 90",
+      "Formula/Value": "=IFERROR(BM5/K5,0)"
+    },
+    {
+      "Header": "Minutos pra criar uma chance de perigo",
+      "Formula/Value": "=IFERROR(DP5/(DX5+EH5+EK5),0)"
+    },
+    {
+      "Header": "Minutos pra fazer um Passe Decisivo",
+      "Formula/Value": "=IFERROR((DP5/EH5),0)"
+    },
+    {
+      "Header": "Assistências Esperadas xA",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(EA5,\".\",\",\")),0)"
+    },
+    {
+      "Header": "Assistências Desperdiçadas pela Equipe",
+      "Formula/Value": "=IFERROR(BQ5-DU5,0)"
+    },
+    {
+      "Header": "Chances criadas",
+      "Formula/Value": "=IFERROR(EW5+EH5+BQ5+DX5,0)"
+    },
+    {
+      "Header": "Chances criadas /90",
+      "Formula/Value": "=IFERROR(BS5/K5,0)"
+    },
+    {
+      "Header": "Fintas",
+      "Formula/Value": "=FB5"
+    },
+    {
+      "Header": "Fintas / 90",
+      "Formula/Value": "=IFERROR(BU5/K5,0)"
+    },
+    {
+      "Header": "Desarmes Decisivos",
+      "Formula/Value": "=EQ5"
+    },
+    {
+      "Header": "Desarmes Decisivos /90",
+      "Formula/Value": "=IFERROR(BW5/K5,0)"
+    },
+    {
+      "Header": "Erros que originaram gol",
+      "Formula/Value": "=DS5"
+    },
+    {
+      "Header": "Erros que geraram gol/90",
+      "Formula/Value": "=IFERROR(BY5/K5,0)"
+    },
+    {
+      "Header": "Participações do jogador (Fintas, passes, etc)",
+      "Formula/Value": "=IFERROR(EF5+FB5+EJ5+DX5+EX5+EH5+AG5+EQ5+ES5+EV5+EZ5+EY5+ED5,0)"
+    },
+    {
+      "Header": "Participação / 90",
+      "Formula/Value": "=IFERROR(CA5/K5,0)"
+    },
+    {
+      "Header": "Cabeceios Disputados",
+      "Formula/Value": "=EC5"
+    },
+    {
+      "Header": "Cabeceios Disp /90",
+      "Formula/Value": "=CC5/K5"
+    },
+    {
+      "Header": "Cabeceios Ganhos",
+      "Formula/Value": "=ED5"
+    },
+    {
+      "Header": "Cabeceios G/90",
+      "Formula/Value": "=CE5/K5"
+    },
+    {
+      "Header": "% Cabeceios ganhos",
+      "Formula/Value": "=IFERROR((ED5*1)/EC5,0)"
+    },
+    {
+      "Header": "Cabeceios que evitaram jogada ofensiva",
+      "Formula/Value": "=IFERROR((CI5*K5),0)"
+    },
+    {
+      "Header": "Cabs que evitaram jogada ofensiva /90",
+      "Formula/Value": "=IFERROR(EE5,0)"
+    },
+    {
+      "Header": "Bolas roubadas",
+      "Formula/Value": "=IFERROR((EQ5*0.5)+EP5+ES5+CH5,0)"
+    },
+    {
+      "Header": "Bolas roubadas / 90",
+      "Formula/Value": "=IFERROR(CJ5/K5,0)"
+    },
+    {
+      "Header": "Movimentos ofensivos tentados",
+      "Formula/Value": "=IFERROR(EV5+FB5+EJ5+DX5+EH5,0)"
+    },
+    {
+      "Header": "Movimentos ofensivos conseguidos",
+      "Formula/Value": "=IFERROR(EW5+(EH5+(EH5*0.5))+EK5+FB5+DX5,0)"
+    },
+    {
+      "Header": "Mov Of / 90",
+      "Formula/Value": "=IFERROR(CM5/K5,0)"
+    },
+    {
+      "Header": "Movimentos ofensivos com sucesso",
+      "Formula/Value": "=IFERROR((CM5*1)/CL5,0)"
+    },
+    {
+      "Header": "Lances defensivos tentados",
+      "Formula/Value": "=IFERROR((DS5*3)+(DV5*1.33)+(DW5*2)+EC5+EO5+ES5+EU5+ER5+ET5+EN5,0)"
+    },
+    {
+      "Header": "Lances DEF tentados / 90",
+      "Formula/Value": "=IFERROR(CP5/K5,0)"
+    },
+    {
+      "Header": "Lances defensivos conseguidos",
+      "Formula/Value": "=IFERROR(ED5+EP5+ES5+EU5+ER5+ET5+EQ5+(CH5*0.5),0)"
+    },
+    {
+      "Header": "Lances DEF conseguidos / 90",
+      "Formula/Value": "=IFERROR(CR5/K5,0)"
+    },
+    {
+      "Header": "Erros Defensivos",
+      "Formula/Value": "=IFERROR((DS5*3)+(DV5*1.25)+(DW5*2)+EN5,0)"
+    },
+    {
+      "Header": "Erros Defensivos /90",
+      "Formula/Value": "=IFERROR((CT5/K5),0)"
+    },
+    {
+      "Header": "Eficácia defensiva",
+      "Formula/Value": "=IFERROR(CR5/CP5,0)"
+    },
+    {
+      "Header": "Sucesso (Overall)",
+      "Formula/Value": "=IFERROR(((CR5+CM5)*1)/(CL5+CP5),0)"
+    },
+    {
+      "Header": "Distância Percorrida",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(FC5, \" km\", \"\")),0)"
+    },
+    {
+      "Header": "Dist / 90",
+      "Formula/Value": "=IFERROR(CX5/K5,0)"
+    },
+    {
+      "Header": "Sprints (Total)",
+      "Formula/Value": "=IFERROR((DA5*K5),0)"
+    },
+    {
+      "Header": "Sprints / 90",
+      "Formula/Value": "=DZ5"
+    },
+    {
+      "Header": "Posse Desperdiçada",
+      "Formula/Value": "=IFERROR((EC5-ED5)+(EF5-EG5)+(EV5-EW5),0)"
+    },
+    {
+      "Header": "Posse Desperdiçada /90",
+      "Formula/Value": "=IFERROR(DB5/K5,0)"
+    },
+    {
+      "Header": "Posse perdida /90",
+      "Formula/Value": "=DY5"
+    },
+    {
+      "Header": "Nota média",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(FD5, \".\", \",\")),0)"
+    },
+    {
+      "Header": "Inf",
+      "Formula/Value": "Les"
+    },
+    {
+      "Header": "Jogador",
+      "Formula/Value": "Guilherme Arana"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "178 cm"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "29"
+    },
+    {
+      "Header": "Valor Estimado",
+      "Formula/Value": "5,6M € - 9,4M €"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "128m € p/m"
+    },
+    {
+      "Header": "Nação",
+      "Formula/Value": "BRA"
+    },
+    {
+      "Header": "Pé Preferido",
+      "Formula/Value": "Pé Esquerdo"
+    },
+    {
+      "Header": "Expira",
+      "Formula/Value": "2029-12-31 00:00:00"
+    },
+    {
+      "Header": "Clube",
+      "Formula/Value": "Fluminense"
+    },
+    {
+      "Header": "Minutos",
+      "Formula/Value": "3736"
+    },
+    {
+      "Header": "Presenças",
+      "Formula/Value": "48 (3)"
+    },
+    {
+      "Header": "HdJ",
+      "Formula/Value": "1"
+    },
+    {
+      "Header": "EPG",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Golos",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Assist.",
+      "Formula/Value": "6"
+    },
+    {
+      "Header": "Amr",
+      "Formula/Value": "7"
+    },
+    {
+      "Header": "Cartões vermelhos",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "OCG",
+      "Formula/Value": "10"
+    },
+    {
+      "Header": "Poss Perd/90",
+      "Formula/Value": "9.4"
+    },
+    {
+      "Header": "Sprints/90",
+      "Formula/Value": "20.7"
+    },
+    {
+      "Header": "xA",
+      "Formula/Value": "6,92"
+    },
+    {
+      "Header": "xG",
+      "Formula/Value": "2,47"
+    },
+    {
+      "Header": "Cab A",
+      "Formula/Value": "104"
+    },
+    {
+      "Header": "Cabs",
+      "Formula/Value": "37"
+    },
+    {
+      "Header": "Cab Dec/90",
+      "Formula/Value": "0.1"
+    },
+    {
+      "Header": "Pas A",
+      "Formula/Value": "2663"
+    },
+    {
+      "Header": "Ps C",
+      "Formula/Value": "2438"
+    },
+    {
+      "Header": "Passes Ch",
+      "Formula/Value": "77"
+    },
+    {
+      "Header": "PeP",
+      "Formula/Value": "346"
+    },
+    {
+      "Header": "Remates",
+      "Formula/Value": "20"
+    },
+    {
+      "Header": "Rem %",
+      "Formula/Value": "8"
+    },
+    {
+      "Header": "Press. tent.",
+      "Formula/Value": "377"
+    },
+    {
+      "Header": "Press. conc.",
+      "Formula/Value": "92"
+    },
+    {
+      "Header": "Faltas Cometidas",
+      "Formula/Value": "53"
+    },
+    {
+      "Header": "T Desa",
+      "Formula/Value": "124"
+    },
+    {
+      "Header": "Des C",
+      "Formula/Value": "99"
+    },
+    {
+      "Header": "Crt D",
+      "Formula/Value": "5"
+    },
+    {
+      "Header": "Blq",
+      "Formula/Value": "34"
+    },
+    {
+      "Header": "Crt",
+      "Formula/Value": "143"
+    },
+    {
+      "Header": "Rems Bloq",
+      "Formula/Value": "10"
+    },
+    {
+      "Header": "Alívios",
+      "Formula/Value": "39"
+    },
+    {
+      "Header": "Cr T",
+      "Formula/Value": "166"
+    },
+    {
+      "Header": "Cr C",
+      "Formula/Value": "33"
+    },
+    {
+      "Header": "Fj",
+      "Formula/Value": "5"
+    },
+    {
+      "Header": "Remates em livres",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pens",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pens M",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Fnt",
+      "Formula/Value": "21"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "511,3 km"
+    },
+    {
+      "Header": "Classificação",
+      "Formula/Value": "6.91"
+    }
+  ],
+  "🛡️Volantes": [
+    {
+      "Header": "Jogador",
+      "Formula/Value": "=DC5"
+    },
+    {
+      "Header": "NAC",
+      "Formula/Value": "=DB5"
+    },
+    {
+      "Header": "Pé preferido",
+      "Formula/Value": "=DG5"
+    },
+    {
+      "Header": "Equipe",
+      "Formula/Value": "=DE5"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(DF5,\" cm\",\"\")/100,0)"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "=DD5"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "=DI5"
+    },
+    {
+      "Header": "Data Final de Contrato",
+      "Formula/Value": "=IF(DJ5=\"-\", \"Sem Data Final\", DJ5)"
+    },
+    {
+      "Header": "Valor",
+      "Formula/Value": "=DH5"
+    },
+    {
+      "Header": "Média de jogos",
+      "Formula/Value": "=AVERAGE(L:L)"
+    },
+    {
+      "Header": "Jogos Completos",
+      "Formula/Value": "=DK5/90"
+    },
+    {
+      "Header": "Jogos Totais",
+      "Formula/Value": "=IF(ISERROR(FIND(\"(\",DL5)), VALUE(DL5), VALUE(LEFT(DL5,FIND(\"(\",DL5)-2)) + VALUE(MID(DL5,FIND(\"(\",DL5)+1,FIND(\")\",DL5)-FIND(\"(\",DL5)-1)))"
+    },
+    {
+      "Header": "Minutos por partida",
+      "Formula/Value": "=IFERROR(DK5/M5,0)"
+    },
+    {
+      "Header": "Jogos como Titular",
+      "Formula/Value": "=IFERROR(IF(ISERROR(FIND(\"(\",DL5)), \"100%\", TEXT(VALUE(LEFT(DL5,FIND(\"(\",DL5)-2)) / (VALUE(LEFT(DL5,FIND(\"(\",DL5)-2)) + VALUE(MID(DL5,FIND(\"(\",DL5)+1,FIND(\")\",DL5)-FIND(\"(\",DL5)-1))),\"0%\")),0)*1"
+    },
+    {
+      "Header": "Gols",
+      "Formula/Value": "=DO5"
+    },
+    {
+      "Header": "Assistências",
+      "Formula/Value": "=DP5"
+    },
+    {
+      "Header": "Gols + Ass",
+      "Formula/Value": "=IFERROR(P5+Q5,0)"
+    },
+    {
+      "Header": "Man of the match",
+      "Formula/Value": "=DM5"
+    },
+    {
+      "Header": "% de vezes que foi eleito o Homem do Jogo",
+      "Formula/Value": "=IFERROR((S5*1)/L5,0)"
+    },
+    {
+      "Header": "Pênaltis batidos",
+      "Formula/Value": "=ER5"
+    },
+    {
+      "Header": "Pênaltis marcados",
+      "Formula/Value": "=ES5"
+    },
+    {
+      "Header": "Pênaltis perdidos",
+      "Formula/Value": "=IFERROR(U5-V5,0)"
+    },
+    {
+      "Header": "% Conversão de pênalti",
+      "Formula/Value": "=IFERROR((V5*1)/U5,0.0000001)"
+    },
+    {
+      "Header": "Amarelos",
+      "Formula/Value": "=DQ5"
+    },
+    {
+      "Header": "Vermelhos",
+      "Formula/Value": "=DR5"
+    },
+    {
+      "Header": "Total cartões",
+      "Formula/Value": "=IFERROR(DQ5+DR5,0)"
+    },
+    {
+      "Header": "Faltas cometidas",
+      "Formula/Value": "=DV5"
+    },
+    {
+      "Header": "Faltas/90",
+      "Formula/Value": "=IFERROR(AB5/L5,0)"
+    },
+    {
+      "Header": "Faltas sem cartão",
+      "Formula/Value": "=AB5-(Y5+Z5)"
+    },
+    {
+      "Header": "Cartões por falta cometida",
+      "Formula/Value": "=IFERROR((AA5*1)/AB5,0)"
+    },
+    {
+      "Header": "Movimentos de pressão tentados",
+      "Formula/Value": "=EF5"
+    },
+    {
+      "Header": "Mov Press T/90",
+      "Formula/Value": "=IFERROR(AF5/L5,0)"
+    },
+    {
+      "Header": "Movimentos de pressão ganhos",
+      "Formula/Value": "=EG5"
+    },
+    {
+      "Header": "Mov Press Ganhos /90",
+      "Formula/Value": "=IFERROR(AH5/L5,0)"
+    },
+    {
+      "Header": "% Pressão ganha/90",
+      "Formula/Value": "=IFERROR(AH5/AF5,0)"
+    },
+    {
+      "Header": "Bolas disputadas com o adversário",
+      "Formula/Value": "=IFERROR(DW5+EH5+DV5,0)"
+    },
+    {
+      "Header": "Bolas disputadas com o adversário /90",
+      "Formula/Value": "=IFERROR(AK5/L5,0)"
+    },
+    {
+      "Header": "Bolas disputadas e ganhas",
+      "Formula/Value": "=IFERROR(DX5+EI5+EJ5,0)"
+    },
+    {
+      "Header": "Bolas disputadas e ganhas /90",
+      "Formula/Value": "=IFERROR(AM5/L5,0)"
+    },
+    {
+      "Header": "% Bolas disputadas e ganhas (sem falta)",
+      "Formula/Value": "=IFERROR((AM5*1)/AK5,0)"
+    },
+    {
+      "Header": "Faltas sem cartão",
+      "Formula/Value": "=IFERROR(DV5-DQ5-DR5,0)"
+    },
+    {
+      "Header": "%Faltas Sem Cartão",
+      "Formula/Value": "=IFERROR((AP5*1)/DV5,0)"
+    },
+    {
+      "Header": "Passes tentados",
+      "Formula/Value": "=DZ5"
+    },
+    {
+      "Header": "Passes certos",
+      "Formula/Value": "=EA5"
+    },
+    {
+      "Header": "Pass C / 90",
+      "Formula/Value": "=IFERROR((AS5/L5),0)"
+    },
+    {
+      "Header": "Passes certos  - errados / Jogo",
+      "Formula/Value": "=IFERROR((AS5-AV5)/(DK5/90),0)"
+    },
+    {
+      "Header": "Passes errados",
+      "Formula/Value": "=AR5-AS5"
+    },
+    {
+      "Header": "Passes errados / 90",
+      "Formula/Value": "=IFERROR(AV5/L5,0)"
+    },
+    {
+      "Header": "% Passes certos",
+      "Formula/Value": "=IFERROR((EA5*1)/DZ5,0)"
+    },
+    {
+      "Header": "Passes que são curtos",
+      "Formula/Value": "=(DZ5-EC5)"
+    },
+    {
+      "Header": "Passes curtos certos /90",
+      "Formula/Value": "=IFERROR(AY5/L5,0)"
+    },
+    {
+      "Header": "Passes que são em progressão",
+      "Formula/Value": "=EC5"
+    },
+    {
+      "Header": "Passes em progressão/90",
+      "Formula/Value": "=IFERROR(BA5/L5,0)"
+    },
+    {
+      "Header": "% Passes em progressão em relação aos curtos",
+      "Formula/Value": "=IFERROR((BA5*1)/AY5,0)"
+    },
+    {
+      "Header": "Desarmes Tentados",
+      "Formula/Value": "=EH5+DV5"
+    },
+    {
+      "Header": "Desarmes Tentados/90",
+      "Formula/Value": "=IFERROR(BD5/L5,0)"
+    },
+    {
+      "Header": "Desarmes ganhos",
+      "Formula/Value": "=EI5"
+    },
+    {
+      "Header": "Desarmes ganhos/90",
+      "Formula/Value": "=IFERROR(BF5/L5,0)"
+    },
+    {
+      "Header": "Dribles Sofridos",
+      "Formula/Value": "=EH5-EI5"
+    },
+    {
+      "Header": "Dribles Sofridos/90",
+      "Formula/Value": "=IFERROR(BH5/L5,0)"
+    },
+    {
+      "Header": "% Des Ganhos",
+      "Formula/Value": "=IFERROR((BF5*1)/BD5,0)"
+    },
+    {
+      "Header": "Desarmes Decisivos",
+      "Formula/Value": "=EJ5"
+    },
+    {
+      "Header": "Desarmes Decisivos / 90",
+      "Formula/Value": "=IFERROR(BK5/L5,0)"
+    },
+    {
+      "Header": "Cabs disputados",
+      "Formula/Value": "=DW5"
+    },
+    {
+      "Header": "Cabs Disputados /90",
+      "Formula/Value": "=IFERROR(BM5/L5,0)"
+    },
+    {
+      "Header": "Cabs ganhos",
+      "Formula/Value": "=DX5"
+    },
+    {
+      "Header": "Cabs ganhos /90",
+      "Formula/Value": "=IFERROR(BO5/L5,0)"
+    },
+    {
+      "Header": "% Cabeceios Ganhos",
+      "Formula/Value": "=IFERROR(DX5/DW5,0)"
+    },
+    {
+      "Header": "Cabs perdidos",
+      "Formula/Value": "=DW5-DX5"
+    },
+    {
+      "Header": "Cabs perdidos /90",
+      "Formula/Value": "=IFERROR(BR5/L5,0)"
+    },
+    {
+      "Header": "Cabeceios que evitaram jogada ofensiva",
+      "Formula/Value": "=IFERROR((BU5*L5),0)"
+    },
+    {
+      "Header": "Cabs que evitaram jogada ofensiva /90",
+      "Formula/Value": "=DY5"
+    },
+    {
+      "Header": "% Cabs ganhos",
+      "Formula/Value": "=IFERROR((BO5*1)/BM5,0)"
+    },
+    {
+      "Header": "Passes decisivos",
+      "Formula/Value": "=EB5"
+    },
+    {
+      "Header": "Passes decisivos / jogos",
+      "Formula/Value": "=IFERROR(BW5/L5,0)"
+    },
+    {
+      "Header": "Interceptação + Recuperação de bola",
+      "Formula/Value": "=EL5+EK5+EM5+EJ5"
+    },
+    {
+      "Header": "Interceptação + Recuperação de bola/90",
+      "Formula/Value": "=IFERROR(BY5/L5,0)"
+    },
+    {
+      "Header": "Criação / 90",
+      "Formula/Value": "=IFERROR((DS5+EB5+DP5)/L5,0)"
+    },
+    {
+      "Header": "Soma de todos os desarmes",
+      "Formula/Value": "=SUM(EI:EI)"
+    },
+    {
+      "Header": "% Des em relação a media",
+      "Formula/Value": "=IFERROR((EI5*1)/CB5,0)"
+    },
+    {
+      "Header": "Bolas interceptadas",
+      "Formula/Value": "=EM5+EL5+EN5+EK5"
+    },
+    {
+      "Header": "Bolas int/90",
+      "Formula/Value": "=IFERROR(CD5/L5,0)"
+    },
+    {
+      "Header": "Bolas roubadas",
+      "Formula/Value": "=EG5+EI5+(EJ5*0.5)"
+    },
+    {
+      "Header": "Bolas roubadas /90",
+      "Formula/Value": "=IFERROR(CF5/L5,0)"
+    },
+    {
+      "Header": "Posse Ganha/90",
+      "Formula/Value": "=EP5"
+    },
+    {
+      "Header": "Lances defensivos tentados",
+      "Formula/Value": "=IFERROR((DN5*3)+(DQ5*1.5)+(DR5*2)+EH5+EL5+EN5+EK5+EM5+DV5,0)"
+    },
+    {
+      "Header": "Lances DEF tentados / 90",
+      "Formula/Value": "=IFERROR(CI5/L5,0)"
+    },
+    {
+      "Header": "Lances defensivos conseguidos",
+      "Formula/Value": "=IFERROR(EI5+EL5+EJ5+EN5+EK5+EM5+(BT5*0.5),0)"
+    },
+    {
+      "Header": "Lances DEF conseguidos / 90",
+      "Formula/Value": "=IFERROR(CK5/L5,0)"
+    },
+    {
+      "Header": "Erros Defensivos",
+      "Formula/Value": "=IFERROR((DN5*3)+(DQ5*1.25)+(DR5*2)+DV5,0)"
+    },
+    {
+      "Header": "Erros Defensivos /90",
+      "Formula/Value": "=CM5/L5"
+    },
+    {
+      "Header": "Eficácia defensiva",
+      "Formula/Value": "=IFERROR(CK5/CI5,0)"
+    },
+    {
+      "Header": "Assistências Esperadas xA",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(DU5,\".\",\",\" ),0)*1"
+    },
+    {
+      "Header": "xA por passe decisivo",
+      "Formula/Value": "=IFERROR(CP5/EB5,0)"
+    },
+    {
+      "Header": "Criação (Jogadas Ofensivas)",
+      "Formula/Value": "=IFERROR(EB5+DS5,0)"
+    },
+    {
+      "Header": "Criação / 90",
+      "Formula/Value": "=IFERROR(CR5/L5,0)"
+    },
+    {
+      "Header": "Distância percorrida",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(ET5, \" km\", \"\")),0)"
+    },
+    {
+      "Header": "Distância /90",
+      "Formula/Value": "=IFERROR(CT5/L5,0)"
+    },
+    {
+      "Header": "Velocidade Média (em km/h)",
+      "Formula/Value": "=IFERROR((((CT5*1000)/(DK5*60))*3600)/1000,0)"
+    },
+    {
+      "Header": "Posse Desperdiçada",
+      "Formula/Value": "=IFERROR((DZ5-EA5)+(DW5-DX5)+(ED5-EE5),0)"
+    },
+    {
+      "Header": "Posse Desperdiçada /90",
+      "Formula/Value": "=IFERROR(CW5/L5,0)"
+    },
+    {
+      "Header": "Posse perdida /90",
+      "Formula/Value": "=DT5"
+    },
+    {
+      "Header": "Nota média",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(EU5, \".\", \",\")),0)"
+    },
+    {
+      "Header": "Inf",
+      "Formula/Value": "Prt"
+    },
+    {
+      "Header": "Nação",
+      "Formula/Value": "COL"
+    },
+    {
+      "Header": "Jogador",
+      "Formula/Value": "Jhojan Torres"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "23"
+    },
+    {
+      "Header": "Clube",
+      "Formula/Value": "Independiente Santa Fe"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "178 cm"
+    },
+    {
+      "Header": "Pé Preferido",
+      "Formula/Value": "Pé Direito"
+    },
+    {
+      "Header": "Valor Estimado",
+      "Formula/Value": "750m € - 1,7M €"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "22m € p/m"
+    },
+    {
+      "Header": "Expira",
+      "Formula/Value": "2027-12-31 00:00:00"
+    },
+    {
+      "Header": "Minutos",
+      "Formula/Value": "3270"
+    },
+    {
+      "Header": "Presenças",
+      "Formula/Value": "37 (4)"
+    },
+    {
+      "Header": "HdJ",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "EPG",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Golos",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Assist.",
+      "Formula/Value": "5"
+    },
+    {
+      "Header": "Amr",
+      "Formula/Value": "11"
+    },
+    {
+      "Header": "Cartões vermelhos",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "OCG",
+      "Formula/Value": "3"
+    },
+    {
+      "Header": "Poss Perd/90",
+      "Formula/Value": "9.1"
+    },
+    {
+      "Header": "xA",
+      "Formula/Value": "4.73"
+    },
+    {
+      "Header": "Faltas Cometidas",
+      "Formula/Value": "31"
+    },
+    {
+      "Header": "Cab A",
+      "Formula/Value": "44"
+    },
+    {
+      "Header": "Cabs",
+      "Formula/Value": "18"
+    },
+    {
+      "Header": "Cab Dec/90",
+      "Formula/Value": "0.1"
+    },
+    {
+      "Header": "Pas A",
+      "Formula/Value": "1275"
+    },
+    {
+      "Header": "Ps C",
+      "Formula/Value": "1158"
+    },
+    {
+      "Header": "Passes Ch",
+      "Formula/Value": "19"
+    },
+    {
+      "Header": "PeP",
+      "Formula/Value": "102"
+    },
+    {
+      "Header": "Remates",
+      "Formula/Value": "43"
+    },
+    {
+      "Header": "Rem %",
+      "Formula/Value": "17"
+    },
+    {
+      "Header": "Press. tent.",
+      "Formula/Value": "132"
+    },
+    {
+      "Header": "Press. conc.",
+      "Formula/Value": "33"
+    },
+    {
+      "Header": "T Desa",
+      "Formula/Value": "27"
+    },
+    {
+      "Header": "Des C",
+      "Formula/Value": "21"
+    },
+    {
+      "Header": "Crt D",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Blq",
+      "Formula/Value": "7"
+    },
+    {
+      "Header": "Crt",
+      "Formula/Value": "60"
+    },
+    {
+      "Header": "Rems Bloq",
+      "Formula/Value": "3"
+    },
+    {
+      "Header": "Alívios",
+      "Formula/Value": "14"
+    },
+    {
+      "Header": "Faltas Contra",
+      "Formula/Value": "12"
+    },
+    {
+      "Header": "Poss Con/90",
+      "Formula/Value": "12.2"
+    },
+    {
+      "Header": "Remates em livres",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pens",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pens M",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "243,9 km"
+    },
+    {
+      "Header": "Classificação",
+      "Formula/Value": "6.69"
+    }
+  ],
+  "⚙️Box-To-Box": [
+    {
+      "Header": "Jogador",
+      "Formula/Value": "=DF5"
+    },
+    {
+      "Header": "NAC",
+      "Formula/Value": "=DE5"
+    },
+    {
+      "Header": "Pé preferido",
+      "Formula/Value": "=DJ5"
+    },
+    {
+      "Header": "Equipe",
+      "Formula/Value": "=DH5"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(DI5,\" cm\",\"\")/100,0)"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "=DG5"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "=DL5"
+    },
+    {
+      "Header": "Fim de contrato",
+      "Formula/Value": "=IF(DM5=\"-\", \"Sem Data Final\", DM5)"
+    },
+    {
+      "Header": "Valor",
+      "Formula/Value": "=DK5"
+    },
+    {
+      "Header": "Média de jogos",
+      "Formula/Value": "=AVERAGE(L:L)"
+    },
+    {
+      "Header": "Jogos completos",
+      "Formula/Value": "=IFERROR(DN5/90,0)"
+    },
+    {
+      "Header": "Jogos Totais",
+      "Formula/Value": "=IF(ISERROR(FIND(\"(\",DO5)), VALUE(DO5), VALUE(LEFT(DO5,FIND(\"(\",DO5)-2)) + VALUE(MID(DO5,FIND(\"(\",DO5)+1,FIND(\")\",DO5)-FIND(\"(\",DO5)-1)))"
+    },
+    {
+      "Header": "Minutos por partida",
+      "Formula/Value": "=IFERROR(DN5/M5,0)"
+    },
+    {
+      "Header": "Jogos como Titular",
+      "Formula/Value": "=IFERROR(IF(ISERROR(FIND(\"(\",DM5)), \"100%\", TEXT(VALUE(LEFT(DM5,FIND(\"(\",DM5)-2)) / (VALUE(LEFT(DM5,FIND(\"(\",DM5)-2)) + VALUE(MID(DM5,FIND(\"(\",DM5)+1,FIND(\")\",DM5)-FIND(\"(\",DM5)-1))),\"0%\")),0)*1"
+    },
+    {
+      "Header": "Pênaltis batidos",
+      "Formula/Value": "=EZ5"
+    },
+    {
+      "Header": "Pênaltis marcados",
+      "Formula/Value": "=FA5"
+    },
+    {
+      "Header": "Pênaltis perdidos",
+      "Formula/Value": "=IFERROR(P5-Q5,0)"
+    },
+    {
+      "Header": "% Conversão de pênalti",
+      "Formula/Value": "=IFERROR((Q5*1)/P5,0.0000001)"
+    },
+    {
+      "Header": "Gols",
+      "Formula/Value": "=DR5"
+    },
+    {
+      "Header": "Assistências",
+      "Formula/Value": "=DS5"
+    },
+    {
+      "Header": "Gols + Ass",
+      "Formula/Value": "=IFERROR(T5+U5,0)"
+    },
+    {
+      "Header": "Bolas recuperadas",
+      "Formula/Value": "=IFERROR((EO5+ER5+EP5),0)"
+    },
+    {
+      "Header": "Bolas recuperadas / 90",
+      "Formula/Value": "=IFERROR(W5/L5,0)"
+    },
+    {
+      "Header": "Finalizações realizadas",
+      "Formula/Value": "=EJ5-P5"
+    },
+    {
+      "Header": "Finalizações /90",
+      "Formula/Value": "=IFERROR(Y5/L5,0)"
+    },
+    {
+      "Header": "Finalizações no Gol",
+      "Formula/Value": "=EK5-Q5"
+    },
+    {
+      "Header": "Finalizações no Gol /90",
+      "Formula/Value": "=IFERROR(AA5/L5,0)"
+    },
+    {
+      "Header": "% Finalizações Certas",
+      "Formula/Value": "=IFERROR((AA5*1)/Y5,0)"
+    },
+    {
+      "Header": "Taxa de Conversão %",
+      "Formula/Value": "=DR5/EJ5"
+    },
+    {
+      "Header": "Gols esperados (xG)",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(DX5,\".\",\",\" )*1,0)"
+    },
+    {
+      "Header": "xG /90",
+      "Formula/Value": "=IFERROR(AE5/L5,0)"
+    },
+    {
+      "Header": "xG (Sem pênaltis)",
+      "Formula/Value": "=(AE5)-(EZ5*0.79)"
+    },
+    {
+      "Header": "xG (Sem pênaltis) /90",
+      "Formula/Value": "=IFERROR((AG5/L5),0)"
+    },
+    {
+      "Header": "Assistências Esperadas (xA)",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(DY5,\".\",\",\" )*1,0)"
+    },
+    {
+      "Header": "xA /90",
+      "Formula/Value": "=IFERROR(AI5/L5,0)"
+    },
+    {
+      "Header": "xA + xG sem pen",
+      "Formula/Value": "=AI5+AG5"
+    },
+    {
+      "Header": "xA + xG /90",
+      "Formula/Value": "=IFERROR(AK5/L5,0)"
+    },
+    {
+      "Header": "Man of the match",
+      "Formula/Value": "=DP5"
+    },
+    {
+      "Header": "Minutos pra ser o homem do jogo",
+      "Formula/Value": "=IFERROR(DN5/AM5,5000)"
+    },
+    {
+      "Header": "% de vezes que foi eleito o Homem do Jogo",
+      "Formula/Value": "=IFERROR((AM5*1)/L5,0)"
+    },
+    {
+      "Header": "Interceptações",
+      "Formula/Value": "=ER5"
+    },
+    {
+      "Header": "Int / 90",
+      "Formula/Value": "=IFERROR(ER5/L5,0)"
+    },
+    {
+      "Header": "Desarmes Tentados",
+      "Formula/Value": "=EN5+DZ5"
+    },
+    {
+      "Header": "Des disputados /90",
+      "Formula/Value": "=IFERROR(AR5/L5,0)"
+    },
+    {
+      "Header": "Desarmes Ganhos",
+      "Formula/Value": "=EO5"
+    },
+    {
+      "Header": "Desarmes G/90",
+      "Formula/Value": "=AT5/L5"
+    },
+    {
+      "Header": "Dribles Sofridos",
+      "Formula/Value": "=IFERROR(AR5-AT5,0)"
+    },
+    {
+      "Header": "Dribles Sofridos /90",
+      "Formula/Value": "=AV5/L5"
+    },
+    {
+      "Header": "% Des Ganhos",
+      "Formula/Value": "=IFERROR(AT5/AR5,0)"
+    },
+    {
+      "Header": "Faltas cometidas",
+      "Formula/Value": "=DZ5"
+    },
+    {
+      "Header": "Faltas/90",
+      "Formula/Value": "=IFERROR(AY5/L5,0)"
+    },
+    {
+      "Header": "Faltas sem cartão",
+      "Formula/Value": "=IFERROR(AY5-(BH5+BI5),0)"
+    },
+    {
+      "Header": "Cartões por falta cometida",
+      "Formula/Value": "=IFERROR((BJ5*1)/AY5,0)"
+    },
+    {
+      "Header": "Movimentos de pressão tentados",
+      "Formula/Value": "=EL5"
+    },
+    {
+      "Header": "Mov Press T/90",
+      "Formula/Value": "=IFERROR(BC5/L5,0)"
+    },
+    {
+      "Header": "Movimentos de pressão ganhos",
+      "Formula/Value": "=EM5"
+    },
+    {
+      "Header": "Mov Press Ganhos /90",
+      "Formula/Value": "=IFERROR(BE5/L5,0)"
+    },
+    {
+      "Header": "% Pressão ganha/90",
+      "Formula/Value": "=IFERROR((BE5*1)/BC5,0)"
+    },
+    {
+      "Header": "Amarelos",
+      "Formula/Value": "=DT5"
+    },
+    {
+      "Header": "Vermelhos",
+      "Formula/Value": "=DU5"
+    },
+    {
+      "Header": "Total cartões",
+      "Formula/Value": "=IFERROR(DT5+DU5,0)"
+    },
+    {
+      "Header": "Lances disputados",
+      "Formula/Value": "=IFERROR((AY5+EP5+EO5),0)"
+    },
+    {
+      "Header": "Lances disputados e ganhos de forma limpa",
+      "Formula/Value": "=IFERROR(BK5-AY5,0)"
+    },
+    {
+      "Header": "% Lances disputados e ganhos de forma limpa",
+      "Formula/Value": "=IFERROR((BL5*1)/BK5,0)"
+    },
+    {
+      "Header": "%Faltas limpas (Sem cartão)",
+      "Formula/Value": "=IFERROR((BA5)/AY5,0)"
+    },
+    {
+      "Header": "Desarmes Decisivos",
+      "Formula/Value": "=EP5"
+    },
+    {
+      "Header": "Desarmes Decisivos / 90",
+      "Formula/Value": "=IFERROR(BO5/L5,0)"
+    },
+    {
+      "Header": "Cruzamentos Tentados",
+      "Formula/Value": "=EW5"
+    },
+    {
+      "Header": "Cruzamentos com sucesso",
+      "Formula/Value": "=EX5"
+    },
+    {
+      "Header": "% Cruzamentos certos",
+      "Formula/Value": "=IFERROR((BR5*1)/BQ5,0)"
+    },
+    {
+      "Header": "Passes tentados",
+      "Formula/Value": "=EE5"
+    },
+    {
+      "Header": "Passes certos",
+      "Formula/Value": "=EF5"
+    },
+    {
+      "Header": "Passes certos  - errados / Jogo",
+      "Formula/Value": "=IFERROR((BU5-BW5)/(DN5/90),0)"
+    },
+    {
+      "Header": "Passes errados",
+      "Formula/Value": "=IFERROR(BT5-BU5,0)"
+    },
+    {
+      "Header": "% Passes certos",
+      "Formula/Value": "=IFERROR(BU5/BT5,0)"
+    },
+    {
+      "Header": "Cabeceios Disputados",
+      "Formula/Value": "=EB5"
+    },
+    {
+      "Header": "Cabeceios Disputados /90",
+      "Formula/Value": "=IFERROR(BY5/L5,0)"
+    },
+    {
+      "Header": "Cabeceios Ganhos",
+      "Formula/Value": "=EC5"
+    },
+    {
+      "Header": "Cabeceios Perdidos",
+      "Formula/Value": "=IFERROR(EB5-EC5,0)"
+    },
+    {
+      "Header": "% Cabs Ganhos",
+      "Formula/Value": "=IFERROR((EC5*1)/EB5,0)"
+    },
+    {
+      "Header": "Participação por jogo (passes, fnt, fin, criação, roubadas de bola, etc)",
+      "Formula/Value": "=IFERROR((DR5+DS5+EA5+EO5+ER5+EP5+EB5+EI5+DV5+EG5+EE5)/L5,0)"
+    },
+    {
+      "Header": "Lances Tentados (Remate, Passe, Finta, etc)",
+      "Formula/Value": "=IFERROR((AI5+AR5+BK5+BT5+BY5+EJ5+EL5+EW5),0)"
+    },
+    {
+      "Header": "Lances Tentados /90",
+      "Formula/Value": "=IFERROR(CE5/L5,0)"
+    },
+    {
+      "Header": "Lances Conseguidos",
+      "Formula/Value": "=IFERROR((T5*1.5)+(AT5+BL5+BU5+CA5+EM5+EX5)+(EK5*0.75)+(DR5*0.75),0)"
+    },
+    {
+      "Header": "Lances Conseguidos /90",
+      "Formula/Value": "=IFERROR(CG5/L5,0)"
+    },
+    {
+      "Header": "% Acerto",
+      "Formula/Value": "=IFERROR((CG5*1)/CE5,0)"
+    },
+    {
+      "Header": "Chances criadas",
+      "Formula/Value": "=IFERROR(EG5+DV5+AI5+EX5,0)"
+    },
+    {
+      "Header": "Chances criadas / 90",
+      "Formula/Value": "=IFERROR(CJ5/L5,0)"
+    },
+    {
+      "Header": "Passes Decisivos",
+      "Formula/Value": "=EG5"
+    },
+    {
+      "Header": "Pass D /90",
+      "Formula/Value": "=IFERROR(CL5/L5,0)"
+    },
+    {
+      "Header": "Passes Decisivos pra uma assistência",
+      "Formula/Value": "=IFERROR(EG5/DS5,25)"
+    },
+    {
+      "Header": "Pass Decisivos que se converteram em assistências",
+      "Formula/Value": "=IFERROR(DS5/EG5,0)"
+    },
+    {
+      "Header": "Assistências Claras que a Equipe desperdiçou",
+      "Formula/Value": "=IFERROR(AI5/EG5,0)"
+    },
+    {
+      "Header": "xA / Passe Decisivo",
+      "Formula/Value": "=IFERROR(AI5/EG5,0)"
+    },
+    {
+      "Header": "Bolas Interceptadas",
+      "Formula/Value": "=IFERROR(ET5+ER5+EQ5+ES5+(EP5*0.5),0)"
+    },
+    {
+      "Header": "Bolas Interceptadas /90",
+      "Formula/Value": "=IFERROR(CR5/L5,0)"
+    },
+    {
+      "Header": "Bolas roubadas",
+      "Formula/Value": "=IFERROR(EO5+EM5+(EP5*0.5),0)"
+    },
+    {
+      "Header": "Bolas roubadas / 90",
+      "Formula/Value": "=IFERROR(CT5/L5,0)"
+    },
+    {
+      "Header": "Ações no último terço (Finta, Pass D, OGC, etc)",
+      "Formula/Value": "=IFERROR(EJ5+EG5+DV5+EI5+EX5,0)"
+    },
+    {
+      "Header": "Último terço/90",
+      "Formula/Value": "=IFERROR(CV5/L5,0)"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(FB5, \" km\", \"\")),0)"
+    },
+    {
+      "Header": "Dist / 90",
+      "Formula/Value": "=IFERROR(CX5/L5,0)"
+    },
+    {
+      "Header": "Posse Desperdiçada",
+      "Formula/Value": "=IFERROR((EJ5-EK5)+(EE5-EF5),0)"
+    },
+    {
+      "Header": "Posse Desperdiçada /90",
+      "Formula/Value": "=IFERROR(CZ5/L5,0)"
+    },
+    {
+      "Header": "Posse perdida /90",
+      "Formula/Value": "=DW5"
+    },
+    {
+      "Header": "Nota média",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(FC5, \".\", \",\")),0)"
+    },
+    {
+      "Header": "Inf",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Nação",
+      "Formula/Value": "CHI"
+    },
+    {
+      "Header": "Jogador",
+      "Formula/Value": "Israel Poblete"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "31"
+    },
+    {
+      "Header": "Clube",
+      "Formula/Value": "Universidad de Chile"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "173 cm"
+    },
+    {
+      "Header": "Pé Preferido",
+      "Formula/Value": "Pé Direito"
+    },
+    {
+      "Header": "Valor Estimado",
+      "Formula/Value": "Não está à venda"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "14,25m € p/m"
+    },
+    {
+      "Header": "Expira",
+      "Formula/Value": "2028-12-31 00:00:00"
+    },
+    {
+      "Header": "Minutos",
+      "Formula/Value": "3292"
+    },
+    {
+      "Header": "Presenças",
+      "Formula/Value": "37"
+    },
+    {
+      "Header": "HdJ",
+      "Formula/Value": "3"
+    },
+    {
+      "Header": "EPG",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Golos",
+      "Formula/Value": "7"
+    },
+    {
+      "Header": "Assist.",
+      "Formula/Value": "9"
+    },
+    {
+      "Header": "Amr",
+      "Formula/Value": "1"
+    },
+    {
+      "Header": "Cartões vermelhos",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "OCG",
+      "Formula/Value": "10"
+    },
+    {
+      "Header": "Poss Perd/90",
+      "Formula/Value": "15.3"
+    },
+    {
+      "Header": "xG",
+      "Formula/Value": "9.39"
+    },
+    {
+      "Header": "xA",
+      "Formula/Value": "5.85"
+    },
+    {
+      "Header": "Faltas Cometidas",
+      "Formula/Value": "41"
+    },
+    {
+      "Header": "Faltas Contra",
+      "Formula/Value": "29"
+    },
+    {
+      "Header": "Cab A",
+      "Formula/Value": "135"
+    },
+    {
+      "Header": "Cabs",
+      "Formula/Value": "23"
+    },
+    {
+      "Header": "Cab Dec/90",
+      "Formula/Value": "0.1"
+    },
+    {
+      "Header": "Pas A",
+      "Formula/Value": "1613"
+    },
+    {
+      "Header": "Ps C",
+      "Formula/Value": "1445"
+    },
+    {
+      "Header": "Passes Ch",
+      "Formula/Value": "40"
+    },
+    {
+      "Header": "PeP",
+      "Formula/Value": "107"
+    },
+    {
+      "Header": "Fnt",
+      "Formula/Value": "118"
+    },
+    {
+      "Header": "Remates",
+      "Formula/Value": "83"
+    },
+    {
+      "Header": "Rem %",
+      "Formula/Value": "22"
+    },
+    {
+      "Header": "Press. tent.",
+      "Formula/Value": "338"
+    },
+    {
+      "Header": "Press. conc.",
+      "Formula/Value": "73"
+    },
+    {
+      "Header": "T Desa",
+      "Formula/Value": "65"
+    },
+    {
+      "Header": "Des C",
+      "Formula/Value": "48"
+    },
+    {
+      "Header": "Crt D",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Blq",
+      "Formula/Value": "16"
+    },
+    {
+      "Header": "Crt",
+      "Formula/Value": "86"
+    },
+    {
+      "Header": "Rems Bloq",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Alívios",
+      "Formula/Value": "20"
+    },
+    {
+      "Header": "Poss Con/90",
+      "Formula/Value": "7.3"
+    },
+    {
+      "Header": "Remates de fora da área em cada 90 minutes",
+      "Formula/Value": "0.7"
+    },
+    {
+      "Header": "Cr T",
+      "Formula/Value": "117"
+    },
+    {
+      "Header": "Cr C",
+      "Formula/Value": "24"
+    },
+    {
+      "Header": "Remates em livres",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pens",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pens M",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "425,9 km"
+    },
+    {
+      "Header": "Classificação",
+      "Formula/Value": "7.11"
+    }
+  ],
+  "⚙️Armadores": [
+    {
+      "Header": "Jogador",
+      "Formula/Value": "=DH5"
+    },
+    {
+      "Header": "NAC",
+      "Formula/Value": "=DG5"
+    },
+    {
+      "Header": "Pé preferido",
+      "Formula/Value": "=DL5"
+    },
+    {
+      "Header": "Equipe",
+      "Formula/Value": "=DJ5"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(DK5,\" cm\",\"\")/100,0)"
+    },
+    {
+      "Header": "Data Final do contrato",
+      "Formula/Value": "=IF(DO5=\"-\", \"Sem Data Final\", DO5)"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "=DI5"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "=DN5"
+    },
+    {
+      "Header": "Valor",
+      "Formula/Value": "=DM5"
+    },
+    {
+      "Header": "Média de jogos",
+      "Formula/Value": "=AVERAGE(L:L)"
+    },
+    {
+      "Header": "Jogos completos",
+      "Formula/Value": "=DP5/90"
+    },
+    {
+      "Header": "Jogos Totais",
+      "Formula/Value": "=IF(ISERROR(FIND(\"(\",DQ5)), VALUE(DQ5), VALUE(LEFT(DQ5,FIND(\"(\",DQ5)-2)) + VALUE(MID(DQ5,FIND(\"(\",DQ5)+1,FIND(\")\",DQ5)-FIND(\"(\",DQ5)-1)))"
+    },
+    {
+      "Header": "Minutos por partida",
+      "Formula/Value": "=IFERROR(DP5/M5,0)"
+    },
+    {
+      "Header": "Jogos como Titular",
+      "Formula/Value": "=IFERROR(IF(ISERROR(FIND(\"(\",DQ5)), \"100%\", TEXT(VALUE(LEFT(DQ5,FIND(\"(\",DQ5)-2)) / (VALUE(LEFT(DQ5,FIND(\"(\",DQ5)-2)) + VALUE(MID(DQ5,FIND(\"(\",DQ5)+1,FIND(\")\",DQ5)-FIND(\"(\",DQ5)-1))),\"0%\")),0)*1"
+    },
+    {
+      "Header": "Gols",
+      "Formula/Value": "=DS5"
+    },
+    {
+      "Header": "Assist",
+      "Formula/Value": "=DT5"
+    },
+    {
+      "Header": "Gols + Ass",
+      "Formula/Value": "=P5+Q5"
+    },
+    {
+      "Header": "Man of the match",
+      "Formula/Value": "=DR5"
+    },
+    {
+      "Header": "Minutos pra ser o homem do jogo",
+      "Formula/Value": "=IFERROR(DP5/S5,5000)"
+    },
+    {
+      "Header": "% de vezes que foi eleito o Homem do Jogo",
+      "Formula/Value": "=(S5*1)/L5"
+    },
+    {
+      "Header": "Tentativas de  Criar  uma chance em Bola Parada",
+      "Formula/Value": "=EL5-EJ5"
+    },
+    {
+      "Header": "Tentativas/90",
+      "Formula/Value": "=IFERROR(V5/L5,0)"
+    },
+    {
+      "Header": "Chances Criadas em  Bolas Paradas",
+      "Formula/Value": "=EM5-EK5"
+    },
+    {
+      "Header": "Chances C /90",
+      "Formula/Value": "=IFERROR(X5/L5,0)"
+    },
+    {
+      "Header": "% Aproveitamento das Tentativas de Criar chance em  BP",
+      "Formula/Value": "=IFERROR(X5/V5,0)"
+    },
+    {
+      "Header": "Cobranças de falta (Diretas)",
+      "Formula/Value": "=EP5"
+    },
+    {
+      "Header": "Pênaltis batidos",
+      "Formula/Value": "=EQ5"
+    },
+    {
+      "Header": "Pênaltis marcados",
+      "Formula/Value": "=ER5"
+    },
+    {
+      "Header": "Pênaltis perdidos",
+      "Formula/Value": "=EQ5-ER5"
+    },
+    {
+      "Header": "% Conversão de pênalti",
+      "Formula/Value": "=IFERROR((ER5*1)/EQ5,0.0000001)"
+    },
+    {
+      "Header": "Gols",
+      "Formula/Value": "=DS5"
+    },
+    {
+      "Header": "Assistências",
+      "Formula/Value": "=DT5"
+    },
+    {
+      "Header": "Gols + Ass",
+      "Formula/Value": "=AF5+AG5"
+    },
+    {
+      "Header": "Gols sem pênalti",
+      "Formula/Value": "=AF5-ER5"
+    },
+    {
+      "Header": "Gols de fora da área",
+      "Formula/Value": "=EN5"
+    },
+    {
+      "Header": "Gols/90",
+      "Formula/Value": "=IFERROR((P5/L5),0)"
+    },
+    {
+      "Header": "Ast/90",
+      "Formula/Value": "=IFERROR((Q5/L5),0)"
+    },
+    {
+      "Header": "Gols+ Assist / 90",
+      "Formula/Value": "=IFERROR((P5+Q5)/L5,0)"
+    },
+    {
+      "Header": "Fintas",
+      "Formula/Value": "=EE5"
+    },
+    {
+      "Header": "Fintas /90",
+      "Formula/Value": "=IFERROR(AN5/L5,0)"
+    },
+    {
+      "Header": "xG",
+      "Formula/Value": "=SUBSTITUTE(DW5,\".\",\",\" )*1"
+    },
+    {
+      "Header": "xG sem pênaltis",
+      "Formula/Value": "=IFERROR(AP5-(EQ5*0.79),0)"
+    },
+    {
+      "Header": "non Pen xG /90",
+      "Formula/Value": "=IFERROR(AQ5/L5,0)"
+    },
+    {
+      "Header": "Assistências Esperadas xA",
+      "Formula/Value": "=SUBSTITUTE(DX5,\".\",\",\" )*1"
+    },
+    {
+      "Header": "xA /90",
+      "Formula/Value": "=IFERROR(AS5/L5,0)"
+    },
+    {
+      "Header": "xG + xA",
+      "Formula/Value": "=AQ5+AS5"
+    },
+    {
+      "Header": "xG + xA /90",
+      "Formula/Value": "=IFERROR(AU5/L5,0)"
+    },
+    {
+      "Header": "xA Conclusion",
+      "Formula/Value": "=IFERROR(AS5/(AS5+DT5),0)"
+    },
+    {
+      "Header": "xG Conclusion",
+      "Formula/Value": "=IFERROR(DS5/(DS5+AP5),0)"
+    },
+    {
+      "Header": "Cruzamentos Tentados",
+      "Formula/Value": "=EJ5"
+    },
+    {
+      "Header": "Cruzamentos com sucesso",
+      "Formula/Value": "=EK5"
+    },
+    {
+      "Header": "% Cruzamentos certos",
+      "Formula/Value": "=IFERROR((AZ5*1)/AY5,0)"
+    },
+    {
+      "Header": "Passes tentados",
+      "Formula/Value": "=EA5"
+    },
+    {
+      "Header": "Passes completados",
+      "Formula/Value": "=EB5"
+    },
+    {
+      "Header": "Passes Tentados / 90",
+      "Formula/Value": "=IFERROR(EA5/L5,0)"
+    },
+    {
+      "Header": "Passes Completados / 90",
+      "Formula/Value": "=IFERROR(EB5/L5,0)"
+    },
+    {
+      "Header": "Média de passes errados / 90",
+      "Formula/Value": "=IFERROR(BD5-BE5,0)"
+    },
+    {
+      "Header": "% passes certos",
+      "Formula/Value": "=IFERROR((EB5*1)/EA5,0)"
+    },
+    {
+      "Header": "Passes errados",
+      "Formula/Value": "=IFERROR(EA5-EB5,0)"
+    },
+    {
+      "Header": "%Passes errados",
+      "Formula/Value": "=100%-BG5"
+    },
+    {
+      "Header": "Passes Decisivos (Total)",
+      "Formula/Value": "=IFERROR(EC5,0)"
+    },
+    {
+      "Header": "Passes Decisivos /90",
+      "Formula/Value": "=IFERROR(BJ5/L5,0)"
+    },
+    {
+      "Header": "Passes Decisivos pra uma assistência",
+      "Formula/Value": "=IFERROR(EC5/DT5,25)"
+    },
+    {
+      "Header": "Pass Decisivos que se converteram em assistências",
+      "Formula/Value": "=IFERROR(DT5/EC5,0)"
+    },
+    {
+      "Header": "Assistências Claras que a Equipe desperdiçou",
+      "Formula/Value": "=IFERROR((AS5-DT5),0)"
+    },
+    {
+      "Header": "xA / Passe Decisivo",
+      "Formula/Value": "=IFERROR(AS5/EC5,0)"
+    },
+    {
+      "Header": "Minutos pra fazer um Passe Decisivo",
+      "Formula/Value": "=IFERROR(DP5/EC5,0)"
+    },
+    {
+      "Header": "Minutos pra criar uma chance perigosa",
+      "Formula/Value": "=IFERROR(DP5/((DU5-EQ5)+EG5+EC5),0)"
+    },
+    {
+      "Header": "Gols não esperados",
+      "Formula/Value": "=IFERROR(DS5-AP5,0)"
+    },
+    {
+      "Header": "nPen xG (xG=0,79)",
+      "Formula/Value": "=IFERROR(BR5-(ER5*0.79),0)"
+    },
+    {
+      "Header": "Finalizações",
+      "Formula/Value": "=IFERROR(EF5-EQ5,0)"
+    },
+    {
+      "Header": "Finalizações /90",
+      "Formula/Value": "=IFERROR(BT5/L5,0)"
+    },
+    {
+      "Header": "Finalizações no gol/90",
+      "Formula/Value": "=IFERROR((EG5-ER5)/L5,0)"
+    },
+    {
+      "Header": "% Finalizações que foram no gol",
+      "Formula/Value": "=IFERROR(((EG5-ER5)/(EF5-EQ5)),0)"
+    },
+    {
+      "Header": "Finalizações pra um gol",
+      "Formula/Value": "=IFERROR(BT5/(DS5-ER5),50)"
+    },
+    {
+      "Header": "Finalizações certas pra um gol",
+      "Formula/Value": "=IFERROR(EG5/DS5,50)"
+    },
+    {
+      "Header": "Finalizações que se converteram em gols",
+      "Formula/Value": "=IFERROR(AI5/BT5,0)"
+    },
+    {
+      "Header": "Gols dentro da área",
+      "Formula/Value": "=DS5-EN5-EQ5"
+    },
+    {
+      "Header": "Gols de fora da área",
+      "Formula/Value": "=EN5"
+    },
+    {
+      "Header": "Gols de pênalti",
+      "Formula/Value": "=EQ5"
+    },
+    {
+      "Header": "Conversão dos chutes de fora da  área",
+      "Formula/Value": "=(EN5/L5)/EO5"
+    },
+    {
+      "Header": "Faltas sofridas",
+      "Formula/Value": "=DV5"
+    },
+    {
+      "Header": "Faltas Sof / jogo",
+      "Formula/Value": "=IFERROR(CE5/L5,0)"
+    },
+    {
+      "Header": "Ações com Bola Tentadas",
+      "Formula/Value": "=IFERROR(EJ5+EF5+EE5+EC5,0)"
+    },
+    {
+      "Header": "Ações com Bola T/90",
+      "Formula/Value": "=IFERROR(CG5/L5,0)"
+    },
+    {
+      "Header": "Ações com Bola (Completadas)",
+      "Formula/Value": "=IFERROR(EK5+EG5+EE5+EC5,0)"
+    },
+    {
+      "Header": "Ações com Bola Comp /90",
+      "Formula/Value": "=IFERROR(CI5/L5,0)"
+    },
+    {
+      "Header": "% Sucesso de ações com bola",
+      "Formula/Value": "=IFERROR(CI5/CG5,0)"
+    },
+    {
+      "Header": "Ações que geraram finalizações ao gol",
+      "Formula/Value": "=IFERROR(EG5+AS5+(DU5-EQ5)+EC5+EN5+EK5+(DS5*0.5)+(DT5*0.5),0)"
+    },
+    {
+      "Header": "Ações que geraram finalizações ao gol /90",
+      "Formula/Value": "=IFERROR(CL5/L5,0)"
+    },
+    {
+      "Header": "Chances de perigo criadas",
+      "Formula/Value": "=IFERROR((EC5+(DU5-EQ5)+AS5)+(DS5*0.75)+(DT5*0.75)+EG5+EK5,0)"
+    },
+    {
+      "Header": "Chances de perigo criadas /90",
+      "Formula/Value": "=IFERROR(CN5/L5,0)"
+    },
+    {
+      "Header": "Participação do jogador a cada 90 minutos (fnt, cabs, pass, finalizaçõs)",
+      "Formula/Value": "=IFERROR((EA5+EE5+EK5+EM5+EP5+ER5+EI5+EF5+DU5+EC5+ED5)/L5,0)"
+    },
+    {
+      "Header": "Participação em passes / 90",
+      "Formula/Value": "=IFERROR((EB5+EC5+DU5+ED5)/L5,0)"
+    },
+    {
+      "Header": "Passes em construção de jogada ofensiva",
+      "Formula/Value": "=IFERROR((EC5+ED5),0)"
+    },
+    {
+      "Header": "Passes em construção de jog OF /90",
+      "Formula/Value": "=IFERROR(CR5/L5,0)"
+    },
+    {
+      "Header": "Ações no último terço (Fintas, chances criadas, remates)",
+      "Formula/Value": "=IFERROR(EE5+EF5+EC5+(DU5-EQ5)+ED5+EJ5,0)"
+    },
+    {
+      "Header": "Ações no último terço / 90",
+      "Formula/Value": "=IFERROR(CT5/L5,0)"
+    },
+    {
+      "Header": "Tentativas de marcar um gol",
+      "Formula/Value": "=IFERROR(EC5+DU5+EF5,0)"
+    },
+    {
+      "Header": "Tentativas de marcar um gol / 90",
+      "Formula/Value": "=IFERROR(CV5/L5,0)"
+    },
+    {
+      "Header": "Posse Desperdiçada",
+      "Formula/Value": "=(EF5-EG5)+(EA5-EB5)+(EJ5-EK5)"
+    },
+    {
+      "Header": "Posse Desperdiçada /90",
+      "Formula/Value": "=IFERROR(CX5/L5,0)"
+    },
+    {
+      "Header": "Posse perdida /90",
+      "Formula/Value": "=DV5"
+    },
+    {
+      "Header": "Distância percorrida (Total)",
+      "Formula/Value": "=VALUE(SUBSTITUTE(ET5, \" km\", \"\"))"
+    },
+    {
+      "Header": "Dist / 90",
+      "Formula/Value": "=IFERROR(DA5/L5,0)"
+    },
+    {
+      "Header": "Sprints de alta intensidade",
+      "Formula/Value": "=DD5*L5"
+    },
+    {
+      "Header": "Sprints/90",
+      "Formula/Value": "=ES5"
+    },
+    {
+      "Header": "Nota média",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(EU5, \".\", \",\")),0)"
+    },
+    {
+      "Header": "Inf",
+      "Formula/Value": "Les"
+    },
+    {
+      "Header": "Nação",
+      "Formula/Value": "BRA"
+    },
+    {
+      "Header": "Jogador",
+      "Formula/Value": "Matheuzinho"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "28"
+    },
+    {
+      "Header": "Clube",
+      "Formula/Value": "Vitória"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "165 cm"
+    },
+    {
+      "Header": "Pé Preferido",
+      "Formula/Value": "Pé Esquerdo"
+    },
+    {
+      "Header": "Valor Estimado",
+      "Formula/Value": "1M € - 2,3M €"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "56,5m € p/m"
+    },
+    {
+      "Header": "Expira",
+      "Formula/Value": "2029-12-31 00:00:00"
+    },
+    {
+      "Header": "Minutos",
+      "Formula/Value": "2408"
+    },
+    {
+      "Header": "Presenças",
+      "Formula/Value": "30 (3)"
+    },
+    {
+      "Header": "HdJ",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Golos",
+      "Formula/Value": "6"
+    },
+    {
+      "Header": "Assist.",
+      "Formula/Value": "7"
+    },
+    {
+      "Header": "OCG",
+      "Formula/Value": "14"
+    },
+    {
+      "Header": "Poss Perd/90",
+      "Formula/Value": "12.6"
+    },
+    {
+      "Header": "xG",
+      "Formula/Value": "7.48"
+    },
+    {
+      "Header": "xA",
+      "Formula/Value": "7.01"
+    },
+    {
+      "Header": "Faltas Cometidas",
+      "Formula/Value": "20"
+    },
+    {
+      "Header": "Faltas Contra",
+      "Formula/Value": "30"
+    },
+    {
+      "Header": "Pas A",
+      "Formula/Value": "1156"
+    },
+    {
+      "Header": "Ps C",
+      "Formula/Value": "1023"
+    },
+    {
+      "Header": "Passes Ch",
+      "Formula/Value": "74"
+    },
+    {
+      "Header": "PeP",
+      "Formula/Value": "84"
+    },
+    {
+      "Header": "Fnt",
+      "Formula/Value": "59"
+    },
+    {
+      "Header": "Remates",
+      "Formula/Value": "76"
+    },
+    {
+      "Header": "Rem %",
+      "Formula/Value": "32"
+    },
+    {
+      "Header": "Press. tent.",
+      "Formula/Value": "212"
+    },
+    {
+      "Header": "Press. conc.",
+      "Formula/Value": "57"
+    },
+    {
+      "Header": "CT-JA",
+      "Formula/Value": "48"
+    },
+    {
+      "Header": "CC-JA",
+      "Formula/Value": "11"
+    },
+    {
+      "Header": "Cr T",
+      "Formula/Value": "168"
+    },
+    {
+      "Header": "Cr C",
+      "Formula/Value": "29"
+    },
+    {
+      "Header": "Golos marcados de fora da área",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Remates de fora da área em cada 90 minutes",
+      "Formula/Value": "1.4"
+    },
+    {
+      "Header": "Remates em livres",
+      "Formula/Value": "3"
+    },
+    {
+      "Header": "Pens",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pens M",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Sprints/90",
+      "Formula/Value": "12.1"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "336,2 km"
+    },
+    {
+      "Header": "Classificação",
+      "Formula/Value": "6.95"
+    }
+  ],
+  "🎯Avançados": [
+    {
+      "Header": "Jogador",
+      "Formula/Value": "=EM5"
+    },
+    {
+      "Header": "NAC",
+      "Formula/Value": "=EL5"
+    },
+    {
+      "Header": "Pé preferido",
+      "Formula/Value": "=EQ5"
+    },
+    {
+      "Header": "Equipe",
+      "Formula/Value": "=EO5"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(EP5,\" cm\",\"\")/100,0)"
+    },
+    {
+      "Header": "Data Final do contrato",
+      "Formula/Value": "=IF(ET5=\"-\", \"Sem Data Final\", ET5)"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "=EN5"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "=ES5"
+    },
+    {
+      "Header": "Valor Estimado",
+      "Formula/Value": "=ER5"
+    },
+    {
+      "Header": "Média de jogos",
+      "Formula/Value": "=IFERROR(AVERAGE(L:L),0)"
+    },
+    {
+      "Header": "Jogos completos",
+      "Formula/Value": "=IFERROR(EU5/90,0)"
+    },
+    {
+      "Header": "Jogos Totais",
+      "Formula/Value": "=IFERROR(IF(ISERROR(FIND(\"(\",EV5)), VALUE(EV5), VALUE(LEFT(EV5,FIND(\"(\",EV5)-2)) + VALUE(MID(EV5,FIND(\"(\",EV5)+1,FIND(\")\",EV5)-FIND(\"(\",EV5)-1))),0)"
+    },
+    {
+      "Header": "Minutos por partida",
+      "Formula/Value": "=IFERROR(EU5/M5,0)"
+    },
+    {
+      "Header": "Jogos como Titular",
+      "Formula/Value": "=IFERROR(IF(ISERROR(FIND(\"(\",EV5)), \"100%\", TEXT(VALUE(LEFT(EV5,FIND(\"(\",EV5)-2)) / (VALUE(LEFT(EV5,FIND(\"(\",EV5)-2)) + VALUE(MID(EV5,FIND(\"(\",EV5)+1,FIND(\")\",EV5)-FIND(\"(\",EV5)-1))),\"0%\")),0)*1"
+    },
+    {
+      "Header": "Gols na carreira",
+      "Formula/Value": "=FA5"
+    },
+    {
+      "Header": "Média de gols em toda a Carreira",
+      "Formula/Value": "=IFERROR(FA5/FB5,0)"
+    },
+    {
+      "Header": "Média gols / partida",
+      "Formula/Value": "=IFERROR(EX5/L5,0)"
+    },
+    {
+      "Header": "Média gols + ass / partida",
+      "Formula/Value": "=IFERROR((X5+Y5)/L5,0)"
+    },
+    {
+      "Header": "Ass / 90",
+      "Formula/Value": "=IFERROR((Y5)/L5,0)"
+    },
+    {
+      "Header": "Man of the match",
+      "Formula/Value": "=EW5"
+    },
+    {
+      "Header": "Minutos pra ser o homem do jogo",
+      "Formula/Value": "=IFERROR(EU5/U5,5000)"
+    },
+    {
+      "Header": "% de vezes que foi eleito o Homem do Jogo",
+      "Formula/Value": "=IFERROR(U5/L5,0)"
+    },
+    {
+      "Header": "Gols",
+      "Formula/Value": "=EX5"
+    },
+    {
+      "Header": "Assist",
+      "Formula/Value": "=EY5"
+    },
+    {
+      "Header": "Gols + Ass",
+      "Formula/Value": "=IFERROR(X5+Y5,0)"
+    },
+    {
+      "Header": "Gols de dentro da área",
+      "Formula/Value": "=EX5-GD5-FZ5"
+    },
+    {
+      "Header": "Gols de fora da área",
+      "Formula/Value": "=FZ5"
+    },
+    {
+      "Header": "Gols de Penaltis",
+      "Formula/Value": "=AY5"
+    },
+    {
+      "Header": "Gols Sem Pênalti",
+      "Formula/Value": "=IFERROR(EX5-GE5,0)"
+    },
+    {
+      "Header": "% Gols (sem penalti)",
+      "Formula/Value": "=IFERROR((X5-AC5)/X5,0)"
+    },
+    {
+      "Header": "% Ass",
+      "Formula/Value": "=IFERROR(Y5/Z5,0)"
+    },
+    {
+      "Header": "% Pênaltis",
+      "Formula/Value": "=IFERROR((AY5*1)/Z5,0)"
+    },
+    {
+      "Header": "Gols /90",
+      "Formula/Value": "=IFERROR(X5/L5,0)"
+    },
+    {
+      "Header": "Assist /90",
+      "Formula/Value": "=IFERROR(Y5/L5,0)"
+    },
+    {
+      "Header": "Gols + Assist /90",
+      "Formula/Value": "=IFERROR((EX5+EY5)/L5,0)"
+    },
+    {
+      "Header": "Gols Sem Pênalti /90",
+      "Formula/Value": "=IFERROR(AD5/L5,0)"
+    },
+    {
+      "Header": "Gols de dentro da área",
+      "Formula/Value": "=IFERROR(EX5-FZ5-GD5,0)"
+    },
+    {
+      "Header": "Gols de dentro da área /90",
+      "Formula/Value": "=IFERROR(AL5/L5,0)"
+    },
+    {
+      "Header": "Gols de fora da área",
+      "Formula/Value": "=FZ5"
+    },
+    {
+      "Header": "Gols de fora da área /90",
+      "Formula/Value": "=IFERROR(AN5/L5,0)"
+    },
+    {
+      "Header": "Chutes de fora da área /90",
+      "Formula/Value": "=GA5"
+    },
+    {
+      "Header": "% Conclusão dos chutes de fora da área",
+      "Formula/Value": "=IFERROR((AO5*1)/AP5,0)"
+    },
+    {
+      "Header": "Tentativas de  Criar  uma chance em Bola Parada",
+      "Formula/Value": "=FX5-FV5"
+    },
+    {
+      "Header": "Tentativas/90",
+      "Formula/Value": "=AR5/L5"
+    },
+    {
+      "Header": "Chances Criadas em  Bolas Paradas",
+      "Formula/Value": "=FY5-FW5"
+    },
+    {
+      "Header": "Chances C /90",
+      "Formula/Value": "=AT5/L5"
+    },
+    {
+      "Header": "% Aproveitamento das Tentativas de Criar chance em  BP",
+      "Formula/Value": "=IFERROR(AT5/AR5,)"
+    },
+    {
+      "Header": "Cobranças de falta (Diretas)",
+      "Formula/Value": "=GB5"
+    },
+    {
+      "Header": "Pênaltis batidos",
+      "Formula/Value": "=GD5"
+    },
+    {
+      "Header": "Pênaltis marcados",
+      "Formula/Value": "=GE5"
+    },
+    {
+      "Header": "Pênaltis perdidos",
+      "Formula/Value": "=IFERROR(GD5-GE5,0)"
+    },
+    {
+      "Header": "Gols de pen/90",
+      "Formula/Value": "=IFERROR(AY5/L5,0)"
+    },
+    {
+      "Header": "% Conversão de pênalti",
+      "Formula/Value": "=IFERROR((AY5*1)/GD5,0.00001)"
+    },
+    {
+      "Header": "Cabeceios disputados",
+      "Formula/Value": "=FO5"
+    },
+    {
+      "Header": "Ganhos",
+      "Formula/Value": "=FP5"
+    },
+    {
+      "Header": "Cabs Disputados /90",
+      "Formula/Value": "=IFERROR(BC5/L5,0)"
+    },
+    {
+      "Header": "Ganhos /90",
+      "Formula/Value": "=IFERROR(BD5/L5,0)"
+    },
+    {
+      "Header": "Perdidos",
+      "Formula/Value": "=IFERROR(FO5-FP5,0)"
+    },
+    {
+      "Header": "% Cabs ganhos",
+      "Formula/Value": "=IFERROR((BD5*1)/BC5,0)"
+    },
+    {
+      "Header": "% Cabs perdidos",
+      "Formula/Value": "=IFERROR(100%-BH5,0)"
+    },
+    {
+      "Header": "Impedimentos",
+      "Formula/Value": "=GC5"
+    },
+    {
+      "Header": "Impedimentos / 90",
+      "Formula/Value": "=IFERROR(GC5/L5,0)"
+    },
+    {
+      "Header": "Finalizações",
+      "Formula/Value": "=FM5"
+    },
+    {
+      "Header": "Finalizações /90",
+      "Formula/Value": "=IFERROR(BL5/L5,0)"
+    },
+    {
+      "Header": "Finalizações no Gol",
+      "Formula/Value": "=FN5"
+    },
+    {
+      "Header": "Finalizações no gol/90",
+      "Formula/Value": "=IFERROR(BN5/L5,0)"
+    },
+    {
+      "Header": "% Finalizações que foram no gol",
+      "Formula/Value": "=IFERROR((FN5*1)/FM5,0)"
+    },
+    {
+      "Header": "Finalizações pra um gol",
+      "Formula/Value": "=IFERROR((FM5-GD5)/(EX5-GE5),0)"
+    },
+    {
+      "Header": "Finalizações certas pra um gol",
+      "Formula/Value": "=IFERROR((FN5-GD5)/(EX5-GE5),0)"
+    },
+    {
+      "Header": "Finalização ou Cabeceio pra um gol",
+      "Formula/Value": "=IFERROR((FM5+FO5-GD5)/(EX5-GE5),0)"
+    },
+    {
+      "Header": "Finalizações que se converteram em gols",
+      "Formula/Value": "=IFERROR((EX5-GE5)/(FM5-GD5),0)"
+    },
+    {
+      "Header": "GPI (Goal Probability Index)",
+      "Formula/Value": "=IFERROR(((X5-AY5)/CH5)*(AD5/L5),0)"
+    },
+    {
+      "Header": "xG / Jogo",
+      "Formula/Value": "=IFERROR(CF5/(L5),0)"
+    },
+    {
+      "Header": "Gols convertidos /90",
+      "Formula/Value": "=IFERROR(EX5/L5,0)"
+    },
+    {
+      "Header": "Over xG / Under xG per 90",
+      "Formula/Value": "=IFERROR(BW5-BV5,0)"
+    },
+    {
+      "Header": "xG / chute",
+      "Formula/Value": "=IFERROR(CH5/(FM5-GD5),0)"
+    },
+    {
+      "Header": "Minutos pra tentar uma finalização",
+      "Formula/Value": "=IFERROR(EU5/FM5,0)"
+    },
+    {
+      "Header": "Minutos pra acertar uma finalização no gol",
+      "Formula/Value": "=IFERROR(EU5/FN5,0)"
+    },
+    {
+      "Header": "Minutos pra MARCAR um gol",
+      "Formula/Value": "=IFERROR(EU5/EX5,L5*90)"
+    },
+    {
+      "Header": "Minutos pra PARTICIPAR de um gol",
+      "Formula/Value": "=IFERROR(EU5/Z5,300)"
+    },
+    {
+      "Header": "Gols não esperados",
+      "Formula/Value": "=IFERROR(EX5-CF5,0)"
+    },
+    {
+      "Header": "Gols não esperados SEM PÊNALTI",
+      "Formula/Value": "=IFERROR((EX5-GE5)-CH5,0)"
+    },
+    {
+      "Header": "Gols esperados (xG)",
+      "Formula/Value": "=SUBSTITUTE(FD5,\".\",\",\" )*1"
+    },
+    {
+      "Header": "xG /90",
+      "Formula/Value": "=IFERROR(CF5/L5,0)"
+    },
+    {
+      "Header": "xG (Sem pênaltis)",
+      "Formula/Value": "=IFERROR(CF5-(GD5*0.79),0)"
+    },
+    {
+      "Header": "xG (Sem pênaltis) /90",
+      "Formula/Value": "=IFERROR((CH5/L5),0)"
+    },
+    {
+      "Header": "Assistências Esperadas (xA)",
+      "Formula/Value": "=SUBSTITUTE(FE5,\".\",\",\" )*1"
+    },
+    {
+      "Header": "xA /90",
+      "Formula/Value": "=IFERROR(CJ5/L5,0)"
+    },
+    {
+      "Header": "xA + xG sem pen",
+      "Formula/Value": "=IFERROR(CJ5+CH5,0)"
+    },
+    {
+      "Header": "xA + xG /90",
+      "Formula/Value": "=IFERROR(CL5/L5,0)"
+    },
+    {
+      "Header": "xG Conclusion",
+      "Formula/Value": "=EX5/(EX5+CF5)"
+    },
+    {
+      "Header": "Passes Decisivos",
+      "Formula/Value": "=FJ5"
+    },
+    {
+      "Header": "Pass D /90",
+      "Formula/Value": "=IFERROR(CO5/L5,0)"
+    },
+    {
+      "Header": "xA (assistências esperadas)",
+      "Formula/Value": "=CJ5"
+    },
+    {
+      "Header": "Chances criadas e não aproveitadas pela equipe / 90",
+      "Formula/Value": "=IFERROR(CJ5-EY5,0)"
+    },
+    {
+      "Header": "Cruzamentos Tentados",
+      "Formula/Value": "=FV5"
+    },
+    {
+      "Header": "Cruzamentos T /90",
+      "Formula/Value": "=CS5/L5"
+    },
+    {
+      "Header": "Cruzamentos Conseguidos",
+      "Formula/Value": "=FW5"
+    },
+    {
+      "Header": "Cruzamentos C/90",
+      "Formula/Value": "=CU5/L5"
+    },
+    {
+      "Header": "Cruzamentos",
+      "Formula/Value": "=IFERROR(CU5/CS5,0)"
+    },
+    {
+      "Header": "Fintas",
+      "Formula/Value": "=FL5"
+    },
+    {
+      "Header": "Fintas/90",
+      "Formula/Value": "=IFERROR(FL5/L5,0)"
+    },
+    {
+      "Header": "Velocidade Média (em km/h)",
+      "Formula/Value": "=IFERROR((((DJ5*1000)/(EU5*60))*3600)/1000,0)"
+    },
+    {
+      "Header": "Desarme + Pressões Tentadas",
+      "Formula/Value": "=FQ5+FS5+FF5"
+    },
+    {
+      "Header": "Des + Pres T /90",
+      "Formula/Value": "=IFERROR(DA5/L5,0)"
+    },
+    {
+      "Header": "Desarme + Pressões Concluídas",
+      "Formula/Value": "=IFERROR(FT5+FR5,0)"
+    },
+    {
+      "Header": "Des + Pres C /90",
+      "Formula/Value": "=IFERROR(DC5/L5,0)"
+    },
+    {
+      "Header": "% Des + Pressões concluídas",
+      "Formula/Value": "=IFERROR((DC5*1)/DA5,)"
+    },
+    {
+      "Header": "Interceptações",
+      "Formula/Value": "=FU5"
+    },
+    {
+      "Header": "Int/90",
+      "Formula/Value": "=IFERROR(DF5/L5,0)"
+    },
+    {
+      "Header": "Faltas Sofridas",
+      "Formula/Value": "=FG5"
+    },
+    {
+      "Header": "Faltas Sof/90",
+      "Formula/Value": "=IFERROR(DH5/L5,0)"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "=VALUE(SUBSTITUTE(GG5, \" km\", \"\"))"
+    },
+    {
+      "Header": "Dist / 90",
+      "Formula/Value": "=IFERROR(DJ5/L5,0)"
+    },
+    {
+      "Header": "Sprints de alta intensidade",
+      "Formula/Value": "=IFERROR((GF5*L5),0)"
+    },
+    {
+      "Header": "Sprints de alta intensidade/90",
+      "Formula/Value": "=GF5"
+    },
+    {
+      "Header": "Lances ofensivos tentados",
+      "Formula/Value": "=(FO5+FM5+GC5+FF5+FG5+FL5+FJ5+GD5+CF5)"
+    },
+    {
+      "Header": "Lances ofensivos / 90",
+      "Formula/Value": "=IFERROR(DN5/L5,0)"
+    },
+    {
+      "Header": "Lances ofensivos conseguidos",
+      "Formula/Value": "=(FN5+FG5+FL5+FJ5+GE5+EX5+EY5)"
+    },
+    {
+      "Header": "Lances ofensivos conseguidos / 90",
+      "Formula/Value": "=IFERROR(DP5/L5,0)"
+    },
+    {
+      "Header": "Posse Perdida",
+      "Formula/Value": "=DS5*L5"
+    },
+    {
+      "Header": "Posse Perdida /90",
+      "Formula/Value": "=FC5"
+    },
+    {
+      "Header": "Eficácia ofensiva",
+      "Formula/Value": "=IFERROR(DP5/DN5,0)"
+    },
+    {
+      "Header": "Ações que geraram finalizações ao gol",
+      "Formula/Value": "=IFERROR(FN5+CJ5+EZ5+FJ5+FZ5+FW5+(EX5*0.5)+(EY5*0.5),0)"
+    },
+    {
+      "Header": "Ações que geraram finalizações ao gol /90",
+      "Formula/Value": "=IFERROR(DU5/L5,0)"
+    },
+    {
+      "Header": "Participação do jogador a cada 90 minutos",
+      "Formula/Value": "=IFERROR((GD5+FO5+FM5+FL5+FH5+FT5)/L5,0)"
+    },
+    {
+      "Header": "Ações com Bola Tentadas",
+      "Formula/Value": "=IFERROR(FV5+FM5+FL5+FJ5,0)"
+    },
+    {
+      "Header": "Ações com Bola T/90",
+      "Formula/Value": "=DX5/L5"
+    },
+    {
+      "Header": "Ações com Bola (Completadas)",
+      "Formula/Value": "=IFERROR(FW5+FN5+FL5+FJ5,0)"
+    },
+    {
+      "Header": "Ações com Bola Comp /90",
+      "Formula/Value": "=IFERROR(DZ5/L5,0)"
+    },
+    {
+      "Header": "% Sucesso de ações com bola",
+      "Formula/Value": "=IFERROR(DZ5/DX5,0)"
+    },
+    {
+      "Header": "Ações no último terço ",
+      "Formula/Value": "=IFERROR((FL5+FM5+(EZ5-GD5)+FJ5+DA5+FW5),0)"
+    },
+    {
+      "Header": "Ações no último terço / 90",
+      "Formula/Value": "=IFERROR(EC5/L5,0)"
+    },
+    {
+      "Header": "Tentativas de marcar um gol (finalização e oportunidades criadas)",
+      "Formula/Value": "=IFERROR((FM5+EZ5+FJ5),0)"
+    },
+    {
+      "Header": "Tentativas de marcar um gol  /90",
+      "Formula/Value": "=IFERROR(EE5/L5,0)"
+    },
+    {
+      "Header": "Posse Desperdiçada",
+      "Formula/Value": "=IFERROR((FM5-FN5)+(FH5-FI5),0)"
+    },
+    {
+      "Header": "Posse Desperdiçada /90",
+      "Formula/Value": "=IFERROR(EG5/L5,0)"
+    },
+    {
+      "Header": "Posse perdida /90",
+      "Formula/Value": "=FC5"
+    },
+    {
+      "Header": "Nota média",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(GH5, \".\", \",\")),0)"
+    },
+    {
+      "Header": "Inf",
+      "Formula/Value": "Prt"
+    },
+    {
+      "Header": "Nação",
+      "Formula/Value": "BRA"
+    },
+    {
+      "Header": "Jogador",
+      "Formula/Value": "Everaldo"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "35"
+    },
+    {
+      "Header": "Clube",
+      "Formula/Value": "Bahia"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "182 cm"
+    },
+    {
+      "Header": "Pé Preferido",
+      "Formula/Value": "Pé Direito"
+    },
+    {
+      "Header": "Valor Estimado",
+      "Formula/Value": "0 € - 35m €"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "6,25m € p/m"
+    },
+    {
+      "Header": "Expira",
+      "Formula/Value": "2026-12-31 00:00:00"
+    },
+    {
+      "Header": "Minutos",
+      "Formula/Value": "1847"
+    },
+    {
+      "Header": "Presenças",
+      "Formula/Value": "16 (22)"
+    },
+    {
+      "Header": "HdJ",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Golos",
+      "Formula/Value": "13"
+    },
+    {
+      "Header": "Assist.",
+      "Formula/Value": "1"
+    },
+    {
+      "Header": "OCG",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Golos DS",
+      "Formula/Value": "89"
+    },
+    {
+      "Header": "Jogos DS",
+      "Formula/Value": "348"
+    },
+    {
+      "Header": "Poss Perd/90",
+      "Formula/Value": "11.1"
+    },
+    {
+      "Header": "xG",
+      "Formula/Value": "9,32"
+    },
+    {
+      "Header": "xA",
+      "Formula/Value": "1,17"
+    },
+    {
+      "Header": "Faltas Cometidas",
+      "Formula/Value": "24"
+    },
+    {
+      "Header": "Faltas Contra",
+      "Formula/Value": "22"
+    },
+    {
+      "Header": "Pas A",
+      "Formula/Value": "607"
+    },
+    {
+      "Header": "Ps C",
+      "Formula/Value": "537"
+    },
+    {
+      "Header": "Passes Ch",
+      "Formula/Value": "28"
+    },
+    {
+      "Header": "PeP",
+      "Formula/Value": "25"
+    },
+    {
+      "Header": "Fnt",
+      "Formula/Value": "15"
+    },
+    {
+      "Header": "Remates",
+      "Formula/Value": "66"
+    },
+    {
+      "Header": "Rem %",
+      "Formula/Value": "40"
+    },
+    {
+      "Header": "Cab A",
+      "Formula/Value": "181"
+    },
+    {
+      "Header": "Cabs",
+      "Formula/Value": "77"
+    },
+    {
+      "Header": "Press. tent.",
+      "Formula/Value": "61"
+    },
+    {
+      "Header": "Press. conc.",
+      "Formula/Value": "17"
+    },
+    {
+      "Header": "T Desa",
+      "Formula/Value": "10"
+    },
+    {
+      "Header": "Des C",
+      "Formula/Value": "8"
+    },
+    {
+      "Header": "Crt",
+      "Formula/Value": "15"
+    },
+    {
+      "Header": "CT-JA",
+      "Formula/Value": "16"
+    },
+    {
+      "Header": "CC-JA",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Cr T",
+      "Formula/Value": "18"
+    },
+    {
+      "Header": "Cr C",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Golos marcados de fora da área",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Remates de fora da área em cada 90 minutes",
+      "Formula/Value": "0.9"
+    },
+    {
+      "Header": "Remates em livres",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Fj",
+      "Formula/Value": "22"
+    },
+    {
+      "Header": "Pens",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pens M",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Sprints/90",
+      "Formula/Value": "6.9"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "219,3 km"
+    },
+    {
+      "Header": "Classificação",
+      "Formula/Value": "6.91"
+    }
+  ],
+  "📊Time Estatísticas": [
+    {
+      "Header": "Jogador",
+      "Formula/Value": "=IF(BL5=0,\"Sem Jogador Adicionado\",BL5)"
+    },
+    {
+      "Header": "Posição",
+      "Formula/Value": "=IF(BK5=0,\"VAZIO\",BK5)"
+    },
+    {
+      "Header": "Minutos Jogados",
+      "Formula/Value": "=BP5"
+    },
+    {
+      "Header": "Jogos completos",
+      "Formula/Value": "=C5/90"
+    },
+    {
+      "Header": "Altura           (em metros)",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(BN5,\" cm\",\"\")/100,0)"
+    },
+    {
+      "Header": "Passes Tentados /90",
+      "Formula/Value": "=IFERROR(CO5/D5,0)"
+    },
+    {
+      "Header": "Pass Certos / 90",
+      "Formula/Value": "=IFERROR(CP5/D5,0)"
+    },
+    {
+      "Header": "Passes errados /90",
+      "Formula/Value": "=IFERROR((CO5-CP5)/(D5),0)"
+    },
+    {
+      "Header": "% Passes certos /90",
+      "Formula/Value": "=IFERROR((G5*1)/F5,0)"
+    },
+    {
+      "Header": "Falhas",
+      "Formula/Value": "=CL5"
+    },
+    {
+      "Header": "Passes Tentados",
+      "Formula/Value": "=CO5"
+    },
+    {
+      "Header": "Passes errados",
+      "Formula/Value": "=IFERROR((CO5-CP5),0)"
+    },
+    {
+      "Header": "% passes errados",
+      "Formula/Value": "=IFERROR((L5*1)/CO5,0)"
+    },
+    {
+      "Header": "Ações com Bola",
+      "Formula/Value": "=IFERROR((CG5+BV5+CN5+C5),0)"
+    },
+    {
+      "Header": "Ações com Bola/90",
+      "Formula/Value": "=IFERROR((N5/D5),0)"
+    },
+    {
+      "Header": "Perda da posse de bola",
+      "Formula/Value": "=IFERROR(Q5*D5,0)"
+    },
+    {
+      "Header": "Perda de posse /90 minutos",
+      "Formula/Value": "=CB5"
+    },
+    {
+      "Header": "Ações que geraram finalizações ao gol",
+      "Formula/Value": "=IFERROR(CC5+CA5+BW5+BR5,0)"
+    },
+    {
+      "Header": "Ações que geraram finalizações ao gol /90",
+      "Formula/Value": "=IFERROR(R5/D5,0)"
+    },
+    {
+      "Header": "Cruzamentos",
+      "Formula/Value": "=CG5"
+    },
+    {
+      "Header": "Cruzamentos Conseguidos",
+      "Formula/Value": "=CH5"
+    },
+    {
+      "Header": "Cruzamentos %",
+      "Formula/Value": "=IFERROR((U5*1)/T5,0)"
+    },
+    {
+      "Header": "Assistências Esperadas (xA)",
+      "Formula/Value": "=IFERROR(SUBSTITUTE(CA5,\".\",\",\" )*1,0)"
+    },
+    {
+      "Header": "xA /90",
+      "Formula/Value": "=IFERROR(W5/D5,0)"
+    },
+    {
+      "Header": "xG sem pênalti",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(BZ5,\".\",\",\"))-(BT5*0.79),0)"
+    },
+    {
+      "Header": "Non Pen xG/90",
+      "Formula/Value": "=IFERROR(Y5/D5,0)"
+    },
+    {
+      "Header": "xA + xG sem pen",
+      "Formula/Value": "=IFERROR(W5+Y5,0)"
+    },
+    {
+      "Header": "xA + xG sem pen /90",
+      "Formula/Value": "=IFERROR(AA5/D5,0)"
+    },
+    {
+      "Header": "Finalizações",
+      "Formula/Value": "=BV5-BT5"
+    },
+    {
+      "Header": "Fin/90",
+      "Formula/Value": "=IFERROR(AC5/D5,0)"
+    },
+    {
+      "Header": "Finalizações Certas /90",
+      "Formula/Value": "=IFERROR((BW5-BU5)/(D5-BT5),0)"
+    },
+    {
+      "Header": "% Finalizações certas",
+      "Formula/Value": "=IFERROR((BW5-BU5)/(BV5-BT5),0)"
+    },
+    {
+      "Header": "Conversão de Gols",
+      "Formula/Value": "=IFERROR((BR5-BU5)/(BV5-BT5),0)"
+    },
+    {
+      "Header": "Gols",
+      "Formula/Value": "=BR5"
+    },
+    {
+      "Header": "Gols/90",
+      "Formula/Value": "=IFERROR(AH5/D5,0)"
+    },
+    {
+      "Header": "Assistências",
+      "Formula/Value": "=BS5"
+    },
+    {
+      "Header": "Ast/90",
+      "Formula/Value": "=IFERROR((AJ5/D5),0)"
+    },
+    {
+      "Header": "Gols + Ast",
+      "Formula/Value": "=AH5+AJ5"
+    },
+    {
+      "Header": "Gols + Ast/90",
+      "Formula/Value": "=IFERROR(AI5+AK5,0)"
+    },
+    {
+      "Header": "Cabeceios Disputados",
+      "Formula/Value": "=IFERROR(BX5,0)"
+    },
+    {
+      "Header": "Cabeceios Disputados/90",
+      "Formula/Value": "=IFERROR(AN5/D5,0)"
+    },
+    {
+      "Header": "Cabeceios Ganhos",
+      "Formula/Value": "=BY5"
+    },
+    {
+      "Header": "Cabs Ganhos / 90",
+      "Formula/Value": "=IFERROR(AP5/D5,0)"
+    },
+    {
+      "Header": "% Cabs",
+      "Formula/Value": "=IFERROR((AP5*1)/AN5,0)"
+    },
+    {
+      "Header": "Desarmes Tentados",
+      "Formula/Value": "=CT5+CJ5+CI5"
+    },
+    {
+      "Header": "Des T /90",
+      "Formula/Value": "=IFERROR(AS5/D5,0)"
+    },
+    {
+      "Header": "Desarmes Ganhos",
+      "Formula/Value": "=CU5+CI5"
+    },
+    {
+      "Header": "Desarmes G/90",
+      "Formula/Value": "=IFERROR(AU5/D5,0)"
+    },
+    {
+      "Header": "% Desarmes",
+      "Formula/Value": "=IFERROR(AU5/AS5,0)"
+    },
+    {
+      "Header": "Faltas cometidas",
+      "Formula/Value": "=CJ5"
+    },
+    {
+      "Header": "Faltas/90",
+      "Formula/Value": "=IFERROR(AX5/D5,0)"
+    },
+    {
+      "Header": "Chances Criadas em Bola Parada",
+      "Formula/Value": "=CE5-CG5"
+    },
+    {
+      "Header": "Chances Criadas em Bola Parada",
+      "Formula/Value": "=CF5-CH5"
+    },
+    {
+      "Header": "% Aproveitamento das Tentativas de Criar chance em  BP",
+      "Formula/Value": "=IFERROR(BA5/AZ5,0)"
+    },
+    {
+      "Header": "Passes Decisivos",
+      "Formula/Value": "=CD5"
+    },
+    {
+      "Header": "Pass D / 90",
+      "Formula/Value": "=IFERROR(BC5/D5,0)"
+    },
+    {
+      "Header": "Distância Percorrida",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(CM5,\" km\",\"\")),0)"
+    },
+    {
+      "Header": "Dist / 90",
+      "Formula/Value": "=IFERROR((BE5/D5),0)"
+    },
+    {
+      "Header": "Fintas",
+      "Formula/Value": "=CN5"
+    },
+    {
+      "Header": "Fintas/90",
+      "Formula/Value": "=IFERROR(BG5/D5,0)"
+    },
+    {
+      "Header": "Nota média",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(BQ5, \".\", \",\")),6)"
+    },
+    {
+      "Header": "Inf",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Escolhido",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Jogador",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Pé Preferido",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Minutos",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Classificação",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Golos",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Assist.",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Pens",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Pens M",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Remates",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Rem %",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Cab A",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Cabs",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "xG",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "xA",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Poss Perd/90",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "OCG",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Passes Ch",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Cr T",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Cr C",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "CT-JA",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "CC-JA",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Crt D",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Faltas Cometidas",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Faltas Contra",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "EPG",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Fnt",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Pas A",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Ps C",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "PeP",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Press. tent.",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Press. conc.",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "T Desa",
+      "Formula/Value": "None"
+    },
+    {
+      "Header": "Des C",
+      "Formula/Value": "None"
+    }
+  ],
+  "💪Placar de Esforço": [
+    {
+      "Header": "Jogador",
+      "Formula/Value": "=AB5"
+    },
+    {
+      "Header": "NAC",
+      "Formula/Value": "=Z5"
+    },
+    {
+      "Header": "Equipe",
+      "Formula/Value": "=AA5"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "=AC5"
+    },
+    {
+      "Header": "Média de jogos",
+      "Formula/Value": "=IFERROR(AVERAGE(H:H),0)"
+    },
+    {
+      "Header": "Jogos completos",
+      "Formula/Value": "=IFERROR(AD5/90,0)"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "=VALUE(SUBSTITUTE(AH5, \" km\", \"\"))"
+    },
+    {
+      "Header": "Dist / 90",
+      "Formula/Value": "=I5/H5"
+    },
+    {
+      "Header": "Velocidade Média (em km/h)",
+      "Formula/Value": "=IFERROR((((I5*1000)/(AD5*60))*3600)/1000,0)"
+    },
+    {
+      "Header": "Pressões Tentadas",
+      "Formula/Value": "=AF5"
+    },
+    {
+      "Header": "Pressões T /90",
+      "Formula/Value": "=L5/H5"
+    },
+    {
+      "Header": "Pressões concluídas",
+      "Formula/Value": "=AG5"
+    },
+    {
+      "Header": "Pressões C /90",
+      "Formula/Value": "=N5/H5"
+    },
+    {
+      "Header": "% Des + Pressões concluídas",
+      "Formula/Value": "=IFERROR(N5/L5,0)"
+    },
+    {
+      "Header": "Desarmes Conseguidos",
+      "Formula/Value": "=AK5"
+    },
+    {
+      "Header": "Desarmes C/90",
+      "Formula/Value": "=AK5/H5"
+    },
+    {
+      "Header": "Desarmes Decisivos",
+      "Formula/Value": "=AJ5"
+    },
+    {
+      "Header": "Sprints /90",
+      "Formula/Value": "=AO5"
+    },
+    {
+      "Header": "Erros que geraram gol adversário",
+      "Formula/Value": "=AN5"
+    },
+    {
+      "Header": "Erros que originaram gols /90",
+      "Formula/Value": "=U5/H5"
+    },
+    {
+      "Header": "Placar de Esforço",
+      "Formula/Value": "=(I5/100)*10+(J5/12)*10+(L5/100)*10+(N5/50)*10+(R5*10)+(S5/0.1)*10+(U5*-10)"
+    },
+    {
+      "Header": "Nota média",
+      "Formula/Value": "=AM5"
+    },
+    {
+      "Header": "Inf",
+      "Formula/Value": "Prt"
+    },
+    {
+      "Header": "Nação",
+      "Formula/Value": "BRA"
+    },
+    {
+      "Header": "Clube",
+      "Formula/Value": "Bahia"
+    },
+    {
+      "Header": "Jogador",
+      "Formula/Value": "Everton Ribeiro"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "37"
+    },
+    {
+      "Header": "Minutos",
+      "Formula/Value": "3334"
+    },
+    {
+      "Header": "Poss Con/90",
+      "Formula/Value": "6"
+    },
+    {
+      "Header": "Press. tent.",
+      "Formula/Value": "352"
+    },
+    {
+      "Header": "Press. conc.",
+      "Formula/Value": "66"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "452,6 km"
+    },
+    {
+      "Header": "Dist/90",
+      "Formula/Value": "12.2"
+    },
+    {
+      "Header": "Des Dec/90",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Des C",
+      "Formula/Value": "46"
+    },
+    {
+      "Header": "Fnt",
+      "Formula/Value": "104"
+    },
+    {
+      "Header": "Classificação",
+      "Formula/Value": "6.84"
+    },
+    {
+      "Header": "EPG",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Sprints/90",
+      "Formula/Value": "14.6"
+    },
+    {
+      "Header": "Valor Estimado",
+      "Formula/Value": "16m € - 50m €"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "244m € p/m"
+    },
+    {
+      "Header": "Recomendação",
+      "Formula/Value": "-"
+    },
+    {
+      "Header": "Observação",
+      "Formula/Value": "Nenhuma"
+    }
+  ],
+  "🌎Overall Análise": [
+    {
+      "Header": "Jogador",
+      "Formula/Value": "=EF5"
+    },
+    {
+      "Header": "NAC",
+      "Formula/Value": "=EE5"
+    },
+    {
+      "Header": "Equipe",
+      "Formula/Value": "=EH5"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "=EG5"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "=EL5"
+    },
+    {
+      "Header": "Média de jogos",
+      "Formula/Value": "=AVERAGE(H:H)"
+    },
+    {
+      "Header": "Jogos completos",
+      "Formula/Value": "=IFERROR(EN5/90,0)"
+    },
+    {
+      "Header": "Jogos Totais",
+      "Formula/Value": "=IFERROR(IF(ISERROR(FIND(\"(\",EO5)), VALUE(EO5), VALUE(LEFT(EO5,FIND(\"(\",EO5)-2)) + VALUE(MID(EO5,FIND(\"(\",EO5)+1,FIND(\")\",EO5)-FIND(\"(\",EO5)-1))),0)"
+    },
+    {
+      "Header": "Minutos por partida",
+      "Formula/Value": "=IFERROR(EN5/I5,0)"
+    },
+    {
+      "Header": "Jogos como Titular",
+      "Formula/Value": "=IFERROR(IF(ISERROR(FIND(\"(\",EO5)), \"100%\", TEXT(VALUE(LEFT(EO5,FIND(\"(\",EO5)-2)) / (VALUE(LEFT(EO5,FIND(\"(\",EO5)-2)) + VALUE(MID(EO5,FIND(\"(\",EO5)+1,FIND(\")\",EO5)-FIND(\"(\",EO5)-1))),\"0%\")),0)*1"
+    },
+    {
+      "Header": "Man of the match",
+      "Formula/Value": "=EP5"
+    },
+    {
+      "Header": "Minutos pra ser o homem do jogo",
+      "Formula/Value": "=IFERROR((EN5/EP5),5400)"
+    },
+    {
+      "Header": "% de vezes que foi eleito o Homem do Jogo",
+      "Formula/Value": "=IFERROR((L5*1)/H5,0)"
+    },
+    {
+      "Header": "Gols",
+      "Formula/Value": "=EQ5"
+    },
+    {
+      "Header": "Assistências",
+      "Formula/Value": "=ER5"
+    },
+    {
+      "Header": "Gols + Assist",
+      "Formula/Value": "=O5+P5"
+    },
+    {
+      "Header": "Gols/90",
+      "Formula/Value": "=IFERROR(O5/H5,0)"
+    },
+    {
+      "Header": "Assistência /90",
+      "Formula/Value": "=IFERROR(P5/H5,0)"
+    },
+    {
+      "Header": "Gols + A/90",
+      "Formula/Value": "=IFERROR((O5+P5)/H5,0)"
+    },
+    {
+      "Header": "xG",
+      "Formula/Value": "=SUBSTITUTE(EW5,\".\",\",\" )*1"
+    },
+    {
+      "Header": "xG sem pênalti",
+      "Formula/Value": "=IFERROR(U5-(GE5*0.79),0)"
+    },
+    {
+      "Header": "non Pen xG/90",
+      "Formula/Value": "=IFERROR(V5/H5,0)"
+    },
+    {
+      "Header": "Assistências Esperadas xA",
+      "Formula/Value": "=SUBSTITUTE(EX5,\".\",\",\" )*1"
+    },
+    {
+      "Header": "xA /90",
+      "Formula/Value": "=IFERROR(X5/H5,0)"
+    },
+    {
+      "Header": "xG + xA",
+      "Formula/Value": "=IFERROR(V5+X5,0)"
+    },
+    {
+      "Header": "xG + xA /90",
+      "Formula/Value": "=W5+Y5"
+    },
+    {
+      "Header": "Finalizações (Total)",
+      "Formula/Value": "=FF5"
+    },
+    {
+      "Header": "Finalizações /90",
+      "Formula/Value": "=IFERROR(FF5/H5,0)"
+    },
+    {
+      "Header": "Finalizações no gol",
+      "Formula/Value": "=FG5"
+    },
+    {
+      "Header": "Finalizações no gol /90",
+      "Formula/Value": "=IFERROR(FG5/H5,0)"
+    },
+    {
+      "Header": "% Finalizações em direção ao gol",
+      "Formula/Value": "=IFERROR(AD5/AB5,0)"
+    },
+    {
+      "Header": "Finalizações pra marcar um gol",
+      "Formula/Value": "=IFERROR((FF5-GE5)/(EQ5-GF5),50)"
+    },
+    {
+      "Header": "Finalizações no gol pra marcar um gol",
+      "Formula/Value": "=IFERROR((FG5-GE5)/(EQ5-GF5),50)"
+    },
+    {
+      "Header": "% Finalizações que converteram em gol",
+      "Formula/Value": "=IFERROR((EQ5-GF5)/(FF5-GE5),0)"
+    },
+    {
+      "Header": "Minutos pra tentar uma finalização",
+      "Formula/Value": "=IFERROR(EN5/FF5,700)"
+    },
+    {
+      "Header": "Minutos pra acertar um remate no gol",
+      "Formula/Value": "=IFERROR(EN5/FG5,700)"
+    },
+    {
+      "Header": "Minutos pra MARCAR um gol",
+      "Formula/Value": "=IFERROR(EN5/EQ5,EN5)"
+    },
+    {
+      "Header": "Minutos pra PARTICIPAR de um gol",
+      "Formula/Value": "=IFERROR(EN5/Q5,EN5)"
+    },
+    {
+      "Header": "Gols não esperados",
+      "Formula/Value": "=IFERROR(EQ5-U5,0)"
+    },
+    {
+      "Header": "Gols não esperados SEM PÊNALTI",
+      "Formula/Value": "=IFERROR((EQ5 -GF5)-V5,0)"
+    },
+    {
+      "Header": "Fora de jogo",
+      "Formula/Value": "=FV5"
+    },
+    {
+      "Header": "Fora de jogo/90",
+      "Formula/Value": "=IFERROR(AP5/H5,0)"
+    },
+    {
+      "Header": "Cabeceios Disputados",
+      "Formula/Value": "=FH5"
+    },
+    {
+      "Header": "Cabeceios Ganhos",
+      "Formula/Value": "=FI5"
+    },
+    {
+      "Header": "Cabeceios Perdidos",
+      "Formula/Value": "=AR5-AS5"
+    },
+    {
+      "Header": "Cabeceios Ganhos/90",
+      "Formula/Value": "=IFERROR(AS5/H5,0)"
+    },
+    {
+      "Header": "% Cabs",
+      "Formula/Value": "=IFERROR((AS5*1)/AR5,0)"
+    },
+    {
+      "Header": "Desarmes Tentados",
+      "Formula/Value": "=FL5+EY5"
+    },
+    {
+      "Header": "Desarmes Ganhos",
+      "Formula/Value": "=FM5"
+    },
+    {
+      "Header": "Dribles Sofridos",
+      "Formula/Value": "=FL5-FM5"
+    },
+    {
+      "Header": "Des Ganhos/90",
+      "Formula/Value": "=IFERROR(FM5/H5,0)"
+    },
+    {
+      "Header": "Dribles Sofridos/90",
+      "Formula/Value": "=IFERROR(AY5/H5,0)"
+    },
+    {
+      "Header": "%Des Ganhos",
+      "Formula/Value": "=IFERROR(AX5/AW5,0)"
+    },
+    {
+      "Header": "Faltas cometidas",
+      "Formula/Value": "=EY5"
+    },
+    {
+      "Header": "Faltas/90",
+      "Formula/Value": "=IFERROR(BC5/H5,0)"
+    },
+    {
+      "Header": "Cartões Amarelos",
+      "Formula/Value": "=GA5"
+    },
+    {
+      "Header": "Cartão Amarelo/90",
+      "Formula/Value": "=IFERROR(BE5/H5,0)"
+    },
+    {
+      "Header": "Cartão Vermelho",
+      "Formula/Value": "=GB5"
+    },
+    {
+      "Header": "Cartão Vermelho/90",
+      "Formula/Value": "=IFERROR(BG5/H5,0)"
+    },
+    {
+      "Header": "Cartões Recebidos no Total",
+      "Formula/Value": "=BE5+BG5"
+    },
+    {
+      "Header": "% Cartões por falta cometida",
+      "Formula/Value": "=IFERROR(BI5/EY5,0)"
+    },
+    {
+      "Header": "Proporção de posse Ganha - Perdida",
+      "Formula/Value": "=IFERROR(EU5-EV5,0)"
+    },
+    {
+      "Header": "Movimentos de pressão Tentados",
+      "Formula/Value": "=FJ5"
+    },
+    {
+      "Header": "Movimentos de pressão Concretizados",
+      "Formula/Value": "=FK5"
+    },
+    {
+      "Header": "% Pressão pra roubar a bola com sucesso",
+      "Formula/Value": "=IFERROR((BM5*1)/BL5,0)"
+    },
+    {
+      "Header": "Lances disputados",
+      "Formula/Value": "=FH5+FL5+FZ5+EY5+FJ5"
+    },
+    {
+      "Header": "Lances disputados/90",
+      "Formula/Value": "=IFERROR(BO5/H5,0)"
+    },
+    {
+      "Header": "Lances ganhos",
+      "Formula/Value": "=FI5+FM5+FZ5+FK5"
+    },
+    {
+      "Header": "Lances ganhos/90",
+      "Formula/Value": "=IFERROR(BQ5/H5,0)"
+    },
+    {
+      "Header": "% Lances disputados e ganhos de forma limpa",
+      "Formula/Value": "=IFERROR((BQ5*1)/BO5,0)"
+    },
+    {
+      "Header": "Bolas Interceptadas",
+      "Formula/Value": "=(FW5+FX5+FN5+FZ5+FY5)"
+    },
+    {
+      "Header": "Bolas Int / 90",
+      "Formula/Value": "=IFERROR(BT5/H5,0)"
+    },
+    {
+      "Header": "Bolas roubadas",
+      "Formula/Value": "=IFERROR((FK5+FM5)+(FZ5*1.5),0)"
+    },
+    {
+      "Header": "Bolas roubadas / 90",
+      "Formula/Value": "=IFERROR(BV5/H5,0)"
+    },
+    {
+      "Header": "Tentativas de  Criar  uma chance em Bola Parada",
+      "Formula/Value": "=FQ5-FO5"
+    },
+    {
+      "Header": "Tentativas/90",
+      "Formula/Value": "=BX5/H5"
+    },
+    {
+      "Header": "Chances Criadas em Bola Parada",
+      "Formula/Value": "=FR5-FP5"
+    },
+    {
+      "Header": "Chances C /90",
+      "Formula/Value": "=BZ5/H5"
+    },
+    {
+      "Header": "% Aproveitamento das Tentativas de Criar chance em  BP",
+      "Formula/Value": "=IFERROR(BZ5/BX5,0)"
+    },
+    {
+      "Header": "Pênaltis batidos",
+      "Formula/Value": "=GE5"
+    },
+    {
+      "Header": "Pênaltis marcados",
+      "Formula/Value": "=GF5"
+    },
+    {
+      "Header": "Pênaltis perdidos",
+      "Formula/Value": "=CC5-CD5"
+    },
+    {
+      "Header": "% Conversão de pênalti",
+      "Formula/Value": "=IFERROR((CD5*1)/CC5,0.00000001)"
+    },
+    {
+      "Header": "Lances ofensivos Tentados",
+      "Formula/Value": "=FQ5+FE5+FV5+FF5+ET5+FC5+(FT5*H5)"
+    },
+    {
+      "Header": "Lances ofensivos tentados/90",
+      "Formula/Value": "=IFERROR(CG5/H5,0)"
+    },
+    {
+      "Header": "Lances OF conseguidos",
+      "Formula/Value": "=FR5+FE5+FV5+FG5+ET5+FC5"
+    },
+    {
+      "Header": "Lances OF conseguidos/90",
+      "Formula/Value": "=IFERROR(CI5/H5,0)"
+    },
+    {
+      "Header": "% Lances ofensivos conseguidos",
+      "Formula/Value": "=IFERROR((CI5*1)/CG5,0)"
+    },
+    {
+      "Header": "Lances defensivos Tentados",
+      "Formula/Value": "=IFERROR((GC5*3)+FH5+FL5+FN5+FY5+FW5+FX5+EY5,0)"
+    },
+    {
+      "Header": "Lances defensivos tentados/90",
+      "Formula/Value": "=IFERROR(CL5/H5,0)"
+    },
+    {
+      "Header": "Lances DEF conseguidos",
+      "Formula/Value": "=IFERROR(FI5+FM5+FN5+FY5+FW5+FX5+FZ5,0)"
+    },
+    {
+      "Header": "Lances DEF conseguidos/90",
+      "Formula/Value": "=IFERROR(CN5/H5,0)"
+    },
+    {
+      "Header": "% Lances defensivos conseguidos",
+      "Formula/Value": "=IFERROR(CN5/CL5,0)"
+    },
+    {
+      "Header": "Lances Tentados (Ataque e Defesa)",
+      "Formula/Value": "=(CL5+CG5)+FA5"
+    },
+    {
+      "Header": "Lances Conseguidos (ATA e DEF)",
+      "Formula/Value": "=IFERROR((CN5+CI5)+FB5,0)"
+    },
+    {
+      "Header": "% Acertos Global",
+      "Formula/Value": "=IFERROR(CR5/CQ5,0)"
+    },
+    {
+      "Header": "Fintas",
+      "Formula/Value": "=FE5"
+    },
+    {
+      "Header": "Fintas/90",
+      "Formula/Value": "=IFERROR(CT5/H5,0)"
+    },
+    {
+      "Header": "Jogadas de Criação",
+      "Formula/Value": "=IFERROR(FC5+ET5+FR5,0)"
+    },
+    {
+      "Header": "Criação/90",
+      "Formula/Value": "=IFERROR(CV5/H5,0)"
+    },
+    {
+      "Header": "Tentativas de marcar um gol",
+      "Formula/Value": "=IFERROR(FF5+ET5+FC5,0)"
+    },
+    {
+      "Header": "Tentativas de marcar um gol/90",
+      "Formula/Value": "=IFERROR(CX5/H5,0)"
+    },
+    {
+      "Header": "Tentativas totais de remate de fora da área",
+      "Formula/Value": "=IFERROR(DA5*H5,0)"
+    },
+    {
+      "Header": "Tentativas de Remates de fora da área /90",
+      "Formula/Value": "=IFERROR(FT5,0)"
+    },
+    {
+      "Header": "Participações do jogador",
+      "Formula/Value": "=IFERROR((FQ5+FM5+FZ5+FN5+FK5+FH5+FE5+FF5+GE5+FU5+FA5),0)"
+    },
+    {
+      "Header": "Participações do jogador /90",
+      "Formula/Value": "=IFERROR(DB5/H5,0)"
+    },
+    {
+      "Header": "Ações no último terço",
+      "Formula/Value": "=IFERROR((((EQ5*1.5)+(ER5*1.5)+FE5+ET5+FC5+FG5)),0)"
+    },
+    {
+      "Header": "Ações que geraram finalizações ao gol",
+      "Formula/Value": "=IFERROR(FG5+EX5+ET5+FC5+(FT5*H5)+(EQ5*0.5)+(ER5*0.5),0)"
+    },
+    {
+      "Header": "Ações que geraram finalizações ao gol /90",
+      "Formula/Value": "=IFERROR(DE5/H5,0)"
+    },
+    {
+      "Header": "Passes Decisivos",
+      "Formula/Value": "=FC5"
+    },
+    {
+      "Header": "Pass D /90",
+      "Formula/Value": "=IFERROR(DG5/H5,0)"
+    },
+    {
+      "Header": "Passes Decisivos pra uma assistência",
+      "Formula/Value": "=IFERROR(FC5/ER5,70)"
+    },
+    {
+      "Header": "Pass Decisivos que se converteram em assistências",
+      "Formula/Value": "=IFERROR((ER5*1)/FC5,0)"
+    },
+    {
+      "Header": "Assistências Claras que a Equipe desperdiçou",
+      "Formula/Value": "=(X5-ER5)"
+    },
+    {
+      "Header": "xA / Passe Decisivo",
+      "Formula/Value": "=IFERROR(X5/FC5,0)"
+    },
+    {
+      "Header": "Ações com Bola",
+      "Formula/Value": "=IFERROR((FQ5+FF5+FE5+FC5),0)"
+    },
+    {
+      "Header": "Ações com Bola/90",
+      "Formula/Value": "=IFERROR(DM5/H5,0)"
+    },
+    {
+      "Header": "Minutos pra fazer um Passe Decisivo",
+      "Formula/Value": "=IFERROR(EN5/FC5,700)"
+    },
+    {
+      "Header": "Minutos pra criar uma chance perigosa",
+      "Formula/Value": "=IFERROR(EN5/(FG5+ET5+#REF!),700)"
+    },
+    {
+      "Header": "Passes Tentados /90",
+      "Formula/Value": "=IFERROR(FA5/H5,0)"
+    },
+    {
+      "Header": "Passes Completados /90",
+      "Formula/Value": "=IFERROR(FB5/H5,0)"
+    },
+    {
+      "Header": "% Passes",
+      "Formula/Value": "=IFERROR(FB5/FA5,0)"
+    },
+    {
+      "Header": "Distância percorrida",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(GG5, \" km\", \"\")),0)"
+    },
+    {
+      "Header": "Distância percorrida/90",
+      "Formula/Value": "=IFERROR(DT5/H5,0)"
+    },
+    {
+      "Header": "Velocidade Média (em km/h)",
+      "Formula/Value": "=IFERROR((((DT5*1000)/(EN5*60))*3600)/1000,0)"
+    },
+    {
+      "Header": "Sprints de alta intensidade",
+      "Formula/Value": "=IFERROR((DX5*H5),0)"
+    },
+    {
+      "Header": "Sprints/90",
+      "Formula/Value": "=IFERROR(GD5,0)"
+    },
+    {
+      "Header": "Posse Desperdiçada",
+      "Formula/Value": "=(FQ5-FR5)+(FH5-FI5)+(FF5-FG5)+(FA5-FB5)"
+    },
+    {
+      "Header": "Posse Desperdiçada /90",
+      "Formula/Value": "=IFERROR(DY5/H5,0)"
+    },
+    {
+      "Header": "Posse Perdida/90",
+      "Formula/Value": "=EV5"
+    },
+    {
+      "Header": "Pontuação recebida",
+      "Formula/Value": "=EC5*H5"
+    },
+    {
+      "Header": "Nota média",
+      "Formula/Value": "=IFERROR(VALUE(SUBSTITUTE(GH5, \".\", \",\")),5)"
+    },
+    {
+      "Header": "Inf",
+      "Formula/Value": "Pro"
+    },
+    {
+      "Header": "Nação",
+      "Formula/Value": "BRA"
+    },
+    {
+      "Header": "Jogador",
+      "Formula/Value": "Jean Lucas"
+    },
+    {
+      "Header": "Idade",
+      "Formula/Value": "28"
+    },
+    {
+      "Header": "Clube",
+      "Formula/Value": "Bahia"
+    },
+    {
+      "Header": "Altura",
+      "Formula/Value": "181 cm"
+    },
+    {
+      "Header": "Pé Preferido",
+      "Formula/Value": "Pé Direito"
+    },
+    {
+      "Header": "Valor Estimado",
+      "Formula/Value": "850m € - 8,4M €"
+    },
+    {
+      "Header": "Salário",
+      "Formula/Value": "141m € p/m"
+    },
+    {
+      "Header": "Expira",
+      "Formula/Value": "2028-12-31 00:00:00"
+    },
+    {
+      "Header": "Minutos",
+      "Formula/Value": "3475"
+    },
+    {
+      "Header": "Presenças",
+      "Formula/Value": "44 (4)"
+    },
+    {
+      "Header": "HdJ",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Golos",
+      "Formula/Value": "6"
+    },
+    {
+      "Header": "Assist.",
+      "Formula/Value": "4"
+    },
+    {
+      "Header": "Golos DS",
+      "Formula/Value": "11"
+    },
+    {
+      "Header": "OCG",
+      "Formula/Value": "11"
+    },
+    {
+      "Header": "Poss Con/90",
+      "Formula/Value": "8.7"
+    },
+    {
+      "Header": "Poss Perd/90",
+      "Formula/Value": "6.6"
+    },
+    {
+      "Header": "xG",
+      "Formula/Value": "4.4"
+    },
+    {
+      "Header": "xA",
+      "Formula/Value": "4.53"
+    },
+    {
+      "Header": "Faltas Cometidas",
+      "Formula/Value": "40"
+    },
+    {
+      "Header": "Faltas Contra",
+      "Formula/Value": "16"
+    },
+    {
+      "Header": "Pas A",
+      "Formula/Value": "2225"
+    },
+    {
+      "Header": "Ps C",
+      "Formula/Value": "2024"
+    },
+    {
+      "Header": "Passes Ch",
+      "Formula/Value": "44"
+    },
+    {
+      "Header": "PeP",
+      "Formula/Value": "292"
+    },
+    {
+      "Header": "Fnt",
+      "Formula/Value": "12"
+    },
+    {
+      "Header": "Remates",
+      "Formula/Value": "66"
+    },
+    {
+      "Header": "Rem %",
+      "Formula/Value": "18"
+    },
+    {
+      "Header": "Cab A",
+      "Formula/Value": "69"
+    },
+    {
+      "Header": "Cabs",
+      "Formula/Value": "31"
+    },
+    {
+      "Header": "Press. tent.",
+      "Formula/Value": "288"
+    },
+    {
+      "Header": "Press. conc.",
+      "Formula/Value": "62"
+    },
+    {
+      "Header": "T Desa",
+      "Formula/Value": "60"
+    },
+    {
+      "Header": "Des C",
+      "Formula/Value": "48"
+    },
+    {
+      "Header": "Crt",
+      "Formula/Value": "125"
+    },
+    {
+      "Header": "CT-JA",
+      "Formula/Value": "16"
+    },
+    {
+      "Header": "CC-JA",
+      "Formula/Value": "6"
+    },
+    {
+      "Header": "Cr T",
+      "Formula/Value": "17"
+    },
+    {
+      "Header": "Cr C",
+      "Formula/Value": "7"
+    },
+    {
+      "Header": "Golos marcados de fora da área",
+      "Formula/Value": "1"
+    },
+    {
+      "Header": "Remates de fora da área em cada 90 minutes",
+      "Formula/Value": "1"
+    },
+    {
+      "Header": "Remates em livres",
+      "Formula/Value": "1"
+    },
+    {
+      "Header": "Fj",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Blq",
+      "Formula/Value": "17"
+    },
+    {
+      "Header": "Rems Bloq",
+      "Formula/Value": "11"
+    },
+    {
+      "Header": "Alívios",
+      "Formula/Value": "37"
+    },
+    {
+      "Header": "Crt D",
+      "Formula/Value": "4"
+    },
+    {
+      "Header": "Amr",
+      "Formula/Value": "2"
+    },
+    {
+      "Header": "Cartões vermelhos",
+      "Formula/Value": "1"
+    },
+    {
+      "Header": "EPG",
+      "Formula/Value": "1"
+    },
+    {
+      "Header": "Sprints/90",
+      "Formula/Value": "11.9"
+    },
+    {
+      "Header": "Pens",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Pens M",
+      "Formula/Value": "0"
+    },
+    {
+      "Header": "Distância",
+      "Formula/Value": "469,6 km"
+    },
+    {
+      "Header": "Classificação",
+      "Formula/Value": "7"
+    }
+  ]
+}

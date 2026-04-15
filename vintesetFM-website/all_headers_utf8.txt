@@ -1,0 +1,189 @@
+﻿2 : Jogador
+3 : NAC
+4 : Pé preferido
+5 : Equipe
+6 : Altura
+7 : Data Final do contrato
+8 : Idade
+9 : Salário
+10 : Valor Estimado
+11 : Média de jogos
+12 : Jogos completos
+13 : Jogos Totais
+14 : Minutos por partida
+15 : Jogos como Titular
+16 : Gols na carreira
+17 : Média de gols em toda a Carreira
+18 : Média gols / partida
+19 : Média gols + ass / partida
+20 : Ass / 90
+21 : Man of the match
+22 : Minutos pra ser o homem do jogo
+23 : % de vezes que foi eleito o Homem do Jogo
+24 : Gols
+25 : Assist
+26 : Gols + Ass
+27 : Gols de dentro da área
+28 : Gols de fora da área
+29 : Gols de Penaltis
+30 : Gols Sem Pênalti
+31 : % Gols (sem penalti)
+32 : % Ass
+33 : % Pênaltis
+34 : Gols /90
+35 : Assist /90
+36 : Gols + Assist /90
+37 : Gols Sem Pênalti /90
+38 : Gols de dentro da área
+39 : Gols de dentro da área /90
+40 : Gols de fora da área
+41 : Gols de fora da área /90
+42 : Chutes de fora da área /90
+43 : % Conclusão dos chutes de fora da área
+44 : Tentativas de  Criar  uma chance em Bola Parada
+45 : Tentativas/90
+46 : Chances Criadas em  Bolas Paradas
+47 : Chances C /90
+48 : % Aproveitamento das Tentativas de Criar chance em  BP
+49 : Cobranças de falta (Diretas)
+50 : Pênaltis batidos
+51 : Pênaltis marcados
+52 : Pênaltis perdidos
+53 : Gols de pen/90
+54 : % Conversão de pênalti
+55 : Cabeceios disputados
+56 : Ganhos
+57 : Cabs Disputados /90
+58 : Ganhos /90
+59 : Perdidos
+60 : % Cabs ganhos
+61 : % Cabs perdidos
+62 : Impedimentos
+63 : Impedimentos / 90
+64 : Finalizações
+65 : Finalizações /90
+66 : Finalizações no Gol
+67 : Finalizações no gol/90
+68 : % Finalizações que foram no gol
+69 : Finalizações pra um gol
+70 : Finalizações certas pra um gol
+71 : Finalização ou Cabeceio pra um gol
+72 : Finalizações que se converteram em gols
+73 : GPI (Goal Probability Index)
+74 : xG / Jogo
+75 : Gols convertidos /90
+76 : Over xG / Under xG per 90
+77 : xG / chute
+78 : Minutos pra tentar uma finalização
+79 : Minutos pra acertar uma finalização no gol
+80 : Minutos pra MARCAR um gol
+81 : Minutos pra PARTICIPAR de um gol
+82 : Gols não esperados
+83 : Gols não esperados SEM PÊNALTI
+84 : Gols esperados (xG)
+85 : xG /90
+86 : xG (Sem pênaltis)
+87 : xG (Sem pênaltis) /90
+88 : Assistências Esperadas (xA)
+89 : xA /90
+90 : xA + xG sem pen
+91 : xA + xG /90
+92 : xG Conclusion
+93 : Passes Decisivos
+94 : Pass D /90
+95 : xA (assistências esperadas)
+96 : Chances criadas e não aproveitadas pela equipe / 90
+97 : Cruzamentos Tentados
+98 : Cruzamentos T /90
+99 : Cruzamentos Conseguidos
+100 : Cruzamentos C/90
+101 : Cruzamentos
+102 : Fintas
+103 : Fintas/90
+104 : Velocidade Média (em km/h)
+105 : Desarme + Pressões Tentadas
+106 : Des + Pres T /90
+107 : Desarme + Pressões Concluídas
+108 : Des + Pres C /90
+109 : % Des + Pressões concluídas
+110 : Interceptações
+111 : Int/90
+112 : Faltas Sofridas
+113 : Faltas Sof/90
+114 : Distância
+115 : Dist / 90
+116 : Sprints de alta intensidade
+117 : Sprints de alta intensidade/90
+118 : Lances ofensivos tentados
+119 : Lances ofensivos / 90
+120 : Lances ofensivos conseguidos
+121 : Lances ofensivos conseguidos / 90
+122 : Posse Perdida
+123 : Posse Perdida /90
+124 : Eficácia ofensiva
+125 : Ações que geraram finalizações ao gol
+126 : Ações que geraram finalizações ao gol /90
+127 : Participação do jogador a cada 90 minutos
+128 : Ações com Bola Tentadas
+129 : Ações com Bola T/90
+130 : Ações com Bola (Completadas)
+131 : Ações com Bola Comp /90
+132 : % Sucesso de ações com bola
+133 : Ações no último terço 
+134 : Ações no último terço / 90
+135 : Tentativas de marcar um gol (finalização e oportunidades criadas)
+136 : Tentativas de marcar um gol  /90
+137 : Posse Desperdiçada
+138 : Posse Desperdiçada /90
+139 : Posse perdida /90
+140 : Nota média
+141 : Inf
+142 : Nação
+143 : Jogador
+144 : Idade
+145 : Clube
+146 : Altura
+147 : Pé Preferido
+148 : Valor Estimado
+149 : Salário
+150 : Expira
+151 : Minutos
+152 : Presenças
+153 : HdJ
+154 : Golos
+155 : Assist.
+156 : OCG
+157 : Golos DS
+158 : Jogos DS
+159 : Poss Perd/90
+160 : xG
+161 : xA
+162 : Faltas Cometidas
+163 : Faltas Contra
+164 : Pas A
+165 : Ps C
+166 : Passes Ch
+167 : PeP
+168 : Fnt
+169 : Remates
+170 : Rem %
+171 : Cab A
+172 : Cabs
+173 : Press. tent.
+174 : Press. conc.
+175 : T Desa
+176 : Des C
+177 : Crt
+178 : CT-JA
+179 : CC-JA
+180 : Cr T
+181 : Cr C
+182 : Golos marcados de fora da área
+183 : Remates de fora da área em cada 90 minutes
+184 : Remates em livres
+185 : Fj
+186 : Pens
+187 : Pens M
+188 : Sprints/90
+189 : Distância
+190 : Classificação

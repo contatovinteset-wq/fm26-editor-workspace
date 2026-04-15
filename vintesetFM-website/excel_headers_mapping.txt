@@ -1,0 +1,189 @@
+B: Jogador
+C: NAC
+D: Pé preferido
+E: Equipe
+F: Altura
+G: Data Final do contrato
+H: Idade
+I: Salário
+J: Valor Estimado
+K: Média de jogos
+L: Jogos completos
+M: Jogos Totais
+N: Minutos por partida
+O: Jogos como Titular
+P: Gols na carreira
+Q: Média de gols em toda a Carreira
+R: Média gols / partida
+S: Média gols + ass / partida
+T: Ass / 90
+U: Man of the match
+V: Minutos pra ser o homem do jogo
+W: % de vezes que foi eleito o Homem do Jogo
+X: Gols
+Y: Assist
+Z: Gols + Ass
+AA: Gols de dentro da área
+AB: Gols de fora da área
+AC: Gols de Penaltis
+AD: Gols Sem Pênalti
+AE: % Gols (sem penalti)
+AF: % Ass
+AG: % Pênaltis
+AH: Gols /90
+AI: Assist /90
+AJ: Gols + Assist /90
+AK: Gols Sem Pênalti /90
+AL: Gols de dentro da área
+AM: Gols de dentro da área /90
+AN: Gols de fora da área
+AO: Gols de fora da área /90
+AP: Chutes de fora da área /90
+AQ: % Conclusão dos chutes de fora da área
+AR: Tentativas de  Criar  uma chance em Bola Parada
+AS: Tentativas/90
+AT: Chances Criadas em  Bolas Paradas
+AU: Chances C /90
+AV: % Aproveitamento das Tentativas de Criar chance em  BP
+AW: Cobranças de falta (Diretas)
+AX: Pênaltis batidos
+AY: Pênaltis marcados
+AZ: Pênaltis perdidos
+BA: Gols de pen/90
+BB: % Conversão de pênalti
+BC: Cabeceios disputados
+BD: Ganhos
+BE: Cabs Disputados /90
+BF: Ganhos /90
+BG: Perdidos
+BH: % Cabs ganhos
+BI: % Cabs perdidos
+BJ: Impedimentos
+BK: Impedimentos / 90
+BL: Finalizações
+BM: Finalizações /90
+BN: Finalizações no Gol
+BO: Finalizações no gol/90
+BP: % Finalizações que foram no gol
+BQ: Finalizações pra um gol
+BR: Finalizações certas pra um gol
+BS: Finalização ou Cabeceio pra um gol
+BT: Finalizações que se converteram em gols
+BU: GPI (Goal Probability Index)
+BV: xG / Jogo
+BW: Gols convertidos /90
+BX: Over xG / Under xG per 90
+BY: xG / chute
+BZ: Minutos pra tentar uma finalização
+CA: Minutos pra acertar uma finalização no gol
+CB: Minutos pra MARCAR um gol
+CC: Minutos pra PARTICIPAR de um gol
+CD: Gols não esperados
+CE: Gols não esperados SEM PÊNALTI
+CF: Gols esperados (xG)
+CG: xG /90
+CH: xG (Sem pênaltis)
+CI: xG (Sem pênaltis) /90
+CJ: Assistências Esperadas (xA)
+CK: xA /90
+CL: xA + xG sem pen
+CM: xA + xG /90
+CN: xG Conclusion
+CO: Passes Decisivos
+CP: Pass D /90
+CQ: xA (assistências esperadas)
+CR: Chances criadas e não aproveitadas pela equipe / 90
+CS: Cruzamentos Tentados
+CT: Cruzamentos T /90
+CU: Cruzamentos Conseguidos
+CV: Cruzamentos C/90
+CW: Cruzamentos
+CX: Fintas
+CY: Fintas/90
+CZ: Velocidade Média (em km/h)
+DA: Desarme + Pressões Tentadas
+DB: Des + Pres T /90
+DC: Desarme + Pressões Concluídas
+DD: Des + Pres C /90
+DE: % Des + Pressões concluídas
+DF: Interceptações
+DG: Int/90
+DH: Faltas Sofridas
+DI: Faltas Sof/90
+DJ: Distância
+DK: Dist / 90
+DL: Sprints de alta intensidade
+DM: Sprints de alta intensidade/90
+DN: Lances ofensivos tentados
+DO: Lances ofensivos / 90
+DP: Lances ofensivos conseguidos
+DQ: Lances ofensivos conseguidos / 90
+DR: Posse Perdida
+DS: Posse Perdida /90
+DT: Eficácia ofensiva
+DU: Ações que geraram finalizações ao gol
+DV: Ações que geraram finalizações ao gol /90
+DW: Participação do jogador a cada 90 minutos
+DX: Ações com Bola Tentadas
+DY: Ações com Bola T/90
+DZ: Ações com Bola (Completadas)
+EA: Ações com Bola Comp /90
+EB: % Sucesso de ações com bola
+EC: Ações no último terço
+ED: Ações no último terço / 90
+EE: Tentativas de marcar um gol (finalização e oportunidades criadas)
+EF: Tentativas de marcar um gol  /90
+EG: Posse Desperdiçada
+EH: Posse Desperdiçada /90
+EI: Posse perdida /90
+EJ: Nota média
+EK: Inf
+EL: Nação
+EM: Jogador
+EN: Idade
+EO: Clube
+EP: Altura
+EQ: Pé Preferido
+ER: Valor Estimado
+ES: Salário
+ET: Expira
+EU: Minutos
+EV: Presenças
+EW: HdJ
+EX: Golos
+EY: Assist.
+EZ: OCG
+FA: Golos DS
+FB: Jogos DS
+FC: Poss Perd/90
+FD: xG
+FE: xA
+FF: Faltas Cometidas
+FG: Faltas Contra
+FH: Pas A
+FI: Ps C
+FJ: Passes Ch
+FK: PeP
+FL: Fnt
+FM: Remates
+FN: Rem %
+FO: Cab A
+FP: Cabs
+FQ: Press. tent.
+FR: Press. conc.
+FS: T Desa
+FT: Des C
+FU: Crt
+FV: CT-JA
+FW: CC-JA
+FX: Cr T
+FY: Cr C
+FZ: Golos marcados de fora da área
+GA: Remates de fora da área em cada 90 minutes
+GB: Remates em livres
+GC: Fj
+GD: Pens
+GE: Pens M
+GF: Sprints/90
+GG: Distância
+GH: Classificação
