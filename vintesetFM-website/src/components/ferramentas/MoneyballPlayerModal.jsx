@@ -24,6 +24,29 @@ const POLAR_METRICS = [
   { key: 'HeaderWinRate', label: '% Aéreo', color: '#10B981' },
 ];
 
+// MÉTRICAS POLARES ESPECÍFICAS DE GOLEIRO
+const GK_POLAR_METRICS = [
+  // 🧤 DEFESAS - Esmeralda
+  { key: 'GK_SavesTotal', label: 'Def. Totais', color: '#10B981' },
+  { key: 'GK_SavesSafe', label: 'Def. Seguras', color: '#10B981' },
+  { key: 'GK_SavesTipped', label: 'Def. P. Dedos', color: '#10B981' },
+  { key: 'GK_SavesParried', label: 'Def. Desviadas', color: '#10B981' },
+  { key: 'GK_DifficultSavePct', label: '% Def Difíceis', color: '#10B981' },
+  { key: 'GK_xGSaved', label: 'xG Defendidos', color: '#10B981' },
+  { key: 'GK_PenFaced', label: 'Pên Enfrent.', color: '#10B981' },
+  { key: 'GK_PenSaved', label: 'Pên Defend.', color: '#10B981' },
+  
+  // ⚡ AÇÕES - Azul
+  { key: 'GK_SweepAttempts', label: 'Saídas 1v1 T.', color: '#3B82F6' },
+  { key: 'GK_SweepSuccess', label: 'Saídas Suces.', color: '#3B82F6' },
+  { key: 'GK_ActionsTried', label: 'Ações Tent.', color: '#3B82F6' },
+  { key: 'GK_ActionsSuccess', label: 'Ações Suces.', color: '#3B82F6' },
+  
+  // 📐 PASSES - Roxo
+  { key: 'GK_PassesAttempted', label: 'Passes Tent.', color: '#A78BFA' },
+  { key: 'GK_PassesCompleted', label: 'Passes Compl.', color: '#A78BFA' },
+];
+
 const SVG_SIZE = 700;
 const CENTER = SVG_SIZE / 2;
 const MAX_RADIUS = 210;
@@ -52,7 +75,9 @@ const drawSlice = (radius, startAngle, endAngle) => {
 export default function MoneyballPlayerModal({ player, onClose }) {
   if (!player) return null;
 
-  const sliceAngle = 360 / POLAR_METRICS.length;
+  const isGK = player.isGoalkeeper;
+  const metrics = isGK ? GK_POLAR_METRICS : POLAR_METRICS;
+  const sliceAngle = 360 / metrics.length;
 
   const getAvatarUrl = (uid) => {
     return uid ? `https://sortitoutsi.b-cdn.net/uploads/face/face_${uid}.png` : '';
@@ -110,14 +135,33 @@ style={{ backgroundImage: "linear-gradient(to right, #0b1016, #141c27)" }}>
                         <td className="py-3">Minutos Jogados</td>
                         <td className="py-3 text-right text-gray-200 font-medium text-sm">{player._rawMinutes || '0'}</td>
                      </tr>
-                     <tr className="border-b border-gray-700/50">
-                        <td className="py-3">Gols</td>
-                        <td className="py-3 text-right text-gray-200 font-medium text-sm">{player.Goals || '0'}</td>
-                     </tr>
-                     <tr className="border-b border-gray-700/50">
-                        <td className="py-3">Assistências</td>
-                        <td className="py-3 text-right text-gray-200 font-medium text-sm">{player.Assist || '0'}</td>
-                     </tr>
+                     {isGK ? (
+                        <>
+                        <tr className="border-b border-gray-700/50">
+                           <td className="py-3">🧤 Defesas Totais</td>
+                           <td className="py-3 text-right text-gray-200 font-medium text-sm">{player.GK_SavesTotal || '0'}</td>
+                        </tr>
+                        <tr className="border-b border-gray-700/50">
+                           <td className="py-3">Clean Sheets</td>
+                           <td className="py-3 text-right text-emerald-400 font-medium text-sm">{player.GK_CleanSheets || '0'}</td>
+                        </tr>
+                        <tr className="border-b border-gray-700/50">
+                           <td className="py-3">Gols Sofridos</td>
+                           <td className="py-3 text-right text-red-400 font-medium text-sm">{player.GK_GoalsConceded || '0'}</td>
+                        </tr>
+                        </>
+                      ) : (
+                        <>
+                        <tr className="border-b border-gray-700/50">
+                           <td className="py-3">Gols</td>
+                           <td className="py-3 text-right text-gray-200 font-medium text-sm">{player.Goals || '0'}</td>
+                        </tr>
+                        <tr className="border-b border-gray-700/50">
+                           <td className="py-3">Assistências</td>
+                           <td className="py-3 text-right text-gray-200 font-medium text-sm">{player.Assist || '0'}</td>
+                        </tr>
+                        </>
+                      )}
                      <tr className="">
                         <td className="py-3 text-accent font-black">Classificação Média</td>
                         <td className="py-3 text-right text-white font-black text-lg">{player._rawRating || '0.00'}</td>
@@ -133,9 +177,31 @@ style={{ backgroundImage: "linear-gradient(to right, #0b1016, #141c27)" }}>
                   </h3>
                   <ul className="list-disc pl-4 space-y-2.5">
                      <li>O gráfico exibe os <strong className="text-gray-300">Percentis (0 a 100)</strong> comparando com os demais. Ex: um "90%" significa ser melhor que 90% dos jogadores importados.</li>
-                     <li><span className="text-[#FFD700] font-black tracking-wide">DOURADO:</span> Métricas ofensivas, finalização e Último Terço.</li>
-                     <li><span className="text-[#E2E8F0] font-black tracking-wide">PRATA:</span> Capacidade de progressão, passes e Construção.</li>
-                     <li><span className="text-[#10B981] font-black tracking-wide">ESMERALDA:</span> Intensidade defensiva, desarmes e disputas físicas.</li>
+                     {isGK ? (
+
+                       <>
+
+                       <li><span className="text-[#10B981] font-black tracking-wide">ESMERALDA:</span> Defesas totais, seguras, desviadas, ponta dos dedos, % difíceis, xG defendidos e pênaltis.</li>
+
+                       <li><span className="text-[#3B82F6] font-black tracking-wide">AZUL:</span> Ações do goleiro: saídas 1v1 e ações gerais.</li>
+
+                       <li><span className="text-[#A78BFA] font-black tracking-wide">ROXO:</span> Distribuição com os pés: passes tentados e completados.</li>
+
+                       </>
+
+                     ) : (
+
+                       <>
+
+                       <li><span className="text-[#FFD700] font-black tracking-wide">DOURADO:</span> Métricas ofensivas, finalização e Último Terço.</li>
+
+                       <li><span className="text-[#E2E8F0] font-black tracking-wide">PRATA:</span> Capacidade de progressão, passes e Construção.</li>
+
+                       <li><span className="text-[#10B981] font-black tracking-wide">ESMERALDA:</span> Intensidade defensiva, desarmes e disputas físicas.</li>
+
+                       </>
+
+                     )}
                   </ul>
                </div>
            </div>
@@ -152,7 +218,7 @@ style={{ backgroundImage: "linear-gradient(to right, #0b1016, #141c27)" }}>
                      <circle cx={CENTER} cy={CENTER} r={MAX_RADIUS * 0.25} fill="none" stroke="#253545" strokeWidth="1" strokeDasharray="4 4" />
 
                      {/* Fatias do Gráfico */}
-                     {POLAR_METRICS.map((metric, index) => {
+                     {metrics.map((metric, index) => {
                         const startAngle = index * sliceAngle;
                         const endAngle = (index + 1) * sliceAngle;
                         
@@ -181,7 +247,7 @@ style={{ backgroundImage: "linear-gradient(to right, #0b1016, #141c27)" }}>
                      })}
 
                      {/* Linhas  Divisórias */}
-                     {POLAR_METRICS.map((_, index) => {
+                     {metrics.map((_, index) => {
                         const angle = index * sliceAngle;
                         const lineEnd = polarToCartesian(CENTER, CENTER, MAX_RADIUS, angle);
                         return (
@@ -199,7 +265,7 @@ style={{ backgroundImage: "linear-gradient(to right, #0b1016, #141c27)" }}>
                      <text x={CENTER} y={CENTER + 3} textAnchor="middle" fill="#18232f" fontSize="11" fontWeight="bold">ALL</text>
 
                      {/* Rótulos Radiais */}
-                     {POLAR_METRICS.map((metric, index) => {
+                     {metrics.map((metric, index) => {
                         // Posicionar os textos fora do gráfico
                         const midAngle = (index + 0.5) * sliceAngle;
                         const textPos = polarToCartesian(CENTER, CENTER, MAX_RADIUS + 25, midAngle);

@@ -43,6 +43,8 @@ export const processMoneyballHtml = (html, positionSelected) => {
    
    if (!table) throw new Error("A tabela não foi encontrada no arquivo enviado.");
    
+   const isGoalkeeper = positionSelected === 'Goleiros';
+   
    const rows = Array.from(table.querySelectorAll('tr'));
    const originalHeaders = Array.from(rows[0].querySelectorAll('th')).map(th => th.innerText.trim());
    
@@ -58,9 +60,11 @@ export const processMoneyballHtml = (html, positionSelected) => {
         if(tds[index]) p[header] = tds[index].innerText.trim();
      });
      
-     // GERAR METRICAS DA PLANILHA PRIMEIRO
-     const advancedP = processAvancadosRow(p, i);
-     Object.assign(p, advancedP);
+     // GERAR METRICAS DA PLANILHA PRIMEIRO (pular para goleiros)
+     if (!isGoalkeeper) {
+       const advancedP = processAvancadosRow(p, i);
+       Object.assign(p, advancedP);
+     }
      
      // 1. Limpeza Base
      const minutos = extractStat(p, 'Minutos') || extractStat(p, 'Min');
@@ -72,63 +76,107 @@ export const processMoneyballHtml = (html, positionSelected) => {
      // Extrair UID da foto se presente na tabela HTML ou diretamente da coluna de ID
      p.uid = p['Inf']?.match(/face_([0-9]*)/)?.[1] || p['ID Único'] || p['Unique ID'] || null; 
      
-     // 2. Extração para Polar Chart (FINAL THIRD)
-     p.Goals = extractStat(p, 'Golos');
-     p.GoalsPer90 = calcPer90(p.Goals, minutos);
-     p.ExpectedGoals = extractStat(p, 'xG SP') || extractStat(p, 'xG');
-     p.ExpectedGoalsPer90 = calcPer90(p.ExpectedGoals, minutos);
-     p.Shots = extractStat(p, 'Remates');
-     p.ShotsPer90 = calcPer90(p.Shots, minutos);
-     p.Assists = extractStat(p, 'Assist.');
-     p.AssistsPer90 = calcPer90(p.Assists, minutos);
-     p.ExpectedAssists = extractStat(p, 'xA');
-     p.ExpectedAssistsPer90 = calcPer90(p.ExpectedAssists, minutos);
-     p.KeyPasses = extractStat(p, 'Passes Ch');
-     p.KeyPassesPer90 = calcPer90(p.KeyPasses, minutos);
-     
-     // CRIAÇÃO E POSSE (POSSESSION)
-     p.Dribbles = extractStat(p, 'Fnt');
-     p.DribblesPer90 = calcPer90(p.Dribbles, minutos);
-     p.PossessionLost = (p['Posse Perdida'] !== undefined ? p['Posse Perdida'] : null) ?? extractStat(p, 'PeP') ?? extractStat(p, 'Posse Desperdiçada');
-     const possLost90 = (p['Posse Perdida /90'] !== undefined ? p['Posse Perdida /90'] : null) ?? extractStat(p, 'Poss Perd/90');
-     p.PossessionLostPer90 = possLost90 ? possLost90 : calcPer90(p.PossessionLost, minutos); // INVERSO
-     p.ProgressivePasses = extractStat(p, 'Psg P') || p.KeyPasses; // Aproximação se não tiver Passe Prog
-     p.ProgressivePassesPer90 = calcPer90(p.ProgressivePasses, minutos);
-     p.PassesAttempted = extractStat(p, 'Pas A');
-     p.PassesAttemptedPer90 = calcPer90(p.PassesAttempted, minutos);
-     p.PassesCompleted = extractStat(p, 'Ps C');
-     p.PassesCompletedPer90 = calcPer90(p.PassesCompleted, minutos);
-     p.PeP = p.PossessionLost;
-     p.PePPer90 = p.PossessionLostPer90;
-     // DEFESA (DEFENDING)
-      p.HeadersAttempted = extractStat(p, "Cab A");
-      p.HeadersAttemptedPer90 = calcPer90(p.HeadersAttempted, minutos);
-      p.HeadersWon = extractStat(p, "Cabs");
-      p.HeadersWonPer90 = calcPer90(p.HeadersWon, minutos);
-      p.HeaderWinRate = p.HeadersAttempted > 0 ? Math.round((p.HeadersWon / p.HeadersAttempted) * 100) : 0;
-      
-      p.TacklesAttempted = extractStat(p, "T Desa");
-      p.TacklesAttemptedPer90 = calcPer90(p.TacklesAttempted, minutos);
-      p.TacklesWon = extractStat(p, "Des C");
-      p.TacklesWonPer90 = calcPer90(p.TacklesWon, minutos);
-      p.TackleWinRate = p.TacklesAttempted > 0 ? Math.round((p.TacklesWon / p.TacklesAttempted) * 100) : 0;
-      
-      p.PressuresAttempted = extractStat(p, "Press. tent.");
-      p.PressuresAttemptedPer90 = calcPer90(p.PressuresAttempted, minutos);
-      p.PressuresWon = extractStat(p, "Press. conc.");
-      p.PressuresWonPer90 = calcPer90(p.PressuresWon, minutos);
-      p.PressureWinRate = p.PressuresAttempted > 0 ? Math.round((p.PressuresWon / p.PressuresAttempted) * 100) : 0;
-      
-      p.Clearances = extractStat(p, "Crt");
-      p.ClearancesPer90 = calcPer90(p.Clearances, minutos);
-      
-      p.Interceptions = extractStat(p, "Interceptações") || extractStat(p, "DF") || 0;
-      p.InterceptionsPer90 = calcPer90(p.Interceptions, minutos);
-      
-      p.DistancePer90 = extractStat(p, "Dist / 90") || extractStat(p, "DK") || 0;
-      
-      p.OCG = extractStat(p, "OCG");
-      p.OCGPer90 = calcPer90(p.OCG, minutos);
+     if (isGoalkeeper) {
+       // ====== EXTRAÇÃO ESPECÍFICA DE GOLEIRO ======
+       p.isGoalkeeper = true;
+       p['Jogos completos'] = minutos > 0 ? minutos / 90 : 0;
+
+       // 🧤 DEFESAS
+       p.GK_SavesTotal = extractStat(p, 'Defesas totais') || extractStat(p, 'Def') || extractStat(p, 'Defesas');
+       p.GK_SavesTotalPer90 = calcPer90(p.GK_SavesTotal, minutos);
+       p.GK_SavesSafe = extractStat(p, 'Defesas Seguras') || extractStat(p, 'D Seg') || extractStat(p, 'Def Seg');
+       p.GK_SavesSafePer90 = calcPer90(p.GK_SavesSafe, minutos);
+       p.GK_SavesTipped = extractStat(p, 'Defesas Com a Ponta dos Dedos') || extractStat(p, 'DPdD') || extractStat(p, 'D PdD') || extractStat(p, 'Def PD');
+       p.GK_SavesTippedPer90 = calcPer90(p.GK_SavesTipped, minutos);
+       p.GK_SavesParried = extractStat(p, 'Defesas Desviadas') || extractStat(p, 'D Desv') || extractStat(p, 'Def Desv');
+       p.GK_SavesParriedPer90 = calcPer90(p.GK_SavesParried, minutos);
+       p.GK_DifficultSavePct = extractStat(p, '% Def Dificeis') || extractStat(p, '% Def Difíceis');
+       p.GK_xGSaved = extractStat(p, 'xG Defendidos') || extractStat(p, 'xGD') || extractStat(p, 'xG Def');
+       p.GK_xGSavedPer90 = calcPer90(p.GK_xGSaved, minutos);
+       p.GK_PenFaced = extractStat(p, 'Pênaltis enfrentados') || extractStat(p, 'Pên Enf') || extractStat(p, 'Pen Enf');
+       p.GK_PenSaved = extractStat(p, 'Pênaltis Defendidos') || extractStat(p, 'Pên Def') || extractStat(p, 'Pen Def');
+
+       // ⚡ AÇÕES
+       p.GK_SweepAttempts = extractStat(p, 'Tentativas de Saída do gol pra 1v1') || extractStat(p, 'T Saída') || extractStat(p, 'Saídas T') || extractStat(p, 'Saídas 1v1');
+       p.GK_SweepAttemptsPer90 = calcPer90(p.GK_SweepAttempts, minutos);
+       p.GK_SweepSuccess = extractStat(p, 'Saídas do gol com sucesso') || extractStat(p, 'Saídas C') || extractStat(p, 'Saídas S');
+       p.GK_SweepSuccessPer90 = calcPer90(p.GK_SweepSuccess, minutos);
+       p.GK_ActionsTried = extractStat(p, 'Ações tentadas') || extractStat(p, 'Ações T');
+       p.GK_ActionsTriedPer90 = calcPer90(p.GK_ActionsTried, minutos);
+       p.GK_ActionsSuccess = extractStat(p, 'Ações com sucesso') || extractStat(p, 'Ações C');
+       p.GK_ActionsSuccessPer90 = calcPer90(p.GK_ActionsSuccess, minutos);
+
+       // 📐 PASSES
+       p.GK_PassesAttempted = extractStat(p, 'Passes Tentados') || extractStat(p, 'Pas A') || extractStat(p, 'Passes A');
+       p.GK_PassesAttemptedPer90 = calcPer90(p.GK_PassesAttempted, minutos);
+       p.GK_PassesCompleted = extractStat(p, 'Passes completados') || extractStat(p, 'Ps C') || extractStat(p, 'Passes C');
+       p.GK_PassesCompletedPer90 = calcPer90(p.GK_PassesCompleted, minutos);
+
+       // EXTRAS para badges do card
+       p.GK_CleanSheets = extractStat(p, 'Clean Sheet') || extractStat(p, 'J Limpos') || extractStat(p, 'Jogos Limpos') || extractStat(p, 'CS');
+       p.GK_GoalsConceded = extractStat(p, 'Gols Sofridos') || extractStat(p, 'GS') || extractStat(p, 'Gols Sof');
+       p.GK_SavePct = extractStat(p, '% Acerto do goleiro') || extractStat(p, '% Defesas') || extractStat(p, '% Def');
+       p.GK_ConcededPerGame = extractStat(p, 'Sofridos / jogo') || extractStat(p, 'GS/Jogo');
+
+     } else {
+       // 2. Extração para Polar Chart (FINAL THIRD)
+       p.Goals = extractStat(p, 'Golos');
+       p.GoalsPer90 = calcPer90(p.Goals, minutos);
+       p.ExpectedGoals = extractStat(p, 'xG SP') || extractStat(p, 'xG');
+       p.ExpectedGoalsPer90 = calcPer90(p.ExpectedGoals, minutos);
+       p.Shots = extractStat(p, 'Remates');
+       p.ShotsPer90 = calcPer90(p.Shots, minutos);
+       p.Assists = extractStat(p, 'Assist.');
+       p.AssistsPer90 = calcPer90(p.Assists, minutos);
+       p.ExpectedAssists = extractStat(p, 'xA');
+       p.ExpectedAssistsPer90 = calcPer90(p.ExpectedAssists, minutos);
+       p.KeyPasses = extractStat(p, 'Passes Ch');
+       p.KeyPassesPer90 = calcPer90(p.KeyPasses, minutos);
+       
+       // CRIAÇÃO E POSSE (POSSESSION)
+       p.Dribbles = extractStat(p, 'Fnt');
+       p.DribblesPer90 = calcPer90(p.Dribbles, minutos);
+       p.PossessionLost = (p['Posse Perdida'] !== undefined ? p['Posse Perdida'] : null) ?? extractStat(p, 'PeP') ?? extractStat(p, 'Posse Desperdiçada');
+       const possLost90 = (p['Posse Perdida /90'] !== undefined ? p['Posse Perdida /90'] : null) ?? extractStat(p, 'Poss Perd/90');
+       p.PossessionLostPer90 = possLost90 ? possLost90 : calcPer90(p.PossessionLost, minutos); // INVERSO
+       p.ProgressivePasses = extractStat(p, 'Psg P') || p.KeyPasses; // Aproximação se não tiver Passe Prog
+       p.ProgressivePassesPer90 = calcPer90(p.ProgressivePasses, minutos);
+       p.PassesAttempted = extractStat(p, 'Pas A');
+       p.PassesAttemptedPer90 = calcPer90(p.PassesAttempted, minutos);
+       p.PassesCompleted = extractStat(p, 'Ps C');
+       p.PassesCompletedPer90 = calcPer90(p.PassesCompleted, minutos);
+       p.PeP = p.PossessionLost;
+       p.PePPer90 = p.PossessionLostPer90;
+       // DEFESA (DEFENDING)
+        p.HeadersAttempted = extractStat(p, "Cab A");
+        p.HeadersAttemptedPer90 = calcPer90(p.HeadersAttempted, minutos);
+        p.HeadersWon = extractStat(p, "Cabs");
+        p.HeadersWonPer90 = calcPer90(p.HeadersWon, minutos);
+        p.HeaderWinRate = p.HeadersAttempted > 0 ? Math.round((p.HeadersWon / p.HeadersAttempted) * 100) : 0;
+        
+        p.TacklesAttempted = extractStat(p, "T Desa");
+        p.TacklesAttemptedPer90 = calcPer90(p.TacklesAttempted, minutos);
+        p.TacklesWon = extractStat(p, "Des C");
+        p.TacklesWonPer90 = calcPer90(p.TacklesWon, minutos);
+        p.TackleWinRate = p.TacklesAttempted > 0 ? Math.round((p.TacklesWon / p.TacklesAttempted) * 100) : 0;
+        
+        p.PressuresAttempted = extractStat(p, "Press. tent.");
+        p.PressuresAttemptedPer90 = calcPer90(p.PressuresAttempted, minutos);
+        p.PressuresWon = extractStat(p, "Press. conc.");
+        p.PressuresWonPer90 = calcPer90(p.PressuresWon, minutos);
+        p.PressureWinRate = p.PressuresAttempted > 0 ? Math.round((p.PressuresWon / p.PressuresAttempted) * 100) : 0;
+        
+        p.Clearances = extractStat(p, "Crt");
+        p.ClearancesPer90 = calcPer90(p.Clearances, minutos);
+        
+        p.Interceptions = extractStat(p, "Interceptações") || extractStat(p, "DF") || 0;
+        p.InterceptionsPer90 = calcPer90(p.Interceptions, minutos);
+        
+        p.DistancePer90 = extractStat(p, "Dist / 90") || extractStat(p, "DK") || 0;
+        
+        p.OCG = extractStat(p, "OCG");
+        p.OCGPer90 = calcPer90(p.OCG, minutos);
+     }
 
      // INFOS EXTRAS PARA O MODAL
      p.YellowCards = extractStat(p, 'Amr');
@@ -154,6 +202,73 @@ export const processMoneyballHtml = (html, positionSelected) => {
    const totalJogosCompletos = players.reduce((sum, p) => sum + (parseFloat(p['Jogos completos']) || 0), 0);
    const mediaJogosGlobal = players.length > 0 ? totalJogosCompletos / players.length : 0;
    players.forEach(p => p['Média de jogos'] = mediaJogosGlobal);
+
+   // ====== PERCENTIS DE GOLEIRO ====== 
+   if (isGoalkeeper) {
+     const gkPer90Metrics = [
+       'GK_SavesTotal', 'GK_SavesSafe', 'GK_SavesTipped', 'GK_SavesParried',
+       'GK_xGSaved', 'GK_SweepAttempts', 'GK_SweepSuccess',
+       'GK_ActionsTried', 'GK_ActionsSuccess',
+       'GK_PassesAttempted', 'GK_PassesCompleted'
+     ];
+     const gkDirectMetrics = ['GK_DifficultSavePct', 'GK_SavePct'];
+
+     const gkMaxValues = {};
+     const qualifiedGKs = players.filter(p => !p._rawMinutes || p._rawMinutes >= 270);
+     const refGKs = qualifiedGKs.length >= 3 ? qualifiedGKs : players;
+
+     gkPer90Metrics.forEach(key => {
+       const per90Key = key + 'Per90';
+       gkMaxValues[per90Key] = Math.max(...refGKs.map(p => p[per90Key] || 0), 0.01);
+     });
+     gkDirectMetrics.forEach(key => {
+       gkMaxValues[key] = Math.max(...refGKs.map(p => p[key] || 0), 0.01);
+     });
+     // Pênaltis usam totais (frequência é aleatória, não faz sentido per90)
+     gkMaxValues['GK_PenFaced'] = Math.max(...refGKs.map(p => p.GK_PenFaced || 0), 0.01);
+     gkMaxValues['GK_PenSaved'] = Math.max(...refGKs.map(p => p.GK_PenSaved || 0), 0.01);
+
+     players = players.map(p => {
+       p.percentiles = {};
+       gkPer90Metrics.forEach(key => {
+         const per90Key = key + 'Per90';
+         const max = gkMaxValues[per90Key];
+         const val = p[per90Key] || 0;
+         p.percentiles[key] = Math.round(max > 0 ? (val / max) * 100 : 0);
+       });
+       gkDirectMetrics.forEach(key => {
+         const max = gkMaxValues[key];
+         const val = p[key] || 0;
+         p.percentiles[key] = Math.round(max > 0 ? (val / max) * 100 : 0);
+       });
+       p.percentiles['GK_PenFaced'] = Math.round(gkMaxValues['GK_PenFaced'] > 0 ? ((p.GK_PenFaced || 0) / gkMaxValues['GK_PenFaced']) * 100 : 0);
+       p.percentiles['GK_PenSaved'] = Math.round(gkMaxValues['GK_PenSaved'] > 0 ? ((p.GK_PenSaved || 0) / gkMaxValues['GK_PenSaved']) * 100 : 0);
+
+       // Nota IA do Goleiro (Defesas 50%, Ações 25%, Passes 25%)
+       const defAvg = (
+         (p.percentiles.GK_SavesTotal || 0) +
+         (p.percentiles.GK_DifficultSavePct || 0) +
+         (p.percentiles.GK_xGSaved || 0)
+       ) / 3;
+       const actAvg = (
+         (p.percentiles.GK_SweepSuccess || 0) +
+         (p.percentiles.GK_ActionsSuccess || 0)
+       ) / 2;
+       const passAvg = p.percentiles.GK_PassesCompleted || 0;
+       p._notaIA = (defAvg * 0.5 + actAvg * 0.25 + passAvg * 0.25).toFixed(1);
+
+       return p;
+     });
+
+     players = players.sort((a, b) => b._notaIA - a._notaIA);
+
+     // Headers para a tabela: usar colunas do HTML do goleiro
+     const gkHeaders = originalHeaders
+       .filter(h => h !== 'Inf' && h !== 'ID Único' && h !== 'Unique ID')
+       .map(h => ({ id: h, type: 'float' }));
+
+     return { players, originalHeaders: gkHeaders, originalHtmlCols: originalHeaders, maxValues: gkMaxValues };
+   }
    
    // 3. Cálculos de Percentis do Dataset Baseado no melhor do elenco importado
    const maxValues = {

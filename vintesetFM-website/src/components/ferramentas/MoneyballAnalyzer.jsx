@@ -370,8 +370,10 @@ export default function MoneyballAnalyzer() {
         
         // Anti-Erro: Validar se os headers contêm as colunas clássicas de elenco
         const headersNames = originalHeaders.map(h => typeof h === 'string' ? h.toLowerCase() : h.id.toLowerCase());
-        const isConfigPlayers = headersNames.includes('altura') || headersNames.includes('peso') || headersNames.some(h => h.includes('dist'));
-        if (!isConfigPlayers) throw new Error("O arquivo importado não é compatível com Análise Moneyball. Certifique-se de não estar importando uma lista de Staff.");
+        if (selectedCategory !== 'Goleiros') {
+           const isConfigPlayers = headersNames.includes('altura') || headersNames.includes('peso') || headersNames.some(h => h.includes('dist'));
+           if (!isConfigPlayers) throw new Error("O arquivo importado não é compatível com Análise Moneyball. Certifique-se de não estar importando uma lista de Staff.");
+        }
 
         setPlayersData(players);
         setOriginalHeaders(originalHeaders);
@@ -578,10 +580,10 @@ export default function MoneyballAnalyzer() {
                                      Gráfico
                                    </button>
                                 </div>
-                             </div>
-                          </div>
+                              </div>
+                           </div>
 
-                           {/* HEADER UNIFICADO (Mustermann Mod) */}
+                           {/* HEADER UNIFICADO */}
                            <div className="flex border-b border-[#2a303c] bg-[#141820] items-center justify-between px-3 py-2">
                                <div className="flex items-center gap-3">
                                   <div className="flex flex-col items-center justify-center -mt-0.5">
@@ -590,79 +592,159 @@ export default function MoneyballAnalyzer() {
                                   </div>
                                </div>
                                
-                               <div className="flex items-center gap-1.5 pl-2">
-                                   <FootIcon pe={player.Foot || player['Pé Preferido'] || player['Pé']} />
-                                   
-                                   <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 w-12 py-1 rounded shadow-inner" title="Dist / 90">
-                                     <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">Dis/90</span>
-                                     <span className={`font-black text-[13px] leading-none ${player.DistancePer90 >= 12.0 ? 'text-[#4ade80]' : player.DistancePer90 >= 10.0 ? 'text-[#facc15]' : 'text-[#f87171]'}`}>{typeof player.DistancePer90 === 'number' ? player.DistancePer90.toFixed(1) : player.DistancePer90 || '-'}</span>
-                                   </div>
+                               {player.isGoalkeeper ? (
+                                 /* BADGES DO GOLEIRO */
+                                 <div className="flex items-center gap-1.5 pl-2">
+                                    <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 w-12 py-1 rounded shadow-inner" title="Clean Sheets">
+                                      <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">CS</span>
+                                      <span className="text-emerald-400 font-black text-[13px] leading-none">{player.GK_CleanSheets || 0}</span>
+                                    </div>
 
-                                   <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 w-12 py-1 rounded shadow-inner" title="Idade">
-                                     <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">Idade</span>
-                                     <span className="text-white font-black text-[13px] leading-none">{player.Age || '-'}</span>
-                                   </div>
+                                    <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 w-12 py-1 rounded shadow-inner" title="Gols Sofridos">
+                                      <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">GS</span>
+                                      <span className={`font-black text-[13px] leading-none ${(player.GK_GoalsConceded || 0) > 20 ? 'text-[#f87171]' : 'text-[#facc15]'}`}>{player.GK_GoalsConceded || 0}</span>
+                                    </div>
 
-                                   <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 w-12 py-1 rounded shadow-inner" title="Classificação Média">
-                                     <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">Nota</span>
-                                     <span className="text-yellow-400 font-black text-[13px] leading-none">{player._rawRating || '-'}</span>
-                                   </div>
+                                    <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 w-12 py-1 rounded shadow-inner" title="Idade">
+                                      <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">Idade</span>
+                                      <span className="text-white font-black text-[13px] leading-none">{player.Age || '-'}</span>
+                                    </div>
 
-                                   <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 px-2 py-1 rounded shadow-inner" title={'I.A. Rating (' + player._notaIA + ' pts)'}>
-                                     <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">Rec. IA</span>
-                                     <span className={(player._notaIA >= 50 ? 'text-accent ' : 'text-gray-300 ') + 'font-black text-[13px] leading-none'}>{player._notaIA}</span>
-                                   </div>
-                               </div>
+                                    <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 w-12 py-1 rounded shadow-inner" title="Classificação Média">
+                                      <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">Nota</span>
+                                      <span className="text-yellow-400 font-black text-[13px] leading-none">{player._rawRating || '-'}</span>
+                                    </div>
+
+                                    <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 px-2 py-1 rounded shadow-inner" title={'I.A. Rating (' + player._notaIA + ' pts)'}>
+                                      <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">Rec. IA</span>
+                                      <span className={(player._notaIA >= 50 ? 'text-accent ' : 'text-gray-300 ') + 'font-black text-[13px] leading-none'}>{player._notaIA}</span>
+                                    </div>
+                                 </div>
+                               ) : (
+                                 /* BADGES DO JOGADOR DE LINHA */
+                                 <div className="flex items-center gap-1.5 pl-2">
+                                    <FootIcon pe={player.Foot || player['Pé Preferido'] || player['Pé']} />
+                                    
+                                    <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 w-12 py-1 rounded shadow-inner" title="Dist / 90">
+                                      <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">Dis/90</span>
+                                      <span className={`font-black text-[13px] leading-none ${player.DistancePer90 >= 12.0 ? 'text-[#4ade80]' : player.DistancePer90 >= 10.0 ? 'text-[#facc15]' : 'text-[#f87171]'}`}>{typeof player.DistancePer90 === 'number' ? player.DistancePer90.toFixed(1) : player.DistancePer90 || '-'}</span>
+                                    </div>
+
+                                    <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 w-12 py-1 rounded shadow-inner" title="Idade">
+                                      <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">Idade</span>
+                                      <span className="text-white font-black text-[13px] leading-none">{player.Age || '-'}</span>
+                                    </div>
+
+                                    <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 w-12 py-1 rounded shadow-inner" title="Classificação Média">
+                                      <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">Nota</span>
+                                      <span className="text-yellow-400 font-black text-[13px] leading-none">{player._rawRating || '-'}</span>
+                                    </div>
+
+                                    <div className="flex flex-col items-center justify-center bg-[#1f2229] border border-gray-700 px-2 py-1 rounded shadow-inner" title={'I.A. Rating (' + player._notaIA + ' pts)'}>
+                                      <span className="text-[8px] text-gray-400 font-bold leading-none mb-0.5 uppercase tracking-wider">Rec. IA</span>
+                                      <span className={(player._notaIA >= 50 ? 'text-accent ' : 'text-gray-300 ') + 'font-black text-[13px] leading-none'}>{player._notaIA}</span>
+                                    </div>
+                                 </div>
+                               )}
                            </div>
 
                            {/* STATS AREA */}
                            <div className="p-3">
-                              {/* AREA DEFESA */}
-                              <div className="flex mb-1.5">
-                                 <div className="w-6 shrink-0 flex flex-col justify-center items-center border border-gray-800 rounded-l overflow-hidden relative bg-[#0a1e16]">
-                                    <span className="-rotate-90 absolute text-[9px] uppercase tracking-[0.25em] text-emerald-400 font-bold whitespace-nowrap opacity-90 shadow-sm drop-shadow-md">Defesa</span>
-                                 </div>
-                                 <div className="flex-1 border border-l-0 border-gray-800 rounded-r p-1.5 flex flex-col gap-0.5 bg-[#081014]">
-                                    <StatRow label="Desarmes" value={player.TacklesAttempted} percentile={player.percentiles.TacklesAttempted} tooltip="Desarmes tentados durante os 90 minutos" />
-                                    <StatRow label="Des Concl." value={player.TacklesWon} percentile={player.percentiles.TacklesWon} tooltip="Desarmes ganhos + Pressões concluídas" />
-                                    <StatRow label="Press. Tent." value={player.PressuresAttempted} percentile={player.percentiles.PressuresAttempted} tooltip="Pressões tentadas sem a posse da bola" />
-                                    <StatRow label="Press. Conc." value={player.PressuresWon} percentile={player.percentiles.PressuresWon} tooltip="Pressões concluídas" />
-                                    <StatRow label="Cabeceios" value={player.HeadersAttempted} percentile={player.percentiles.HeadersAttempted} tooltip="Cabeceios disputados no ar" />
-                                    <StatRow label="Cab Ganhos" value={player.HeadersWon} percentile={player.percentiles.HeadersWon} tooltip="Bolas aéreas ganhas via cabeceio" />
-                                    <StatRow label="Interceptações" value={player.Interceptions} percentile={player.percentiles.Interceptions} tooltip="Interceptações de passes ou ações adversárias" />
-                                 </div>
-                              </div>
+                              {player.isGoalkeeper ? (
+                                <>
+                                {/* ====== CARD DE GOLEIRO ====== */}
+                                {/* 🧤 DEFESAS */}
+                                <div className="flex mb-1.5">
+                                   <div className="w-6 shrink-0 flex flex-col justify-center items-center border border-gray-800 rounded-l overflow-hidden relative bg-[#0a1e16]">
+                                      <span className="-rotate-90 absolute text-[9px] uppercase tracking-[0.25em] text-emerald-400 font-bold whitespace-nowrap opacity-90 shadow-sm drop-shadow-md">Defesas</span>
+                                   </div>
+                                   <div className="flex-1 border border-l-0 border-gray-800 rounded-r p-1.5 flex flex-col gap-0.5 bg-[#081014]">
+                                      <StatRow label="Def. Totais" value={player.GK_SavesTotal} percentile={player.percentiles?.GK_SavesTotal || 0} tooltip="Total de defesas realizadas" />
+                                      <StatRow label="Def. Seguras" value={player.GK_SavesSafe} percentile={player.percentiles?.GK_SavesSafe || 0} tooltip="Defesas seguras (encaixadas)" />
+                                      <StatRow label="Def. P. Dedos" value={player.GK_SavesTipped} percentile={player.percentiles?.GK_SavesTipped || 0} tooltip="Defesas com a ponta dos dedos" />
+                                      <StatRow label="Def. Desviadas" value={player.GK_SavesParried} percentile={player.percentiles?.GK_SavesParried || 0} tooltip="Defesas desviadas (espalmadas)" />
+                                      <StatRow label="% Def Difíceis" value={typeof player.GK_DifficultSavePct === 'number' ? Math.round(player.GK_DifficultSavePct * 100) + '%' : player.GK_DifficultSavePct} percentile={player.percentiles?.GK_DifficultSavePct || 0} tooltip="Percentual de defesas difíceis" />
+                                      <StatRow label="xG Defendidos" value={typeof player.GK_xGSaved === 'number' ? player.GK_xGSaved.toFixed(2) : player.GK_xGSaved} percentile={player.percentiles?.GK_xGSaved || 0} tooltip="Expected Goals defendidos" />
+                                      <StatRow label="Pên Enfrent." value={player.GK_PenFaced} percentile={player.percentiles?.GK_PenFaced || 0} tooltip="Pênaltis enfrentados" />
+                                      <StatRow label="Pên Defend." value={player.GK_PenSaved} percentile={player.percentiles?.GK_PenSaved || 0} tooltip="Pênaltis defendidos" />
+                                   </div>
+                                </div>
 
-                             {/* POSSE */}
-                             <div className="flex mb-1.5">
-                                <div className="w-6 shrink-0 flex flex-col justify-center items-center border border-gray-800 rounded-l overflow-hidden relative bg-[rgba(15,30,60,0.8)]">
-                                   <span className="-rotate-90 absolute text-[9px] uppercase tracking-[0.25em] text-blue-300 font-bold whitespace-nowrap opacity-90 drop-shadow-md">Posse</span>
+                                {/* ⚡ AÇÕES */}
+                                <div className="flex mb-1.5">
+                                   <div className="w-6 shrink-0 flex flex-col justify-center items-center border border-gray-800 rounded-l overflow-hidden relative bg-[rgba(15,30,60,0.8)]">
+                                      <span className="-rotate-90 absolute text-[9px] uppercase tracking-[0.25em] text-blue-300 font-bold whitespace-nowrap opacity-90 drop-shadow-md">Ações</span>
+                                   </div>
+                                   <div className="flex-1 border border-l-0 border-gray-800 rounded-r p-1.5 flex flex-col gap-0.5 bg-[#081014]">
+                                      <StatRow label="Saídas 1v1 T." value={player.GK_SweepAttempts} percentile={player.percentiles?.GK_SweepAttempts || 0} tooltip="Tentativas de saída do gol para 1v1" />
+                                      <StatRow label="Saídas Suces." value={player.GK_SweepSuccess} percentile={player.percentiles?.GK_SweepSuccess || 0} tooltip="Saídas do gol com sucesso" />
+                                      <StatRow label="Ações Tent." value={typeof player.GK_ActionsTried === 'number' ? Math.round(player.GK_ActionsTried) : player.GK_ActionsTried} percentile={player.percentiles?.GK_ActionsTried || 0} tooltip="Ações tentadas pelo goleiro" />
+                                      <StatRow label="Ações Suces." value={typeof player.GK_ActionsSuccess === 'number' ? Math.round(player.GK_ActionsSuccess) : player.GK_ActionsSuccess} percentile={player.percentiles?.GK_ActionsSuccess || 0} tooltip="Ações com sucesso" />
+                                   </div>
                                 </div>
-                                <div className="flex-1 border border-l-0 border-gray-800 rounded-r p-1.5 flex flex-col gap-0.5 bg-[#081014]">
-                                   <StatRow label="Passes" value={player.PassesAttempted} percentile={player.percentiles.PassesAttempted} tooltip="Passes tentados ao longo do jogo" />
-                                   <StatRow label="Pas Concl." value={player.PassesCompleted} percentile={player.percentiles.PassesCompleted} tooltip="Passes conseguidos" />
-                                   <StatRow label="Dribles" value={player.Dribbles} percentile={player.percentiles.Dribbles} tooltip="Fintas e Dribles concluídos" />
-                                   <StatRow label="Posse Perd." value={player.PossessionLost} percentile={player.percentiles.PeP} tooltip="Volume de Posses perdidas (Mínimo = Melhor)" />
-                                   <StatRow label="Perd./90" value={player.PossessionLostPer90} percentile={player.percentiles.PossessionLost} tooltip="Posses perdidas a cada 90 minutos" />
-                                </div>
-                             </div>
 
-                             {/* ÚLTIMO TERÇO */}
-                             <div className="flex mb-1">
-                                <div className="w-6 shrink-0 flex flex-col justify-center items-center border border-gray-800 rounded-l overflow-hidden relative bg-[#3f121d]">
-                                   <span className="-rotate-90 absolute text-[9px] uppercase tracking-[0.25em] text-rose-300 font-bold whitespace-nowrap opacity-90 drop-shadow-md">Ataque</span>
+                                {/* 📐 PASSES */}
+                                <div className="flex mb-1">
+                                   <div className="w-6 shrink-0 flex flex-col justify-center items-center border border-gray-800 rounded-l overflow-hidden relative bg-[#1a1520]">
+                                      <span className="-rotate-90 absolute text-[9px] uppercase tracking-[0.25em] text-purple-300 font-bold whitespace-nowrap opacity-90 drop-shadow-md">Passes</span>
+                                   </div>
+                                   <div className="flex-1 border border-l-0 border-gray-800 rounded-r p-1.5 flex flex-col gap-0.5 bg-[#081014]">
+                                      <StatRow label="Passes Tent." value={player.GK_PassesAttempted} percentile={player.percentiles?.GK_PassesAttempted || 0} tooltip="Passes tentados" />
+                                      <StatRow label="Passes Compl." value={player.GK_PassesCompleted} percentile={player.percentiles?.GK_PassesCompleted || 0} tooltip="Passes completados" />
+                                   </div>
                                 </div>
-                                <div className="flex-1 border border-l-0 border-gray-800 rounded-r p-1.5 flex flex-col gap-0.5 bg-[#081014]">
-                                   <StatRow label="Passes Ch" value={player.KeyPasses} percentile={player.percentiles.KeyPasses} tooltip="Passe-Chave criativo e direcional para gol" />
-                                   <StatRow label="Oport. Cla" value={player.OCG} percentile={player.percentiles.OCG} tooltip="Oportunidades Claras de Golo" />
-                                   <StatRow label="Finaliz." value={player.Shots} percentile={player.percentiles.Shots} tooltip="Remates ou Finalizações desferidos" />
-                                   <StatRow label="xA" value={player.ExpectedAssists} percentile={player.percentiles.ExpectedAssists} tooltip="Assistências Esperadas (xA)" />
-                                   <StatRow label="Assistênc" value={player.Assists} percentile={player.percentiles.Assists} tooltip="Assistências concluídas para gol" />
-                                   <StatRow label="xG" value={player.ExpectedGoals} percentile={player.percentiles.ExpectedGoals} tooltip="Gols Esperados (xG)" />
-                                   <StatRow label="Gols" value={player.Goals} percentile={player.percentiles.Goals} tooltip="Gols marcados" />
+                                </>
+                              ) : (
+                                <>
+                                {/* ====== CARD DE JOGADOR DE LINHA ====== */}
+                                {/* AREA DEFESA */}
+                                <div className="flex mb-1.5">
+                                   <div className="w-6 shrink-0 flex flex-col justify-center items-center border border-gray-800 rounded-l overflow-hidden relative bg-[#0a1e16]">
+                                      <span className="-rotate-90 absolute text-[9px] uppercase tracking-[0.25em] text-emerald-400 font-bold whitespace-nowrap opacity-90 shadow-sm drop-shadow-md">Defesa</span>
+                                   </div>
+                                   <div className="flex-1 border border-l-0 border-gray-800 rounded-r p-1.5 flex flex-col gap-0.5 bg-[#081014]">
+                                      <StatRow label="Desarmes" value={player.TacklesAttempted} percentile={player.percentiles.TacklesAttempted} tooltip="Desarmes tentados durante os 90 minutos" />
+                                      <StatRow label="Des Concl." value={player.TacklesWon} percentile={player.percentiles.TacklesWon} tooltip="Desarmes ganhos + Pressões concluídas" />
+                                      <StatRow label="Press. Tent." value={player.PressuresAttempted} percentile={player.percentiles.PressuresAttempted} tooltip="Pressões tentadas sem a posse da bola" />
+                                      <StatRow label="Press. Conc." value={player.PressuresWon} percentile={player.percentiles.PressuresWon} tooltip="Pressões concluídas" />
+                                      <StatRow label="Cabeceios" value={player.HeadersAttempted} percentile={player.percentiles.HeadersAttempted} tooltip="Cabeceios disputados no ar" />
+                                      <StatRow label="Cab Ganhos" value={player.HeadersWon} percentile={player.percentiles.HeadersWon} tooltip="Bolas aéreas ganhas via cabeceio" />
+                                      <StatRow label="Interceptações" value={player.Interceptions} percentile={player.percentiles.Interceptions} tooltip="Interceptações de passes ou ações adversárias" />
+                                   </div>
                                 </div>
-                             </div>
-                          </div>
+
+                                {/* POSSE */}
+                                <div className="flex mb-1.5">
+                                   <div className="w-6 shrink-0 flex flex-col justify-center items-center border border-gray-800 rounded-l overflow-hidden relative bg-[rgba(15,30,60,0.8)]">
+                                      <span className="-rotate-90 absolute text-[9px] uppercase tracking-[0.25em] text-blue-300 font-bold whitespace-nowrap opacity-90 drop-shadow-md">Posse</span>
+                                   </div>
+                                   <div className="flex-1 border border-l-0 border-gray-800 rounded-r p-1.5 flex flex-col gap-0.5 bg-[#081014]">
+                                      <StatRow label="Passes" value={player.PassesAttempted} percentile={player.percentiles.PassesAttempted} tooltip="Passes tentados ao longo do jogo" />
+                                      <StatRow label="Pas Concl." value={player.PassesCompleted} percentile={player.percentiles.PassesCompleted} tooltip="Passes conseguidos" />
+                                      <StatRow label="Dribles" value={player.Dribbles} percentile={player.percentiles.Dribbles} tooltip="Fintas e Dribles concluídos" />
+                                      <StatRow label="Posse Perd." value={player.PossessionLost} percentile={player.percentiles.PeP} tooltip="Volume de Posses perdidas (Mínimo = Melhor)" />
+                                      <StatRow label="Perd./90" value={player.PossessionLostPer90} percentile={player.percentiles.PossessionLost} tooltip="Posses perdidas a cada 90 minutos" />
+                                   </div>
+                                </div>
+
+                                {/* ÚLTIMO TERÇO */}
+                                <div className="flex mb-1">
+                                   <div className="w-6 shrink-0 flex flex-col justify-center items-center border border-gray-800 rounded-l overflow-hidden relative bg-[#3f121d]">
+                                      <span className="-rotate-90 absolute text-[9px] uppercase tracking-[0.25em] text-rose-300 font-bold whitespace-nowrap opacity-90 drop-shadow-md">Ataque</span>
+                                   </div>
+                                   <div className="flex-1 border border-l-0 border-gray-800 rounded-r p-1.5 flex flex-col gap-0.5 bg-[#081014]">
+                                      <StatRow label="Passes Ch" value={player.KeyPasses} percentile={player.percentiles.KeyPasses} tooltip="Passe-Chave criativo e direcional para gol" />
+                                      <StatRow label="Oport. Cla" value={player.OCG} percentile={player.percentiles.OCG} tooltip="Oportunidades Claras de Golo" />
+                                      <StatRow label="Finaliz." value={player.Shots} percentile={player.percentiles.Shots} tooltip="Remates ou Finalizações desferidos" />
+                                      <StatRow label="xA" value={player.ExpectedAssists} percentile={player.percentiles.ExpectedAssists} tooltip="Assistências Esperadas (xA)" />
+                                      <StatRow label="Assistênc" value={player.Assists} percentile={player.percentiles.Assists} tooltip="Assistências concluídas para gol" />
+                                      <StatRow label="xG" value={player.ExpectedGoals} percentile={player.percentiles.ExpectedGoals} tooltip="Gols Esperados (xG)" />
+                                      <StatRow label="Gols" value={player.Goals} percentile={player.percentiles.Goals} tooltip="Gols marcados" />
+                                   </div>
+                                </div>
+                                </>
+                              )}
+                           </div>
                        </div>
                      ))}
                    </div>
