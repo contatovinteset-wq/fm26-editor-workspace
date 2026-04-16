@@ -257,7 +257,7 @@ router.post('/squad', requireAuth, async (req, res) => {
 });
 
 // STATUS DO MERCADO (In-memory por enquanto, reseta ao reiniciar o servidor)
-let isMarketOpen = true;
+let isMarketOpen = false;
 const overlayNotifiedUsers = new Set();
 
 router.get('/status', (req, res) => {
