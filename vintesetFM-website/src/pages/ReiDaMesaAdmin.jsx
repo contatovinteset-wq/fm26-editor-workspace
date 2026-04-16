@@ -273,7 +273,19 @@ const ReiDaMesaAdmin = () => {
                                  <td className="px-4 py-3 font-bold text-white flex items-center gap-2">
                                    {s.playerName} <span className="text-[10px] text-gray-500">[{s.realPosition}]</span>
                                  </td>
-                                 <td className="px-4 py-3 text-center">{s.details.minsPlayed || 0}'</td>
+                                 <td className="px-4 py-3 text-center">
+                                   <input 
+                                     type="number" 
+                                     min="0" 
+                                     value={s.details.minsPlayed || 0} 
+                                     onChange={(e) => {
+                                       const newPreview = [...matchPreview];
+                                       newPreview[index].details.minsPlayed = parseInt(e.target.value) || 0;
+                                       setMatchPreview(newPreview);
+                                     }}
+                                     className="w-16 bg-black/60 border border-white/30 text-white rounded p-1 text-center outline-none focus:border-white"
+                                   />
+                                 </td>
                                  <td className="px-4 py-3 text-center">{s.details.goals} / {s.details.assists}</td>
                                  <td className="px-4 py-3 text-center">
                                    <input 
