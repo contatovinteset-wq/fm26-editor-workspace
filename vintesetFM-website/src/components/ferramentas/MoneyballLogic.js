@@ -1,5 +1,6 @@
 // Função para tratar parse e cálculo de dados dos jogadores exportados no Moneyball
 import { processAvancadosRow, getAvancadosHeaders } from './MoneyballAvancados.js';
+import { processGoleirosRow, getGoleirosHeaders } from './MoneyballGoleiros.js';
 
 // Converter valores monetários ou strings (como "€1.2M", "5,55", "85%") para número
 const parseMoneyballNumber = (val) => {
@@ -60,8 +61,11 @@ export const processMoneyballHtml = (html, positionSelected) => {
         if(tds[index]) p[header] = tds[index].innerText.trim();
      });
      
-     // GERAR METRICAS DA PLANILHA PRIMEIRO (pular para goleiros)
-     if (!isGoalkeeper) {
+     // GERAR METRICAS DA PLANILHA PRIMEIRO
+     if (isGoalkeeper) {
+       const gkP = processGoleirosRow(p, i);
+       Object.assign(p, gkP);
+     } else {
        const advancedP = processAvancadosRow(p, i);
        Object.assign(p, advancedP);
      }
@@ -262,10 +266,8 @@ export const processMoneyballHtml = (html, positionSelected) => {
 
      players = players.sort((a, b) => b._notaIA - a._notaIA);
 
-     // Headers para a tabela: usar colunas do HTML do goleiro
-     const gkHeaders = originalHeaders
-       .filter(h => h !== 'Inf' && h !== 'ID Único' && h !== 'Unique ID')
-       .map(h => ({ id: h, type: 'float' }));
+     // Headers para a tabela: usar colunas da aba do Excel do goleiro
+     const gkHeaders = getGoleirosHeaders();
 
      return { players, originalHeaders: gkHeaders, originalHtmlCols: originalHeaders, maxValues: gkMaxValues };
    }
