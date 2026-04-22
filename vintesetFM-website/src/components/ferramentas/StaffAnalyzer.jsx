@@ -232,27 +232,22 @@ export default function StaffAnalyzer() {
             </p>
          </div>
 
-         {/* 3. CTA PREMIUM (Lado a Lado) */}
-         <div className="bg-gradient-to-br from-indigo-900/40 via-bgDark to-accent/10 border border-accent/30 rounded-xl p-5 shadow-2xl relative flex flex-col justify-center order-3 xl:order-3">
-            <span className="absolute -top-3 -right-3 bg-accent text-bgDark text-[10px] font-black px-3 py-1 rounded-full shadow-lg border border-accent animate-pulse uppercase tracking-wider">Premium</span>
-            <h3 className="text-lg font-extrabold text-white mb-2 decoration-accent flex items-center justify-between">
-               <span><span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-yellow-400 text-xl block">FM26PlayerExport</span></span>
+         {/* 3. CTA GRATUITO (Lado a Lado) */}
+         <div className="bg-gradient-to-br from-gray-900 via-bgDark to-[#1f2229] border border-gray-700/80 rounded-xl p-5 shadow-2xl relative flex flex-col justify-center order-3 xl:order-3">
+            <span className="absolute -top-3 -right-3 bg-green-500 text-white text-[10px] font-black px-3 py-1 rounded-full shadow-lg border border-green-400 uppercase tracking-wider">Grátis</span>
+            <h3 className="text-lg font-extrabold text-white mb-2 flex flex-col">
+               <span>FM26PlayerExport</span>
             </h3>
-            <p className="text-xs text-gray-400 mb-4 font-medium">Extraia todas as informações necessárias num clique e hackeie o mercado sendo Membro.</p>
+            <p className="text-xs text-gray-400 mb-4 font-medium">Extraia os dados instantaneamente usando o nosso plugin gratuito!</p>
             
             <div className="flex flex-row gap-2">
-               <a href="https://www.youtube.com/channel/UCN7QD3RR37kN9_f6Dzs_3jg/join" target="_blank" rel="noreferrer"
-                  className="flex-1 h-9 flex items-center justify-center space-x-1.5 bg-red-600 hover:bg-red-500 text-white rounded-lg text-[10px] sm:text-[11px] font-bold shadow-lg transition-transform hover:-translate-y-0.5 border border-red-500">
-                 <Youtube className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> <span>Youtube</span>
-               </a>
-               <a href="https://www.patreon.com/posts/fm26playerexport-154546270?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_creator&utm_content=join_link" target="_blank" rel="noreferrer"
-                  className="flex-1 h-9 flex items-center justify-center space-x-1.5 bg-black hover:bg-neutral-900 text-white rounded-lg text-[10px] sm:text-[11px] font-bold shadow-lg transition-transform hover:-translate-y-0.5 border border-neutral-800">
-                 <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M15.386 0c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 3.876 20.136 0 15.386 0zM0 .004v23.996h5.666V.004H0z"/></svg>
-                 <span>Patreon</span>
+               <a href="https://drive.google.com/file/d/11SVZC0TCINHeZQYsa8w-bAIyQbKuS5Sv/view?usp=drive_link" target="_blank" rel="noreferrer"
+                  className="flex-1 h-9 flex items-center justify-center space-x-1.5 bg-gray-800 hover:bg-gray-700 text-white rounded-lg text-[11px] font-bold shadow-lg transition-transform hover:-translate-y-0.5 border border-gray-700">
+                 <Download className="w-3.5 h-3.5 text-green-400" /> <span>Download V5</span>
                </a>
                <a href="https://livepix.gg/vinteset/socio-torcedor-27" target="_blank" rel="noreferrer"
-                  className="flex-1 h-9 flex items-center justify-center space-x-1.5 bg-[#32BCAD] hover:bg-[#2eaa9c] text-white rounded-lg text-[10px] sm:text-[11px] font-bold shadow-lg transition-transform hover:-translate-y-0.5 border border-[#32BCAD]">
-                 <Banknote className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> <span className="whitespace-nowrap">Sócio Torcedor via LivePix</span>
+                  className="flex-1 h-9 flex items-center justify-center space-x-1.5 bg-[#32BCAD] hover:bg-[#2eaa9c] text-white rounded-lg text-[11px] font-bold shadow-lg transition-transform hover:-translate-y-0.5 border border-[#32BCAD]">
+                 <Heart className="w-3.5 h-3.5 text-white fill-white" /> <span>Apoie através do PIX</span>
                </a>
             </div>
          </div>
