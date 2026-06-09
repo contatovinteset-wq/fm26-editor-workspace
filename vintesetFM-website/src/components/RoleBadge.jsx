@@ -5,6 +5,8 @@ import { ROLE_HIERARCHY } from '../config/permissions';
 const ROLE_COLORS = {
   OWNER: 'bg-amber-500 text-black border-amber-600',
   ADMIN: 'bg-blue-500 text-white border-blue-600',
+  ADMIN_DOWNLOADS: 'bg-cyan-500 text-white border-cyan-600',
+  ADMIN_GERACAO: 'bg-purple-500 text-white border-purple-600',
   MODERATOR: 'bg-emerald-500 text-white border-emerald-600',
   USER: 'bg-gray-700 text-white border-gray-900',
 };
@@ -12,6 +14,8 @@ const ROLE_COLORS = {
 const ROLE_LABELS = {
   OWNER: 'Owner',
   ADMIN: 'Administrador',
+  ADMIN_DOWNLOADS: 'Admin Downloads',
+  ADMIN_GERACAO: 'Admin Geração',
   MODERATOR: 'Moderador',
   USER: 'Membro',
 };
@@ -19,6 +23,8 @@ const ROLE_LABELS = {
 const RoleIcons = {
   OWNER: Crown,
   ADMIN: ShieldAlert,
+  ADMIN_DOWNLOADS: ShieldAlert,
+  ADMIN_GERACAO: Shield,
   MODERATOR: Shield,
   USER: User,
 };

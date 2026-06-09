@@ -8,6 +8,8 @@ import RoleBadge from '../components/RoleBadge';
 const ROLE_COLORS = {
   OWNER: { bg: 'bg-amber-500/20', text: 'text-amber-500', border: 'border-amber-500/50' },
   ADMIN: { bg: 'bg-red-500/20', text: 'text-red-500', border: 'border-red-500/50' },
+  ADMIN_DOWNLOADS: { bg: 'bg-cyan-500/20', text: 'text-cyan-500', border: 'border-cyan-500/50' },
+  ADMIN_GERACAO: { bg: 'bg-purple-500/20', text: 'text-purple-500', border: 'border-purple-500/50' },
   MODERATOR: { bg: 'bg-emerald-500/20', text: 'text-emerald-500', border: 'border-emerald-500/50' },
   USER: { bg: 'bg-blue-500/20', text: 'text-blue-500', border: 'border-blue-500/50' },
 };
