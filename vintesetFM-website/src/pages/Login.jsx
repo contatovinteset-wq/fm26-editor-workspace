@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Key, Mail, LogIn, Twitch, Activity } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const GoogleIconSVG = ({ size = 24, className = "" }) => (
@@ -19,7 +19,11 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { fetchUser } = useAuth();
+
+  // Se o usuário veio barrado de uma rota protegida, volta pra lá após logar.
+  const redirectTo = location.state?.from?.pathname || '/minhaconta';
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -34,7 +38,7 @@ const Login = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Erro ao logar.');
       await fetchUser();
-      navigate('/minhaconta');
+      navigate(redirectTo, { replace: true });
     } catch (err) {
       setError(err.message);
     } finally {

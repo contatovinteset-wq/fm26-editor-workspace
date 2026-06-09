@@ -1,4 +1,5 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
 import { requireAuth } from '../middleware/roles.js';
 import { judgeTopic } from '../services/aiModerator.js';

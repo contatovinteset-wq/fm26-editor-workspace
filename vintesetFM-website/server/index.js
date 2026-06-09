@@ -21,6 +21,13 @@ import boardRoutes from './routes/board.js';
 
 import fs from 'fs';
 
+// Segurança: em produção o JWT_SECRET é OBRIGATÓRIO (injetado pelo Coolify).
+// Sem ele, o fallback hardcoded permitiria forjar tokens — então abortamos o boot.
+if (process.env.NODE_ENV === 'production' && !process.env.JWT_SECRET) {
+  console.error('[FATAL] JWT_SECRET não configurado em produção. Configure a variável no Coolify antes de subir.');
+  process.exit(1);
+}
+
 const app = express();
 app.set('trust proxy', 1);
 
