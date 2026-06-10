@@ -105,47 +105,55 @@ router.post('/login', loginLimiter, async (req, res) => {
   }
 });
 
+// Anti open-redirect: só aceita caminho interno relativo (começa com 1 "/", não "//").
+const safeRedirect = (target) =>
+  (typeof target === 'string' && target.startsWith('/') && !target.startsWith('//')) ? target : null;
+
+const getClientUrl = (req) =>
+  (req.hostname === 'localhost' || req.hostname === '127.0.0.1') ? 'http://localhost:5173' : '';
+
+// Decide o destino final pós-OAuth: onboarding se sem nickname, senão a rota de origem (ou /minhaconta).
+const oauthRedirect = (req, res) => {
+  const token = generateToken(req.user);
+  setJWTCookie(res, token);
+  const clientUrl = getClientUrl(req);
+
+  if (!req.user.nickname) {
+    return res.redirect(`${clientUrl}/minhaconta?onboarding=true`);
+  }
+  const dest = safeRedirect(req.query.state) || '/minhaconta';
+  res.redirect(`${clientUrl}${dest}`);
+};
+
 // ==========================================
 // GOOGLE OAUTH
 // ==========================================
-router.get('/google', loginLimiter, passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google', loginLimiter, (req, res, next) =>
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    state: safeRedirect(req.query.redirect) || undefined,
+  })(req, res, next)
+);
 
 router.get(
   '/google/callback',
   passport.authenticate('google', { session: false, failureRedirect: '/login?error=true' }),
-  (req, res) => {
-    const token = generateToken(req.user);
-    setJWTCookie(res, token);
-    const clientUrl = (req.hostname === 'localhost' || req.hostname === '127.0.0.1') ? 'http://localhost:5173' : '';
-    
-    // Se não tiver nickname, manda definir um
-    if (!req.user.nickname) {
-      return res.redirect(`${clientUrl}/minhaconta?onboarding=true`);
-    }
-    
-    res.redirect(`${clientUrl}/minhaconta`);
-  }
+  oauthRedirect
 );
 
 // ==========================================
 // TWITCH OAUTH
 // ==========================================
-router.get('/twitch', loginLimiter, passport.authenticate('twitch'));
+router.get('/twitch', loginLimiter, (req, res, next) =>
+  passport.authenticate('twitch', {
+    state: safeRedirect(req.query.redirect) || undefined,
+  })(req, res, next)
+);
 
 router.get(
   '/twitch/callback',
   passport.authenticate('twitch', { session: false, failureRedirect: '/login?error=true' }),
-  (req, res) => {
-    const token = generateToken(req.user);
-    setJWTCookie(res, token);
-    const clientUrl = (req.hostname === 'localhost' || req.hostname === '127.0.0.1') ? 'http://localhost:5173' : '';
-    
-    if (!req.user.nickname) {
-      return res.redirect(`${clientUrl}/minhaconta?onboarding=true`);
-    }
-    
-    res.redirect(`${clientUrl}/minhaconta`);
-  }
+  oauthRedirect
 );
 
 // ==========================================
