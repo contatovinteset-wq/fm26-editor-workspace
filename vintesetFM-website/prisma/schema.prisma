@@ -32,6 +32,8 @@ model User {
 
   forumTopics    ForumTopic[]
   forumPosts     ForumPost[]
+
+  creators       Creator[] @relation("UserCreators")
 }
 
 model Topic {
@@ -66,7 +68,10 @@ model Squad {
   id          String    @id @default(uuid())
   userId      String    @unique
   user        User      @relation(fields: [userId], references: [id])
-  
+
+  creatorId   String?
+  creator     Creator?  @relation(fields: [creatorId], references: [id])
+
   defensorId  String?
   defensor    Player?   @relation("SquadDefensor", fields: [defensorId], references: [id])
   
@@ -94,6 +99,25 @@ model Squad {
 
 // 👑 Tabelas do Rei da Mesa (Cartola)
 
+// 🎥 Multi-tenant: cada criador de conteúdo tem o seu próprio Rei da Mesa.
+model Creator {
+  id        String   @id @default(uuid())
+  ownerId   String
+  owner     User     @relation("UserCreators", fields: [ownerId], references: [id])
+  name      String
+  slug      String   @unique
+  isActive  Boolean  @default(true)
+  branding  Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  players      Player[]
+  rounds       Round[]
+  squads       Squad[]
+  playerScores PlayerScore[]
+  craqueVotes  CraqueVote[]
+}
+
 model Player {
   id           String        @id @default(uuid())
   uidName      String        @unique
@@ -106,7 +130,10 @@ model Player {
   eligible     Boolean       @default(true)
   rawStats     Json?
   uniqueId     String?
-  
+
+  creatorId    String?
+  creator      Creator? @relation(fields: [creatorId], references: [id])
+
   squadsDef    Squad[]  @relation("SquadDefensor")
   squadsMei    Squad[]  @relation("SquadMeio")
   squadsAta    Squad[]  @relation("SquadAtaque")
@@ -131,6 +158,9 @@ model Round {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  creatorId   String?
+  creator     Creator? @relation(fields: [creatorId], references: [id])
+
   scores      PlayerScore[]
   craqueVotes CraqueVote[]
 }
@@ -145,6 +175,9 @@ model PlayerScore {
   rating      Float    @default(0.0) // Nota do match stats FM
   points      Float    @default(0.0) // Pontuação algébrica final de Cartola
   details     Json?    // Salva por quais estatísticas o cara pontuou (Gols: 1, Cartoes: 0)
+
+  creatorId   String?
+  creator     Creator? @relation(fields: [creatorId], references: [id])
 
   @@unique([playerId, roundId])
 }
@@ -206,6 +239,9 @@ model CraqueVote {
   player    Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
+
+  creatorId String?
+  creator   Creator? @relation(fields: [creatorId], references: [id])
 
   @@unique([userId, roundId])
 }
