@@ -1,45 +1,32 @@
-import Home from './Home';
-import Telecurso from './Telecurso';
-import Downloads from './Downloads';
-import ReiDaMesa from './ReiDaMesa';
-import Escalacao from './Escalacao';
-import Ranking from './Ranking';
-import PerfilManager from './PerfilManager';
-import PlantelReiDaMesa from './PlantelReiDaMesa';
-import Login from './Login';
-import Cadastro from './Cadastro';
-import Topico from './Topico';
-import MinhaConta from './MinhaConta';
-import AdminPanel from './AdminPanel';
-import ModeratorPanel from './ModeratorPanel';
-import ReiDaMesaAdmin from './ReiDaMesaAdmin';
-import ReiDaMesaOverlay from './ReiDaMesaOverlay';
-import ForumHome from './forum/ForumHome';
-import ForumCategory from './forum/ForumCategory';
-import ForumThread from './forum/ForumThread';
-import AnaliseDados from './ferramentas/AnaliseDados';
+import { lazy } from 'react';
 
+/**
+ * Páginas carregadas sob demanda (code-splitting via React.lazy).
+ * Cada rota vira um chunk separado, reduzindo o bundle inicial.
+ * O <Suspense> que cobre essas páginas fica no Layout (em torno do <Outlet/>)
+ * e, para a rota standalone do overlay, em App.jsx.
+ */
 const Pages = {
-  Home,
-  Telecurso: () => <Telecurso />,
-  Downloads: () => <Downloads />,
-  ReiDaMesa: () => <ReiDaMesa />,
-  Escalacao: () => <Escalacao />,
-  Ranking: () => <Ranking />,
-  PerfilManager: () => <PerfilManager />,
-  PlantelReiDaMesa: () => <PlantelReiDaMesa />,
-  Login: () => <Login />,
-  Cadastro: () => <Cadastro />,
-  Topico: () => <Topico />,
-  MinhaConta: () => <MinhaConta />,
-  AdminPanel: () => <AdminPanel />,
-  ModeratorPanel: () => <ModeratorPanel />,
-  ReiDaMesaAdmin: () => <ReiDaMesaAdmin />,
-  ReiDaMesaOverlay: () => <ReiDaMesaOverlay />,
-  ForumHome: () => <ForumHome />,
-  ForumCategory: () => <ForumCategory />,
-  ForumThread: () => <ForumThread />,
-  AnaliseDados: () => <AnaliseDados />
+  Home: lazy(() => import('./Home')),
+  Telecurso: lazy(() => import('./Telecurso')),
+  Downloads: lazy(() => import('./Downloads')),
+  ReiDaMesa: lazy(() => import('./ReiDaMesa')),
+  Escalacao: lazy(() => import('./Escalacao')),
+  Ranking: lazy(() => import('./Ranking')),
+  PerfilManager: lazy(() => import('./PerfilManager')),
+  PlantelReiDaMesa: lazy(() => import('./PlantelReiDaMesa')),
+  Login: lazy(() => import('./Login')),
+  Cadastro: lazy(() => import('./Cadastro')),
+  Topico: lazy(() => import('./Topico')),
+  MinhaConta: lazy(() => import('./MinhaConta')),
+  AdminPanel: lazy(() => import('./AdminPanel')),
+  ModeratorPanel: lazy(() => import('./ModeratorPanel')),
+  ReiDaMesaAdmin: lazy(() => import('./ReiDaMesaAdmin')),
+  ReiDaMesaOverlay: lazy(() => import('./ReiDaMesaOverlay')),
+  ForumHome: lazy(() => import('./forum/ForumHome')),
+  ForumCategory: lazy(() => import('./forum/ForumCategory')),
+  ForumThread: lazy(() => import('./forum/ForumThread')),
+  AnaliseDados: lazy(() => import('./ferramentas/AnaliseDados')),
 };
 
 export default Pages;

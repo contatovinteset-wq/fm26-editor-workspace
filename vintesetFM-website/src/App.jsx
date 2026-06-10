@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Pages from './pages/Pages';
@@ -16,7 +16,7 @@ function App() {
           <ScrollToTop />
           <Routes>
           {/* ROTA PURA DO OBS OVERLAY SEM LAYOUT NAVBAR/FOOTER */}
-          <Route path="/reidamesa/overlay" element={<Pages.ReiDaMesaOverlay />} />
+          <Route path="/reidamesa/overlay" element={<Suspense fallback={null}><Pages.ReiDaMesaOverlay /></Suspense>} />
 
           <Route path="/" element={<Layout />}>
             <Route index element={<Pages.Home />} />

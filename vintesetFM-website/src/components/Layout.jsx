@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import FloatingDiscord from './FloatingDiscord';
+
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-[60vh]">
+    <div className="w-10 h-10 border-4 border-white/20 border-t-primary rounded-full animate-spin" />
+  </div>
+);
 
 const Layout = () => {
   return (
@@ -16,7 +22,9 @@ const Layout = () => {
         
         {/* Main Content Area - Ocupa espaço flexível entre Nav e Footer */}
         <main className="flex-grow relative">
-          <Outlet />
+          <Suspense fallback={<PageLoader />}>
+            <Outlet />
+          </Suspense>
         </main>
         
         <Footer />
