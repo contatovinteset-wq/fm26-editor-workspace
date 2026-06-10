@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client';
 import multer from 'multer';
 import { processPlantelHtml, previewMatchResultHtml, processMatchResultFinal } from '../services/ReiDaMesaAdminService.js';
 import { requireAuth, requireRoles } from '../middleware/roles.js';
-import { reiDaMesaEvents } from '../services/eventBus.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -228,9 +227,9 @@ router.get('/squad', requireAuth, async (req, res) => {
 // Salvar Escalação do Usuário
 router.post('/squad', requireAuth, async (req, res) => {
   try {
-    if (!isMarketOpen) return res.status(403).json({ error: 'Mercado Fechado' });
+    if (!(await getMarketOpen())) return res.status(403).json({ error: 'Mercado Fechado' });
     const { defensorId, meioId, ataqueId, bagreId, capitaoId } = req.body;
-    
+
     const squad = await prisma.squad.upsert({
       where: { userId: req.user.id },
       update: { defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId },
@@ -239,15 +238,12 @@ router.post('/squad', requireAuth, async (req, res) => {
 
     const isFullSquad = defensorId && meioId && ataqueId && bagreId && capitaoId;
 
-    if (isFullSquad && !overlayNotifiedUsers.has(req.user.id)) {
-        reiDaMesaEvents.emit('overlay_event', { 
-           type: 'NEW_SQUAD', 
-           user: req.user.nickname || req.user.name || 'Viewer' 
-        });
-        overlayNotifiedUsers.add(req.user.id);
-    } else if (!isFullSquad && overlayNotifiedUsers.has(req.user.id)) {
+    if (isFullSquad && !squad.overlayNotified) {
+        await emitOverlay('NEW_SQUAD', { user: req.user.nickname || req.user.name || 'Viewer' });
+        await prisma.squad.update({ where: { id: squad.id }, data: { overlayNotified: true } });
+    } else if (!isFullSquad && squad.overlayNotified) {
         // Se limpou o time, permite que apareça na overlay quando escalar de novo
-        overlayNotifiedUsers.delete(req.user.id);
+        await prisma.squad.update({ where: { id: squad.id }, data: { overlayNotified: false } });
     }
 
     res.json(squad);
@@ -256,23 +252,42 @@ router.post('/squad', requireAuth, async (req, res) => {
   }
 });
 
-// STATUS DO MERCADO (In-memory por enquanto, reseta ao reiniciar o servidor)
-let isMarketOpen = false;
-const overlayNotifiedUsers = new Set();
+// STATUS DO MERCADO (persistido no banco — sobrevive a deploy/restart)
+async function getMarketOpen() {
+  const state = await prisma.reiDaMesaState.findUnique({ where: { id: 1 } });
+  return state?.isMarketOpen ?? false;
+}
+async function setMarketOpen(isOpen) {
+  await prisma.reiDaMesaState.upsert({
+    where: { id: 1 },
+    update: { isMarketOpen: isOpen },
+    create: { id: 1, isMarketOpen: isOpen }
+  });
+}
 
-router.get('/status', (req, res) => {
-  res.json({ isOpen: isMarketOpen });
+// Insere um evento de overlay no banco (substitui a fila em memória).
+async function emitOverlay(type, payload = {}) {
+  await prisma.overlayEvent.create({ data: { type, payload } });
+  // Limpeza: mantém o histórico enxuto (remove eventos com mais de 6h).
+  await prisma.overlayEvent.deleteMany({
+    where: { createdAt: { lt: new Date(Date.now() - 6 * 60 * 60 * 1000) } }
+  });
+}
+
+router.get('/status', async (req, res) => {
+  res.json({ isOpen: await getMarketOpen() });
 });
 
 router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
   try {
     if (typeof req.body.isOpen === 'boolean') {
-      const wasOpen = isMarketOpen;
-      isMarketOpen = req.body.isOpen;
+      const wasOpen = await getMarketOpen();
+      const nowOpen = req.body.isOpen;
+      await setMarketOpen(nowOpen);
 
-      // Se o mercado for ABERTO agora, assumimos que uma Nova Rodada começou 
-      if (!wasOpen && isMarketOpen) {
-         overlayNotifiedUsers.clear(); // Limpa as notificações pro novo overlay da rodada
+      // Se o mercado for ABERTO agora, assumimos que uma Nova Rodada começou
+      if (!wasOpen && nowOpen) {
+         await prisma.squad.updateMany({ data: { overlayNotified: false } }); // Limpa notificações pro novo overlay da rodada
          const currentOpen = await prisma.round.findFirst({ where: { isOpen: true } });
          if (currentOpen) {
             // Fecha definitivamente
@@ -298,7 +313,7 @@ router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), as
          });
       }
     }
-    res.json({ isOpen: isMarketOpen });
+    res.json({ isOpen: await getMarketOpen() });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erro ao alterar status do mercado', details: error.message });
@@ -362,7 +377,7 @@ router.get('/craque/status', requireAuth, async (req, res) => {
     if (!currentRound) return res.json({ mode: 'CLOSED' });
 
     // Mercado aberto = jogo não começou
-    if (isMarketOpen) return res.json({ mode: 'CLOSED' });
+    if (await getMarketOpen()) return res.json({ mode: 'CLOSED' });
 
     // Jogadores elegíveis para voto no front (usaremos os que não são bagre etc., ou todos ativos do html)
     // Se a rodada já tem bagreId, significa que a partida acabou e já foi processada.
@@ -387,7 +402,7 @@ router.post('/craque/vote', requireAuth, async (req, res) => {
     const { playerId } = req.body;
     const currentRound = await prisma.round.findFirst({ where: { isOpen: true } });
     
-    if (!currentRound || isMarketOpen || currentRound.bagreId) {
+    if (!currentRound || (await getMarketOpen()) || currentRound.bagreId) {
        return res.status(403).json({ error: 'Votação não permitida neste momento.' });
     }
 
@@ -437,42 +452,34 @@ router.get('/craque/results', async (req, res) => {
   }
 });
 
-// ---- OBS OVERLAY (POLLING FALLBACK) ----
-let overlayEventsHistory = [];
-let overlayGlobalIdCounter = 1;
-
-// Limpa histórico antigo para evitar vazamento de memória (mantém últimos 20)
-const pushOverlayEvent = (evt) => {
-   evt.id = overlayGlobalIdCounter++;
-   overlayEventsHistory.push(evt);
-   if (overlayEventsHistory.length > 20) {
-      overlayEventsHistory.shift();
-   }
-};
-
-reiDaMesaEvents.on('overlay_event', (data) => {
-   pushOverlayEvent(data);
-});
-
+// ---- OBS OVERLAY (POLLING — eventos persistidos no banco) ----
 // FrontEnd acessa a cada 2s passando o ID do último evento que ele viu
-router.get('/overlay/poll', (req, res) => {
-  const since = parseInt(req.query.since || '0', 10);
-  
-  // Se o frontend está cobrando um ID que nem mesmo o backend chegou ainda, 
-  // significa que o servidor foi reiniciado (Ex: pos-deploy) e perdeu a contagem. 
-  if (since >= overlayGlobalIdCounter && overlayGlobalIdCounter === 1) {
-      return res.json({ resetSync: true, events: [] });
-  }
+router.get('/overlay/poll', async (req, res) => {
+  try {
+    const since = parseInt(req.query.since || '0', 10);
 
-  const unreadEvents = overlayEventsHistory.filter(e => e.id > since);
-  res.json({ events: unreadEvents });
+    // Se o front pede um id maior que o último existente (ex.: tabela recém-criada
+    // pós-deploy, ou histórico limpo), pede pra ele ressincronizar pro topo atual.
+    const last = await prisma.overlayEvent.findFirst({ orderBy: { id: 'desc' } });
+    const maxId = last?.id || 0;
+    if (since > maxId) {
+      return res.json({ resetSync: true, events: [] });
+    }
+
+    const events = await prisma.overlayEvent.findMany({
+      where: { id: { gt: since } },
+      orderBy: { id: 'asc' },
+      take: 20
+    });
+    res.json({ events: events.map(e => ({ id: e.id, type: e.type, ...(e.payload || {}) })) });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro no poll do overlay' });
+  }
 });
 
-router.post('/overlay/test', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'ADMIN']), (req, res) => {
-  reiDaMesaEvents.emit('overlay_event', { 
-     type: 'NEW_SQUAD', 
-     user: 'Teste da Live' 
-  });
+router.post('/overlay/test', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'ADMIN']), async (req, res) => {
+  await emitOverlay('NEW_SQUAD', { user: 'Teste da Live' });
   res.json({ success: true });
 });
 

@@ -87,6 +87,7 @@ model Squad {
   
   roundScore  Float     @default(0.0)
   totalScore  Float     @default(0.0)
+  overlayNotified Boolean @default(false) // já apareceu no overlay nesta rodada (reseta ao abrir rodada)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
@@ -146,6 +147,25 @@ model PlayerScore {
   details     Json?    // Salva por quais estatísticas o cara pontuou (Gols: 1, Cartoes: 0)
 
   @@unique([playerId, roundId])
+}
+
+// ⚙️ Estado do Rei da Mesa (antes ficava em memória no processo).
+// Singleton: sempre id=1. Persiste o mercado entre deploys/restarts.
+model ReiDaMesaState {
+  id           Int      @id @default(1)
+  isMarketOpen Boolean  @default(false)
+  updatedAt    DateTime @updatedAt
+}
+
+// 📺 Eventos do overlay do OBS (antes era fila em memória).
+// O poll do front lê os eventos com id > since.
+model OverlayEvent {
+  id        Int      @id @default(autoincrement())
+  type      String
+  payload   Json?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
 }
 
 // 🛡️ Tabela de Auditoria de Segurança
