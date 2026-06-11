@@ -118,6 +118,8 @@ model Creator {
   squads       Squad[]
   playerScores PlayerScore[]
   craqueVotes  CraqueVote[]
+  reiDaMesaState ReiDaMesaState?
+  overlayEvents  OverlayEvent[]
 }
 
 model Player {
@@ -189,22 +191,27 @@ model PlayerScore {
 }
 
 // ⚙️ Estado do Rei da Mesa (antes ficava em memória no processo).
-// Singleton: sempre id=1. Persiste o mercado entre deploys/restarts.
+// Fase 3b: 1 linha por criador (creatorId é a PK). Cada criador tem o seu
+// mercado aberto/fechado, persistido entre deploys/restarts.
 model ReiDaMesaState {
-  id           Int      @id @default(1)
+  creatorId    String   @id
+  creator      Creator  @relation(fields: [creatorId], references: [id])
   isMarketOpen Boolean  @default(false)
   updatedAt    DateTime @updatedAt
 }
 
 // 📺 Eventos do overlay do OBS (antes era fila em memória).
-// O poll do front lê os eventos com id > since.
+// Fase 3b: por criador. O poll do front lê os eventos do creator com id > since.
 model OverlayEvent {
   id        Int      @id @default(autoincrement())
   type      String
   payload   Json?
   createdAt DateTime @default(now())
 
-  @@index([createdAt])
+  creatorId String
+  creator   Creator  @relation(fields: [creatorId], references: [id])
+
+  @@index([creatorId, createdAt])
 }
 
 // 🛡️ Tabela de Auditoria de Segurança

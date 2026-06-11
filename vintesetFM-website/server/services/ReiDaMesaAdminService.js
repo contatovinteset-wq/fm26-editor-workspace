@@ -1,6 +1,5 @@
 import * as cheerio from 'cheerio';
 import { PrismaClient } from '@prisma/client';
-import { reiDaMesaEvents } from './eventBus.js';
 // creatorId é injetado pelas rotas (req.creatorId) e passado por parâmetro
 // para cada função deste service — mantém o scoping multi-tenant explícito.
 
@@ -406,11 +405,14 @@ export async function processMatchResultFinal(scoresFromFrontend, creatorId) {
       craqueChat = crqPlayer; // Passa o objeto se achar
   }
 
-  reiDaMesaEvents.emit('overlay_event', {
-     type: 'ROUND_FINISHED',
-     craque: craqueChat,
-     champion: roundChampion
-  });
-  
-  return { success: true, scoresProcessados: processados, bagreDaRodadaId: worstPlayerId, scores: finalScores };
+  // Fase 3b: o overlay de fim de rodada deixa de usar o eventBus in-memory
+  // (que não tinha assinante e nunca chegava no front) e passa a ser emitido
+  // como OverlayEvent no banco pela rota, com o creatorId do request.
+  return {
+    success: true,
+    scoresProcessados: processados,
+    bagreDaRodadaId: worstPlayerId,
+    scores: finalScores,
+    overlayEvent: { type: 'ROUND_FINISHED', craque: craqueChat, champion: roundChampion }
+  };
 }

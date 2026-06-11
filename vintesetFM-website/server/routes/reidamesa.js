@@ -238,7 +238,7 @@ router.get('/squad', requireAuth, async (req, res) => {
 // Salvar Escalação do Usuário
 router.post('/squad', requireAuth, async (req, res) => {
   try {
-    if (!(await getMarketOpen())) return res.status(403).json({ error: 'Mercado Fechado' });
+    if (!(await getMarketOpen(req.creatorId))) return res.status(403).json({ error: 'Mercado Fechado' });
     const { defensorId, meioId, ataqueId, bagreId, capitaoId } = req.body;
 
     const squad = await prisma.squad.upsert({
@@ -250,7 +250,7 @@ router.post('/squad', requireAuth, async (req, res) => {
     const isFullSquad = defensorId && meioId && ataqueId && bagreId && capitaoId;
 
     if (isFullSquad && !squad.overlayNotified) {
-        await emitOverlay('NEW_SQUAD', { user: req.user.nickname || req.user.name || 'Viewer' });
+        await emitOverlay(req.creatorId, 'NEW_SQUAD', { user: req.user.nickname || req.user.name || 'Viewer' });
         await prisma.squad.update({ where: { id: squad.id }, data: { overlayNotified: true } });
     } else if (!isFullSquad && squad.overlayNotified) {
         // Se limpou o time, permite que apareça na overlay quando escalar de novo
@@ -263,38 +263,40 @@ router.post('/squad', requireAuth, async (req, res) => {
   }
 });
 
-// STATUS DO MERCADO (persistido no banco — sobrevive a deploy/restart)
-async function getMarketOpen() {
-  const state = await prisma.reiDaMesaState.findUnique({ where: { id: 1 } });
+// STATUS DO MERCADO (persistido no banco — sobrevive a deploy/restart).
+// Fase 3b: 1 estado por criador (chaveado por creatorId).
+async function getMarketOpen(creatorId) {
+  const state = await prisma.reiDaMesaState.findUnique({ where: { creatorId } });
   return state?.isMarketOpen ?? false;
 }
-async function setMarketOpen(isOpen) {
+async function setMarketOpen(creatorId, isOpen) {
   await prisma.reiDaMesaState.upsert({
-    where: { id: 1 },
+    where: { creatorId },
     update: { isMarketOpen: isOpen },
-    create: { id: 1, isMarketOpen: isOpen }
+    create: { creatorId, isMarketOpen: isOpen }
   });
 }
 
 // Insere um evento de overlay no banco (substitui a fila em memória).
-async function emitOverlay(type, payload = {}) {
-  await prisma.overlayEvent.create({ data: { type, payload } });
-  // Limpeza: mantém o histórico enxuto (remove eventos com mais de 6h).
+// Fase 3b: cada evento pertence a um criador.
+async function emitOverlay(creatorId, type, payload = {}) {
+  await prisma.overlayEvent.create({ data: { creatorId, type, payload } });
+  // Limpeza: mantém o histórico enxuto (remove eventos do criador com mais de 6h).
   await prisma.overlayEvent.deleteMany({
-    where: { createdAt: { lt: new Date(Date.now() - 6 * 60 * 60 * 1000) } }
+    where: { creatorId, createdAt: { lt: new Date(Date.now() - 6 * 60 * 60 * 1000) } }
   });
 }
 
 router.get('/status', async (req, res) => {
-  res.json({ isOpen: await getMarketOpen() });
+  res.json({ isOpen: await getMarketOpen(req.creatorId) });
 });
 
 router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
   try {
     if (typeof req.body.isOpen === 'boolean') {
-      const wasOpen = await getMarketOpen();
+      const wasOpen = await getMarketOpen(req.creatorId);
       const nowOpen = req.body.isOpen;
-      await setMarketOpen(nowOpen);
+      await setMarketOpen(req.creatorId, nowOpen);
 
       // Se o mercado for ABERTO agora, assumimos que uma Nova Rodada começou
       if (!wasOpen && nowOpen) {
@@ -325,7 +327,7 @@ router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), as
          });
       }
     }
-    res.json({ isOpen: await getMarketOpen() });
+    res.json({ isOpen: await getMarketOpen(req.creatorId) });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erro ao alterar status do mercado', details: error.message });
@@ -390,7 +392,7 @@ router.get('/craque/status', requireAuth, async (req, res) => {
     if (!currentRound) return res.json({ mode: 'CLOSED' });
 
     // Mercado aberto = jogo não começou
-    if (await getMarketOpen()) return res.json({ mode: 'CLOSED' });
+    if (await getMarketOpen(req.creatorId)) return res.json({ mode: 'CLOSED' });
 
     // Jogadores elegíveis para voto no front (usaremos os que não são bagre etc., ou todos ativos do html)
     // Se a rodada já tem bagreId, significa que a partida acabou e já foi processada.
@@ -415,7 +417,7 @@ router.post('/craque/vote', requireAuth, async (req, res) => {
     const { playerId } = req.body;
     const currentRound = await prisma.round.findFirst({ where: { creatorId: req.creatorId, isOpen: true } });
 
-    if (!currentRound || (await getMarketOpen()) || currentRound.bagreId) {
+    if (!currentRound || (await getMarketOpen(req.creatorId)) || currentRound.bagreId) {
        return res.status(403).json({ error: 'Votação não permitida neste momento.' });
     }
 
@@ -471,16 +473,16 @@ router.get('/overlay/poll', async (req, res) => {
   try {
     const since = parseInt(req.query.since || '0', 10);
 
-    // Se o front pede um id maior que o último existente (ex.: tabela recém-criada
-    // pós-deploy, ou histórico limpo), pede pra ele ressincronizar pro topo atual.
-    const last = await prisma.overlayEvent.findFirst({ orderBy: { id: 'desc' } });
+    // Se o front pede um id maior que o último existente do criador (ex.: tabela
+    // recém-criada pós-deploy, ou histórico limpo), pede pra ele ressincronizar.
+    const last = await prisma.overlayEvent.findFirst({ where: { creatorId: req.creatorId }, orderBy: { id: 'desc' } });
     const maxId = last?.id || 0;
     if (since > maxId) {
       return res.json({ resetSync: true, events: [] });
     }
 
     const events = await prisma.overlayEvent.findMany({
-      where: { id: { gt: since } },
+      where: { creatorId: req.creatorId, id: { gt: since } },
       orderBy: { id: 'asc' },
       take: 20
     });
@@ -492,7 +494,7 @@ router.get('/overlay/poll', async (req, res) => {
 });
 
 router.post('/overlay/test', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'ADMIN']), async (req, res) => {
-  await emitOverlay('NEW_SQUAD', { user: 'Teste da Live' });
+  await emitOverlay(req.creatorId, 'NEW_SQUAD', { user: 'Teste da Live' });
   res.json({ success: true });
 });
 
@@ -530,6 +532,13 @@ router.post('/process-match-final', requireAuth, requireRoles('OWNER', 'ADMIN_GE
       return res.status(400).json({ error: 'Array de scores inválido.' });
     }
     const result = await processMatchResultFinal(scores, req.creatorId);
+
+    // Emite o overlay de fim de rodada como evento persistido (por criador).
+    if (result.overlayEvent) {
+      const { type, ...payload } = result.overlayEvent;
+      await emitOverlay(req.creatorId, type, payload);
+    }
+
     res.json(result);
   } catch (error) {
     console.error(error);
