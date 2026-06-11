@@ -8,9 +8,13 @@ import { rdmFetch, useRdmBase, useCreator } from '../services/reidamesa';
 
 const ReiDaMesa = () => {
   const { user } = useAuth();
-  const isOwner = user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN');
   const base = useRdmBase();
-  const { creator } = useCreator();
+  const { slug, creator } = useCreator();
+  // Quem pode administrar um Rei da Mesa (o backend isola pelo dono).
+  // OWNER em qualquer página; CREATOR/ADMIN_GERACAO só dentro de um criador (slug).
+  const roles = user?.roles || [];
+  const canManage = roles.includes('OWNER') || roles.includes('ADMIN') ||
+    ((roles.includes('CREATOR') || roles.includes('ADMIN_GERACAO')) && !!slug);
 
   const [isMarketOpen, setIsMarketOpen] = useState(true);
   const [ranking, setRanking] = useState([]);
@@ -127,14 +131,14 @@ const ReiDaMesa = () => {
       {/* MOCK LOGIN & ADMIN PANEL TOGGLE (Canto Superior Direito) */}
       <div className="fixed top-24 right-4 sm:right-8 z-50 flex flex-col items-end gap-3">
         <AnimatePresence>
-          {isOwner && (
-            <Link 
-              to="/reidamesa/admin"
+          {canManage && (
+            <Link
+              to={`${base}/admin`}
               className="px-4 py-3 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.5)] transition-all flex items-center gap-2 border bg-gray-900 border-white/10 text-gray-300 hover:border-white/30 hover:bg-gray-800"
               title="Ir para o Painel do Streamer"
             >
               <Settings size={18} />
-              <span className="font-bold text-sm tracking-wide uppercase">Painel Dono</span>
+              <span className="font-bold text-sm tracking-wide uppercase">Painel</span>
             </Link>
           )}
         </AnimatePresence>
