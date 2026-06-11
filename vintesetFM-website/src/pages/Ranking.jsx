@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Trophy, Crown, Medal, User, ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import { Link, Navigate } from 'react-router-dom';
+import { rdmFetch, useRdmBase } from '../services/reidamesa';
 
 const Ranking = () => {
   const [activeTab, setActiveTab] = useState('GERAL');
@@ -9,9 +10,10 @@ const Ranking = () => {
 
   const [rankingGeral, setRankingGeral] = useState([]);
   const [rankingLive, setRankingLive] = useState([]);
+  const base = useRdmBase();
 
   React.useEffect(() => {
-    fetch('/api/reidamesa/ranking')
+    rdmFetch('/api/reidamesa/ranking')
       .then(res => res.json())
       .then(data => {
          const formattedGeral = data.map((sq, i) => ({
@@ -56,7 +58,7 @@ const Ranking = () => {
             <p className="text-gray-400 mt-2">Visão completa dos maiores pontuadores do Rei da Mesa.</p>
           </div>
           
-          <Link to="/reidamesa" className="px-6 py-2 bg-black/50 border border-white/10 hover:bg-white/10 text-sm font-bold uppercase tracking-widest text-white rounded transition-all">
+          <Link to={base} className="px-6 py-2 bg-black/50 border border-white/10 hover:bg-white/10 text-sm font-bold uppercase tracking-widest text-white rounded transition-all">
             Voltar
           </Link>
         </div>

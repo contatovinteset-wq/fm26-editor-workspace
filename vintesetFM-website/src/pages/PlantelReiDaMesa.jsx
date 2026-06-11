@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Search, Filter, ArrowLeft, Activity, User, Ruler } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { rdmFetch, useRdmBase } from '../services/reidamesa';
 
 const PlantelReiDaMesa = () => {
   const [players, setPlayers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('ALL'); // ALL, GOL, DEF, MEI, ATA
   const [isLoading, setIsLoading] = useState(true);
+  const base = useRdmBase();
 
   useEffect(() => {
-    fetch('/api/reidamesa/players')
+    rdmFetch('/api/reidamesa/players')
       .then(res => res.json())
       .then(data => {
         setPlayers(data);
@@ -41,7 +43,7 @@ const PlantelReiDaMesa = () => {
             <p className="text-gray-400 mt-2">Visão geral do elenco atual do save para você estudar suas próximas escalações.</p>
           </div>
           
-          <Link to="/reidamesa" className="px-6 py-2 text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 rounded transition-all flex items-center gap-2 border border-white/10 bg-black/50">
+          <Link to={base} className="px-6 py-2 text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 rounded transition-all flex items-center gap-2 border border-white/10 bg-black/50">
             <ArrowLeft size={16} /> Voltar
           </Link>
         </div>

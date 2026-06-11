@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Trophy, Star, User } from 'lucide-react';
+import { rdmFetch } from '../services/reidamesa';
 
 const ReiDaMesaOverlay = () => {
     const [events, setEvents] = useState([]);
@@ -19,7 +20,7 @@ const ReiDaMesaOverlay = () => {
             if (isFetching) return;
             isFetching = true;
             try {
-                const res = await fetch(`/api/reidamesa/overlay/poll?since=${lastSeenId}`);
+                const res = await rdmFetch(`/api/reidamesa/overlay/poll?since=${lastSeenId}`);
                 if (res.ok) {
                     const data = await res.json();
                     

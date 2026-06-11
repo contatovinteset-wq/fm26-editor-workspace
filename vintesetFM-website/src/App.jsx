@@ -17,6 +17,8 @@ function App() {
           <Routes>
           {/* ROTA PURA DO OBS OVERLAY SEM LAYOUT NAVBAR/FOOTER */}
           <Route path="/reidamesa/overlay" element={<Suspense fallback={null}><Pages.ReiDaMesaOverlay /></Suspense>} />
+          {/* Overlay por criador (Fase 3c) — a slug no path define o creator */}
+          <Route path="/reidamesa/c/:slug/overlay" element={<Suspense fallback={null}><Pages.ReiDaMesaOverlay /></Suspense>} />
 
           <Route path="/" element={<Layout />}>
             <Route index element={<Pages.Home />} />
@@ -32,14 +34,26 @@ function App() {
             <Route path="cadastro" element={<Pages.Cadastro />} />
             <Route path="minhaconta" element={<Pages.MinhaConta />} />
             
+            {/* Diretório público de criadores (Fase 3c) */}
+            <Route path="reidamesa/criadores" element={<Pages.ReiDaMesaCriadores />} />
+
             {/* Protected Routes */}
             <Route element={<ProtectedRoute />}>
+              {/* Rei da Mesa do vinteset (flagship, bare — backward compat) */}
               <Route path="reidamesa" element={<Pages.ReiDaMesa />} />
               <Route path="reidamesa/admin" element={<Pages.ReiDaMesaAdmin />} />
               <Route path="reidamesa/escalar" element={<Pages.Escalacao />} />
               <Route path="reidamesa/plantel" element={<Pages.PlantelReiDaMesa />} />
               <Route path="reidamesa/ranking" element={<Pages.Ranking />} />
               <Route path="reidamesa/perfil" element={<Pages.PerfilManager />} />
+
+              {/* Rei da Mesa por criador (Fase 3c) — a slug define o creator */}
+              <Route path="reidamesa/c/:slug" element={<Pages.ReiDaMesa />} />
+              <Route path="reidamesa/c/:slug/escalar" element={<Pages.Escalacao />} />
+              <Route path="reidamesa/c/:slug/plantel" element={<Pages.PlantelReiDaMesa />} />
+              <Route path="reidamesa/c/:slug/ranking" element={<Pages.Ranking />} />
+              <Route path="reidamesa/c/:slug/perfil" element={<Pages.PerfilManager />} />
+
               <Route path="admin" element={<Pages.AdminPanel />} />
               <Route path="moderacao" element={<Pages.ModeratorPanel />} />
             </Route>

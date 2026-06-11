@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Users, Shield, Search, Save, Crown, X, Info, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { rdmFetch, useRdmBase } from '../services/reidamesa';
 
 // ─── Sub-componente: Foto do Jogador via Sortitoutsi ───────────────────────
 const PlayerImage = ({ uniqueId, name, fallbackText, className }) => {
@@ -130,6 +131,7 @@ const ScoreDetailModal = ({ player, onClose }) => {
 
 // ─── Componente Principal ─────────────────────────────────────────────────
 const Escalacao = () => {
+  const base = useRdmBase();
   const [activeSlot, setActiveSlot] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [squad, setSquad] = useState({
@@ -150,17 +152,17 @@ const Escalacao = () => {
 
   // ─── Fetch inicial ─────────────────────────────────────────────────
   useEffect(() => {
-    fetch('/api/reidamesa/status')
+    rdmFetch('/api/reidamesa/status')
       .then(res => res.json())
       .then(data => setIsMarketOpen(data.isOpen))
       .catch(console.error);
 
-    fetch('/api/reidamesa/players')
+    rdmFetch('/api/reidamesa/players')
       .then(res => res.json())
       .then(data => setPlayers(data))
       .catch(console.error);
 
-    fetch('/api/reidamesa/squad', { credentials: 'include' })
+    rdmFetch('/api/reidamesa/squad', { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         if (data && data.defensor) {
@@ -229,7 +231,7 @@ const Escalacao = () => {
       capitaoId: squad.capitao?.id
     };
     try {
-      const res = await fetch('/api/reidamesa/squad', {
+      const res = await rdmFetch('/api/reidamesa/squad', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -246,7 +248,7 @@ const Escalacao = () => {
     setIsSaved(false);
     setActiveSlot(null);
     try {
-      await fetch('/api/reidamesa/squad', {
+      await rdmFetch('/api/reidamesa/squad', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -290,7 +292,7 @@ const Escalacao = () => {
             >
               Limpar
             </button>
-            <Link to="/reidamesa" className="px-6 py-2 text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 rounded transition-all text-center flex-1 border border-transparent">
+            <Link to={base} className="px-6 py-2 text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-white hover:bg-white/5 rounded transition-all text-center flex-1 border border-transparent">
               Voltar
             </Link>
           </div>

@@ -4,16 +4,18 @@ import { User, ShieldAlert, BarChart3, Target, Goal, Sword, Trophy } from 'lucid
 import RoleBadge from '../components/RoleBadge';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { rdmFetch, useRdmBase } from '../services/reidamesa';
 
 const PerfilManager = () => {
   const { user } = useAuth();
   const isOwner = user?.roles?.includes('OWNER');
+  const base = useRdmBase();
   
   const [squad, setSquad] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/reidamesa/squad', { credentials: 'include' })
+    rdmFetch('/api/reidamesa/squad', { credentials: 'include' })
       .then(res => {
         if (!res.ok) throw new Error('Não foi possível carregar esquadrão');
         return res.json();
@@ -95,7 +97,7 @@ const PerfilManager = () => {
             <p className="text-gray-400 mt-2">Acompanhe seu desempenho histórico e suas escalações.</p>
           </div>
           
-          <Link to="/reidamesa" className="px-6 py-2 bg-black/50 border border-white/10 hover:bg-white/10 text-sm font-bold uppercase tracking-widest text-white rounded transition-all">
+          <Link to={base} className="px-6 py-2 bg-black/50 border border-white/10 hover:bg-white/10 text-sm font-bold uppercase tracking-widest text-white rounded transition-all">
             Voltar ao Dashboard
           </Link>
         </div>
@@ -144,7 +146,7 @@ const PerfilManager = () => {
                  Esquadrão Atual
               </h3>
               {isOwner && (
-                 <Link to="/reidamesa/escalar" className="text-xs font-bold uppercase tracking-widest text-accent hover:text-white transition-colors">
+                 <Link to={`${base}/escalar`} className="text-xs font-bold uppercase tracking-widest text-accent hover:text-white transition-colors">
                    Alterar Escalação
                  </Link>
               )}
@@ -156,7 +158,7 @@ const PerfilManager = () => {
                <h4 className="text-lg font-bold text-white mb-2">Você ainda não definiu um Esquadrão</h4>
                <p className="text-gray-400 text-sm mb-6 max-w-md mx-auto">Vá até a tela de escalação e monte seu time titular e escolha seu bagre para começar a pontuar nas lives.</p>
                {isOwner ? (
-                 <Link to="/reidamesa/escalar" className="inline-block bg-accent text-black px-8 py-3 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-accentHover transition-colors">
+                 <Link to={`${base}/escalar`} className="inline-block bg-accent text-black px-8 py-3 rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-accentHover transition-colors">
                    Escalar Agora
                  </Link>
                ) : (

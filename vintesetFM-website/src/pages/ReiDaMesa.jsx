@@ -4,10 +4,13 @@ import { Crown, HelpCircle, Trophy, BarChart3, Users, Clock, ArrowRight, Setting
 import { Link } from 'react-router-dom';
 import EmConstrucao from '../components/EmConstrucao';
 import { useAuth } from '../context/AuthContext';
+import { rdmFetch, useRdmBase, useCreator } from '../services/reidamesa';
 
 const ReiDaMesa = () => {
   const { user } = useAuth();
   const isOwner = user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN');
+  const base = useRdmBase();
+  const { creator } = useCreator();
 
   const [isMarketOpen, setIsMarketOpen] = useState(true);
   const [ranking, setRanking] = useState([]);
@@ -18,12 +21,12 @@ const ReiDaMesa = () => {
   const [selectedCraque, setSelectedCraque] = useState(null);
   
   React.useEffect(() => {
-    fetch('/api/reidamesa/status')
+    rdmFetch('/api/reidamesa/status')
       .then(res => res.json())
       .then(data => setIsMarketOpen(data.isOpen))
       .catch(console.error);
 
-    fetch('/api/reidamesa/ranking')
+    rdmFetch('/api/reidamesa/ranking')
       .then(res => res.json())
       .then(data => {
          const formatted = data.slice(0,5).map((sq, i) => ({
@@ -36,12 +39,12 @@ const ReiDaMesa = () => {
       })
       .catch(console.error);
 
-    fetch('/api/reidamesa/top-match')
+    rdmFetch('/api/reidamesa/top-match')
       .then(res => res.json())
       .then(data => setTopMatch(data))
       .catch(console.error);
 
-    fetch('/api/reidamesa/squad', {
+    rdmFetch('/api/reidamesa/squad', {
        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
     })
       .then(res => res.json())
@@ -51,7 +54,7 @@ const ReiDaMesa = () => {
       .catch(console.error);
 
     // Craque do Chat Status
-    fetch('/api/reidamesa/craque/status', {
+    rdmFetch('/api/reidamesa/craque/status', {
        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
     })
       .then(res => res.json())
@@ -59,13 +62,13 @@ const ReiDaMesa = () => {
          setCraqueData(data);
          if (data.mode === 'VOTING') {
             setSelectedCraque(data.userVote ? data.userVote.id : null);
-            fetch('/api/reidamesa/players')
+            rdmFetch('/api/reidamesa/players')
                .then(playersRes => playersRes.json())
                .then(playersData => {
                    setCraqueCandidates(playersData);
                });
          } else if (data.mode === 'RESULTS') {
-            fetch('/api/reidamesa/craque/results')
+            rdmFetch('/api/reidamesa/craque/results')
                .then(resultsRes => resultsRes.json())
                .then(resultsData => {
                    setCraqueData({ mode: 'RESULTS', top3: resultsData.top3, totalVotes: resultsData.totalVotes });
@@ -77,7 +80,7 @@ const ReiDaMesa = () => {
 
   const handleVoteCraque = async (playerId) => {
      try {
-         const res = await fetch('/api/reidamesa/craque/vote', {
+         const res = await rdmFetch('/api/reidamesa/craque/vote', {
              method: 'POST',
              headers: { 
                  'Content-Type': 'application/json',
@@ -161,6 +164,13 @@ const ReiDaMesa = () => {
             </div>
           )}
           
+          {creator && (
+            <div className="mb-4 inline-flex items-center gap-2 self-start bg-accent/10 border border-accent/30 px-3 py-1 rounded-full">
+              <Crown size={14} className="text-accent" />
+              <span className="text-xs font-bold uppercase tracking-widest text-accent">Rei da Mesa de {creator.name}</span>
+            </div>
+          )}
+
           <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-6">
             Escale, Assista<br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accentHover drop-shadow-md">
@@ -174,14 +184,14 @@ const ReiDaMesa = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             {isMarketOpen ? (
               <Link 
-               to="/reidamesa/escalar"
+               to={`${base}/escalar`}
                className="flex items-center justify-center gap-2 font-black uppercase tracking-wide px-8 py-4 rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.3)] transition-all duration-300 w-full sm:w-auto bg-accent hover:bg-accentHover text-black hover:scale-105"
               >
                  <Crown size={20} /> Montar Meu Esquadrão
               </Link>
             ) : (
               <Link 
-               to="/reidamesa/escalar"
+               to={`${base}/escalar`}
                className="flex items-center justify-center gap-2 font-black uppercase tracking-wide px-8 py-4 rounded-xl transition-all duration-300 w-full sm:w-auto bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white border border-white/10 shadow-none"
               >
                  <AlertTriangle size={20} /> Meu Esquadrão (Mercado Fechado)
@@ -189,7 +199,7 @@ const ReiDaMesa = () => {
             )}
 
             <Link 
-             to="/reidamesa/plantel"
+             to={`${base}/plantel`}
              className="flex items-center justify-center gap-2 font-black uppercase tracking-wide px-8 py-4 rounded-xl transition-all duration-300 w-full sm:w-auto bg-black/50 text-gray-300 hover:bg-white/10 border border-white/10"
             >
                <Users size={20} /> Estudar Plantel
@@ -479,7 +489,7 @@ const ReiDaMesa = () => {
                            )
                         })}
                      </div>
-                     <Link to="/reidamesa/escalar" className="mt-4 px-6 py-2 rounded-lg font-bold uppercase text-xs tracking-widest transition-colors w-full border bg-white/10 hover:bg-white/20 border-white/20 text-white inline-block text-center shadow-lg">
+                     <Link to={`${base}/escalar`} className="mt-4 px-6 py-2 rounded-lg font-bold uppercase text-xs tracking-widest transition-colors w-full border bg-white/10 hover:bg-white/20 border-white/20 text-white inline-block text-center shadow-lg">
                         Ver no Campinho
                      </Link>
                   </div>
@@ -489,7 +499,7 @@ const ReiDaMesa = () => {
                      <h3 className="text-xl font-bold mb-2">{isMarketOpen ? 'Escale Agora' : 'Escalação Bloqueada'}</h3>
                      <p className="text-sm text-gray-300 mb-6">Monte seu time para pontuar nesta rodada.</p>
                      
-                     <Link to="/reidamesa/escalar" className="px-6 py-2 rounded-lg font-bold uppercase text-xs tracking-widest transition-colors w-full border bg-accent/10 hover:bg-accent/20 border-accent/30 text-accent inline-block text-center">
+                     <Link to={`${base}/escalar`} className="px-6 py-2 rounded-lg font-bold uppercase text-xs tracking-widest transition-colors w-full border bg-accent/10 hover:bg-accent/20 border-accent/30 text-accent inline-block text-center">
                         {isMarketOpen ? 'Ir para Escalação' : 'Ver Meu Time'}
                      </Link>
                   </div>
@@ -505,10 +515,10 @@ const ReiDaMesa = () => {
                  Rankings
               </h2>
               <div className="flex gap-2 w-full md:w-auto">
-                <Link to="/reidamesa/ranking" className="bg-black/50 hover:bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest border border-white/10 text-white rounded transition-colors text-center flex-1">
+                <Link to={`${base}/ranking`} className="bg-black/50 hover:bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest border border-white/10 text-white rounded transition-colors text-center flex-1">
                   Ver Completo
                 </Link>
-                <Link to="/reidamesa/perfil" className="bg-black/50 hover:bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest border border-white/10 text-white rounded transition-colors text-center flex-1">
+                <Link to={`${base}/perfil`} className="bg-black/50 hover:bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest border border-white/10 text-white rounded transition-colors text-center flex-1">
                   Meu Perfil
                 </Link>
               </div>

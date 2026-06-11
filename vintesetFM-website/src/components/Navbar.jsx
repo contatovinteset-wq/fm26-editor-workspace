@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Home, MonitorPlay, Youtube, Twitch, DownloadCloud, Crown, Settings, LogOut, Menu, X, ShieldAlert, MessageSquare, Wrench } from 'lucide-react';
+import { Home, MonitorPlay, Youtube, Twitch, DownloadCloud, Crown, Settings, LogOut, Menu, X, ShieldAlert, MessageSquare, Wrench, Users } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -35,6 +35,7 @@ const Navbar = () => {
     { name: 'Ferramentas', path: '/ferramentas/analise-de-dados', icon: Wrench },
     { name: 'Downloads', path: '/downloads', icon: DownloadCloud },
     { name: 'Rei Da Mesa', path: '/reidamesa', icon: Crown },
+    { name: 'Criadores', path: '/reidamesa/criadores', icon: Users },
   ];
 
   return (
