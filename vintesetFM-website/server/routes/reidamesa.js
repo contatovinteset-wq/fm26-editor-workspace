@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import multer from 'multer';
 import { processPlantelHtml, previewMatchResultHtml, processMatchResultFinal } from '../services/ReiDaMesaAdminService.js';
 import { requireAuth, requireRoles } from '../middleware/roles.js';
+import { getDefaultCreatorId } from '../services/creatorContext.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -186,8 +187,9 @@ router.get('/squad', requireAuth, async (req, res) => {
 
     const roundIds = rounds.map(r => r.id);
 
+    const creatorId = await getDefaultCreatorId(prisma);
     const squad = await prisma.squad.findUnique({
-      where: { userId: req.user.id },
+      where: { userId_creatorId: { userId: req.user.id, creatorId } },
       include: {
         defensor: { include: { scores: { where: { roundId: { in: roundIds } } } } },
         meio: { include: { scores: { where: { roundId: { in: roundIds } } } } },
@@ -230,10 +232,11 @@ router.post('/squad', requireAuth, async (req, res) => {
     if (!(await getMarketOpen())) return res.status(403).json({ error: 'Mercado Fechado' });
     const { defensorId, meioId, ataqueId, bagreId, capitaoId } = req.body;
 
+    const creatorId = await getDefaultCreatorId(prisma);
     const squad = await prisma.squad.upsert({
-      where: { userId: req.user.id },
+      where: { userId_creatorId: { userId: req.user.id, creatorId } },
       update: { defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId },
-      create: { userId: req.user.id, defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId }
+      create: { userId: req.user.id, creatorId, defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId }
     });
 
     const isFullSquad = defensorId && meioId && ataqueId && bagreId && capitaoId;
@@ -301,11 +304,12 @@ router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), as
          // E também caso ele não escale novamente, mantém os mesmos jogadores na rodada atual.
 
          // Cria a próxima rodada
-         const lastRound = await prisma.round.findFirst({ orderBy: { number: 'desc' } });
+         const creatorId = await getDefaultCreatorId(prisma);
+         const lastRound = await prisma.round.findFirst({ where: { creatorId }, orderBy: { number: 'desc' } });
          const nextNumber = lastRound ? lastRound.number + 1 : 1;
-         
+
          await prisma.round.create({
-            data: { number: nextNumber, isOpen: true }
+            data: { number: nextNumber, isOpen: true, creatorId }
          });
 
          await prisma.squad.updateMany({
@@ -406,10 +410,11 @@ router.post('/craque/vote', requireAuth, async (req, res) => {
        return res.status(403).json({ error: 'Votação não permitida neste momento.' });
     }
 
+    const creatorId = await getDefaultCreatorId(prisma);
     const vote = await prisma.craqueVote.upsert({
       where: { userId_roundId: { userId: req.user.id, roundId: currentRound.id } },
       update: { playerId },
-      create: { userId: req.user.id, roundId: currentRound.id, playerId }
+      create: { userId: req.user.id, roundId: currentRound.id, playerId, creatorId }
     });
 
     res.json({ success: true, vote });
