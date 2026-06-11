@@ -42,6 +42,7 @@ function App() {
               {/* Rei da Mesa do vinteset (flagship, bare — backward compat) */}
               <Route path="reidamesa" element={<Pages.ReiDaMesa />} />
               <Route path="reidamesa/admin" element={<Pages.ReiDaMesaAdmin />} />
+              <Route path="reidamesa/admin/criadores" element={<Pages.ReiDaMesaCriadoresAdmin />} />
               <Route path="reidamesa/escalar" element={<Pages.Escalacao />} />
               <Route path="reidamesa/plantel" element={<Pages.PlantelReiDaMesa />} />
               <Route path="reidamesa/ranking" element={<Pages.Ranking />} />
@@ -53,6 +54,7 @@ function App() {
               <Route path="reidamesa/c/:slug/plantel" element={<Pages.PlantelReiDaMesa />} />
               <Route path="reidamesa/c/:slug/ranking" element={<Pages.Ranking />} />
               <Route path="reidamesa/c/:slug/perfil" element={<Pages.PerfilManager />} />
+              <Route path="reidamesa/c/:slug/admin" element={<Pages.ReiDaMesaAdmin />} />
 
               <Route path="admin" element={<Pages.AdminPanel />} />
               <Route path="moderacao" element={<Pages.ModeratorPanel />} />

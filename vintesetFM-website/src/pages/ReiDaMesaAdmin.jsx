@@ -3,9 +3,12 @@ import { ShieldAlert, BarChart3, UploadCloud, Lock, Unlock, Trash2, Eye, Copy, C
 import { useAuth } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { rdmFetch, useRdmBase } from '../services/reidamesa';
 const ReiDaMesaAdmin = () => {
   const { user } = useAuth();
-  const isOwner = user?.roles?.includes('OWNER') || user?.roles?.includes('ADMIN_GERACAO') || user?.roles?.includes('ADMIN');
+  const base = useRdmBase();
+  const isOwnerGlobal = user?.roles?.includes('OWNER');
+  const isOwner = isOwnerGlobal || user?.roles?.includes('ADMIN_GERACAO') || user?.roles?.includes('ADMIN') || user?.roles?.includes('CREATOR');
 
   const [isMarketOpen, setIsMarketOpen] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
@@ -23,7 +26,7 @@ const ReiDaMesaAdmin = () => {
 
   const testOverlay = async () => {
     try {
-      await fetch('/api/reidamesa/overlay/test', {
+      await rdmFetch('/api/reidamesa/overlay/test', {
          method: 'POST',
          credentials: 'include'
       });
@@ -33,7 +36,7 @@ const ReiDaMesaAdmin = () => {
   };
 
   const copyOverlayLink = () => {
-    const url = window.location.origin + '/reidamesa/overlay';
+    const url = window.location.origin + base + '/overlay';
     navigator.clipboard.writeText(url);
     setCopiedOverlay(true);
     setTimeout(() => setCopiedOverlay(false), 3000);
@@ -42,17 +45,17 @@ const ReiDaMesaAdmin = () => {
   useEffect(() => {
     if (!isOwner) return;
 
-    fetch('/api/reidamesa/players/all', { credentials: 'include' })
+    rdmFetch('/api/reidamesa/players/all', { credentials: 'include' })
       .then(res => res.json())
       .then(data => setAllPlayers(Array.isArray(data) ? data : []))
       .catch(console.error);
 
-    fetch('/api/reidamesa/status')
+    rdmFetch('/api/reidamesa/status')
       .then(res => res.json())
       .then(data => setIsMarketOpen(data.isOpen))
       .catch(console.error);
 
-    fetch('/api/reidamesa/rounds', { credentials: 'include' })
+    rdmFetch('/api/reidamesa/rounds', { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
          setRounds(Array.isArray(data) ? data : []);
@@ -63,7 +66,7 @@ const ReiDaMesaAdmin = () => {
 
   const toggleMarket = async (newStatus) => {
     try {
-      const res = await fetch('/api/reidamesa/status', {
+      const res = await rdmFetch('/api/reidamesa/status', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -94,7 +97,7 @@ const ReiDaMesaAdmin = () => {
         
         if (type === 'PLANTEL') {
             alert(`Upload Concluído! Backend Retornou: ${JSON.stringify(data)}`);
-            const playersRes = await fetch('/api/reidamesa/players/all', { credentials: 'include' });
+            const playersRes = await rdmFetch('/api/reidamesa/players/all', { credentials: 'include' });
             if (playersRes.ok) {
                 const refreshed = await playersRes.json();
                 setAllPlayers(refreshed);
@@ -115,7 +118,7 @@ const ReiDaMesaAdmin = () => {
     if (!window.confirm("ATENÇÃO: Você está prestes a excluir TODO o elenco do Banco de Dados. Esta ação é irreversível. Deseja continuar?")) return;
     
     try {
-      const res = await fetch('/api/reidamesa/players/all', {
+      const res = await rdmFetch('/api/reidamesa/players/all', {
         method: 'DELETE',
         credentials: 'include'
       });
@@ -132,7 +135,7 @@ const ReiDaMesaAdmin = () => {
   };
 
   const handleOpenAnularModal = () => {
-    fetch('/api/reidamesa/rounds', { credentials: 'include' })
+    rdmFetch('/api/reidamesa/rounds', { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
          setRounds(Array.isArray(data) ? data : []);
@@ -181,7 +184,7 @@ const ReiDaMesaAdmin = () => {
   };
 
   if (!isOwner) {
-    return <Navigate to="/reidamesa" replace />;
+    return <Navigate to={base} replace />;
   }
 
   const defaultHeaders = [
@@ -328,7 +331,7 @@ const ReiDaMesaAdmin = () => {
                        onClick={async () => {
                          setIsProcessingFinal(true);
                          try {
-                           const res = await fetch('/api/reidamesa/process-match-final', {
+                           const res = await rdmFetch('/api/reidamesa/process-match-final', {
                              method: 'POST',
                              headers: { 'Content-Type': 'application/json' },
                              credentials: 'include',
@@ -530,7 +533,7 @@ const ReiDaMesaAdmin = () => {
                  onClick={async () => {
                    if(!window.confirm('CERTEZA ABSOLUTA? Vai deletar TODOS os Históricos de Jogadores e Zerar Pontuação Total dos usuários! O elenco será mantido. Use isso SÓ antes da 1ª Rodada!')) return;
                    try {
-                     const res = await fetch('/api/reidamesa/squads/reset-points', { method: 'POST', credentials: 'include' });
+                     const res = await rdmFetch('/api/reidamesa/squads/reset-points', { method: 'POST', credentials: 'include' });
                      const text = await res.json();
                      alert(text.message || 'Reset realizado');
                    } catch(e) { console.error(e); }

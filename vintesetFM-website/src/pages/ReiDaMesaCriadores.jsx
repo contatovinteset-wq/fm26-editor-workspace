@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Crown, Users, Tv, ArrowRight } from 'lucide-react';
+import { Crown, Users, Tv, ArrowRight, Settings } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 // Diretório público dos criadores do Rei da Mesa (Fase 3c).
 // Lista todos os criadores ativos (incluindo o vinteset). O card do vinteset
 // leva ao /reidamesa bare (flagship); os demais a /reidamesa/c/:slug.
 const ReiDaMesaCriadores = () => {
+  const { user } = useAuth();
+  const isOwner = user?.roles?.includes('OWNER');
   const [creators, setCreators] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,6 +35,11 @@ const ReiDaMesaCriadores = () => {
             Cada criador tem o seu próprio Rei da Mesa, com elenco e ranking independentes.
             Escolha um e jogue junto com a comunidade dele.
           </p>
+          {isOwner && (
+            <Link to="/reidamesa/admin/criadores" className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-lg font-bold uppercase text-xs tracking-widest bg-white/10 hover:bg-white/20 border border-white/20 transition">
+              <Settings size={14} /> Gerenciar criadores
+            </Link>
+          )}
         </div>
 
         {isLoading ? (

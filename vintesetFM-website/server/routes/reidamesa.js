@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import multer from 'multer';
 import { processPlantelHtml, previewMatchResultHtml, processMatchResultFinal } from '../services/ReiDaMesaAdminService.js';
 import { requireAuth, requireRoles } from '../middleware/roles.js';
-import { attachCreatorContext } from '../services/creatorContext.js';
+import { attachCreatorContext, getDefaultCreatorId } from '../services/creatorContext.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -11,6 +11,35 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 // Injeta req.creatorId em todo request do Rei da Mesa (Fase 3a/3c).
 router.use(attachCreatorContext(prisma));
+
+// Slugs reservadas (colidiriam com rotas/uso interno).
+const RESERVED_SLUGS = new Set(['overlay', 'criadores', 'admin', 'escalar', 'plantel', 'ranking', 'perfil', 'c', 'api']);
+
+// Middleware (Fase 3d): autoriza gerir o Rei da Mesa do creator ALVO (req.creatorId).
+// OWNER manda em tudo; o dono do creator gere o seu; ADMIN_GERACAO mantém poder
+// no creator default (vinteset) por retrocompat. Exige requireAuth antes.
+async function requireCreatorManager(req, res, next) {
+  try {
+    const roles = req.user?.roles || [];
+    if (roles.includes('OWNER')) return next();
+
+    const creator = await prisma.creator.findUnique({
+      where: { id: req.creatorId },
+      select: { ownerId: true }
+    });
+    if (creator && creator.ownerId === req.user.id) return next();
+
+    if (roles.includes('ADMIN_GERACAO')) {
+      const defId = await getDefaultCreatorId(prisma);
+      if (req.creatorId === defId) return next();
+    }
+
+    return res.status(403).json({ error: 'Você não administra este Rei da Mesa.' });
+  } catch (err) {
+    console.error('requireCreatorManager:', err);
+    return res.status(500).json({ error: 'Erro de autorização' });
+  }
+}
 
 // 🎥 Diretório público de criadores ativos (Fase 3c) — alimenta /reidamesa/criadores.
 router.get('/creators', async (req, res) => {
@@ -40,6 +69,99 @@ router.get('/creator/:slug', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erro ao buscar criador' });
+  }
+});
+
+// ➕ Criar um novo criador (Fase 3d) — só OWNER. Define o dono (por email; sem
+// email, o próprio OWNER) e concede o cargo CREATOR a ele.
+router.post('/creators', requireAuth, requireRoles(['OWNER']), async (req, res) => {
+  try {
+    const { name, branding, ownerEmail } = req.body;
+    const slug = (req.body.slug || '').trim().toLowerCase();
+
+    if (!name || !name.trim()) return res.status(400).json({ error: 'Nome é obrigatório.' });
+    if (!/^[a-z0-9-]{2,30}$/.test(slug)) {
+      return res.status(400).json({ error: 'Slug inválida (use 2-30 caracteres: a-z, 0-9, hífen).' });
+    }
+    if (RESERVED_SLUGS.has(slug)) return res.status(400).json({ error: 'Essa slug é reservada.' });
+
+    // Resolve o dono: por email informado, ou o próprio OWNER logado.
+    let owner = req.user;
+    if (ownerEmail && ownerEmail.trim()) {
+      owner = await prisma.user.findUnique({ where: { email: ownerEmail.trim().toLowerCase() } });
+      if (!owner) return res.status(404).json({ error: 'Usuário (dono) não encontrado por esse email.' });
+    }
+
+    const exists = await prisma.creator.findUnique({ where: { slug } });
+    if (exists) return res.status(409).json({ error: 'Já existe um criador com essa slug.' });
+
+    const creator = await prisma.creator.create({
+      data: { name: name.trim(), slug, branding: branding || undefined, ownerId: owner.id }
+    });
+
+    // Concede CREATOR ao dono (se ainda não tiver).
+    let roles = owner.roles;
+    if (typeof roles === 'string') { try { roles = JSON.parse(roles); } catch { roles = [roles]; } }
+    if (!Array.isArray(roles)) roles = [];
+    if (!roles.includes('CREATOR') && !roles.includes('OWNER')) {
+      await prisma.user.update({ where: { id: owner.id }, data: { roles: [...roles, 'CREATOR'] } });
+    }
+
+    res.status(201).json(creator);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao criar criador', details: error.message });
+  }
+});
+
+// ✏️ Editar criador (nome/branding/ativo) — OWNER ou o próprio dono.
+router.patch('/creator/:slug', requireAuth, async (req, res) => {
+  try {
+    const slug = (req.params.slug || '').trim().toLowerCase();
+    const creator = await prisma.creator.findFirst({ where: { slug } });
+    if (!creator) return res.status(404).json({ error: 'Criador não encontrado' });
+
+    const roles = req.user?.roles || [];
+    if (!roles.includes('OWNER') && creator.ownerId !== req.user.id) {
+      return res.status(403).json({ error: 'Você não administra este criador.' });
+    }
+
+    const { name, branding, isActive } = req.body;
+    const data = {};
+    if (name !== undefined) data.name = String(name).trim();
+    if (branding !== undefined) data.branding = branding;
+    if (isActive !== undefined) data.isActive = !!isActive;
+
+    const updated = await prisma.creator.update({ where: { id: creator.id }, data });
+    res.json(updated);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao editar criador', details: error.message });
+  }
+});
+
+// 🛠️ "Meu criador" — qual creator o usuário logado administra (Fase 3d).
+// OWNER recebe o default (vinteset). CREATOR recebe o seu. Usado pelo painel.
+router.get('/my-creator', requireAuth, async (req, res) => {
+  try {
+    const roles = req.user?.roles || [];
+    let creator = await prisma.creator.findFirst({
+      where: { ownerId: req.user.id, isActive: true },
+      select: { name: true, slug: true, branding: true },
+      orderBy: { createdAt: 'asc' }
+    });
+    if (!creator && roles.includes('OWNER')) {
+      const defId = await getDefaultCreatorId(prisma);
+      creator = await prisma.creator.findUnique({
+        where: { id: defId },
+        select: { name: true, slug: true, branding: true }
+      });
+    }
+    if (!creator) return res.status(404).json({ error: 'Você não administra nenhum Rei da Mesa.' });
+    res.json(creator);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao resolver seu criador' });
   }
 });
 
@@ -126,7 +248,7 @@ router.get('/players', async (req, res) => {
 });
 
 // Busca TODOS os jogadores para o painel Admin (inclui inativos e stats)
-router.get('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+router.get('/players/all', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, async (req, res) => {
   try {
     const players = await prisma.player.findMany({ where: { creatorId: req.creatorId } });
     // parse rawStats
@@ -142,7 +264,7 @@ router.get('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req,
 });
 
 // Endpoint Temporário/Administrativo para Resetar Scores Manuais e Início de Temporada
-router.post('/squads/reset-points', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+router.post('/squads/reset-points', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, async (req, res) => {
   try {
     const deletedScores = await prisma.playerScore.deleteMany({ where: { creatorId: req.creatorId } });
     const updated = await prisma.squad.updateMany({
@@ -160,7 +282,7 @@ router.post('/squads/reset-points', requireRoles(['OWNER', 'ADMIN_GERACAO']), as
 });
 
 // Deleta TODOS os jogadores do painel Admin (Truncate Plantel)
-router.delete('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+router.delete('/players/all', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, async (req, res) => {
   try {
     // 1. Desvincula todos os jogadores dos elencos ativos para evitar erros de FK
     await prisma.squad.updateMany({
@@ -203,7 +325,7 @@ router.delete('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (r
 });
 
 // Patch da Role do Cartola
-router.patch('/players/:id/role', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+router.patch('/players/:id/role', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, async (req, res) => {
   try {
     const { id } = req.params;
     const { cartolaRole } = req.body;
@@ -322,7 +444,7 @@ router.get('/status', async (req, res) => {
   res.json({ isOpen: await getMarketOpen(req.creatorId) });
 });
 
-router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, async (req, res) => {
   try {
     if (typeof req.body.isOpen === 'boolean') {
       const wasOpen = await getMarketOpen(req.creatorId);
@@ -366,7 +488,7 @@ router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), as
 });
 
 // Busca últimas 5 rodadas
-router.get('/rounds', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+router.get('/rounds', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, async (req, res) => {
   try {
     const rounds = await prisma.round.findMany({
       where: { creatorId: req.creatorId },
@@ -380,7 +502,7 @@ router.get('/rounds', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), asy
 });
 
 // Anular Rodada
-router.delete('/round/:id', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
+router.delete('/round/:id', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, async (req, res) => {
   try {
     const { id } = req.params;
     
@@ -524,7 +646,7 @@ router.get('/overlay/poll', async (req, res) => {
   }
 });
 
-router.post('/overlay/test', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'ADMIN']), async (req, res) => {
+router.post('/overlay/test', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'ADMIN', 'CREATOR']), requireCreatorManager, async (req, res) => {
   await emitOverlay(req.creatorId, 'NEW_SQUAD', { user: 'Teste da Live' });
   res.json({ success: true });
 });
@@ -532,7 +654,7 @@ router.post('/overlay/test', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO'
 export default router;
 
 // ADMIN ROUTES: UPLOADS 
-router.post('/upload-plantel', requireAuth, requireRoles('OWNER', 'ADMIN_GERACAO'), upload.single('file'), async (req, res) => {
+router.post('/upload-plantel', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, upload.single('file'), async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
     const htmlString = req.file.buffer.toString('utf-8');
@@ -544,7 +666,7 @@ router.post('/upload-plantel', requireAuth, requireRoles('OWNER', 'ADMIN_GERACAO
   }
 });
 
-router.post('/upload-match', requireAuth, requireRoles('OWNER', 'ADMIN_GERACAO'), upload.single('file'), async (req, res) => {
+router.post('/upload-match', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, upload.single('file'), async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
     const htmlString = req.file.buffer.toString('utf-8');
@@ -556,7 +678,7 @@ router.post('/upload-match', requireAuth, requireRoles('OWNER', 'ADMIN_GERACAO')
   }
 });
 
-router.post('/process-match-final', requireAuth, requireRoles('OWNER', 'ADMIN_GERACAO'), async (req, res) => {
+router.post('/process-match-final', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, async (req, res) => {
   try {
     const { scores } = req.body;
     if (!scores || !Array.isArray(scores)) {

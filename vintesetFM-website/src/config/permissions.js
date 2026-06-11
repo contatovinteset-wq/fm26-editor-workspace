@@ -17,6 +17,7 @@ export const ROLES = {
   ADMIN: 'ADMIN',
   ADMIN_DOWNLOADS: 'ADMIN_DOWNLOADS',
   ADMIN_GERACAO: 'ADMIN_GERACAO',
+  CREATOR: 'CREATOR',
   MODERATOR: 'MODERATOR',
   USER: 'USER',
   GUEST: 'GUEST',
@@ -30,6 +31,7 @@ export const ROLE_LEVELS = {
   [ROLES.ADMIN_DOWNLOADS]: 60,
   [ROLES.ADMIN_GERACAO]: 60,
   [ROLES.MODERATOR]: 50,
+  [ROLES.CREATOR]: 40,
   [ROLES.USER]: 10,
   [ROLES.GUEST]: 0,
 };
@@ -82,8 +84,16 @@ export const GRANTS = {
     'approve_download', 'create_download_post',
   ],
 
-  // Especializado: só Rei da Mesa.
+  // Especializado: só Rei da Mesa (do vinteset / criador default).
   [ROLES.ADMIN_GERACAO]: [
+    ...USER_GRANTS,
+    'reidamesa:manage',
+  ],
+
+  // Criador de conteúdo: gere o PRÓPRIO Rei da Mesa (multistream).
+  // A capacidade é a mesma do ADMIN_GERACAO; o isolamento ao Creator que ele
+  // é dono é garantido no backend (middleware requireCreatorManager).
+  [ROLES.CREATOR]: [
     ...USER_GRANTS,
     'reidamesa:manage',
   ],
