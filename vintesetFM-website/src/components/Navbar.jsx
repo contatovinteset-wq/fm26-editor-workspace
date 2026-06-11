@@ -35,7 +35,8 @@ const Navbar = () => {
     { name: 'Ferramentas', path: '/ferramentas/analise-de-dados', icon: Wrench },
     { name: 'Downloads', path: '/downloads', icon: DownloadCloud },
     { name: 'Rei Da Mesa', path: '/reidamesa', icon: Crown },
-    { name: 'Criadores', path: '/reidamesa/criadores', icon: Users },
+    // Aba Criadores ainda em construção (multistream): só OWNER por enquanto.
+    ...(isOwner ? [{ name: 'Criadores', path: '/reidamesa/criadores', icon: Users }] : []),
   ];
 
   return (
