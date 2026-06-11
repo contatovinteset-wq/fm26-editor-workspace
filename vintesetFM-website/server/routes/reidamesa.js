@@ -3,16 +3,20 @@ import { PrismaClient } from '@prisma/client';
 import multer from 'multer';
 import { processPlantelHtml, previewMatchResultHtml, processMatchResultFinal } from '../services/ReiDaMesaAdminService.js';
 import { requireAuth, requireRoles } from '../middleware/roles.js';
-import { getDefaultCreatorId } from '../services/creatorContext.js';
+import { attachCreatorContext } from '../services/creatorContext.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
 const upload = multer({ storage: multer.memoryStorage() });
 
+// Injeta req.creatorId em todo request do Rei da Mesa (Fase 3a).
+router.use(attachCreatorContext(prisma));
+
 // Ranking Geral
 router.get('/ranking', async (req, res) => {
   try {
     const squads = await prisma.squad.findMany({
+      where: { creatorId: req.creatorId },
       include: { user: { select: { nickname: true, name: true, avatar: true, twitchId: true } } },
       orderBy: { totalScore: 'desc' },
       take: 50,
@@ -27,7 +31,7 @@ router.get('/ranking', async (req, res) => {
 router.get('/top-match', async (req, res) => {
   try {
     const lastRound = await prisma.round.findFirst({
-      where: { scores: { some: {} } },
+      where: { creatorId: req.creatorId, scores: { some: {} } },
       orderBy: { number: 'desc' },
     });
     if (!lastRound) return res.json({ top3: [], bagre: null });
@@ -56,14 +60,15 @@ router.get('/top-match', async (req, res) => {
 router.get('/players', async (req, res) => {
   try {
     const rounds = await prisma.round.findMany({
+      where: { creatorId: req.creatorId },
       orderBy: { number: 'desc' },
       take: 2
     });
-    
+
     const roundIds = rounds.map(r => r.id);
 
-    const players = await prisma.player.findMany({ 
-       where: { eligible: true },
+    const players = await prisma.player.findMany({
+       where: { creatorId: req.creatorId, eligible: true },
        include: { scores: { where: { roundId: { in: roundIds } } } }
     });
 
@@ -92,7 +97,7 @@ router.get('/players', async (req, res) => {
 // Busca TODOS os jogadores para o painel Admin (inclui inativos e stats)
 router.get('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
   try {
-    const players = await prisma.player.findMany();
+    const players = await prisma.player.findMany({ where: { creatorId: req.creatorId } });
     // parse rawStats
     const parsed = players.map(p => ({
        ...p,
@@ -108,8 +113,9 @@ router.get('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req,
 // Endpoint Temporário/Administrativo para Resetar Scores Manuais e Início de Temporada
 router.post('/squads/reset-points', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
   try {
-    const deletedScores = await prisma.playerScore.deleteMany({});
+    const deletedScores = await prisma.playerScore.deleteMany({ where: { creatorId: req.creatorId } });
     const updated = await prisma.squad.updateMany({
+      where: { creatorId: req.creatorId },
       data: {
         roundScore: 0,
         totalScore: 0
@@ -127,6 +133,7 @@ router.delete('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (r
   try {
     // 1. Desvincula todos os jogadores dos elencos ativos para evitar erros de FK
     await prisma.squad.updateMany({
+      where: { creatorId: req.creatorId },
       data: {
         defensorId: null,
         meioId: null,
@@ -138,14 +145,16 @@ router.delete('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (r
 
     // 2. Desvincula o 'Bagre' das rodadas passadas
     await prisma.round.updateMany({
+      where: { creatorId: req.creatorId },
       data: { bagreId: null }
     });
 
     // 3. Deleta todas as pontuações registradas de jogadores
-    await prisma.playerScore.deleteMany({});
+    await prisma.playerScore.deleteMany({ where: { creatorId: req.creatorId } });
 
     // 4. (Opcional, mas seguro) Zera a pontuação dos squads caso resete o jogo pro começo
     await prisma.squad.updateMany({
+      where: { creatorId: req.creatorId },
       data: {
         roundScore: 0,
         totalScore: 0
@@ -153,7 +162,7 @@ router.delete('/players/all', requireRoles(['OWNER', 'ADMIN_GERACAO']), async (r
     });
 
     // 5. Deleta todos os Jogadores do banco (O FK não vai estourar mais)
-    await prisma.player.deleteMany({});
+    await prisma.player.deleteMany({ where: { creatorId: req.creatorId } });
 
     res.json({ success: true, message: 'Elenco deletado com sucesso!' });
   } catch (error) {
@@ -167,8 +176,8 @@ router.patch('/players/:id/role', requireRoles(['OWNER', 'ADMIN_GERACAO']), asyn
   try {
     const { id } = req.params;
     const { cartolaRole } = req.body;
-    await prisma.player.update({
-      where: { id },
+    await prisma.player.updateMany({
+      where: { id, creatorId: req.creatorId },
       data: { cartolaRole }
     });
     res.json({ success: true });
@@ -181,15 +190,15 @@ router.patch('/players/:id/role', requireRoles(['OWNER', 'ADMIN_GERACAO']), asyn
 router.get('/squad', requireAuth, async (req, res) => {
   try {
     const rounds = await prisma.round.findMany({
+      where: { creatorId: req.creatorId },
       orderBy: { number: 'desc' },
       take: 2
     });
 
     const roundIds = rounds.map(r => r.id);
 
-    const creatorId = await getDefaultCreatorId(prisma);
     const squad = await prisma.squad.findUnique({
-      where: { userId_creatorId: { userId: req.user.id, creatorId } },
+      where: { userId_creatorId: { userId: req.user.id, creatorId: req.creatorId } },
       include: {
         defensor: { include: { scores: { where: { roundId: { in: roundIds } } } } },
         meio: { include: { scores: { where: { roundId: { in: roundIds } } } } },
@@ -232,11 +241,10 @@ router.post('/squad', requireAuth, async (req, res) => {
     if (!(await getMarketOpen())) return res.status(403).json({ error: 'Mercado Fechado' });
     const { defensorId, meioId, ataqueId, bagreId, capitaoId } = req.body;
 
-    const creatorId = await getDefaultCreatorId(prisma);
     const squad = await prisma.squad.upsert({
-      where: { userId_creatorId: { userId: req.user.id, creatorId } },
+      where: { userId_creatorId: { userId: req.user.id, creatorId: req.creatorId } },
       update: { defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId },
-      create: { userId: req.user.id, creatorId, defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId }
+      create: { userId: req.user.id, creatorId: req.creatorId, defensorId, meioId, ataqueId, bancoId: null, bagreId, capitaoId }
     });
 
     const isFullSquad = defensorId && meioId && ataqueId && bagreId && capitaoId;
@@ -290,8 +298,8 @@ router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), as
 
       // Se o mercado for ABERTO agora, assumimos que uma Nova Rodada começou
       if (!wasOpen && nowOpen) {
-         await prisma.squad.updateMany({ data: { overlayNotified: false } }); // Limpa notificações pro novo overlay da rodada
-         const currentOpen = await prisma.round.findFirst({ where: { isOpen: true } });
+         await prisma.squad.updateMany({ where: { creatorId: req.creatorId }, data: { overlayNotified: false } }); // Limpa notificações pro novo overlay da rodada
+         const currentOpen = await prisma.round.findFirst({ where: { creatorId: req.creatorId, isOpen: true } });
          if (currentOpen) {
             // Fecha definitivamente
             await prisma.round.update({
@@ -304,15 +312,15 @@ router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), as
          // E também caso ele não escale novamente, mantém os mesmos jogadores na rodada atual.
 
          // Cria a próxima rodada
-         const creatorId = await getDefaultCreatorId(prisma);
-         const lastRound = await prisma.round.findFirst({ where: { creatorId }, orderBy: { number: 'desc' } });
+         const lastRound = await prisma.round.findFirst({ where: { creatorId: req.creatorId }, orderBy: { number: 'desc' } });
          const nextNumber = lastRound ? lastRound.number + 1 : 1;
 
          await prisma.round.create({
-            data: { number: nextNumber, isOpen: true, creatorId }
+            data: { number: nextNumber, isOpen: true, creatorId: req.creatorId }
          });
 
          await prisma.squad.updateMany({
+            where: { creatorId: req.creatorId },
             data: { roundScore: 0 }
          });
       }
@@ -328,6 +336,7 @@ router.post('/status', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), as
 router.get('/rounds', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']), async (req, res) => {
   try {
     const rounds = await prisma.round.findMany({
+      where: { creatorId: req.creatorId },
       orderBy: { number: 'desc' },
       take: 5
     });
@@ -342,11 +351,11 @@ router.delete('/round/:id', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']
   try {
     const { id } = req.params;
     
-    const round = await prisma.round.findUnique({ where: { id } });
+    const round = await prisma.round.findFirst({ where: { id, creatorId: req.creatorId } });
     if (!round) return res.status(404).json({ error: 'Rodada não encontrada' });
 
     await prisma.$transaction(async (tx) => {
-      const squads = await tx.squad.findMany();
+      const squads = await tx.squad.findMany({ where: { creatorId: req.creatorId } });
       for (const sq of squads) {
         if (sq.roundScore !== 0) {
           await tx.squad.update({
@@ -377,7 +386,7 @@ router.delete('/round/:id', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO']
 // ---- CRAQUE DO JOGO (Votação) ----
 router.get('/craque/status', requireAuth, async (req, res) => {
   try {
-    const currentRound = await prisma.round.findFirst({ where: { isOpen: true } });
+    const currentRound = await prisma.round.findFirst({ where: { creatorId: req.creatorId, isOpen: true } });
     if (!currentRound) return res.json({ mode: 'CLOSED' });
 
     // Mercado aberto = jogo não começou
@@ -404,17 +413,16 @@ router.get('/craque/status', requireAuth, async (req, res) => {
 router.post('/craque/vote', requireAuth, async (req, res) => {
   try {
     const { playerId } = req.body;
-    const currentRound = await prisma.round.findFirst({ where: { isOpen: true } });
-    
+    const currentRound = await prisma.round.findFirst({ where: { creatorId: req.creatorId, isOpen: true } });
+
     if (!currentRound || (await getMarketOpen()) || currentRound.bagreId) {
        return res.status(403).json({ error: 'Votação não permitida neste momento.' });
     }
 
-    const creatorId = await getDefaultCreatorId(prisma);
     const vote = await prisma.craqueVote.upsert({
       where: { userId_roundId: { userId: req.user.id, roundId: currentRound.id } },
       update: { playerId },
-      create: { userId: req.user.id, roundId: currentRound.id, playerId, creatorId }
+      create: { userId: req.user.id, roundId: currentRound.id, playerId, creatorId: req.creatorId }
     });
 
     res.json({ success: true, vote });
@@ -426,7 +434,7 @@ router.post('/craque/vote', requireAuth, async (req, res) => {
 
 router.get('/craque/results', async (req, res) => {
   try {
-    const currentRound = await prisma.round.findFirst({ where: { isOpen: true } });
+    const currentRound = await prisma.round.findFirst({ where: { creatorId: req.creatorId, isOpen: true } });
     if (!currentRound) return res.json({ top3: [], totalVotes: 0 });
 
     const votesCount = await prisma.craqueVote.groupBy({
@@ -495,7 +503,7 @@ router.post('/upload-plantel', requireAuth, requireRoles('OWNER', 'ADMIN_GERACAO
   try {
     if (!req.file) return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
     const htmlString = req.file.buffer.toString('utf-8');
-    const result = await processPlantelHtml(htmlString);
+    const result = await processPlantelHtml(htmlString, req.creatorId);
     res.json(result);
   } catch (error) {
     console.error(error);
@@ -507,7 +515,7 @@ router.post('/upload-match', requireAuth, requireRoles('OWNER', 'ADMIN_GERACAO')
   try {
     if (!req.file) return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
     const htmlString = req.file.buffer.toString('utf-8');
-    const result = await previewMatchResultHtml(htmlString);
+    const result = await previewMatchResultHtml(htmlString, req.creatorId);
     res.json(result);
   } catch (error) {
     console.error(error);
@@ -521,7 +529,7 @@ router.post('/process-match-final', requireAuth, requireRoles('OWNER', 'ADMIN_GE
     if (!scores || !Array.isArray(scores)) {
       return res.status(400).json({ error: 'Array de scores inválido.' });
     }
-    const result = await processMatchResultFinal(scores);
+    const result = await processMatchResultFinal(scores, req.creatorId);
     res.json(result);
   } catch (error) {
     console.error(error);

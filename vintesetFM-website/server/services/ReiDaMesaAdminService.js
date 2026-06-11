@@ -1,11 +1,12 @@
 import * as cheerio from 'cheerio';
 import { PrismaClient } from '@prisma/client';
 import { reiDaMesaEvents } from './eventBus.js';
-import { getDefaultCreatorId } from './creatorContext.js';
+// creatorId é injetado pelas rotas (req.creatorId) e passado por parâmetro
+// para cada função deste service — mantém o scoping multi-tenant explícito.
 
 const prisma = new PrismaClient();
 
-export async function processPlantelHtml(htmlString) {
+export async function processPlantelHtml(htmlString, creatorId) {
   const $ = cheerio.load(htmlString);
   const rows = $('table tr').toArray();
   const playersToAdd = [];
@@ -59,7 +60,6 @@ export async function processPlantelHtml(htmlString) {
   // Na limpeza, excluímos manualmente todos que não vieram, junto com suas FKs.
   let countUpdated = 0;
   const incomingUids = [];
-  const creatorId = await getDefaultCreatorId(prisma);
 
   for (const pData of playersToAdd) {
     if (pData.name) {
@@ -131,13 +131,13 @@ export async function processPlantelHtml(htmlString) {
   return { message: "Plantel importado com sucesso! Os elencos da rodada foram resetados e os inativos excluídos.", inserted: countUpdated, total: rows.length - 1 };
 }
 
-export async function previewMatchResultHtml(htmlString) {
+export async function previewMatchResultHtml(htmlString, creatorId) {
   const $ = cheerio.load(htmlString);
   const rows = $('table tr').toArray();
   const scores = [];
 
   // Pega a rodada aberta
-  const openRound = await prisma.round.findFirst({ where: { isOpen: true } });
+  const openRound = await prisma.round.findFirst({ where: { creatorId, isOpen: true } });
   if (!openRound) {
     throw new Error('Nenhuma rodada aberta no momento.');
   }
@@ -181,7 +181,7 @@ export async function previewMatchResultHtml(htmlString) {
     const stats = playerStatsMap[name];
 
     // Busca jogador no DB
-    const playerArray = await prisma.player.findMany({ where: { name: name } });
+    const playerArray = await prisma.player.findMany({ where: { creatorId, name: name } });
     const player = playerArray.length > 0 ? playerArray[0] : null;
 
     if (player) {
@@ -277,8 +277,7 @@ export async function previewMatchResultHtml(htmlString) {
   return { success: true, scores };
 }
 
-export async function processMatchResultFinal(scoresFromFrontend) {
-  const creatorId = await getDefaultCreatorId(prisma);
+export async function processMatchResultFinal(scoresFromFrontend, creatorId) {
   const openRound = await prisma.round.findFirst({ where: { isOpen: true, creatorId } });
   if (!openRound) {
     throw new Error('Nenhuma rodada aberta no momento.');
@@ -341,7 +340,7 @@ export async function processMatchResultFinal(scoresFromFrontend) {
   });
 
   // Atualizar pontuação total de usuários
-  const squads = await prisma.squad.findMany({});
+  const squads = await prisma.squad.findMany({ where: { creatorId } });
   
   for (const sq of squads) {
     let roundScore = 0;

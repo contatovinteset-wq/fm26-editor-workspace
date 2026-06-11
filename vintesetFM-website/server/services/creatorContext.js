@@ -21,6 +21,29 @@ export async function getDefaultCreatorId(prisma) {
   return _cachedCreatorId;
 }
 
+// Resolve qual criador este request está operando.
+// Fase 3a: ainda single-tenant — sempre o Creator #1 (vinteset).
+// Fase 3c: passará a ler a slug de req.params.slug / req.query.creator
+//          (rotas /reidamesa/c/:slug) e o painel admin resolverá pelo dono logado.
+export async function resolveCreatorId(req, prisma) {
+  // const slug = req.params?.slug || req.query?.creator; // <- ligado na Fase 3c
+  return getDefaultCreatorId(prisma);
+}
+
+// Middleware: injeta req.creatorId em todo request do Rei da Mesa.
+// Centraliza a resolução num ponto só — na 3c basta evoluir resolveCreatorId.
+export function attachCreatorContext(prisma) {
+  return async (req, res, next) => {
+    try {
+      req.creatorId = await resolveCreatorId(req, prisma);
+      next();
+    } catch (err) {
+      console.error('attachCreatorContext:', err);
+      res.status(404).json({ error: 'Criador não encontrado' });
+    }
+  };
+}
+
 // Para testes / cenários onde o creator pode mudar em runtime.
 export function _clearCreatorCache() {
   _cachedCreatorId = null;
