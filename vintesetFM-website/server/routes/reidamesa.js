@@ -9,8 +9,39 @@ const router = express.Router();
 const prisma = new PrismaClient();
 const upload = multer({ storage: multer.memoryStorage() });
 
-// Injeta req.creatorId em todo request do Rei da Mesa (Fase 3a).
+// Injeta req.creatorId em todo request do Rei da Mesa (Fase 3a/3c).
 router.use(attachCreatorContext(prisma));
+
+// 🎥 Diretório público de criadores ativos (Fase 3c) — alimenta /reidamesa/criadores.
+router.get('/creators', async (req, res) => {
+  try {
+    const creators = await prisma.creator.findMany({
+      where: { isActive: true },
+      select: { name: true, slug: true, branding: true },
+      orderBy: { createdAt: 'asc' }
+    });
+    res.json(creators);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao listar criadores' });
+  }
+});
+
+// Branding/validação de um criador pela slug (Fase 3c) — usado pelo CreatorContext.
+router.get('/creator/:slug', async (req, res) => {
+  try {
+    const slug = (req.params.slug || '').trim().toLowerCase();
+    const creator = await prisma.creator.findFirst({
+      where: { slug, isActive: true },
+      select: { name: true, slug: true, branding: true }
+    });
+    if (!creator) return res.status(404).json({ error: 'Criador não encontrado' });
+    res.json(creator);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao buscar criador' });
+  }
+});
 
 // Ranking Geral
 router.get('/ranking', async (req, res) => {

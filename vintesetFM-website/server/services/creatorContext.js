@@ -22,12 +22,27 @@ export async function getDefaultCreatorId(prisma) {
 }
 
 // Resolve qual criador este request está operando.
-// Fase 3a: ainda single-tenant — sempre o Creator #1 (vinteset).
-// Fase 3c: passará a ler a slug de req.params.slug / req.query.creator
-//          (rotas /reidamesa/c/:slug) e o painel admin resolverá pelo dono logado.
+// Fase 3c: lê a slug do header `X-Creator-Slug` (injetado pelo front via
+// CreatorContext) ou do query `?creator=`. Sem slug => Creator #1 (vinteset),
+// preservando o /reidamesa bare e o overlay atual do OBS.
 export async function resolveCreatorId(req, prisma) {
-  // const slug = req.params?.slug || req.query?.creator; // <- ligado na Fase 3c
-  return getDefaultCreatorId(prisma);
+  const slug = (req.headers['x-creator-slug'] || req.query?.creator || '')
+    .toString().trim().toLowerCase();
+
+  if (!slug) {
+    return getDefaultCreatorId(prisma); // backward compat: vinteset
+  }
+
+  const creator = await prisma.creator.findFirst({
+    where: { slug, isActive: true },
+    select: { id: true }
+  });
+  if (!creator) {
+    const err = new Error(`Criador não encontrado ou inativo: ${slug}`);
+    err.code = 'CREATOR_NOT_FOUND';
+    throw err;
+  }
+  return creator.id;
 }
 
 // Middleware: injeta req.creatorId em todo request do Rei da Mesa.
