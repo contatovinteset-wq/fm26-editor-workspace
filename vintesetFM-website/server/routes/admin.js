@@ -2,9 +2,16 @@ import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import { requirePermission } from '../middleware/roles.js';
 import { getAllRoles } from '../config/permissions.js';
+import { ensureCreatorForUser, deactivateCreatorsForUser } from '../services/creatorContext.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
+
+function parseRolesJson(roles) {
+  if (Array.isArray(roles)) return roles;
+  if (typeof roles === 'string') { try { return JSON.parse(roles); } catch { return [roles]; } }
+  return [];
+}
 
 /**
  * GET /api/admin/users
@@ -84,17 +91,40 @@ router.patch('/users/:id/roles', requirePermission('admin:manage_roles'), async 
   }
 
   try {
+    // Estado anterior (p/ reconciliar o cargo CREATOR com o Rei da Mesa).
+    const before = await prisma.user.findUnique({
+      where: { id },
+      select: { id: true, nickname: true, name: true, roles: true }
+    });
+
     const updatedUser = await prisma.user.update({
       where: { id },
       data: { roles },
       select: {
         id: true,
         name: true,
+        nickname: true,
         email: true,
         avatar: true,
         roles: true,
       },
     });
+
+    // Reconcilia o Rei da Mesa do usuário com o cargo CREATOR (Fase 3e):
+    // ganhou CREATOR -> cria o Rei da Mesa dele (INATIVO, ativa ao preencher perfil);
+    // perdeu CREATOR (e não é OWNER) -> desativa os dele (preserva dados).
+    try {
+      const hadCreator = parseRolesJson(before?.roles).includes('CREATOR');
+      const hasCreator = roles.includes('CREATOR');
+      if (hasCreator && !hadCreator) {
+        await ensureCreatorForUser(prisma, { id, nickname: before?.nickname, name: before?.name });
+      } else if (!hasCreator && hadCreator && !roles.includes('OWNER')) {
+        await deactivateCreatorsForUser(prisma, id);
+      }
+    } catch (e) {
+      console.error('[Admin] Falha ao reconciliar Creator com cargo CREATOR:', e);
+    }
+
     res.json({ user: updatedUser, message: 'Roles atualizadas com sucesso.' });
   } catch (error) {
     console.error('[Admin] Erro ao atualizar roles:', error);

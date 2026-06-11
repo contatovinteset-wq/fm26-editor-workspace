@@ -25,6 +25,7 @@ const Pages = {
   ReiDaMesaOverlay: lazy(() => import('./ReiDaMesaOverlay')),
   ReiDaMesaCriadores: lazy(() => import('./ReiDaMesaCriadores')),
   ReiDaMesaCriadoresAdmin: lazy(() => import('./ReiDaMesaCriadoresAdmin')),
+  ReiDaMesaPerfilCriador: lazy(() => import('./ReiDaMesaPerfilCriador')),
   ForumHome: lazy(() => import('./forum/ForumHome')),
   ForumCategory: lazy(() => import('./forum/ForumCategory')),
   ForumThread: lazy(() => import('./forum/ForumThread')),

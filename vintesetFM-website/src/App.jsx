@@ -43,6 +43,7 @@ function App() {
               <Route path="reidamesa" element={<Pages.ReiDaMesa />} />
               <Route path="reidamesa/admin" element={<Pages.ReiDaMesaAdmin />} />
               <Route path="reidamesa/admin/criadores" element={<Pages.ReiDaMesaCriadoresAdmin />} />
+              <Route path="reidamesa/meu-canal" element={<Pages.ReiDaMesaPerfilCriador />} />
               <Route path="reidamesa/escalar" element={<Pages.Escalacao />} />
               <Route path="reidamesa/plantel" element={<Pages.PlantelReiDaMesa />} />
               <Route path="reidamesa/ranking" element={<Pages.Ranking />} />

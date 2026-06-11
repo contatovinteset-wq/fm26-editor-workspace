@@ -1,7 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Crown, Users, Tv, ArrowRight, Settings } from 'lucide-react';
+import { Crown, Users, ArrowRight, Settings, Twitch, Youtube, Radio } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+
+// Plataformas suportadas (logo + cor + qual ícone).
+const PLATFORMS = [
+  { key: 'twitch', label: 'Twitch', color: '#9146FF' },
+  { key: 'kick', label: 'Kick', color: '#53FC18' },
+  { key: 'youtube', label: 'YouTube', color: '#FF0000' },
+];
+
+const PlatformIcon = ({ pKey, size = 16 }) => {
+  if (pKey === 'twitch') return <Twitch size={size} />;
+  if (pKey === 'youtube') return <Youtube size={size} />;
+  // Kick não tem ícone no lucide — usa o monograma.
+  return <span style={{ fontSize: size - 2, fontWeight: 900, lineHeight: 1 }}>K</span>;
+};
 
 // Diretório público dos criadores do Rei da Mesa (Fase 3c).
 // Lista todos os criadores ativos (incluindo o vinteset). O card do vinteset
@@ -55,10 +69,29 @@ const ReiDaMesaCriadores = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {creators.map((c) => {
               const logo = c.branding?.logo;
-              const liveUrl = c.branding?.liveUrl;
+              const platforms = c.branding?.platforms || {};
+              const live = Array.isArray(c.livePlatforms) ? c.livePlatforms : [];
+              const isLive = !!c.isLive;
+              const platformList = PLATFORMS.filter((p) => platforms[p.key]);
               return (
-                <div key={c.slug} className="bg-gray-900 border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center hover:border-accent/40 transition-colors group">
-                  <div className="w-20 h-20 rounded-full bg-black border border-white/20 flex items-center justify-center overflow-hidden mb-4">
+                <div
+                  key={c.slug}
+                  className={`relative bg-gray-900 border rounded-2xl p-6 flex flex-col items-center text-center transition-all ${
+                    isLive ? 'border-red-500/40 hover:border-red-500/70' : 'border-white/10 opacity-70 grayscale hover:grayscale-0 hover:opacity-100'
+                  }`}
+                >
+                  {/* Selo AO VIVO / Offline */}
+                  {isLive ? (
+                    <span className="absolute top-3 right-3 inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-red-400 bg-red-500/15 border border-red-500/40 px-2 py-0.5 rounded-full">
+                      <Radio size={11} className="animate-pulse" /> Ao vivo
+                    </span>
+                  ) : (
+                    <span className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-widest text-gray-500 bg-white/5 border border-white/10 px-2 py-0.5 rounded-full">
+                      Offline
+                    </span>
+                  )}
+
+                  <div className={`w-20 h-20 rounded-full bg-black border flex items-center justify-center overflow-hidden mb-4 ${isLive ? 'border-red-500/50' : 'border-white/20'}`}>
                     {logo ? (
                       <img src={logo} alt={c.name} className="w-full h-full object-cover" onError={(e) => { e.target.style.display = 'none'; }} />
                     ) : (
@@ -78,15 +111,30 @@ const ReiDaMesaCriadores = () => {
                     Entrar no Rei da Mesa <ArrowRight size={14} />
                   </Link>
 
-                  {liveUrl && (
-                    <a
-                      href={liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-2 w-full px-4 py-2 rounded-lg font-bold uppercase text-[11px] tracking-widest bg-black/50 border border-white/10 text-gray-300 hover:text-white hover:bg-white/5 transition flex items-center justify-center gap-2"
-                    >
-                      <Tv size={14} /> Assistir a live
-                    </a>
+                  {platformList.length > 0 && (
+                    <div className="mt-4 w-full">
+                      <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Assistir a live</div>
+                      <div className="flex items-center justify-center gap-2">
+                        {platformList.map((p) => {
+                          const onLive = live.includes(p.key);
+                          return (
+                            <a
+                              key={p.key}
+                              href={platforms[p.key]}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              title={`${p.label}${onLive ? ' — AO VIVO' : ''}`}
+                              className={`w-9 h-9 rounded-lg border flex items-center justify-center transition-all ${
+                                onLive ? 'text-white shadow-lg scale-105' : 'text-gray-500 border-white/10 bg-black/40 hover:text-white'
+                              }`}
+                              style={onLive ? { backgroundColor: `${p.color}22`, borderColor: `${p.color}88`, color: p.color } : undefined}
+                            >
+                              <PlatformIcon pKey={p.key} />
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
                   )}
                 </div>
               );

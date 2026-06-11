@@ -37,6 +37,8 @@ const Navbar = () => {
     { name: 'Rei Da Mesa', path: '/reidamesa', icon: Crown },
     // Aba Criadores ainda em construção (multistream): só OWNER por enquanto.
     ...(isOwner ? [{ name: 'Criadores', path: '/reidamesa/criadores', icon: Users }] : []),
+    // Criador de conteúdo gerencia o próprio Rei da Mesa pelo "Meu Canal".
+    ...(user?.roles?.includes('CREATOR') ? [{ name: 'Meu Canal', path: '/reidamesa/meu-canal', icon: Crown }] : []),
   ];
 
   return (

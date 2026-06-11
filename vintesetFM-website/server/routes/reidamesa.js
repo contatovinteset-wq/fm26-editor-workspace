@@ -3,7 +3,8 @@ import { PrismaClient } from '@prisma/client';
 import multer from 'multer';
 import { processPlantelHtml, previewMatchResultHtml, processMatchResultFinal } from '../services/ReiDaMesaAdminService.js';
 import { requireAuth, requireRoles } from '../middleware/roles.js';
-import { attachCreatorContext, getDefaultCreatorId } from '../services/creatorContext.js';
+import { attachCreatorContext, getDefaultCreatorId, RESERVED_SLUGS } from '../services/creatorContext.js';
+import { getLivePlatforms } from '../services/creatorLiveService.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -11,9 +12,6 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 // Injeta req.creatorId em todo request do Rei da Mesa (Fase 3a/3c).
 router.use(attachCreatorContext(prisma));
-
-// Slugs reservadas (colidiriam com rotas/uso interno).
-const RESERVED_SLUGS = new Set(['overlay', 'criadores', 'admin', 'escalar', 'plantel', 'ranking', 'perfil', 'c', 'api']);
 
 // Middleware (Fase 3d): autoriza gerir o Rei da Mesa do creator ALVO (req.creatorId).
 // OWNER manda em tudo; o dono do creator gere o seu; ADMIN_GERACAO mantém poder
@@ -49,7 +47,36 @@ router.get('/creators', async (req, res) => {
       select: { name: true, slug: true, branding: true },
       orderBy: { createdAt: 'asc' }
     });
-    res.json(creators);
+
+    // Status ao vivo (best-effort, cacheado). ?live=0 pula a checagem (mais rápido).
+    if (req.query.live === '0') {
+      return res.json(creators.map((c) => ({ ...c, livePlatforms: [], isLive: false })));
+    }
+    const withLive = await Promise.all(creators.map(async (c) => {
+      const livePlatforms = await getLivePlatforms(c.branding).catch(() => []);
+      return { ...c, livePlatforms, isLive: livePlatforms.length > 0 };
+    }));
+    res.json(withLive);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao listar criadores' });
+  }
+});
+
+// Lista TODOS os criadores (ativos e inativos) — só OWNER, p/ a gestão (Fase 3e).
+router.get('/creators/all', requireAuth, requireRoles(['OWNER']), async (req, res) => {
+  try {
+    const creators = await prisma.creator.findMany({
+      select: {
+        name: true, slug: true, branding: true, isActive: true, createdAt: true,
+        owner: { select: { nickname: true, name: true } }
+      },
+      orderBy: { createdAt: 'asc' }
+    });
+    res.json(creators.map((c) => ({
+      name: c.name, slug: c.slug, branding: c.branding, isActive: c.isActive,
+      ownerName: c.owner?.nickname || c.owner?.name || '—'
+    })));
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erro ao listar criadores' });
@@ -130,13 +157,57 @@ router.patch('/creator/:slug', requireAuth, async (req, res) => {
     const data = {};
     if (name !== undefined) data.name = String(name).trim();
     if (branding !== undefined) data.branding = branding;
-    if (isActive !== undefined) data.isActive = !!isActive;
+
+    // Critério de ativação (Fase 3e): nome de exibição + ao menos 1 plataforma.
+    const finalName = data.name !== undefined ? data.name : creator.name;
+    const finalBranding = data.branding !== undefined ? data.branding : creator.branding;
+    const pf = (finalBranding && finalBranding.platforms) || {};
+    const hasPlatform = !!(pf.twitch || pf.kick || pf.youtube || (finalBranding && finalBranding.liveUrl));
+    const meets = !!(finalName && finalName.trim()) && hasPlatform;
+
+    // Desativar é sempre permitido; ativar (auto ou explícito) só cumprindo o critério.
+    data.isActive = isActive === false ? false : meets;
 
     const updated = await prisma.creator.update({ where: { id: creator.id }, data });
-    res.json(updated);
+    res.json({ ...updated, meetsActivation: meets });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erro ao editar criador', details: error.message });
+  }
+});
+
+// 🗑️ Excluir criador (Fase 3e) — só OWNER, e só se NÃO tiver dados de jogo
+// (senão orienta a desativar). O criador principal (vinteset) não pode ser excluído.
+router.delete('/creator/:slug', requireAuth, requireRoles(['OWNER']), async (req, res) => {
+  try {
+    const slug = (req.params.slug || '').trim().toLowerCase();
+    const creator = await prisma.creator.findFirst({ where: { slug } });
+    if (!creator) return res.status(404).json({ error: 'Criador não encontrado' });
+
+    const defId = await getDefaultCreatorId(prisma);
+    if (creator.id === defId) {
+      return res.status(400).json({ error: 'O criador principal não pode ser excluído.' });
+    }
+
+    const [players, rounds, squads, scores, votes] = await Promise.all([
+      prisma.player.count({ where: { creatorId: creator.id } }),
+      prisma.round.count({ where: { creatorId: creator.id } }),
+      prisma.squad.count({ where: { creatorId: creator.id } }),
+      prisma.playerScore.count({ where: { creatorId: creator.id } }),
+      prisma.craqueVote.count({ where: { creatorId: creator.id } }),
+    ]);
+    if (players + rounds + squads + scores + votes > 0) {
+      return res.status(409).json({ error: 'Esse Rei da Mesa já tem dados. Desative-o em vez de excluir.' });
+    }
+
+    // Sem dados de jogo: limpa estado/overlay e remove.
+    await prisma.overlayEvent.deleteMany({ where: { creatorId: creator.id } });
+    await prisma.reiDaMesaState.deleteMany({ where: { creatorId: creator.id } });
+    await prisma.creator.delete({ where: { id: creator.id } });
+    res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao excluir criador', details: error.message });
   }
 });
 
@@ -145,16 +216,17 @@ router.patch('/creator/:slug', requireAuth, async (req, res) => {
 router.get('/my-creator', requireAuth, async (req, res) => {
   try {
     const roles = req.user?.roles || [];
+    // Acha o criador do dono mesmo que INATIVO (ele precisa achar p/ preencher e ativar).
     let creator = await prisma.creator.findFirst({
-      where: { ownerId: req.user.id, isActive: true },
-      select: { name: true, slug: true, branding: true },
+      where: { ownerId: req.user.id },
+      select: { name: true, slug: true, branding: true, isActive: true },
       orderBy: { createdAt: 'asc' }
     });
     if (!creator && roles.includes('OWNER')) {
       const defId = await getDefaultCreatorId(prisma);
       creator = await prisma.creator.findUnique({
         where: { id: defId },
-        select: { name: true, slug: true, branding: true }
+        select: { name: true, slug: true, branding: true, isActive: true }
       });
     }
     if (!creator) return res.status(404).json({ error: 'Você não administra nenhum Rei da Mesa.' });

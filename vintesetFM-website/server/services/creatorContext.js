@@ -11,6 +11,61 @@
 
 let _cachedCreatorId = null;
 
+// Slugs reservadas (colidiriam com rotas / uso interno do Rei da Mesa).
+export const RESERVED_SLUGS = new Set(['overlay', 'criadores', 'admin', 'escalar', 'plantel', 'ranking', 'perfil', 'c', 'api']);
+
+// Gera uma slug segura a partir de um texto (nickname/nome).
+export function slugify(input) {
+  const s = (input || '')
+    .toString()
+    .normalize('NFKD').replace(/[̀-ͯ]/g, '') // tira acentos
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 30);
+  return s || 'criador';
+}
+
+// Garante uma slug única no banco (sufixa -2, -3… se preciso) e não-reservada.
+async function uniqueSlug(prisma, base) {
+  let root = base;
+  if (RESERVED_SLUGS.has(root)) root = `${root}-rdm`.slice(0, 30);
+  let slug = root;
+  let n = 1;
+  // eslint-disable-next-line no-await-in-loop
+  while (await prisma.creator.findUnique({ where: { slug }, select: { id: true } })) {
+    n += 1;
+    slug = `${root}-${n}`.slice(0, 30);
+  }
+  return slug;
+}
+
+// Fase 3e: ao conceder o cargo CREATOR, cria o Rei da Mesa do usuário —
+// INATIVO. Ele só ativa quando o criador preencher o próprio perfil
+// (nome + ≥1 plataforma). Idempotente: não duplica se já existir.
+export async function ensureCreatorForUser(prisma, user) {
+  const existing = await prisma.creator.findFirst({ where: { ownerId: user.id }, select: { id: true } });
+  if (existing) return existing;
+  const base = slugify(user.nickname || user.name || `criador-${String(user.id).slice(0, 6)}`);
+  const slug = await uniqueSlug(prisma, base);
+  return prisma.creator.create({
+    data: {
+      ownerId: user.id,
+      name: user.nickname || user.name || 'Novo criador',
+      slug,
+      isActive: false
+    }
+  });
+}
+
+// Ao remover o cargo CREATOR, desativa os Rei da Mesa do usuário (preserva dados).
+export async function deactivateCreatorsForUser(prisma, userId) {
+  await prisma.creator.updateMany({
+    where: { ownerId: userId, isActive: true },
+    data: { isActive: false }
+  });
+}
+
 export async function getDefaultCreatorId(prisma) {
   if (_cachedCreatorId) return _cachedCreatorId;
   const creator = await prisma.creator.findFirst({ orderBy: { createdAt: 'asc' } });
