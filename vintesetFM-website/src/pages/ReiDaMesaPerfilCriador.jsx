@@ -1,7 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { Crown, Save, Settings, ExternalLink, CheckCircle, AlertCircle, Share2, Copy, Check, MessageCircle, Send } from 'lucide-react';
+import { Crown, Save, Settings, ExternalLink, CheckCircle, AlertCircle, Share2, Copy, Check, MessageCircle, Send, UploadCloud, Unlock, Lock, MonitorPlay, BarChart3, Trophy, GraduationCap } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+
+// 🎓 Banho de loja: passo a passo de como o criador opera o Rei da Mesa.
+const TUTORIAL_STEPS = [
+  { icon: UploadCloud, title: 'Suba seu elenco', text: 'No Painel, aba Plantel, suba o arquivo exportado do FM26 (plugin de export). Isso cria os jogadores que a galera vai poder escalar.' },
+  { icon: Unlock, title: 'Abra o mercado', text: 'Clique em "Abrir Mercado" no Painel. Isso inicia uma nova rodada e libera os viewers a montarem o time (3 titulares + bagre + capitão).' },
+  { icon: Share2, title: 'Divulgue o link', text: 'Cole o link do seu Rei da Mesa no chat da sua live (botões de compartilhar aqui em cima). Quanto mais gente escalar, mais animada a disputa.' },
+  { icon: MonitorPlay, title: 'Coloque o overlay no OBS', text: 'Copie o link do overlay no Painel e adicione como Fonte de Navegador no OBS. As escalações da galera aparecem ao vivo na tela.' },
+  { icon: Lock, title: 'Feche o mercado ao começar a partida', text: 'Assim ninguém escala depois que a bola rola. Nesse momento abre a votação do "Craque do Jogo" pra galera.' },
+  { icon: BarChart3, title: 'Suba o resultado', text: 'No fim do jogo, exporte as estatísticas no FM26 e suba no Painel. Confira o preview e processe — o sistema calcula a pontuação de cada jogador automaticamente.' },
+  { icon: Trophy, title: 'Acompanhe o ranking', text: 'Ranking Geral (soma das rodadas) + Rei da Mesa da rodada (maior pontuador da live). Repita a cada partida e veja a comunidade subir no ranking!' },
+];
+
+const CreatorTutorial = () => (
+  <div className="mt-6 bg-gray-900 border border-white/10 rounded-2xl p-6">
+    <div className="flex items-center gap-2 mb-1">
+      <GraduationCap size={20} className="text-accent" />
+      <h3 className="font-black uppercase tracking-tight text-white">Como usar seu Rei da Mesa</h3>
+    </div>
+    <p className="text-gray-400 text-sm mb-6">O ciclo de cada partida, do começo ao fim. Em pouco tempo vira rotina. 👇</p>
+
+    <ol className="space-y-4">
+      {TUTORIAL_STEPS.map((s, i) => {
+        const Icon = s.icon;
+        return (
+          <li key={i} className="flex gap-4">
+            <div className="flex flex-col items-center">
+              <div className="w-10 h-10 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent font-black">{i + 1}</div>
+              {i < TUTORIAL_STEPS.length - 1 && <div className="w-px flex-1 bg-white/10 my-1" />}
+            </div>
+            <div className="pb-2">
+              <div className="flex items-center gap-2 text-white font-bold">
+                <Icon size={16} className="text-accent" /> {s.title}
+              </div>
+              <p className="text-gray-400 text-sm mt-1 leading-relaxed">{s.text}</p>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+);
 
 // 𝕏 não existe no lucide — glifo inline.
 const XGlyph = ({ size = 16 }) => (
@@ -217,6 +258,8 @@ const ReiDaMesaPerfilCriador = () => {
             )}
           </div>
         </div>
+
+        {creator.isActive && <CreatorTutorial />}
       </div>
     </div>
   );
