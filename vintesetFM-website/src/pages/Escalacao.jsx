@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, Shield, Search, Save, Crown, X, Info, AlertCircle } from 'lucide-react';
+import { Users, Shield, Search, Save, Crown, X, Info, AlertCircle, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { rdmFetch, useRdmBase } from '../services/reidamesa';
 
@@ -222,6 +222,30 @@ const Escalacao = () => {
     setIsSaved(false);
   };
 
+  // ─── Escalação Recomendada (Fase 6) ────────────────────────────────
+  // Projeção simples por jogador: pontos da última rodada (peso maior),
+  // classificação média e minutos jogados. Monta DEF/MEI/ATA, capitão (o
+  // melhor projetado dos 3) e um palpite de bagre (pior avaliado que joga).
+  const num = (v) => { const n = parseFloat(String(v ?? '').replace(',', '.')); return Number.isNaN(n) ? 0 : n; };
+  const proj = (p) => (p.lastMatchPoints || 0) * 2 + num(p.rawStats?.['Classificação']) * 1.5 + num(p.rawStats?.['Minutos']) * 0.001;
+  const bestOf = (role) => players.filter(p => p.cartolaRole === role).sort((a, b) => proj(b) - proj(a))[0] || null;
+
+  const handleRecommend = () => {
+    if (!players.length) return;
+    const def = bestOf('DEF');
+    const mei = bestOf('MEI');
+    const ata = bestOf('ATA');
+    const titulares = [def, mei, ata].filter(Boolean);
+    const capitao = [...titulares].sort((a, b) => proj(b) - proj(a))[0] || null;
+    const titularIds = new Set(titulares.map(p => p.id));
+    const bagre = players
+      .filter(p => !titularIds.has(p.id) && num(p.rawStats?.['Minutos']) > 0)
+      .sort((a, b) => proj(a) - proj(b))[0] || null;
+    setSquad(prev => ({ ...prev, def, mei, ata, bagre, capitao }));
+    setIsSaved(false);
+    setActiveSlot(null);
+  };
+
   const saveSquadToBackend = async () => {
     const payload = {
       defensorId: squad.def?.id,
@@ -281,6 +305,18 @@ const Escalacao = () => {
             </div>
           </div>
           <div className="flex bg-black/50 p-1 rounded-lg border border-white/10 w-full md:w-auto gap-2">
+            <button
+              onClick={handleRecommend}
+              disabled={!isMarketOpen || !players.length}
+              title="Monta um time sugerido pelo desempenho do plantel"
+              className={`px-4 py-2 text-sm font-bold uppercase tracking-widest rounded transition-all text-center flex-1 border flex items-center justify-center gap-1.5 ${
+                isMarketOpen && players.length
+                  ? 'text-accent hover:text-black hover:bg-accent border-accent/30'
+                  : 'text-gray-600 bg-black/50 border-gray-800 cursor-not-allowed opacity-50'
+              }`}
+            >
+              <Sparkles size={15} /> Recomendar
+            </button>
             <button
               onClick={handleClearSquad}
               disabled={!isMarketOpen}
