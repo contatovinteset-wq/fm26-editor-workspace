@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ClipboardList, ArrowLeft, Crown, ImagePlus, Trash2, Flame, ThumbsDown, ClipboardPaste } from 'lucide-react';
 import { rdmFetch, useRdmBase } from '../services/reidamesa';
-import { useAuth } from '../context/AuthContext';
 
 const Face = ({ uniqueId, name, size = 28 }) => {
   const [err, setErr] = useState(false);
@@ -69,23 +68,23 @@ const compressImage = (file) => new Promise((resolve, reject) => {
 
 const ReiDaMesaEscalacoes = () => {
   const base = useRdmBase();
-  const { user } = useAuth();
   const fileRef = useRef(null);
   const [rows, setRows] = useState([]);
   const [print, setPrint] = useState(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
-
-  const roles = user?.roles || [];
-  const canManage = roles.includes('OWNER') || roles.includes('ADMIN') || roles.includes('ADMIN_GERACAO') || roles.includes('CREATOR');
+  // Só o DONO daquele Rei da Mesa gerencia o print; o backend é a fonte da verdade.
+  const [canManage, setCanManage] = useState(false);
 
   const load = () => {
     Promise.all([
       rdmFetch('/api/reidamesa/escalacoes').then((r) => r.json()).catch(() => []),
       rdmFetch('/api/reidamesa/lineup-print').then((r) => r.json()).catch(() => ({ image: null })),
-    ]).then(([escalacoes, lp]) => {
+      rdmFetch('/api/reidamesa/lineup-print/permissions', { credentials: 'include' }).then((r) => (r.ok ? r.json() : { canManage: false })).catch(() => ({ canManage: false })),
+    ]).then(([escalacoes, lp, perm]) => {
       setRows(Array.isArray(escalacoes) ? escalacoes : []);
       setPrint(lp?.image || null);
+      setCanManage(!!perm?.canManage);
       setLoading(false);
     });
   };

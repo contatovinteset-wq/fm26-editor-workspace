@@ -370,8 +370,30 @@ router.get('/lineup-print', async (req, res) => {
   }
 });
 
-router.post('/lineup-print', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, async (req, res) => {
+// Dono do print: só o OWNER do site ou o dono daquele Creator (não basta cargo).
+async function userOwnsCreator(user, creatorId) {
+  if (!user) return false;
+  const roles = user.roles || [];
+  if (roles.includes('OWNER')) return true;
+  const creator = await prisma.creator.findUnique({ where: { id: creatorId }, select: { ownerId: true } });
+  return !!creator && creator.ownerId === user.id;
+}
+
+// O front pergunta se PODE gerir o print deste Rei da Mesa (autoritativo).
+router.get('/lineup-print/permissions', requireAuth, async (req, res) => {
   try {
+    res.json({ canManage: await userOwnsCreator(req.user, req.creatorId) });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao checar permissão' });
+  }
+});
+
+router.post('/lineup-print', requireAuth, async (req, res) => {
+  try {
+    if (!(await userOwnsCreator(req.user, req.creatorId))) {
+      return res.status(403).json({ error: 'Só o dono deste Rei da Mesa pode subir o print.' });
+    }
     const { image } = req.body; // dataURL base64, ou null para limpar
     if (image !== null && image !== undefined) {
       if (typeof image !== 'string' || !/^data:image\/(png|jpe?g|webp);base64,/.test(image)) {
