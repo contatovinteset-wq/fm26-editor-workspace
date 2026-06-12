@@ -1,7 +1,81 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { Crown, Save, Settings, ExternalLink, CheckCircle, AlertCircle, Tv } from 'lucide-react';
+import { Crown, Save, Settings, ExternalLink, CheckCircle, AlertCircle, Share2, Copy, Check, MessageCircle, Send } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+
+// 𝕏 não existe no lucide — glifo inline.
+const XGlyph = ({ size = 16 }) => (
+  <span style={{ fontSize: size, fontWeight: 900, lineHeight: 1 }}>𝕏</span>
+);
+
+// Caixa de compartilhamento do link do Rei da Mesa do criador.
+const ShareBox = ({ url, name }) => {
+  const [copied, setCopied] = useState(false);
+  const enc = encodeURIComponent;
+  const text = `🏆 Entra no Rei da Mesa do ${name}! Escale seu time e dispute o ranking:`;
+
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(url); } catch { /* noop */ }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const nativeShare = async () => {
+    try { await navigator.share({ title: `Rei da Mesa do ${name}`, text, url }); } catch { /* cancelado */ }
+  };
+
+  const buttons = [
+    { label: 'WhatsApp', color: '#25D366', href: `https://wa.me/?text=${enc(`${text} ${url}`)}`, icon: <MessageCircle size={18} /> },
+    { label: 'Telegram', color: '#229ED9', href: `https://t.me/share/url?url=${enc(url)}&text=${enc(text)}`, icon: <Send size={18} /> },
+    { label: 'X', color: '#1d9bf0', href: `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}`, icon: <XGlyph size={15} /> },
+  ];
+
+  return (
+    <div className="bg-gradient-to-br from-accent/10 to-transparent border border-accent/30 rounded-2xl p-5 mb-6">
+      <div className="flex items-center gap-2 mb-3">
+        <Share2 size={18} className="text-accent" />
+        <h3 className="font-black uppercase tracking-tight text-white">Divulgue na sua live</h3>
+      </div>
+
+      {/* Link + copiar */}
+      <div className="flex items-stretch gap-2 mb-4">
+        <div className="flex-1 bg-black/50 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-gray-300 truncate flex items-center">
+          {url}
+        </div>
+        <button
+          onClick={copy}
+          className={`px-4 rounded-lg font-bold uppercase text-xs tracking-widest flex items-center gap-2 transition-all ${copied ? 'bg-green-500 text-black' : 'bg-accent text-black hover:brightness-110'}`}
+        >
+          {copied ? <><Check size={15} /> Copiado</> : <><Copy size={15} /> Copiar</>}
+        </button>
+      </div>
+
+      {/* Botões de compartilhamento */}
+      <div className="flex flex-wrap gap-2">
+        {buttons.map((b) => (
+          <a
+            key={b.label}
+            href={b.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg font-bold uppercase text-xs tracking-widest text-white transition-transform hover:scale-105"
+            style={{ backgroundColor: b.color }}
+          >
+            {b.icon} {b.label}
+          </a>
+        ))}
+        {typeof navigator !== 'undefined' && navigator.share && (
+          <button
+            onClick={nativeShare}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg font-bold uppercase text-xs tracking-widest bg-white/10 border border-white/20 text-white hover:bg-white/20 transition"
+          >
+            <Share2 size={16} /> Mais
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
 
 // Perfil self-service do criador (Fase 3e). Porta de entrada do CREATOR:
 // carrega o /my-creator (mesmo inativo), deixa preencher nome + logo + links
@@ -98,6 +172,15 @@ const ReiDaMesaPerfilCriador = () => {
 
         {msg && (
           <div className={`mb-6 px-4 py-3 rounded-lg border text-sm font-bold ${msg.type === 'ok' ? 'bg-green-500/10 border-green-500/30 text-green-400' : 'bg-red-500/10 border-red-500/30 text-red-400'}`}>{msg.text}</div>
+        )}
+
+        {/* Compartilhar: só faz sentido quando o canal está ativo (link público funciona). */}
+        {creator.isActive ? (
+          <ShareBox url={`${window.location.origin}/reidamesa/c/${creator.slug}`} name={creator.name} />
+        ) : (
+          <div className="mb-6 px-4 py-3 rounded-lg border border-white/10 bg-white/5 text-gray-400 text-sm flex items-center gap-2">
+            <Share2 size={16} className="text-gray-500" /> Ative seu canal (salve com nome + 1 plataforma) para liberar o link de compartilhamento.
+          </div>
         )}
 
         <div className="bg-gray-900 border border-white/10 rounded-2xl p-6 space-y-4">
