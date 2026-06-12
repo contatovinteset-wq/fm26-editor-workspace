@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, Shield, Search, Save, Crown, X, Info, AlertCircle, Sparkles } from 'lucide-react';
+import { Users, Shield, Search, Save, Crown, X, Info, AlertCircle, Sparkles, ClipboardList } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { rdmFetch, useRdmBase } from '../services/reidamesa';
 
@@ -147,6 +147,9 @@ const Escalacao = () => {
   const [isMarketOpen, setIsMarketOpen] = useState(true);
   const [players, setPlayers] = useState([]);
   const [scoreModalPlayer, setScoreModalPlayer] = useState(null);
+  const [creatorPrint, setCreatorPrint] = useState(null);
+  const [showCreatorPrint, setShowCreatorPrint] = useState(true);
+  const [zoomPrint, setZoomPrint] = useState(false);
 
   const isSquadComplete = squad.def && squad.mei && squad.ata && squad.bagre;
 
@@ -160,6 +163,11 @@ const Escalacao = () => {
     rdmFetch('/api/reidamesa/players')
       .then(res => res.json())
       .then(data => setPlayers(data))
+      .catch(console.error);
+
+    rdmFetch('/api/reidamesa/lineup-print')
+      .then(res => res.json())
+      .then(data => setCreatorPrint(data?.image || null))
       .catch(console.error);
 
     rdmFetch('/api/reidamesa/squad', { credentials: 'include' })
@@ -333,6 +341,32 @@ const Escalacao = () => {
             </Link>
           </div>
         </div>
+
+        {/* Escalação do criador (referência pro viewer montar o time) */}
+        {creatorPrint && (
+          <div className="mb-6 bg-gray-900 border border-accent/20 rounded-2xl overflow-hidden">
+            <button onClick={() => setShowCreatorPrint(v => !v)} className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-white/5 transition-colors">
+              <span className="font-black uppercase tracking-tight text-white text-sm flex items-center gap-2">
+                <ClipboardList size={16} className="text-accent" /> Escalação do criador (referência)
+              </span>
+              <span className="text-xs text-gray-400 uppercase tracking-widest">{showCreatorPrint ? 'ocultar' : 'mostrar'}</span>
+            </button>
+            {showCreatorPrint && (
+              <div className="px-4 pb-4">
+                <img src={creatorPrint} alt="Escalação do criador" onClick={() => setZoomPrint(true)} className="w-full max-h-72 object-contain rounded-lg border border-white/10 cursor-zoom-in bg-black/40" />
+                <p className="text-[11px] text-gray-500 mt-2">Clique pra ampliar. Use o time do criador como base pra montar o seu.</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Zoom do print */}
+        {zoomPrint && creatorPrint && (
+          <div className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4" onClick={() => setZoomPrint(false)}>
+            <img src={creatorPrint} alt="Escalação do criador" className="max-w-full max-h-full object-contain rounded-lg" />
+            <button className="absolute top-4 right-4 text-white/80 hover:text-white" onClick={() => setZoomPrint(false)}><X size={28} /></button>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 h-full">
 
