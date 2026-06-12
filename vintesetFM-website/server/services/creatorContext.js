@@ -68,7 +68,9 @@ export async function deactivateCreatorsForUser(prisma, userId) {
 
 export async function getDefaultCreatorId(prisma) {
   if (_cachedCreatorId) return _cachedCreatorId;
-  const creator = await prisma.creator.findFirst({ orderBy: { createdAt: 'asc' } });
+  // select id só — está no caminho quente de toda rota; não pode quebrar quando
+  // uma coluna nova é adicionada ao Creator antes da migration rodar.
+  const creator = await prisma.creator.findFirst({ orderBy: { createdAt: 'asc' }, select: { id: true } });
   if (!creator) {
     throw new Error('Nenhum Creator configurado no banco (esperado o Creator #1 do backfill da Fase 2b).');
   }
