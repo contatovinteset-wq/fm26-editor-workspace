@@ -20,6 +20,7 @@ const AdminPanel = () => {
   const [users, setUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(true);
   const [search, setSearch] = useState('');
+  const [stats, setStats] = useState({ total: 0, counts: {} });
   const [editingUser, setEditingUser] = useState(null);
   const [editRoles, setEditRoles] = useState([]);
   const [saving, setSaving] = useState(false);
@@ -34,19 +35,30 @@ const AdminPanel = () => {
   const canManageRoles = hasPermission(userRoles, 'admin:manage_roles');
   const allRoles = getAllRoles();
 
+  // Contadores dos cards (1 query leve no servidor).
   useEffect(() => {
-    fetchUsers();
+    fetch('/api/admin/users/stats', { credentials: 'include' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (d) setStats({ total: d.total || 0, counts: d.counts || {} }); })
+      .catch(() => {});
   }, []);
 
-  const fetchUsers = async () => {
+  // Busca no servidor com debounce (300ms). search vazio = 30 mais recentes.
+  useEffect(() => {
+    const t = setTimeout(() => fetchUsers(search), 300);
+    return () => clearTimeout(t);
+  }, [search]);
+
+  const fetchUsers = async (q = '') => {
+    setLoadingUsers(true);
     try {
-      const res = await fetch('/api/admin/users', { credentials: 'include' });
+      const res = await fetch(`/api/admin/users?q=${encodeURIComponent(q)}`, { credentials: 'include' });
       const data = await res.json();
       if (res.ok) {
         setUsers(data.users || []);
       } else {
         console.error('API Error:', data.error);
-        if (users.length === 0) setMessage({ type: 'error', text: data.error || 'A API retornou um erro interno e não enviou a lista de usuários. O Schema de Banco de Dados está sincronizado em produção?' });
+        setMessage({ type: 'error', text: data.error || 'A API retornou um erro ao buscar usuários.' });
       }
     } catch (err) {
       console.error('Erro ao buscar usuários:', err);
@@ -104,14 +116,10 @@ const AdminPanel = () => {
     }
   };
 
-  // Filtrar usuários
-  const filtered = users.filter(u =>
-    (u.nickname || '').toLowerCase().includes(search.toLowerCase()) ||
-    (u.name || '').toLowerCase().includes(search.toLowerCase()) ||
-    (u.email || '').toLowerCase().includes(search.toLowerCase())
-  );
+  // A busca agora é feita no servidor; 'users' já vem filtrado e limitado.
+  const filtered = users;
 
-  if (isLoading || loadingUsers) {
+  if (isLoading) {
     return (
       <div className="w-full min-h-screen bg-bgDark flex items-center justify-center">
         <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
@@ -157,11 +165,7 @@ const AdminPanel = () => {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {Object.entries(ROLES).map(([key, name]) => {
-            const count = users.filter(u => {
-              let roles = u.roles;
-              if (typeof roles === 'string') try { roles = JSON.parse(roles); } catch { roles = []; }
-              return Array.isArray(roles) && roles.includes(name);
-            }).length;
+            const count = stats.counts[name] || 0;
             const colors = ROLE_COLORS[name] || ROLE_COLORS.USER;
             return (
               <motion.div
@@ -199,12 +203,16 @@ const AdminPanel = () => {
             <div className="col-span-3 sm:col-span-2 text-right">Ações</div>
           </div>
 
-          {filtered.length === 0 && (
+          {loadingUsers ? (
+            <div className="p-12 flex justify-center">
+              <span className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : filtered.length === 0 ? (
             <div className="p-12 text-center text-gray-500">
               <Users size={32} className="mx-auto mb-3 opacity-40" />
-              <p>Nenhum usuário encontrado.</p>
+              <p>{search ? 'Nenhum usuário encontrado.' : 'Nenhum usuário recente.'}</p>
             </div>
-          )}
+          ) : null}
 
           {filtered.map((u, i) => {
             let roles = u.roles;

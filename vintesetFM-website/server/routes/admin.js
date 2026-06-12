@@ -21,8 +21,20 @@ function parseRolesJson(roles) {
 router.get('/users', requirePermission('admin:view_users'), async (req, res) => {
   try {
     const isOwner = req.user.roles.includes('OWNER');
-    
+
+    // Busca no servidor (escala p/ milhares de usuários): filtra no banco e
+    // limita o retorno. Sem busca, devolve os mais recentes.
+    const q = (req.query.q || '').toString().trim();
+    const where = q
+      ? { OR: [
+          { nickname: { contains: q } },
+          { name: { contains: q } },
+          { email: { contains: q } },
+        ] }
+      : {};
+
     const users = await prisma.user.findMany({
+      where,
       select: {
         id: true,
         name: true,
@@ -33,6 +45,7 @@ router.get('/users', requirePermission('admin:view_users'), async (req, res) => 
         createdAt: true,
       },
       orderBy: { createdAt: 'desc' },
+      take: q ? 50 : 30,
     });
 
     const maskEmailPartial = (email) => {
@@ -58,6 +71,27 @@ router.get('/users', requirePermission('admin:view_users'), async (req, res) => 
   } catch (error) {
     console.error('[Admin] Erro ao listar usuários:', error);
     res.status(500).json({ error: 'Erro interno ao buscar usuários.' });
+  }
+});
+
+/**
+ * GET /api/admin/users/stats
+ * Contadores por cargo + total (1 query leve, só o campo roles).
+ * Alimenta os cards do painel sem baixar a base inteira.
+ */
+router.get('/users/stats', requirePermission('admin:view_users'), async (req, res) => {
+  try {
+    const all = await prisma.user.findMany({ select: { roles: true } });
+    const counts = {};
+    for (const u of all) {
+      let r = u.roles;
+      if (typeof r === 'string') { try { r = JSON.parse(r); } catch { r = []; } }
+      if (Array.isArray(r)) for (const role of r) counts[role] = (counts[role] || 0) + 1;
+    }
+    res.json({ total: all.length, counts });
+  } catch (error) {
+    console.error('[Admin] Erro ao calcular stats:', error);
+    res.status(500).json({ error: 'Erro ao calcular estatísticas.' });
   }
 });
 
