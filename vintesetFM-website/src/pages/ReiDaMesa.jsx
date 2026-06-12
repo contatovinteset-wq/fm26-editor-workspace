@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Crown, HelpCircle, Trophy, BarChart3, Users, Clock, ArrowRight, Settings, UploadCloud, Lock, Unlock, AlertTriangle, ShieldAlert, Star } from 'lucide-react';
+import { Crown, HelpCircle, Trophy, BarChart3, Users, Clock, ArrowRight, Settings, UploadCloud, Lock, Unlock, AlertTriangle, ShieldAlert, Star, ClipboardList } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import EmConstrucao from '../components/EmConstrucao';
 import { useAuth } from '../context/AuthContext';
@@ -524,6 +524,9 @@ const ReiDaMesa = () => {
                 </Link>
                 <Link to={`${base}/trofeus`} className="bg-black/50 hover:bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest border border-white/10 text-white rounded transition-colors text-center flex-1 flex items-center justify-center gap-1.5">
                   <Trophy size={14} className="text-accent" /> Troféus
+                </Link>
+                <Link to={`${base}/escalacoes`} className="bg-black/50 hover:bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest border border-white/10 text-white rounded transition-colors text-center flex-1 flex items-center justify-center gap-1.5">
+                  <ClipboardList size={14} className="text-accent" /> Escalações
                 </Link>
                 <Link to={`${base}/perfil`} className="bg-black/50 hover:bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest border border-white/10 text-white rounded transition-colors text-center flex-1">
                   Meu Perfil

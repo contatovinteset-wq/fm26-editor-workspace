@@ -27,6 +27,7 @@ const Pages = {
   ReiDaMesaCriadoresAdmin: lazy(() => import('./ReiDaMesaCriadoresAdmin')),
   ReiDaMesaPerfilCriador: lazy(() => import('./ReiDaMesaPerfilCriador')),
   ReiDaMesaTrofeus: lazy(() => import('./ReiDaMesaTrofeus')),
+  ReiDaMesaEscalacoes: lazy(() => import('./ReiDaMesaEscalacoes')),
   ForumHome: lazy(() => import('./forum/ForumHome')),
   ForumCategory: lazy(() => import('./forum/ForumCategory')),
   ForumThread: lazy(() => import('./forum/ForumThread')),

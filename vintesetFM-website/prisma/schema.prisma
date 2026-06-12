@@ -110,6 +110,8 @@ model Creator {
   slug      String   @unique
   isActive  Boolean  @default(true)
   branding  Json?
+  lineupPrint   String?   @db.LongText // print da escalação do criador (base64 dataURL)
+  lineupPrintAt DateTime?              // quando o print foi atualizado
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

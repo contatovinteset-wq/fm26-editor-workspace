@@ -328,6 +328,70 @@ router.get('/trofeus', async (req, res) => {
   }
 });
 
+// 📋 Escalações da Rodada (Fase 6) — tabela ao vivo dos picks de cada manager.
+router.get('/escalacoes', async (req, res) => {
+  try {
+    const squads = await prisma.squad.findMany({
+      where: { creatorId: req.creatorId, defensorId: { not: null } },
+      include: {
+        user: { select: { nickname: true, name: true, avatar: true } },
+        defensor: { select: { id: true, name: true, uniqueId: true } },
+        meio: { select: { id: true, name: true, uniqueId: true } },
+        ataque: { select: { id: true, name: true, uniqueId: true } },
+        bagre: { select: { id: true, name: true, uniqueId: true } },
+      },
+      orderBy: { updatedAt: 'desc' },
+      take: 300,
+    });
+    res.json(squads.map((s) => ({
+      manager: s.user?.nickname || s.user?.name || 'Manager',
+      avatar: s.user?.avatar || null,
+      def: s.defensor, mei: s.meio, ata: s.ataque, bagre: s.bagre,
+      capitaoId: s.capitaoId,
+      roundScore: s.roundScore,
+    })));
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao buscar escalações' });
+  }
+});
+
+// 🖼️ Print da escalação do criador — público (leitura) / manager (escrita).
+router.get('/lineup-print', async (req, res) => {
+  try {
+    const c = await prisma.creator.findUnique({
+      where: { id: req.creatorId },
+      select: { lineupPrint: true, lineupPrintAt: true }
+    });
+    res.json({ image: c?.lineupPrint || null, updatedAt: c?.lineupPrintAt || null });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao buscar o print' });
+  }
+});
+
+router.post('/lineup-print', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, async (req, res) => {
+  try {
+    const { image } = req.body; // dataURL base64, ou null para limpar
+    if (image !== null && image !== undefined) {
+      if (typeof image !== 'string' || !/^data:image\/(png|jpe?g|webp);base64,/.test(image)) {
+        return res.status(400).json({ error: 'Formato de imagem inválido.' });
+      }
+      if (image.length > 3_000_000) {
+        return res.status(413).json({ error: 'Imagem muito grande. Tente uma menor.' });
+      }
+    }
+    await prisma.creator.update({
+      where: { id: req.creatorId },
+      data: { lineupPrint: image || null, lineupPrintAt: image ? new Date() : null }
+    });
+    res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao salvar o print' });
+  }
+});
+
 // Top 3 Jogadores e Bagre da ÚLTIMA rodada fechada
 router.get('/top-match', async (req, res) => {
   try {
