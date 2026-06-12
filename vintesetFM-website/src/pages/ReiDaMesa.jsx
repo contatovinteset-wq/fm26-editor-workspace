@@ -522,6 +522,9 @@ const ReiDaMesa = () => {
                 <Link to={`${base}/ranking`} className="bg-black/50 hover:bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest border border-white/10 text-white rounded transition-colors text-center flex-1">
                   Ver Completo
                 </Link>
+                <Link to={`${base}/trofeus`} className="bg-black/50 hover:bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest border border-white/10 text-white rounded transition-colors text-center flex-1 flex items-center justify-center gap-1.5">
+                  <Trophy size={14} className="text-accent" /> Troféus
+                </Link>
                 <Link to={`${base}/perfil`} className="bg-black/50 hover:bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest border border-white/10 text-white rounded transition-colors text-center flex-1">
                   Meu Perfil
                 </Link>

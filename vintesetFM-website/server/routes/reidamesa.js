@@ -252,6 +252,82 @@ router.get('/ranking', async (req, res) => {
   }
 });
 
+// 🏆 Sala de Troféus + Agregados (Fase 6) — tudo calculado sobre dados atuais,
+// escopado por criador. Sem migration.
+router.get('/trofeus', async (req, res) => {
+  try {
+    const creatorId = req.creatorId;
+
+    const [liderSquad, squads, artilheiroAgg, totalManagers, totalRounds, lastFinished] = await Promise.all([
+      prisma.squad.findFirst({
+        where: { creatorId, totalScore: { gt: 0 } },
+        orderBy: { totalScore: 'desc' },
+        include: { user: { select: { nickname: true, name: true, avatar: true } } }
+      }),
+      prisma.squad.findMany({
+        where: { creatorId },
+        select: { defensorId: true, meioId: true, ataqueId: true, bagreId: true, capitaoId: true }
+      }),
+      prisma.playerScore.groupBy({
+        by: ['playerId'],
+        where: { creatorId },
+        _sum: { points: true },
+        orderBy: { _sum: { points: 'desc' } },
+        take: 1
+      }),
+      prisma.squad.count({ where: { creatorId } }),
+      prisma.round.count({ where: { creatorId } }),
+      prisma.round.findFirst({
+        where: { creatorId, bagreId: { not: null } },
+        orderBy: { number: 'desc' },
+        include: { bagre: { select: { name: true, uniqueId: true } } }
+      }),
+    ]);
+
+    // Contagem do mais frequente numa lista de ids.
+    const tally = (arr) => {
+      const m = {};
+      for (const id of arr) if (id) m[id] = (m[id] || 0) + 1;
+      let best = null;
+      for (const [id, count] of Object.entries(m)) if (!best || count > best.count) best = { id, count };
+      return best;
+    };
+    const titularBest = tally(squads.flatMap((s) => [s.defensorId, s.meioId, s.ataqueId]));
+    const bagreBest = tally(squads.map((s) => s.bagreId));
+    const capitaoBest = tally(squads.map((s) => s.capitaoId));
+
+    // Resolve nomes/fotos dos jogadores vencedores num único query.
+    const ids = [titularBest?.id, bagreBest?.id, capitaoBest?.id, artilheiroAgg[0]?.playerId].filter(Boolean);
+    const players = ids.length
+      ? await prisma.player.findMany({ where: { id: { in: ids } }, select: { id: true, name: true, realPosition: true, uniqueId: true } })
+      : [];
+    const pMap = Object.fromEntries(players.map((p) => [p.id, p]));
+    const mk = (best) => (best && pMap[best.id] ? { ...pMap[best.id], count: best.count } : null);
+
+    res.json({
+      lider: liderSquad ? {
+        nickname: liderSquad.user?.nickname || liderSquad.user?.name || 'Manager',
+        avatar: liderSquad.user?.avatar || null,
+        totalScore: Number((liderSquad.totalScore || 0).toFixed(2))
+      } : null,
+      artilheiro: (artilheiroAgg[0] && pMap[artilheiroAgg[0].playerId]) ? {
+        ...pMap[artilheiroAgg[0].playerId],
+        points: Number((artilheiroAgg[0]._sum.points || 0).toFixed(2))
+      } : null,
+      maisEscalado: mk(titularBest),
+      bagreMaisEscalado: mk(bagreBest),
+      capitaoFavorito: mk(capitaoBest),
+      bagreUltimaRodada: lastFinished?.bagre ? {
+        name: lastFinished.bagre.name, uniqueId: lastFinished.bagre.uniqueId, roundNumber: lastFinished.number
+      } : null,
+      totals: { managers: totalManagers, rounds: totalRounds }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Erro ao montar a Sala de Troféus' });
+  }
+});
+
 // Top 3 Jogadores e Bagre da ÚLTIMA rodada fechada
 router.get('/top-match', async (req, res) => {
   try {
