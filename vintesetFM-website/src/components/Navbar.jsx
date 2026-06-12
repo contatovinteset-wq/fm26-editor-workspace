@@ -35,8 +35,8 @@ const Navbar = () => {
     { name: 'Ferramentas', path: '/ferramentas/analise-de-dados', icon: Wrench },
     { name: 'Downloads', path: '/downloads', icon: DownloadCloud },
     { name: 'Rei Da Mesa', path: '/reidamesa', icon: Crown },
-    // Aba Criadores ainda em construção (multistream): só OWNER por enquanto.
-    ...(isOwner ? [{ name: 'Criadores', path: '/reidamesa/criadores', icon: Users }] : []),
+    // Multistream finalizado: diretório de criadores público para todos.
+    { name: 'Criadores', path: '/reidamesa/criadores', icon: Users },
     // Criador de conteúdo gerencia o próprio Rei da Mesa pelo "Meu Canal".
     ...(user?.roles?.includes('CREATOR') ? [{ name: 'Meu Canal', path: '/reidamesa/meu-canal', icon: Crown }] : []),
   ];
