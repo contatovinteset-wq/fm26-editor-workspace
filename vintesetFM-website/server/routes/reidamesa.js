@@ -258,7 +258,7 @@ router.get('/trofeus', async (req, res) => {
   try {
     const creatorId = req.creatorId;
 
-    const [liderSquad, squads, artilheiroAgg, totalManagers, totalRounds, lastFinished] = await Promise.all([
+    const [liderSquad, squads, artilheiroAgg, totalManagers, totalRounds, lastFinished, recordRound, championAgg] = await Promise.all([
       prisma.squad.findFirst({
         where: { creatorId, totalScore: { gt: 0 } },
         orderBy: { totalScore: 'desc' },
@@ -282,7 +282,28 @@ router.get('/trofeus', async (req, res) => {
         orderBy: { number: 'desc' },
         include: { bagre: { select: { name: true, uniqueId: true } } }
       }),
+      // Recorde: maior pontuação já feita numa rodada.
+      prisma.round.findFirst({
+        where: { creatorId, topScore: { not: null } },
+        orderBy: { topScore: 'desc' },
+        select: { championName: true, topScore: true, number: true }
+      }),
+      // Quem mais foi campeão de rodada.
+      prisma.round.groupBy({
+        by: ['championId'],
+        where: { creatorId, championId: { not: null } },
+        _count: { championId: true },
+        orderBy: { _count: { championId: 'desc' } },
+        take: 1
+      }),
     ]);
+
+    // Resolve o manager que mais venceu rodadas.
+    let maisCampeao = null;
+    if (championAgg[0]?.championId) {
+      const u = await prisma.user.findUnique({ where: { id: championAgg[0].championId }, select: { nickname: true, name: true, avatar: true } });
+      maisCampeao = { nickname: u?.nickname || u?.name || 'Manager', avatar: u?.avatar || null, count: championAgg[0]._count.championId };
+    }
 
     // Contagem do mais frequente numa lista de ids.
     const tally = (arr) => {
@@ -320,6 +341,12 @@ router.get('/trofeus', async (req, res) => {
       bagreUltimaRodada: lastFinished?.bagre ? {
         name: lastFinished.bagre.name, uniqueId: lastFinished.bagre.uniqueId, roundNumber: lastFinished.number
       } : null,
+      recordeRodada: recordRound ? {
+        nickname: recordRound.championName || 'Manager',
+        score: Number((recordRound.topScore || 0).toFixed(2)),
+        roundNumber: recordRound.number
+      } : null,
+      maisCampeao,
       totals: { managers: totalManagers, rounds: totalRounds }
     });
   } catch (error) {
@@ -761,7 +788,7 @@ router.delete('/round/:id', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO',
 
       await tx.round.update({
         where: { id },
-        data: { bagreId: null }
+        data: { bagreId: null, championId: null, championName: null, topScore: null }
       });
     });
 

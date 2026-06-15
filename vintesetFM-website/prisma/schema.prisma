@@ -162,7 +162,12 @@ model Round {
   
   bagreId     String?  // Id do pior jogador da rodada computado no admin
   bagre       Player?  @relation("RoundBagre", fields: [bagreId], references: [id])
-  
+
+  // Resultado da rodada (Fase 6 — Sala de Troféus / recordes históricos)
+  championId   String?  // userId do campeão da rodada (sem relação formal)
+  championName String?  // snapshot do nick do campeão na época
+  topScore     Float?   // maior pontuação feita nesta rodada
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

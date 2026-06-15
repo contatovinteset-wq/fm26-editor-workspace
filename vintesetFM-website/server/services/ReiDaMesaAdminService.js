@@ -392,6 +392,16 @@ export async function processMatchResultFinal(scoresFromFrontend, creatorId) {
      roundChampion = { nickname: ch?.nickname || ch?.name || 'Viewer', score: sortedSquads[0].roundScoreCalculated };
   }
 
+  // Registra o resultado da rodada (Sala de Troféus / recordes) na própria Round.
+  await prisma.round.update({
+    where: { id: openRound.id },
+    data: {
+      championId: roundChampion ? sortedSquads[0].userId : null,
+      championName: roundChampion?.nickname || null,
+      topScore: roundChampion ? roundChampion.score : null,
+    }
+  });
+
   const votesCount = await prisma.craqueVote.groupBy({
       by: ['playerId'],
       where: { roundId: openRound.id },

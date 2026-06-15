@@ -111,6 +111,38 @@ const ReiDaMesaTrofeus = () => {
               <TrophyCard icon={Award} label="Bagre da última rodada" color="#94a3b8" player={data.bagreUltimaRodada} metric={data.bagreUltimaRodada ? `Rodada ${data.bagreUltimaRodada.roundNumber}` : null} />
             </div>
 
+            {/* Recordes históricos (acumulam a partir de quando começa a registrar) */}
+            {(data.recordeRodada || data.maisCampeao) && (
+              <div className="mt-6">
+                <h2 className="text-sm font-black uppercase tracking-widest text-gray-400 mb-3">Recordes</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {data.recordeRodada && (
+                    <div className="bg-gray-900 border border-white/10 rounded-2xl p-5 flex items-center gap-4">
+                      <div className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center bg-amber-500/15 text-amber-400"><Award size={22} /></div>
+                      <div>
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Recorde de pontuação (rodada)</div>
+                        <div className="font-bold text-white">{data.recordeRodada.nickname}</div>
+                        <div className="text-xs font-mono text-amber-400">{data.recordeRodada.score} pts · Rodada {data.recordeRodada.roundNumber}</div>
+                      </div>
+                    </div>
+                  )}
+                  {data.maisCampeao && (
+                    <div className="bg-gray-900 border border-white/10 rounded-2xl p-5 flex items-center gap-4">
+                      <div className="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center bg-accent/15 text-accent"><Crown size={22} /></div>
+                      <div className="flex items-center gap-3 min-w-0">
+                        {data.maisCampeao.avatar && <img src={data.maisCampeao.avatar} className="w-9 h-9 rounded-full object-cover border border-white/10" alt="" />}
+                        <div className="min-w-0">
+                          <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Mais campeão de rodada</div>
+                          <div className="font-bold text-white truncate">{data.maisCampeao.nickname}</div>
+                          <div className="text-xs font-mono text-accent">{data.maisCampeao.count}x campeão</div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
             {/* Totais */}
             <div className="grid grid-cols-2 gap-4 mt-6">
               <div className="bg-gray-900 border border-white/10 rounded-2xl p-5 flex items-center gap-3">
