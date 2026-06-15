@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { User, ShieldAlert, BarChart3, Target, Goal, Sword, Trophy } from 'lucide-react';
 import RoleBadge from '../components/RoleBadge';
+import ConquistasManager from '../components/ConquistasManager';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { rdmFetch, useRdmBase } from '../services/reidamesa';
@@ -136,6 +137,11 @@ const PerfilManager = () => {
                   </div>
                </div>
            </div>
+        </div>
+
+        {/* Conquistas (Gamificação G2) */}
+        <div className="mb-12">
+           <ConquistasManager />
         </div>
 
         {/* Scaled Team */}

@@ -6,6 +6,7 @@ import { requireAuth, requireRoles } from '../middleware/roles.js';
 import { attachCreatorContext, getDefaultCreatorId, RESERVED_SLUGS } from '../services/creatorContext.js';
 import { getLivePlatforms } from '../services/creatorLiveService.js';
 import { getActiveSeason, getSeasonStandings, listSeasons, closeActiveSeason } from '../services/seasonService.js';
+import { computeConquistas } from '../services/conquistasService.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -447,6 +448,17 @@ router.post('/seasons/close', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO
   } catch (error) {
     console.error('POST /seasons/close:', error);
     res.status(500).json({ error: 'Erro ao encerrar a temporada' });
+  }
+});
+
+// 🏅 Conquistas (Gamificação G2) — badges do manager logado, derivadas do histórico.
+router.get('/conquistas', requireAuth, async (req, res) => {
+  try {
+    const data = await computeConquistas(req.creatorId, req.user.id);
+    res.json(data);
+  } catch (error) {
+    console.error('GET /conquistas:', error);
+    res.status(500).json({ error: 'Erro ao buscar conquistas' });
   }
 });
 
