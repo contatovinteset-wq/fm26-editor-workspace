@@ -49,6 +49,7 @@ function App() {
               <Route path="reidamesa/ranking" element={<Pages.Ranking />} />
               <Route path="reidamesa/perfil" element={<Pages.PerfilManager />} />
               <Route path="reidamesa/trofeus" element={<Pages.ReiDaMesaTrofeus />} />
+              <Route path="reidamesa/temporadas" element={<Pages.ReiDaMesaTemporadas />} />
               <Route path="reidamesa/escalacoes" element={<Pages.ReiDaMesaEscalacoes />} />
 
               {/* Rei da Mesa por criador (Fase 3c) — a slug define o creator */}
@@ -58,6 +59,7 @@ function App() {
               <Route path="reidamesa/c/:slug/ranking" element={<Pages.Ranking />} />
               <Route path="reidamesa/c/:slug/perfil" element={<Pages.PerfilManager />} />
               <Route path="reidamesa/c/:slug/trofeus" element={<Pages.ReiDaMesaTrofeus />} />
+              <Route path="reidamesa/c/:slug/temporadas" element={<Pages.ReiDaMesaTemporadas />} />
               <Route path="reidamesa/c/:slug/escalacoes" element={<Pages.ReiDaMesaEscalacoes />} />
               <Route path="reidamesa/c/:slug/admin" element={<Pages.ReiDaMesaAdmin />} />
 

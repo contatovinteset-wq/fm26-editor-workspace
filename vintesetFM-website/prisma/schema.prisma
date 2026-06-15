@@ -122,6 +122,8 @@ model Creator {
   craqueVotes  CraqueVote[]
   reiDaMesaState ReiDaMesaState?
   overlayEvents  OverlayEvent[]
+  seasons        Season[]
+  roundEntries   RoundEntry[]
 }
 
 model Player {
@@ -174,10 +176,54 @@ model Round {
   creatorId   String
   creator     Creator  @relation(fields: [creatorId], references: [id])
 
+  // Gamificação (G1): a qual temporada esta rodada pertence (coluna simples).
+  seasonId    String?
+
   scores      PlayerScore[]
   craqueVotes CraqueVote[]
+  entries     RoundEntry[]
 
   @@unique([creatorId, number])
+}
+
+// 🎮 Gamificação (G1) — Temporadas: agrupam rodadas e coroam um campeão ao encerrar.
+model Season {
+  id            String    @id @default(uuid())
+  number        Int       // sequencial por criador
+  name          String?   // rótulo opcional (ex: "Temporada de Verão")
+  isActive      Boolean   @default(true) // a temporada em curso do criador
+  startedAt     DateTime  @default(now())
+  endedAt       DateTime?
+  championId    String?   // userId do campeão da temporada (snapshot, sem relação)
+  championName  String?
+  championScore Float?
+
+  creatorId String
+  creator   Creator @relation(fields: [creatorId], references: [id])
+
+  @@unique([creatorId, number])
+  @@index([creatorId, isActive])
+}
+
+// 🎮 Gamificação (G1) — RoundEntry: histórico da pontuação de cada viewer em cada
+// rodada (a fundação que faltava). Habilita classificação por temporada, conquistas
+// e, no futuro, duelos/valorização.
+model RoundEntry {
+  id        String   @id @default(uuid())
+  roundId   String
+  round     Round    @relation(fields: [roundId], references: [id])
+  userId    String   // sem relação formal (espelha Round.championId)
+  seasonId  String?  // coluna simples
+  score     Float    @default(0.0)
+  rank      Int?     // posição do viewer naquela rodada (1 = campeão)
+  createdAt DateTime @default(now())
+
+  creatorId String
+  creator   Creator @relation(fields: [creatorId], references: [id])
+
+  @@unique([roundId, userId])
+  @@index([creatorId, seasonId])
+  @@index([userId])
 }
 
 model PlayerScore {

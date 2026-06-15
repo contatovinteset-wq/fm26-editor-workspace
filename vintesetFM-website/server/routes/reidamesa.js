@@ -5,6 +5,7 @@ import { processPlantelHtml, previewMatchResultHtml, processMatchResultFinal } f
 import { requireAuth, requireRoles } from '../middleware/roles.js';
 import { attachCreatorContext, getDefaultCreatorId, RESERVED_SLUGS } from '../services/creatorContext.js';
 import { getLivePlatforms } from '../services/creatorLiveService.js';
+import { getActiveSeason, getSeasonStandings, listSeasons, closeActiveSeason } from '../services/seasonService.js';
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -380,6 +381,72 @@ router.get('/escalacoes', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Erro ao buscar escalações' });
+  }
+});
+
+// 🎮 ---- TEMPORADAS (Gamificação G1) ----
+
+// Público: temporada ativa + classificação ao vivo + Hall da Fama (campeões passados).
+router.get('/seasons', async (req, res) => {
+  try {
+    const creatorId = req.creatorId;
+    const active = await getActiveSeason(creatorId);
+    const [seasons, standings] = await Promise.all([
+      listSeasons(creatorId),
+      getSeasonStandings(creatorId, active.id),
+    ]);
+
+    res.json({
+      active: { id: active.id, number: active.number, name: active.name, startedAt: active.startedAt },
+      standings,
+      hallOfFame: seasons
+        .filter((s) => !s.isActive && s.championId)
+        .map((s) => ({
+          number: s.number,
+          name: s.name,
+          championName: s.championName,
+          championScore: s.championScore,
+          endedAt: s.endedAt,
+        })),
+    });
+  } catch (error) {
+    console.error('GET /seasons:', error);
+    res.status(500).json({ error: 'Erro ao buscar temporadas' });
+  }
+});
+
+// Público: classificação de uma temporada específica (default = ativa).
+router.get('/seasons/standings', async (req, res) => {
+  try {
+    const creatorId = req.creatorId;
+    let seasonId = req.query.seasonId;
+    if (!seasonId) {
+      const active = await getActiveSeason(creatorId);
+      seasonId = active.id;
+    }
+    const standings = await getSeasonStandings(creatorId, seasonId);
+    res.json({ seasonId, standings });
+  } catch (error) {
+    console.error('GET /seasons/standings:', error);
+    res.status(500).json({ error: 'Erro ao buscar classificação' });
+  }
+});
+
+// Manager: encerra a temporada ativa (coroa o campeão) e abre a próxima.
+router.post('/seasons/close', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO', 'CREATOR']), requireCreatorManager, async (req, res) => {
+  try {
+    const result = await closeActiveSeason(req.creatorId);
+    res.json({
+      success: true,
+      champion: result.closed.championName
+        ? { name: result.closed.championName, score: result.closed.championScore }
+        : null,
+      closedNumber: result.closed.number,
+      nextNumber: result.next.number,
+    });
+  } catch (error) {
+    console.error('POST /seasons/close:', error);
+    res.status(500).json({ error: 'Erro ao encerrar a temporada' });
   }
 });
 
@@ -786,9 +853,12 @@ router.delete('/round/:id', requireAuth, requireRoles(['OWNER', 'ADMIN_GERACAO',
 
       await tx.playerScore.deleteMany({ where: { roundId: id } });
 
+      // 🎮 Gamificação: anular rodada apaga o histórico por viewer e desvincula a temporada.
+      await tx.roundEntry.deleteMany({ where: { roundId: id } });
+
       await tx.round.update({
         where: { id },
-        data: { bagreId: null, championId: null, championName: null, topScore: null }
+        data: { bagreId: null, championId: null, championName: null, topScore: null, seasonId: null }
       });
     });
 

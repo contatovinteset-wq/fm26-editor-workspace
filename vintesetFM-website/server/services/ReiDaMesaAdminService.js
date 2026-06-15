@@ -1,5 +1,6 @@
 import * as cheerio from 'cheerio';
 import { PrismaClient } from '@prisma/client';
+import { getActiveSeason } from './seasonService.js';
 // creatorId é injetado pelas rotas (req.creatorId) e passado por parâmetro
 // para cada função deste service — mantém o scoping multi-tenant explícito.
 
@@ -401,6 +402,31 @@ export async function processMatchResultFinal(scoresFromFrontend, creatorId) {
       topScore: roundChampion ? roundChampion.score : null,
     }
   });
+
+  // 🎮 Gamificação (G1): marca a temporada da rodada e grava o histórico por viewer
+  // (RoundEntry) — fundação para classificação de temporada, conquistas e duelos.
+  // Em try/catch para nunca derrubar o processamento da rodada se algo falhar.
+  try {
+    const season = await getActiveSeason(creatorId);
+    await prisma.round.update({ where: { id: openRound.id }, data: { seasonId: season.id } });
+
+    // Só registra quem realmente escalou (tem ao menos titular ou bagre nesta rodada).
+    const participants = sortedSquads.filter(
+      (sq) => sq.defensorId || sq.meioId || sq.ataqueId || sq.bagreId
+    );
+    let rank = 0;
+    for (const sq of participants) {
+      rank++;
+      const score = sq.roundScoreCalculated || 0;
+      await prisma.roundEntry.upsert({
+        where: { roundId_userId: { roundId: openRound.id, userId: sq.userId } },
+        update: { score, rank, seasonId: season.id, creatorId },
+        create: { roundId: openRound.id, userId: sq.userId, score, rank, seasonId: season.id, creatorId },
+      });
+    }
+  } catch (e) {
+    console.error('[seasons] Falha ao registrar RoundEntry/temporada:', e);
+  }
 
   const votesCount = await prisma.craqueVote.groupBy({
       by: ['playerId'],
